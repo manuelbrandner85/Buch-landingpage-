@@ -1,0 +1,8 @@
+# Netlify baut die Welt aus dem Repository.
+# Für den Sofort-Weg (Ordner „out" per Drag-and-drop) wird diese Datei nicht gebraucht.
+[build]
+  command = "npm run pruefen && NEXT_EXPORT=1 npx next build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
