@@ -25,6 +25,12 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
     if (!leinwand.current) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { beiRueckfall(); return; }
 
+    // Auflösung nach Gerät: Ein Telefon mit 390 Punkten Breite braucht kein
+    // 1600-Pixel-Motiv, ein 4K-Schirm möchte mehr als 1600. Vorher galt für
+    // beide derselbe Wert.
+    const zielBreite = Math.round(Math.min(2560, Math.max(640,
+      window.innerWidth * Math.min(window.devicePixelRatio || 1, 2) * 0.9)));
+
     const bild = szenen.filter((s) => s.platte);
     let steuerung: KinoSteuerung | null = null;
     try {
@@ -32,11 +38,12 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
         const asset = assetNach(s.platte);
         return {
           id: s.id,
-          bild: asset ? bildQuelle(asset, 1600) : '',
+          bild: asset ? bildQuelle(asset, zielBreite) : '',
           tiefe: asset ? ordner(`${asset.datei}-tiefe.webp`) : undefined,
           // Bewegtfassung, sobald sie vorliegt. Fehlt sie, bleibt das Standbild –
           // die Engine prüft das selbst und fällt still zurück.
           video: s.motion && asset ? ordner(`${asset.datei}-motion.mp4`) : undefined,
+          videoKlein: s.motion && asset ? ordner(`${asset.datei}-motion-klein.mp4`) : undefined,
           grading: hexZuRgb(s.grading ?? '#1a2540'),
           uebergang: s.uebergang ?? 'aufloesen',
           fahrt: s.fahrt ?? 'hinein',

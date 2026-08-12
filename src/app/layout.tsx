@@ -2,12 +2,15 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, EB_Garamond } from 'next/font/google';
 import '@/styles/global.css';
 
+// Nur die Schnitte, die tatsächlich vorkommen. Jeder zusätzliche Schnitt ist
+// eine eigene Datei: Vorher wurden vier Schriftdateien geladen, obwohl die
+// Halbfetten nirgends gesetzt sind.
 const display = Cormorant_Garamond({
-  subsets: ['latin'], weight: ['300', '400', '500'],
+  subsets: ['latin'], weight: ['300', '400'],
   style: ['normal', 'italic'], variable: '--display', display: 'swap',
 });
 const body = EB_Garamond({
-  subsets: ['latin'], weight: ['400', '500'],
+  subsets: ['latin'], weight: ['400'],
   style: ['normal', 'italic'], variable: '--body', display: 'swap',
 });
 

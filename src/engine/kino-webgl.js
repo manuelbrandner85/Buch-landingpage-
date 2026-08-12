@@ -226,17 +226,45 @@ export function starteKino(canvas, szenen, optionen = {}) {
   const flach = einfarbig(gl, [128, 128, 128]);
   const geladen = szenen.map(() => ({ bild: platzhalter, tiefe: flach, seite: 1.5, bereit: false }));
 
-  szenen.forEach((s, i) => {
-    lade(s.bild).then((img) => {
-      geladen[i].bild = textur(gl, img);
-      geladen[i].seite = img.width / img.height;
-      geladen[i].bereit = true;
-    }).catch(() => undefined);
-    if (s.tiefe) {
-      lade(s.tiefe).then((img) => { geladen[i].tiefe = textur(gl, img); }).catch(() => undefined);
+  /**
+   * Geladen wird nur, was in Reichweite ist.
+   *
+   * Vorher zog die Engine beim Start alle sechzehn Motive gleichzeitig – über
+   * ein Megabyte, von dem der Besucher genau eines sah. Jetzt liegt ein Fenster
+   * um die aktuelle Position: die Szene selbst, die vorige und die nächsten zwei.
+   * Wer nach unten scrollt, hat das nächste Bild längst da, bevor es gebraucht wird.
+   */
+  const VORAUS = 2, ZURUECK = 1;
+
+  function sichere(mitte) {
+    const von = Math.max(0, Math.floor(mitte) - ZURUECK);
+    const bis = Math.min(szenen.length - 1, Math.ceil(mitte) + VORAUS);
+    for (let i = von; i <= bis; i++) {
+      const e = geladen[i];
+      if (e.angefordert) continue;
+      e.angefordert = true;
+      const s = szenen[i];
+      lade(s.bild).then((img) => {
+        e.bild = textur(gl, img);
+        e.seite = img.width / img.height;
+        e.bereit = true;
+      }).catch(() => { e.angefordert = false; });
+      if (s.tiefe) {
+        lade(s.tiefe).then((img) => { e.tiefe = textur(gl, img); }).catch(() => undefined);
+      }
+      if (s.video && bewegtErlaubt) e.quelle = videoQuelle(waehleVideo(s));
     }
-    if (s.video && bewegtErlaubt) geladen[i].quelle = videoQuelle(s.video);
-  });
+  }
+
+  /** Auf schmalen Verbindungen und kleinen Geräten die kleinere Fassung. */
+  function waehleVideo(s) {
+    const netz = navigator.connection;
+    const schmal = mobil || netz?.saveData || /2g|3g/.test(netz?.effectiveType ?? '');
+    return (schmal && s.videoKlein) ? s.videoKlein : s.video;
+  }
+
+  // Die ersten beiden Szenen sofort, damit der Einstieg ohne Warten steht.
+  sichere(0);
 
   /**
    * Bewegtbild nur, wenn es vertretbar ist: nicht bei „Bewegung reduzieren“,
@@ -261,14 +289,23 @@ export function starteKino(canvas, szenen, optionen = {}) {
   }
 
   /** Nachbarschaft wecken, Ferne schlafen legen – höchstens zwei Videos laufen. */
-  function videosSteuern(i) {
+  /**
+   * Videos wecken und schlafen legen.
+   *
+   * Der Abstand wird an der gleitenden Position gemessen, nicht an der ganzen
+   * Zahl. Vorher galt die Nachbarszene ab dem ersten Bild als „nah“ – dadurch
+   * lud die Seite beim Start ein Video von über einem Megabyte, während der
+   * Besucher noch auf dem schwarzen Einstieg stand. Jetzt beginnt das Laden
+   * erst kurz bevor die Szene an der Reihe ist.
+   */
+  function videosSteuern(stelle) {
     geladen.forEach((e, j) => {
       const q = e.quelle; if (!q) return;
-      const nah = Math.abs(j - i) <= 1;
-      if (nah && !q.geweckt) {
+      const abstand = Math.abs(j - stelle);
+      if (abstand < 0.85 && !q.geweckt) {
         q.geweckt = true; q.el.preload = 'auto'; q.el.load();
         q.el.play().then(() => { q.laeuft = true; }).catch(() => { q.laeuft = false; });
-      } else if (!nah && q.geweckt && Math.abs(j - i) > 2) {
+      } else if (q.geweckt && abstand > 1.6) {
         q.geweckt = false; q.laeuft = false; q.el.pause();
       }
     });
@@ -349,10 +386,11 @@ export function starteKino(canvas, szenen, optionen = {}) {
     // Sonst wäre man in der Mitte jeder Szene schon zur Hälfte in der nächsten.
     const roh = Math.max(0, Math.min(1, (t - 0.72) / 0.28));
     const uebergang = roh * roh * (3 - 2 * roh);
+    sichere(stelle);
     const A = geladen[i], B = geladen[i + 1] ?? geladen[i];
     const sA = szenen[i], sB = szenen[i + 1] ?? szenen[i];
 
-    videosSteuern(i);
+    videosSteuern(stelle);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, videoBild(A) ?? A.bild);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, videoBild(B) ?? B.bild);
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, A.tiefe);

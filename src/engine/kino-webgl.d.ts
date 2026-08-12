@@ -2,6 +2,8 @@ export interface KinoSzene {
   id: string;
   bild: string;
   tiefe?: string;
+  video?: string;
+  videoKlein?: string;
   grading: [number, number, number] | number[];
   uebergang?: 'aufloesen' | 'glut' | 'lichtschwenk' | 'wasser' | 'sediment';
   fahrt?: 'hinein' | 'durchfahrt' | 'heraus' | 'schwenkLinks' | 'schwenkRechts'

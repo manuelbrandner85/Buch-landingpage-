@@ -142,6 +142,28 @@ Das Standbild ist zugleich das Poster – es gibt keinen schwarzen Moment.
 
 ## Performance
 
+Gemessen an der ausgelieferten Seite, nicht geschätzt:
+
+| | vorher | nachher |
+|---|---|---|
+| Anfragen beim Start | 51 | 24 |
+| Bilddaten beim Start | 1,25 MB (34 Dateien) | 0,25 MB (8 Dateien) |
+| Video beim Start | 1,34 MB | keines |
+| Schriftdaten | 0,16 MB | 0,12 MB |
+
+Drei Ursachen steckten dahinter:
+
+1. **Alle Motive wurden sofort geladen.** Die Engine zog beim Start sechzehn
+   Texturen, von denen der Besucher eine sah. Jetzt liegt ein Fenster um die
+   aktuelle Position – die Szene selbst, die vorige, die nächsten zwei.
+2. **Ein Video lud auf dem schwarzen Einstieg.** Die Nachbarszene galt ab dem
+   ersten Bild als „nah". Der Abstand wird jetzt an der gleitenden Position
+   gemessen: Das Laden beginnt kurz bevor die Szene an der Reihe ist.
+3. **Ein Telefon bekam dieselbe Auflösung wie ein 4K-Schirm.** Die Motivbreite
+   folgt jetzt Fensterbreite und Pixeldichte, zwischen 640 und 2560 px.
+   Auf schmalen Verbindungen und kleinen Geräten läuft zusätzlich die
+   kleinere Videofassung.
+
 - GSAP wird erst geladen, wenn die Kamera gebraucht wird. Wer die ruhige Fassung
   wählt oder „Reduce Motion“ gesetzt hat, lädt die Animationsbibliothek nie.
 - Die Kinoebene nutzt `image-set()`: der Browser wählt zwischen AVIF und WebP

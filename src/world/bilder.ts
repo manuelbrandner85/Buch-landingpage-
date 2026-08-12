@@ -47,5 +47,8 @@ export function bildSatz(asset: Asset): string {
 
 /** Das erste Motiv wird vorgeladen, damit der Einstieg sofort da ist. */
 export function vorladen(asset: Asset): { href: string; type: string } {
-  return { href: bildQuelle(asset, 1000, 'avif'), type: 'image/avif' };
+  // Bewusst die kleinste Stufe: Sie steht sofort, und die Kinoebene tauscht
+  // gleich darauf die passende Auflösung ein. Ein doppelt geladenes großes
+  // Motiv wäre teurer als dieser kurze Moment.
+  return { href: bildQuelle(asset, 640, 'avif'), type: 'image/avif' };
 }
