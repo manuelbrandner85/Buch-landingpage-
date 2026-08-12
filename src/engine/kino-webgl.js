@@ -156,6 +156,39 @@ void main(){
   farbe = vec4(c, 1.0);
 }`;
 
+
+/**
+ * Kamerafahrten.
+ *
+ * `phase` läuft von 0 (Szene tritt ein) bis 1 (Szene geht ab). Zurückgegeben
+ * werden Versatz in x und y sowie der Zoom – zusammen ergibt das die Bewegung,
+ * die der Shader dann mit der Tiefenkarte verrechnet: Was vorne liegt, wandert
+ * stärker als der Hintergrund.
+ *
+ * Die Fahrt gehört zur Szene, nicht zum System. Unter den Boden von Çatalhöyük
+ * senkt sich die Kamera, über die Zikkurat steigt sie, in die Bibliothekshöhle
+ * fährt sie hinein, auf der römischen Straße hindurch.
+ */
+const FAHRTEN = {
+  // [x-Versatz Anfang→Ende, y-Versatz Anfang→Ende, Zoom Anfang→Ende]
+  hinein:      [[0, 0], [0.012, -0.010], [0.15, 0.01]],
+  durchfahrt:  [[0, 0], [0.006, -0.006], [0.24, 0.00]],
+  heraus:      [[0, 0], [-0.008, 0.008], [0.01, 0.16]],
+  schwenkLinks:  [[0.030, -0.026], [0.004, -0.004], [0.09, 0.05]],
+  schwenkRechts: [[-0.030, 0.026], [0.004, -0.004], [0.09, 0.05]],
+  aufsteigen:  [[0.004, -0.004], [0.034, -0.030], [0.12, 0.04]],
+  absenken:    [[0.004, -0.004], [-0.030, 0.034], [0.04, 0.12]],
+};
+
+function fahrt(szene, phase) {
+  const f = FAHRTEN[szene?.fahrt] ?? FAHRTEN.hinein;
+  // Weich ein- und ausblenden, damit die Bewegung nicht an den Rändern anreißt
+  const p = Math.max(0, Math.min(1, phase));
+  const w = p * p * (3 - 2 * p);
+  const zw = (paar) => paar[0] + (paar[1] - paar[0]) * w;
+  return [zw(f[0]), zw(f[1]), zw(f[2])];
+}
+
 export function starteKino(canvas, szenen, optionen = {}) {
   const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'high-performance' });
   if (!gl) return null;
@@ -329,11 +362,26 @@ export function starteKino(canvas, szenen, optionen = {}) {
     gl.uniform4fv(U.fitB, fit(B.seite));
     gl.uniform3fv(U.gradeA, sA.grading);
     gl.uniform3fv(U.gradeB, sB.grading);
-    // Die Kamera fährt innerhalb einer Szene langsam hindurch.
-    gl.uniform2f(U.kameraA, 0.012 * (t - 0.5), 0.02 * (t - 0.5));
-    gl.uniform2f(U.kameraB, 0.012 * (t - 1.0), 0.02 * (t - 1.0));
-    gl.uniform1f(U.zoomA, (sA.zoom ?? zoomStaerke) * (1.0 - t * 0.8));
-    gl.uniform1f(U.zoomB, (sB.zoom ?? zoomStaerke) * (1.0 - t * 0.2));
+    // Jede Szene hat ihre eigene Kamerafahrt. Der Wert `phase` ist der Fortschritt
+    // dieser einen Szene: 0 beim Eintreten, 1 beim Verlassen. Szene A ist bei t
+    // unterwegs, Szene B kommt gerade herein und steht deshalb bei t - 1.
+    const fA = fahrt(sA, t);
+    const fB = fahrt(sB, t - 1.0);
+    gl.uniform2f(U.kameraA, fA[0], fA[1]);
+    gl.uniform2f(U.kameraB, fB[0], fB[1]);
+    gl.uniform1f(U.zoomA, fA[2]);
+    gl.uniform1f(U.zoomB, fB[2]);
+
+    // Bewegtbild an den Scroll koppeln: Wer schnell scrollt, treibt die Szene an;
+    // wer stehen bleibt, sieht sie fast still weiterlaufen. Das verbindet Hand
+    // und Bild, ohne dass ruckelnd gesucht werden muss.
+    const takt = Math.min(2.0, Math.max(0.45, 0.6 + Math.abs(tempo) * 260));
+    for (const e of [A, B]) {
+      const q = e.quelle;
+      if (q?.laeuft && Math.abs(q.el.playbackRate - takt) > 0.05) {
+        try { q.el.playbackRate = takt; } catch { /* manche Browser begrenzen das */ }
+      }
+    }
     gl.uniform1f(U.t, uebergang);
     gl.uniform1i(U.typ, UEBERGAENGE[sB.uebergang ?? 'aufloesen'] ?? 0);
     gl.uniform1f(U.zeit, zeit * 0.001);

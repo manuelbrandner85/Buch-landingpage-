@@ -39,6 +39,7 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           video: s.motion && asset ? ordner(`${asset.datei}-motion.mp4`) : undefined,
           grading: hexZuRgb(s.grading ?? '#1a2540'),
           uebergang: s.uebergang ?? 'aufloesen',
+          fahrt: s.fahrt ?? 'hinein',
         };
       }));
     } catch {

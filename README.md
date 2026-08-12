@@ -54,6 +54,39 @@ Trägt WebGL2 nicht – alter Browser, abgeschaltete Beschleunigung, „Bewegung
 reduzieren“ –, übernimmt wieder die DOM-Fassung. Das ist kein Notbehelf, sondern
 dieselbe Welt in ruhig.
 
+### Kamerafahrten
+
+Jede Szene hat ihre eigene Fahrt, und sie folgt dem Inhalt statt einem Schema
+(`fahrt` in den Szenendaten):
+
+| Szene | Fahrt | warum |
+|---|---|---|
+| Cover | aufsteigen | der Faden steigt vom Feuer zu den Säulen |
+| Ostafrikanischer Graben | hinein | in den Graben hinein |
+| Woher die Zahlen kommen | hinein | näher an den Fund |
+| Ein Kreis aus Licht | hinein | an das Feuer heran |
+| Vom Sammeln zur Pflege | aufsteigen | über das Feld zum Siedlungshügel |
+| Unter dem Boden | absenken | unter den Boden, wo die Toten liegen |
+| Reiche, Glaube und Macht | aufsteigen | an der Zikkurat hinauf |
+| Die erste Bibliothek | schwenkLinks | an den Regalen entlang |
+| Neun Tage statt neunzig | schwenkRechts | die Nachricht zieht weiter |
+| Gesetz, Geld und Imperium | durchfahrt | die Straße hinunter zum Fluchtpunkt |
+| Fünfzigtausend Handschriften | durchfahrt | durch die Wand in die Kammer |
+| Am Rand des Belegten | heraus | der Nebel gibt den Blick frei |
+| Städte, die versanken | schwenkLinks | an den Mauern vorbeitreiben |
+
+Der Shader verrechnet die Fahrt mit der Tiefenkarte: Was vorne liegt, wandert
+stärker als der Hintergrund. Erst dadurch wirkt die Bewegung räumlich statt wie
+ein geschobenes Bild.
+
+**Bewegtbild am Scroll:** Die Abspielgeschwindigkeit der Videos folgt dem Scroll
+(0,45- bis 2-fach). Wer schnell scrollt, treibt die Szene an; wer stehen bleibt,
+sieht sie fast still weiterlaufen. Gesucht wird dabei nicht — Springen im Video
+ruckelt, Tempo ändern nicht.
+
+Die Motivszenen sind entsprechend länger, damit die Fahrt Zeit hat: rund
+190 bis 300 Bildschirmhöhen Scrollstrecke statt 140 bis 220.
+
 ### Bewegtbild – Herkunft
 
 **Wichtig:** Die Motive der sieben bewegten Szenen (Ostafrikanischer Graben,

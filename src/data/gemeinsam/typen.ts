@@ -132,6 +132,12 @@ export interface Szene {
   /** Der Übergang gehört zur Szene, nicht zum System: Glut beim Feuer,
    *  Lichtschwenk in der Kammer, Brechung unter Wasser, Wischer im Sediment. */
   uebergang?: 'aufloesen' | 'glut' | 'lichtschwenk' | 'wasser' | 'sediment';
+  /**
+   * Kamerafahrt in dieser Szene. Sie folgt dem Inhalt: unter den Boden senkt sie
+   * sich, über die Zikkurat steigt sie, in die Kammer fährt sie hinein.
+   */
+  fahrt?: 'hinein' | 'durchfahrt' | 'heraus' | 'schwenkLinks' | 'schwenkRechts'
+        | 'aufsteigen' | 'absenken';
 
   /** Aus den „IM ZUSAMMENHANG“-Kästen des Buches übernommen – nicht erfunden. */
   bezuege?: { vorher?: string; danach?: string; sieheAuch?: string[] };

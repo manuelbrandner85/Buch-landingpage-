@@ -4,6 +4,8 @@ export interface KinoSzene {
   tiefe?: string;
   grading: [number, number, number] | number[];
   uebergang?: 'aufloesen' | 'glut' | 'lichtschwenk' | 'wasser' | 'sediment';
+  fahrt?: 'hinein' | 'durchfahrt' | 'heraus' | 'schwenkLinks' | 'schwenkRechts'
+        | 'aufsteigen' | 'absenken';
   zoom?: number;
 }
 export interface KinoSteuerung {
