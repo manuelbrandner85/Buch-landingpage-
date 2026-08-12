@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
 import { assetNach } from '@/world/registry';
+import { STIMMUNG } from '@/data/band-1/band';
 import { bildQuelle, ordner } from '@/world/bilder';
 import { starteKino, type KinoSteuerung } from './kino-webgl';
 import { zeilenAufdecken } from './zeilen';
@@ -51,6 +52,7 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           grading: hexZuRgb(s.grading ?? '#1a2540'),
           uebergang: s.uebergang ?? 'aufloesen',
           fahrt: s.fahrt ?? 'hinein',
+          stimmung: STIMMUNG[s.kapitelId ?? 1] ?? [1, 1, 1],
         };
       }));
     } catch {

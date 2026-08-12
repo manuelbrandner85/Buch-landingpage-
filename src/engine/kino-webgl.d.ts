@@ -6,6 +6,7 @@ export interface KinoSzene {
   videoKlein?: string;
   grading: [number, number, number] | number[];
   uebergang?: 'aufloesen' | 'glut' | 'lichtschwenk' | 'wasser' | 'sediment';
+  stimmung?: [number, number, number];
   fahrt?: 'hinein' | 'durchfahrt' | 'heraus' | 'schwenkLinks' | 'schwenkRechts'
         | 'aufsteigen' | 'absenken';
   zoom?: number;

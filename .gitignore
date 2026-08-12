@@ -11,3 +11,4 @@ assets-quelle/*-motion-roh.mp4
 
 # Die Vorschau ist eine erzeugte Datei (npm run vorschau)
 vorschau
+modelle/

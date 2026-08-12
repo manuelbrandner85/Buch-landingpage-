@@ -32,7 +32,7 @@ async function daten(datei, name) {
   return import(pathToFileURL(path.resolve(ziel)).href);
 }
 
-const { BUCH_BAND_1, KAPITEL_BAND_1 } = await daten('src/data/band-1/band.ts', 'band');
+const { BUCH_BAND_1, KAPITEL_BAND_1, STIMMUNG } = await daten('src/data/band-1/band.ts', 'band');
 const { SZENEN_BAND_1 } = await daten('src/data/band-1/szenen.ts', 'szenen');
 const { ASSETS_BAND_1 } = await daten('src/data/band-1/assets.ts', 'assets');
 const { RINGE, DENAR, KOENIGSSTRASSE, PRUEFUNG } = await daten('src/data/band-1/interaktionen.ts', 'interaktionen');
@@ -61,7 +61,7 @@ const css = readFileSync('src/styles/global.css', 'utf8');
 const daten_js = JSON.stringify({
   buch: BUCH_BAND_1, kapitel: KAPITEL_BAND_1, szenen: SZENEN_BAND_1,
   assets: ASSETS_BAND_1, orte: ORTE, begriffe: BEGRIFFE, zeitleiste: ZEITLEISTE, ringe: RINGE, denar: DENAR, koenigsstrasse: KOENIGSSTRASSE, pruefung: PRUEFUNG,
-  bilder, tiefen, videos,
+  bilder, tiefen, videos, stimmung: STIMMUNG,
 });
 
 // Dieselben Dateien wie in der Anwendung – nur das Modulschlüsselwort fällt weg.

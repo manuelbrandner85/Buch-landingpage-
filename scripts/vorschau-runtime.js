@@ -221,6 +221,7 @@
         grading: hexZuRgb(s.grading || '#1a2540'),
         uebergang: s.uebergang || 'aufloesen',
         fahrt: s.fahrt || 'hinein',
+        stimmung: (W.stimmung && W.stimmung[s.kapitelId]) || [1, 1, 1],
       })));
     } catch (e) { console.warn('WebGL nicht verfügbar:', e.message); webgl = null; }
     if (!webgl) leinwand.remove();

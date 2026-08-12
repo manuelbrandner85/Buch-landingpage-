@@ -18,6 +18,8 @@ const EINSTELLUNG: Record<Klang, { frequenz: number; guete: number; flackern: nu
 };
 
 export interface Atmosphaere {
+  /** 0 = fern, 1 = die Kamera steht mitten in der Szene. */
+  naehe: (wert: number) => void;
   an: () => void;
   aus: () => void;
   /** Blendet auf die Klangfarbe der aktuellen Szene um. */
@@ -79,7 +81,17 @@ export function erzeugeAtmosphaere(): Atmosphaere {
     }
   };
 
+  let grundLautstaerke = 0.05;
+
   return {
+    naehe(wert: number) {
+      // Die Atmosphäre wird lauter, je näher die Kamera an der Szene steht.
+      // Zwischen zwei Szenen tritt sie zurück – man hört, dass man unterwegs ist.
+      grundLautstaerke = 0.02 + Math.max(0, Math.min(1, wert)) * 0.05;
+      if (an && haupt && ctx) {
+        haupt.gain.linearRampToValueAtTime(grundLautstaerke, ctx.currentTime + 0.4);
+      }
+    },
     an() {
       if (!ctx) start();
       void ctx?.resume();

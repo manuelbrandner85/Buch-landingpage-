@@ -1,71 +1,75 @@
 /**
- * Tiefenkarten für die 2.5D-Kamerafahrt.
+ * Tiefenkarten mit einem echten Tiefenmodell.
  *
- * EHRLICHER HINWEIS ZUM VERFAHREN
- * Dies ist keine gemessene Tiefe, sondern eine Näherung aus zwei Signalen:
- *   1. der Bildhöhe – was unten liegt, ist bei Landschaftsaufnahmen näher,
- *   2. der Helligkeit – dunkle Bereiche liegen meist hinten.
- * Für Landschaften trifft das gut zu (Graben, Feld, Straße, Meeresgrund),
- * für Innenräume nur teilweise (Kammer, Çatalhöyük). Deshalb steht die
- * Mischung je Motiv in der Tabelle unten und nicht fest im Code.
+ * Bis hierher waren die Karten eine Näherung aus Bildhöhe und Helligkeit.
+ * Für Landschaften ging das durch, für Innenräume nicht: In der Kammer von
+ * Dunhuang lag das helle Fenster hinten und wurde als „nah" gelesen.
  *
- * Sobald die Originalrenderings vorliegen, sollte hier ein echtes
- * Tiefenmodell laufen (Depth Anything, MiDaS). Der Rest der Kette ändert
- * sich dadurch nicht: Die Engine liest weiterhin <name>-tiefe.webp.
+ * Jetzt läuft Depth Anything V2 (small) über jedes Motiv. Das Modell schätzt
+ * die relative Tiefe je Bildpunkt – daraus entsteht echte Verdeckung: Der
+ * Vordergrund schiebt sich beim Fahren wirklich vor den Hintergrund.
  *
  *   npm run tiefenkarten
+ *
+ * Das Modell liegt unter modelle/depth.onnx und ist nicht im Repository
+ * (99 MB). Fehlt es, wird es beim ersten Lauf geladen.
  */
+import * as ort from 'onnxruntime-node';
 import sharp from 'sharp';
-import { readdir } from 'node:fs/promises';
+import { readdir, mkdir, access } from 'node:fs/promises';
+import { createWriteStream } from 'node:fs';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import path from 'node:path';
 
 const QUELLE = 'assets-quelle';
 const ZIEL = 'public/assets/band-1/szenen';
+const MODELL = 'modelle/depth.onnx';
+const HERKUNFT = 'https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx';
+const KANTE = 518;                    // Eingabegröße des Modells
 
-/** [Anteil Bildhöhe, Anteil Helligkeit, Horizont] – Rest ergänzt sich. */
-const EINSTELLUNG = {
-  cover:      [0.75, 0.25, 0.30],
-  graben:     [0.85, 0.15, 0.18],   // weite Landschaft, klarer Horizont
-  feld:       [0.85, 0.15, 0.22],
-  strasse:    [0.90, 0.10, 0.15],   // Fluchtpunkt: Tiefe fast rein vertikal
-  versunken:  [0.70, 0.30, 0.25],
-  feuer:      [0.45, 0.55, 0.45],   // Nachtszene: Helligkeit trägt mehr
-  grabung:    [0.60, 0.40, 0.30],
-  catal:      [0.35, 0.65, 0.40],   // Innenraum
-  dunhuang:   [0.35, 0.65, 0.35],
-  bibliothek: [0.40, 0.60, 0.35],
-  baustelle:  [0.45, 0.55, 0.38],
-  persien:    [0.60, 0.40, 0.30],
-  kap2:       [0.85, 0.15, 0.20], kap3: [0.80, 0.20, 0.25],
-  kap4:       [0.80, 0.20, 0.25], kap6: [0.70, 0.30, 0.28],
-};
+await mkdir('modelle', { recursive: true });
+try { await access(MODELL); } catch {
+  console.log('Tiefenmodell wird geladen (99 MB, einmalig) …');
+  const a = await fetch(HERKUNFT);
+  await pipeline(Readable.fromWeb(a.body), createWriteStream(MODELL));
+}
 
+const sitzung = await ort.InferenceSession.create(MODELL);
 const dateien = (await readdir(QUELLE)).filter((f) => /\.(jpe?g|png)$/i.test(f));
 
 for (const datei of dateien) {
   const name = path.parse(datei).name;
-  const [wHoehe, wLicht, horizont] = EINSTELLUNG[name] ?? [0.7, 0.3, 0.3];
+  const quelle = path.join(QUELLE, datei);
 
-  const B = 512;
-  const bild = sharp(path.join(QUELLE, datei)).resize({ width: B });
-  const { data, info } = await bild.clone().greyscale().blur(9)
-    .raw().toBuffer({ resolveWithObject: true });
-
-  const aus = Buffer.alloc(info.width * info.height);
-  for (let y = 0; y < info.height; y++) {
-    // Bildhöhe: unterhalb des Horizonts steigt die Nähe an
-    const rampe = Math.max(0, (y / info.height - horizont) / (1 - horizont));
-    for (let x = 0; x < info.width; x++) {
-      const i = y * info.width + x;
-      const licht = data[i] / 255;
-      const t = wHoehe * rampe + wLicht * licht;
-      aus[i] = Math.round(Math.min(1, Math.max(0, t)) * 255);
+  // Vorverarbeitung wie beim Modell: quadratisch, normalisiert, CHW
+  const { data } = await sharp(quelle).resize(KANTE, KANTE, { fit: 'fill' })
+    .removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const eingabe = new Float32Array(3 * KANTE * KANTE);
+  const mittel = [0.485, 0.456, 0.406], streuung = [0.229, 0.224, 0.225];
+  for (let i = 0; i < KANTE * KANTE; i++) {
+    for (let k = 0; k < 3; k++) {
+      eingabe[k * KANTE * KANTE + i] = (data[i * 3 + k] / 255 - mittel[k]) / streuung[k];
     }
   }
 
-  await sharp(aus, { raw: { width: info.width, height: info.height, channels: 1 } })
-    .blur(3)
-    .webp({ quality: 70 })
+  const ergebnis = await sitzung.run({
+    [sitzung.inputNames[0]]: new ort.Tensor('float32', eingabe, [1, 3, KANTE, KANTE]),
+  });
+  const roh = ergebnis[sitzung.outputNames[0]].data;
+
+  // Auf 0…255 spreizen: nah = hell, fern = dunkel
+  let min = Infinity, max = -Infinity;
+  for (const v of roh) { if (v < min) min = v; if (v > max) max = v; }
+  const spanne = Math.max(1e-6, max - min);
+  const grau = Buffer.alloc(roh.length);
+  for (let i = 0; i < roh.length; i++) grau[i] = Math.round(((roh[i] - min) / spanne) * 255);
+
+  const seite = Math.round(Math.sqrt(roh.length));
+  await sharp(grau, { raw: { width: seite, height: seite, channels: 1 } })
+    .resize(512, Math.round(512 * 9 / 16), { fit: 'fill' })
+    .blur(1.2)                        // Kanten leicht glätten, sonst flimmert der Versatz
+    .webp({ quality: 82 })
     .toFile(path.join(ZIEL, `${name}-tiefe.webp`));
-  console.log(`${name}-tiefe.webp  (Höhe ${wHoehe}, Licht ${wLicht}, Horizont ${horizont})`);
+  console.log(`${name}-tiefe.webp  (Depth Anything V2)`);
 }

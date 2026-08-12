@@ -41,10 +41,29 @@ dazwischen schien das Schwarz durch. Jetzt gibt es zwei Texturen, zwei Tiefenkar
 einen Mischwert. Korn, Vignette, Halation, Belichtung und chromatische Aberration
 entstehen im selben Durchgang statt als vier Blendschichten.
 
-`npm run tiefenkarten` erzeugt die Tiefenkarten. Das Verfahren ist eine Näherung
-aus Bildhöhe und Helligkeit, je Motiv eingestellt – siehe Kopfkommentar des Skripts.
-Mit den Originalrenderings sollte hier ein echtes Tiefenmodell laufen; die Kette
-ändert sich dadurch nicht, die Engine liest weiterhin `<name>-tiefe.webp`.
+`npm run tiefenkarten` erzeugt die Tiefenkarten mit **Depth Anything V2 (small)**
+über ONNX Runtime. Vorher war das eine Näherung aus Bildhöhe und Helligkeit –
+für Landschaften brauchbar, für Innenräume falsch: In der Kammer von Dunhuang
+lag das helle Fenster hinten und wurde als „nah" gelesen. Jetzt schätzt das
+Modell die relative Tiefe je Bildpunkt, und der Vordergrund schiebt sich beim
+Fahren wirklich vor den Hintergrund.
+
+Das Modell liegt unter `modelle/depth.onnx` (99 MB, nicht im Repository) und
+wird beim ersten Lauf geladen.
+
+**Kamera und Licht**
+- Die Fahrt folgt einer Zeitkurve mit Masse: träges Anfahren, langes Ausrollen,
+  eine kleine gedämpfte Schwingung am Ende. Ein reines Smoothstep sah sauber aus
+  und fühlte sich an wie ein geschobenes Bild.
+- Der Schnitt liegt auf der Bewegung: Die eintretende Szene beginnt dort, wo die
+  abgehende gerade steht, statt bei null.
+- Die Schärfeebene wandert mit der Fahrt – sehr eng dosiert. Eine
+  Schärfeverlagerung, die man bemerkt, ist zu stark.
+- Die Lichtstimmung ist eine Kurve über den Band (`STIMMUNG` in
+  `data/band-1/band.ts`): Kapitel 1 kalt und nachtblau, Kapitel 5 warm und
+  staubig, Kapitel 6 entsättigt. Zwischen Szenen wird weich übergeblendet.
+- Der Ton folgt der Kamera: Die Atmosphäre wird lauter, je näher sie an der
+  Szene steht, und tritt zwischen zwei Szenen zurück.
 
 Der Übergang gehört zur Szene, nicht zum System: Glut am Feuer, Lichtschwenk in der
 Kammer, Brechung unter Wasser, Schichtwischer bei der Grabung. Er steht in den

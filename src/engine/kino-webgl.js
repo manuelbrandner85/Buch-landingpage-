@@ -45,6 +45,8 @@ uniform float uT;                // Übergang 0..1
 uniform int   uTyp;
 uniform float uZeit, uTempo;     // Scrollgeschwindigkeit für Trägheitsunschärfe
 uniform float uKorn, uVignette, uQualitaet;
+uniform vec3  uFokus;     // x Schärfeebene A, y Schärfeebene B, z Stärke
+uniform vec3  uStimmung;  // Lichtstimmung des Kapitels
 
 float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 
@@ -73,6 +75,54 @@ vec3 hole(sampler2D bild, sampler2D tiefe, vec4 fit, vec2 kamera, float zoom, ou
   return texture(bild, abgetastet).rgb;
 }
 
+/**
+ * Motiv mit Schärfeverlagerung.
+ *
+ * Beim Hineinfahren wandert die Schärfe von hinten nach vorne, wie beim
+ * Objektiv: Zuerst steht der Horizont, am Ende der Vordergrund. Der
+ * Unschärfekreis wächst mit dem Abstand zur Schärfeebene – nicht gleichmäßig
+ * über das Bild, sondern nach der Tiefenkarte.
+ */
+/**
+ * Motiv mit Schärfeverlagerung.
+ *
+ * Beim Hineinfahren wandert die Schärfe von hinten nach vorne, wie beim
+ * Objektiv: Zuerst steht der Horizont, am Ende der Vordergrund. Der
+ * Unschärfekreis wächst mit dem Abstand zur Schärfeebene – nicht gleichmäßig
+ * über das Bild, sondern nach der Tiefenkarte.
+ */
+vec3 holeMitSchaerfe(sampler2D bild, sampler2D tiefe, vec4 fit, vec2 kamera,
+                     float zoom, float fokus, float staerke, out float tief){
+  vec2 uv = (vUv - 0.5) / (1.0 + zoom) + 0.5;
+  uv = uv * fit.xy + fit.zw;
+  tief = texture(tiefe, uv).r;
+  vec2 abgetastet = uv + kamera * (tief - 0.5);
+  if (uQualitaet > 0.5) {
+    for (int i = 0; i < 3; i++) {
+      float t2 = texture(tiefe, abgetastet).r;
+      abgetastet = uv + kamera * (t2 - 0.5);
+    }
+  }
+
+  vec3 scharf = texture(bild, abgetastet).rgb;
+  if (uQualitaet < 0.5 || staerke < 0.002) return scharf;
+
+  // Sehr eng dosiert. Eine Schärfeverlagerung, die man bemerkt, ist zu stark –
+  // sie soll nur den Rand der Tiefe weich halten, nie das Hauptmotiv.
+  float weite = smoothstep(0.22, 0.85, abs(tief - fokus));
+  float kreis = clamp(weite * staerke, 0.0, 0.0016);
+  if (kreis < 0.00035) return scharf;
+
+  // Vier Abtastungen auf einem kleinen Kreuz – genug für Objektivcharakter,
+  // billig genug für jedes Bild in jedem Einzelbild.
+  vec3 summe = scharf
+    + texture(bild, abgetastet + vec2( kreis, 0.0)).rgb
+    + texture(bild, abgetastet + vec2(-kreis, 0.0)).rgb
+    + texture(bild, abgetastet + vec2(0.0,  kreis)).rgb
+    + texture(bild, abgetastet + vec2(0.0, -kreis)).rgb;
+  return summe * 0.2;
+}
+
 /* Weiche Farbstufe: hebt den Grundton an, ohne die Lichter zuzudrücken. */
 vec3 stufe(vec3 c, vec3 ton){
   vec3 weich = mix(2.0 * c * ton, 1.0 - 2.0 * (1.0 - c) * (1.0 - ton), step(0.5, c));
@@ -81,8 +131,10 @@ vec3 stufe(vec3 c, vec3 ton){
 
 void main(){
   float tA, tB;
-  vec3 a = stufe(hole(uBildA, uTiefeA, uFitA, uKameraA, uZoomA, tA), uGradeA);
-  vec3 b = stufe(hole(uBildB, uTiefeB, uFitB, uKameraB, uZoomB, tB), uGradeB);
+  vec3 a = stufe(holeMitSchaerfe(uBildA, uTiefeA, uFitA, uKameraA, uZoomA,
+                                 uFokus.x, uFokus.z, tA), uGradeA);
+  vec3 b = stufe(holeMitSchaerfe(uBildB, uTiefeB, uFitB, uKameraB, uZoomB,
+                                 uFokus.y, uFokus.z, tB), uGradeB);
 
   /* --- Übergänge. Jeder mischt Helligkeit, keiner blendet nach Schwarz. --- */
   float m;
@@ -153,6 +205,13 @@ void main(){
   float korn = hash(vUv * 1024.0 + fract(uZeit)) - 0.5;
   c += korn * uKorn;
 
+  /* --- Lichtstimmung des Kapitels ---
+     Eine Kurve über den ganzen Band, nicht je Szene gesetzt: Kapitel 1 kalt und
+     nachtblau, Kapitel 5 warm und staubig, Kapitel 6 entsättigt und neblig.
+     Zurückhaltend dosiert – die Motive sollen getönt werden, nicht eingefärbt. */
+  float grau = dot(c, vec3(0.299, 0.587, 0.114));
+  c = mix(c, mix(vec3(grau), c * uStimmung, 0.86), 0.30);
+
   farbe = vec4(c, 1.0);
 }`;
 
@@ -180,11 +239,26 @@ const FAHRTEN = {
   absenken:    [[0.004, -0.004], [-0.030, 0.034], [0.04, 0.12]],
 };
 
+/**
+ * Zeitkurve der Kamera.
+ *
+ * Eine Kamera hat Masse. Sie fährt nicht gleichmäßig an und steht nicht
+ * schlagartig, sie schwingt aus und wippt einmal leicht nach. Genau das macht
+ * diese Kurve: träges Anfahren, langes Ausrollen, eine kleine gedämpfte
+ * Schwingung am Ende. Ein reines Smoothstep sah sauber aus und fühlte sich
+ * an wie ein geschobenes Bild.
+ */
+function masse(p) {
+  const x = Math.max(0, Math.min(1, p));
+  const aus = 1 - Math.pow(1 - x, 3.2);                 // langes Ausrollen
+  const wippe = Math.sin(x * Math.PI * 2.4) * Math.pow(1 - x, 2.6) * 0.055;
+  const an = x * x * (3 - 2 * x);                       // träges Anfahren
+  return Math.max(0, Math.min(1.03, an * 0.35 + aus * 0.65 + wippe));
+}
+
 function fahrt(szene, phase) {
   const f = FAHRTEN[szene?.fahrt] ?? FAHRTEN.hinein;
-  // Weich ein- und ausblenden, damit die Bewegung nicht an den Rändern anreißt
-  const p = Math.max(0, Math.min(1, phase));
-  const w = p * p * (3 - 2 * p);
+  const w = masse(phase);
   const zw = (paar) => paar[0] + (paar[1] - paar[0]) * w;
   return [zw(f[0]), zw(f[1]), zw(f[2])];
 }
@@ -213,6 +287,7 @@ export function starteKino(canvas, szenen, optionen = {}) {
     kameraA: u('uKameraA'), kameraB: u('uKameraB'), zoomA: u('uZoomA'), zoomB: u('uZoomB'),
     t: u('uT'), typ: u('uTyp'), zeit: u('uZeit'), tempo: u('uTempo'),
     korn: u('uKorn'), vignette: u('uVignette'), qualitaet: u('uQualitaet'),
+    fokus: u('uFokus'), stimmung: u('uStimmung'),
   };
   gl.uniform1i(U.bildA, 0); gl.uniform1i(U.bildB, 1);
   gl.uniform1i(U.tiefeA, 2); gl.uniform1i(U.tiefeB, 3);
@@ -403,12 +478,30 @@ export function starteKino(canvas, szenen, optionen = {}) {
     // Jede Szene hat ihre eigene Kamerafahrt. Der Wert `phase` ist der Fortschritt
     // dieser einen Szene: 0 beim Eintreten, 1 beim Verlassen. Szene A ist bei t
     // unterwegs, Szene B kommt gerade herein und steht deshalb bei t - 1.
+    // Schnitt auf Bewegung: Die eintretende Szene beginnt nicht bei null, sondern
+    // dort, wo die abgehende gerade steht. Dadurch bricht die Fahrt am Übergang
+    // nicht ab – die Kamera läuft durch, nur das Bild wechselt.
     const fA = fahrt(sA, t);
-    const fB = fahrt(sB, t - 1.0);
+    const fB = fahrt(sB, (t - 1.0) + uebergang * 0.34);
     gl.uniform2f(U.kameraA, fA[0], fA[1]);
     gl.uniform2f(U.kameraB, fB[0], fB[1]);
     gl.uniform1f(U.zoomA, fA[2]);
     gl.uniform1f(U.zoomB, fB[2]);
+
+    // Schärfeverlagerung: Beim Hineinfahren wandert die Schärfe von hinten
+    // (Horizont) nach vorne (Vordergrund), beim Herausfahren umgekehrt.
+    const zieht = (sz) => (sz?.fahrt === 'heraus' ? -1 : 1);
+    const ebene = (sz, phase) => 0.5 + zieht(sz) * (masse(Math.max(0, Math.min(1, phase))) - 0.5) * 0.34;
+    gl.uniform3f(U.fokus, ebene(sA, t), ebene(sB, (t - 1.0) + uebergang * 0.34),
+      qualitaet ? 0.0030 : 0.0);
+
+    // Lichtstimmung des Kapitels, zwischen den Szenen weich überblendet
+    const stA = sA?.stimmung ?? [1, 1, 1];
+    const stB = sB?.stimmung ?? [1, 1, 1];
+    gl.uniform3f(U.stimmung,
+      stA[0] + (stB[0] - stA[0]) * uebergang,
+      stA[1] + (stB[1] - stA[1]) * uebergang,
+      stA[2] + (stB[2] - stA[2]) * uebergang);
 
     // Bewegtbild an den Scroll koppeln: Wer schnell scrollt, treibt die Szene an;
     // wer stehen bleibt, sieht sie fast still weiterlaufen. Das verbindet Hand
