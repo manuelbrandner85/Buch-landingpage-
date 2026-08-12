@@ -73,6 +73,35 @@ Trägt WebGL2 nicht – alter Browser, abgeschaltete Beschleunigung, „Bewegung
 reduzieren“ –, übernimmt wieder die DOM-Fassung. Das ist kein Notbehelf, sondern
 dieselbe Welt in ruhig.
 
+### In die Tiefe statt nach unten
+
+Die Welt wird nicht durchgeblättert, sondern durchfahren. Drei Bauteile tragen das:
+
+**Durchfahrt statt Überblendung.** Bei einer Blende verschwinden beide Bilder
+gleichmäßig. Hier weicht zuerst, was nah ist – der Fels am Bildrand, der
+Türrahmen, die Wasseroberfläche –, während der ferne Bildteil noch steht. Die
+Tiefenkarte entscheidet, was nah ist. Man fährt durch die Szene hindurch,
+statt sie auszublenden.
+
+**Drei Ebenen statt zwei.** Hinter der nächsten Szene liegt bereits die
+übernächste, kleiner und dunkler. Sie wird nur sichtbar, wo die nächste schon
+geöffnet ist – dadurch sieht man in die Tiefe der Welt statt auf eine Blende.
+
+**Kapitelschwellen sind Tore.** Jeder Kapitelauftakt trägt `tor: true`. Dort
+fällt der Durchtritt stärker aus und man sieht tiefer hinein: Der Eintritt in
+ein Kapitel ist ein Ereignis, kein Übergang.
+
+Dazu: Der Text liegt nicht mehr auf dem Bild, sondern dahinter im Raum und
+kommt der Kamera entgegen (`animation-timeline: view()`, bei „Bewegung
+reduzieren" flach wie zuvor). Escape steigt eine Ebene heraus – aus der Szene
+auf die Weltkarte, von der Karte an den Anfang; dieselbe Geste liegt sichtbar
+am unteren Rand, sobald man tief genug ist. Und das Vorausladen reicht jetzt
+drei Szenen weit, weil drei Ebenen drei Motive brauchen.
+
+**Noch offen:** Karte und Bandebene als echte Zoomstufen (Karte ⇄ Kapitel ⇄
+Szene, darüber die drei Fäden). Das ist der Umbau des Navigationsmodells,
+nicht mehr nur der Darstellung.
+
 ### Kamerafahrten
 
 Jede Szene hat ihre eigene Fahrt, und sie folgt dem Inhalt statt einem Schema

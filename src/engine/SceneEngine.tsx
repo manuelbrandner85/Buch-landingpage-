@@ -22,6 +22,7 @@ import { Kapitelmarke } from '@/ui/Kapitelmarke';
 import { EvidenzRegler } from '@/ui/EvidenzRegler';
 import { Faden } from '@/ui/Faden';
 import { Filmkorn } from '@/ui/Filmkorn';
+import { Ausstieg } from '@/ui/Ausstieg';
 import { FortschrittGeber } from '@/world/FortschrittKontext';
 
 /**
@@ -49,6 +50,7 @@ export function SceneEngine({ szenen }: { szenen: Szene[] }) {
       <Faden />
       <Kapitelmarke />
       <EvidenzRegler />
+      <Ausstieg />
       <main>{szenen.map((s) => <Abschnitt key={s.id} szene={s} />)}</main>
     </div>
     </FortschrittGeber>

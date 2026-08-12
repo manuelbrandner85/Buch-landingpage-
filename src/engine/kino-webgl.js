@@ -37,10 +37,12 @@ in vec2 vUv;
 out vec4 farbe;
 
 uniform sampler2D uBildA, uBildB, uTiefeA, uTiefeB;
-uniform vec4 uFitA, uFitB;      // xy Skalierung, zw Versatz (Cover-Anpassung)
-uniform vec3 uGradeA, uGradeB;
-uniform vec2 uKameraA, uKameraB; // Versatz der Kamera in dieser Szene
-uniform float uZoomA, uZoomB;
+uniform sampler2D uBildC, uTiefeC;   // die übernächste Szene, in der Tiefe dahinter
+uniform vec4 uFitA, uFitB, uFitC; // xy Skalierung, zw Versatz (Cover-Anpassung)
+uniform vec3 uGradeA, uGradeB, uGradeC;
+uniform vec2 uKameraA, uKameraB, uKameraC;
+uniform float uZoomA, uZoomB, uZoomC;
+uniform float uTor;              // 1 = diese Schwelle ist ein Kapitelzugang
 uniform float uT;                // Übergang 0..1
 uniform int   uTyp;
 uniform float uZeit, uTempo;     // Scrollgeschwindigkeit für Trägheitsunschärfe
@@ -164,7 +166,30 @@ void main(){
     m = smoothstep(0.0, 1.0, uT * 1.5 - 0.25 + n * 0.3 - 0.15);
   }
 
-  vec3 c = mix(a, b, clamp(m, 0.0, 1.0));
+  /* --- Durchfahrt ---------------------------------------------------------
+     Der eigentliche Unterschied zwischen „weiter" und „hinein": Bei einer
+     Blende verschwinden beide Bilder gleichmäßig. Hier weicht zuerst, was nah
+     ist – der Fels am Bildrand, der Türrahmen, die Wasseroberfläche –, während
+     der ferne Bildteil noch steht. Man fährt durch die Szene hindurch, statt
+     sie auszublenden. Die Tiefenkarte entscheidet, was nah ist.
+
+     An Kapitelschwellen (uTor) fällt das stärker aus: Dort ist der Durchtritt
+     ein Ereignis, nicht ein Übergang. */
+  float naehe = clamp(tA, 0.0, 1.0);
+  float weicht = smoothstep(0.0, 1.0, uT * (1.35 + uTor * 0.55) - (1.0 - naehe) * (0.85 + uTor * 0.3));
+  m = max(m, weicht);
+
+  /* --- Dritte Ebene -------------------------------------------------------
+     Hinter der nächsten Szene liegt die übernächste, kleiner und dunkler.
+     Sie wird nur sichtbar, wo die nächste schon geöffnet ist – dadurch sieht
+     man in die Tiefe der Welt statt auf eine Blende. */
+  float tC;
+  vec3 cc = stufe(holeMitSchaerfe(uBildC, uTiefeC, uFitC, uKameraC, uZoomC,
+                                  0.5, 0.0, tC), uGradeC) * 0.62;
+  float tiefer = smoothstep(0.55, 1.0, uT) * (0.35 + uTor * 0.3);
+  vec3 b2 = mix(b, cc, tiefer * (1.0 - smoothstep(0.0, 0.45, tB)));
+
+  vec3 c = mix(a, b2, clamp(m, 0.0, 1.0));
 
   /* --- Trägheitsunschärfe: nur beim schnellen Scrollen, gerichtet --- */
   if (uQualitaet > 0.5 && abs(uTempo) > 0.001) {
@@ -282,15 +307,18 @@ export function starteKino(canvas, szenen, optionen = {}) {
 
   const u = (name) => gl.getUniformLocation(prog, name);
   const U = {
-    bildA: u('uBildA'), bildB: u('uBildB'), tiefeA: u('uTiefeA'), tiefeB: u('uTiefeB'),
-    fitA: u('uFitA'), fitB: u('uFitB'), gradeA: u('uGradeA'), gradeB: u('uGradeB'),
-    kameraA: u('uKameraA'), kameraB: u('uKameraB'), zoomA: u('uZoomA'), zoomB: u('uZoomB'),
+    bildA: u('uBildA'), bildB: u('uBildB'), bildC: u('uBildC'),
+    tiefeA: u('uTiefeA'), tiefeB: u('uTiefeB'), tiefeC: u('uTiefeC'),
+    fitA: u('uFitA'), fitB: u('uFitB'), fitC: u('uFitC'),
+    gradeA: u('uGradeA'), gradeB: u('uGradeB'), gradeC: u('uGradeC'),
+    kameraA: u('uKameraA'), kameraB: u('uKameraB'), kameraC: u('uKameraC'),
+    zoomA: u('uZoomA'), zoomB: u('uZoomB'), zoomC: u('uZoomC'), tor: u('uTor'),
     t: u('uT'), typ: u('uTyp'), zeit: u('uZeit'), tempo: u('uTempo'),
     korn: u('uKorn'), vignette: u('uVignette'), qualitaet: u('uQualitaet'),
     fokus: u('uFokus'), stimmung: u('uStimmung'),
   };
-  gl.uniform1i(U.bildA, 0); gl.uniform1i(U.bildB, 1);
-  gl.uniform1i(U.tiefeA, 2); gl.uniform1i(U.tiefeB, 3);
+  gl.uniform1i(U.bildA, 0); gl.uniform1i(U.bildB, 1); gl.uniform1i(U.bildC, 4);
+  gl.uniform1i(U.tiefeA, 2); gl.uniform1i(U.tiefeB, 3); gl.uniform1i(U.tiefeC, 5);
   gl.uniform1f(U.korn, qualitaet ? 0.045 : 0.03);
   gl.uniform1f(U.vignette, 0.55);
   gl.uniform1f(U.qualitaet, qualitaet);
@@ -309,7 +337,10 @@ export function starteKino(canvas, szenen, optionen = {}) {
    * um die aktuelle Position: die Szene selbst, die vorige und die nächsten zwei.
    * Wer nach unten scrollt, hat das nächste Bild längst da, bevor es gebraucht wird.
    */
-  const VORAUS = 2, ZURUECK = 1;
+  // Drei Ebenen brauchen drei Motive – und was hinter dem nächsten Tor liegt,
+// wird geladen, während man sich ihm nähert. Sonst steht man im Durchgang
+// vor Schwarz.
+const VORAUS = 3, ZURUECK = 1;
 
   function sichere(mitte) {
     const von = Math.max(0, Math.floor(mitte) - ZURUECK);
@@ -466,13 +497,24 @@ export function starteKino(canvas, szenen, optionen = {}) {
     const sA = szenen[i], sB = szenen[i + 1] ?? szenen[i];
 
     videosSteuern(stelle);
+    const C = geladen[i + 2] ?? B;
+    const sC = szenen[i + 2] ?? sB;
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, videoBild(A) ?? A.bild);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, videoBild(B) ?? B.bild);
+    gl.activeTexture(gl.TEXTURE4); gl.bindTexture(gl.TEXTURE_2D, C.bild ?? platzhalter);
+    gl.activeTexture(gl.TEXTURE5); gl.bindTexture(gl.TEXTURE_2D, C.tiefe ?? platzhalter);
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, A.tiefe);
     gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, B.tiefe);
 
     gl.uniform4fv(U.fitA, fit(A.seite));
     gl.uniform4fv(U.fitB, fit(B.seite));
+    gl.uniform4fv(U.fitC, fit(C.seite));
+    gl.uniform3fv(U.gradeC, sC.grading ?? sB.grading);
+    // Die übernächste Szene steht weiter hinten: kleiner Ausschnitt, kaum Fahrt.
+    gl.uniform2f(U.kameraC, 0, 0);
+    gl.uniform1f(U.zoomC, 0.0);
+    // Ein Kapitelanfang ist eine Schwelle, kein Übergang.
+    gl.uniform1f(U.tor, sB.tor ? 1 : 0);
     gl.uniform3fv(U.gradeA, sA.grading);
     gl.uniform3fv(U.gradeB, sB.grading);
     // Jede Szene hat ihre eigene Kamerafahrt. Der Wert `phase` ist der Fortschritt

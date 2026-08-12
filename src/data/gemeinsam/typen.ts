@@ -138,6 +138,12 @@ export interface Szene {
    */
   fahrt?: 'hinein' | 'durchfahrt' | 'heraus' | 'schwenkLinks' | 'schwenkRechts'
         | 'aufsteigen' | 'absenken';
+  /**
+   * Kapitelschwelle. Der Eintritt in ein Kapitel ist ein Durchtritt, kein
+   * Übergang: Die Kamera wird langsamer, das Nahe weicht stärker zur Seite,
+   * und man sieht tiefer in das hinein, was dahinter liegt.
+   */
+  tor?: boolean;
 
   /** Aus den „IM ZUSAMMENHANG“-Kästen des Buches übernommen – nicht erfunden. */
   bezuege?: { vorher?: string; danach?: string; sieheAuch?: string[] };

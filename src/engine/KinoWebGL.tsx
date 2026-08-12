@@ -53,6 +53,7 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           uebergang: s.uebergang ?? 'aufloesen',
           fahrt: s.fahrt ?? 'hinein',
           stimmung: STIMMUNG[s.kapitelId ?? 1] ?? [1, 1, 1],
+          tor: Boolean(s.tor),
         };
       }));
     } catch {

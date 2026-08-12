@@ -462,3 +462,14 @@ main{z-index:3}
 @media (prefers-reduced-motion:reduce){
   .ankunft .funke,.lesefassung::before{animation:none}
 }
+
+/* ---------- Rückweg aus der Tiefe ----------
+   Escape steigt eine Ebene heraus: aus der Szene auf die Weltkarte, von der
+   Karte an den Anfang. Ohne eine klare Geste verliert man sich in der Tiefe. */
+.ausstieg{position:fixed;left:50%;bottom:1.6rem;transform:translateX(-50%);z-index:22;
+  font-family:var(--display),serif;font-size:.62rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--staub);background:rgba(6,10,20,.7);
+  border:1px solid rgba(227,200,139,.22);padding:.5rem 1rem;cursor:pointer;
+  opacity:0;transition:opacity .5s;pointer-events:none}
+.ausstieg.an{opacity:.8;pointer-events:auto}
+.ausstieg:hover{opacity:1;color:var(--gold)}

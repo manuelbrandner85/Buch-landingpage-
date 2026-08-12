@@ -7,6 +7,7 @@ export interface KinoSzene {
   grading: [number, number, number] | number[];
   uebergang?: 'aufloesen' | 'glut' | 'lichtschwenk' | 'wasser' | 'sediment';
   stimmung?: [number, number, number];
+  tor?: boolean;
   fahrt?: 'hinein' | 'durchfahrt' | 'heraus' | 'schwenkLinks' | 'schwenkRechts'
         | 'aufsteigen' | 'absenken';
   zoom?: number;

@@ -22,7 +22,7 @@ export const SZENEN_BAND_1: Szene[] = [
     ],
   },
   {
-    id: 'kapitel-1', bandId: 'band-1', kapitelId: 1, typ: 'auftakt',
+    id: 'kapitel-1', bandId: 'band-1', kapitelId: 1, typ: 'auftakt', tor: true,
     platte: 'graben', motion: 'graben', buchseite: 12, hoehe: 202, grading: '#3d2f2a',
     uebergang: 'aufloesen', fahrt: 'hinein',
     titel: 'Feuer, Sprache\nund Wanderung',
@@ -80,7 +80,7 @@ export const SZENEN_BAND_1: Szene[] = [
     quelle: 'Bilanz zu Kapitel 1: Kooperation als Fähigkeit, nicht als Tugend.',
   },
   {
-    id: 'kapitel-2', bandId: 'band-1', kapitelId: 2, typ: 'auftakt',
+    id: 'kapitel-2', bandId: 'band-1', kapitelId: 2, typ: 'auftakt', tor: true,
     platte: 'kapitel-2-auftakt', buchseite: 40, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'schwenkRechts',
     titel: 'Saat, Besitz\nund Hierarchie',
@@ -133,7 +133,7 @@ export const SZENEN_BAND_1: Szene[] = [
     quelle: 'Bilanz zu Kapitel 2: Aus Überschuss wird Speicher, aus Speicher werden Regeln, aus Regeln wird Verwaltung.',
   },
   {
-    id: 'kapitel-3', bandId: 'band-1', kapitelId: 3, typ: 'auftakt',
+    id: 'kapitel-3', bandId: 'band-1', kapitelId: 3, typ: 'auftakt', tor: true,
     platte: 'kapitel-3-auftakt', buchseite: 72, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'aufsteigen',
     titel: 'Reiche, Glaube\nund Macht',
@@ -167,7 +167,7 @@ export const SZENEN_BAND_1: Szene[] = [
     quelle: 'Bilanz zu Kapitel 3: eine Begründung, die niemand prüfen kann, eine Schrift, die nur wenige lesen, ein Handelsnetz, das kein Einzelner überblickt.',
   },
   {
-    id: 'kapitel-4', bandId: 'band-1', kapitelId: 4, typ: 'auftakt',
+    id: 'kapitel-4', bandId: 'band-1', kapitelId: 4, typ: 'auftakt', tor: true,
     platte: 'kapitel-4-auftakt', buchseite: 99, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'hinein',
     titel: 'Krieg, Könige\nund Geheimbünde',
@@ -219,7 +219,7 @@ export const SZENEN_BAND_1: Szene[] = [
     quelle: 'Bilanz zu Kapitel 4: Herrschaft über Entfernung braucht Stellvertreter, und jeder Stellvertreter gewinnt dabei eigene Macht.',
   },
   {
-    id: 'kapitel-5', bandId: 'band-1', kapitelId: 5, typ: 'auftakt',
+    id: 'kapitel-5', bandId: 'band-1', kapitelId: 5, typ: 'auftakt', tor: true,
     platte: 'roemische-strasse', buchseite: 130, hoehe: 189, grading: '#3b3524',
     uebergang: 'aufloesen', fahrt: 'durchfahrt',
     titel: 'Gesetz, Geld\nund Imperium',
@@ -263,7 +263,7 @@ export const SZENEN_BAND_1: Szene[] = [
     quelle: 'Bilanz zu Kapitel 5: Ein Gesetz gilt ohne den Gesetzgeber, eine Münze ohne den Prägenden, eine Akte ohne den Beamten.',
   },
   {
-    id: 'kapitel-6', bandId: 'band-1', kapitelId: 6, typ: 'auftakt',
+    id: 'kapitel-6', bandId: 'band-1', kapitelId: 6, typ: 'auftakt', tor: true,
     platte: 'kapitel-6-auftakt', buchseite: 163, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'heraus',
     titel: 'Am Rand\ndes Belegten',
