@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+
+# Arbeitsdateien, die nicht ins Repository gehören
+.vorschau-tmp
+abzug
+assets-quelle/*-motion-roh.mp4
+
+# Die Vorschau ist eine erzeugte Datei (npm run vorschau)
+vorschau

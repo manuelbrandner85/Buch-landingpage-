@@ -1,0 +1,36 @@
+{
+  "name": "unsichtbare-faeden",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Die digitale Welt der drei Bände von „Die unsichtbaren Fäden“",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "assets": "node scripts/assets.mjs",
+    "pruefen": "node scripts/pruefe-welt.mjs",
+    "prebuild": "node scripts/pruefe-welt.mjs",
+    "vorschau": "node scripts/vorschau.mjs",
+    "abzug": "node scripts/abzug.mjs",
+    "pruefe:a11y": "node scripts/pruefe-a11y.mjs",
+    "tiefen": "node scripts/tiefenkarten.mjs",
+    "tiefenkarten": "node scripts/tiefenkarten.mjs",
+    "export": "NEXT_EXPORT=1 next build"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "@types/react": "^19.2.18",
+    "axe-core": "^4.13.0",
+    "puppeteer": "^25.6.0",
+    "sharp": "^0.33.5",
+    "typescript": "5.7"
+  }
+}

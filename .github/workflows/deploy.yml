@@ -1,0 +1,64 @@
+# Baut die Welt und veröffentlicht sie auf GitHub Pages.
+#
+# Einmalig im Repository einzustellen:
+#   Settings → Pages → Build and deployment → Source: "GitHub Actions"
+#
+# Danach genügt ein Push auf main.
+name: Welt bauen und veröffentlichen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Abhängigkeiten
+        run: npm ci
+
+      - name: Weltdaten prüfen
+        run: npm run pruefen
+
+      - name: Bauen
+        env:
+          # Unterpfad, unter dem GitHub Pages das Projekt ausliefert
+          NEXT_PUBLIC_BASIS_PFAD: /Buch-landingpage-
+          NEXT_PUBLIC_BASIS_URL: https://manuelbrandner85.github.io/Buch-landingpage-
+          NEXT_EXPORT: '1'
+        run: npx next build
+
+      - name: Jekyll abschalten
+        run: touch out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  veroeffentlichen:
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - id: pages
+        uses: actions/deploy-pages@v4

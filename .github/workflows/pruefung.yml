@@ -1,0 +1,21 @@
+# Prüft jeden Pull Request, bevor etwas nach main kommt.
+name: Prüfung
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Weltdaten
+        run: npm run pruefen
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Bauen
+        run: npx next build

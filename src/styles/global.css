@@ -1,0 +1,409 @@
+/* =========================================================================
+   Die visuelle Welt kommt aus dem Buch:
+   außen die Nacht des Covers, innen das Papier der Seiten.
+   ========================================================================= */
+:root{
+  --nacht:#060A14; --gold:#E3C88B; --gold-tief:#A8863F;
+  --papier:#F1ECE0; --weinrot:#7C1622; --staub:#9C9482;
+  --rand:clamp(1.25rem,5vw,5rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--nacht);color:var(--papier);
+  font-family:var(--body),Georgia,serif;
+  font-size:clamp(1rem,.5vw + .88rem,1.12rem);line-height:1.62;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display),Georgia,serif;font-weight:400;line-height:1.05}
+h2{font-size:clamp(2.1rem,5.4vw,4.1rem)}
+h3{font-size:clamp(1.2rem,2.2vw,1.6rem)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.nur-lesen{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+
+.eyebrow{font-family:var(--display),serif;font-size:.7rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.unterzeile{font-family:var(--display),serif;font-style:italic;color:var(--gold);
+  font-size:clamp(1rem,1.7vw,1.3rem);margin-top:.6rem}
+.fliess{margin-top:1.5rem;max-width:38rem}
+.quelle{margin-top:1.4rem;font-size:.74rem;color:var(--staub);font-style:italic}
+.quelle b{font-style:normal;font-family:var(--display),serif;letter-spacing:.16em;
+  text-transform:uppercase;font-size:.62rem;color:var(--gold);margin-right:.55rem}
+/* Kein Abdunkeln über Deckkraft: das unterschreitet den Mindestkontrast. */
+.quelle .seite{color:inherit}
+
+/* ---------- Kinoebene ---------- */
+.kino{position:fixed;inset:0;z-index:0;overflow:hidden;background:#000}
+.buehne{position:absolute;inset:0;opacity:0;will-change:opacity}
+.platte{position:absolute;inset:0;background-size:cover;background-position:center;
+  will-change:transform}
+.platte.grund{filter:brightness(.62)}
+.ebene{position:absolute;background-repeat:no-repeat;will-change:transform}
+.grading{position:absolute;inset:0;mix-blend-mode:soft-light;opacity:.55}
+.dunst{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,10,20,.55),transparent 45%)}
+.vignette{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 45%,transparent 42%,rgba(4,7,14,.82) 100%)}
+.partikel{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.korn{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.16;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.55'/></svg>")}
+
+/* ---------- Szenen ---------- */
+main{position:relative;z-index:2}
+.szene{position:relative;display:flex;align-items:flex-end;padding-bottom:12vh}
+/* Der Textgrund trägt jetzt allein: In der DOM-Fassung lag über jedem Motiv noch
+   eine Dunstschicht, im WebGL-Durchgang gibt es die nicht mehr. Über hellen
+   Motiven – Wasser, Wüste – muss der Verlauf deshalb kräftiger sein. */
+.block{width:100%;padding:16vh var(--rand) 0;
+  background:linear-gradient(to top,rgba(5,8,16,.96) 0%,rgba(5,8,16,.88) 30%,
+    rgba(5,8,16,.6) 62%,transparent 100%)}
+.raster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,19rem);
+  gap:clamp(1.5rem,4vw,4rem);align-items:end;max-width:78rem}
+.text{max-width:36rem}
+.kapitelband{display:flex;gap:clamp(1rem,3vw,2.4rem);align-items:baseline}
+.ziffer{font-family:var(--display),serif;font-size:clamp(3rem,7vw,5.5rem);
+  color:var(--gold-tief);line-height:.8}
+.zahlen{display:flex;flex-wrap:wrap;gap:clamp(1.2rem,4vw,3rem);margin-top:2rem}
+.zahl{font-family:var(--display),serif;font-size:clamp(1.8rem,3.6vw,2.9rem);line-height:1}
+.zahl span{display:block;font-family:var(--body),serif;font-size:.76rem;line-height:1.45;
+  color:var(--staub);margin-top:.5rem;max-width:14rem}
+.marginal{border-left:1px solid rgba(227,200,139,.26);padding-left:1.3rem;font-size:.85rem}
+.marginal-spalte{align-self:end}
+.marginal dt{font-family:var(--display),serif;font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+.marginal dd{color:var(--staub);margin-bottom:1rem}
+.badge{display:inline-block;font-family:var(--display),serif;font-size:.6rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  border:1px solid rgba(227,200,139,.38);padding:.28rem .65rem;margin-bottom:1rem}
+[data-evidenz]{transition:opacity .5s,filter .5s}
+[data-evidenz].verblasst{opacity:.15;filter:grayscale(1)}
+
+/* ---------- Ankunft ---------- */
+.ankunft{height:100svh;display:grid;place-items:center;background:#000;
+  position:relative;z-index:4}
+.funke{width:5px;height:5px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 20px 6px rgba(227,200,139,.5);animation:atmen 5s ease-in-out infinite}
+@keyframes atmen{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+.ankunft p{color:var(--staub);position:absolute;bottom:15vh;left:0;right:0;text-align:center;
+  font-family:var(--display),serif;letter-spacing:.24em;text-transform:uppercase;
+  font-size:clamp(.66rem,1.4vw,.82rem);color:var(--staub);opacity:0;
+  animation:auf 2.4s ease 1.4s forwards}
+.ankunft .hinweis{bottom:7vh;font-size:.65rem;animation-delay:3.4s;color:#b3ab98}
+@keyframes auf{to{opacity:1}}
+
+/* ---------- Papier ---------- */
+.papier{background:var(--papier);color:#1a1611;min-height:100svh;display:grid;
+  place-items:center;text-align:center;padding:14vh var(--rand);position:relative;z-index:4}
+.papier .eyebrow{color:var(--weinrot)}
+/* Gold auf Elfenbein trägt im Druck, auf dem Bildschirm nicht: 1,4 : 1.
+   Auf Papierseiten deshalb ein tiefes Bronze, das den Ton hält und lesbar bleibt. */
+.papier .unterzeile{color:#7A5E22}
+.papier h2{color:var(--weinrot);max-width:20ch;margin-inline:auto}
+.papier blockquote{font-family:var(--display),serif;font-style:italic;
+  font-size:clamp(1.2rem,2.4vw,1.8rem);max-width:40rem;margin:2rem auto 0;line-height:1.5}
+.papier .quelle{color:#6a6152}
+.papier .quelle b{color:var(--weinrot)}
+
+/* ---------- Karte ---------- */
+.karte{background:#050810;position:relative;z-index:4;padding:12vh var(--rand)}
+.karte-huelle{max-width:70rem;margin:0 auto}
+.karte svg{width:100%;height:auto;margin-top:2rem}
+.ort{cursor:pointer}
+.ort circle{fill:var(--gold);opacity:.55;transition:opacity .3s}
+.ort:hover circle,.ort[aria-current="true"] circle{opacity:1}
+/* Namen bleiben leise sichtbar – eine Karte ohne Beschriftung ist ein Muster,
+   keine Karte. Beim Berühren treten sie hervor. */
+.ort text{fill:var(--staub);font-family:var(--display),serif;font-size:11px;
+  letter-spacing:.08em;opacity:.42;transition:opacity .3s,fill .3s}
+.ort:hover text,.ort[aria-current="true"] text{opacity:1;fill:var(--gold)}
+.karte-netz{stroke:rgba(227,200,139,.09);stroke-width:.6;fill:none}
+.karte-faden{stroke:rgba(227,200,139,.45);stroke-width:1;fill:none;stroke-dasharray:3 5}
+.ort-info{margin-top:1.4rem;min-height:5rem;max-width:34rem;font-size:.92rem;color:var(--staub)}
+.ort-info strong{color:var(--papier);font-family:var(--display),serif;font-size:1.15rem;
+  display:block;margin-bottom:.3rem;font-weight:400}
+.ort-info .verweis{display:block;margin-top:.5rem;color:var(--gold);font-size:.78rem}
+
+/* ---------- Bücher ---------- */
+.buecher{background:var(--nacht);position:relative;z-index:4;padding:12vh var(--rand)}
+.buch-raster{display:grid;grid-template-columns:minmax(0,17rem) minmax(0,32rem);
+  gap:clamp(2rem,6vw,5rem);align-items:center;max-width:60rem;margin:0 auto}
+.buch-cover{border:1px solid rgba(227,200,139,.28);box-shadow:0 30px 80px rgba(0,0,0,.7);
+  height:auto}
+.kaufen{display:inline-block;margin-top:1.6rem;font-family:var(--display),serif;
+  font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--nacht);
+  background:var(--gold);text-decoration:none;padding:.85rem 1.7rem;transition:background .3s}
+.kaufen:hover{background:#fff}
+.spaeter{display:flex;gap:2.5rem;flex-wrap:wrap;max-width:60rem;margin:3.5rem auto 0;
+  border-top:1px solid rgba(227,200,139,.16);padding-top:2rem}
+.spaeter div{flex:1 1 12rem}
+.spaeter h3{color:var(--staub)}
+.spaeter p{font-size:.82rem;color:var(--staub);margin-top:.35rem}
+footer{background:var(--nacht);position:relative;z-index:4;padding:3rem var(--rand) 6rem;
+  text-align:center;font-size:.72rem;color:var(--staub)}
+
+/* ---------- Faden und Oberfläche ---------- */
+.faden{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .8s}
+.faden path{fill:none;stroke:var(--gold);stroke-width:1.3;
+  filter:drop-shadow(0 0 5px rgba(227,200,139,.5))}
+.faden circle{fill:#fff;filter:drop-shadow(0 0 8px rgba(227,200,139,1))}
+
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;
+  justify-content:space-between;align-items:center;padding:1rem var(--rand);
+  opacity:0;pointer-events:none;transition:opacity .6s}
+header.an{opacity:1;pointer-events:auto}
+header::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to bottom,rgba(6,10,20,.8),transparent)}
+.marke{font-family:var(--display),serif;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);text-decoration:none}
+nav{display:flex;gap:clamp(.7rem,2vw,1.6rem);align-items:center}
+nav a,nav button{font-family:var(--display),serif;font-size:.7rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--papier);text-decoration:none;opacity:.7;
+  background:none;border:0;cursor:pointer;padding:.4rem 0;transition:opacity .3s,color .3s}
+nav a:hover,nav button:hover{opacity:1;color:var(--gold)}
+nav button[aria-pressed="true"]{color:var(--gold);opacity:1}
+
+.kapitelmarke{position:fixed;left:var(--rand);bottom:2.2rem;z-index:20;
+  font-family:var(--display),serif;font-size:.66rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--staub);opacity:0;transition:opacity .6s}
+.kapitelmarke.an{opacity:.9}
+.kapitelmarke b{color:var(--gold);font-weight:400}
+
+.regler{position:fixed;right:var(--rand);bottom:2rem;z-index:20;width:14rem;
+  background:rgba(6,10,20,.78);border:1px solid rgba(227,200,139,.2);padding:.9rem 1rem;
+  backdrop-filter:blur(8px);opacity:0;transform:translateY(10px);
+  transition:opacity .5s,transform .5s;pointer-events:none}
+.regler.an{opacity:1;transform:none;pointer-events:auto}
+.regler label{font-family:var(--display),serif;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.5rem}
+.regler input{width:100%;accent-color:var(--gold-tief)}
+.regler p{font-size:.7rem;color:var(--staub);margin-top:.5rem;line-height:1.4}
+
+.zeitleiste{position:fixed;inset:0;z-index:30;background:rgba(4,7,14,.96);
+  display:grid;place-items:center;padding:var(--rand);overflow:auto}
+.band{margin:2.6rem 0}
+.band h3{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:.7rem}
+.bandlinie{position:relative;height:3px;
+  background:linear-gradient(90deg,var(--gold-tief),rgba(168,134,63,.25))}
+.bandlinie .marke{position:absolute;top:-4px;width:11px;height:11px;border-radius:50%;
+  background:var(--papier);transform:translateX(-50%)}
+.bandlinie .marke span{position:absolute;left:50%;transform:translateX(-50%);top:-2.9rem;
+  white-space:nowrap;font-size:.7rem;color:var(--staub);text-align:center;line-height:1.3}
+.bandlinie .marke span b{display:block;color:var(--gold);font-weight:400;
+  font-family:var(--display),serif;font-size:.85rem}
+
+/* ---------- Lesefassung für Kapitel- und Ortseiten ---------- */
+.lesefassung{max-width:44rem;margin:0 auto;padding:12vh var(--rand)}
+.lesefassung article{margin:3rem 0;border-top:1px solid rgba(227,200,139,.16);padding-top:2rem}
+.lesefassung ul{margin-top:1rem;padding-left:1.2rem}
+.lesefassung li{margin-bottom:.6rem}
+
+/* ---------- Mobil ---------- */
+@media (max-width:900px){
+  .raster{grid-template-columns:1fr}
+  .marginal{display:none}
+  .regler{left:var(--rand);right:var(--rand);width:auto;bottom:1rem}
+  .kapitelmarke{display:none}
+  .buch-raster{grid-template-columns:1fr}
+  .buch-cover{max-width:13rem}
+}
+
+/* ---------- Ruhige Fassung: gleichwertig, nicht reduziert ---------- */
+@media (prefers-reduced-motion:reduce){
+  .kino{position:relative;inset:auto;height:auto}
+  .buehne{position:relative;opacity:1;height:60svh}
+  .faden,.korn,.partikel{display:none}
+  .funke{animation:none}
+  .ankunft p{animation:none;opacity:1}
+}
+.ruhig .kino{position:relative;inset:auto;height:auto}
+.ruhig .buehne{position:relative;opacity:1!important;height:58svh;transform:none!important}
+.ruhig .platte{transform:none!important}
+.ruhig .szene{min-height:0!important;padding-bottom:6vh}
+.ruhig .block{background:var(--nacht)}
+.ruhig .faden,.ruhig .korn{display:none}
+
+/* ---------- Interaktive Module (Papierregister) ---------- */
+.interaktion .fliess{margin-inline:auto;text-align:left}
+.ringe{display:flex;flex-direction:column;gap:.5rem;max-width:34rem;
+  margin:2.5rem auto 1rem}
+/* Geschlossene Ringe treten zurück – über Farbe und Rahmen, nicht über Deckkraft:
+   Was noch Information trägt, muss lesbar bleiben. */
+.ring{display:flex;flex-direction:column;gap:.2rem;text-align:left;
+  border:1px solid rgba(124,22,34,.18);background:transparent;cursor:pointer;
+  padding:.85rem 1.1rem;font:inherit;color:inherit;
+  transition:background .35s,border-color .35s,color .35s}
+.ring:not(.offen) .ring-stufe{color:#6a6152}
+.ring:hover{border-color:rgba(124,22,34,.5)}
+.ring[aria-disabled="true"]{cursor:not-allowed}
+.ring.offen{opacity:1;border-color:var(--weinrot);background:rgba(124,22,34,.05)}
+.ring-stufe{font-family:var(--display),serif;font-size:1.15rem;color:var(--weinrot)}
+.ring-kontrolle{font-size:.82rem;color:#6a6152}
+.ringe-stand{font-size:.85rem;color:#6a6152;font-style:italic}
+/* Die Ringe stehen im Papierregister – Verblassen dort dunkler als in der Nacht. */
+.papier [data-evidenz].verblasst{opacity:.25;filter:grayscale(1)}
+
+.denar-buehne{display:flex;align-items:center;justify-content:center;
+  gap:clamp(1.5rem,5vw,3.5rem);margin:2.5rem 0 1.5rem;flex-wrap:wrap}
+.muenze{width:8.5rem;height:8.5rem;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#e8e4da,#b8b2a4 60%,#8d8677);
+  box-shadow:inset 0 0 0 6px rgba(255,255,255,.28),0 12px 28px rgba(0,0,0,.18);
+  font-family:var(--display),serif;letter-spacing:.14em;font-size:.7rem;color:#4a4438}
+.denar-werte{text-align:left}
+.denar-anteil{font-family:var(--display),serif;font-size:1.1rem;color:#6a6152}
+.denar-anteil b{display:block;font-size:clamp(2.4rem,6vw,3.6rem);color:var(--weinrot);
+  font-weight:400;line-height:1}
+.denar-jahr{font-size:.85rem;color:#6a6152;margin-top:.4rem}
+.denar-regler{display:block;max-width:26rem;margin:0 auto;
+  font-family:var(--display),serif;font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--weinrot)}
+.denar-regler input{width:100%;margin-top:.6rem;accent-color:var(--weinrot)}
+
+/* ---------- Erkundung: was schon gesehen wurde ---------- */
+.ort circle.besucht{opacity:.95;filter:drop-shadow(0 0 4px rgba(227,200,139,.7))}
+.ort-info .sprung{display:inline-block;margin-top:.9rem;font-family:var(--display),serif;
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  text-decoration:none;border-bottom:1px solid rgba(227,200,139,.4);padding-bottom:.2rem}
+.ort-info .sprung:hover{color:var(--papier);border-color:var(--papier)}
+.ankunft .wiederkehr a{color:var(--gold);text-decoration:none;
+  border-bottom:1px solid rgba(227,200,139,.35);padding-bottom:.15rem}
+.ankunft .wiederkehr a:hover{color:var(--papier)}
+
+/* Sprungmarke: sichtbar nur für die Tastatur */
+.sprungmarke{position:fixed;top:-4rem;left:var(--rand);z-index:80;
+  background:var(--papier);color:var(--nacht);padding:.6rem 1rem;
+  font-family:var(--display),serif;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;text-decoration:none;transition:top .2s}
+.sprungmarke:focus{top:1rem}
+
+/* ---------- Szenenlänge: am Desktop großzügig, mobil gestrafft ---------- */
+.szene{min-height:calc(var(--hoehe,180) * 1svh)}
+
+/* ---------- Mobil ist eine eigene Erfahrung, keine verkleinerte ---------- */
+@media (max-width:900px){
+  /* Kein Scrollweg ohne Veränderung: auf kleinen Schirmen passiert pro
+     Bildschirmhöhe mehr, also braucht jede Szene weniger Strecke. */
+  .szene{min-height:calc(var(--hoehe,180) * 0.62svh)}
+  /* Die Coverebenen greifen im Hochformat kaum – die ruhige Platte genügt
+     und spart Rechenzeit auf schwächeren Geräten. */
+  .cover-buehne .ebene{display:none}
+  .platte.grund{filter:none}
+  .block{padding-top:9vh}
+  .regler{backdrop-filter:none;background:rgba(6,10,20,.92)}
+  .denar-buehne{gap:1.2rem}
+  .muenze{width:6.5rem;height:6.5rem}
+}
+@media (max-width:900px) and (orientation:landscape){
+  /* Im Querformat ist Höhe knapp: Text kompakter, Szene kürzer. */
+  .szene{min-height:calc(var(--hoehe,180) * 0.5svh)}
+  .block{padding-top:6vh}
+}
+
+/* ---------- Königsstraße: zwei Marken, dieselbe Strecke ---------- */
+.strecke{max-width:40rem;margin:2.5rem auto 1.5rem}
+.strecke-namen{display:flex;justify-content:space-between;
+  font-family:var(--display),serif;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--weinrot);margin-bottom:1.6rem}
+.bahn{position:relative;height:5.5rem}
+.stationen{position:absolute;top:2.4rem;left:0;right:0;height:2px;
+  background:rgba(124,22,34,.35)}
+.stationen i{position:absolute;top:-1px;width:2px;height:4px;
+  background:rgba(124,22,34,.5);transform:translateX(-50%)}
+.marke{position:absolute;transform:translateX(-50%);transition:left .18s linear;
+  display:flex;flex-direction:column;align-items:center;font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;font-family:var(--display),serif}
+.marke::before{content:"";width:9px;height:9px;border-radius:50%}
+.marke.bote{top:.6rem;color:var(--weinrot)}
+.marke.bote::before{background:var(--weinrot);order:2;margin-top:.4rem}
+.marke.laeufer{top:3rem;color:#6a6152}
+.marke.laeufer::before{background:#8d8677;margin-bottom:.4rem}
+.strecke-stand{margin-top:.8rem;font-size:.85rem;color:#6a6152;font-style:italic;
+  min-height:3rem}
+.kernsatz{font-family:var(--display),serif;font-style:italic;color:var(--weinrot);
+  font-size:clamp(1.05rem,2vw,1.35rem);margin-top:1.4rem}
+
+/* ---------- Die Prüfung ---------- */
+.pruefung{list-style:none;max-width:40rem;margin:2.5rem auto 1.5rem;padding:0;
+  text-align:left}
+.pruefung li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(124,22,34,.16);
+  transition:color .4s}
+.pruefung li:not(.geprueft) .pruef-frage{color:#6a6152}
+.pruef-frage{font-family:var(--display),serif;color:var(--weinrot);font-size:1.02rem}
+.pruef-befund{font-size:.86rem;color:#6a6152}
+.pruef-knopf{font-family:var(--display),serif;font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--papier);background:var(--weinrot);border:0;
+  padding:.8rem 1.6rem;cursor:pointer;transition:background .3s}
+.pruef-knopf:hover{background:#5d101a}
+.pruef-ergebnis .zahlen{justify-content:center}
+.pruef-ergebnis .zahl{color:var(--weinrot)}
+.pruef-ergebnis .zahl span{color:#6a6152}
+@media (max-width:900px){
+  .pruefung li{grid-template-columns:1fr;gap:.2rem}
+}
+
+/* ---------- Kopfzeile im Hochformat: der Titel weicht dem Menü ---------- */
+@media (max-width:700px){
+  header{padding:.7rem var(--rand)}
+  .marke{display:none}
+  nav{width:100%;justify-content:space-between;gap:.5rem}
+  nav a,nav button{font-size:.6rem;letter-spacing:.1em}
+}
+
+/* ---------- Erklärte Begriffe: im Buch gold, hier antippbar ---------- */
+.begriff{font:inherit;color:var(--gold);background:none;border:0;padding:0;cursor:pointer;
+  border-bottom:1px dotted rgba(227,200,139,.55);transition:color .25s,border-color .25s}
+.begriff:hover,.begriff[aria-expanded="true"]{color:var(--papier);border-color:var(--papier)}
+.papier .begriff{color:var(--weinrot);border-bottom-color:rgba(124,22,34,.45)}
+.papier .begriff:hover,.papier .begriff[aria-expanded="true"]{color:#3a0d14;border-color:#3a0d14}
+.begriff-erklaerung{margin-top:.9rem;max-width:34rem;font-size:.86rem;color:var(--staub);
+  border-left:1px solid rgba(227,200,139,.3);padding-left:1rem}
+.begriff-erklaerung b{display:block;font-family:var(--display),serif;font-weight:400;
+  color:var(--gold);font-size:1rem;margin-bottom:.2rem}
+.begriffsliste div{border-top:1px solid rgba(227,200,139,.16);padding:1.1rem 0}
+.begriffsliste dt{font-family:var(--display),serif;font-size:1.2rem;color:var(--gold);
+  margin-bottom:.3rem}
+.begriffsliste dd{color:var(--staub);margin:0}
+
+/* ---------- WebGL-Kinoebene ---------- */
+.kino-flaeche{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* Läuft die Fläche, entfallen die gestapelten DOM-Ebenen samt ihrer
+   Mischmodi – Farbstufe, Vignette und Korn macht der Shader in einem Durchgang. */
+body.webgl .korn{display:none}
+body.webgl .buehne{display:none}
+
+/* ---------- Zeilenmasken: Überschriften steigen zeilenweise auf ---------- */
+.zeile{display:inline-block;overflow:hidden;vertical-align:top}
+.zeile-innen{display:inline-block;transform:translateY(105%);opacity:0;
+  transition:transform 1.05s cubic-bezier(.19,1,.22,1) var(--verzug,0s),
+             opacity .8s ease var(--verzug,0s)}
+.zeilen-offen .zeile-innen{transform:none;opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .zeile-innen{transform:none;opacity:1;transition:none}
+}
+
+/* ---------- Kinoebene: ein Canvas statt gestapelter Blendschichten ---------- */
+.kino-canvas{position:fixed;inset:0;z-index:1;width:100%;height:100%;display:block;
+  background:#060A14;pointer-events:none}
+/* Sobald WebGL trägt, wird die DOM-Fassung nicht mehr gebraucht.
+   Bis dahin bleibt sie stehen – kein schwarzes Loch beim Laden. */
+.kino-canvas[data-bereit="1"] ~ .kino,
+.welt:has(.kino-canvas[data-bereit="1"]) .kino{opacity:0;transition:opacity .6s ease}
+.faden{z-index:2}
+main{z-index:3}
+.papier,.karte,.buecher,footer,.ankunft{z-index:4}
+.ruhig .kino-canvas{display:none}
+.ruhig .kino{opacity:1!important}
+@media (prefers-reduced-motion:reduce){ .kino-canvas{display:none} .kino{opacity:1!important} }
+
+/* ---------- Kinoebene als eine Fläche ---------- */
+.kino-flaeche{position:fixed;inset:0;width:100%;height:100%;display:block;
+  background:#060A14;pointer-events:none;transition:opacity .9s ease}
+.ruhig .kino-flaeche{display:none}
+@media (prefers-reduced-motion:reduce){ .kino-flaeche{display:none} }
+
+/* Zeilenmasken: eine Überschrift steigt zeilenweise auf, statt als Block einzublenden.
+   Die Klassennamen kommen aus src/engine/zeilen.js. */
+.zeile{display:inline-block;overflow:hidden;vertical-align:top}
+.zeile-innen{display:block;transform:translateY(105%);
+  transition:transform 1s cubic-bezier(.16,.84,.3,1);transition-delay:var(--verzug,0s)}
+.zeilen-offen .zeile-innen{transform:none}
