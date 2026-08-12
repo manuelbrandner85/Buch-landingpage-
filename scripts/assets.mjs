@@ -14,7 +14,7 @@ import path from 'node:path';
 
 const QUELLE = 'assets-quelle';
 const ZIEL = 'public/assets/band-1/szenen';
-const BREITEN = [640, 1000, 1600, 2400];
+const BREITEN = [640, 1000, 1600, 1920, 2560];
 
 await mkdir(ZIEL, { recursive: true });
 const dateien = (await readdir(QUELLE)).filter((f) => /\.(jpe?g|png|tiff?)$/i.test(f));
@@ -27,10 +27,10 @@ for (const datei of dateien) {
   for (const b of BREITEN) {
     if (b > width * 1.2) continue; // nicht hochrechnen
     await bild.clone().resize({ width: b })
-      .avif({ quality: 52, effort: 5 })
+      .avif({ quality: 60, effort: 4, chromaSubsampling: '4:4:4' })
       .toFile(path.join(ZIEL, `${name}-${b}.avif`));
     await bild.clone().resize({ width: b })
-      .webp({ quality: 72 })
+      .webp({ quality: 80, effort: 4 })
       .toFile(path.join(ZIEL, `${name}-${b}.webp`));
   }
   // Poster für spätere Motion-Sequenzen

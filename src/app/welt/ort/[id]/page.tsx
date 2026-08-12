@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ORTE, ortNach } from '@/data/gemeinsam/orte';
 import { kapitelNach } from '@/world/registry';
+import { Rueckweg } from '@/ui/Rueckweg';
 
 /** Ein Ort gehört der Welt, nicht einem Band – deshalb listet er alle Vorkommen. */
 export function generateStaticParams() {
@@ -22,6 +23,7 @@ export default async function OrtSeite({ params }: { params: Promise<{ id: strin
 
   return (
     <main className="lesefassung">
+      <Rueckweg />
       <p className="eyebrow">Ort</p>
       <h1>{ort.name}</h1>
       <p>{ort.text}</p>
@@ -39,6 +41,10 @@ export default async function OrtSeite({ params }: { params: Promise<{ id: strin
       <p className="quelle">
         <b>Hinweis</b>Die Koordinaten dienen der Verortung, nicht der Vermessung.
       </p>
+      <nav className="fusszeile">
+        <Rueckweg />
+        <a href="/welt/begriffe">Begriffe</a>
+      </nav>
     </main>
   );
 }

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { WELT, ALLE_KAPITEL } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
 import { Quelle } from '@/ui/Quelle';
+import { Rueckweg } from '@/ui/Rueckweg';
 
 /** Eigene URL je Kapitel – damit Suchmaschinen die Welt verstehen. */
 export function generateStaticParams() {
@@ -28,12 +29,13 @@ export default async function KapitelSeite({ params }: { params: Promise<{ numme
 
   return (
     <main className="lesefassung">
+      <Rueckweg />
       <p className="eyebrow">Band 1 · Kapitel {kapitel.id}</p>
       <h1>{kapitel.titel}</h1>
       <p className="unterzeile">{kapitel.unterzeile}</p>
       <p className="quelle"><b>Im Buch</b>Seiten {kapitel.seiten[0]}–{kapitel.seiten[1]}</p>
 
-      {szenen.map((s) => (
+      {szenen.filter((s) => s.typ !== 'auftakt').map((s) => (
         <article key={s.id}>
           <h2>{s.titel}</h2>
           {s.unterzeile && <p className="unterzeile">{s.unterzeile}</p>}
@@ -51,6 +53,11 @@ export default async function KapitelSeite({ params }: { params: Promise<{ numme
           <li key={o.id}><a href={`/welt/ort/${o.id}`}>{o.name}</a> – {o.text}</li>
         ))}
       </ul>
+      <nav className="fusszeile">
+        <Rueckweg />
+        <a href="/welt/begriffe">Begriffe</a>
+        <a href="/ueber">Über das Projekt</a>
+      </nav>
     </main>
   );
 }

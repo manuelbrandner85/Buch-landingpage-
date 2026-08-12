@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Rueckweg } from '@/ui/Rueckweg';
 
 export const metadata: Metadata = {
   title: 'Impressum – Die unsichtbaren Fäden',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function ImpressumSeite() {
   return (
     <main className="lesefassung">
+      <Rueckweg />
       <p className="eyebrow">Pflichtangaben</p>
       <h1>Impressum</h1>
 
@@ -68,7 +70,7 @@ export default function ImpressumSeite() {
         </p>
       </article>
 
-      <p><a href="/ueber">Über das Projekt</a> · <a href="/">Zurück in die Welt</a></p>
+      <nav className="fusszeile"><a href="/ueber">Über das Projekt</a>  <a href="/">Zurück in die Welt</a></nav>
     </main>
   );
 }

@@ -89,9 +89,14 @@ Die Motivszenen sind entsprechend länger, damit die Fahrt Zeit hat: rund
 
 ### Bewegtbild – Herkunft
 
-**Wichtig:** Die Motive der sieben bewegten Szenen (Ostafrikanischer Graben,
-Grabung, Feuerkreis, Kulturfeld, Königsstraße, Bibliothekshöhle, Meeresgrund)
-sind **nicht die Bilder aus dem Buch**. Sie wurden eigens für die
+**Wichtig:** Bis auf das Cover sind **alle** Szenenmotive eigens für die Website
+erzeugt und **nicht die Bilder aus dem Buch**. Die Ausschnitte aus dem Druck-PDF
+sind vollständig ersetzt: Sie lagen bei 1000 bis 1200 Pixel im Hochformat und
+mussten für das Breitbild stark beschnitten werden.
+
+Stand jetzt: sieben bewegte Szenen aus 1920 × 1080, neun Standbilder aus
+4096 × 2304, alle im Querformat 16:9. Das Cover bleibt unverändert das echte
+Buchcover. Sie wurden eigens für die
 Bewegtfassung erzeugt, weil sich die Buchmotive technisch nicht in die
 Generierung einspeisen ließen. Inhaltlich folgen sie den Buchszenen, und sie
 tragen dieselbe Herkunftsangabe wie im Band – „Freie Rekonstruktion“ –, aber wer
@@ -99,10 +104,14 @@ Buch und Website nebeneinanderlegt, sieht zwei verschiedene Bilder derselben Sze
 Das muss vor dem Livegang entschieden werden: entweder so belassen oder die
 Bewegtfassung aus den Originalrenderings neu erzeugen.
 
-Erzeugt mit VideoSlash: Standbild `seedream-45` (0,2 Credits), Bewegung
-`kling-30`, 5 Sekunden, 1080p (11,2 Credits je Szene). Sieben Szenen,
-zusammen 79,8 Credits. Alle im Querformat 16:9 – dadurch sitzt jetzt auch
-kein hochformatiges Motiv mehr im Breitbild.
+Erzeugt mit VideoSlash: Standbilder `seedream-45` (0,2 Credits bei 2K,
+0,35 bei 4K), Bewegung `kling-30`, 5 Sekunden, 1080p (11,2 Credits je Szene).
+
+**Auslieferung:** AVIF und WebP in fünf Breiten bis 2560 px, AVIF in Qualität 60
+mit vollem Farbunterabtasten. Videos in zwei Stufen – 1920 px in CRF 21 für den
+Schirm, 1280 px in CRF 25 für Telefone und schmale Verbindungen. VP9 wird nicht
+mehr erzeugt: Die Engine lädt ohnehin nur MP4, und die Kodierung kostete ein
+Vielfaches der Zeit bei kaum sichtbarem Gewinn.
 `node scripts/motion-holen.mjs <name> <url>` holt das Ergebnis, kodiert MP4 und
 WebM, zieht das erste Bild als Standbild und Poster.
 

@@ -4,7 +4,7 @@ import type { Asset } from '@/data/gemeinsam/typen';
  * Bildquellen. scripts/assets.mjs legt AVIF und WebP nebeneinander ab;
  * AVIF ist rund 15 Prozent kleiner, WebP bleibt als Rückfall.
  */
-const BREITEN = [640, 1000, 1600, 2400] as const;
+const BREITEN = [640, 1000, 1600, 1920, 2560] as const;
 
 /** Unter GitHub Pages liegt die Welt in einem Unterordner, nicht in der Wurzel. */
 export const BASIS_PFAD = process.env.NEXT_PUBLIC_BASIS_PFAD ?? '';

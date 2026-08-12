@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { BEGRIFFE } from '@/data/gemeinsam/begriffe';
+import { Rueckweg } from '@/ui/Rueckweg';
 
 export const metadata: Metadata = {
   title: 'Begriffe – Die unsichtbaren Fäden',
@@ -10,6 +11,7 @@ export default function BegriffeSeite() {
   const sortiert = [...BEGRIFFE].sort((a, b) => a.wort.localeCompare(b.wort, 'de'));
   return (
     <main className="lesefassung">
+      <Rueckweg />
       <p className="eyebrow">Anhang</p>
       <h1>Begriffe</h1>
       <p className="unterzeile">Was im Buch in Gold steht, wird hier erklärt.</p>
@@ -27,7 +29,7 @@ export default function BegriffeSeite() {
         <b>Hinweis</b>Das Glossar des Bandes umfasst mehr Einträge. Aufgenommen ist hier,
         was wörtlich aus dem Buch übernommen werden konnte.
       </p>
-      <p><a href="/ueber">Über das Projekt</a> · <a href="/">Zurück in die Welt</a></p>
+      <nav className="fusszeile"><a href="/ueber">Über das Projekt</a>  <a href="/">Zurück in die Welt</a></nav>
     </main>
   );
 }

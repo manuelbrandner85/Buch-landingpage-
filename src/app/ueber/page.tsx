@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { WELT } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
+import { Rueckweg } from '@/ui/Rueckweg';
 
 export const metadata: Metadata = {
   title: 'Über das Projekt – Die unsichtbaren Fäden',
@@ -19,6 +20,7 @@ export default function UeberSeite() {
 
   return (
     <main className="lesefassung">
+      <Rueckweg />
       <p className="eyebrow">Über das Projekt</p>
       <h1>Wie diese Welt gemacht ist</h1>
       <p className="unterzeile">
@@ -89,7 +91,7 @@ export default function UeberSeite() {
       <p className="quelle">
         <b>Bildnachweis</b>Alle Angaben folgen dem Bildnachweis des Bandes, Seite 201.
       </p>
-      <p><a href="/welt/begriffe">Begriffe</a> · <a href="/impressum">Impressum und Datenschutz</a> · <a href="/">Zurück in die Welt</a></p>
+      <nav className="fusszeile"><a href="/welt/begriffe">Begriffe</a>  <a href="/impressum">Impressum und Datenschutz</a>  <a href="/">Zurück in die Welt</a></nav>
     </main>
   );
 }

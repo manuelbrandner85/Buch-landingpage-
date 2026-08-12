@@ -13,8 +13,12 @@ body{background:var(--nacht);color:var(--papier);
   font-size:clamp(1rem,.5vw + .88rem,1.12rem);line-height:1.62;
   overflow-x:hidden;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:var(--display),Georgia,serif;font-weight:400;line-height:1.05}
-h2{font-size:clamp(2.1rem,5.4vw,4.1rem)}
-h3{font-size:clamp(1.2rem,2.2vw,1.6rem)}
+/* h1 hatte keine eigene Größe und fiel dadurch auf den Browserwert zurück –
+   auf den Leseseiten stand die Überschrift zweiter Ordnung größer da als die erste. */
+h1{font-size:clamp(2.4rem,5.6vw,4.4rem);letter-spacing:.005em}
+h2{font-size:clamp(1.9rem,3.4vw,2.9rem)}
+h3{font-size:clamp(1.15rem,1.8vw,1.45rem)}
+.szene h2,.papier h2{font-size:clamp(2.1rem,5.4vw,4.1rem)}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
@@ -191,11 +195,38 @@ nav button[aria-pressed="true"]{color:var(--gold);opacity:1}
 .bandlinie .marke span b{display:block;color:var(--gold);font-weight:400;
   font-family:var(--display),serif;font-size:.85rem}
 
-/* ---------- Lesefassung für Kapitel- und Ortseiten ---------- */
-.lesefassung{max-width:44rem;margin:0 auto;padding:12vh var(--rand)}
-.lesefassung article{margin:3rem 0;border-top:1px solid rgba(227,200,139,.16);padding-top:2rem}
-.lesefassung ul{margin-top:1rem;padding-left:1.2rem}
-.lesefassung li{margin-bottom:.6rem}
+/* ---------- Lesefassung: Kapitel, Orte, Begriffe, Über, Impressum ----------
+   Diese Seiten sind die ruhige Seite der Welt. Sie sollen sich wie eine
+   aufgeschlagene Doppelseite lesen, nicht wie ein Datenauszug. */
+.lesefassung{max-width:42rem;margin:0 auto;padding:16vh var(--rand) 14vh;
+  position:relative;z-index:5}
+.lesefassung::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(120% 80% at 50% 0%,#0d1526 0%,var(--nacht) 62%)}
+.lesefassung h1{margin-bottom:.4rem;color:var(--papier)}
+.lesefassung > .unterzeile{margin-bottom:2.6rem}
+.lesefassung > p{max-width:36rem}
+.lesefassung article{margin:3.4rem 0 0;padding-top:2.4rem;
+  border-top:1px solid rgba(227,200,139,.14)}
+.lesefassung article h2{color:var(--gold);margin-bottom:.8rem}
+.lesefassung article p + p{margin-top:.9rem}
+.lesefassung h2{margin-top:3rem}
+.lesefassung ul{margin-top:1.2rem;padding:0;list-style:none}
+.lesefassung li{margin-bottom:1rem;padding-left:1.1rem;position:relative;
+  color:var(--staub)}
+.lesefassung li::before{content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:5px;background:var(--gold-tief);border-radius:50%}
+.lesefassung a{color:var(--gold);text-decoration:none;
+  border-bottom:1px solid rgba(227,200,139,.35);transition:color .3s,border-color .3s}
+.lesefassung a:hover{color:var(--papier);border-color:var(--papier)}
+.lesefassung .quelle{max-width:36rem}
+
+/* Rückweg in die Welt – auf jeder Leseseite oben und unten */
+.rueckweg{display:inline-block;font-family:var(--display),serif;font-size:.68rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--staub);
+  text-decoration:none;border:0;margin-bottom:2.4rem}
+.rueckweg:hover{color:var(--gold)}
+.lesefassung .fusszeile{margin-top:4rem;padding-top:2rem;
+  border-top:1px solid rgba(227,200,139,.14);display:flex;gap:1.6rem;flex-wrap:wrap}
 
 /* ---------- Mobil ---------- */
 @media (max-width:900px){
