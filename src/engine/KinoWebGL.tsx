@@ -25,11 +25,15 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
     if (!leinwand.current) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { beiRueckfall(); return; }
 
-    // Auflösung nach Gerät: Ein Telefon mit 390 Punkten Breite braucht kein
-    // 1600-Pixel-Motiv, ein 4K-Schirm möchte mehr als 1600. Vorher galt für
-    // beide derselbe Wert.
+    // Auflösung nach Gerät – und mit Reserve für die Kamerafahrt.
+    //
+    // Die Kamera fährt in die Szene hinein, bis zu Faktor 1,24. Was auf dem
+    // Schirm 1440 Punkte breit ist, wird dabei aus einem kleineren Ausschnitt
+    // des Motivs gefüllt. Wer nur die Fensterbreite anfordert, bekommt in der
+    // Nahaufnahme ein hochgezogenes Bild. Deshalb ein Viertel Zuschlag.
+    const dichte = Math.min(window.devicePixelRatio || 1, 2);
     const zielBreite = Math.round(Math.min(2560, Math.max(640,
-      window.innerWidth * Math.min(window.devicePixelRatio || 1, 2) * 0.9)));
+      window.innerWidth * dichte * 1.25)));
 
     const bild = szenen.filter((s) => s.platte);
     let steuerung: KinoSteuerung | null = null;

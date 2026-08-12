@@ -159,7 +159,13 @@ Drei Ursachen steckten dahinter:
 2. **Ein Video lud auf dem schwarzen Einstieg.** Die Nachbarszene galt ab dem
    ersten Bild als „nah". Der Abstand wird jetzt an der gleitenden Position
    gemessen: Das Laden beginnt kurz bevor die Szene an der Reihe ist.
-3. **Ein Telefon bekam dieselbe Auflösung wie ein 4K-Schirm.** Die Motivbreite
+3. **Die Motive wurden zu klein angefordert und dadurch unscharf.** Die
+   Breitenwahl nahm die *nächstliegende* Stufe: Bei einem Bedarf von 1296 Pixeln
+   lag 1000 näher als 1600 – die Kinoebene bekam ein Bild mit 1000 Pixeln und zog
+   es auf die volle Fläche. Jetzt wird aufgerundet, und die Kamerafahrt bekommt
+   einen Viertel Zuschlag: Sie fährt bis Faktor 1,24 hinein, füllt die Fläche
+   also aus einem kleineren Ausschnitt des Motivs.
+4. **Ein Telefon bekam dieselbe Auflösung wie ein 4K-Schirm.** Die Motivbreite
    folgt jetzt Fensterbreite und Pixeldichte, zwischen 640 und 2560 px.
    Auf schmalen Verbindungen und kleinen Geräten läuft zusätzlich die
    kleinere Videofassung.

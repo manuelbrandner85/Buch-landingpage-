@@ -20,9 +20,14 @@ const pfad = (asset: Asset, breite: number, format: 'avif' | 'webp'): string =>
 /** Eine konkrete Quelle – für next/image und Vorschaubilder. */
 export function bildQuelle(asset: Asset, wunsch = 1600, format: 'avif' | 'webp' = 'avif'): string {
   const passend = verfuegbar(asset);
-  const breite = passend.reduce<number>(
-    (beste, b) => (Math.abs(b - wunsch) < Math.abs(beste - wunsch) ? b : beste),
-    passend[0] ?? 640);
+  // Aufrunden, nicht die nächstliegende Stufe nehmen.
+  //
+  // Vorher wurde die nächstgelegene Breite gewählt. Bei einem Bedarf von 1296
+  // Pixeln lag 1000 näher als 1600 – die Kinoebene bekam also ein Bild mit
+  // 1000 Pixeln und zog es auf die volle Fläche. Genau das war die Unschärfe.
+  // Ein zu großes Bild kostet Bytes, ein zu kleines kostet Bildqualität; hier
+  // wiegt die Bildqualität schwerer.
+  const breite = passend.find((b) => b >= wunsch) ?? passend[passend.length - 1] ?? 640;
   return pfad(asset, breite, format);
 }
 
