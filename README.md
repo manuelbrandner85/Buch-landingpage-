@@ -1,10 +1,10 @@
 # Die unsichtbaren Fäden – Die Welt der drei Bände
 
 Immersive Weltseite zum Bildband von Manuel & Uwe.
-Alle drei Bände stehen als Daten in der Welt. **Band 1** ist vollständig begehbar –
-mit Motiven, Kamerafahrten und Kinoebene. **Band 2** und **Band 3** sind mit
-Kapiteln, Auftakten und Kapitelbilanzen eingehängt; ihre Bewegtmotive für die
-Website sind noch nicht erzeugt.
+Alle drei Bände stehen als Daten in der Welt. **Band 1 und Band 2** sind
+begehbar – als **ein** Durchgang, mit Motiven, Tiefenkarten und Kamerafahrten.
+**Band 3** ist mit Kapiteln, Auftakten und Kapitelbilanzen vollständig
+eingehängt, aber nicht öffentlich.
 
 Was öffentlich sichtbar ist, entscheidet **nicht** das Vorhandensein von Daten,
 sondern `status` in `data/<band>/band.ts` – siehe „Die drei Bände“.
@@ -38,6 +38,15 @@ Dateien wie die Anwendung; nachgebaut ist nur das Rendern.
 `npm run build` erzeugt 40 statische Seiten: die Weltseite, elf Kapitelseiten
 (Band 1 und Band 2) und einundzwanzig Ortsseiten. Band 3 liegt vollständig in
 den Daten, bekommt aber keine Seite, solange er auf „in Arbeit“ steht.
+
+Die Bildpipeline kennt den Band:
+
+```bash
+npm run assets       -- --band=band-2      # AVIF/WebP aus assets-quelle/band-2/
+npm run tiefenkarten -- --band=band-2      # Tiefenkarten mit Depth Anything V2
+```
+
+Ohne Angabe bleibt es bei Band 1 und `assets-quelle/` – wie bisher.
 
 ## Die Kinoebene
 
@@ -144,6 +153,20 @@ ruckelt, Tempo ändern nicht.
 
 Die Motivszenen sind entsprechend länger, damit die Fahrt Zeit hat: rund
 190 bis 300 Bildschirmhöhen Scrollstrecke statt 140 bis 220.
+
+### Motive für Band 2
+
+Zwölf Motive, eigens für die Website erzeugt – zehn Szenenmotive und zwei
+Weltmotive (der Faden am Übergang zwischen den Bänden, das Kartenmotiv am
+Schluss). Erzeugt über **kie.ai**, Modell `nano-banana-2`, Querformat 16:9,
+2K, zwölf Punkte je Motiv. Die Tiefenkarten stammen aus demselben Lauf wie in
+Band 1: Depth Anything V2 über ONNX.
+
+Es gilt dasselbe wie in Band 1: Diese Bilder sind **nicht** die Abbildungen aus
+dem Buch. Sie folgen den Szenen des Bandes und tragen dieselbe Herkunftsangabe –
+„Freie Rekonstruktion“ –, aber wer Buch und Website nebeneinanderlegt, sieht
+zwei verschiedene Bilder derselben Szene. Wo eine Bildunterschrift des Buches
+vorlag, steht sie wörtlich als Quellenzeile.
 
 ### Bewegtbild – Herkunft
 
@@ -267,7 +290,7 @@ src/
 | Band | Kapitel | Seiten | in den Daten | öffentlich |
 |---|---|---|---|---|
 | 1 – Ursprung und Ordnung | 1–6 | 206 | Motive, Fahrten, Interaktionen | ja |
-| 2 – Glaube, Gold und Revolution | 7–11 | 206 | Auftakte und Kapitelbilanzen | ja |
+| 2 – Glaube, Gold und Revolution | 7–11 | 206 | Motive, Tiefenkarten, Fahrten | ja |
 | 3 – Krieg, Ordnung und Netz | 12–16 | 206 | Auftakte und Kapitelbilanzen | **nein** |
 
 Alles in Band 2 und Band 3 stammt aus dem gesetzten Buch: Kapitelnamen und
@@ -290,13 +313,23 @@ Band 3 steht dort, weil seine Buch-DNA das ausdrücklich verlangt: „öffentlic
 nicht erwähnen, auch nicht andeuten“. Aus `'in Arbeit'` wird `'erschienen'`,
 und der Band ist da. Ein anderer Eingriff ist nicht nötig.
 
+### Die Reise über die Bände
+
+`REISE_OEFFENTLICH` in `world/registry.ts` hängt die erschienenen Bände
+hintereinander zu **einem** Durchgang. Drei Szenen gehören nicht einem Band,
+sondern der Welt, und stehen deshalb immer am Ende: die Karte, der Epilog mit
+dem Leitsatz der Reihe und der Bücherbereich. Ein neuer Band reiht sich davor
+ein, ohne dass die Dramaturgie angefasst werden muss.
+
 ### Motive nachrüsten
 
-1. Assets nach `public/assets/band-<n>/szenen/` legen und in `assets.ts` eintragen
-2. Den Auftakten `platte`, `motion`, `ebenen` geben; Motivszenen zwischen
-   Auftakt und Bilanz ergänzen
-3. In `src/data/gemeinsam/orte.ts` bei wiederkehrenden Orten `vorkommen` ergänzen
-4. `amazonUrl` eintragen, sobald die Produktseite vorliegt
+1. Quellbilder nach `assets-quelle/band-<n>/` legen
+2. `npm run assets -- --band=band-<n>` und `npm run tiefenkarten -- --band=band-<n>`
+3. In `data/band-<n>/assets.ts` eintragen – `bandId` nicht vergessen, sonst
+   sucht die Kinoebene die Datei unter Band 1
+4. Den Szenen `platte` geben; `motion` kommt dazu, sobald Bewegtfassungen da sind
+5. In `src/data/gemeinsam/orte.ts` bei wiederkehrenden Orten `vorkommen` ergänzen
+6. `amazonUrl` eintragen, sobald die Produktseite vorliegt
 
 Kein Eingriff in `engine/`, `scenes/` oder `camera/`.
 
@@ -411,11 +444,15 @@ und nichts freizuschalten.
 
 ## Offen
 
-- **Band 2 und Band 3: Motive für die Website.** Beide Bände sind mit Kapiteln,
-  Auftakten und Bilanzen in den Daten, aber ohne `platte`. Bis dahin steht der
-  Kapitelauftakt als Text – die Kinoebene überspringt Szenen ohne Motiv.
+- **Band 2: Bewegtfassung.** Die zwölf Motive sind Standbilder mit Tiefenkarte;
+  `motion` fehlt noch. Bis dahin steht das Bild – die Fahrt trägt es.
+- **Band 2: Orte.** `data/gemeinsam/orte.ts` kennt bisher nur Band 1. Die Karte
+  zeigt deshalb keine Punkte aus Band 2; das steht so auch auf der Kartenszene.
+- **Band 3: Motive für die Website.** Der Band ist mit Kapiteln, Auftakten und
+  Bilanzen in den Daten, aber ohne `platte` – und ohnehin nicht öffentlich.
 - **Band 3, Kapitel 14 und 15:** im Seitenplan verbindlich, im Satz noch offen –
   deshalb Auftakt ohne Bilanz.
+- **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
 - **`amazonUrl` für Band 2 und Band 3** – weiterhin Platzhalter.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Originalrenderings statt PDF-Ausschnitte (Druck-PDF: eine flache Ebene je Seite)

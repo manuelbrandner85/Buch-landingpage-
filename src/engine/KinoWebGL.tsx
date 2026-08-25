@@ -43,11 +43,11 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
         return {
           id: s.id,
           bild: asset ? bildQuelle(asset, zielBreite) : '',
-          tiefe: asset ? ordner(`${asset.datei}-tiefe.webp`) : undefined,
+          tiefe: asset ? ordner(`${asset.datei}-tiefe.webp`, asset.bandId ?? 'band-1') : undefined,
           // Bewegtfassung, sobald sie vorliegt. Fehlt sie, bleibt das Standbild –
           // die Engine prüft das selbst und fällt still zurück.
-          video: s.motion && asset ? ordner(`${asset.datei}-motion.mp4`) : undefined,
-          videoKlein: s.motion && asset ? ordner(`${asset.datei}-motion-klein.mp4`) : undefined,
+          video: s.motion && asset ? ordner(`${asset.datei}-motion.mp4`, asset.bandId ?? 'band-1') : undefined,
+          videoKlein: s.motion && asset ? ordner(`${asset.datei}-motion-klein.mp4`, asset.bandId ?? 'band-1') : undefined,
           grading: hexZuRgb(s.grading ?? '#1a2540'),
           uebergang: s.uebergang ?? 'aufloesen',
           fahrt: s.fahrt ?? 'hinein',

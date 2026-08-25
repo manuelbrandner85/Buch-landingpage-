@@ -40,7 +40,9 @@ for (const band of BAENDE) {
   if (!kapitelIds.size) { warnung.push(`${band.id} hat noch keine Kapitel.`); continue; }
 
   // --- Assets: Datei je Asset vorhanden? ---
-  const assets = [...assetText.matchAll(/id: '([\w-]+)', datei: '([\w-]+)'/g)]
+  // `bandId` steht optional zwischen id und datei – Band 1 kennt es nicht.
+  const assets = [...assetText.matchAll(
+    /id: '([\w-]+)',\s*(?:bandId: '[\w-]+',\s*)?datei: '([\w-]+)'/g)]
     .map(([, id, datei]) => ({ id, datei }));
   const assetIds = new Set(assets.map((a) => a.id));
   assetZahl += assets.length;

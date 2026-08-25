@@ -327,7 +327,7 @@ export const SZENEN_BAND_1: Szene[] = [
     id: 'karte', bandId: 'band-1', typ: 'karte',
     titel: 'Die Welt der Fäden',
     fliesstext:
-      'Jeder Punkt ist ein Ort, an dem Band 1 etwas belegt. Der Faden verbindet sie in der Reihenfolge der Kapitel. Band 2 und Band 3 setzen neue Punkte in dieselbe Karte – und greifen auf bestehende zurück.',
+      'Jeder Punkt ist ein Ort, an dem Band 1 etwas belegt. Der Faden verbindet sie in der Reihenfolge der Kapitel. Die Orte von Band 2 sind noch nicht eingetragen – sie kommen in dieselbe Karte und greifen auf bestehende Punkte zurück.',
   },
   {
     id: 'epilog', bandId: 'band-1', typ: 'papier', buchseite: 195,

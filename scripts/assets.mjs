@@ -12,8 +12,12 @@ import sharp from 'sharp';
 import { readdir, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
-const QUELLE = 'assets-quelle';
-const ZIEL = 'public/assets/band-1/szenen';
+// Band wählbar: npm run assets -- --band=band-2
+// Ohne Angabe bleibt es bei Band 1 und assets-quelle/ – wie bisher.
+const arg = (n, s) => process.argv.find((a) => a.startsWith(`--${n}=`))?.split('=')[1] ?? s;
+const BAND = arg('band', 'band-1');
+const QUELLE = arg('quelle', BAND === 'band-1' ? 'assets-quelle' : `assets-quelle/${BAND}`);
+const ZIEL = `public/assets/${BAND}/szenen`;
 const BREITEN = [640, 1000, 1600, 1920, 2560];
 
 await mkdir(ZIEL, { recursive: true });

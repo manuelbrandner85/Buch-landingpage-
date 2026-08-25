@@ -33,6 +33,19 @@ export const OEFFENTLICHE_KAPITEL: Kapitel[] = OEFFENTLICHE_BAENDE.flatMap((b) =
 export const REISE: Szene[] = BAENDE.flatMap((b) => b.szenen);
 export const ALLE_KAPITEL: Kapitel[] = BAENDE.flatMap((b) => b.kapitel);
 
+/**
+ * Die begehbare Reise: alle erschienenen Bände hintereinander, als **ein**
+ * Durchgang. Drei Szenen gehören nicht einem Band, sondern der Welt, und
+ * stehen deshalb immer am Ende: die Karte, auf der alles zusammenkommt, der
+ * Epilog mit dem Leitsatz der Reihe und der Bücherbereich. Ohne diesen Griff
+ * läge der Schluss von Band 1 mitten in der Reise.
+ */
+const SCHLUSS = ['karte', 'epilog', 'buecher'];
+export const REISE_OEFFENTLICH: Szene[] = [
+  ...OEFFENTLICHE_BAENDE.flatMap((b) => b.szenen).filter((s) => !SCHLUSS.includes(s.id)),
+  ...SCHLUSS.map((id) => REISE.find((s) => s.id === id)).filter((s): s is Szene => Boolean(s)),
+];
+
 export const kapitelNach = (id?: number): Kapitel | undefined =>
   ALLE_KAPITEL.find((k) => k.id === id);
 

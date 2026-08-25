@@ -22,8 +22,12 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import path from 'node:path';
 
-const QUELLE = 'assets-quelle';
-const ZIEL = 'public/assets/band-1/szenen';
+// Band wählbar: npm run assets -- --band=band-2
+// Ohne Angabe bleibt es bei Band 1 und assets-quelle/ – wie bisher.
+const arg = (n, s) => process.argv.find((a) => a.startsWith(`--${n}=`))?.split('=')[1] ?? s;
+const BAND = arg('band', 'band-1');
+const QUELLE = arg('quelle', BAND === 'band-1' ? 'assets-quelle' : `assets-quelle/${BAND}`);
+const ZIEL = `public/assets/${BAND}/szenen`;
 const MODELL = 'modelle/depth.onnx';
 const HERKUNFT = 'https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx';
 const KANTE = 518;                    // Eingabegröße des Modells

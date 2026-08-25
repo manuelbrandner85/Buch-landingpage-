@@ -69,6 +69,8 @@ export type AssetId = string;
 
 export interface Asset {
   id: AssetId;
+  /** Ohne Angabe Band 1 – die Motive liegen unter public/assets/<band>/szenen/. */
+  bandId?: BandId;
   /** Basisname ohne Endung; die Varianten erzeugt scripts/assets.mjs. */
   datei: string;
   breite: number;

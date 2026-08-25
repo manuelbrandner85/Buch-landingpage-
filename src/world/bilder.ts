@@ -1,4 +1,4 @@
-import type { Asset } from '@/data/gemeinsam/typen';
+import type { Asset, BandId } from '@/data/gemeinsam/typen';
 
 /**
  * Bildquellen. scripts/assets.mjs legt AVIF und WebP nebeneinander ab;
@@ -8,14 +8,14 @@ const BREITEN = [640, 1000, 1600, 1920, 2560] as const;
 
 /** Unter GitHub Pages liegt die Welt in einem Unterordner, nicht in der Wurzel. */
 export const BASIS_PFAD = process.env.NEXT_PUBLIC_BASIS_PFAD ?? '';
-export const ordner = (datei: string): string =>
-  `${BASIS_PFAD}/assets/band-1/szenen/${datei}`;
+export const ordner = (datei: string, band: BandId = 'band-1'): string =>
+  `${BASIS_PFAD}/assets/${band}/szenen/${datei}`;
 
 const verfuegbar = (asset: Asset): number[] =>
   BREITEN.filter((b) => b <= asset.breite * 1.2);
 
 const pfad = (asset: Asset, breite: number, format: 'avif' | 'webp'): string =>
-  ordner(`${asset.datei}-${breite}.${format}`);
+  ordner(`${asset.datei}-${breite}.${format}`, asset.bandId ?? 'band-1');
 
 /** Eine konkrete Quelle – für next/image und Vorschaubilder. */
 export function bildQuelle(asset: Asset, wunsch = 1600, format: 'avif' | 'webp' = 'avif'): string {
