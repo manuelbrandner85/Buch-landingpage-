@@ -28,7 +28,16 @@ export function Buch3D({ cover, band, tiefe = rueckenstaerke(band) }:
   const basis = cover.datei;
   const flaeche = (teil: string) => ordner(`${basis}-${teil}.webp`, band);
 
+  // Zwei Hüllen um den Band. Sie sind normalerweise nicht da – `display:contents`
+  // macht sie für das Layout unsichtbar. Erst wo der Band sich beim Scrollen
+  // ganz um sich selbst drehen soll, bekommen sie eine Aufgabe: `buchlauf` ist
+  // die Strecke, über die gedreht wird, `buchhalt` hält den Band dabei im Bild
+  // stehen. Ohne diese Trennung ginge beides nicht zusammen: Ein Element, das
+  // klebt, bewegt sich zum Fenster nicht mehr – und eine Drehung, die an der
+  // eigenen Lage im Fenster hängt, bliebe damit stehen.
   return (
+    <div className="buchlauf">
+    <div className="buchhalt">
     <div className="buch3d" style={{ ['--tiefe' as string]: tiefe }}>
       <div className="korpus">
         <div className="flaeche vorn">
@@ -54,6 +63,8 @@ export function Buch3D({ cover, band, tiefe = rueckenstaerke(band) }:
         <div className="flaeche fussschnitt" aria-hidden="true"><span className="licht" /></div>
       </div>
       <div className="standschatten" aria-hidden="true" />
+    </div>
+    </div>
     </div>
   );
 }

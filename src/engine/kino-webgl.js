@@ -416,7 +416,8 @@ const VORAUS = 3, ZURUECK = 1;
     v.disablePictureInPicture = true;
     v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
     v.setAttribute('disableremoteplayback', '');
-    const q = { el: v, textur: null, laeuft: false, geweckt: false, neu: false, stand: -1 };
+    const q = { el: v, textur: null, laeuft: false, geweckt: false, laedt: false,
+      neu: false, stand: -1, breite: 0, hoehe: 0 };
     // Wo der Browser es anbietet, meldet er selbst, wenn ein neues Videobild
     // bereitliegt. Das ist genauer und billiger als jedes Nachfragen.
     if (typeof v.requestVideoFrameCallback === 'function') {
@@ -444,13 +445,29 @@ const VORAUS = 3, ZURUECK = 1;
     geladen.forEach((e, j) => {
       const q = e.quelle; if (!q) return;
       const abstand = Math.abs(j - stelle);
-      if (abstand < 0.85 && !q.geweckt) {
-        q.geweckt = true; q.el.preload = 'auto'; q.el.load();
+
+      // Zwei Schwellen statt einer.
+      //
+      // Vorher begann das Laden erst, wenn die Szene fast an der Reihe war –
+      // eine Datei von zwei, drei Megabyte war dann noch unterwegs, während
+      // ihre Szene schon im Bild stand. Man sah das Standbild, dann sprang das
+      // Video hinein. Jetzt wird eine Szene früher geladen und erst spät
+      // abgespielt: Das Laden kostet Bandbreite, das Abspielen kostet Rechenzeit,
+      // und nur das Zweite muss knapp gehalten werden.
+      if (abstand < 1.7 && !q.laedt) {
+        q.laedt = true; q.el.preload = 'auto'; q.el.load();
+      }
+      if (abstand < 0.9 && !q.geweckt) {
+        q.geweckt = true;
         q.el.play().then(() => { q.laeuft = true; q.anmelden?.(); })
           .catch(() => { q.laeuft = false; });
-      } else if (q.geweckt && abstand > 1.6) {
-        schlafen(q);
+      } else if (q.geweckt && abstand > 1.35) {
+        // Nur anhalten, nicht vergessen: Der Puffer bleibt, bis die Szene ganz
+        // aus der Nachbarschaft fällt.
+        q.geweckt = false; q.laeuft = false; q.neu = false;
+        try { q.el.pause(); } catch { /* egal */ }
       }
+      if (q.laedt && abstand > 2.4) schlafen(q);
     });
   }
 
@@ -462,7 +479,7 @@ const VORAUS = 3, ZURUECK = 1;
    */
   function schlafen(q) {
     if (!q) return;
-    q.geweckt = false; q.laeuft = false; q.neu = false; q.stand = -1;
+    q.geweckt = false; q.laeuft = false; q.neu = false; q.stand = -1; q.laedt = false;
     try { q.el.pause(); } catch { /* egal */ }
     q.el.preload = 'none';
     if (q.textur) { gl.deleteTexture(q.textur); q.textur = null; }
@@ -499,16 +516,31 @@ const VORAUS = 3, ZURUECK = 1;
     if (q.textur && !neu) return q.textur;
     q.neu = false; q.stand = q.el.currentTime;
 
+    // Speicher einmal anlegen, danach nur noch überschreiben.
+    //
+    // `texImage2D` legt die Textur jedes Mal neu an: Bei 1920 mal 1080 sind das
+    // acht Megabyte Grafikspeicher, die je Bild angefordert und wieder
+    // freigegeben werden. `texSubImage2D` schreibt in denselben Speicher. Auf
+    // schwachen Geräten ist das der Unterschied zwischen einer Fahrt und einem
+    // Ruckeln, und der Treiber muss nicht ständig aufräumen.
+    const b = q.el.videoWidth, h = q.el.videoHeight;
+    if (!b || !h) return q.textur;
     if (!q.textur) {
       q.textur = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, q.textur);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      q.breite = 0; q.hoehe = 0;
     }
     gl.bindTexture(gl.TEXTURE_2D, q.textur);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, q.el);
+    if (q.breite !== b || q.hoehe !== h) {
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, q.el);
+      q.breite = b; q.hoehe = h;
+    } else {
+      gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, gl.RGBA, gl.UNSIGNED_BYTE, q.el);
+    }
     return q.textur;
   }
 

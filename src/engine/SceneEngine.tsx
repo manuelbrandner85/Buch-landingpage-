@@ -5,7 +5,6 @@ import type { ReiheId, Szene } from '@/data/gemeinsam/typen';
 import { useScrollKamera } from '@/camera/useScrollKamera';
 import { KinoEbene } from './KinoEbene';
 import { KinoWebGL } from './KinoWebGL';
-import { useSanftesScrollen } from '@/camera/useSanftesScrollen';
 import { Ankunft } from '@/scenes/Ankunft';
 import { Auftakt } from '@/scenes/Auftakt';
 import { Motiv } from '@/scenes/Motiv';
@@ -31,9 +30,23 @@ import { FortschrittGeber } from '@/world/FortschrittKontext';
 export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId }) {
   const [ruhig, setRuhig] = useState(false);
   const [rueckfall, setRueckfall] = useState(false);
-  // Die Kamera bewegt jetzt der Shader. GSAP bleibt für die Textauftritte.
-  useScrollKamera(!ruhig);
-  useSanftesScrollen(!ruhig);
+
+  /**
+   * GSAP nur noch dort, wo es gebraucht wird: in der DOM-Fassung.
+   *
+   * Vorher lief es immer mit. Trägt WebGL, sind die DOM-Bühnen gar nicht im
+   * Baum – die Zeitachsen liefen also ins Leere –, und die Textauftritte
+   * wurden doppelt bewegt, einmal von GSAP und einmal von der Kinoebene. Das
+   * war reine Arbeit ohne Bild.
+   *
+   * Das Trägheitsscrollen ist ganz entfallen. Es fing das Mausrad ab und setzte
+   * die Scrollhöhe sechzigmal je Sekunde selbst – dagegen kann der Browser
+   * nichts optimieren: klebende Elemente, scrollgebundene Animationen und die
+   * Kinoebene mussten in jedem Bild neu rechnen, und genau das war das Ruckeln.
+   * Die Trägheit gibt es weiterhin, aber dort, wo sie hingehört: in der Kamera
+   * der Kinoebene, die dem Scroll gedämpft folgt.
+   */
+  useScrollKamera(!ruhig && rueckfall);
 
   return (
     <FortschrittGeber>
@@ -45,7 +58,7 @@ export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId
       {ruhig || rueckfall
         ? <KinoEbene szenen={szenen} />
         : <KinoWebGL szenen={szenen} beiRueckfall={() => setRueckfall(true)} />}
-      <Filmkorn />
+      <Filmkorn an={ruhig || rueckfall} />
       <Faden />
       <Kapitelmarke />
       <EvidenzRegler />

@@ -8,6 +8,10 @@
   --rand:clamp(1.25rem,5vw,5rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* Ankersprünge laufen weich – das kann der Browser selbst, ohne dass ihm
+   jemand die Scrollhöhe aus der Hand nimmt. */
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
 body{background:var(--nacht);color:var(--papier);
   font-family:var(--body),Georgia,serif;
   font-size:clamp(1rem,.5vw + .88rem,1.12rem);line-height:1.62;
@@ -409,8 +413,8 @@ nav button[aria-pressed="true"]{color:var(--gold);opacity:1}
 .kapitelmarke b{color:var(--gold);font-weight:400}
 
 .regler{position:fixed;right:var(--rand);bottom:2rem;z-index:20;width:14rem;
-  background:rgba(6,10,20,.78);border:1px solid rgba(227,200,139,.2);padding:.9rem 1rem;
-  backdrop-filter:blur(8px);opacity:0;transform:translateY(10px);
+  background:rgba(6,10,20,.92);border:1px solid rgba(227,200,139,.2);padding:.9rem 1rem;
+  opacity:0;transform:translateY(10px);
   transition:opacity .5s,transform .5s;pointer-events:none}
 .regler.an{opacity:1;transform:none;pointer-events:auto}
 .regler label{font-family:var(--display),serif;font-size:.62rem;letter-spacing:.2em;
@@ -707,9 +711,9 @@ main{z-index:3}
    Escape steigt eine Ebene heraus: aus der Szene auf die Weltkarte, von der
    Karte an den Anfang. Ohne eine klare Geste verliert man sich in der Tiefe. */
 .ausstieg{position:fixed;left:50%;bottom:1.6rem;transform:translateX(-50%);z-index:22;
-  backdrop-filter:blur(10px) saturate(1.1);border-radius:2px;
+  border-radius:2px;
   font-family:var(--display),serif;font-size:.62rem;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--staub);background:rgba(6,10,20,.7);
+  text-transform:uppercase;color:var(--staub);background:rgba(6,10,20,.92);
   border:1px solid rgba(227,200,139,.22);padding:.5rem 1rem;cursor:pointer;
   opacity:0;transition:opacity .5s;pointer-events:none}
 .ausstieg.an{opacity:.8;pointer-events:auto}
@@ -755,19 +759,16 @@ main{z-index:3}
 .kaufblock .auch{font-size:.7rem;color:var(--staub);letter-spacing:.04em}
 .kaufblock .auch a{color:var(--gold);text-underline-offset:3px}
 
-/* Der Band im Vorraum dreht sich nicht am Scrollen, sondern steht und zeigt
-   sich – die Scrolldrehung gehört der Welt, nicht dem Empfang. */
-.hausbild .korpus{animation:vorzeigen 24s ease-in-out infinite alternate;
+/* Der Band im Empfang hängt nicht am Scrollen – dort ist noch nichts gescrollt.
+   Er dreht sich von selbst: einmal ganz herum bis auf die Rückseite und wieder
+   zurück, mit Verweilen an beiden Enden. Dieselbe Kurve wie beim Scrollen,
+   nur von der Zeit getrieben; deshalb stimmt auch das Licht auf den Flächen. */
+.hausbild .korpus{animation:umrunden 26s ease-in-out infinite alternate;
   animation-timeline:auto;animation-range:normal}
-@keyframes vorzeigen{
-  0%{transform:rotateX(8deg) rotateY(-13deg)}
-  100%{transform:rotateX(5deg) rotateY(-41deg)}
-}
-.hausbild .flaeche .licht{animation:none}
-.hausbild .vorn .licht{opacity:.07}
-.hausbild .ruecken .licht{opacity:.34}
-.hausbild .hinten .licht{opacity:.86}
-.hausbild .schnitt .licht{opacity:.46}
+.hausbild .flaeche .licht,.hausbild .standschatten{
+  animation-duration:26s;animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;animation-direction:alternate;
+  animation-fill-mode:both;animation-timeline:auto;animation-range:normal}
 
 /* ---------- Die Welten ---------- */
 .welten,.buecherwand,.arbeitsweise{position:relative;z-index:2;
@@ -863,27 +864,6 @@ footer a:hover{text-decoration-color:var(--gold)}
 .weltentore:has(> :only-child) .weltentor::after{
   background:radial-gradient(ellipse at 50% 55%,rgba(6,10,20,.86) 20%,rgba(6,10,20,.6) 60%,rgba(6,10,20,.9))}
 
-/* In der Bücherwand verkauft die Vorderseite. Der Band zeigt beim Scrollen
-   seine Tiefe und den Rücken, dreht sich aber nicht weg. */
-.buecherwand .korpus{animation-name:vorstellen}
-@keyframes vorstellen{
-  0%{transform:rotateX(9deg) rotateY(3deg)}
-  100%{transform:rotateX(5deg) rotateY(-44deg)}
-}
-.buecherwand .flaeche .licht{animation:none}
-.buecherwand .vorn .licht{opacity:.05}
-.buecherwand .ruecken .licht{opacity:.3}
-.buecherwand .hinten .licht{opacity:.9}
-.buecherwand .schnitt .licht{opacity:.4}
-.buchseite .korpus{animation-name:vorstellen}
-.buchseite .flaeche .licht{animation:none}
-.buchseite .vorn .licht{opacity:.05}
-.buchseite .ruecken .licht{opacity:.3}
-.buchseite .hinten .licht{opacity:.9}
-.buchseite .schnitt .licht{opacity:.4}
-@media (prefers-reduced-motion:reduce){
-  .buecherwand .korpus,.buchseite .korpus{animation:none}
-}
 
 /* =========================================================================
    Der Premium-Durchgang
@@ -976,18 +956,6 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
   a,button,.tor,.weltentor,.kaufen,.eintauchen{transition:none}
 }
 
-/* An der Weltenwahl verkauft die Vorderseite.
-   Die volle Umrundung – Vorderseite, Rücken, Rückseite – bleibt dem Abschluss
-   vorbehalten: Dort ist sie die Belohnung. Am Eingang wäre sie im Weg, weil man
-   dann ausgerechnet in dem Moment auf einen dunklen Buchrücken sieht, in dem
-   man sich für eine Welt entscheiden soll. */
-.tor-eingang .korpus{animation-name:vorstellen}
-.tor-eingang .flaeche .licht{animation:none}
-.tor-eingang .vorn .licht{opacity:.05}
-.tor-eingang .ruecken .licht{opacity:.3}
-.tor-eingang .hinten .licht{opacity:.9}
-.tor-eingang .schnitt .licht{opacity:.4}
-@media (prefers-reduced-motion:reduce){ .tor-eingang .korpus{animation:none} }
 
 /* ---------- Der Empfang auf dem Handy ----------
    Auf dem Schreibtisch stehen Umschlag und Kaufweg nebeneinander im ersten
@@ -1009,4 +977,60 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
   .buchkarte .wege{justify-content:center}
   .buchkarte .klappe,.buchkarte .unterzeile{margin-inline:auto}
   .buchseite .buchkopf{justify-items:center}
+}
+
+
+/* =========================================================================
+   Die ganze Drehung – und der Band bleibt dabei im Bild
+   Die Umrundung lief bisher über die Strecke, auf der der Band durchs Fenster
+   zieht: Sie war am Anfang und am Ende halb am Rand, und wer schnell scrollte,
+   sah sie gar nicht zu Ende. Jetzt bekommt jeder Band an den Weltentoren eine
+   eigene Strecke. Er klebt darin am Fenster und dreht sich, bis er ganz herum
+   ist; erst dann läuft die Seite weiter.
+
+   Warum drei Elemente: Ein klebendes Element bewegt sich zum Fenster nicht
+   mehr – eine Drehung, die an der eigenen Lage hängt, bliebe stehen. Deshalb
+   trägt die Strecke die Zeitachse (`view-timeline-name`), der Halter klebt,
+   und der Band dreht sich nach der Zeitachse der Strecke.
+   ========================================================================= */
+.buchlauf,.buchhalt{display:contents}
+
+@supports (animation-timeline: view()){
+  .tor .buchlauf{display:block;width:100%;height:var(--lauf,185svh);
+    view-timeline-name:--buchlauf;view-timeline-axis:block}
+  /* Der Halter ist nur so hoch wie der Band selbst. Wäre er ein volles Fenster
+     hoch, stünde über und unter dem Band je ein Viertel Bildschirm Leere – und
+     genau die sähe man vor und nach der Drehung als Loch im Satz. */
+  .tor .buchhalt{display:block;position:sticky;top:16vh}
+  /* Während der Drehung ist der Band das Bild und darf groß sein. */
+  .tor .buch3d{max-width:min(23rem,88%)}
+  /* `contain` ist genau die Strecke, auf der die Bahn das Fenster ganz füllt –
+     also genau die Zeit, in der der Band klebt. Anfang und Ende der Drehung
+     fallen damit mit Ankommen und Loslassen zusammen. */
+  .tor .korpus,.tor .flaeche .licht,.tor .standschatten{
+    animation-timeline:--buchlauf;animation-range:contain 0% contain 100%}
+  .tor .buch3d{margin-bottom:0;margin-inline:auto}
+  /* Die Bandangabe bleibt über dem Band stehen, solange er sich dreht –
+     aber nur dort, wo auch ein Band steht. Über dem versiegelten Tor bliebe
+     sonst eine Zeile allein am Fenster kleben. */
+  .tor:not(.versiegelt) .band-nr{position:sticky;top:10vh;z-index:2}
+}
+
+@media (max-width:900px){
+  .tor .buchlauf{--lauf:150svh}
+  .tor .buchhalt{top:15vh}
+  .tor:not(.versiegelt) .band-nr{top:9vh}
+  .tor .buch3d{max-width:min(17rem,72%)}
+}
+
+/* Trägt der Browser keine Scroll-Zeitachse, gibt es auch keine Strecke:
+   Der Band steht dann in seiner Ausgangsdrehung und nimmt keine Höhe ein. */
+@supports not (animation-timeline: view()){
+  .tor .buchlauf,.tor .buchhalt{display:contents}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .tor .buchlauf{display:contents}
+  .tor .buchhalt{display:contents}
+  .hausbild .korpus,.hausbild .flaeche .licht,.hausbild .standschatten{animation:none}
 }
