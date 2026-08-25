@@ -15,11 +15,19 @@
 import { writeFileSync } from 'node:fs';
 
 const inhalt = `# Erzeugt von scripts/htaccess.mjs – nicht von Hand ändern.
+#
+# Nur Anweisungen, die in einer .htaccess erlaubt sind.
+#
+# Der erste Entwurf enthielt <LocationMatch>. Das ist ausschließlich in der
+# Serverkonfiguration zulässig; in einer .htaccess beantwortet Apache damit
+# jede Anfrage mit 500. Die Seite war dadurch nicht kaputt – sie war weg.
+# Dasselbe gilt für Options, wenn der Anbieter es nicht freigegeben hat;
+# deshalb steht es hier gar nicht erst.
 
 # Die eigene Startseite zuerst.
 #
 # Auf dem Webspace lag eine Platzhalterseite als index.htm. Apache nimmt, was
-# in DirectoryIndex zuerst steht – und das war dort die Platzhalterdatei. Die
+# in DirectoryIndex zuerst steht – und das war die Platzhalterdatei. Die
 # hochgeladene Seite lag daneben und wurde nie ausgeliefert.
 DirectoryIndex index.html index.htm index.php
 
@@ -27,7 +35,8 @@ DirectoryIndex index.html index.htm index.php
 ErrorDocument 404 /404.html
 
 # Next legt seine Bausteine unter Namen ab, die sich mit dem Inhalt ändern.
-# Sie dürfen deshalb lange im Zwischenspeicher bleiben; alles andere kurz.
+# Sie dürfen deshalb lange im Zwischenspeicher bleiben; die Seite selbst nie,
+# sonst sieht niemand die neue Fassung nach einer Veröffentlichung.
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 1 hour"
@@ -43,14 +52,9 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 <IfModule mod_headers.c>
-  <FilesMatch "\\.(avif|webp|jpg|jpeg|png|mp4|woff2)$">
+  <FilesMatch "\\.(avif|webp|jpg|jpeg|png|mp4|woff2|css|js)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  <LocationMatch "^/_next/static/">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </LocationMatch>
-  # Die Seite selbst soll nie aus dem Zwischenspeicher kommen, sonst sieht
-  # niemand die neue Fassung nach einer Veröffentlichung.
   <FilesMatch "\\.html$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
@@ -67,9 +71,6 @@ ErrorDocument 404 /404.html
   AddType image/webp .webp
   AddType font/woff2 .woff2
 </IfModule>
-
-# Verzeichnisse zeigen ihren Inhalt nicht.
-Options -Indexes
 `;
 
 writeFileSync('out/.htaccess', inhalt);
