@@ -1,4 +1,4 @@
-import type { Buch } from '@/data/gemeinsam/typen';
+import type { Buch, Szene } from '@/data/gemeinsam/typen';
 import { BAENDE, WELT, assetNach, szeneZuKapitel } from '@/world/registry';
 import { Buch3D } from './Buch3D';
 
@@ -20,8 +20,25 @@ const RUECKEN: Record<string, number> = { 'band-1': 0.0775, 'band-2': 0.0808 };
 /** Solange die Produktseite ein Platzhalter ist, gibt es nichts zu verlinken. */
 const istPlatzhalter = (url: string) => url.startsWith('AMAZON_');
 
+/** Was auf dem Knopf steht, hängt am Zustand des Bandes – nicht am Wunsch. */
+function Kaufweg({ buch }: { buch: Buch }) {
+  if (buch.status === 'erscheint') {
+    return <span className="kaufen wartet">Erscheint in Kürze</span>;
+  }
+  if (istPlatzhalter(buch.amazonUrl)) {
+    return <span className="kaufen wartet">Produktseite folgt</span>;
+  }
+  return (
+    <a className="kaufen" href={buch.amazonUrl} target="_blank" rel="noopener noreferrer">
+      Band {buch.nummer} kaufen
+    </a>
+  );
+}
+
 function Tor({ buch }: { buch: Buch }) {
-  const offen = buch.status === 'erschienen';
+  // Offen ist alles, was nicht mehr in Arbeit ist – auch ein Band, der erst
+  // erscheint. Seine Welt ist begehbar, nur zu kaufen gibt es ihn noch nicht.
+  const offen = buch.status !== 'in Arbeit';
   const cover = assetNach(buch.coverAsset);
   const ziel = szeneZuKapitel(WELT[buch.id].kapitel[0]?.id);
 
@@ -40,37 +57,39 @@ function Tor({ buch }: { buch: Buch }) {
 
   return (
     <div className="tor">
-      <p className="band-nr">Band {buch.nummer} · {buch.seiten} Seiten</p>
+      <p className="band-nr">
+        Band {buch.nummer} · {buch.seiten} Seiten
+        {buch.status === 'erscheint' && <> · erscheint</>}
+      </p>
       {cover && <Buch3D cover={cover} band={buch.id} tiefe={RUECKEN[buch.id] ?? 0.078} />}
       <h3>{buch.titel}</h3>
       {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
       <p className="klappe">{buch.klappentext}</p>
       <div className="wege">
-        {istPlatzhalter(buch.amazonUrl)
-          ? <span className="kaufen wartet">Erscheint in Kürze</span>
-          : <a className="kaufen" href={buch.amazonUrl} target="_blank" rel="noopener noreferrer">
-              Band {buch.nummer} kaufen
-            </a>}
+        <Kaufweg buch={buch} />
         {ziel && <a className="eintauchen" href={`#${ziel.id}`}>In die Welt</a>}
       </div>
     </div>
   );
 }
 
-export function Buecher() {
+export function Buecher({ szene }: { szene?: Szene }) {
   const buecher = BAENDE.map((b) => b.buch);
   const wartend = buecher.filter((b) => b.status === 'erschienen' && istPlatzhalter(b.amazonUrl));
+  // Dieselben Tore, zwei Auftritte: am Anfang die Wahl, am Ende der Abschluss.
+  const amAnfang = szene?.id === 'welten';
 
   return (
     <>
-      <section id="buecher" className="buecher">
+      <section id={amAnfang ? 'welten' : 'buecher'}
+        className={amAnfang ? 'buecher tor-eingang' : 'buecher'}>
         <div className="kopf">
-          <p className="eyebrow">Die Reihe</p>
-          <h2>Drei Bände, eine Welt</h2>
+          <p className="eyebrow">{amAnfang ? 'Drei Welten' : 'Die Reihe'}</p>
+          <h2>{amAnfang ? 'Wo willst du hinein?' : 'Drei Bände, eine Welt'}</h2>
           <p>
-            Jeder Band ist ein eigener Abschnitt derselben Welt und lässt sich einzeln
-            begehen. Zu jeder Aussage weist er aus, wie gut sie belegt ist — von
-            gesichertem Befund bis zur offenen Frage.
+            {amAnfang
+              ? 'Jeder Band ist eine eigene Welt und lässt sich einzeln betreten. Wähle einen – oder scrolle weiter und geh alle drei der Reihe nach.'
+              : 'Jeder Band ist ein eigener Abschnitt derselben Welt. Zu jeder Aussage weist er aus, wie gut sie belegt ist — von gesichertem Befund bis zur offenen Frage.'}
           </p>
         </div>
 
@@ -78,18 +97,23 @@ export function Buecher() {
           {buecher.map((b) => <Tor key={b.id} buch={b} />)}
         </div>
 
-        {wartend.length > 0 && (
+        {!amAnfang && wartend.length > 0 && (
           <p className="hinweis-zeile">
-            Die Produktseiten {wartend.length === 1 ? 'zu diesem Band' : 'zu diesen Bänden'} sind
-            noch nicht freigeschaltet. Hier steht ein Platzhalter statt eines Links —
+            Die Produktseite {wartend.length === 1 ? 'zu diesem Band ist' : 'zu diesen Bänden sind'}
+            {' '}noch nicht eingetragen. Hier steht ein Platzhalter statt eines Links —
             erfundene Adressen gibt es in dieser Welt nicht.
           </p>
         )}
+        {amAnfang && (
+          <p className="hinweis-zeile weiter">Oder weiter nach unten — der Faden führt von selbst.</p>
+        )}
       </section>
-      <footer>
-        Manuel &amp; Uwe · Die Welt der drei Bände · Alle Motive stammen aus dem Buch
-        und wurden eigens dafür erzeugt.
-      </footer>
+      {!amAnfang && (
+        <footer>
+          Manuel &amp; Uwe · Trendonix · Die Welt der drei Bände · Alle Motive stammen
+          aus dem Buch und wurden eigens dafür erzeugt.
+        </footer>
+      )}
     </>
   );
 }

@@ -11,6 +11,11 @@ export const SZENEN_BAND_1: Szene[] = [
     fliesstext: 'Vom ersten Feuer bis zu den ersten Reichen.',
   },
   {
+    // Die Wahl steht vor der Reise: Wer nur einen Band will, muss ihn nicht suchen.
+    // Derselbe Bauteil wie am Schluss, nur mit anderem Auftritt.
+    id: 'welten', bandId: 'band-1', typ: 'buecher',
+  },
+  {
     id: 'cover', bandId: 'band-1', typ: 'cover', platte: 'cover', hoehe: 256,
     grading: '#1b2c52',
     uebergang: 'glut', fahrt: 'aufsteigen', partikel: 'funken',

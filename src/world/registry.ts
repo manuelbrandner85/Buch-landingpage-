@@ -25,10 +25,13 @@ export const BAENDE = Object.values(WELT);
  * Band 3 trägt in seiner Buch-DNA die Regel „öffentlich nicht erwähnen, auch
  * nicht andeuten“. Deshalb entscheidet `status` – nicht das Vorhandensein von
  * Daten –, ob Kapitelseiten gebaut werden, ob der Band in der Sitemap steht
- * und ob sein Titel im Bücherbereich auftaucht. Aus „in Arbeit“ wird
- * „erschienen“, und der Band ist da; ein anderer Eingriff ist nicht nötig.
+ * und ob sein Titel im Bücherbereich auftaucht.
+ *
+ * „erscheint“ ist dabei offen, aber nicht käuflich: Die Welt des Bandes lässt
+ * sich begehen, im Bücherbereich steht kein Kaufweg. Aus „in Arbeit“ wird
+ * „erscheint“ und daraus „erschienen“; ein anderer Eingriff ist nicht nötig.
  */
-export const OEFFENTLICHE_BAENDE = BAENDE.filter((b) => b.buch.status === 'erschienen');
+export const OEFFENTLICHE_BAENDE = BAENDE.filter((b) => b.buch.status !== 'in Arbeit');
 export const OEFFENTLICHE_KAPITEL: Kapitel[] = OEFFENTLICHE_BAENDE.flatMap((b) => b.kapitel);
 export const REISE: Szene[] = BAENDE.flatMap((b) => b.szenen);
 export const ALLE_KAPITEL: Kapitel[] = BAENDE.flatMap((b) => b.kapitel);

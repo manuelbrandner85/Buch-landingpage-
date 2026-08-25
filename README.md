@@ -287,6 +287,25 @@ src/
 
 ## Die drei Welten
 
+Die Wahl steht **vor** der Reise, nicht dahinter: Gleich hinter der Ankunft
+liegt „Wo willst du hinein?" mit den drei Bänden. Wer nur einen Band will, muss
+nicht durch die anderen scrollen; wer weiterscrollt, geht alle der Reihe nach.
+Am Schluss stehen dieselben Tore noch einmal als Abschluss. Beides ist derselbe
+Bauteil, unterschieden nur durch die Szenen-id (`welten` gegen `buecher`) —
+kein neuer Szenentyp.
+
+**Drei Zustände statt zwei.** `status` kennt jetzt `erschienen`, `erscheint`
+und `in Arbeit`. Ein Band, der erscheint, hat eine begehbare Welt, aber keinen
+Kaufweg; ein Band in Arbeit ist überhaupt nicht öffentlich. Damit steht auf der
+Seite, was stimmt: Band 1 im Handel, Band 2 erscheint, Band 3 verschlossen.
+
+**Alle Motive von Band 2 sind Bewegtbild.** Zwölf Sequenzen, fünf Sekunden,
+1080p, mit `wan-26` aus dem jeweiligen Standbild erzeugt (0,25 Credits je
+Sequenz). Die Bewegung ist absichtlich klein — Staub im Licht, eine Flamme,
+Dunst über Wasser: Die Kamerafahrt macht der Shader, das Video liefert nur das
+Leben darin. Das Standbild bleibt Poster und Rückfall.
+
+
 Der Bücherbereich ist der Ort, an dem die Reihe verkauft wird, und er sieht
 jetzt auch so aus: drei Tore nebeneinander, jedes mit Umschlag, Klappentext und
 zwei Wegen — zum Buch und in die Welt. Der Kaufweg steht zuerst; solange die

@@ -15,11 +15,17 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
+// Band wählbar: node scripts/motion-holen.mjs <name> <url> --band=band-2
+const arg = (n, s) => process.argv.find((a) => a.startsWith(`--${n}=`))?.split('=')[1] ?? s;
+const BAND = arg('band', 'band-1');
 const [name, url] = process.argv.slice(2);
-if (!name || !url) { console.error('Aufruf: node scripts/motion-holen.mjs <name> <url>'); process.exit(1); }
+if (!name || !url) {
+  console.error('Aufruf: node scripts/motion-holen.mjs <name> <url> [--band=band-2]');
+  process.exit(1);
+}
 
-const ZIEL = 'public/assets/band-1/szenen';
-const ROH = 'assets-quelle';
+const ZIEL = `public/assets/${BAND}/szenen`;
+const ROH = BAND === 'band-1' ? 'assets-quelle' : `assets-quelle/${BAND}`;
 mkdirSync(ZIEL, { recursive: true });
 mkdirSync(ROH, { recursive: true });
 
@@ -31,7 +37,7 @@ const ff = (args) => execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...args
 
 // H.264: breite Unterstützung, faststart für sofortiges Abspielen
 ff(['-i', `${ROH}/${name}-motion-roh.mp4`, '-an', '-vf', 'scale=1920:-2',
-    '-c:v', 'libx264', '-profile:v', 'high', '-crf', '21', '-preset', 'slower',
+    '-c:v', 'libx264', '-profile:v', 'high', '-crf', '21', '-preset', 'slow',
     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', `${ZIEL}/${name}-motion.mp4`]);
 
 // VP9 wird nicht mehr erzeugt: Die Engine lädt ohnehin nur die MP4-Fassung,
@@ -43,7 +49,9 @@ ff(['-i', `${ROH}/${name}-motion-roh.mp4`, '-an', '-vf', 'scale=1280:-2',
     '-c:v', 'libx264', '-profile:v', 'high', '-crf', '25', '-preset', 'slow',
     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', `${ZIEL}/${name}-motion-klein.mp4`]);
 
-// Erstes Bild als Standbild und Poster
-ff(['-i', `${ROH}/${name}-motion-roh.mp4`, '-frames:v', '1', `${ROH}/${name}.jpg`]);
+// Erstes Bild zur Kontrolle – das Standbild bleibt die Quelldatei.
+// Vorher überschrieb dieser Schritt das Quellmotiv mit dem ersten Videobild;
+// bei Bewegtfassungen aus einem größeren Standbild war das ein Qualitätsverlust.
+ff(['-i', `${ROH}/${name}-motion-roh.mp4`, '-frames:v', '1', `${ROH}/${name}-erstbild.jpg`]);
 
 console.log(`${name}: mp4 + webm + Standbild erzeugt`);

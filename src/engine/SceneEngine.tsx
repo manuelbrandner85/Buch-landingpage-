@@ -73,7 +73,7 @@ function Abschnitt({ szene }: { szene: Szene }) {
       const Modul = module[szene.modul ?? 'ringe'];
       return <Modul szene={szene} />;
     }
-    case 'buecher': return <Buecher />;
+    case 'buecher': return <Buecher szene={szene} />;
     default: return null;
   }
 }

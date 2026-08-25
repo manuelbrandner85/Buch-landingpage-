@@ -29,7 +29,13 @@ export interface Buch {
   nummer: 1 | 2 | 3;
   titel: string;
   unterzeile?: string;
-  status: 'erschienen' | 'in Arbeit';
+  /**
+   * Drei Zustände, weil die Reihe drei hat:
+   *  · `erschienen` – im Handel, die Welt ist offen, es gibt etwas zu kaufen
+   *  · `erscheint`  – fertig gesetzt, die Welt ist offen, aber noch kein Kauf
+   *  · `in Arbeit`  – nicht öffentlich; der Band steht in den Daten und schweigt
+   */
+  status: 'erschienen' | 'erscheint' | 'in Arbeit';
   /** Platzhalter, bis die echte Produktseite vorliegt. Niemals erfundene URLs. */
   amazonUrl: string;
   coverAsset?: AssetId;

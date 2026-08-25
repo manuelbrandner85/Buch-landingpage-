@@ -31,20 +31,23 @@ export function Buch3D({ cover, band, tiefe }:
           <img src={bildQuelle(cover, 1000)} alt={cover.alt}
             width={cover.breite} height={cover.hoehe} loading="lazy" decoding="async" />
           <span className="lack" aria-hidden="true" />
+          <span className="licht" aria-hidden="true" />
         </div>
         <div className="flaeche hinten">
           <img src={flaeche('rueckseite')} alt="" aria-hidden="true"
             loading="lazy" decoding="async" />
           <span className="lack" aria-hidden="true" />
+          <span className="licht" aria-hidden="true" />
         </div>
         <div className="flaeche ruecken">
           <img src={flaeche('ruecken')} alt="" aria-hidden="true"
             loading="lazy" decoding="async" />
           <span className="lack" aria-hidden="true" />
+          <span className="licht" aria-hidden="true" />
         </div>
-        <div className="flaeche schnitt" aria-hidden="true" />
-        <div className="flaeche kopfschnitt" aria-hidden="true" />
-        <div className="flaeche fussschnitt" aria-hidden="true" />
+        <div className="flaeche schnitt" aria-hidden="true"><span className="licht" /></div>
+        <div className="flaeche kopfschnitt" aria-hidden="true"><span className="licht" /></div>
+        <div className="flaeche fussschnitt" aria-hidden="true"><span className="licht" /></div>
       </div>
       <div className="standschatten" aria-hidden="true" />
     </div>

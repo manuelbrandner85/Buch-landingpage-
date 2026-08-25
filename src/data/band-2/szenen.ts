@@ -9,6 +9,12 @@ import type { Szene } from '../gemeinsam/typen';
  *  · `fliesstext` ist wörtlich aus dem Band übernommen,
  *  · `zitat` der Bilanzen ist der Schlüsselsatz der Kapitelbilanz.
  *
+ * Alle Motive liegen als Bewegtfassung vor (`motion`): fünf Sekunden, 1080p,
+ * aus dem Standbild erzeugt. Die Bewegung ist absichtlich klein – Staub im
+ * Licht, eine Flamme, Dunst über Wasser. Die Kamerafahrt macht der Shader; das
+ * Video liefert nur das Leben darin. Das Standbild bleibt Poster und Rückfall
+ * bei „Bewegung reduzieren“, im Datensparmodus und auf 2G.
+ *
  * `zahlen` und `randnotizen` fehlen bewusst: Die Kennzahlen des Bandes stehen
  * fest, ihre Evidenzstufen aber nicht in einer Form, die sich ohne Deutung
  * übernehmen ließe. Lieber keine Angabe als eine erfundene.
@@ -16,7 +22,7 @@ import type { Szene } from '../gemeinsam/typen';
 export const SZENEN_BAND_2: Szene[] = [
   {
     id: 'faden-laeuft-weiter', bandId: 'band-2', typ: 'motiv',
-    platte: 'welt-ankunft', buchseite: 1, hoehe: 214, grading: '#1b2c52',
+    platte: 'welt-ankunft', motion: 'welt-ankunft', buchseite: 1, hoehe: 214, grading: '#1b2c52',
     uebergang: 'aufloesen', fahrt: 'durchfahrt', partikel: 'funken',
     badge: 'Eigene Darstellung',
     eyebrow: 'Band 2',
@@ -30,7 +36,7 @@ export const SZENEN_BAND_2: Szene[] = [
   // ------------------------------------------------------------ Kapitel 7
   {
     id: 'kapitel-7', bandId: 'band-2', kapitelId: 7, typ: 'auftakt', tor: true,
-    platte: 'b2-kap07-auftakt', buchseite: 12, hoehe: 208, grading: '#802a28',
+    platte: 'b2-kap07-auftakt', motion: 'b2-kap07-auftakt', buchseite: 12, hoehe: 208, grading: '#802a28',
     uebergang: 'lichtschwenk', fahrt: 'hinein', partikel: 'staub',
     titel: 'Nach Rom',
     unterzeile: 'Wie Erinnerung überdauert, wenn die Macht zerfällt',
@@ -38,7 +44,7 @@ export const SZENEN_BAND_2: Szene[] = [
   },
   {
     id: 'was-bewahrt-wurde', bandId: 'band-2', kapitelId: 7, unterkapitel: '7.5', typ: 'motiv',
-    platte: 'b2-kap07-motiv', buchseite: 40, hoehe: 268, grading: '#6e2c26',
+    platte: 'b2-kap07-motiv', motion: 'b2-kap07-motiv', buchseite: 40, hoehe: 268, grading: '#6e2c26',
     uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Wer bewahrte Wissen – und wer verlor seine Stimme?',
@@ -58,7 +64,7 @@ export const SZENEN_BAND_2: Szene[] = [
   // ------------------------------------------------------------ Kapitel 8
   {
     id: 'kapitel-8', bandId: 'band-2', kapitelId: 8, typ: 'auftakt', tor: true,
-    platte: 'b2-kap08-auftakt', buchseite: 47, hoehe: 208, grading: '#703e30',
+    platte: 'b2-kap08-auftakt', motion: 'b2-kap08-auftakt', buchseite: 47, hoehe: 208, grading: '#703e30',
     uebergang: 'lichtschwenk', fahrt: 'hinein',
     titel: 'Krone, Kirche und\ngeheime Gemeinschaften',
     unterzeile: 'Wie sich Macht verflocht – und wer davon wusste',
@@ -66,7 +72,7 @@ export const SZENEN_BAND_2: Szene[] = [
   },
   {
     id: 'drei-schloesser', bandId: 'band-2', kapitelId: 8, typ: 'motiv',
-    platte: 'b2-kap08-motiv', buchseite: 81, hoehe: 274, grading: '#5e3628',
+    platte: 'b2-kap08-motiv', motion: 'b2-kap08-motiv', buchseite: 81, hoehe: 274, grading: '#5e3628',
     uebergang: 'lichtschwenk', fahrt: 'hinein', partikel: 'staub',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Kapitelbilanz',
@@ -86,7 +92,7 @@ export const SZENEN_BAND_2: Szene[] = [
   // ------------------------------------------------------------ Kapitel 9
   {
     id: 'kapitel-9', bandId: 'band-2', kapitelId: 9, typ: 'auftakt', tor: true,
-    platte: 'b2-kap09-auftakt', buchseite: 82, hoehe: 208, grading: '#76602c',
+    platte: 'b2-kap09-auftakt', motion: 'b2-kap09-auftakt', buchseite: 82, hoehe: 208, grading: '#76602c',
     uebergang: 'wasser', fahrt: 'schwenkRechts', ton: 'wasser',
     titel: 'Kaufleute, Banken\nund globale Finanzen',
     unterzeile: 'Wie aus Vertrauen ein Gewerbe wurde',
@@ -94,7 +100,7 @@ export const SZENEN_BAND_2: Szene[] = [
   },
   {
     id: 'truhen', bandId: 'band-2', kapitelId: 9, typ: 'motiv',
-    platte: 'b2-kap09-motiv', buchseite: 116, hoehe: 274, grading: '#6a5628',
+    platte: 'b2-kap09-motiv', motion: 'b2-kap09-motiv', buchseite: 116, hoehe: 274, grading: '#6a5628',
     uebergang: 'aufloesen', fahrt: 'hinein',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Kapitelbilanz',
@@ -114,7 +120,7 @@ export const SZENEN_BAND_2: Szene[] = [
   // ----------------------------------------------------------- Kapitel 10
   {
     id: 'kapitel-10', bandId: 'band-2', kapitelId: 10, typ: 'auftakt', tor: true,
-    platte: 'b2-kap10-auftakt', buchseite: 117, hoehe: 208, grading: '#48584a',
+    platte: 'b2-kap10-auftakt', motion: 'b2-kap10-auftakt', buchseite: 117, hoehe: 208, grading: '#48584a',
     uebergang: 'wasser', fahrt: 'durchfahrt', ton: 'wasser',
     titel: 'Entdeckung, Eroberung\nund Kolonialreiche',
     unterzeile: 'Wer die Karte hält, bestimmt, was auf ihr fehlt',
@@ -122,7 +128,7 @@ export const SZENEN_BAND_2: Szene[] = [
   },
   {
     id: 'die-linie', bandId: 'band-2', kapitelId: 10, unterkapitel: '10.1', typ: 'motiv',
-    platte: 'b2-kap10-motiv', buchseite: 118, hoehe: 280, grading: '#3f4e42',
+    platte: 'b2-kap10-motiv', motion: 'b2-kap10-motiv', buchseite: 118, hoehe: 280, grading: '#3f4e42',
     uebergang: 'sediment', fahrt: 'hinein',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Navigation, Karten und Konkurrenz',
@@ -142,7 +148,7 @@ export const SZENEN_BAND_2: Szene[] = [
   // ----------------------------------------------------------- Kapitel 11
   {
     id: 'kapitel-11', bandId: 'band-2', kapitelId: 11, typ: 'auftakt', tor: true,
-    platte: 'b2-kap11-auftakt', buchseite: 152, hoehe: 208, grading: '#3a4860',
+    platte: 'b2-kap11-auftakt', motion: 'b2-kap11-auftakt', buchseite: 152, hoehe: 208, grading: '#3a4860',
     uebergang: 'aufloesen', fahrt: 'aufsteigen', ton: 'wind',
     titel: 'Revolution, Industrie\nund neue Eliten',
     unterzeile: 'Wer die Presse hat, bestimmt, was für selbstverständlich gilt',
@@ -150,7 +156,7 @@ export const SZENEN_BAND_2: Szene[] = [
   },
   {
     id: 'handpresse', bandId: 'band-2', kapitelId: 11, unterkapitel: '11.1', typ: 'motiv',
-    platte: 'b2-kap11-motiv', buchseite: 153, hoehe: 280, grading: '#33415a',
+    platte: 'b2-kap11-motiv', motion: 'b2-kap11-motiv', buchseite: 153, hoehe: 280, grading: '#33415a',
     uebergang: 'glut', fahrt: 'hinein', partikel: 'staub',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Aufklärung und Öffentlichkeit',
@@ -170,7 +176,7 @@ export const SZENEN_BAND_2: Szene[] = [
   // ------------------------------------------------------------- Ausblick
   {
     id: 'wohin-dieser-band-fuehrt', bandId: 'band-2', typ: 'motiv',
-    platte: 'welt-karte', buchseite: 186, hoehe: 246, grading: '#141c30',
+    platte: 'welt-karte', motion: 'welt-karte', buchseite: 186, hoehe: 246, grading: '#141c30',
     uebergang: 'aufloesen', fahrt: 'heraus', ton: 'wind',
     badge: 'Eigene Darstellung',
     eyebrow: 'Wohin dieser Band führt',

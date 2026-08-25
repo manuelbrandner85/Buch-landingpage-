@@ -11,7 +11,7 @@ export const BUCH_BAND_2: Buch = {
   nummer: 2,
   titel: 'Glaube, Gold und Revolution',
   unterzeile: 'Vom Ende der Antike bis zum Industriezeitalter',
-  status: 'erschienen',
+  status: 'erscheint',
   amazonUrl: 'AMAZON_BAND_2_URL',
   coverAsset: 'cover-band-2',
   seiten: 206,
