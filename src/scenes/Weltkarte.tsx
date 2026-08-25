@@ -1,167 +1,400 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type React from 'react';
 import type { Ort, Szene } from '@/data/gemeinsam/typen';
 import { ORTE } from '@/data/gemeinsam/orte';
-import { bandNummer, kapitelNach, szeneZuKapitel } from '@/world/registry';
+import {
+  GRENZEN_PFAD, KARTE_BREITE, KARTE_HOEHE, LAND_PFAD, NETZ_PFAD, kx, ky,
+} from '@/data/gemeinsam/karte-pfade';
+import { WELT, assetNach, bandNummer, kapitelNach, szeneZuKapitel } from '@/world/registry';
+import { bildQuelle } from '@/world/bilder';
 import { useWeltFortschritt } from '@/world/FortschrittKontext';
 
 /**
- * Keine Google-Maps-artige Karte. Reale Koordinaten auf einem Gradnetz,
- * verbunden durch den Faden – in der Reihenfolge der Kapitel, nicht der Geografie.
+ * Die Welt dieses Bandes – als Flug, nicht als Diagramm.
  *
- * Die Karte zeigt nur die Orte des Bandes, in dessen Welt sie steht. Ein Punkt
- * aus einem anderen Band wäre hier ein Fremdkörper: Wer die Welt von Band 3
- * betritt, soll nicht über Uruk stolpern. Ein Ort gehört trotzdem der Welt und
- * nicht dem Band – er kann in mehreren Bänden vorkommen und zeigt dann in jeder
- * Bandkarte die Kapitel und Seiten genau dieses Bandes.
+ * Vorher war das hier ein Gradnetz mit Punkten darauf: mathematisch richtig und
+ * vollkommen leer. Ein Ort ohne Küste ist keine Verortung, sondern eine
+ * Behauptung mit Koordinaten.
  *
- * Der Ausschnitt wird aus den Punkten gerechnet, nicht gesetzt. Band 1 spielt
- * zwischen Südafrika und China, Band 3 zwischen der Magellanstraße und der
- * Luzonstraße – ein fester Rahmen könnte nur einem von beiden passen.
+ * Jetzt liegt darunter dieselbe Grundlage, die das Buch nennt: Küstenlinien und
+ * Staatsgrenzen aus Natural Earth, erzeugt von `scripts/karte.mjs`. Darüber
+ * liegen fünf Ebenen mit echtem Tiefenversatz – Meer, Gradnetz, Land, Faden,
+ * Orte. Sie stehen in einem perspektivischen Raum unterschiedlich weit hinten;
+ * wenn die Kamera kippt und wandert, wandern sie verschieden schnell. Das ist
+ * kein Parallaxe-Trick über eine Grafik, sondern die Grafik selbst in Schichten.
+ *
+ * Die Kamera hängt am Scrollen: Sie beginnt hoch über der ganzen Welt, senkt
+ * sich auf den ersten Ort, fährt den Faden entlang von Ort zu Ort – bei jedem
+ * hält sie kurz und steht am tiefsten – und zieht am Ende wieder auf, wenn der
+ * Faden vollständig liegt. Der Faden zeichnet sich dabei mit, mit einem Licht
+ * an der Spitze.
+ *
+ * Wo die Seite still sein soll – im Ruhig-Modus, bei „Bewegung reduzieren“ –
+ * steht die Karte als vollständige Übersicht da: alle Orte, ganzer Faden,
+ * keine Fahrt. Nichts geht verloren, es bewegt sich nur nichts.
  */
-const W = 1000;
-const RAND = 14; // Grad Luft um die äußersten Punkte – auch der Name braucht Platz
 
-function ausschnitt(orte: Ort[]) {
-  const lons = orte.map((o) => o.lon);
-  const lats = orte.map((o) => o.lat);
-  const lon: [number, number] = [Math.min(...lons) - RAND, Math.max(...lons) + RAND];
-  const lat: [number, number] = [Math.min(...lats) - RAND, Math.max(...lats) + RAND];
-  // Die Karte darf nicht höher als breit werden – sonst kippt sie das Layout.
-  const spanneLon = lon[1] - lon[0];
-  const spanneLat = lat[1] - lat[0];
-  if (spanneLat > spanneLon * 0.62) {
-    const fehlt = (spanneLat / 0.62 - spanneLon) / 2;
-    lon[0] -= fehlt; lon[1] += fehlt;
+const PERSPEKTIVE = 900;
+
+/** Wie weit die Kamera an einem Ort heruntergeht (halbe Breite in Karteneinheiten). */
+const NAH = 340;
+/** Und wie weit sie zwischen zwei Orten wieder aufzieht. */
+const FERN = 900;
+/** Die Übersicht am Anfang und am Ende. */
+const GANZ = 2500;
+
+const klemm = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+const misch = (a: number, b: number, t: number) => a + (b - a) * t;
+/** Weiche Beschleunigung – ohne sie fühlt sich jede Fahrt nach Förderband an. */
+const sanft = (t: number) => t * t * (3 - 2 * t);
+
+/**
+ * Ein Faden, kein Streckenzug.
+ *
+ * Der erste Versuch war eine Catmull-Rom-Spline durch alle Punkte. Sie sieht
+ * weich aus, schießt aber bei scharfen Richtungswechseln weit über das Ziel
+ * hinaus – zwischen zwei europäischen Städten schwang der Faden in den
+ * Atlantik. Deshalb jetzt: je Abschnitt ein eigener Bogen, seitlich um ein
+ * Zwölftel der Strecke ausgelenkt. Er überschießt nie, und er sieht aus wie
+ * ein Faden, der über eine Kugel gelegt wurde – was er dem Sinn nach ist.
+ */
+function faden(punkte: { x: number; y: number }[]): string {
+  if (punkte.length < 2) return '';
+  const p = punkte;
+  let d = `M ${p[0]!.x.toFixed(1)} ${p[0]!.y.toFixed(1)}`;
+  for (let i = 0; i < p.length - 1; i += 1) {
+    const a = p[i]!;
+    const b = p[i + 1]!;
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    const l = Math.hypot(dx, dy) || 1;
+    // Immer zur selben Seite auslenken, damit sich Hin- und Rückwege nicht decken.
+    const bogen = Math.min(l / 12, 160);
+    const cx = (a.x + b.x) / 2 - (dy / l) * bogen;
+    const cy = (a.y + b.y) / 2 + (dx / l) * bogen;
+    d += ` Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
   }
-  const h = Math.round((W * (lat[1] - lat[0])) / (lon[1] - lon[0]));
-  return {
-    h,
-    x: (l: number) => ((l - lon[0]) / (lon[1] - lon[0])) * W,
-    y: (b: number) => ((lat[1] - b) / (lat[1] - lat[0])) * h,
-    lon, lat,
-  };
+  return d;
+}
+
+interface Halt {
+  ort: Ort;
+  x: number;
+  y: number;
+  kapitel?: number;
+  seiten: number[];
 }
 
 export function Weltkarte({ szene }: { szene: Szene }) {
-  const [gewaehlt, setGewaehlt] = useState<string | null>(null);
-  const fortschritt = useWeltFortschritt();
-
   const band = szene.bandId;
-  const eigene = ORTE.filter((o) => o.vorkommen.some((v) => v.bandId === band));
-  // Das Vorkommen, das zu diesem Band gehört – nicht das erste überhaupt.
-  const hier = (o: Ort) => o.vorkommen.find((v) => v.bandId === band);
+  const fortschritt = useWeltFortschritt();
+  const abschnitt = useRef<HTMLElement>(null);
+  const fadenRef = useRef<SVGPathElement>(null);
 
-  const orte = [...eigene].sort(
-    (a, b) => (hier(a)?.kapitel ?? 0) - (hier(b)?.kapitel ?? 0));
+  const [p, setP] = useState(0);
+  const [ruhig, setRuhig] = useState(false);
+  const [laenge, setLaenge] = useState(0);
+  const [gewaehlt, setGewaehlt] = useState<string | null>(null);
 
-  if (orte.length === 0) return null;
+  /** Nur die Orte dieses Bandes – in der Reihenfolge der Kapitel. */
+  const halte = useMemo<Halt[]>(() => {
+    const eigene = ORTE.filter((o) => o.vorkommen.some((v) => v.bandId === band));
+    return eigene
+      .map((ort) => {
+        const v = ort.vorkommen.find((w) => w.bandId === band)!;
+        return { ort, x: kx(ort.lon), y: ky(ort.lat), kapitel: v.kapitel, seiten: v.seiten };
+      })
+      .sort((a, b) => (a.kapitel ?? 0) - (b.kapitel ?? 0));
+  }, [band]);
 
-  const k = ausschnitt(orte);
+  const spur = useMemo(() => faden(halte), [halte]);
 
-  // Beschriftung ohne Gedränge.
+  /**
+   * Stillstand hat zwei Quellen: die Systemeinstellung und den Ruhig-Knopf in
+   * der Kopfzeile. Beide können sich ändern, während die Karte schon steht –
+   * deshalb wird beides beobachtet und nicht einmal beim Aufbau abgefragt.
+   */
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const welt = document.querySelector('.welt');
+    const pruefen = () => setRuhig(mq.matches || Boolean(welt?.classList.contains('ruhig')));
+    pruefen();
+    mq.addEventListener('change', pruefen);
+    const b = welt
+      ? new MutationObserver(pruefen)
+      : undefined;
+    if (welt && b) b.observe(welt, { attributes: true, attributeFilter: ['class'] });
+    return () => { mq.removeEventListener('change', pruefen); b?.disconnect(); };
+  }, []);
+
+  useEffect(() => {
+    if (fadenRef.current) setLaenge(fadenRef.current.getTotalLength());
+  }, [spur]);
+
+  const messen = useCallback(() => {
+    const el = abschnitt.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const strecke = r.height - window.innerHeight;
+    if (strecke <= 0) { setP(0); return; }
+    setP(klemm(-r.top / strecke, 0, 1));
+  }, []);
+
+  useEffect(() => {
+    if (ruhig) return undefined;
+    let warte = false;
+    const auf = () => {
+      if (warte) return;
+      warte = true;
+      requestAnimationFrame(() => { warte = false; messen(); });
+    };
+    messen();
+    window.addEventListener('scroll', auf, { passive: true });
+    window.addEventListener('resize', auf);
+    return () => {
+      window.removeEventListener('scroll', auf);
+      window.removeEventListener('resize', auf);
+    };
+  }, [messen, ruhig]);
+
+  // ── Die Kamera ────────────────────────────────────────────────────────────
   //
-  // In Europa liegen sieben Orte dieses Bandes auf der Fläche eines Daumens.
-  // Setzt man jeden Namen stur rechts neben seinen Punkt, überschreiben sich
-  // die Zeilen, und die Karte wird unleserlich – genau dort, wo am meisten
-  // steht. Deshalb bekommt jeder Name die erste Höhe, an der er noch frei ist,
-  // und am rechten Rand kippt er auf die andere Seite des Punktes.
-  const belegt: { x1: number; x2: number; y1: number; y2: number }[] = [];
-  const HOEHE = 11;
-  const versatz = [4, -7, 15, -18, 26, -29, 37, -40, 48, -51];
-  const schrift = (o: Ort) => {
-    const breite = o.name.length * 6 + 10;
-    const passtRechts = k.x(o.lon) + breite < W - 4;
-    const seiten = passtRechts ? [true, false] : [false, true];
-    for (const dy of versatz) {
-      for (const rechts of seiten) {
-        const px = rechts ? k.x(o.lon) + 8 : k.x(o.lon) - 8;
-        const py = k.y(o.lat) + dy;
-        const kasten = {
-          x1: rechts ? px : px - breite, x2: rechts ? px + breite : px,
-          y1: py - HOEHE, y2: py + 2,
-        };
-        if (kasten.x1 < 0 || kasten.x2 > W) continue;
-        const stoesst = belegt.some((b) =>
-          kasten.x1 < b.x2 && kasten.x2 > b.x1 && kasten.y1 < b.y2 && kasten.y2 > b.y1);
-        if (!stoesst) { belegt.push(kasten); return { px, py, rechts }; }
-      }
+  // Drei Akte: ansetzen, den Faden abfliegen, aufziehen. Die Grenzen sind so
+  // gewählt, dass der Blick am Anfang und am Ende jeweils einen Moment steht –
+  // eine Fahrt, die sofort losgeht und abrupt endet, wirkt wie ein Fehler.
+  const ANSATZ = 0.14;
+  const AUSZUG = 0.88;
+  const anzahl = Math.max(halte.length - 1, 1);
+
+  const kamera = useMemo(() => {
+    if (ruhig || halte.length === 0) {
+      return { x: KARTE_BREITE / 2, y: KARTE_HOEHE / 2, w: GANZ, kippung: 0, i: -1 };
     }
-    // Notfall: lieber nach innen kippen als über den Rand hinausragen.
-    const rechts = k.x(o.lon) + breite < W - 4;
-    return { px: k.x(o.lon) + (rechts ? 8 : -8), py: k.y(o.lat) + 4, rechts };
-  };
-  const namen = new Map(orte.map((o) => [o.id, schrift(o)]));
-  const faden = orte.map((o, i) =>
-    `${i ? 'L' : 'M'} ${k.x(o.lon).toFixed(1)} ${k.y(o.lat).toFixed(1)}`).join(' ');
+    const erster = halte[0]!;
+    const letzter = halte[halte.length - 1]!;
 
-  const netz: string[] = [];
-  const schritt = k.lon[1] - k.lon[0] > 120 ? 30 : 20;
-  for (let l = Math.ceil(k.lon[0] / schritt) * schritt; l <= k.lon[1]; l += schritt) {
-    netz.push(`M ${k.x(l).toFixed(1)} 0 L ${k.x(l).toFixed(1)} ${k.h}`);
-  }
-  for (let b = Math.ceil(k.lat[0] / schritt) * schritt; b <= k.lat[1]; b += schritt) {
-    netz.push(`M 0 ${k.y(b).toFixed(1)} L ${W} ${k.y(b).toFixed(1)}`);
-  }
+    if (p <= ANSATZ) {
+      const t = sanft(p / ANSATZ);
+      return {
+        x: misch(KARTE_BREITE / 2, erster.x, t),
+        y: misch(KARTE_HOEHE / 2, erster.y, t),
+        w: misch(GANZ, NAH, t),
+        kippung: misch(16, 38, t),
+        i: 0,
+      };
+    }
+    if (p >= AUSZUG) {
+      const t = sanft((p - AUSZUG) / (1 - AUSZUG));
+      return {
+        x: misch(letzter.x, KARTE_BREITE / 2, t),
+        y: misch(letzter.y, KARTE_HOEHE / 2, t),
+        w: misch(NAH, GANZ, t),
+        kippung: misch(38, 12, t),
+        i: halte.length - 1,
+      };
+    }
+    const roh = ((p - ANSATZ) / (AUSZUG - ANSATZ)) * anzahl;
+    const i = klemm(Math.floor(roh), 0, anzahl - 1);
+    const t = roh - i;
+    const a = halte[i]!;
+    const b = halte[i + 1] ?? a;
+    const s = sanft(t);
+    return {
+      x: misch(a.x, b.x, s),
+      y: misch(a.y, b.y, s),
+      // Zwischen zwei Orten zieht die Kamera auf und geht am Ziel wieder herunter.
+      w: misch(NAH, FERN, Math.sin(Math.PI * t) ** 0.7),
+      kippung: 38 - 10 * Math.sin(Math.PI * t),
+      i: t < 0.5 ? i : i + 1,
+    };
+  }, [p, ruhig, halte, anzahl]);
 
-  // Ein Ort gilt als besucht, wenn eine Szene seines Kapitels gesehen wurde.
-  const besucht = (o: Ort) => {
-    const v = hier(o);
-    const s = szeneZuKapitel(v?.kapitel, v?.bandId);
+  const hoehe = (kamera.w * 9) / 16;
+  const sichtfeld = `${(kamera.x - kamera.w).toFixed(1)} ${(kamera.y - hoehe).toFixed(1)} `
+    + `${(kamera.w * 2).toFixed(1)} ${(hoehe * 2).toFixed(1)}`;
+
+  /** Strichstärken und Schriftgrößen in Karteneinheiten – sonst wachsen sie beim Zoom mit. */
+  const e = kamera.w / 900;
+
+  const gezeichnet = ruhig
+    ? 0
+    : laenge * (1 - klemm((p - ANSATZ) / (AUSZUG - ANSATZ), 0, 1));
+
+  const aktuell = halte[klemm(kamera.i, 0, halte.length - 1)];
+  const gezeigt = gewaehlt ? halte.find((h) => h.ort.id === gewaehlt) ?? aktuell : aktuell;
+  const kapitel = kapitelNach(gezeigt?.kapitel, band);
+  const sprung = szeneZuKapitel(gezeigt?.kapitel, band);
+  /**
+   * Das Bild zum Ort – aber kein erfundenes: das Motiv des Kapitels, das diesen
+   * Ort belegt. So sieht man neben dem Punkt, wovon die Seite handelt, auf der
+   * er steht, und nicht eine Fotografie, die es nicht gibt.
+   */
+  const auftakt = useMemo(() => {
+    const k = gezeigt?.kapitel;
+    if (k === undefined) return undefined;
+    const szenen = WELT[band]?.szenen ?? [];
+    const treffer = szenen.find((z) => z.kapitelId === k && z.typ === 'auftakt' && z.platte)
+      ?? szenen.find((z) => z.kapitelId === k && z.platte);
+    return treffer?.platte ? assetNach(treffer.platte) : undefined;
+  }, [gezeigt, band]);
+
+  const besucht = (h: Halt) => {
+    const s = szeneZuKapitel(h.kapitel, band);
     return Boolean(s && fortschritt?.kennt(s.id));
   };
 
-  const ort = orte.find((o) => o.id === gewaehlt);
-  const v = ort ? hier(ort) : undefined;
-  const sprung = szeneZuKapitel(v?.kapitel, v?.bandId);
-  const kapitel = kapitelNach(v?.kapitel, v?.bandId);
+  if (halte.length === 0) return null;
+
+  /**
+   * Wie lang der Abschnitt sein muss.
+   *
+   * Nicht als feste Zahl: Band 2 hat vierundzwanzig Orte, Band 1 zwanzig. Bei
+   * fester Höhe hätte jeder Ort in Band 2 weniger Weg als in Band 1, und die
+   * Fahrt wäre dort ein Vorbeirauschen. Dreißig Bildschirmhöhen je Abschnitt
+   * sind genug, um eine Tafel zu lesen, ohne dass das Scrollen zur Arbeit wird.
+   */
+  const strecke = Math.min(900, 100 + 30 * Math.max(halte.length - 1, 1));
+
+  /** Eine Ebene im Raum: weiter hinten heißt kleiner – und muss zurückskaliert werden. */
+  const ebene = (z: number): React.CSSProperties => ({
+    transform: `translateZ(${z}px) scale(${((PERSPEKTIVE - z) / PERSPEKTIVE).toFixed(4)})`,
+  });
+
+  /**
+   * Stillgestellt wird die ganze Welt eingepasst (`meet`), in der Fahrt füllt
+   * sie das Bild (`slice`). Sonst stünde im Ruhezustand ein Ausschnitt da, wo
+   * eine Übersicht stehen soll.
+   */
+  const passung = ruhig ? 'xMidYMid meet' : 'xMidYMid slice';
+  const svgProps = {
+    viewBox: sichtfeld,
+    preserveAspectRatio: passung,
+    'aria-hidden': true as const,
+  };
 
   return (
-    <section id={szene.id} className="karte">
-      <div className="karte-huelle">
-        <p className="eyebrow">Die Welt</p>
-        <h2>{szene.titel}</h2>
-        <p className="fliess">{szene.fliesstext}</p>
+    <section id={szene.id} className={ruhig ? 'karte still' : 'karte'} ref={abschnitt}
+      style={{ '--hoehe': strecke } as React.CSSProperties}>
+      <div className="karte-halt">
+        <div className="karte-buehne" style={{ perspective: `${PERSPEKTIVE}px` }}>
+          <div className="karte-raum"
+            style={{ transform: `rotateX(${kamera.kippung.toFixed(2)}deg)` }}>
 
-        <svg viewBox={`0 0 ${W} ${k.h}`} role="group"
-          aria-label={`Karte der Orte aus Band ${bandNummer(band)}`}>
-          <path className="karte-netz" d={netz.join(' ')} />
-          <path className="karte-faden" d={faden} />
-          {orte.map((o) => (
-            <g key={o.id} className="ort" tabIndex={0} role="button"
-              aria-label={o.name} aria-current={gewaehlt === o.id}
-              onClick={() => setGewaehlt(o.id)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setGewaehlt(o.id); }
-              }}>
-              <circle cx={k.x(o.lon)} cy={k.y(o.lat)} r={3.4}
-                className={besucht(o) ? 'besucht' : undefined} />
-              <text x={namen.get(o.id)!.px} y={namen.get(o.id)!.py}
-                textAnchor={namen.get(o.id)!.rechts ? 'start' : 'end'}>{o.name}</text>
-            </g>
-          ))}
-        </svg>
+            {/* Meer */}
+            <div className="karte-ebene" style={ebene(-220)}>
+              <svg {...svgProps}>
+                <rect x={-KARTE_BREITE} y={-KARTE_HOEHE} width={KARTE_BREITE * 3}
+                  height={KARTE_HOEHE * 3} className="karte-meer" />
+              </svg>
+            </div>
 
-        <div className="ort-info" aria-live="polite">
-          {ort && v ? (
+            {/* Gradnetz */}
+            <div className="karte-ebene" style={ebene(-140)}>
+              <svg {...svgProps}>
+                <path d={NETZ_PFAD} className="karte-netz" strokeWidth={0.7 * e} />
+              </svg>
+            </div>
+
+            {/* Land, Grenzen, Küste */}
+            <div className="karte-ebene" style={ebene(0)}>
+              <svg {...svgProps}>
+                <defs>
+                  <linearGradient id="landton" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#1a2233" />
+                    <stop offset="100%" stopColor="#0d1420" />
+                  </linearGradient>
+                </defs>
+                <path d={LAND_PFAD} className="karte-saum" strokeWidth={7 * e} />
+                <path d={LAND_PFAD} className="karte-land" />
+                <path d={GRENZEN_PFAD} className="karte-grenzen" strokeWidth={0.7 * e} />
+                <path d={LAND_PFAD} className="karte-kueste" strokeWidth={1.1 * e} />
+              </svg>
+            </div>
+
+            {/* Der Faden */}
+            <div className="karte-ebene" style={ebene(70)}>
+              <svg {...svgProps}>
+                <path d={spur} className="karte-faden-spur" strokeWidth={1.4 * e} />
+                <path d={spur} className="karte-faden-schein" strokeWidth={9 * e}
+                  strokeDasharray={laenge} strokeDashoffset={gezeichnet} />
+                <path ref={fadenRef} d={spur} className="karte-faden"
+                  strokeWidth={2.2 * e}
+                  strokeDasharray={laenge} strokeDashoffset={gezeichnet} />
+              </svg>
+            </div>
+
+            {/* Orte */}
+            <div className="karte-ebene karte-ebene-orte" style={ebene(130)}>
+              <svg viewBox={sichtfeld} preserveAspectRatio={passung}
+                role="group" aria-label={`Karte der Orte aus Band ${bandNummer(band)}`}>
+                {halte.map((h, i) => {
+                  const hier = gezeigt?.ort.id === h.ort.id;
+                  const erreicht = ruhig || i <= kamera.i;
+                  return (
+                    <g key={h.ort.id}
+                      className={`ort${hier ? ' hier' : ''}${erreicht ? ' erreicht' : ''}`}
+                      tabIndex={0} role="button" aria-label={h.ort.name}
+                      aria-current={hier}
+                      onClick={() => setGewaehlt(h.ort.id)}
+                      onKeyDown={(ev) => {
+                        if (ev.key === 'Enter' || ev.key === ' ') {
+                          ev.preventDefault(); setGewaehlt(h.ort.id);
+                        }
+                      }}>
+                      {hier && <circle cx={h.x} cy={h.y} r={13 * e} className="ort-hof" />}
+                      <circle cx={h.x} cy={h.y} r={3.2 * e}
+                        className={besucht(h) ? 'besucht' : undefined} />
+                      <text x={h.x + 9 * e} y={h.y + 4 * e}
+                        fontSize={13 * e} strokeWidth={3.4 * e}>{h.ort.name}</text>
+                    </g>
+                  );
+                })}
+              </svg>
+            </div>
+          </div>
+          {/* Dunst am fernen Rand: Die Welt hört nicht auf, sie verliert sich. */}
+          <div className="karte-dunst" aria-hidden="true" />
+          <div className="karte-vignette" aria-hidden="true" />
+        </div>
+
+        {/* Die Tafel: was an diesem Ort belegt ist */}
+        <div className="karte-tafel">
+          <p className="eyebrow">{szene.titel}</p>
+          {gezeigt && (
             <>
-              <strong>{ort.name}</strong>{ort.text}
-              <span className="verweis">
-                Band {bandNummer(v.bandId)} · Kapitel {v.kapitel} – {kapitel?.titel}
-                {' · Seiten '}{v.seiten.join(', ')}
-              </span>
+              <h2>{gezeigt.ort.name}</h2>
+              <p className="karte-text">{gezeigt.ort.text}</p>
+              <p className="karte-beleg">
+                Band {bandNummer(band)} · Kapitel {gezeigt.kapitel} – {kapitel?.titel}
+                <span>Seiten {gezeigt.seiten.join(', ')}</span>
+              </p>
               {sprung && (
-                <a className="sprung" href={`#${sprung.id}`}>
-                  In die Szene · {sprung.titel}
-                </a>
+                <a className="sprung" href={`#${sprung.id}`}>In die Szene · {sprung.titel}</a>
               )}
             </>
-          ) : (
-            <><strong>Einen Punkt wählen</strong>Jeder Ort führt zurück in das Kapitel, das ihn belegt.</>
           )}
+          <p className="karte-stand" aria-hidden="true">
+            {ruhig ? halte.length : Math.min(kamera.i + 1, halte.length)}{' '}
+            <span>von {halte.length} Orten</span>
+          </p>
+          <p className="karte-grundlage">
+            Küstenlinien und Grenzen: Natural Earth. Der Faden verbindet die Orte in der
+            Reihenfolge der Kapitel, nicht der Geografie.
+          </p>
         </div>
+
+        {auftakt && (
+          <figure className="karte-motiv" key={auftakt.id}>
+            <img src={bildQuelle(auftakt, 1000)} alt="" loading="lazy" decoding="async" />
+          </figure>
+        )}
       </div>
+      <p className="karte-fliess"
+        style={{ opacity: ruhig ? 1 : klemm(1 - p / ANSATZ, 0, 1) }}>
+        {szene.fliesstext}
+      </p>
     </section>
   );
 }

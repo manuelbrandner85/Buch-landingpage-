@@ -27,11 +27,11 @@ export interface Anbieter {
 }
 
 export const ANBIETER: Anbieter = {
-  name: '',
-  strasse: '',
-  plzOrt: '',
+  name: 'Manuel Brandner',
+  strasse: 'Im Wahlsberg 10',
+  plzOrt: '55545 Bad Kreuznach',
   land: 'Deutschland',
-  email: '',
+  email: 'Info@trendonix-buecher.de',
   telefon: '',
   ustId: '',
   hoster: 'GitHub Pages, GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA',

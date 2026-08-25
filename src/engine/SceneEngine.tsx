@@ -49,10 +49,14 @@ export function SceneEngine(
    */
   useScrollKamera(!ruhig && rueckfall);
 
+  // Die Sprungmarke braucht die Adresse der Karte dieses Bandes – „#karte“ gab
+  // es nur in Band 1 und lief in den Bandwelten ins Leere.
+  const karte = szenen.find((s) => s.typ === 'karte');
+
   return (
     <FortschrittGeber>
     <div className={ruhig ? 'welt ruhig' : 'welt'}>
-      <a className="sprungmarke" href="#karte">Zur Weltkarte springen</a>
+      {karte && <a className="sprungmarke" href={`#${karte.id}`}>Zur Weltkarte springen</a>}
       <Kopfzeile reihe={reihe} band={band} ruhig={ruhig} beiRuhe={() => setRuhig((r) => !r)} />
       {/* WebGL zuerst. Trägt es nicht – alter Browser, abgeschaltete
           Beschleunigung, „Bewegung reduzieren“ –, übernimmt die DOM-Fassung. */}

@@ -517,23 +517,80 @@ die Seite still sein soll – im Ruhig-Modus und bei „Bewegung reduzieren“.
 `src/data/gemeinsam/orte.ts` hält alle Orte der Reihe – Regel 3: **Orte gehören
 der Welt, nicht dem Band.** Ein Ort kann deshalb in mehreren Bänden vorkommen
 und führt für jeden sein eigenes `vorkommen` mit Kapitel und Seiten; London
-steht in Band 2 und Band 3, Rom in Band 1 und Band 2.
+steht in Band 2 und Band 3, Rom in Band 1 und Band 2. Die Kartenszene zeigt
+trotzdem nur die Orte *ihres* Bandes: Wer die Welt von Band 3 betritt, soll
+nicht über Uruk stolpern.
 
-Die Kartenszene zeigt trotzdem nur die Orte *ihres* Bandes. Alles andere wäre
-ein Fremdkörper: Wer die Welt von Band 3 betritt, soll nicht über Uruk
-stolpern. Der Kartenausschnitt wird aus den gezeigten Punkten gerechnet, nicht
-gesetzt – Band 1 spielt zwischen Südafrika und China, Band 3 zwischen der
-Magellanstraße und der Luzonstraße, und ein fester Rahmen könnte nur einem von
-beiden passen.
+### Die Grundlage
 
-Die Namen werden gesetzt, nicht gestreut: Jeder Name bekommt die erste Höhe, an
-der er noch frei ist, kippt am Rand auf die andere Seite des Punktes und trägt
-einen schmalen Saum in der Farbe der Nacht, damit er auch über dem Faden lesbar
-bleibt. In Europa liegen sonst sieben Orte auf der Fläche eines Daumens.
+`npm run karte` erzeugt `src/data/gemeinsam/karte-pfade.ts` aus Natural Earth
+(über das npm-Paket `world-atlas`): Küstenlinien 1:50 Mio., vereinfacht, und
+Staatsgrenzen 1:110 Mio. Dieselbe Grundlage nennt das Buch für seine gedruckten
+Karten. Projektion ist die Plattkarte, zehn Einheiten je Grad – nicht, weil sie
+die schönste wäre, sondern weil ein Ort dann genau dort liegt, wo seine
+Koordinaten ihn hinsetzen, ohne Zwischenrechnung.
 
-Woher die Daten stammen: Ortsregister der Bände (Band 1 S. 203, Band 2 S. 202,
-Band 3 S. 203). Die Kapitelzuordnung folgt den Seitenbereichen der Kapitel,
-nicht einer Einschätzung. Die Koordinaten sind allgemein bekannte Lagewerte.
+Vorher lag hier nur ein Gradnetz mit Punkten darauf: mathematisch richtig und
+vollkommen leer. Ein Ort ohne Küste ist keine Verortung, sondern eine
+Behauptung mit Koordinaten.
+
+### Der Raum
+
+Fünf Ebenen stehen in einem perspektivischen Raum verschieden weit hinten –
+Meer, Gradnetz, Land, Faden, Orte. Kippt die Kamera, wandern sie verschieden
+schnell. Das ist kein Parallaxe-Effekt über einer Grafik, sondern die Grafik
+selbst in Schichten. Zwei flache Schleier liegen *über* dem Raum und nicht
+darin: Dunst am fernen Rand und eine Vignette – im Raum würden sie mitkippen
+und der Dunst stünde schräg in der Luft.
+
+### Die Fahrt
+
+Sie hängt am Scrollen, nicht an einer Uhr. Drei Akte: ansetzen (die ganze Welt,
+flach, dann Senkflug auf den ersten Ort), den Faden abfliegen (von Ort zu Ort;
+dazwischen zieht die Kamera auf, am Ziel geht sie herunter), aufziehen (zurück
+auf die Übersicht, wenn der Faden vollständig liegt). Der Faden zeichnet sich
+dabei mit.
+
+Die Länge des Abschnitts ergibt sich aus der Zahl der Orte – dreißig
+Bildschirmhöhen je Abschnitt. Bei fester Höhe hätte jeder Ort in Band 2
+(vierundzwanzig Orte) weniger Weg als in Band 1, und die Fahrt wäre dort ein
+Vorbeirauschen.
+
+Der Faden ist je Abschnitt ein eigener Bogen, seitlich um ein Zwölftel der
+Strecke ausgelenkt. Der erste Versuch war eine Catmull-Rom-Spline durch alle
+Punkte: weich, aber sie schoss bei scharfen Richtungswechseln weit über das
+Ziel hinaus – zwischen zwei europäischen Städten schwang der Faden in den
+Atlantik.
+
+Neben der Tafel steht das Motiv des Kapitels, das diesen Ort belegt. Kein
+erfundenes Ortsbild: das Bild der Seite, auf der der Ort steht.
+
+**Stillgestellt** – Ruhig-Modus, „Bewegung reduzieren“ – steht die Karte als
+vollständige Übersicht da: alle Orte, ganzer Faden, keine Fahrt. Nichts geht
+verloren, es bewegt sich nur nichts. Der Schalter wird beobachtet, nicht einmal
+beim Aufbau abgefragt.
+
+## Der Evidenzregler
+
+`src/ui/EvidenzRegler.tsx`. Er stand vorher auch dort, wo es nichts zu filtern
+gab – auf der Karte, auf Papierseiten, in ganzen Bänden ohne belegte Angaben.
+Ein Regler, der nichts bewegt, macht die Idee dahinter unglaubwürdig: Man
+schiebt, nichts passiert, und das Versprechen „Belege lassen sich prüfen“ wirkt
+wie Dekor.
+
+Jetzt erscheint er nur, wo im sichtbaren Abschnitt Angaben mit einer Stufe
+stehen, und er sagt, was er getan hat: wie viele Angaben stehen bleiben und wie
+viele zurücktreten.
+
+`evidenz` ist an Kennzahlen, Randnotizen und Belegzeilen **freiwillig**. Nur wo
+das Buch einen Grad angibt, steht hier einer. Eine Angabe zurücktreten zu
+lassen, weil man ihre Beleglage nicht kennt, wäre eine Behauptung für sich.
+
+Dazu kommt die Belegtabelle des Buches als eigener Szenenteil (`belege`):
+Aussage, Beleglage, Grad – Zeile für Zeile, mit den Worten des Satzes
+(„Gesicherter Befund“, „Starke Indizien“, „Umstritten“, „Widerlegt“). Der
+Buchstabe daneben ist nur die Stelle auf der Skala des Reglers und steht
+deshalb nirgends anstelle des gedruckten Grades.
 
 ## Blick ins Buch und Leseprobe
 

@@ -26,27 +26,45 @@ export function Motiv({ szene }: { szene: Szene }) {
             {szene.zahlen && (
               <div className="zahlen">
                 {szene.zahlen.map((z) => (
-                  <div key={z.wert} className="zahl" data-evidenz={z.evidenz} data-auf>
+                  <div key={z.wert} className="zahl" data-evidenz={z.evidenz ?? undefined} data-auf>
                     {z.wert}<span>{z.label}</span>
                   </div>
                 ))}
               </div>
             )}
+            {szene.belege && (
+              <table className="belege">
+                <thead>
+                  <tr><th>Aussage</th><th>Beleglage</th><th>Grad</th></tr>
+                </thead>
+                <tbody>
+                  {szene.belege.map((b) => (
+                    <tr key={b.aussage} data-evidenz={b.evidenz ?? undefined}>
+                      <td>{b.aussage}</td>
+                      <td className="beleglage">{b.beleglage}</td>
+                      <td><span className="grad">{b.grad}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
             <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} />
           </div>
 
-          {szene.randnotizen && (
+          {(szene.randnotizen || szene.badge) && (
             <div className="marginal-spalte">
               {/* Der Herkunftsbadge steht außerhalb der Liste: eine Definitionsliste
                   darf nur Begriff-und-Erklärung-Paare enthalten. */}
               {szene.badge && <p className="badge">{szene.badge}</p>}
-              <dl className="marginal">
-                {szene.randnotizen.map((r) => (
-                  <div key={r.begriff} data-evidenz={r.evidenz}>
-                    <dt>{r.begriff}</dt><dd>{r.text}</dd>
-                  </div>
-                ))}
-              </dl>
+              {szene.randnotizen && (
+                <dl className="marginal">
+                  {szene.randnotizen.map((r) => (
+                    <div key={r.begriff} data-evidenz={r.evidenz ?? undefined}>
+                      <dt>{r.begriff}</dt><dd>{r.text}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
             </div>
           )}
         </div>

@@ -27,6 +27,40 @@ export const SZENEN_BAND_3: Szene[] = [
     quelle: 'Maschinenhalle mit Transmission. Freie Rekonstruktion.',
   },
   {
+    id: 'der-mann-mit-der-stoppuhr', bandId: 'band-3', kapitelId: 12, unterkapitel: '12.1', typ: 'motiv',
+    platte: 'b3-kap12-stoppuhr', buchseite: 16, hoehe: 268, grading: '#4a425c',
+    uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
+    badge: 'Freie Rekonstruktion',
+    eyebrow: 'Die Uhr verlässt die Fabrik',
+    titel: 'Der Mann\nmit der Stoppuhr',
+    unterzeile: 'Eine berühmte Geschichte und ihre Aktenlage',
+    fliesstext:
+      'Das berühmteste Beispiel darin handelt von einem Arbeiter, der Roheisen verlädt. Es wird bis heute in Lehrbüchern zitiert. Es ist auch nachgeprüft worden – und das Ergebnis der Prüfung steht seltener in den Lehrbüchern.',
+    // Die Tabelle des Buches, Zeile für Zeile. `grad` ist das Wort, das im Satz
+    // steht; `evidenz` ist nur die Stelle auf der Skala des Reglers.
+    belege: [
+      { aussage: 'Ein Arbeiter steigerte seine Leistung von 12,5 auf 47 Tonnen am Tag',
+        beleglage: 'Taylors eigene Darstellung, keine unabhängige Messung',
+        grad: 'Starke Indizien', evidenz: 'B' },
+      { aussage: 'Sein Lohn stieg dabei um rund sechzig Prozent',
+        beleglage: 'Taylors Angabe: von 1,15 auf 1,85 Dollar am Tag',
+        grad: 'Starke Indizien', evidenz: 'B' },
+      { aussage: 'Der Arbeiter hieß Schmidt',
+        beleglage: 'Deckname; die Person ist unter anderem Namen belegt',
+        grad: 'Widerlegt', evidenz: 'G' },
+      { aussage: 'Die Versuche belegen Taylors allgemeine Grundsätze',
+        beleglage: 'Prüfung von 1974: unzulässig verallgemeinert',
+        grad: 'Umstritten', evidenz: 'E' },
+      { aussage: 'Das Buch von 1911 prägte die Betriebsführung weltweit',
+        beleglage: 'Übersetzungen, Lehrpläne, Betriebsanweisungen',
+        grad: 'Gesicherter Befund', evidenz: 'A' },
+    ],
+    randnotizen: [
+      { begriff: 'Die Stoppuhr', text: 'Sie misst nicht, wie lange etwas dauert. Sie misst, wie lange es dauern darf.' },
+    ],
+    quelle: 'Seite 16, wörtlich: Taylors eigene Darstellung, 1974 nachgeprüft. Stoppuhr auf einem Schreibtisch, freie Rekonstruktion.',
+  },
+  {
     id: 'zweitausend-zuege', bandId: 'band-3', kapitelId: 12, unterkapitel: '12.2', typ: 'motiv',
     platte: 'b3-kap12-motiv', motion: 'b3-kap12-motiv', buchseite: 22, hoehe: 262, grading: '#4a425c',
     uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
@@ -36,7 +70,21 @@ export const SZENEN_BAND_3: Szene[] = [
     unterzeile: 'Der Aufmarsch in Zahlen',
     fliesstext:
       'Solche Zahlen sind schwer vorstellbar, und genau darin liegt ihre Wirkung. Ein Zug alle zehn Minuten über eine Brücke ist keine militärische Leistung mehr, sondern eine betriebstechnische. Sie setzt voraus, dass jede Weiche, jeder Wasserkran und jede Ablösung im Voraus eingeplant ist.',
-    quelle: 'Seite 22, wörtlich. Die Zahl stammt aus der Aufmarschliteratur, eine amtliche oder archivalische Quelle war für das Buch nicht erreichbar – deshalb Stufe C. Stellwerk an einer Bahnstrecke, freie Rekonstruktion.',
+    zahlen: [
+      { wert: '2.150', label: 'Züge überquerten zwischen dem 2. und 8. August eine einzige Rheinbrücke', evidenz: 'C' },
+      { wert: 'rund 2 Mio.', label: 'Menschen wurden in denselben Tagen im Westen befördert', evidenz: 'C' },
+      { wert: 'rund 400.000', label: 'Tonnen Gerät und Vorräte kamen hinzu', evidenz: 'C' },
+      { wert: 'etwa 7', label: 'Tage brauchte ein Korps bis zur Einsatzbereitschaft', evidenz: 'C' },
+    ],
+    // Ohne Stufe: Der Band gibt für diese vier Punkte keine an, und eine zu
+    // erfinden wäre schlimmer, als sie stehen zu lassen.
+    randnotizen: [
+      { begriff: 'Rechnen', text: 'Jeder Zug hat Strecke, Uhrzeit und Ziel.' },
+      { begriff: 'Verketten', text: 'Jeder Zug blockiert die Strecke für den nächsten.' },
+      { begriff: 'Auffüllen', text: 'Lücken lassen sich nicht nachträglich schließen.' },
+      { begriff: 'Umstellen', text: 'Eine Änderung betrifft nicht einen Zug, sondern alle.' },
+    ],
+    quelle: 'Seite 22, wörtlich. Die Zahlen stammen aus der Aufmarschliteratur, eine amtliche oder archivalische Quelle war für das Buch nicht erreichbar – deshalb Stufe C und nicht B. Stellwerk an einer Bahnstrecke, freie Rekonstruktion.',
   },
   {
     id: 'faden-12', bandId: 'band-3', kapitelId: 12, typ: 'papier', buchseite: 46,
@@ -90,7 +138,17 @@ export const SZENEN_BAND_3: Szene[] = [
     unterzeile: 'Vierundvierzig Staaten, siebenhundertdreißig Delegierte, drei Wochen',
     fliesstext:
       'In diesen Wochen trafen sich im Mount Washington Hotel in Bretton Woods, New Hampshire, Delegationen aus vierundvierzig Staaten – siebenhundertdreißig Personen – zur Währungs- und Finanzkonferenz der Vereinten Nationen. Verhandelt wurde nicht über den Krieg, sondern über die Zeit danach: wie Geld zwischen Staaten fließen soll, wenn wieder Handel möglich ist.',
-    quelle: 'Seite 84, wörtlich. Konferenzunterlagen und Abkommenstext. Das Ferienhotel in den Bergen: freie Rekonstruktion.',
+    zahlen: [
+      { wert: '44', label: 'Staaten waren vertreten', evidenz: 'A' },
+      { wert: '730', label: 'Delegierte kamen zusammen', evidenz: 'A' },
+      { wert: '35 $', label: 'je Unze Gold – der Anker des Systems', evidenz: 'A' },
+    ],
+    randnotizen: [
+      { begriff: 'Parität', text: 'Der amtlich festgelegte Wert einer Währung gegenüber einer anderen. Er darf sich bewegen, aber nur innerhalb eines engen Bandes.' },
+      { begriff: 'Konvertibilität', text: 'Die Zusage, eine Währung jederzeit in eine andere – oder in Gold – zu tauschen. Sie ist der Kern des ganzen Systems.' },
+      { begriff: 'Bancor', text: 'Der Name für eine reine Verrechnungswährung, die keinem Staat gehören sollte. Sie blieb ein Entwurf.' },
+    ],
+    quelle: 'Seite 84, wörtlich. Konferenzunterlagen und Abkommenstext – der genaueste Belegtyp dieses Bandes. Das Ferienhotel in den Bergen: freie Rekonstruktion.',
   },
   {
     id: 'faden-14', bandId: 'band-3', kapitelId: 14, typ: 'papier', buchseite: 116,

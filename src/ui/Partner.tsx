@@ -30,6 +30,7 @@ export function Partner({ zeile = 'Partner' }: { zeile?: string }) {
         </picture>
         <span className="partner-glanz" aria-hidden="true" />
       </span>
+      <span className="partner-adresse">www.vecom-design.it</span>
     </a>
   );
 }

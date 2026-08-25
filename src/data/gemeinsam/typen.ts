@@ -132,8 +132,32 @@ export interface Ebene {
   unschaerfe?: number;
 }
 
-export interface Kennzahl { wert: string; label: string; evidenz: Evidenz }
-export interface Randnotiz { begriff: string; text: string; evidenz: Evidenz }
+/**
+ * `evidenz` ist freiwillig: Nur wo das Buch einen Grad angibt, steht hier einer.
+ * Eine Angabe ohne Grad wird vom Regler nicht angefasst – sie zurücktreten zu
+ * lassen, weil man ihre Beleglage nicht kennt, wäre eine Behauptung für sich.
+ */
+export interface Kennzahl { wert: string; label: string; evidenz?: Evidenz }
+export interface Randnotiz { begriff: string; text: string; evidenz?: Evidenz }
+
+/**
+ * Eine Zeile aus einer Belegtabelle des Buches.
+ *
+ * Die Bände prüfen berühmte Aussagen zeilenweise und schreiben den Grad dazu –
+ * mit Worten, nicht mit Buchstaben: „Gesicherter Befund“, „Starke Indizien“,
+ * „Umstritten“, „Widerlegt“. Genau diese Worte stehen hier in `grad`; sie sind
+ * die Angabe des Buches und werden auch so angezeigt.
+ *
+ * `evidenz` ist etwas anderes: die Position auf der Skala des Reglers. Sie ist
+ * eine Einordnung dieser Seite, keine Angabe des Buches – deshalb steht sie
+ * daneben und nicht anstelle von `grad`.
+ */
+export interface Beleg {
+  aussage: string;
+  beleglage: string;
+  grad: string;
+  evidenz?: Evidenz;
+}
 
 /** Eine Szene ist ein Datensatz, kein Bauteil. Die Engine rendert sie anhand von `typ`. */
 export interface Szene {
@@ -167,6 +191,8 @@ export interface Szene {
 
   zahlen?: Kennzahl[];
   randnotizen?: Randnotiz[];
+  /** Eine Belegtabelle aus dem Buch: Aussage, Beleglage, Grad. */
+  belege?: Beleg[];
 
   /** Nur bei typ === 'interaktion'. */
   modul?: InteraktionsModul;
