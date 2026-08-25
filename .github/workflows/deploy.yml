@@ -229,19 +229,24 @@ jobs:
           else
             # Das Konto steckt im Servernamen: w021fb9a.kasserver.com → w021fb9a.
             KONTO="${SERVER%%.*}"
-            KANDIDATEN="/$OHNE_WWW / /$DOMAIN /htdocs /htdocs/$OHNE_WWW"
+            # Zuerst das Anmeldeverzeichnis selbst: Bei diesem Anbieter ist
+            # der FTP-Nutzer auf den Dokumentenstamm der Domain festgelegt,
+            # von der Verbindung aus gesehen ist das schlicht die Wurzel.
+            KANDIDATEN="/ /$OHNE_WWW /$DOMAIN /htdocs /htdocs/$OHNE_WWW"
             KANDIDATEN="$KANDIDATEN /$KONTO/$OHNE_WWW /www/htdocs/$KONTO/$OHNE_WWW"
           fi
 
           MARKE="probe-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           printf '%s\n' "$MARKE" > /tmp/_probe.txt
           ZIEL=""
+          ERSTER_BESCHREIBBARER=""
           for K in $KANDIDATEN; do
             echo "Prüfe $K"
             if ! lftp_tun "put -O \"$K\" /tmp/_probe.txt -o _probe.txt;" 2>/dev/null; then
               echo "  nicht beschreibbar"
               continue
             fi
+            [ -n "$ERSTER_BESCHREIBBARER" ] || ERSTER_BESCHREIBBARER="$K"
             sleep 2
             if curl -fsS --max-time 25 "https://$DOMAIN/_probe.txt" 2>/dev/null | grep -qx "$MARKE"; then
               ZIEL="$K"
@@ -251,9 +256,25 @@ jobs:
             echo "  beschreibbar, aber nicht unter der Domain sichtbar"
           done
 
+          # Die Sonde darf nicht das letzte Wort haben.
+          #
+          # Eine fehlerhafte .htaccess im Dokumentenstamm beantwortet jede
+          # Anfrage mit 500 – auch die nach der Sonde. Dann bestätigt kein
+          # Kandidat, und ausgerechnet die Veröffentlichung, die den Fehler
+          # behebt, käme nie durch. Eine Sackgasse, aus der man sich nicht
+          # herausveröffentlichen kann.
+          #
+          # Deshalb ist die Sonde ein Nachweis, keine Sperre: Bestätigt keiner,
+          # wird der erste beschreibbare Kandidat genommen und laut gewarnt.
+          # Das letzte Wort hat die Abfrage der fertigen Seite weiter unten.
           if [ -z "$ZIEL" ]; then
-            echo "::error title=Kein Dokumentenstamm gefunden::Beschrieben und über https://$DOMAIN/_probe.txt geprüft wurde: $KANDIDATEN"
-            exit 1
+            if [ -n "$ERSTER_BESCHREIBBARER" ]; then
+              ZIEL="$ERSTER_BESCHREIBBARER"
+              echo "::warning title=Ziel nicht bestätigt::Kein Kandidat war über https://$DOMAIN erreichbar – vermutlich antwortet der Server gerade mit einem Fehler. Es wird nach $ZIEL geladen und danach geprüft."
+            else
+              echo "::error title=Kein beschreibbares Verzeichnis::Versucht wurde: $KANDIDATEN"
+              exit 1
+            fi
           fi
           echo "Ziel: $SERVER$ZIEL"
 

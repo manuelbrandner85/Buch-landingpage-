@@ -68,10 +68,22 @@ eine winzige Datei mit einer einmaligen Kennung in jedes in Frage kommende
 Verzeichnis und ruft sie über die Domain wieder ab. Wo sie auftaucht, ist der
 Dokumentenstamm. Erst dann wird die Seite dorthin gespiegelt.
 
-Geprüft werden der Reihe nach `/<domain>`, `/`, `/htdocs`, `/htdocs/<domain>`,
-`/<konto>/<domain>` und `/www/htdocs/<konto>/<domain>`. Wer den Weg kennt, kann
-ihn über die Variable `FTP_ZIEL` oder hinten am Zugang vorgeben; dann wird nur
-dieser eine geprüft.
+Geprüft werden der Reihe nach `/`, `/<domain>`, `/htdocs`,
+`/htdocs/<domain>`, `/<konto>/<domain>` und `/www/htdocs/<konto>/<domain>`. Die
+Wurzel steht zuerst, weil der FTP-Nutzer bei diesem Anbieter auf den
+Dokumentenstamm der Domain festgelegt ist (*FTP-Nutzer → Pfad*, hier
+`/trendonix-buecher.de/`); von der Verbindung aus gesehen ist der
+Dokumentenstamm damit schlicht `/`. Wer den Weg kennt, kann ihn über die
+Variable `FTP_ZIEL` oder hinten am Zugang vorgeben; dann wird nur dieser eine
+geprüft.
+
+Die Sonde ist ein Nachweis, keine Sperre. Eine fehlerhafte `.htaccess` im
+Dokumentenstamm beantwortet jede Anfrage mit 500 – auch die nach der Sonde.
+Dann bestätigt kein Kandidat, und ausgerechnet die Veröffentlichung, die den
+Fehler behebt, käme nie durch: eine Sackgasse, aus der man sich nicht
+herausveröffentlichen kann. Bestätigt keiner, wird deshalb der erste
+beschreibbare Ordner genommen und gewarnt; das letzte Wort hat die Abfrage der
+fertigen Seite.
 
 Und danach fragt der Bau die Seite selbst ab – Startseite, `robots.txt`, eine
 Bandwelt, eine Buchseite. Kommt dort nicht die neue Seite zurück, endet der
