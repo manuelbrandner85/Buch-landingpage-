@@ -105,14 +105,16 @@
         <div><p class="eyebrow">Band ${W.buch.nummer} · ${W.buch.status}</p>
           <h2>${esc(W.buch.titel)}</h2><p class="unterzeile">${esc(W.buch.unterzeile)}</p>
           <p class="fliess">${esc(W.buch.klappentext)}</p>
-          <a class="kaufen" href="${W.buch.amazonUrl}" target="_blank" rel="noopener noreferrer">Band 1 auf Amazon ansehen</a>
-          <p class="quelle"><b>Hinweis</b>Platzhalter, bis die Amazon-Produktseite vorliegt.</p></div>
+          ${W.buch.kaufwege?.[0]
+            ? `<a class="kaufen" href="${W.buch.kaufwege[0].url}" target="_blank" rel="noopener noreferrer">Band ${W.buch.nummer} kaufen (${esc(W.buch.kaufwege[0].form)})</a>`
+            : `<span class="kaufen wartet">Produktseite folgt</span>`}
+          <p class="quelle"><b>Hinweis</b>Offlinefassung – der Kaufweg öffnet den Händler im Netz.</p></div>
       </div>
       <div class="spaeter">
         <div><h3>Band 2</h3><p>Der Faden läuft weiter. Dieser Bereich der Welt öffnet sich mit dem Erscheinen.</p></div>
         <div><h3>Band 3</h3><p>Noch nicht begehbar.</p></div>
       </div></section>
-      <footer>Manuel &amp; Uwe · Die Welt der drei Bände · Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.</footer>`
+      <footer>Trendonix · Manuel &amp; Uwe · Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.</footer>`
   };
 
   function ringeHtml(s) {

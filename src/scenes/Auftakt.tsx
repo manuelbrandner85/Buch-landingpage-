@@ -5,10 +5,10 @@ import { Quelle } from '@/ui/Quelle';
 
 /** Kapitelauftakt mit dem schwarzen Band aus dem Buch. */
 export function Auftakt({ szene }: { szene: Szene }) {
-  const kapitel = kapitelNach(szene.kapitelId);
+  const kapitel = kapitelNach(szene.kapitelId, szene.bandId);
   return (
     <section id={szene.id} className="szene" data-abschnitt={szene.id}
-      data-kapitel={szene.kapitelId} style={{ '--hoehe': szene.hoehe ?? 150 } as React.CSSProperties}>
+      data-kapitel={szene.kapitelId} data-band={szene.bandId} style={{ '--hoehe': szene.hoehe ?? 150 } as React.CSSProperties}>
       <div className="block">
         <div className="kapitelband">
           <div className="ziffer" aria-hidden="true">{szene.kapitelId}</div>

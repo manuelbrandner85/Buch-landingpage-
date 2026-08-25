@@ -8,11 +8,13 @@ import type { Buch, Kapitel } from '../gemeinsam/typen';
  */
 export const BUCH_BAND_2: Buch = {
   id: 'band-2',
+  reiheId: 'faeden',
   nummer: 2,
   titel: 'Glaube, Gold und Revolution',
   unterzeile: 'Vom Ende der Antike bis zum Industriezeitalter',
   status: 'erscheint',
-  amazonUrl: 'AMAZON_BAND_2_URL',
+  // Noch kein Kaufweg: Der Band ist gesetzt, aber nicht im Handel.
+  kaufwege: [],
   coverAsset: 'cover-band-2',
   seiten: 206,
   klappentext:

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { Szene } from '@/data/gemeinsam/typen';
+import type { ReiheId, Szene } from '@/data/gemeinsam/typen';
 import { useScrollKamera } from '@/camera/useScrollKamera';
 import { KinoEbene } from './KinoEbene';
 import { KinoWebGL } from './KinoWebGL';
@@ -29,7 +29,7 @@ import { FortschrittGeber } from '@/world/FortschrittKontext';
  * Die Engine kennt sieben Szenentypen und rendert alles aus Daten.
  * Eine neue Szene ist ein neuer Datensatz – keine neue Komponente.
  */
-export function SceneEngine({ szenen }: { szenen: Szene[] }) {
+export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId }) {
   const [ruhig, setRuhig] = useState(false);
   const [rueckfall, setRueckfall] = useState(false);
   // Die Kamera bewegt jetzt der Shader. GSAP bleibt für die Textauftritte.
@@ -40,7 +40,7 @@ export function SceneEngine({ szenen }: { szenen: Szene[] }) {
     <FortschrittGeber>
     <div className={ruhig ? 'welt ruhig' : 'welt'}>
       <a className="sprungmarke" href="#karte">Zur Weltkarte springen</a>
-      <Kopfzeile ruhig={ruhig} beiRuhe={() => setRuhig((r) => !r)} />
+      <Kopfzeile reihe={reihe} ruhig={ruhig} beiRuhe={() => setRuhig((r) => !r)} />
       {/* WebGL zuerst. Trägt es nicht – alter Browser, abgeschaltete
           Beschleunigung, „Bewegung reduzieren“ –, übernimmt die DOM-Fassung. */}
       {ruhig || rueckfall

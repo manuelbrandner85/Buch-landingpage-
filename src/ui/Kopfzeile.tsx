@@ -3,10 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { erzeugeAtmosphaere, type Atmosphaere } from '@/audio/atmosphaere';
 import { Zeitleiste } from './Zeitleiste';
-import { OEFFENTLICHE_BAENDE, szeneZuKapitel } from '@/world/registry';
+import type { ReiheId } from '@/data/gemeinsam/typen';
+import {
+  LEITBUCH, TRENDONIX, oeffentlicheBaendeVon, reiheNach, szeneZuKapitel,
+} from '@/world/registry';
+import { wegHaus, wegUeber } from '@/world/wege';
 
 /** Die Oberfläche bleibt unsichtbar, bis der Einstieg vorbei ist. */
-export function Kopfzeile({ ruhig, beiRuhe }: { ruhig: boolean; beiRuhe: () => void }) {
+export function Kopfzeile(
+  { reihe, ruhig, beiRuhe }: { reihe: ReiheId; ruhig: boolean; beiRuhe: () => void }) {
   const [sichtbar, setSichtbar] = useState(false);
   const [ton, setTon] = useState(false);
   const [zeit, setZeit] = useState(false);
@@ -30,16 +35,21 @@ export function Kopfzeile({ ruhig, beiRuhe }: { ruhig: boolean; beiRuhe: () => v
 
   // Ein Sprung je Band: Wer nur den zweiten Band lesen will, muss nicht durch
   // den ersten scrollen. Nicht erschienene Bände stehen hier nicht.
-  const baender = OEFFENTLICHE_BAENDE.map((b) => ({
+  const dieseReihe = reiheNach(reihe);
+  const baender = (dieseReihe ? oeffentlicheBaendeVon(dieseReihe) : []).map((b) => ({
     nummer: b.buch.nummer,
     titel: b.buch.titel,
-    ziel: szeneZuKapitel(b.kapitel[0]?.id)?.id,
+    ziel: szeneZuKapitel(b.kapitel[0]?.id, b.buch.id)?.id,
   })).filter((b) => b.ziel);
+
+  // Der Kaufweg steht in der Kopfzeile und führt direkt zum Buch – nicht zu
+  // einem Abschnitt, der davon erzählt. Gibt es keinen, führt er zur Bücherwand.
+  const kauf = LEITBUCH?.kaufwege[0];
 
   return (
     <>
       <header className={sichtbar ? 'an' : ''}>
-        <a className="marke" href="#ankunft">Die unsichtbaren Fäden</a>
+        <a className="marke" href="#ankunft">{dieseReihe?.titel ?? TRENDONIX.name}</a>
         <nav>
           <span className="baender">
             {baender.map((b) => (
@@ -50,10 +60,18 @@ export function Kopfzeile({ ruhig, beiRuhe }: { ruhig: boolean; beiRuhe: () => v
           </span>
           <a href="#karte">Welt</a>
           <button onClick={() => setZeit(true)}>Zeitleiste</button>
-          <a href="/ueber">Über</a>
+          <a href={wegHaus()}>{TRENDONIX.name}</a>
+          <a href={wegUeber()}>Über</a>
           <button onClick={tonSchalten} aria-pressed={ton}>{ton ? 'Ton an' : 'Ton aus'}</button>
           <button onClick={beiRuhe} aria-pressed={ruhig}>Ruhig</button>
-          <a className="kopf-kaufen" href="#buecher">Bücher</a>
+          {kauf
+            ? (
+              <a className="kopf-kaufen" href={kauf.url}
+                target="_blank" rel="noopener noreferrer">
+                Buch kaufen
+              </a>
+            )
+            : <a className="kopf-kaufen" href="#buecher">Bücher</a>}
         </nav>
       </header>
       {zeit && <Zeitleiste beiSchliessen={() => setZeit(false)} />}

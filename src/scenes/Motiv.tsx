@@ -11,7 +11,7 @@ import { Begriffstext } from '@/ui/Begriffstext';
 export function Motiv({ szene }: { szene: Szene }) {
   return (
     <section id={szene.id} className="szene" data-abschnitt={szene.id}
-      data-kapitel={szene.kapitelId} data-motiv="1"
+      data-kapitel={szene.kapitelId} data-band={szene.bandId} data-motiv="1"
       style={{ '--hoehe': szene.hoehe ?? 200 } as React.CSSProperties}>
       <div className="block">
         <div className="raster">

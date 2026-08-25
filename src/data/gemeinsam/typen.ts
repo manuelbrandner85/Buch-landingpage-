@@ -1,9 +1,26 @@
 /**
- * Das Weltmodell. Diese Typen gelten für alle drei Bände.
- * Neue Bände fügen Daten hinzu – niemals neue Typen.
+ * Das Weltmodell.
+ *
+ * Es beschreibt ein Haus, keine Reihe: Über den Bänden steht die `Reihe`, über
+ * den Reihen steht Trendonix. Ein neues Buch fügt Daten hinzu – niemals neue
+ * Typen. Eine neue Reihe fügt eine Reihe hinzu und wird in `world/registry.ts`
+ * eingehängt; die Engine merkt davon nichts.
  */
 
-export type BandId = 'band-1' | 'band-2' | 'band-3';
+/**
+ * Der Kurzname einer Reihe, wie er in der Adresse steht: `/faeden/kapitel/7`.
+ * Bewusst offen und nicht als Union geschlossen – sonst wäre jede neue Reihe
+ * eine Typänderung, und genau das soll sie nicht sein.
+ */
+export type ReiheId = string;
+
+/**
+ * Der Kurzname eines Bandes. Die drei Bände der Fäden heißen aus historischen
+ * Gründen `band-1` bis `band-3` – so heißen ihre Bild- und Videoordner unter
+ * `public/assets/`. Neue Reihen benennen ihre Bände nach sich selbst
+ * (`symbole-1`), damit die Ordner eindeutig bleiben.
+ */
+export type BandId = string;
 
 /** Evidenzstufen des Buches: A gesichert … G widerlegt. */
 export const EVIDENZ = ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as const;
@@ -24,9 +41,24 @@ export type SzeneTyp =
 /** Interaktive Module: Argumente, die man nur begreift, wenn man sie bedient. */
 export type InteraktionsModul = 'ringe' | 'denar' | 'laufzeit' | 'pruefung';
 
+/**
+ * Ein Weg, das Buch zu kaufen. Mehrzahl, weil ein Titel selten nur einen hat:
+ * Taschenbuch und E-Book liegen bei verschiedenen Händlern, und der Buchhandel
+ * kommt später dazu. Eine leere Liste heißt: es gibt noch nichts zu kaufen –
+ * niemals einen erfundenen Link.
+ */
+export interface Kaufweg {
+  haendler: string;
+  form: 'Taschenbuch' | 'Gebunden' | 'E-Book' | 'Hörbuch';
+  url: string;
+}
+
 export interface Buch {
   id: BandId;
-  nummer: 1 | 2 | 3;
+  /** Zu welcher Reihe der Band gehört. */
+  reiheId: ReiheId;
+  /** Die Zählung innerhalb der Reihe, nicht im Haus. */
+  nummer: number;
   titel: string;
   unterzeile?: string;
   /**
@@ -36,8 +68,8 @@ export interface Buch {
    *  · `in Arbeit`  – nicht öffentlich; der Band steht in den Daten und schweigt
    */
   status: 'erschienen' | 'erscheint' | 'in Arbeit';
-  /** Platzhalter, bis die echte Produktseite vorliegt. Niemals erfundene URLs. */
-  amazonUrl: string;
+  /** Leer, solange keine Produktseite existiert. Niemals erfundene URLs. */
+  kaufwege: Kaufweg[];
   coverAsset?: AssetId;
   klappentext: string;
   seiten?: number;
@@ -162,4 +194,28 @@ export interface Band {
   kapitel: Kapitel[];
   szenen: Szene[];
   assets: Asset[];
+}
+
+/**
+ * Eine Reihe ist eine Welt, die man betreten kann – und die Einheit, in der
+ * gezählt wird. Kapitelnummern gelten innerhalb einer Reihe, nicht darüber
+ * hinaus: Auch das erste Kapitel einer zweiten Reihe darf die Eins tragen.
+ *
+ * Was eine Reihe nicht vorschreibt, ist ihr Aufbau. Die Fäden haben eine
+ * Weltkarte, weil sie Orte haben. Eine Reihe über Zeichen hätte keine – sie
+ * hätte dann einfach keine `karte`-Szene. Szenen sind Daten; ein Aufbau, der
+ * fehlt, ist kein Sonderfall, sondern eine Zeile weniger.
+ */
+export interface Reihe {
+  id: ReiheId;
+  /** Der Reihentitel ohne Bandangabe: „Die unsichtbaren Fäden“. */
+  titel: string;
+  unterzeile?: string;
+  /** Der Satz an der Schwelle, der zum Eintreten bewegt. Aus dem Buch, nicht erfunden. */
+  einladung: string;
+  /** Die Leitfarbe der Reihe – das, was sie im Haus unterscheidbar macht. */
+  signatur: string;
+  /** Das Motiv, mit dem die Reihe im Haus auftritt. Bewegtfassung, wenn vorhanden. */
+  hausmotiv?: AssetId;
+  baende: Band[];
 }

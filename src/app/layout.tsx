@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, EB_Garamond } from 'next/font/google';
 import '@/styles/global.css';
+import { TRENDONIX } from '@/data/gemeinsam/haus';
 
 // Nur die Schnitte, die tatsächlich vorkommen. Jeder zusätzliche Schnitt ist
 // eine eigene Datei: Vorher wurden vier Schriftdateien geladen, obwohl die
@@ -14,16 +15,21 @@ const body = EB_Garamond({
   style: ['normal', 'italic'], variable: '--body', display: 'swap',
 });
 
+/**
+ * Der Rahmen gehört dem Haus, nicht einem Titel: Jede Seite ergänzt ihren
+ * eigenen Titel, und was hier steht, gilt für alle – auch für die Reihen, die
+ * noch nicht geschrieben sind.
+ */
 export const metadata: Metadata = {
-  title: 'Die unsichtbaren Fäden – Die Welt der drei Bände',
-  description:
-    'Eine begehbare Welt zum Bildband „Die unsichtbaren Fäden – Band 1: Ursprung und Ordnung“. Vom ersten Feuer bis zu den ersten Reichen.',
-  openGraph: {
-    type: 'book',
-    title: 'Die unsichtbaren Fäden – Band 1: Ursprung und Ordnung',
-    description:
-      'Sieben Millionen Jahre in einem Band – erzählt entlang der Frage, wer etwas aufschrieb und wem es nützte.',
+  title: {
+    default: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
+    template: `%s · ${TRENDONIX.name}`,
   },
+  description: TRENDONIX.arbeitsweise,
+  applicationName: TRENDONIX.name,
+  ...(process.env.NEXT_PUBLIC_BASIS_URL
+    ? { metadataBase: new URL(process.env.NEXT_PUBLIC_BASIS_URL) }
+    : {}),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

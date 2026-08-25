@@ -51,7 +51,7 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           grading: hexZuRgb(s.grading ?? '#1a2540'),
           uebergang: s.uebergang ?? 'aufloesen',
           fahrt: s.fahrt ?? 'hinein',
-          stimmung: stimmungFuer(s.kapitelId),
+          stimmung: stimmungFuer(s.kapitelId, s.bandId),
           tor: Boolean(s.tor),
         };
       }));

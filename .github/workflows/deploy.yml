@@ -37,16 +37,36 @@ jobs:
       - name: Weltdaten prüfen
         run: npm run pruefen
 
+      # Zwei Adressen, ein Bau.
+      #
+      # Ohne eigene Domain liegt die Seite in einem Unterordner von github.io –
+      # dann braucht sie einen Basispfad. Mit eigener Domain liegt sie in der
+      # Wurzel, und der Basispfad muss weg, sonst zeigt jeder Link ins Leere.
+      #
+      # Umgestellt wird das an einer Stelle: Repository → Settings → Secrets and
+      # variables → Actions → Variables → `SEITEN_DOMAIN`, z. B.
+      # `www.trendonix-buecher.de`. Ist die Variable leer, bleibt alles wie bisher.
+      # Ein Umlautname wird dort in Punycode eingetragen (siehe DOMAIN.md).
       - name: Bauen
         env:
-          # Unterpfad, unter dem GitHub Pages das Projekt ausliefert
-          NEXT_PUBLIC_BASIS_PFAD: /Buch-landingpage-
-          NEXT_PUBLIC_BASIS_URL: https://manuelbrandner85.github.io/Buch-landingpage-
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
           NEXT_EXPORT: '1'
-        run: npx next build
+        run: |
+          if [ -n "$SEITEN_DOMAIN" ]; then
+            export NEXT_PUBLIC_BASIS_PFAD=""
+            export NEXT_PUBLIC_BASIS_URL="https://$SEITEN_DOMAIN"
+          else
+            export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"
+            export NEXT_PUBLIC_BASIS_URL="https://manuelbrandner85.github.io/Buch-landingpage-"
+          fi
+          npx next build
 
-      - name: Jekyll abschalten
-        run: touch out/.nojekyll
+      - name: Jekyll abschalten und Domain hinterlegen
+        env:
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
+        run: |
+          touch out/.nojekyll
+          if [ -n "$SEITEN_DOMAIN" ]; then echo "$SEITEN_DOMAIN" > out/CNAME; fi
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -2,11 +2,18 @@ import type { Buch, Kapitel } from '../gemeinsam/typen';
 
 export const BUCH_BAND_1: Buch = {
   id: 'band-1',
+  reiheId: 'faeden',
   nummer: 1,
   titel: 'Ursprung und Ordnung',
   unterzeile: 'Von der Menschwerdung bis zu den Imperien der Antike',
   status: 'erschienen',
-  amazonUrl: 'AMAZON_BAND_1_URL',
+  // Die beiden Ausgaben bei Amazon, über ihre ASIN adressiert. Das E-Book liegt
+  // in KDP Select und ist deshalb dort exklusiv; ein Buchhandelsweg kommt erst
+  // mit der geplanten Druckausgabe dazu und wird dann hier ergänzt.
+  kaufwege: [
+    { haendler: 'Amazon', form: 'Taschenbuch', url: 'https://www.amazon.de/dp/B0HG4LPJKV' },
+    { haendler: 'Amazon', form: 'E-Book', url: 'https://www.amazon.de/dp/B0HFZFHWKK' },
+  ],
   coverAsset: 'cover',
   seiten: 206,
   klappentext:

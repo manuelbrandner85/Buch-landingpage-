@@ -11,18 +11,23 @@ import { readFileSync, existsSync } from 'node:fs';
 const lies = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '');
 const holen = (text, muster) => [...text.matchAll(muster)].map((m) => m[1]);
 
-/** Ein Band gilt als eingehängt, sobald er ein Kapitel nennt. Seitenzahl = Umfang des Bandes. */
+/**
+ * Ein Band gilt als eingehängt, sobald er ein Kapitel nennt. Seitenzahl = Umfang
+ * des Bandes. `reihe` sagt, in welcher Zählung seine Kapitelnummern gelten:
+ * innerhalb einer Reihe müssen sie eindeutig sein, über Reihen hinweg dürfen
+ * sie sich wiederholen – sonst könnte keine zweite Reihe bei Kapitel 1 anfangen.
+ */
 const BAENDE = [
-  { id: 'band-1', ordner: 'src/data/band-1', kapitelDatei: 'band.ts', seiten: 206 },
-  { id: 'band-2', ordner: 'src/data/band-2', kapitelDatei: 'band.ts', seiten: 206 },
-  { id: 'band-3', ordner: 'src/data/band-3', kapitelDatei: 'band.ts', seiten: 206 },
+  { id: 'band-1', reihe: 'faeden', ordner: 'src/data/band-1', kapitelDatei: 'band.ts', seiten: 206 },
+  { id: 'band-2', reihe: 'faeden', ordner: 'src/data/band-2', kapitelDatei: 'band.ts', seiten: 206 },
+  { id: 'band-3', reihe: 'faeden', ordner: 'src/data/band-3', kapitelDatei: 'band.ts', seiten: 206 },
 ];
 
 const orteText = lies('src/data/gemeinsam/orte.ts');
 const fehler = [];
 const warnung = [];
 const gesehen = new Set();
-const alleKapitel = new Set();
+const kapitelJeReihe = new Map();
 let assetZahl = 0;
 
 const gueltigeEvidenz = new Set(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
@@ -32,10 +37,20 @@ for (const band of BAENDE) {
   const assetText = lies(`${band.ordner}/assets.ts`);
   const kapitelText = lies(`${band.ordner}/${band.kapitelDatei}`);
 
+  // Der Band muss sich zu der Reihe bekennen, in der er hier geführt wird.
+  const genannteReihe = kapitelText.match(/reiheId: '([\w-]+)'/)?.[1];
+  if (genannteReihe && genannteReihe !== band.reihe) {
+    fehler.push(`${band.id}: steht in Reihe "${band.reihe}", nennt aber "${genannteReihe}".`);
+  }
+
   const kapitelIds = new Set(holen(kapitelText, /\{ id: (\d+), bandId/g).map(Number));
+  if (!kapitelJeReihe.has(band.reihe)) kapitelJeReihe.set(band.reihe, new Set());
+  const inReihe = kapitelJeReihe.get(band.reihe);
   for (const k of kapitelIds) {
-    if (alleKapitel.has(k)) fehler.push(`${band.id}: Kapitel ${k} ist doppelt vergeben.`);
-    alleKapitel.add(k);
+    if (inReihe.has(k)) {
+      fehler.push(`${band.id}: Kapitel ${k} ist in Reihe "${band.reihe}" doppelt vergeben.`);
+    }
+    inReihe.add(k);
   }
   if (!kapitelIds.size) { warnung.push(`${band.id} hat noch keine Kapitel.`); continue; }
 
@@ -103,7 +118,9 @@ for (const band of BAENDE) {
 
 // --- Orte: jedes Kapitel im Vorkommen muss es irgendwo in der Welt geben ---
 for (const [, name, kapitel] of orteText.matchAll(/name: '([^']+)'[\s\S]{0,400}?kapitel: (\d+)/g)) {
-  if (!alleKapitel.has(Number(kapitel))) fehler.push(`Ort "${name}": Kapitel ${kapitel} ist nicht definiert.`);
+  // Orte liegen in der Welt einer Reihe; die Kapitelnummer muss dort vorkommen.
+  const bekannt = [...kapitelJeReihe.values()].some((s) => s.has(Number(kapitel)));
+  if (!bekannt) fehler.push(`Ort "${name}": Kapitel ${kapitel} ist nicht definiert.`);
 }
 
 for (const w of warnung) console.warn(`  Hinweis: ${w}`);
@@ -113,6 +130,8 @@ if (fehler.length) {
   process.exit(1);
 }
 console.log(
-  `Weltdaten geprüft: ${gesehen.size} Szenen, ${alleKapitel.size} Kapitel, ` +
+  `Weltdaten geprüft: ${gesehen.size} Szenen, ` +
+  `${[...kapitelJeReihe.values()].reduce((n, s) => n + s.size, 0)} Kapitel in ` +
+  `${kapitelJeReihe.size} Reihe(n), ` +
   `${assetZahl} Assets – in Ordnung.`,
 );

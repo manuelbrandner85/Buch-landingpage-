@@ -1,15 +1,21 @@
-# Die unsichtbaren Fäden – Die Welt der drei Bände
+# Trendonix – das Haus und seine Welten
 
-Immersive Weltseite zum Bildband von Manuel & Uwe.
-Alle drei Bände stehen als Daten in der Welt. **Band 1 und Band 2** sind
-begehbar – als **ein** Durchgang, mit Motiven, Tiefenkarten und Kamerafahrten.
-**Band 3** ist mit Kapiteln, Auftakten und Kapitelbilanzen vollständig
-eingehängt, aber nicht öffentlich.
+Autorenseite von Trendonix (Manuel & Uwe) mit den begehbaren Welten zu den
+Büchern. Die erste Reihe ist **„Die unsichtbaren Fäden“**: drei Bände, von denen
+Band 1 und Band 2 begehbar sind – als **ein** Durchgang, mit Motiven,
+Tiefenkarten und Kamerafahrten. **Band 3** ist mit Kapiteln, Auftakten und
+Kapitelbilanzen vollständig eingehängt, aber nicht öffentlich.
+
+Über den Bänden steht seit dem Umbau auf das Haus eine **Reihe**, und über den
+Reihen Trendonix. Das ist keine Kosmetik, sondern die Voraussetzung dafür, dass
+ein Buch über ein ganz anderes Thema hier einziehen kann, ohne dass die Fäden
+umgebaut werden – siehe „Das Haus“.
 
 Was öffentlich sichtbar ist, entscheidet **nicht** das Vorhandensein von Daten,
 sondern `status` in `data/<band>/band.ts` – siehe „Die drei Bände“.
 
 **Live:** https://manuelbrandner85.github.io/Buch-landingpage-/
+**Eigene Domain:** vorbereitet, aber noch nicht geschaltet – siehe `DOMAIN.md`.
 
 ## Veröffentlichen
 
@@ -261,18 +267,48 @@ Drei Ursachen steckten dahinter:
 
 ```
 src/
-  world/registry.ts     Die Welt = Summe der Bände. Neue Bände nur hier einhängen.
+  world/registry.ts     Das Haus = Summe der Reihen. Neue Reihen nur hier einhängen.
+  world/wege.ts         Alle Adressen an einer Stelle (Basispfad inbegriffen)
   engine/               Scene Engine, Kinoebene, Cover-Geometrie
   scenes/               Die sieben Szenentypen als Komponenten
   camera/               Scrollkamera (GSAP/ScrollTrigger) und Faden
   animation/ audio/     Partikel und erzeugte Atmosphäre
   ui/                   Kopfzeile, Evidenzregler, Zeitleiste, Kapitelmarke
   data/
+    gemeinsam/haus.ts   Trendonix: Name, Versprechen, Arbeitsweise
     gemeinsam/          Typen, Orte, Zeitleiste – bandübergreifend
+    faeden.ts           Die Reihe: hängt Band 1–3 zu einer Welt zusammen
     band-1/             Kapitel 1–6, Szenen, Assets
     band-2/             Kapitel 7–11, Auftakte und Bilanzen
     band-3/             Kapitel 12–16, Auftakte und Bilanzen
+  app/
+    page.tsx            Das Haus: aktuelles Buch, Welten, Regal
+    [reihe]/            Die begehbare Welt einer Reihe samt Kapiteln und Orten
+    buch/[id]/          Die Buchseite – für Suchmaschinen und zum Weiterschicken
+    welt/               Die alten Adressen, die auf die neuen weiterzeigen
 ```
+
+## Das Haus
+
+Über `Band` steht `Reihe`, über `Reihe` steht Trendonix. Drei Dinge folgen daraus:
+
+- **Kapitelnummern gelten innerhalb einer Reihe.** Die Fäden zählen über ihre drei
+  Bände von 1 bis 16 durch; die nächste Reihe fängt wieder bei 1 an. Deshalb nehmen
+  `kapitelNach`, `szeneZuKapitel` und `stimmungFuer` die `bandId` entgegen, und die
+  Datenprüfung sucht Doppelungen nur noch innerhalb einer Reihe.
+- **Die Adresse trägt die Reihe:** `/faeden/kapitel/7`. Die alten `/welt/…`-Adressen
+  bleiben als Weiterleitung stehen (`refresh` plus `canonical`, weil ein statischer
+  Export keinen Server hat, der umleiten könnte).
+- **Die Startseite ist nicht mehr die Welt, sondern der Vorraum.** Wer von einem
+  kurzen Video kommt, sieht zuerst das Buch, das es zu kaufen gibt, den Kaufweg
+  daneben und die Tür in seine Welt darunter. Die Welt selbst liegt einen Klick
+  weiter unter `/faeden/` – unverändert, mit der ganzen Kinoebene.
+
+**Eine neue Reihe anlegen:** eine Datei unter `src/data/` nach dem Muster von
+`faeden.ts`, dort die Bände einhängen, und die Reihe in `world/registry.ts` in
+`REIHEN` aufnehmen. Kopfzeile, Sitemap, Weltenwahl und Kapitelseiten ziehen
+automatisch nach. Eine Reihe ohne Weltkarte hat einfach keine `karte`-Szene –
+das ist kein Sonderfall, sondern eine Zeile weniger.
 
 ## Die drei Regeln dieses Projekts
 
@@ -284,6 +320,13 @@ src/
 3. **Orte gehören der Welt, nicht dem Band.** `data/gemeinsam/orte.ts` sammelt alle
    Vorkommen über alle Bände. Ein Ort aus Band 1, der in Band 2 wiederkehrt,
    bekommt dort nur einen weiteren Eintrag in `vorkommen` – kein zweites Asset.
+
+Seit dem Umbau auf das Haus kommt eine vierte hinzu, die dieselbe Haltung auf die
+Marke anwendet:
+
+4. **Angekündigt wird, was zu haben ist.** Kein Titel, keine Reihe und kein Thema
+   erscheint auf der Seite, bevor es erscheint – auch nicht angedeutet. Das
+   Versprechen des Hauses ist eine Haltung, keine Vorschau.
 
 ## Die drei Welten
 
@@ -395,7 +438,7 @@ ein, ohne dass die Dramaturgie angefasst werden muss.
    sucht die Kinoebene die Datei unter Band 1
 4. Den Szenen `platte` geben; `motion` kommt dazu, sobald Bewegtfassungen da sind
 5. In `src/data/gemeinsam/orte.ts` bei wiederkehrenden Orten `vorkommen` ergänzen
-6. `amazonUrl` eintragen, sobald die Produktseite vorliegt
+6. `kaufwege` eintragen, sobald die Produktseite vorliegt
 
 Kein Eingriff in `engine/`, `scenes/` oder `camera/`.
 
@@ -422,11 +465,22 @@ Belege zu behaupten.
   Platzhaltern in Großbuchstaben. **Vor dem Livegang ausfüllen und rechtlich prüfen
   lassen.** Erfundene Angaben wären hier besonders schädlich.
 
-## Amazon
+## Kaufwege
 
-`AMAZON_BAND_1_URL`, `AMAZON_BAND_2_URL`, `AMAZON_BAND_3_URL` sind Platzhalter in
-`src/data/<band>/band.ts`. Sobald die Produktseiten vorliegen, werden nur diese
-Werte ersetzt. Es gibt keine eigene Zahlungsabwicklung.
+`buch.kaufwege` in `src/data/<band>/band.ts` ist eine Liste, keine einzelne URL:
+Ein Titel liegt selten nur in einer Ausgabe, und der Buchhandel kommt später dazu.
+Der erste Eintrag trägt den Knopf, weitere stehen als schmale Zeile darunter.
+
+```ts
+kaufwege: [
+  { haendler: 'Amazon', form: 'Taschenbuch', url: 'https://www.amazon.de/dp/…' },
+  { haendler: 'Amazon', form: 'E-Book',      url: 'https://www.amazon.de/dp/…' },
+],
+```
+
+Eine **leere Liste** ist der einzige Platzhalter: Dann steht „Produktseite folgt“
+statt eines Links. Erfundene Adressen gibt es hier nicht. Es gibt keine eigene
+Zahlungsabwicklung; der Kaufweg öffnet den Händler in einem neuen Tab.
 
 ## Interaktive Module
 
@@ -510,8 +564,6 @@ und nichts freizuschalten.
 
 ## Offen
 
-- **Band 2: Bewegtfassung.** Die zwölf Motive sind Standbilder mit Tiefenkarte;
-  `motion` fehlt noch. Bis dahin steht das Bild – die Fahrt trägt es.
 - **Band 2: Orte.** `data/gemeinsam/orte.ts` kennt bisher nur Band 1. Die Karte
   zeigt deshalb keine Punkte aus Band 2; das steht so auch auf der Kartenszene.
 - **Band 3: Motive für die Website.** Der Band ist mit Kapiteln, Auftakten und
@@ -519,7 +571,13 @@ und nichts freizuschalten.
 - **Band 3, Kapitel 14 und 15:** im Seitenplan verbindlich, im Satz noch offen –
   deshalb Auftakt ohne Bilanz.
 - **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
-- **`amazonUrl` für Band 2 und Band 3** – weiterhin Platzhalter.
+- **Kaufwege für Band 2 und Band 3** – leer, weil es sie noch nicht gibt.
+- **Die Leseprobe fehlt.** Der Kanal, der Buch 1 mit Buch 4 verbindet, ist eine
+  E-Mail-Liste: Kapitel 1 gegen eine Adresse. Ohne sie fängt jeder neue Titel bei
+  null an. Braucht einen Anbieter und eine Datenschutzerklärung – beides offen.
+- **Die eigene Domain** ist vorbereitet, aber nicht geschaltet: `DOMAIN.md`.
+- **Das Impressum** trägt weiterhin Platzhalter in Großbuchstaben und ist
+  öffentlich erreichbar.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Originalrenderings statt PDF-Ausschnitte (Druck-PDF: eine flache Ebene je Seite)
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion

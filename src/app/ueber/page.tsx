@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { WELT } from '@/world/registry';
+import { LEITREIHE, TRENDONIX, WELT } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
+import { wegBegriffe, wegHaus, wegImpressum } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
 
 export const metadata: Metadata = {
-  title: 'Über das Projekt – Die unsichtbaren Fäden',
+  title: 'Über das Projekt – Trendonix',
   description:
     'Wie diese Welt entstanden ist: Bildherkunft, Evidenzstufen, Kartengrundlagen und was die Seite über ihre Besucher speichert.',
 };
@@ -15,17 +16,29 @@ export const metadata: Metadata = {
  * Website leisten, die über ihre eigenen Grundlagen schweigt.
  */
 export default function UeberSeite() {
-  const band1 = WELT['band-1'];
-  const motive = band1.assets.length;
+  const motive = WELT['band-1']?.assets.length ?? 0;
 
   return (
     <main className="lesefassung">
-      <Rueckweg />
+      <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
       <p className="eyebrow">Über das Projekt</p>
       <h1>Wie diese Welt gemacht ist</h1>
       <p className="unterzeile">
         Was hier steht, steht im Buch. Was hier bewegt wird, ist Inszenierung.
       </p>
+
+      <article>
+        <h2>Wer {TRENDONIX.name} ist</h2>
+        <p>
+          {TRENDONIX.name} ist der Name, unter dem diese Bücher erscheinen; geschrieben
+          werden sie von {TRENDONIX.autoren.join(' und ')}. {TRENDONIX.arbeitsweise}
+        </p>
+        <p>
+          Was das Haus bisher führt, steht auf der Startseite. Was noch nicht erschienen
+          ist, steht dort nicht – auch nicht angedeutet. Ein Band wird angekündigt, wenn
+          er zu haben ist, nicht früher.
+        </p>
+      </article>
 
       <article>
         <h2>Die Motive</h2>
@@ -74,6 +87,8 @@ export default function UeberSeite() {
         <p>
           Die Bücher werden über Amazon verkauft. Diese Seite wickelt keine Zahlungen ab
           und erhebt dafür keine Daten; der Kauflink öffnet sich in einem neuen Tab.
+          Steht kein Kaufweg dabei, gibt es noch keinen – eine Adresse, die es nicht
+          gibt, wird hier nicht erfunden.
         </p>
       </article>
 
@@ -91,7 +106,11 @@ export default function UeberSeite() {
       <p className="quelle">
         <b>Bildnachweis</b>Alle Angaben folgen dem Bildnachweis des Bandes, Seite 201.
       </p>
-      <nav className="fusszeile"><a href="/welt/begriffe">Begriffe</a>  <a href="/impressum">Impressum und Datenschutz</a>  <a href="/">Zurück in die Welt</a></nav>
+      <nav className="fusszeile">
+        <a href={wegBegriffe(LEITREIHE.id)}>Begriffe</a>
+        <a href={wegImpressum()}>Impressum und Datenschutz</a>
+        <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>
+      </nav>
     </main>
   );
 }

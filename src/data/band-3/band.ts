@@ -12,11 +12,12 @@ import type { Buch, Kapitel } from '../gemeinsam/typen';
  */
 export const BUCH_BAND_3: Buch = {
   id: 'band-3',
+  reiheId: 'faeden',
   nummer: 3,
   titel: 'Krieg, Ordnung und Netz',
   unterzeile: 'Vom Weltkrieg bis zur vernetzten Gegenwart',
   status: 'in Arbeit',
-  amazonUrl: 'AMAZON_BAND_3_URL',
+  kaufwege: [],
   seiten: 206,
   klappentext:
     'Am Anfang steht ein Schützengraben, in dem die Ordnung der Fabrik auf den Krieg trifft. Am Ende steht ein Rechenzentrum, dessen Betreiber Regeln setzt, ohne gewählt zu sein. Dazwischen liegen drei Anläufe, die Welt zu ordnen – Verträge, Blöcke, Märkte. Jeder hat gehalten, bis der nächste ihn ablöste.',

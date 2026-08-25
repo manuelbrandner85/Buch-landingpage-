@@ -32,14 +32,14 @@ export function Weltkarte({ szene }: { szene: Szene }) {
   for (let b = -30; b <= 50; b += 20) netz.push(`M 0 ${y(b)} L ${W} ${y(b)}`);
 
   // Ein Ort gilt als besucht, wenn eine Szene seines Kapitels gesehen wurde.
-  const besucht = (kapitel?: number) => {
-    const szene = szeneZuKapitel(kapitel);
+  const besucht = (kapitel?: number, bandId?: string) => {
+    const szene = szeneZuKapitel(kapitel, bandId);
     return Boolean(szene && fortschritt?.kennt(szene.id));
   };
 
   const ort = ORTE.find((o) => o.id === gewaehlt);
-  const sprung = szeneZuKapitel(ort?.vorkommen[0]?.kapitel);
-  const kapitel = kapitelNach(ort?.vorkommen[0]?.kapitel);
+  const sprung = szeneZuKapitel(ort?.vorkommen[0]?.kapitel, ort?.vorkommen[0]?.bandId);
+  const kapitel = kapitelNach(ort?.vorkommen[0]?.kapitel, ort?.vorkommen[0]?.bandId);
 
   return (
     <section id={szene.id} className="karte">
@@ -59,7 +59,7 @@ export function Weltkarte({ szene }: { szene: Szene }) {
                 if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setGewaehlt(o.id); }
               }}>
               <circle cx={x(o.lon)} cy={y(o.lat)} r={3.4}
-                className={besucht(o.vorkommen[0]?.kapitel) ? 'besucht' : undefined} />
+                className={besucht(o.vorkommen[0]?.kapitel, o.vorkommen[0]?.bandId) ? 'besucht' : undefined} />
               <text x={x(o.lon) + 8} y={y(o.lat) + 4}>{o.name}</text>
             </g>
           ))}
