@@ -16,6 +16,13 @@ import { writeFileSync } from 'node:fs';
 
 const inhalt = `# Erzeugt von scripts/htaccess.mjs – nicht von Hand ändern.
 
+# Die eigene Startseite zuerst.
+#
+# Auf dem Webspace lag eine Platzhalterseite als index.htm. Apache nimmt, was
+# in DirectoryIndex zuerst steht – und das war dort die Platzhalterdatei. Die
+# hochgeladene Seite lag daneben und wurde nie ausgeliefert.
+DirectoryIndex index.html index.htm index.php
+
 # Die eigene Fehlerseite statt der des Servers.
 ErrorDocument 404 /404.html
 

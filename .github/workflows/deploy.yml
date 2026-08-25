@@ -172,13 +172,15 @@ jobs:
         run: node scripts/htaccess.mjs
 
       - name: Hochladen
-        if: steps.zugang.outputs.da == 'ja'
         env:
           FTP_ZUGANG: ${{ secrets.FTP_ZUGANG }}
           FTP_ZIEL: ${{ vars.FTP_ZIEL }}
           FTP_LOESCHEN: ${{ vars.FTP_LOESCHEN }}
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
         run: |
-          set +x
+          set -eu +x
+          DOMAIN="${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
+
           # benutzer:kennwort@server[/verzeichnis] auseinandernehmen.
           # Der Benutzer steht vor dem ersten Doppelpunkt, der Server hinter
           # dem letzten Klammeraffen – so darf das Kennwort selbst einen
@@ -188,33 +190,98 @@ jobs:
           HOST_TEIL="${REST##*@}"
           KENNWORT="${REST%@*}"
           case "$HOST_TEIL" in
-            */*) SERVER="${HOST_TEIL%%/*}"; ZIEL="/${HOST_TEIL#*/}" ;;
-            *)   SERVER="$HOST_TEIL";       ZIEL="" ;;
+            */*) SERVER="${HOST_TEIL%%/*}"; VORGABE="/${HOST_TEIL#*/}" ;;
+            *)   SERVER="$HOST_TEIL";       VORGABE="" ;;
           esac
-          # Steht im Zugang kein Verzeichnis, gilt die Variable FTP_ZIEL, und
-          # sonst der Stammordner der Domain beim Anbieter.
-          #
-          # Der erste Versuch lief nach / – dort landet der FTP-Zugang, aber der
-          # Dokumentenstamm der Domain liegt eine Ebene tiefer. Der Upload war
-          # fehlerfrei und trotzdem unsichtbar: 185 MB neben der Tür.
-          ZIEL="${ZIEL:-${FTP_ZIEL:-/trendonix-buecher.de}}"
           if [ -z "$BENUTZER" ] || [ -z "$KENNWORT" ] || [ -z "$SERVER" ]; then
             echo "::error title=FTP_ZUGANG unlesbar::Erwartet wird benutzer:kennwort@server"
             exit 1
           fi
-          echo "Ziel: $SERVER$ZIEL"
+
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+          lftp_tun() {
+            lftp -c "
+              set ftp:ssl-force true;
+              set ftp:ssl-protect-data true;
+              set ssl:verify-certificate no;
+              set net:max-retries 2;
+              set net:timeout 20;
+              set cmd:fail-exit true;
+              open -u \"$BENUTZER\",\"$KENNWORT\" \"$SERVER\";
+              $1
+            "
+          }
+
+          # ── Wohin? ────────────────────────────────────────────────────────
+          #
+          # Zweimal lief der Upload fehlerfrei durch und war trotzdem
+          # unsichtbar: Der FTP-Zugang landet woanders als der Dokumentenstamm
+          # der Domain. Ein grüner Haken beim Hochladen sagt nur, dass die
+          # Dateien angekommen sind – nicht, dass sie am richtigen Ort liegen.
+          #
+          # Deshalb wird das Ziel nicht geraten, sondern nachgewiesen: eine
+          # winzige Datei mit einer Kennung hochladen und über die Domain
+          # wieder abrufen. Wo sie auftaucht, ist der Dokumentenstamm.
+          OHNE_WWW="${DOMAIN#www.}"
+          if [ -n "$VORGABE" ]; then KANDIDATEN="$VORGABE"
+          elif [ -n "${FTP_ZIEL:-}" ]; then KANDIDATEN="$FTP_ZIEL"
+          else
+            # Das Konto steckt im Servernamen: w021fb9a.kasserver.com → w021fb9a.
+            KONTO="${SERVER%%.*}"
+            KANDIDATEN="/$OHNE_WWW / /$DOMAIN /htdocs /htdocs/$OHNE_WWW"
+            KANDIDATEN="$KANDIDATEN /$KONTO/$OHNE_WWW /www/htdocs/$KONTO/$OHNE_WWW"
+          fi
+
+          MARKE="probe-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          printf '%s\n' "$MARKE" > /tmp/_probe.txt
+          ZIEL=""
+          for K in $KANDIDATEN; do
+            echo "Prüfe $K"
+            if ! lftp_tun "put -O \"$K\" /tmp/_probe.txt -o _probe.txt;" 2>/dev/null; then
+              echo "  nicht beschreibbar"
+              continue
+            fi
+            sleep 2
+            if curl -fsS --max-time 25 "https://$DOMAIN/_probe.txt" 2>/dev/null | grep -qx "$MARKE"; then
+              ZIEL="$K"
+              echo "  das ist der Dokumentenstamm"
+              break
+            fi
+            echo "  beschreibbar, aber nicht unter der Domain sichtbar"
+          done
+
+          if [ -z "$ZIEL" ]; then
+            echo "::error title=Kein Dokumentenstamm gefunden::Beschrieben und über https://$DOMAIN/_probe.txt geprüft wurde: $KANDIDATEN"
+            exit 1
+          fi
+          echo "Ziel: $SERVER$ZIEL"
+
           # Gelöscht wird nur auf ausdrückliche Ansage. Wer im Zielverzeichnis
           # noch etwas anderes liegen hat, verlöre es sonst mit dem ersten Mal.
-          if [ "$FTP_LOESCHEN" = "ja" ]; then LOESCHEN="--delete"; else LOESCHEN=""; fi
-          lftp -c "
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate no;
-            set net:max-retries 3;
-            set net:timeout 20;
-            set cmd:fail-exit true;
-            open -u \"$BENUTZER\",\"$KENNWORT\" \"$SERVER\";
-            mirror -R --parallel=4 --no-perms --ignore-time $LOESCHEN out/ \"$ZIEL\";
-          "
-          echo "Hochgeladen."
+          if [ "${FTP_LOESCHEN:-}" = "ja" ]; then LOESCHEN="--delete"; else LOESCHEN=""; fi
+          lftp_tun "mirror -R --parallel=4 --no-perms --ignore-time $LOESCHEN out/ \"$ZIEL\";"
+          echo "Hochgeladen nach $ZIEL"
+
+      # Der eigentliche Beweis. Alles davor kann grün sein, ohne dass jemand
+      # die Seite sehen kann.
+      - name: Steht die Seite?
+        if: steps.zugang.outputs.da == 'ja'
+        env:
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
+        run: |
+          DOMAIN="${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
+          sleep 5
+          FEHLER=0
+          for W in "/" "/robots.txt" "/faeden/" "/buch/band-1/"; do
+            if curl -fsS --max-time 30 "https://$DOMAIN$W" | grep -q "Trendonix\|User-Agent"; then
+              echo "  ok   $W"
+            else
+              echo "  FEHLT $W"; FEHLER=1
+            fi
+          done
+          if [ "$FEHLER" = "1" ]; then
+            echo "::error title=Seite nicht erreichbar::Der Upload lief durch, aber https://$DOMAIN liefert nicht die neue Seite."
+            exit 1
+          fi
+          echo "https://$DOMAIN steht."

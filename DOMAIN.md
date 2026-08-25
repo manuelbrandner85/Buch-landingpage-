@@ -56,19 +56,33 @@ Zwei Dinge sind freiwillig, beide als **Variables**:
 | `FTP_ZIEL` | anderer Zielordner als `/trendonix-buecher.de` |
 | `FTP_LOESCHEN` | `ja` – räumt im Zielverzeichnis auf. **Nur** setzen, wenn dort ausschließlich diese Seite liegt |
 
-### Das Zielverzeichnis
+### Das Zielverzeichnis findet der Bau selbst
 
-Der FTP-Zugang landet im Wurzelverzeichnis des Webspace – der Dokumentenstamm
-der Domain liegt eine Ebene tiefer. In der Anbieterverwaltung steht er unter
-*Domain → Stammverzeichnis*, hier `/www/htdocs/w021fb9a/trendonix-buecher.de/`;
-vom FTP-Zugang aus gesehen ist das `/trendonix-buecher.de`. Genau das ist die
-Vorgabe im Auftrag.
+Zweimal lief der Upload fehlerfrei durch und war trotzdem unsichtbar: Der
+FTP-Zugang landet woanders als der Dokumentenstamm der Domain. **Ein grüner
+Haken beim Hochladen sagt nur, dass die Dateien angekommen sind – nicht, dass
+sie am richtigen Ort liegen.**
 
-Das ist der Fehler, der beim ersten Mal passiert ist: Der Upload lief
-fehlerfrei durch und war trotzdem unsichtbar – 185 MB neben der Tür. Ein
-grüner Haken beim Hochladen heißt nur, dass die Dateien angekommen sind, nicht
-dass sie am richtigen Ort liegen. Deshalb wird nach jeder Veröffentlichung die
-Startseite selbst abgerufen.
+Deshalb wird das Ziel nicht mehr geraten, sondern nachgewiesen: Der Auftrag legt
+eine winzige Datei mit einer einmaligen Kennung in jedes in Frage kommende
+Verzeichnis und ruft sie über die Domain wieder ab. Wo sie auftaucht, ist der
+Dokumentenstamm. Erst dann wird die Seite dorthin gespiegelt.
+
+Geprüft werden der Reihe nach `/<domain>`, `/`, `/htdocs`, `/htdocs/<domain>`,
+`/<konto>/<domain>` und `/www/htdocs/<konto>/<domain>`. Wer den Weg kennt, kann
+ihn über die Variable `FTP_ZIEL` oder hinten am Zugang vorgeben; dann wird nur
+dieser eine geprüft.
+
+Und danach fragt der Bau die Seite selbst ab – Startseite, `robots.txt`, eine
+Bandwelt, eine Buchseite. Kommt dort nicht die neue Seite zurück, endet der
+Auftrag rot. Lieber ein rotes Kreuz mit Grund als ein grüner Haken ohne Wirkung.
+
+### Die Platzhalterdatei
+
+Auf dem Webspace lag eine Platzhalterseite als `index.htm`. Apache liefert aus,
+was in `DirectoryIndex` zuerst steht – und das war die Platzhalterdatei. Die
+hochgeladene `index.html` lag daneben und wurde nie ausgeliefert. Die
+mitgelieferte `.htaccess` stellt `index.html` deshalb an die erste Stelle.
 
 ### Einmalig beim Anbieter
 
