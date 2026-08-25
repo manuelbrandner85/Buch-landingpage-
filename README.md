@@ -1,7 +1,6 @@
 # Trendonix – das Haus und seine Welten
 
-Autorenseite von Trendonix (Manuel & Uwe) mit den begehbaren Welten zu den
-Büchern. Die erste Reihe ist **„Die unsichtbaren Fäden“**: drei Bände, von denen
+Autorenseite von Trendonix mit den begehbaren Welten zu den Büchern. Die erste Reihe ist **„Die Unsichtbaren Fäden“**: drei Bände, von denen
 Band 1 und Band 2 begehbar sind – als **ein** Durchgang, mit Motiven,
 Tiefenkarten und Kamerafahrten. **Band 3** ist mit Kapiteln, Auftakten und
 Kapitelbilanzen vollständig eingehängt, aber nicht öffentlich.
@@ -270,7 +269,7 @@ src/
   world/registry.ts     Das Haus = Summe der Reihen. Neue Reihen nur hier einhängen.
   world/wege.ts         Alle Adressen an einer Stelle (Basispfad inbegriffen)
   engine/               Scene Engine, Kinoebene, Cover-Geometrie
-  scenes/               Die sieben Szenentypen als Komponenten
+  scenes/               Die sechs Szenentypen als Komponenten
   camera/               Scrollkamera (GSAP/ScrollTrigger) und Faden
   animation/ audio/     Partikel und erzeugte Atmosphäre
   ui/                   Kopfzeile, Evidenzregler, Zeitleiste, Kapitelmarke
@@ -316,7 +315,7 @@ das ist kein Sonderfall, sondern eine Zeile weniger.
    Evidenzstufen stammen aus dem Band. Die Herkunftsbadges entsprechen dem
    Bildnachweis (S. 201): kein Motiv ist eine historische Fotografie.
 2. **Szenen sind Daten.** Eine neue Szene ist ein Eintrag in `data/<band>/szenen.ts`.
-   Die Engine kennt sieben Typen und braucht dafür keine neue Logik.
+   Die Engine kennt sechs Typen und braucht dafür keine neue Logik.
 3. **Orte gehören der Welt, nicht dem Band.** `data/gemeinsam/orte.ts` sammelt alle
    Vorkommen über alle Bände. Ein Ort aus Band 1, der in Band 2 wiederkehrt,
    bekommt dort nur einen weiteren Eintrag in `vorkommen` – kein zweites Asset.

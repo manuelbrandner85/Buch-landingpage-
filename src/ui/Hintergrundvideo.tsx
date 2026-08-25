@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Bewegter Grund hinter dem Empfang.
@@ -15,6 +15,8 @@ export function Hintergrundvideo(
   { bild, video, videoKlein, alt }:
   { bild: string; video?: string; videoKlein?: string; alt: string }) {
   const [quelle, setQuelle] = useState<string | null>(null);
+  const huelle = useRef<HTMLDivElement>(null);
+  const film = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!video) return;
@@ -27,12 +29,43 @@ export function Hintergrundvideo(
     return () => ruhig.removeEventListener('change', waehlen);
   }, [video, videoKlein]);
 
+  /**
+   * Ein Video, das niemand sieht, läuft nicht.
+   *
+   * Der Empfang ist nur der obere Bildschirm der Seite. Wer weiterscrollt,
+   * hätte darunter weiter ein Video dekodiert – auf dem Telefon Akku und Wärme
+   * für ein Bild, das längst aus dem Blick ist. Dasselbe gilt für den Tab im
+   * Hintergrund: Der Browser hält dort nur das Zeichnen an, nicht das Dekodieren.
+   */
+  useEffect(() => {
+    if (!quelle) return;
+    const el = huelle.current;
+    if (!el) return;
+    let sichtbar = true;
+    const richten = () => {
+      const v = film.current;
+      if (!v) return;
+      if (sichtbar && !document.hidden) { v.play().catch(() => undefined); }
+      else v.pause();
+    };
+    const beobachter = new IntersectionObserver(([e]) => {
+      sichtbar = Boolean(e?.isIntersecting); richten();
+    }, { threshold: 0.05 });
+    beobachter.observe(el);
+    document.addEventListener('visibilitychange', richten);
+    return () => {
+      beobachter.disconnect();
+      document.removeEventListener('visibilitychange', richten);
+    };
+  }, [quelle]);
+
   return (
-    <div className="grund" aria-hidden="true">
+    <div className="grund" aria-hidden="true" ref={huelle}>
       <img src={bild} alt={alt} decoding="async" fetchPriority="high" />
       {quelle && (
-        <video key={quelle} src={quelle} poster={bild}
-          autoPlay muted loop playsInline preload="auto" />
+        <video ref={film} key={quelle} src={quelle} poster={bild}
+          autoPlay muted loop playsInline preload="auto"
+          disablePictureInPicture />
       )}
       <span className="schleier" />
     </div>

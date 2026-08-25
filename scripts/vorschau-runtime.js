@@ -59,7 +59,7 @@
         : `<p class="hinweis">Scrollen</p>`}</section>`,
 
     cover: s => `<section id="${s.id}" class="szene" data-abschnitt="${s.id}"
-        style="--hoehe:${s.hoehe || 180}"><h1 class="nur-lesen">Die unsichtbaren Fäden – Band 1: ${esc(W.buch.titel)}</h1></section>`,
+        style="--hoehe:${s.hoehe || 180}"><h1 class="nur-lesen">Die Unsichtbaren Fäden – Band 1: ${esc(W.buch.titel)}</h1></section>`,
 
     auftakt: s => `<section id="${s.id}" class="szene" data-abschnitt="${s.id}" data-kapitel="${s.kapitelId}"
         style="--hoehe:${s.hoehe || 150}"><div class="block"><div class="kapitelband">
@@ -114,7 +114,7 @@
         <div><h3>Band 2</h3><p>Der Faden läuft weiter. Dieser Bereich der Welt öffnet sich mit dem Erscheinen.</p></div>
         <div><h3>Band 3</h3><p>Noch nicht begehbar.</p></div>
       </div></section>
-      <footer>Trendonix · Manuel &amp; Uwe · Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.</footer>`
+      <footer>Trendonix · Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.</footer>`
   };
 
   function ringeHtml(s) {
@@ -188,7 +188,7 @@
   /* ---------- Aufbau ---------- */
   document.body.insertAdjacentHTML('beforeend', `
     <a class="sprungmarke" href="#karte">Zur Weltkarte springen</a>
-    <header id="kopf"><a class="marke" href="#ankunft">Die unsichtbaren Fäden</a>
+    <header id="kopf"><a class="marke" href="#ankunft">Die Unsichtbaren Fäden</a>
       <nav><a href="#karte">Welt</a><button id="btn-zeit">Zeitleiste</button>
         <a href="#buecher">Bücher</a>
         <button id="btn-ton" aria-pressed="false">Ton aus</button>

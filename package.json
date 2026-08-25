@@ -11,13 +11,14 @@
     "typecheck": "tsc --noEmit",
     "assets": "node scripts/assets.mjs",
     "pruefen": "node scripts/pruefe-welt.mjs",
-    "prebuild": "node scripts/pruefe-welt.mjs",
+    "prebuild": "node scripts/pruefe-welt.mjs && node scripts/pruefe-bewegtbild.mjs",
     "vorschau": "node scripts/vorschau.mjs",
     "abzug": "node scripts/abzug.mjs",
     "pruefe:a11y": "node scripts/pruefe-a11y.mjs",
     "tiefen": "node scripts/tiefenkarten.mjs",
     "tiefenkarten": "node scripts/tiefenkarten.mjs",
-    "export": "NEXT_EXPORT=1 next build"
+    "export": "NEXT_EXPORT=1 next build",
+    "pruefe:video": "node scripts/pruefe-bewegtbild.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.5",

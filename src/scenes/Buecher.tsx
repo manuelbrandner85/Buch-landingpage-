@@ -124,9 +124,12 @@ export function Buecher({ szene }: { szene?: Szene }) {
       </section>
       {!amAnfang && (
         <footer>
-          <a href={`${BASIS_PFAD}/`}>{TRENDONIX.name}</a> · {TRENDONIX.versprechen}
-          {' '}· <a href={`${BASIS_PFAD}/ueber`}>Über</a>
-          {' '}· <a href={`${BASIS_PFAD}/impressum`}>Impressum</a>
+          <a href={`${BASIS_PFAD}/`} aria-label={TRENDONIX.name}>
+            <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
+              alt="" width={120} height={80} loading="lazy" decoding="async" />
+          </a>
+          <a href={`${BASIS_PFAD}/ueber`}>Über</a>
+          {' · '}<a href={`${BASIS_PFAD}/impressum`}>Impressum</a>
           <span className="feinschrift">
             Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.
           </span>

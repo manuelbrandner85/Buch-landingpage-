@@ -12,7 +12,7 @@ import { BAND_3, STIMMUNG_BAND_3 } from './band-3';
  */
 export const REIHE_FAEDEN: Reihe = {
   id: 'faeden',
-  titel: 'Die unsichtbaren Fäden',
+  titel: 'Die Unsichtbaren Fäden',
   unterzeile: 'Eine Geschichte der Werkzeuge, die zweierlei bewirkten',
   einladung:
     'Vom ersten geteilten Feuer bis zur zugemauerten Kammer mit fünfzigtausend '

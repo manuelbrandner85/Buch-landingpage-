@@ -34,8 +34,12 @@ export type Herkunft =
   | 'Karte auf realer Geobasis'
   | 'Eigene Darstellung';
 
+/**
+ * Sechs Typen. Ein siebter hieß `cover` und legte den abfotografierten Umschlag
+ * über die volle Fläche – überflüssig, seit der Band als Körper im Raum steht.
+ */
 export type SzeneTyp =
-  | 'ankunft' | 'cover' | 'auftakt' | 'motiv' | 'papier' | 'karte' | 'buecher'
+  | 'ankunft' | 'auftakt' | 'motiv' | 'papier' | 'karte' | 'buecher'
   | 'interaktion';
 
 /** Interaktive Module: Argumente, die man nur begreift, wenn man sie bedient. */
@@ -208,7 +212,7 @@ export interface Band {
  */
 export interface Reihe {
   id: ReiheId;
-  /** Der Reihentitel ohne Bandangabe: „Die unsichtbaren Fäden“. */
+  /** Der Reihentitel ohne Bandangabe: „Die Unsichtbaren Fäden“. */
   titel: string;
   unterzeile?: string;
   /** Der Satz an der Schwelle, der zum Eintreten bewegt. Aus dem Buch, nicht erfunden. */

@@ -7,24 +7,21 @@ import type { Szene } from '../gemeinsam/typen';
  */
 export const SZENEN_BAND_1: Szene[] = [
   {
+    // Die Schwelle.
+    //
+    // Hier stand bis zuletzt der abfotografierte Umschlag über die volle Fläche.
+    // Ein Bild eines Buches ist aber kein Buch – und der gebundene Band steht
+    // eine Szene weiter ohnehin als Körper im Raum, von allen Seiten. Was den
+    // Eintritt trägt, ist Dunkelheit, ein Lichtpunkt und der Name.
     id: 'ankunft', bandId: 'band-1', typ: 'ankunft',
+    titel: 'Die Unsichtbaren Fäden',
+    unterzeile: 'Ursprung und Ordnung',
     fliesstext: 'Vom ersten Feuer bis zu den ersten Reichen.',
   },
   {
     // Die Wahl steht vor der Reise: Wer nur einen Band will, muss ihn nicht suchen.
     // Derselbe Bauteil wie am Schluss, nur mit anderem Auftritt.
     id: 'welten', bandId: 'band-1', typ: 'buecher',
-  },
-  {
-    id: 'cover', bandId: 'band-1', typ: 'cover', platte: 'cover', hoehe: 256,
-    grading: '#1b2c52',
-    uebergang: 'glut', fahrt: 'aufsteigen', partikel: 'funken',
-    ebenen: [
-      { von: 0, bis: 46, tempo: 0.04 },
-      { von: 38, bis: 64, tempo: 0.1 },
-      { von: 56, bis: 78, tempo: 0.17 },
-      { von: 70, bis: 100, tempo: 0.26 },
-    ],
   },
   {
     id: 'kapitel-1', bandId: 'band-1', kapitelId: 1, typ: 'auftakt', tor: true,
@@ -86,7 +83,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'kapitel-2', bandId: 'band-1', kapitelId: 2, typ: 'auftakt', tor: true,
-    platte: 'kapitel-2-auftakt', buchseite: 40, hoehe: 196, grading: '#332a20',
+    platte: 'kapitel-2-auftakt', motion: 'kapitel-2-auftakt', buchseite: 40, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'schwenkRechts',
     titel: 'Saat, Besitz\nund Hierarchie',
     unterzeile: 'Wie aus Vorrat die Frage nach Eigentum wurde',
@@ -114,7 +111,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'unter-dem-boden', bandId: 'band-1', kapitelId: 2, unterkapitel: '2.4', typ: 'motiv',
-    platte: 'catalhoeyuek-innen', buchseite: 66, hoehe: 256, grading: '#3a2a1c',
+    platte: 'catalhoeyuek-innen', motion: 'catalhoeyuek-innen', buchseite: 66, hoehe: 256, grading: '#3a2a1c',
     uebergang: 'lichtschwenk', fahrt: 'absenken',
     badge: 'Freie Rekonstruktion', eyebrow: 'Stadtentstehung und soziale Schichtung',
     titel: 'Unter dem Boden',
@@ -139,7 +136,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'kapitel-3', bandId: 'band-1', kapitelId: 3, typ: 'auftakt', tor: true,
-    platte: 'kapitel-3-auftakt', buchseite: 72, hoehe: 196, grading: '#332a20',
+    platte: 'kapitel-3-auftakt', motion: 'kapitel-3-auftakt', buchseite: 72, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'aufsteigen',
     titel: 'Reiche, Glaube\nund Macht',
     unterzeile: 'Wie Herrschaft sich auf das Unprüfbare berief',
@@ -147,7 +144,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'bibliothek', bandId: 'band-1', kapitelId: 3, unterkapitel: '3.3', typ: 'motiv',
-    platte: 'bibliothek', buchseite: 91, hoehe: 270, grading: '#2f2415',
+    platte: 'bibliothek', motion: 'bibliothek', buchseite: 91, hoehe: 270, grading: '#2f2415',
     uebergang: 'lichtschwenk', fahrt: 'schwenkLinks',
     partikel: 'staub', badge: 'Freie Rekonstruktion',
     eyebrow: 'Schrift und Wissen als Machtinstrument',
@@ -173,7 +170,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'kapitel-4', bandId: 'band-1', kapitelId: 4, typ: 'auftakt', tor: true,
-    platte: 'kapitel-4-auftakt', buchseite: 99, hoehe: 196, grading: '#332a20',
+    platte: 'kapitel-4-auftakt', motion: 'kapitel-4-auftakt', buchseite: 99, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'hinein',
     titel: 'Krieg, Könige\nund Geheimbünde',
     unterzeile: 'Ein Reich ist größer als der Blick eines Menschen',
@@ -225,7 +222,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'kapitel-5', bandId: 'band-1', kapitelId: 5, typ: 'auftakt', tor: true,
-    platte: 'roemische-strasse', buchseite: 130, hoehe: 189, grading: '#3b3524',
+    platte: 'roemische-strasse', motion: 'roemische-strasse', buchseite: 130, hoehe: 189, grading: '#3b3524',
     uebergang: 'aufloesen', fahrt: 'durchfahrt',
     titel: 'Gesetz, Geld\nund Imperium',
     unterzeile: 'Wie Herrschaft unabhängig von der Person wurde',
@@ -269,7 +266,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'kapitel-6', bandId: 'band-1', kapitelId: 6, typ: 'auftakt', tor: true,
-    platte: 'kapitel-6-auftakt', buchseite: 163, hoehe: 196, grading: '#332a20',
+    platte: 'kapitel-6-auftakt', motion: 'kapitel-6-auftakt', buchseite: 163, hoehe: 196, grading: '#332a20',
     uebergang: 'aufloesen', fahrt: 'heraus',
     titel: 'Am Rand\ndes Belegten',
     unterzeile: 'Nicht die Deutung entscheidet, sondern ob sie sich prüfen lässt',
@@ -305,7 +302,7 @@ export const SZENEN_BAND_1: Szene[] = [
   },
   {
     id: 'baustelle', bandId: 'band-1', kapitelId: 6, unterkapitel: '6.3', typ: 'motiv',
-    platte: 'baustelle', buchseite: 182, hoehe: 256, grading: '#3d2412',
+    platte: 'baustelle', motion: 'baustelle', buchseite: 182, hoehe: 256, grading: '#3d2412',
     uebergang: 'lichtschwenk', fahrt: 'hinein',
     partikel: 'funken', badge: 'Freie Rekonstruktion', eyebrow: 'Die Frage nach dem Können',
     titel: 'Wer die Steine bewegte',

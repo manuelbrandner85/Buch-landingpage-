@@ -14,7 +14,6 @@ export interface Haus {
   versprechen: string;
   /** Das Verfahren, das alle Bücher teilen – unabhängig vom Thema. */
   arbeitsweise: string;
-  autoren: string[];
 }
 
 export const TRENDONIX: Haus = {
@@ -24,5 +23,14 @@ export const TRENDONIX: Haus = {
     'Jeder Band beginnt bei etwas Sichtbarem – einem Feuer, einer Münze, einer Maschine – '
     + 'und fragt, welcher unsichtbare Faden daran hängt. Behauptet wird nichts, was sich '
     + 'nicht prüfen lässt: Jede Seite nennt, woher sie es weiß.',
-  autoren: ['Manuel', 'Uwe'],
 };
+
+/**
+ * Warum hier keine Namen stehen.
+ *
+ * Die Bände tragen im Druck Trendonix in der Verlagszeile, und alle Kanäle
+ * laufen unter diesem Namen. Eine Website, die daneben zwei Vornamen führt,
+ * baut eine zweite Marke auf, die niemand kennt – und schwächt die eine, die
+ * es schon gibt. Wer wirklich dahintersteht, gehört ins Impressum: dort ist es
+ * Pflicht, dort ist es richtig, und dort sucht man es auch.
+ */

@@ -7,7 +7,6 @@ import { KinoEbene } from './KinoEbene';
 import { KinoWebGL } from './KinoWebGL';
 import { useSanftesScrollen } from '@/camera/useSanftesScrollen';
 import { Ankunft } from '@/scenes/Ankunft';
-import { CoverSzene } from '@/scenes/CoverSzene';
 import { Auftakt } from '@/scenes/Auftakt';
 import { Motiv } from '@/scenes/Motiv';
 import { PapierSeite } from '@/scenes/PapierSeite';
@@ -26,7 +25,7 @@ import { Ausstieg } from '@/ui/Ausstieg';
 import { FortschrittGeber } from '@/world/FortschrittKontext';
 
 /**
- * Die Engine kennt sieben Szenentypen und rendert alles aus Daten.
+ * Die Engine kennt sechs Szenentypen und rendert alles aus Daten.
  * Eine neue Szene ist ein neuer Datensatz – keine neue Komponente.
  */
 export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId }) {
@@ -60,7 +59,6 @@ export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId
 function Abschnitt({ szene }: { szene: Szene }) {
   switch (szene.typ) {
     case 'ankunft': return <Ankunft szene={szene} />;
-    case 'cover': return <CoverSzene szene={szene} />;
     case 'auftakt': return <Auftakt szene={szene} />;
     case 'motiv': return <Motiv szene={szene} />;
     case 'papier': return <PapierSeite szene={szene} />;

@@ -4,7 +4,7 @@ import {
   LEITBUCH, OEFFENTLICHE_REIHEN, TRENDONIX,
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
-import { bildQuelle, ordner } from '@/world/bilder';
+import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
 import { wegBuch, wegImpressum, wegReihe, wegUeber } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
@@ -88,7 +88,8 @@ export default function Haus() {
     '@type': 'Organization',
     name: TRENDONIX.name,
     description: TRENDONIX.arbeitsweise,
-    member: TRENDONIX.autoren.map((n) => ({ '@type': 'Person', name: n })),
+    slogan: TRENDONIX.versprechen,
+    logo: `${BASIS_PFAD}/marke/trendonix.png`,
   };
 
   return (
@@ -103,7 +104,11 @@ export default function Haus() {
           />
         )}
         <div className="hausinhalt">
-          <p className="marke">{TRENDONIX.name}</p>
+          <p className="marke">
+            <img src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt=""
+              width={140} height={94} fetchPriority="high" decoding="async" />
+            <span>{TRENDONIX.name}</span>
+          </p>
           <h1>{TRENDONIX.versprechen}</h1>
           {LEITBUCH && (
             <div className="leitbuch">
@@ -163,8 +168,9 @@ export default function Haus() {
       </section>
 
       <footer>
-        {TRENDONIX.name} · {TRENDONIX.autoren.join(' & ')}
-        {' · '}<a href={wegUeber()}>Über</a>
+        <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
+          alt={TRENDONIX.name} width={120} height={80} loading="lazy" decoding="async" />
+        <a href={wegUeber()}>Über</a>
         {' · '}<a href={wegImpressum()}>Impressum</a>
         <span className="feinschrift">
           Kein Motiv dieser Seite ist eine historische Fotografie. Alle Bilder

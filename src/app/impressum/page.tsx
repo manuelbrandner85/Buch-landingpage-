@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Rueckweg } from '@/ui/Rueckweg';
 
 export const metadata: Metadata = {
-  title: 'Impressum – Die unsichtbaren Fäden',
+  title: 'Impressum – Die Unsichtbaren Fäden',
   robots: { index: false },
 };
 

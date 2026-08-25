@@ -10,7 +10,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'Begriffe – Die unsichtbaren Fäden',
+  title: 'Begriffe – Die Unsichtbaren Fäden',
   description: 'Fachbegriffe des Bandes, erklärt: von in situ über Satrapie bis Höhle 17.',
 };
 

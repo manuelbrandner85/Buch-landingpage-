@@ -14,12 +14,15 @@ export function Ausstieg() {
   const [tief, setTief] = useState(false);
 
   useEffect(() => {
-    // Im Bücherbereich ist man nicht mehr in der Tiefe, sondern am Ziel –
-    // dort verdeckte der Rückweg sonst die Klappentexte.
+    // Wo Bücher stehen, ist man nicht in der Tiefe, sondern am Ziel – dort
+    // verdeckte der Rückweg sonst die Klappentexte. Gemeint sind beide
+    // Bücherbereiche: die Weltenwahl am Anfang und der Abschluss am Ende. Auf
+    // dem Handy lag der Knopf sonst mitten auf dem Umschlag von Band 2.
     const pruefen = () => {
-      const buecher = document.getElementById('buecher');
-      const amZiel = buecher
-        && buecher.getBoundingClientRect().top < window.innerHeight * 0.8;
+      const amZiel = [...document.querySelectorAll('section.buecher')].some((el) => {
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight * 0.9 && r.bottom > window.innerHeight * 0.1;
+      });
       setTief(window.scrollY > window.innerHeight * 1.5 && !amZiel);
     };
     const zu = (ziel: string) => {

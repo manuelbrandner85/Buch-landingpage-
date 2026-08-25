@@ -60,12 +60,23 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
     }
     if (!steuerung) { beiRueckfall(); return; }
     setLaeuft(true);
+    // Für Messungen von außen erreichbar – die Fläche selbst braucht das nicht.
+    (window as unknown as { kino?: KinoSteuerung }).kino = steuerung;
 
     // Der Fortschritt kommt aus der tatsächlichen Lage der Abschnitte, damit der
     // Übergang genau dort sitzt, wo im Text die nächste Szene beginnt.
-    let frame = 0;
-    const rechnen = () => {
-      const oben = bild
+    //
+    // Gemessen wird die Lage **nicht** in jedem Bild. Vorher las diese Schleife
+    // sechzigmal je Sekunde die Maße von rund dreißig Abschnitten – jedes
+    // `getBoundingClientRect` zwingt den Browser dabei, das Layout vorzeitig zu
+    // berechnen. Auf dem Schreibtisch fiel das kaum auf, auf dem Handy war es
+    // der teuerste Posten der Seite. Die Lage der Titel ändert sich aber nur,
+    // wenn sich etwas am Layout ändert: beim Drehen, beim Nachladen der
+    // Schriften, wenn ein Bild eintrifft. Genau dann – und sonst nie – wird
+    // neu gemessen; im Bild bleibt eine einzige Abfrage der Scrollhöhe.
+    let anker: number[] = [];
+    const messen = () => {
+      anker = bild
         .map((s) => document.getElementById(s.id))
         .filter((e): e is HTMLElement => Boolean(e))
         .map((e) => {
@@ -78,21 +89,48 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           const mitte = titel ? r.top + r.height / 2 : r.top + e.offsetHeight * 0.72;
           return mitte + window.scrollY;
         });
-      if (oben.length > 1) {
+    };
+    messen();
+
+    let frame = 0;
+    const rechnen = () => {
+      if (anker.length > 1) {
         const y = window.scrollY + window.innerHeight * 0.5;
         let i = 0;
-        while (i < oben.length - 1 && y >= (oben[i + 1] ?? Infinity)) i++;
-        const a = oben[i] ?? 0;
-        const b = oben[i + 1] ?? a + window.innerHeight;
+        while (i < anker.length - 1 && y >= (anker[i + 1] ?? Infinity)) i++;
+        const a = anker[i] ?? 0;
+        const b = anker[i + 1] ?? a + window.innerHeight;
         const t = Math.max(0, Math.min(1, (y - a) / Math.max(1, b - a)));
-        steuerung?.setzeFortschritt((i + t) / (oben.length - 1));
+        steuerung?.setzeFortschritt((i + t) / (anker.length - 1));
       }
       frame = requestAnimationFrame(rechnen);
     };
     frame = requestAnimationFrame(rechnen);
 
+    // Neu messen, wenn sich das Layout tatsächlich ändert – gebündelt auf das
+    // nächste Bild, damit ein Schwall von Ereignissen eine Messung ergibt.
+    let geplant = 0;
+    const nachmessen = () => {
+      if (geplant) return;
+      geplant = requestAnimationFrame(() => { geplant = 0; messen(); });
+    };
+    addEventListener('resize', nachmessen, { passive: true });
+    addEventListener('orientationchange', nachmessen, { passive: true });
+    document.fonts?.ready.then(nachmessen).catch(() => undefined);
+    const beobachter = new ResizeObserver(nachmessen);
+    const buehne = document.querySelector('main');
+    if (buehne) beobachter.observe(buehne);
+
     const aufraeumen = zeilenAufdecken('[data-auf]');
-    return () => { cancelAnimationFrame(frame); steuerung?.zerstoeren(); aufraeumen?.(); };
+    return () => {
+      cancelAnimationFrame(frame);
+      if (geplant) cancelAnimationFrame(geplant);
+      removeEventListener('resize', nachmessen);
+      removeEventListener('orientationchange', nachmessen);
+      beobachter.disconnect();
+      steuerung?.zerstoeren();
+      aufraeumen?.();
+    };
   }, [szenen, beiRueckfall]);
 
   return (

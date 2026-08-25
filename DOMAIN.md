@@ -64,7 +64,7 @@ Weg darunter:
 
 ```
 /                      Trendonix — das aktuelle Buch, die Welten, das Regal
-/faeden/               Die unsichtbaren Fäden, begehbar
+/faeden/               Die Unsichtbaren Fäden, begehbar
 /faeden/kapitel/7/     ein Kapitel als Leseseite
 /buch/band-1/          die Buchseite für Suchmaschinen und zum Weiterschicken
 ```

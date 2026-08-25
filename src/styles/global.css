@@ -82,16 +82,41 @@ main{position:relative;z-index:2}
 [data-evidenz].verblasst{opacity:.15;filter:grayscale(1)}
 
 /* ---------- Ankunft ---------- */
-.ankunft{height:100svh;display:grid;place-items:center;background:#000;
-  position:relative;z-index:4}
-.funke{width:5px;height:5px;border-radius:50%;background:var(--gold);
-  box-shadow:0 0 20px 6px rgba(227,200,139,.5);animation:atmen 5s ease-in-out infinite}
-@keyframes atmen{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
-.ankunft p{color:var(--staub);position:absolute;bottom:15vh;left:0;right:0;text-align:center;
-  font-family:var(--display),serif;letter-spacing:.24em;text-transform:uppercase;
-  font-size:clamp(.66rem,1.4vw,.82rem);color:var(--staub);opacity:0;
-  animation:auf 2.4s ease 1.4s forwards}
-.ankunft .hinweis{bottom:7vh;font-size:.65rem;animation-delay:3.4s;color:#b3ab98}
+/* ---------- Die Schwelle ----------
+   Kein abfotografierter Umschlag mehr, sondern das, was ein Buch dieses
+   Zuschnitts verdient: Dunkelheit, ein Schein, die Marke, der Titel. Alles
+   tritt nacheinander ein – die Reihenfolge ist die Dramaturgie. */
+.ankunft{min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:16vh var(--rand) 14vh;background:#000;position:relative;z-index:4;
+  overflow:hidden}
+/* Der Schein hinter der Marke: ein Licht, kein Punkt. */
+.funke{position:absolute;top:50%;left:50%;width:min(42rem,120vw);aspect-ratio:1;
+  translate:-50% -50%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(227,200,139,.16) 0%,
+    rgba(227,200,139,.06) 32%,transparent 66%);
+  animation:atmen 9s ease-in-out infinite}
+@keyframes atmen{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+.hausmarke{position:relative;display:block;line-height:0;opacity:0;
+  animation:auf 1.6s ease .25s forwards}
+.hausmarke img{width:clamp(6rem,12vw,8.5rem);height:auto}
+.ankunft h1{position:relative;margin-top:clamp(1.6rem,4vh,2.8rem);
+  font-size:clamp(2.1rem,6.4vw,4.4rem);letter-spacing:.012em;text-wrap:balance;
+  max-width:16ch;opacity:0;animation:auf 1.8s ease .9s forwards}
+.ankunft .unterzeile{position:relative;margin-top:.9rem;font-style:normal;
+  font-family:var(--display),serif;letter-spacing:.34em;text-transform:uppercase;
+  font-size:clamp(.68rem,1.5vw,.86rem);color:var(--gold);
+  opacity:0;animation:auf 2s ease 1.5s forwards}
+.ankunft .fliess{position:relative;margin-top:clamp(1.4rem,3vh,2.2rem);max-width:34ch;
+  color:var(--staub);font-size:clamp(.9rem,1.9vw,1.02rem);letter-spacing:.02em;
+  opacity:0;animation:auf 2.2s ease 2.1s forwards}
+/* Eine Haarlinie aus Gold, die von der Mitte her aufgeht – der Faden setzt an. */
+.ankunft .fliess::after{content:"";display:block;width:clamp(3rem,8vw,5.5rem);height:1px;
+  margin:clamp(1.6rem,4vh,2.6rem) auto 0;
+  background:linear-gradient(to right,transparent,var(--gold-tief),transparent)}
+.ankunft .hinweis{position:absolute;bottom:6vh;left:0;right:0;
+  font-family:var(--display),serif;letter-spacing:.28em;text-transform:uppercase;
+  font-size:.64rem;color:#b3ab98;opacity:0;animation:auf 2s ease 3s forwards}
 @keyframes auf{to{opacity:1}}
 
 /* ---------- Tafel (vormals Papier) ----------
@@ -682,6 +707,7 @@ main{z-index:3}
    Escape steigt eine Ebene heraus: aus der Szene auf die Weltkarte, von der
    Karte an den Anfang. Ohne eine klare Geste verliert man sich in der Tiefe. */
 .ausstieg{position:fixed;left:50%;bottom:1.6rem;transform:translateX(-50%);z-index:22;
+  backdrop-filter:blur(10px) saturate(1.1);border-radius:2px;
   font-family:var(--display),serif;font-size:.62rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--staub);background:rgba(6,10,20,.7);
   border:1px solid rgba(227,200,139,.22);padding:.5rem 1rem;cursor:pointer;
@@ -698,7 +724,7 @@ main{z-index:3}
 .haus{position:relative;z-index:2}
 
 .hausbild{position:relative;min-height:100svh;display:flex;align-items:center;
-  padding:clamp(6rem,14vh,10rem) var(--rand) clamp(4rem,10vh,7rem);overflow:hidden}
+  padding:clamp(4.5rem,10vh,8rem) var(--rand) clamp(3.5rem,8vh,6rem);overflow:hidden}
 .hausbild .grund{position:absolute;inset:0;z-index:0}
 .hausbild .grund img,.hausbild .grund video{position:absolute;inset:0;
   width:100%;height:100%;object-fit:cover;filter:brightness(.42) saturate(.86)}
@@ -711,10 +737,11 @@ main{z-index:3}
 .hausinhalt{position:relative;z-index:1;width:100%;max-width:78rem;margin:0 auto}
 .hausinhalt > .marke{position:static;font-family:var(--display),serif;font-size:.72rem;
   letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem}
-.hausinhalt > h1{max-width:22ch;text-wrap:balance}
+.hausinhalt > h1{max-width:19ch;text-wrap:balance;
+  font-size:clamp(2.2rem,4.8vw,3.8rem)}
 
-.leitbuch{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);
-  gap:clamp(2rem,5vw,4.5rem);align-items:center;margin-top:clamp(2.5rem,6vh,4.5rem)}
+.leitbuch{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);
+  gap:clamp(1.8rem,4vw,3.6rem);align-items:center;margin-top:clamp(1.8rem,4.5vh,3.4rem)}
 .leitbuch .buch3d{margin-bottom:0;max-width:15rem}
 .leittext h2{font-size:clamp(1.6rem,3vw,2.4rem);color:var(--papier)}
 .leittext .klappe{margin-top:1.1rem;max-width:52ch;color:var(--staub);font-size:.95rem}
@@ -856,4 +883,130 @@ footer a:hover{text-decoration-color:var(--gold)}
 .buchseite .schnitt .licht{opacity:.4}
 @media (prefers-reduced-motion:reduce){
   .buecherwand .korpus,.buchseite .korpus{animation:none}
+}
+
+/* =========================================================================
+   Der Premium-Durchgang
+   Nichts davon ist Zierrat: Ein Buch dieser Machart darf keine Seite haben,
+   die billiger wirkt als sein Einband. Feiner Satz, ruhigere Bewegung, echte
+   Marke – und eine Kopfzeile, die auf dem Handy nicht über den Titel fällt.
+   ========================================================================= */
+
+/* ---------- Satz ---------- */
+h1,h2,h3{text-wrap:balance}
+p,li,dd{text-wrap:pretty}
+/* Ziffern in Fließtext laufen mit der Schrift mit, nicht als Tabelle. */
+body{font-variant-numeric:oldstyle-figures proportional-nums;
+  font-feature-settings:"liga" 1,"kern" 1}
+.zahl,.kapitelliste,.quelle{font-variant-numeric:lining-nums tabular-nums}
+::selection{background:rgba(227,200,139,.28);color:#fff}
+::-moz-selection{background:rgba(227,200,139,.28);color:#fff}
+
+/* ---------- Die Marke ---------- */
+header .marke{display:inline-flex;align-items:center;gap:.75rem;line-height:0}
+header .marke img{width:2.6rem;height:auto;
+  filter:drop-shadow(0 1px 6px rgba(0,0,0,.6));transition:opacity .3s}
+header .marke:hover img{opacity:.82}
+header .marke .reihenname{font-family:var(--display),serif;font-size:.68rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);line-height:1;
+  white-space:nowrap}
+/* Im Empfang steht das Zeichen groß und der Name gesetzt daneben: Die
+   Wortmarke der Vorlage wäre bei dieser Größe nur ein paar Pixel hoch. */
+.hausbild p.marke{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem}
+.hausbild p.marke img{width:clamp(3.4rem,6vw,4.6rem);height:auto;
+  filter:drop-shadow(0 2px 16px rgba(0,0,0,.6))}
+.hausbild p.marke span{font-family:var(--display),serif;
+  font-size:clamp(.8rem,1.5vw,1rem);letter-spacing:.44em;text-transform:uppercase;
+  color:var(--gold)}
+.fussmarke{width:5.6rem;height:auto;margin:0 auto 1.2rem;opacity:.85}
+footer{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+footer > a:not(:has(.fussmarke)){display:inline}
+
+/* ---------- Kopfzeile: eine Zeile, auch auf dem schmalsten Gerät ----------
+   Vorher brach die Leiste bei acht Einträgen auf drei Zeilen um und legte sich
+   über den Titel der ersten Szene. Jetzt bleibt sie eine Zeile: Die Marke steht
+   links, der Kaufweg rechts, und was dazwischen nicht passt, lässt sich
+   seitlich schieben. Nichts verschwindet, nichts überlagert. */
+header{flex-wrap:nowrap}
+header nav{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;
+  scroll-snap-type:x proximity;padding-block:.2rem;
+  mask-image:linear-gradient(to right,transparent 0,#000 1.2rem,#000 calc(100% - 1.2rem),transparent 100%)}
+header nav::-webkit-scrollbar{display:none}
+header nav > *{flex:0 0 auto;scroll-snap-align:end}
+/* Der Kaufweg steht neben der Leiste, nicht darin – sonst schöbe sich der
+   scrollende Rest darunter hindurch. */
+.kopf-kaufen{flex:0 0 auto;margin-left:.2rem}
+
+@media (max-width:760px){
+  header{padding:.7rem calc(var(--rand) * .55);gap:.6rem}
+  header .marke img{width:2.1rem}
+  header .marke .reihenname{display:none}
+  header nav{gap:.9rem}
+  header nav a,header nav button{font-size:.62rem;letter-spacing:.13em}
+  .kopf-kaufen{font-size:.6rem;padding:.55rem .8rem}
+}
+
+/* ---------- Ruhigere, teurere Bewegung ----------
+   Übergänge liefen mit gleichmäßigem Tempo; das wirkt mechanisch. Eine Kurve,
+   die schnell ansetzt und lange ausläuft, wirkt wie geführt. */
+a,button,.tor,.weltentor,.kaufen,.eintauchen{
+  transition-timing-function:cubic-bezier(.22,.61,.36,1)}
+.kaufen{transition-duration:.45s}
+.kaufen:hover{transform:translateY(-2px);
+  box-shadow:0 12px 34px rgba(168,134,63,.36)}
+.kaufen:active{transform:translateY(0);transition-duration:.09s}
+
+/* ---------- Haarlinien statt Kanten ----------
+   Ein durchgezogener Rahmen wirkt wie ein Kasten. Eine Linie, die zu den
+   Rändern hin ausläuft, wirkt wie Papier. */
+.hinweis-zeile,.lesefassung article,.lesefassung .fusszeile,
+.arbeitsweise,.kapitelliste li{border-image:
+  linear-gradient(to right,transparent,rgba(227,200,139,.28) 18%,
+    rgba(227,200,139,.28) 82%,transparent) 1}
+
+/* ---------- Bildkanten ---------- */
+.weltentor,.tor .buch3d,.buchkarte .buch3d{isolation:isolate}
+.weltentor{border-radius:2px}
+
+/* ---------- Ruhig heißt ruhig ---------- */
+@media (prefers-reduced-motion:reduce){
+  .funke,.hausmarke,.ankunft h1,.ankunft .unterzeile,
+  .ankunft .fliess,.ankunft .hinweis{animation:none;opacity:1}
+  a,button,.tor,.weltentor,.kaufen,.eintauchen{transition:none}
+}
+
+/* An der Weltenwahl verkauft die Vorderseite.
+   Die volle Umrundung – Vorderseite, Rücken, Rückseite – bleibt dem Abschluss
+   vorbehalten: Dort ist sie die Belohnung. Am Eingang wäre sie im Weg, weil man
+   dann ausgerechnet in dem Moment auf einen dunklen Buchrücken sieht, in dem
+   man sich für eine Welt entscheiden soll. */
+.tor-eingang .korpus{animation-name:vorstellen}
+.tor-eingang .flaeche .licht{animation:none}
+.tor-eingang .vorn .licht{opacity:.05}
+.tor-eingang .ruecken .licht{opacity:.3}
+.tor-eingang .hinten .licht{opacity:.9}
+.tor-eingang .schnitt .licht{opacity:.4}
+@media (prefers-reduced-motion:reduce){ .tor-eingang .korpus{animation:none} }
+
+/* ---------- Der Empfang auf dem Handy ----------
+   Auf dem Schreibtisch stehen Umschlag und Kaufweg nebeneinander im ersten
+   Bild. Auf dem Telefon stapelt sich beides – und der Kaufweg rutscht unter
+   den Falz. Deshalb hier: kleinerer Umschlag, straffere Überschrift, und der
+   Klappentext entfällt. Er steht vollständig im Regal weiter unten und auf der
+   Buchseite; im Empfang kostet er nur den Weg zum Buch. */
+@media (max-width:820px){
+  .hausbild{padding-top:clamp(3.5rem,7vh,5rem)}
+  .hausinhalt > h1{font-size:clamp(1.95rem,7.4vw,2.7rem);max-width:15ch}
+  .hausbild p.marke{gap:.75rem;margin-bottom:1.1rem}
+  .leitbuch{gap:1.4rem;margin-top:1.6rem;justify-items:center;text-align:center}
+  .leitbuch .buch3d{max-width:min(46vw,11rem)}
+  .leittext{display:flex;flex-direction:column;align-items:center}
+  .leittext .klappe{display:none}
+  .leitbuch .wege{justify-content:center;margin-top:1.2rem}
+  .leittext .eyebrow{letter-spacing:.18em;font-size:.62rem}
+  .buchkarte{justify-items:center;text-align:center}
+  .buchkarte .wege{justify-content:center}
+  .buchkarte .klappe,.buchkarte .unterzeile{margin-inline:auto}
+  .buchseite .buchkopf{justify-items:center}
 }

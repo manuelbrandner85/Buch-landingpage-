@@ -293,8 +293,31 @@ export function starteKino(canvas, szenen, optionen = {}) {
   if (!gl) return null;
 
   const mobil = matchMedia('(max-width: 900px)').matches;
-  const qualitaet = optionen.qualitaet ?? (mobil ? 0 : 1);
-  const dpr = Math.min(devicePixelRatio || 1, mobil ? 1.5 : 2);
+
+  /**
+   * Wie fein gezeichnet wird, entscheidet nicht die Fensterbreite, sondern das
+   * Gerät – und das sagt es erst, wenn es arbeitet.
+   *
+   * Vorher hing beides an einer einzigen Vermutung: schmales Fenster gleich
+   * schwaches Gerät. Ein neues Telefon bekam dadurch grundlos die grobe
+   * Fassung, ein zehn Jahre alter Rechner am großen Schirm die feine – und
+   * ruckelte. Jetzt gibt es drei Stufen, und die Fahrt misst selbst mit:
+   *
+   *   2 – volle Fassung: Tiefenunschärfe, feines Korn, volle Auflösung
+   *   1 – ohne Tiefenunschärfe (der teuerste Posten im Shader)
+   *   0 – zusätzlich drei Viertel der Auflösung
+   *
+   * Heruntergeschaltet wird nach einer schlechten Strecke sofort, hochgeschaltet
+   * nur einmal und erst nach einer langen guten – eine Fläche, die zwischen zwei
+   * Stufen pendelt, fällt mehr auf als eine, die eine Stufe zu grob bleibt.
+   */
+  const START_STUFE = optionen.qualitaet !== undefined
+    ? (optionen.qualitaet ? 2 : 1)
+    : (mobil ? 1 : 2);
+  let stufe = START_STUFE;
+  let qualitaet = stufe >= 2 ? 1 : 0;
+  const dprBasis = Math.min(devicePixelRatio || 1, mobil ? 1.5 : 2);
+  let dpr = stufe >= 1 ? dprBasis : dprBasis * 0.75;
 
   const prog = programm(gl, VERTEX, FRAGMENT);
   gl.useProgram(prog);
@@ -390,8 +413,20 @@ const VORAUS = 3, ZURUECK = 1;
     const v = document.createElement('video');
     v.src = url; v.loop = true; v.muted = true; v.playsInline = true;
     v.preload = 'none'; v.crossOrigin = 'anonymous';
+    v.disablePictureInPicture = true;
     v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
-    return { el: v, textur: null, laeuft: false, geweckt: false };
+    v.setAttribute('disableremoteplayback', '');
+    const q = { el: v, textur: null, laeuft: false, geweckt: false, neu: false, stand: -1 };
+    // Wo der Browser es anbietet, meldet er selbst, wenn ein neues Videobild
+    // bereitliegt. Das ist genauer und billiger als jedes Nachfragen.
+    if (typeof v.requestVideoFrameCallback === 'function') {
+      const melden = () => {
+        q.neu = true;
+        if (q.geweckt) v.requestVideoFrameCallback(melden);
+      };
+      q.anmelden = () => v.requestVideoFrameCallback(melden);
+    }
+    return q;
   }
 
   /** Nachbarschaft wecken, Ferne schlafen legen – höchstens zwei Videos laufen. */
@@ -405,22 +440,65 @@ const VORAUS = 3, ZURUECK = 1;
    * erst kurz bevor die Szene an der Reihe ist.
    */
   function videosSteuern(stelle) {
+    if (schlummert) return;
     geladen.forEach((e, j) => {
       const q = e.quelle; if (!q) return;
       const abstand = Math.abs(j - stelle);
       if (abstand < 0.85 && !q.geweckt) {
         q.geweckt = true; q.el.preload = 'auto'; q.el.load();
-        q.el.play().then(() => { q.laeuft = true; }).catch(() => { q.laeuft = false; });
+        q.el.play().then(() => { q.laeuft = true; q.anmelden?.(); })
+          .catch(() => { q.laeuft = false; });
       } else if (q.geweckt && abstand > 1.6) {
-        q.geweckt = false; q.laeuft = false; q.el.pause();
+        schlafen(q);
       }
     });
   }
+
+  /**
+   * Ein Video, das außer Reichweite gerät, hört nicht nur auf zu laufen: Seine
+   * Textur wird freigegeben. Ein Bild von 1920 mal 1080 belegt als RGBA rund
+   * acht Megabyte Grafikspeicher – auf einem älteren Handy ist das der
+   * Unterschied zwischen einer flüssigen Fahrt und einem Neustart der Fläche.
+   */
+  function schlafen(q) {
+    if (!q) return;
+    q.geweckt = false; q.laeuft = false; q.neu = false; q.stand = -1;
+    try { q.el.pause(); } catch { /* egal */ }
+    q.el.preload = 'none';
+    if (q.textur) { gl.deleteTexture(q.textur); q.textur = null; }
+  }
+
+  /**
+   * Im Hintergrund ruht alles.
+   *
+   * Ein Video dekodiert weiter, auch wenn der Tab nicht sichtbar ist – der
+   * Browser hält nur das Zeichnen an. Auf dem Handy heißt das: Akku für ein
+   * Bild, das niemand sieht. Beim Zurückkommen läuft es von selbst wieder an,
+   * sobald die Fahrt die Szene erreicht.
+   */
+  let schlummert = false;
+  function sichtbarkeit() {
+    schlummert = document.hidden;
+    if (schlummert) geladen.forEach((e) => schlafen(e.quelle));
+  }
+  document.addEventListener('visibilitychange', sichtbarkeit);
 
   /** Laufendes Videobild in die Textur schreiben. Fällt es aus, bleibt das Standbild. */
   function videoBild(e) {
     const q = e.quelle;
     if (!q || !q.laeuft || q.el.readyState < 2) return null;
+
+    // Nur hochladen, wenn tatsächlich ein neues Bild anliegt.
+    //
+    // Ein Video läuft mit 24 bis 30 Bildern je Sekunde, die Fläche zeichnet mit
+    // 60 oder 120. Vorher wurde in jedem gezeichneten Bild ein volles
+    // Videobild in die Grafikkarte geschoben – bei zwei laufenden Videos also
+    // bis zu viermal so oft wie nötig. Das war der zweitteuerste Posten der
+    // Fahrt und auf schwachen Geräten deutlich als Stocken zu sehen.
+    const neu = q.anmelden ? q.neu : q.el.currentTime !== q.stand;
+    if (q.textur && !neu) return q.textur;
+    q.neu = false; q.stand = q.el.currentTime;
+
     if (!q.textur) {
       q.textur = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, q.textur);
@@ -439,6 +517,44 @@ const VORAUS = 3, ZURUECK = 1;
   let fortschritt = 0, gedaempft = 0, tempo = 0, laeuft = true, letzteZeit = 0;
   let zustand = { fortschritt: 0, gedaempft: 0 };
   const zoomStaerke = optionen.zoom ?? 0.1;
+
+  /** Stufe wechseln: Auflösung und Shaderaufwand in einem Zug nachziehen. */
+  function stufeSetzen(neu) {
+    const begrenzt = Math.max(0, Math.min(START_STUFE, neu));
+    if (begrenzt === stufe) return;
+    stufe = begrenzt;
+    qualitaet = stufe >= 2 ? 1 : 0;
+    dpr = stufe >= 1 ? dprBasis : dprBasis * 0.75;
+    gl.uniform1f(U.qualitaet, qualitaet);
+    gl.uniform1f(U.korn, qualitaet ? 0.045 : 0.03);
+    messen();
+  }
+
+  // Bildzeiten der jüngsten Strecke. Beurteilt wird der Median, nicht der
+  // Mittelwert: ein einzelnes langes Bild – ein nachgeladenes Motiv – ist kein
+  // Urteil über das Gerät.
+  //
+  // Gezählt wird in Sekunden, nicht in Bildern. Das ist der Punkt: Auf einem
+  // Gerät, das nur fünf Bilder je Sekunde schafft, wäre ein Fenster von
+  // fünfundvierzig Bildern neun Sekunden lang – die Fläche würde also gerade
+  // dort am längsten ruckeln, wo sie am schnellsten nachgeben müsste. So
+  // entscheidet sie nach gut einer Sekunde, egal wie langsam das Gerät ist.
+  const zeiten = [];
+  let fenster = 0;          // vergangene Zeit im laufenden Fenster, Sekunden
+  let anlauf = 1.5;         // die erste Sekunde zählt nicht: da wird geladen
+  let gutStrecke = 0;
+  function regeln(dt) {
+    if (anlauf > 0) { anlauf -= dt; return; }
+    zeiten.push(dt * 1000);
+    fenster += dt;
+    if (fenster < 1.0 || zeiten.length < 4) return;
+    const sortiert = [...zeiten].sort((a, b) => a - b);
+    const median = sortiert[Math.floor(sortiert.length / 2)];
+    zeiten.length = 0; fenster = 0;
+    if (median > 24 && stufe > 0) { stufeSetzen(stufe - 1); gutStrecke = 0; return; }
+    if (median < 13.5) { gutStrecke++; if (gutStrecke >= 6) { stufeSetzen(stufe + 1); gutStrecke = 0; } }
+    else gutStrecke = 0;
+  }
 
   function messen() {
     breite = canvas.clientWidth; hoehe = canvas.clientHeight;
@@ -468,6 +584,7 @@ const VORAUS = 3, ZURUECK = 1;
     // schwache Geräte ab, ohne nach einem Tabwechsel zu springen.
     const dt = Math.min(0.25, letzteZeit ? (zeit - letzteZeit) / 1000 : 0.016);
     letzteZeit = zeit;
+    regeln(dt);
     const vorher = gedaempft;
     const abstand = Math.abs(fortschritt - gedaempft);
     // Nach einem Sprung – etwa „In die Szene“ von der Karte – wird schnell
@@ -570,9 +687,21 @@ const VORAUS = 3, ZURUECK = 1;
     setzeFortschritt(wert) { fortschritt = Math.max(0, Math.min(1, wert)); },
     tempo: () => tempo,
     stand: () => zustand,
+    /** Aktuelle Zeichenstufe – für Messungen und zur Fehlersuche. */
+    stufe: () => stufe,
     anhalten() { laeuft = false; },
     fortsetzen() { if (!laeuft) { laeuft = true; requestAnimationFrame(zeichne); } },
-    zerstoeren() { laeuft = false; removeEventListener('resize', messen); },
+    zerstoeren() {
+      laeuft = false;
+      removeEventListener('resize', messen);
+      document.removeEventListener('visibilitychange', sichtbarkeit);
+      // Videos anhalten und ihre Texturen freigeben, sonst hängen sie beim
+      // Seitenwechsel im Speicher und dekodieren weiter.
+      geladen.forEach((e) => {
+        schlafen(e.quelle);
+        if (e.quelle) { e.quelle.el.removeAttribute('src'); e.quelle.el.load(); }
+      });
+    },
   };
 }
 

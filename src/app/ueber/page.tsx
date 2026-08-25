@@ -30,8 +30,14 @@ export default function UeberSeite() {
       <article>
         <h2>Wer {TRENDONIX.name} ist</h2>
         <p>
-          {TRENDONIX.name} ist der Name, unter dem diese Bücher erscheinen; geschrieben
-          werden sie von {TRENDONIX.autoren.join(' und ')}. {TRENDONIX.arbeitsweise}
+          {TRENDONIX.name} ist der Name, unter dem diese Bücher erscheinen – so steht er
+          in der Verlagszeile der gedruckten Bände. {TRENDONIX.arbeitsweise}
+        </p>
+        <p>
+          Wer verantwortlich dahintersteht, steht im Impressum. Das ist keine
+          Koketterie: Auf dem Umschlag steht ein Haus, nicht ein Name, und
+          eine Seite, die darüber anders spräche als das Buch, wäre bereits
+          die erste Ungenauigkeit.
         </p>
         <p>
           Was das Haus bisher führt, steht auf der Startseite. Was noch nicht erschienen

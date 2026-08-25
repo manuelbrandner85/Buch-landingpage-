@@ -8,6 +8,7 @@ import {
   LEITBUCH, TRENDONIX, oeffentlicheBaendeVon, reiheNach, szeneZuKapitel,
 } from '@/world/registry';
 import { wegHaus, wegUeber } from '@/world/wege';
+import { BASIS_PFAD } from '@/world/bilder';
 
 /** Die Oberfläche bleibt unsichtbar, bis der Einstieg vorbei ist. */
 export function Kopfzeile(
@@ -49,7 +50,11 @@ export function Kopfzeile(
   return (
     <>
       <header className={sichtbar ? 'an' : ''}>
-        <a className="marke" href="#ankunft">{dieseReihe?.titel ?? TRENDONIX.name}</a>
+        <a className="marke" href={wegHaus()} aria-label={`${TRENDONIX.name} – Startseite`}>
+          <img src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt=""
+            width={46} height={31} loading="lazy" decoding="async" />
+          <span className="reihenname">{dieseReihe?.titel}</span>
+        </a>
         <nav>
           <span className="baender">
             {baender.map((b) => (
@@ -60,19 +65,20 @@ export function Kopfzeile(
           </span>
           <a href="#karte">Welt</a>
           <button onClick={() => setZeit(true)}>Zeitleiste</button>
-          <a href={wegHaus()}>{TRENDONIX.name}</a>
           <a href={wegUeber()}>Über</a>
           <button onClick={tonSchalten} aria-pressed={ton}>{ton ? 'Ton an' : 'Ton aus'}</button>
           <button onClick={beiRuhe} aria-pressed={ruhig}>Ruhig</button>
-          {kauf
-            ? (
-              <a className="kopf-kaufen" href={kauf.url}
-                target="_blank" rel="noopener noreferrer">
-                Buch kaufen
-              </a>
-            )
-            : <a className="kopf-kaufen" href="#buecher">Bücher</a>}
         </nav>
+        {/* Außerhalb der Leiste: Sie lässt sich auf schmalen Geräten schieben,
+            der Kaufweg soll dabei nicht unter die anderen Einträge geraten. */}
+        {kauf
+          ? (
+            <a className="kopf-kaufen" href={kauf.url}
+              target="_blank" rel="noopener noreferrer">
+              Buch kaufen
+            </a>
+          )
+          : <a className="kopf-kaufen" href="#buecher">Bücher</a>}
       </header>
       {zeit && <Zeitleiste beiSchliessen={() => setZeit(false)} />}
     </>
