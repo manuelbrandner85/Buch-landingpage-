@@ -31,6 +31,10 @@ export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_BASIS_URL
     ? { metadataBase: new URL(process.env.NEXT_PUBLIC_BASIS_URL) }
     : {}),
+  // Der Bau-Spiegel unter github.io hält sich aus den Suchergebnissen heraus.
+  ...(process.env.NEXT_PUBLIC_SPIEGEL === '1'
+    ? { robots: { index: false, follow: false } }
+    : {}),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

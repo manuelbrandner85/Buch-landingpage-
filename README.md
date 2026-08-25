@@ -18,40 +18,23 @@ sondern `status` in `data/<band>/band.ts` – siehe „Die drei Bände“.
 
 ## Veröffentlichen
 
-Einmalig im Repository einstellen:
-**Settings → Pages → Build and deployment → Source: `GitHub Actions`**
+Ein Push auf `main` genügt. Der Bau läuft zweimal, weil die Seite an zwei
+Adressen steht:
 
-Danach genügt ein Push auf `main`: Der Workflow prüft die Weltdaten, baut den
-statischen Export und veröffentlicht ihn. Pull Requests werden zusätzlich auf
-TypeScript und Build geprüft.
+- **`www.trendonix-buecher.de`** – die echte Seite. Sie liegt auf dem Webspace
+  des Anbieters, weil dort auch das Postfach liegt; der Bau lädt sie per FTP
+  hoch (Auftrag `webspace`) und legt eine `.htaccess` bei.
+- **`manuelbrandner85.github.io/Buch-landingpage-`** – der Spiegel. Gleiche
+  Seite, aber mit Basispfad und für Suchmaschinen gesperrt. Er zeigt sofort, ob
+  ein Bau durchgelaufen ist, auch wenn der Upload klemmt.
 
-Der Unterpfad `/Buch-landingpage-/` steckt in `.github/workflows/deploy.yml`
-als `NEXT_PUBLIC_BASIS_PFAD`. Bei einer eigenen Domain fällt er ersatzlos weg –
-lokal und auf Vercel läuft die Seite ohne diesen Wert.
+Was einmalig einzustellen ist – Variablen, Kennwort, Zertifikat, Weiterleitung –
+steht in `DOMAIN.md`. Ohne die Variable `FTP_SERVER` läuft der Auftrag
+`webspace` gar nicht erst an; dann bleibt alles auf github.io.
 
-
-```bash
-npm install
-npm run assets      # erzeugt AVIF/WebP aus assets-quelle/
-npm run dev
-```
-
-`npm run typecheck` prüft TypeScript im Strict-Modus.
-`npm run vorschau` erzeugt `vorschau/welt.html` – eine einzelne, offline lauffähige
-Datei zum Ansehen ohne Server. Sie zieht Daten und Stylesheet aus denselben
-Dateien wie die Anwendung; nachgebaut ist nur das Rendern.
-`npm run build` erzeugt 40 statische Seiten: die Weltseite, elf Kapitelseiten
-(Band 1 und Band 2) und einundzwanzig Ortsseiten. Band 3 liegt vollständig in
-den Daten, bekommt aber keine Seite, solange er auf „in Arbeit“ steht.
-
-Die Bildpipeline kennt den Band:
-
-```bash
-npm run assets       -- --band=band-2      # AVIF/WebP aus assets-quelle/band-2/
-npm run tiefenkarten -- --band=band-2      # Tiefenkarten mit Depth Anything V2
-```
-
-Ohne Angabe bleibt es bei Band 1 und `assets-quelle/` – wie bisher.
+Vor jeder Veröffentlichung laufen dieselben Prüfungen wie lokal: Weltdaten,
+Bewegtbild und jeder interne Verweis. Ein statischer Export hat keinen Server,
+der einen falschen Pfad noch abfängt.
 
 ## Die Kinoebene
 

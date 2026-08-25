@@ -53,12 +53,14 @@ jobs:
           NEXT_EXPORT: '1'
         run: |
           if [ -n "$SEITEN_DOMAIN" ]; then
-            export NEXT_PUBLIC_BASIS_PFAD=""
-            export NEXT_PUBLIC_BASIS_URL="https://$SEITEN_DOMAIN"
-          else
-            export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"
-            export NEXT_PUBLIC_BASIS_URL="https://manuelbrandner85.github.io/Buch-landingpage-"
+            # Die eigene Domain wird vom Auftrag „webspace“ beliefert. Hier
+            # entsteht nur noch der Spiegel unter github.io – gleiche Seite,
+            # aber mit Basispfad und für Suchmaschinen gesperrt, damit nicht
+            # zwei Adressen denselben Text anbieten.
+            export NEXT_PUBLIC_SPIEGEL="1"
           fi
+          export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"
+          export NEXT_PUBLIC_BASIS_URL="https://manuelbrandner85.github.io/Buch-landingpage-"
           npx next build
 
       # Ein statischer Export hat keinen Server, der einen falschen Pfad noch
@@ -68,16 +70,11 @@ jobs:
         env:
           SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
         run: |
-          if [ -n "$SEITEN_DOMAIN" ]; then export NEXT_PUBLIC_BASIS_PFAD=""
-          else export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"; fi
+          export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"
           node scripts/pruefe-wege.mjs
 
-      - name: Jekyll abschalten und Domain hinterlegen
-        env:
-          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
-        run: |
-          touch out/.nojekyll
-          if [ -n "$SEITEN_DOMAIN" ]; then echo "$SEITEN_DOMAIN" > out/CNAME; fi
+      - name: Jekyll abschalten
+        run: touch out/.nojekyll
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
@@ -93,3 +90,85 @@ jobs:
     steps:
       - id: pages
         uses: actions/deploy-pages@v4
+
+  # ── Die eigene Domain ───────────────────────────────────────────────────
+  #
+  # www.trendonix-buecher.de liegt nicht auf GitHub Pages, sondern auf dem
+  # Webspace des Anbieters – dort liegt auch das Postfach. Deshalb wird die
+  # gebaute Seite dorthin hochgeladen, statt die Domain umzuhängen: Am
+  # Mailversand ändert sich nichts, und ein Push auf main erneuert die Seite.
+  #
+  # Einmalig im Repository einzustellen
+  # (Settings → Secrets and variables → Actions):
+  #
+  #   Variables : SEITEN_DOMAIN  z. B. www.trendonix-buecher.de
+  #               FTP_SERVER     die Serveradresse aus der Anbieterverwaltung
+  #               FTP_BENUTZER   der FTP-Benutzername
+  #               FTP_ZIEL       Zielverzeichnis, meist /  (nur wenn abweichend)
+  #               FTP_LOESCHEN   ja  – nur setzen, wenn im Zielverzeichnis
+  #                              ausschließlich diese Seite liegt
+  #   Secrets   : FTP_PASSWORT   das FTP-Kennwort
+  #
+  # Fehlt FTP_SERVER, läuft der Auftrag gar nicht erst an – die Seite bleibt
+  # dann einfach auf github.io.
+  webspace:
+    if: vars.FTP_SERVER != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Abhängigkeiten
+        run: npm ci
+
+      - name: Weltdaten prüfen
+        run: npm run pruefen
+
+      - name: Bauen
+        env:
+          NEXT_EXPORT: '1'
+          NEXT_PUBLIC_BASIS_PFAD: ''
+          NEXT_PUBLIC_BASIS_URL: https://${{ vars.SEITEN_DOMAIN }}
+        run: npx next build
+
+      # Ohne Server, der einen falschen Pfad abfängt, muss jeder Verweis
+      # stimmen, bevor irgendetwas hochgeladen wird.
+      - name: Wege prüfen
+        env:
+          NEXT_PUBLIC_BASIS_PFAD: ''
+        run: node scripts/pruefe-wege.mjs
+
+      - name: Serverregeln beilegen
+        run: node scripts/htaccess.mjs
+
+      - name: Hochladen
+        env:
+          FTP_SERVER: ${{ vars.FTP_SERVER }}
+          FTP_BENUTZER: ${{ vars.FTP_BENUTZER }}
+          FTP_PASSWORT: ${{ secrets.FTP_PASSWORT }}
+          FTP_ZIEL: ${{ vars.FTP_ZIEL }}
+          FTP_LOESCHEN: ${{ vars.FTP_LOESCHEN }}
+        run: |
+          if [ -z "$FTP_PASSWORT" ]; then
+            echo "::error::FTP_PASSWORT fehlt. Repository → Settings → Secrets and variables → Actions → Secrets."
+            exit 1
+          fi
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          ZIEL="${FTP_ZIEL:-/}"
+          # Löschen ist nicht die Vorgabe. Wer im Zielverzeichnis noch etwas
+          # anderes liegen hat, verlöre es sonst mit dem ersten Upload.
+          if [ "$FTP_LOESCHEN" = "ja" ]; then LOESCHEN="--delete"; else LOESCHEN=""; fi
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate no;
+            set net:max-retries 3;
+            set net:timeout 20;
+            open -u \"$FTP_BENUTZER\",\"$FTP_PASSWORT\" \"$FTP_SERVER\";
+            mirror -R --parallel=4 --no-perms --ignore-time $LOESCHEN out/ \"$ZIEL\";
+          "
+          echo "Hochgeladen nach $FTP_SERVER:$ZIEL"
