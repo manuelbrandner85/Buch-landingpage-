@@ -36,8 +36,18 @@ export function Buecher() {
         <div className="spaeter">
           {spaeter.map((b) => (
             <div key={b.id}>
-              <h3>{b.titel}</h3>
-              <p>{b.klappentext}</p>
+              <p className="eyebrow">Band {b.nummer} · {b.status}</p>
+              {b.status === 'erschienen' ? (
+                <>
+                  <h3>{b.titel}</h3>
+                  {b.unterzeile && <p className="unterzeile">{b.unterzeile}</p>}
+                  <p>{b.klappentext}</p>
+                </>
+              ) : (
+                // Ein Band, der noch nicht erschienen ist, wird hier auch nicht
+                // angedeutet – weder mit Titel noch mit Inhalt.
+                <p>Der Faden läuft weiter. Dieser Bereich der Welt öffnet sich mit dem Erscheinen.</p>
+              )}
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
 import { KOENIGSSTRASSE as K } from '@/data/band-1/interaktionen';
 import { Quelle } from '@/ui/Quelle';
+import { bandNummer } from '@/world/registry';
 
 /**
  * Neun Tage statt neunzig (S. 104).
@@ -60,7 +61,7 @@ export function LaufzeitSzene({ szene }: { szene: Szene }) {
 
         <p className="fliess">{szene.fliesstext}</p>
         <p className="kernsatz">{K.kern}</p>
-        <Quelle text={szene.quelle} seite={szene.buchseite} />
+        <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} />
       </div>
     </section>
   );

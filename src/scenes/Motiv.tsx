@@ -1,6 +1,7 @@
 import type React from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
 import { Quelle } from '@/ui/Quelle';
+import { bandNummer } from '@/world/registry';
 import { Begriffstext } from '@/ui/Begriffstext';
 
 /**
@@ -31,7 +32,7 @@ export function Motiv({ szene }: { szene: Szene }) {
                 ))}
               </div>
             )}
-            <Quelle text={szene.quelle} seite={szene.buchseite} />
+            <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} />
           </div>
 
           {szene.randnotizen && (

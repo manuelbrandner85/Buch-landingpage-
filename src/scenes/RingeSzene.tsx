@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
 import { RINGE } from '@/data/band-1/interaktionen';
 import { Quelle } from '@/ui/Quelle';
+import { bandNummer } from '@/world/registry';
 
 /**
  * Fünf Ringe um einen Menschen (S. 109).
@@ -46,7 +47,7 @@ export function RingeSzene({ szene }: { szene: Szene }) {
         </p>
 
         <p className="fliess">{szene.fliesstext}</p>
-        <Quelle text={szene.quelle} seite={szene.buchseite} />
+        <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} />
       </div>
     </section>
   );

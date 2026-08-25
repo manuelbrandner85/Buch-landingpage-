@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
 import { DENAR } from '@/data/band-1/interaktionen';
 import { Quelle } from '@/ui/Quelle';
+import { bandNummer } from '@/world/registry';
 
 /**
  * Dreihundert Jahre Verdünnung (S. 138).
@@ -40,7 +41,7 @@ export function DenarSzene({ szene }: { szene: Szene }) {
         </label>
 
         <p className="fliess">{szene.fliesstext}</p>
-        <Quelle text={szene.quelle} seite={szene.buchseite} />
+        <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} />
       </div>
     </section>
   );

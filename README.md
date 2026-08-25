@@ -1,7 +1,13 @@
 # Die unsichtbaren Fäden – Die Welt der drei Bände
 
 Immersive Weltseite zum Bildband von Manuel & Uwe.
-Band 1 ist der erste geöffnete Teil dieser Welt; Band 2 und Band 3 werden später ergänzt.
+Alle drei Bände stehen als Daten in der Welt. **Band 1** ist vollständig begehbar –
+mit Motiven, Kamerafahrten und Kinoebene. **Band 2** und **Band 3** sind mit
+Kapiteln, Auftakten und Kapitelbilanzen eingehängt; ihre Bewegtmotive für die
+Website sind noch nicht erzeugt.
+
+Was öffentlich sichtbar ist, entscheidet **nicht** das Vorhandensein von Daten,
+sondern `status` in `data/<band>/band.ts` – siehe „Die drei Bände“.
 
 **Live:** https://manuelbrandner85.github.io/Buch-landingpage-/
 
@@ -29,8 +35,9 @@ npm run dev
 `npm run vorschau` erzeugt `vorschau/welt.html` – eine einzelne, offline lauffähige
 Datei zum Ansehen ohne Server. Sie zieht Daten und Stylesheet aus denselben
 Dateien wie die Anwendung; nachgebaut ist nur das Rendern.
-`npm run build` erzeugt 30 statische Seiten: die Weltseite, sechs Kapitelseiten
-und einundzwanzig Ortsseiten.
+`npm run build` erzeugt 40 statische Seiten: die Weltseite, elf Kapitelseiten
+(Band 1 und Band 2) und einundzwanzig Ortsseiten. Band 3 liegt vollständig in
+den Daten, bekommt aber keine Seite, solange er auf „in Arbeit“ steht.
 
 ## Die Kinoebene
 
@@ -59,9 +66,12 @@ wird beim ersten Lauf geladen.
   abgehende gerade steht, statt bei null.
 - Die Schärfeebene wandert mit der Fahrt – sehr eng dosiert. Eine
   Schärfeverlagerung, die man bemerkt, ist zu stark.
-- Die Lichtstimmung ist eine Kurve über den Band (`STIMMUNG` in
-  `data/band-1/band.ts`): Kapitel 1 kalt und nachtblau, Kapitel 5 warm und
-  staubig, Kapitel 6 entsättigt. Zwischen Szenen wird weich übergeblendet.
+- Die Lichtstimmung ist eine Kurve über die ganze Reihe (`stimmungFuer` in
+  `world/registry.ts`, gespeist aus dem `STIMMUNG`-Satz jedes Bandes): Kapitel 1
+  kalt und nachtblau, Kapitel 5 warm und staubig, Kapitel 6 entsättigt; Band 2
+  läuft von Weinrot über Gold zu Blau, Band 3 kühl und metallisch. Für Band 2
+  und 3 sind die Werte aus den Kapitelfarben des Satzes abgeleitet, nicht frei
+  gewählt. Zwischen Szenen wird weich übergeblendet.
 - Der Ton folgt der Kamera: Die Atmosphäre wird lauter, je näher sie an der
   Szene steht, und tritt zwischen zwei Szenen zurück.
 
@@ -236,8 +246,9 @@ src/
   ui/                   Kopfzeile, Evidenzregler, Zeitleiste, Kapitelmarke
   data/
     gemeinsam/          Typen, Orte, Zeitleiste – bandübergreifend
-    band-1/             Kapitel, Szenen, Assets
-    band-2/             leer, wartet auf Inhalte
+    band-1/             Kapitel 1–6, Szenen, Assets
+    band-2/             Kapitel 7–11, Auftakte und Bilanzen
+    band-3/             Kapitel 12–16, Auftakte und Bilanzen
 ```
 
 ## Die drei Regeln dieses Projekts
@@ -251,12 +262,41 @@ src/
    Vorkommen über alle Bände. Ein Ort aus Band 1, der in Band 2 wiederkehrt,
    bekommt dort nur einen weiteren Eintrag in `vorkommen` – kein zweites Asset.
 
-## Band 2 hinzufügen
+## Die drei Bände
 
-1. `src/data/band-2/` mit `band.ts`, `szenen.ts`, `assets.ts` füllen
-2. Assets nach `public/assets/band-2/szenen/` legen
+| Band | Kapitel | Seiten | in den Daten | öffentlich |
+|---|---|---|---|---|
+| 1 – Ursprung und Ordnung | 1–6 | 206 | Motive, Fahrten, Interaktionen | ja |
+| 2 – Glaube, Gold und Revolution | 7–11 | 206 | Auftakte und Kapitelbilanzen | ja |
+| 3 – Krieg, Ordnung und Netz | 12–16 | 206 | Auftakte und Kapitelbilanzen | **nein** |
+
+Alles in Band 2 und Band 3 stammt aus dem gesetzten Buch: Kapitelnamen und
+Seitenbereiche aus dem verbindlichen Seitenplan, die Auftaktzeile und die
+Herkunftszeile von der Kapitelauftaktseite, das Zitat der Bilanz ist der
+Schlüsselsatz der Kapitelbilanz. Wo eine Seite noch nicht gesetzt ist –
+Band 3, Kapitel 14 und 15 –, steht der Auftakt ohne Bilanz: Ein Schlüsselsatz,
+den es noch nicht gibt, wird nicht erfunden.
+
+### Der Schalter
+
+`OEFFENTLICHE_BAENDE` in `world/registry.ts` filtert nach `buch.status`.
+Ein Band auf `'in Arbeit'` ist vollständig in den Daten, bekommt aber
+
+- keine Kapitelseiten (`generateStaticParams`),
+- keinen Eintrag in der Sitemap,
+- und im Bücherbereich weder Titel noch Klappentext.
+
+Band 3 steht dort, weil seine Buch-DNA das ausdrücklich verlangt: „öffentlich
+nicht erwähnen, auch nicht andeuten“. Aus `'in Arbeit'` wird `'erschienen'`,
+und der Band ist da. Ein anderer Eingriff ist nicht nötig.
+
+### Motive nachrüsten
+
+1. Assets nach `public/assets/band-<n>/szenen/` legen und in `assets.ts` eintragen
+2. Den Auftakten `platte`, `motion`, `ebenen` geben; Motivszenen zwischen
+   Auftakt und Bilanz ergänzen
 3. In `src/data/gemeinsam/orte.ts` bei wiederkehrenden Orten `vorkommen` ergänzen
-4. `amazonUrl` eintragen
+4. `amazonUrl` eintragen, sobald die Produktseite vorliegt
 
 Kein Eingriff in `engine/`, `scenes/` oder `camera/`.
 
@@ -334,13 +374,16 @@ Vier Befunde wurden dabei behoben:
 
 ## Datenprüfung
 
-`npm run pruefen` läuft automatisch vor jedem Build (`prebuild`). Der Build bricht ab, wenn
+`npm run pruefen` läuft automatisch vor jedem Build (`prebuild`) und prüft
+**alle drei Bände**. Der Build bricht ab, wenn
 
 - eine Szene mit Buchinhalt keine `buchseite` nennt,
 - ein Motiv ohne Herkunftsbadge oder ohne „Woher wir das wissen“ auskommt,
 - eine Szene auf ein Asset oder ein Kapitel zeigt, das es nicht gibt,
 - eine Evidenzstufe außerhalb von A bis G liegt,
-- eine Seitenzahl außerhalb von Band 1 liegt,
+- eine Seitenzahl außerhalb des jeweiligen Bandes liegt,
+- eine Szene eine `bandId` trägt, die nicht zu ihrem Datenordner passt,
+- eine Kapitelnummer in zwei Bänden vorkommt,
 - oder eine Bilddatei fehlt.
 
 Der Anspruch des Buches ist Belegbarkeit. Die Website hält ihn technisch durch,
@@ -368,6 +411,12 @@ und nichts freizuschalten.
 
 ## Offen
 
+- **Band 2 und Band 3: Motive für die Website.** Beide Bände sind mit Kapiteln,
+  Auftakten und Bilanzen in den Daten, aber ohne `platte`. Bis dahin steht der
+  Kapitelauftakt als Text – die Kinoebene überspringt Szenen ohne Motiv.
+- **Band 3, Kapitel 14 und 15:** im Seitenplan verbindlich, im Satz noch offen –
+  deshalb Auftakt ohne Bilanz.
+- **`amazonUrl` für Band 2 und Band 3** – weiterhin Platzhalter.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Originalrenderings statt PDF-Ausschnitte (Druck-PDF: eine flache Ebene je Seite)
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion

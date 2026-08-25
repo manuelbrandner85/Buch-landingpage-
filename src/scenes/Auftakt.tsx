@@ -1,6 +1,6 @@
 import type React from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
-import { kapitelNach } from '@/world/registry';
+import { kapitelNach, bandNummer } from '@/world/registry';
 import { Quelle } from '@/ui/Quelle';
 
 /** Kapitelauftakt mit dem schwarzen Band aus dem Buch. */
@@ -20,7 +20,7 @@ export function Auftakt({ szene }: { szene: Szene }) {
               ))}
             </h2>
             <p className="unterzeile" data-auf>{szene.unterzeile ?? kapitel?.unterzeile}</p>
-            <Quelle text={szene.quelle} seite={szene.buchseite} />
+            <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} />
           </div>
         </div>
       </div>

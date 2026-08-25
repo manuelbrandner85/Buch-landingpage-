@@ -1,5 +1,6 @@
 import type { Szene } from '@/data/gemeinsam/typen';
 import { Quelle } from '@/ui/Quelle';
+import { bandNummer } from '@/world/registry';
 
 /**
  * Der Registerwechsel: außen die Nacht, innen das Papier.
@@ -15,7 +16,7 @@ export function PapierSeite({ szene }: { szene: Szene }) {
         </p>
         <h2 data-auf>{szene.titel}</h2>
         {szene.zitat && <blockquote data-auf>{szene.zitat}</blockquote>}
-        <Quelle text={szene.quelle} seite={szene.buchseite} label="Beleg" />
+        <Quelle text={szene.quelle} seite={szene.buchseite} band={bandNummer(szene.bandId)} label="Beleg" />
       </div>
     </section>
   );

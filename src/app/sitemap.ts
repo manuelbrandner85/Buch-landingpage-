@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { ALLE_KAPITEL } from '@/world/registry';
+import { OEFFENTLICHE_KAPITEL } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
 
 // Beim statischen Export muss die Route zur Bauzeit feststehen.
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASIS, changeFrequency: 'monthly', priority: 1 },
     { url: `${BASIS}/ueber`, changeFrequency: 'yearly', priority: 0.5 },
     { url: `${BASIS}/welt/begriffe`, changeFrequency: 'yearly', priority: 0.5 },
-    ...ALLE_KAPITEL.map((k) => ({
+    ...OEFFENTLICHE_KAPITEL.map((k) => ({
       url: `${BASIS}/welt/kapitel/${k.id}`, changeFrequency: 'yearly' as const, priority: 0.8,
     })),
     ...ORTE.map((o) => ({
