@@ -11,11 +11,10 @@ import type { Szene } from '../gemeinsam/typen';
  * Titel, Leitfragen und Seitenbereiche sind gegen den gedruckten Umschlag des
  * Taschenbuchs geprüft und stimmen mit ihm überein.
  *
- * Die Kapitelbilanzen von 12, 13 und 16 stammen aus dem Satz selbst. Für 14 und
- * 15 fehlen sie hier: Die Druckteile im Ordner von Band 3 tragen den Inhalt von
- * Band 2 (geprüft an den Seiten 81, 82, 117 und 151), es liegt also keine
- * lesbare Fassung dieser beiden Bilanzen vor. Ein Schlüsselsatz, den man nicht
- * gelesen hat, wird hier nicht erfunden – dasselbe gilt für ihre Herkunftszeile.
+ * Alle fünf Kapitelbilanzen stammen aus dem Satz selbst, ebenso die
+ * Herkunftszeilen der Auftakte. Die Seiten von Kapitel 14 und 15 trugen zwischen-
+ * zeitlich den Inhalt von Band 2; nach dem Neubau der Druckdatei am 25.08.2026
+ * sind sie nachgelesen und hier eingetragen (Seiten 82, 116, 117 und 151).
  */
 export const SZENEN_BAND_3: Szene[] = [
   {
@@ -55,7 +54,13 @@ export const SZENEN_BAND_3: Szene[] = [
     uebergang: 'aufloesen', fahrt: 'schwenkRechts',
     titel: 'Vertrag, Dollar\nund Blöcke',
     unterzeile: 'Wer schreibt die Regeln, wenn eine Welt neu geordnet wird',
-    quelle: 'Konferenzsaal. Motiv aus dem Satz des Bandes, Seite 82.',
+    quelle: 'Leerer Konferenzsaal. Freie Rekonstruktion.',
+  },
+  {
+    id: 'faden-14', bandId: 'band-3', kapitelId: 14, typ: 'papier', buchseite: 116,
+    titel: 'Der unsichtbare Faden in Kapitel 14',
+    zitat: 'Jede dieser vier Ordnungen wurde von denen geschrieben, die sie durchsetzen konnten. Genau das ist ihre Stärke und ihre Grenze.',
+    quelle: 'Kapitelbilanz zu Kapitel 14: vier Ordnungen von 1944 und 1945, geprüft an Vertragstext, Charta und Abstimmungsverhalten.',
   },
   {
     id: 'kapitel-15', bandId: 'band-3', kapitelId: 15, typ: 'auftakt', tor: true,
@@ -64,7 +69,13 @@ export const SZENEN_BAND_3: Szene[] = [
     uebergang: 'aufloesen', fahrt: 'durchfahrt',
     titel: 'Öl, Container\nund Konzerne',
     unterzeile: 'Wem gehört eine Ordnung, die niemand beschlossen hat',
-    quelle: 'Containerterminal im Morgennebel. Motiv aus dem Satz des Bandes, Seite 117.',
+    quelle: 'Containerterminal. Freie Rekonstruktion.',
+  },
+  {
+    id: 'faden-15', bandId: 'band-3', kapitelId: 15, typ: 'papier', buchseite: 151,
+    titel: 'Der unsichtbare Faden in Kapitel 15',
+    zitat: 'Über keine dieser fünf Ordnungen ist je abgestimmt worden. Vier davon gelten bis heute – und das ist der unbequemste Befund dieses Bandes.',
+    quelle: 'Kapitelbilanz zu Kapitel 15: fünf Ordnungen von 1961 bis 1991, geprüft an Normen, Notenbankdarstellung und Verfahrenszahlen.',
   },
   {
     id: 'kapitel-16', bandId: 'band-3', kapitelId: 16, typ: 'auftakt', tor: true,
