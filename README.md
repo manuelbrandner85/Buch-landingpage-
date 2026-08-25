@@ -745,18 +745,21 @@ liegt bei den schwachen Geräten.
 
 ## Wege prüfen
 
-```
-NEXT_EXPORT=1 npm run build && npm run pruefe:wege
-```
+`npm run build && node scripts/pruefe-wege.mjs` – läuft im Bau, bevor irgendetwas
+veröffentlicht wird. Ein statischer Export hat keinen Server, der einen falschen
+Pfad noch abfängt; deshalb wird jeder interne Verweis nachgeschlagen.
 
-Läuft auch in der Veröffentlichung. Ein statischer Export hat keinen Server, der
-einen falschen Pfad noch abfängt: Was nicht als Datei liegt, ist eine tote Seite.
-Geprüft wird jeder interne Verweis jeder gebauten Seite, mit Basispfad.
+Dazu eine zweite Prüfung: **Der Basispfad darf nirgends doppelt stehen.** Diese
+Falle hat dreimal zugeschlagen – bei den Zurück-Knöpfen, bei den Vorschaubildern
+für geteilte Links und bei den Weiterleitungen der alten Adressen. Jedes Mal sah
+die Seite richtig aus, und jedes Mal führte der Weg ins Leere.
 
-Gefunden und behoben: Der Rückweg-Knopf hängte den Basispfad selbst an, obwohl
-die Aufrufer ihre Adressen längst über `world/wege` bildeten – heraus kam
-`/Buch-landingpage-/Buch-landingpage-/faeden/`. Dazu drei Fußzeilen mit nackten
-Pfaden. Stand: **87 Seiten, 1530 Verweise, keiner tot.**
+Der Grund ist immer derselbe: Unter GitHub Pages trägt `NEXT_PUBLIC_BASIS_URL`
+den Unterordner schon (`…github.io/Buch-landingpage-`). Wer darauf noch einmal
+`weg()` legt – oder Next einen relativen `canonical` gegen `metadataBase`
+auflösen lässt –, hängt ihn ein zweites Mal an. Deshalb gibt es `wegVollstaendig()`:
+Es nimmt einen fertigen Pfad und macht ihn absolut, ohne den Unterordner
+zweimal zu schreiben.
 
 ## Datenprüfung
 

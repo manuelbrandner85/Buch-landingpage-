@@ -6,7 +6,7 @@ import {
   reiheNach, schwelleVon,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
-import { weg, wegVorschau } from '@/world/wege';
+import { weg, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
 
 /**
  * Die Schwelle einer Reihe.
@@ -32,7 +32,7 @@ export async function generateMetadata(
   return {
     title: titel,
     description: r.einladung,
-    alternates: { canonical: weg(`/${r.id}/`) },
+    alternates: { canonical: wegVollstaendig(wegReihe(r.id)) ?? wegReihe(r.id) },
     openGraph: {
       type: 'book', title: titel, description: r.einladung,
       images: wegVorschau(`welt-${r.id}`),

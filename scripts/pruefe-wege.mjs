@@ -67,6 +67,24 @@ for (const seite of seiten) {
   }
 }
 
+/**
+ * Der Unterordner darf nirgends doppelt stehen.
+ *
+ * Diese Falle hat zweimal zugeschlagen: einmal bei den Zurück-Knöpfen, einmal
+ * bei den Vorschaubildern für geteilte Links. Beide Male sah die Seite richtig
+ * aus, und beide Male führte der Weg ins Leere. Ein doppelter Basispfad ist
+ * immer ein Fehler – im href wie im Metadaten-Kopf.
+ */
+if (BASIS) {
+  const doppelt = BASIS + BASIS;
+  for (const seite of seiten) {
+    const inhalt = readFileSync(seite, 'utf8');
+    if (inhalt.includes(doppelt)) {
+      fehler.push(`${seite}: Basispfad steht doppelt (${doppelt})`);
+    }
+  }
+}
+
 console.log(`${seiten.length} Seiten, ${geprueft} interne Verweise geprüft.`);
 if (fehler.length) {
   for (const f of [...new Set(fehler)]) console.error('Fehler:', f);

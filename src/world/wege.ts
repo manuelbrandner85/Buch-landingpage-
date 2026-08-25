@@ -31,10 +31,28 @@ export const wegImpressum = () => weg('/impressum/');
  * eine Vorschau baut, hat keinen Kontext, gegen den es einen relativen Pfad
  * auflösen könnte. Ohne Basis-URL gibt es kein Bild statt eines falschen.
  */
-export const wegAbsolut = (pfad: string): string | undefined => {
-  const basis = process.env.NEXT_PUBLIC_BASIS_URL;
-  return basis ? `${basis.replace(/\/$/, '')}${weg(pfad)}` : undefined;
+/**
+ * Eine fertige, schon mit dem Basispfad versehene Adresse absolut machen.
+ *
+ * Der Unterordner darf nur einmal vorkommen. Unter GitHub Pages trägt die
+ * Basis-URL ihn bereits (…github.io/Buch-landingpage-); wer dann noch einmal
+ * `weg()` darüberlegt, hängt ihn ein zweites Mal an. Genau das ist zweimal
+ * passiert – einmal bei den Vorschaubildern, einmal bei den Weiterleitungen –
+ * und beide Male sah die Seite richtig aus, während der Weg ins Leere führte.
+ * `scripts/pruefe-wege.mjs` schlägt seitdem Alarm, wenn der Basispfad irgendwo
+ * doppelt steht.
+ */
+export const wegVollstaendig = (fertigerPfad: string): string | undefined => {
+  const basis = (process.env.NEXT_PUBLIC_BASIS_URL ?? '').replace(/\/$/, '');
+  if (!basis) return undefined;
+  const ursprung = BASIS_PFAD && basis.endsWith(BASIS_PFAD)
+    ? basis.slice(0, -BASIS_PFAD.length)
+    : basis;
+  return `${ursprung}${fertigerPfad}`;
 };
+
+/** Eine vollständige Adresse aus einem Pfad ohne Basispfad. */
+export const wegAbsolut = (pfad: string): string | undefined => wegVollstaendig(weg(pfad));
 
 /** Das Vorschaubild einer Seite, wenn es eines gibt. */
 export const wegVorschau = (name: string) => {

@@ -6,7 +6,7 @@ import {
   oeffentlicheBaendeVon, reiheNach, reiseBand,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
-import { weg, wegVorschau } from '@/world/wege';
+import { wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 
 /**
  * Die Welt eines Bandes.
@@ -32,7 +32,9 @@ export async function generateMetadata(
   return {
     title: titel,
     description: b.buch.unterzeile ?? b.buch.klappentext.slice(0, 160),
-    alternates: { canonical: weg(`/${r.id}/${b.buch.id}/`) },
+    alternates: {
+      canonical: wegVollstaendig(wegWelt(r.id, b.buch.id)) ?? wegWelt(r.id, b.buch.id),
+    },
     openGraph: {
       type: 'book', title: titel, description: b.buch.klappentext,
       images: wegVorschau(b.buch.id),

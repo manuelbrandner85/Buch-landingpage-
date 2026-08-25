@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { wegVollstaendig } from '@/world/wege';
 
 /**
  * Eine alte Adresse, die höflich weiterzeigt.
@@ -10,7 +11,9 @@ import type { Metadata } from 'next';
  */
 export const weiterleitungsKopf = (ziel: string): Metadata => ({
   robots: { index: false, follow: true },
-  alternates: { canonical: ziel },
+  // Absolut, nicht relativ: Next löst einen relativen `canonical` gegen die
+  // Basis-URL auf – und die trägt den Unterordner schon.
+  alternates: { canonical: wegVollstaendig(ziel) ?? ziel },
   other: { refresh: `0; url=${ziel}` },
 });
 
