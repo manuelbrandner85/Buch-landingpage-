@@ -534,6 +534,54 @@ Fünf Befunde wurden dabei behoben:
   unterschieden sich nur über die Farbe von ihrem Satz. Beides ist behoben:
   volle Farbe statt Deckkraft, und die Links sind unterstrichen.
 
+## Bewegtbild prüfen
+
+```
+npm run pruefe:video
+```
+
+Läuft auch vor jedem Bau. Geprüft wird für jede Szene mit `motion`, ob beide
+Fassungen vorhanden sind – die große und die kleine –, und was ffprobe über sie
+sagt: Auflösung, Dauer, Größe, und ob eine Tonspur mitläuft. Ton hat in der
+Kinoebene nichts zu suchen: Die Videos laufen stumm und automatisch, eine
+Tonspur wäre Ballast und auf manchen Geräten ein Grund, das Abspielen zu
+verweigern. Stand: **54 Dateien, alle in Ordnung** – Band 1 und Band 2 sind
+vollständig bewegt.
+
+Fehlt eine Datei, sieht man keinen Fehler, sondern nur eine Szene, die sich
+nicht bewegt. Genau deshalb wird hier gezählt statt geschaut.
+
+## Flüssig auf jedem Gerät
+
+Vier Eingriffe, alle gemessen statt vermutet:
+
+- **Kein Layoutzwang je Bild.** Die Kinoebene las sechzigmal je Sekunde die Maße
+  von rund dreißig Abschnitten; jedes `getBoundingClientRect` zwingt den Browser,
+  das Layout vorzeitig zu berechnen. Gemessen wird jetzt nur noch, wenn sich das
+  Layout ändert: beim Drehen, beim Nachladen der Schriften, wenn ein Bild
+  eintrifft (`ResizeObserver`). Im Bild bleibt eine Abfrage der Scrollhöhe.
+- **Videobilder nur, wenn neue anliegen.** Ein Video läuft mit 24 bis 30 Bildern
+  je Sekunde, die Fläche zeichnet mit 60 oder 120. Vorher wurde in jedem
+  gezeichneten Bild ein volles Videobild in die Grafikkarte geschoben – bei zwei
+  laufenden Videos bis zu viermal so oft wie nötig. Jetzt entscheidet
+  `requestVideoFrameCallback`, wo es das gibt, sonst die Abspielzeit.
+- **Drei Zeichenstufen, die sich selbst regeln.** Vorher hing die Feinheit an
+  einer Vermutung: schmales Fenster gleich schwaches Gerät. Ein neues Telefon
+  bekam dadurch grundlos die grobe Fassung, ein alter Rechner am großen Schirm
+  die feine – und ruckelte. Jetzt misst die Fahrt selbst mit und schaltet
+  herunter (erst Tiefenunschärfe, dann Auflösung) beziehungsweise wieder hoch.
+  Gezählt wird in Sekunden, nicht in Bildern: Auf einem langsamen Gerät wäre ein
+  Fenster von fünfundvierzig Bildern neun Sekunden lang – es würde also gerade
+  dort am längsten ruckeln, wo es am schnellsten nachgeben müsste.
+- **Videos schlafen.** Außer Reichweite und im Hintergrund werden sie angehalten
+  und ihre Texturen freigegeben; ein Bild von 1920 × 1080 belegt als RGBA rund
+  acht Megabyte Grafikspeicher.
+
+In der Messung mit weicher Rasterung (SwiftShader, also Rechnen statt Grafikkarte)
+fiel die Bildzeit von **947 ms auf 190 ms** bei 1440 × 900 und von 164 ms auf
+99 ms bei 390 × 844. Auf echter Grafik bleibt die volle Stufe stehen; der Nutzen
+liegt bei den schwachen Geräten.
+
 ## Datenprüfung
 
 `npm run pruefen` läuft automatisch vor jedem Build (`prebuild`) und prüft
@@ -580,6 +628,8 @@ und nichts freizuschalten.
 - **Band 3, Kapitel 14 und 15:** im Seitenplan verbindlich, im Satz noch offen –
   deshalb Auftakt ohne Bilanz.
 - **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
+- **Band 3 hat keine Bewegtfassungen** – er hat auch keine Motive und ist nicht
+  öffentlich.
 - **Kaufwege für Band 2 und Band 3** – leer, weil es sie noch nicht gibt.
 - **Die Leseprobe fehlt.** Der Kanal, der Buch 1 mit Buch 4 verbindet, ist eine
   E-Mail-Liste: Kapitel 1 gegen eine Adresse. Ohne sie fängt jeder neue Titel bei
