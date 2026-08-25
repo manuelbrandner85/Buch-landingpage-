@@ -53,7 +53,22 @@ Zwei Dinge sind freiwillig, beide als **Variables**:
 | Name | Wirkung |
 | --- | --- |
 | `SEITEN_DOMAIN` | andere Adresse als `www.trendonix-buecher.de` |
+| `FTP_ZIEL` | anderer Zielordner als `/trendonix-buecher.de` |
 | `FTP_LOESCHEN` | `ja` – räumt im Zielverzeichnis auf. **Nur** setzen, wenn dort ausschließlich diese Seite liegt |
+
+### Das Zielverzeichnis
+
+Der FTP-Zugang landet im Wurzelverzeichnis des Webspace – der Dokumentenstamm
+der Domain liegt eine Ebene tiefer. In der Anbieterverwaltung steht er unter
+*Domain → Stammverzeichnis*, hier `/www/htdocs/w021fb9a/trendonix-buecher.de/`;
+vom FTP-Zugang aus gesehen ist das `/trendonix-buecher.de`. Genau das ist die
+Vorgabe im Auftrag.
+
+Das ist der Fehler, der beim ersten Mal passiert ist: Der Upload lief
+fehlerfrei durch und war trotzdem unsichtbar – 185 MB neben der Tür. Ein
+grüner Haken beim Hochladen heißt nur, dass die Dateien angekommen sind, nicht
+dass sie am richtigen Ort liegen. Deshalb wird nach jeder Veröffentlichung die
+Startseite selbst abgerufen.
 
 ### Einmalig beim Anbieter
 

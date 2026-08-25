@@ -175,6 +175,7 @@ jobs:
         if: steps.zugang.outputs.da == 'ja'
         env:
           FTP_ZUGANG: ${{ secrets.FTP_ZUGANG }}
+          FTP_ZIEL: ${{ vars.FTP_ZIEL }}
           FTP_LOESCHEN: ${{ vars.FTP_LOESCHEN }}
         run: |
           set +x
@@ -188,8 +189,15 @@ jobs:
           KENNWORT="${REST%@*}"
           case "$HOST_TEIL" in
             */*) SERVER="${HOST_TEIL%%/*}"; ZIEL="/${HOST_TEIL#*/}" ;;
-            *)   SERVER="$HOST_TEIL";       ZIEL="/" ;;
+            *)   SERVER="$HOST_TEIL";       ZIEL="" ;;
           esac
+          # Steht im Zugang kein Verzeichnis, gilt die Variable FTP_ZIEL, und
+          # sonst der Stammordner der Domain beim Anbieter.
+          #
+          # Der erste Versuch lief nach / – dort landet der FTP-Zugang, aber der
+          # Dokumentenstamm der Domain liegt eine Ebene tiefer. Der Upload war
+          # fehlerfrei und trotzdem unsichtbar: 185 MB neben der Tür.
+          ZIEL="${ZIEL:-${FTP_ZIEL:-/trendonix-buecher.de}}"
           if [ -z "$BENUTZER" ] || [ -z "$KENNWORT" ] || [ -z "$SERVER" ]; then
             echo "::error title=FTP_ZUGANG unlesbar::Erwartet wird benutzer:kennwort@server"
             exit 1
