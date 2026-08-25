@@ -282,7 +282,9 @@ src/
     band-3/             Kapitel 12–16, Auftakte und Bilanzen
   app/
     page.tsx            Das Haus: aktuelles Buch, Welten, Regal
-    [reihe]/            Die begehbare Welt einer Reihe samt Kapiteln und Orten
+    [reihe]/            Die Schwelle der Reihe: Ankunft und Weltenwahl
+    [reihe]/[band]/     Die Welt eines Bandes – nur seine Szenen
+    [reihe]/kapitel/    Kapitel als Leseseiten, [reihe]/ort/ die Orte
     buch/[id]/          Die Buchseite – für Suchmaschinen und zum Weiterschicken
     welt/               Die alten Adressen, die auf die neuen weiterzeigen
 ```
@@ -298,10 +300,17 @@ src/
 - **Die Adresse trägt die Reihe:** `/faeden/kapitel/7`. Die alten `/welt/…`-Adressen
   bleiben als Weiterleitung stehen (`refresh` plus `canonical`, weil ein statischer
   Export keinen Server hat, der umleiten könnte).
-- **Die Startseite ist nicht mehr die Welt, sondern der Vorraum.** Wer von einem
-  kurzen Video kommt, sieht zuerst das Buch, das es zu kaufen gibt, den Kaufweg
-  daneben und die Tür in seine Welt darunter. Die Welt selbst liegt einen Klick
-  weiter unter `/faeden/` – unverändert, mit der ganzen Kinoebene.
+- **Eine Welt je Band, und eine Schwelle davor.** Die Reise war zuerst **ein**
+  Durchgang über alle Bände. Das las sich gut und war falsch: Wer die Welt von
+  Band 3 betreten wollte, landete in Band 1 und sah am Ende dessen Bücherwand.
+  Jetzt ist `/faeden/` die Schwelle – Ankunft und Weltenwahl, sonst nichts –,
+  und jeder Band hat seine eigene Welt unter `/faeden/band-2/`. Dort steht
+  ausschließlich, was diesem Band gehört: seine Kapitel, seine Karte, sein
+  Epilog, sein Abschluss, sein Kaufweg.
+- **Die Startseite zeigt das Haus, nicht ein Buch.** Vorher stand oben immer der
+  zuletzt erschienene Band mit seinem Kaufweg – also dauerhaft Band 1. Das
+  bewarb einen Titel statt der Reihe. Jetzt stehen die Bände nebeneinander,
+  jeder führt in seine eigene Welt, und die Kaufwege stehen im Regal darunter.
 
 **Eine neue Reihe anlegen:** eine Datei unter `src/data/` nach dem Muster von
 `faeden.ts`, dort die Bände einhängen, und die Reihe in `world/registry.ts` in
@@ -581,6 +590,21 @@ In der Messung mit weicher Rasterung (SwiftShader, also Rechnen statt Grafikkart
 fiel die Bildzeit von **947 ms auf 190 ms** bei 1440 × 900 und von 164 ms auf
 99 ms bei 390 × 844. Auf echter Grafik bleibt die volle Stufe stehen; der Nutzen
 liegt bei den schwachen Geräten.
+
+## Wege prüfen
+
+```
+NEXT_EXPORT=1 npm run build && npm run pruefe:wege
+```
+
+Läuft auch in der Veröffentlichung. Ein statischer Export hat keinen Server, der
+einen falschen Pfad noch abfängt: Was nicht als Datei liegt, ist eine tote Seite.
+Geprüft wird jeder interne Verweis jeder gebauten Seite, mit Basispfad.
+
+Gefunden und behoben: Der Rückweg-Knopf hängte den Basispfad selbst an, obwohl
+die Aufrufer ihre Adressen längst über `world/wege` bildeten – heraus kam
+`/Buch-landingpage-/Buch-landingpage-/faeden/`. Dazu drei Fußzeilen mit nackten
+Pfaden. Stand: **87 Seiten, 1530 Verweise, keiner tot.**
 
 ## Datenprüfung
 

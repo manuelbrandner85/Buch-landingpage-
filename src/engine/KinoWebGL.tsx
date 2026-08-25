@@ -35,7 +35,15 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
     const zielBreite = Math.round(Math.min(2560, Math.max(640,
       window.innerWidth * dichte * 1.25)));
 
+    // Eine Seite ohne Motive braucht keine Kinoebene.
+    //
+    // Die Schwelle einer Reihe – Ankunft und Weltenwahl – trägt keine Platte.
+    // Vorher wurde die Fläche trotzdem gestartet und griff im ersten Bild auf
+    // eine leere Szenenliste zu: „Cannot read properties of undefined". Hier
+    // gibt es schlicht nichts zu zeigen; der schwarze Grund genügt.
     const bild = szenen.filter((s) => s.platte);
+    if (bild.length === 0) return;
+
     let steuerung: KinoSteuerung | null = null;
     try {
       steuerung = starteKino(leinwand.current, bild.map((s) => {

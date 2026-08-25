@@ -744,13 +744,39 @@ main{z-index:3}
 .hausinhalt > h1{max-width:19ch;text-wrap:balance;
   font-size:clamp(2.2rem,4.8vw,3.8rem)}
 
-.leitbuch{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);
-  gap:clamp(1.8rem,4vw,3.6rem);align-items:center;margin-top:clamp(1.8rem,4.5vh,3.4rem)}
-.leitbuch .buch3d{margin-bottom:0;max-width:15rem}
-.leittext h2{font-size:clamp(1.6rem,3vw,2.4rem);color:var(--papier)}
-.leittext .klappe{margin-top:1.1rem;max-width:52ch;color:var(--staub);font-size:.95rem}
-.leitbuch .wege,.buchkarte .wege{display:flex;gap:.8rem;flex-wrap:wrap;
-  align-items:center;margin-top:1.8rem}
+/* Die Reihe im Empfang: die Bände nebeneinander, keiner davor.
+   Vorher stand hier ein einzelnes Buch mit seinem Kaufweg – das bewarb einen
+   Titel statt der Reihe und ließ die anderen wie Zubehör aussehen. */
+.reihenschau{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,20rem);
+  gap:clamp(2rem,5vw,4rem);align-items:center;margin-top:clamp(1.8rem,4.5vh,3.2rem)}
+.reihenbaende{display:flex;gap:clamp(.9rem,2.4vw,2rem);align-items:flex-end}
+.reihenband{display:block;text-decoration:none;flex:1 1 0;max-width:11rem;
+  transition:transform .45s}
+.reihenband:hover{transform:translateY(-6px)}
+.reihenband .buch3d{margin-bottom:.8rem;max-width:100%}
+.bandzeile{display:block;font-family:var(--display),serif;font-size:.62rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold-tief);
+  text-align:center}
+.bandzeile em{font-style:normal;color:var(--staub)}
+.reihentext .klappe{margin-top:1rem;color:var(--staub);font-size:.95rem}
+.reihenschau .wege,.buchkarte .wege{display:flex;gap:.8rem;flex-wrap:wrap;
+  align-items:center;margin-top:1.6rem}
+
+/* Im Empfang zeigen die Bände ihre Vorderseite und drehen sich langsam. */
+.reihenband .korpus{animation:umrunden 26s ease-in-out infinite alternate;
+  animation-timeline:auto;animation-range:normal}
+.reihenband .flaeche .licht,.reihenband .standschatten{
+  animation-duration:26s;animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;animation-direction:alternate;
+  animation-fill-mode:both;animation-timeline:auto;animation-range:normal}
+.reihenband:nth-child(2) .korpus,.reihenband:nth-child(2) .flaeche .licht{animation-delay:-2s}
+.reihenband:nth-child(3) .korpus,.reihenband:nth-child(3) .flaeche .licht{animation-delay:-4s}
+@media (prefers-reduced-motion:reduce){
+  .reihenband .korpus,.reihenband .flaeche .licht,.reihenband .standschatten{animation:none}
+}
+
+/* Die Bandziffer der Welt, in der man gerade steht. */
+header .baender a.hier{color:var(--gold);border-color:var(--gold);opacity:1}
 
 /* Der Kaufweg: ein Knopf, darunter leise die anderen Ausgaben. */
 .kaufblock{display:inline-flex;flex-direction:column;gap:.45rem}
@@ -840,7 +866,7 @@ footer a:hover{text-decoration-color:var(--gold)}
 .kapitelliste .seite{color:var(--staub);font-size:.8rem}
 
 @media (max-width:820px){
-  .leitbuch,.buchkarte,.buchseite .buchkopf{grid-template-columns:1fr;justify-items:start}
+  .buchkarte,.buchseite .buchkopf{grid-template-columns:1fr;justify-items:start}
   .hausbild{min-height:auto;padding-top:clamp(5rem,12vh,8rem)}
 }
 @media (prefers-reduced-motion:reduce){
@@ -967,12 +993,12 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
   .hausbild{padding-top:clamp(3.5rem,7vh,5rem)}
   .hausinhalt > h1{font-size:clamp(1.95rem,7.4vw,2.7rem);max-width:15ch}
   .hausbild p.marke{gap:.75rem;margin-bottom:1.1rem}
-  .leitbuch{gap:1.4rem;margin-top:1.6rem;justify-items:center;text-align:center}
-  .leitbuch .buch3d{max-width:min(46vw,11rem)}
-  .leittext{display:flex;flex-direction:column;align-items:center}
-  .leittext .klappe{display:none}
-  .leitbuch .wege{justify-content:center;margin-top:1.2rem}
-  .leittext .eyebrow{letter-spacing:.18em;font-size:.62rem}
+  .reihenschau{grid-template-columns:1fr;gap:1.6rem;margin-top:1.4rem;text-align:center}
+  .reihenbaende{gap:.6rem}
+  .reihenband{max-width:none}
+  .reihenschau .wege{justify-content:center;margin-top:1.2rem}
+  .reihentext .eyebrow{letter-spacing:.18em;font-size:.62rem}
+  .reihentext .klappe{font-size:.88rem}
   .buchkarte{justify-items:center;text-align:center}
   .buchkarte .wege{justify-content:center}
   .buchkarte .klappe,.buchkarte .unterzeile{margin-inline:auto}

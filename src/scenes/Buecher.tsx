@@ -1,5 +1,6 @@
 import type { Buch, Szene } from '@/data/gemeinsam/typen';
-import { BAENDE, WELT, TRENDONIX, assetNach, szeneZuKapitel } from '@/world/registry';
+import { BAENDE, TRENDONIX, assetNach, reiheZuBand } from '@/world/registry';
+import { wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 import { Buch3D } from './Buch3D';
 
@@ -54,7 +55,7 @@ function Tor({ buch }: { buch: Buch }) {
   // erscheint. Seine Welt ist begehbar, nur zu kaufen gibt es ihn noch nicht.
   const offen = buch.status !== 'in Arbeit';
   const cover = assetNach(buch.coverAsset);
-  const ziel = szeneZuKapitel(WELT[buch.id]?.kapitel[0]?.id, buch.id);
+  const reihe = reiheZuBand(buch.id);
 
   if (!offen) {
     return (
@@ -81,29 +82,40 @@ function Tor({ buch }: { buch: Buch }) {
       <p className="klappe">{buch.klappentext}</p>
       <div className="wege">
         <Kaufwege buch={buch} />
-        {ziel && <a className="eintauchen" href={`#${ziel.id}`}>In die Welt</a>}
+        {reihe && (
+          <a className="eintauchen" href={wegWelt(reihe.id, buch.id)}>
+            In die Welt von Band {buch.nummer}
+          </a>
+        )}
       </div>
     </div>
   );
 }
 
 export function Buecher({ szene }: { szene?: Szene }) {
-  const buecher = BAENDE.map((b) => b.buch);
-  const wartend = buecher.filter((b) => b.status === 'erschienen' && b.kaufwege.length === 0);
-  // Dieselben Tore, zwei Auftritte: am Anfang die Wahl, am Ende der Abschluss.
+  // Zwei Auftritte, zwei Umfänge.
+  //
+  // Auf der Schwelle der Reihe steht die Wahl: alle Bände nebeneinander. Am
+  // Ende einer Bandwelt steht nur dieser eine Band – dort wäre jedes andere
+  // Buch ein Fremdkörper und würde von dem ablenken, wofür man gerade zwei
+  // Stunden Lesezeit investiert hat.
   const amAnfang = szene?.id === 'welten';
+  const buecher = amAnfang
+    ? BAENDE.map((b) => b.buch)
+    : BAENDE.map((b) => b.buch).filter((b) => b.id === szene?.bandId);
+  const wartend = buecher.filter((b) => b.status === 'erschienen' && b.kaufwege.length === 0);
 
   return (
     <>
       <section id={amAnfang ? 'welten' : 'buecher'}
-        className={amAnfang ? 'buecher tor-eingang' : 'buecher'}>
+        className={amAnfang ? 'buecher tor-eingang' : 'buecher abschluss'}>
         <div className="kopf">
-          <p className="eyebrow">{amAnfang ? 'Drei Welten' : 'Die Reihe'}</p>
-          <h2>{amAnfang ? 'Wo willst du hinein?' : 'Drei Bände, eine Welt'}</h2>
+          <p className="eyebrow">{amAnfang ? 'Die Welten' : 'Am Ende dieser Welt'}</p>
+          <h2>{amAnfang ? 'Wo willst du hinein?' : 'Dieser Band'}</h2>
           <p>
             {amAnfang
-              ? 'Jeder Band ist eine eigene Welt und lässt sich einzeln betreten. Wähle einen – oder scrolle weiter und geh alle drei der Reihe nach.'
-              : 'Jeder Band ist ein eigener Abschnitt derselben Welt. Zu jeder Aussage weist er aus, wie gut sie belegt ist — von gesichertem Befund bis zur offenen Frage.'}
+              ? 'Jeder Band ist eine eigene Welt und lässt sich einzeln betreten. In jeder steht nur, was zu ihrem Band gehört.'
+              : 'Zu jeder Aussage weist dieser Band aus, wie gut sie belegt ist — von gesichertem Befund bis zur offenen Frage.'}
           </p>
         </div>
 
@@ -119,7 +131,9 @@ export function Buecher({ szene }: { szene?: Szene }) {
           </p>
         )}
         {amAnfang && (
-          <p className="hinweis-zeile weiter">Oder weiter nach unten — der Faden führt von selbst.</p>
+          <p className="hinweis-zeile weiter">
+            Jede Welt führt an ihrem Ende zurück hierher.
+          </p>
         )}
       </section>
       {!amAnfang && (

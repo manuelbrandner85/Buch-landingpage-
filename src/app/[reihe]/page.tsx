@@ -2,22 +2,21 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SceneEngine } from '@/engine/SceneEngine';
 import {
-  OEFFENTLICHE_REIHEN, TRENDONIX, assetNach, buchNach,
-  oeffentlicheBaendeVon, reiheNach, reiseVon,
+  OEFFENTLICHE_REIHEN, TRENDONIX, assetNach, oeffentlicheBaendeVon,
+  reiheNach, schwelleVon,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { weg } from '@/world/wege';
 
 /**
- * Eine Welt, von vorn bis hinten begehbar.
+ * Die Schwelle einer Reihe.
+ *
+ * Hier wird angekommen und gewählt – mehr nicht. Die Welten selbst liegen je
+ * Band eine Ebene tiefer (`/faeden/band-2/`), weil eine Welt ihrem Band gehört:
+ * Wer Band 3 betreten will, soll nicht zuerst durch Band 1 müssen.
  *
  * Serverkomponente: Text, Überschriften und Bildunterschriften stehen im HTML,
- * bevor JavaScript läuft. Die Immersion liegt darüber, nicht davor – darum ist
- * die Seite auch für Suchmaschinen und Screenreader vollständig.
- *
- * Die Reise umfasst alle zeigbaren Bände dieser Reihe in einem Durchgang. Ein
- * Band, der noch nicht erscheinen darf, liegt vollständig in den Daten, ist
- * hier aber nicht dabei – siehe `reiseVon`.
+ * bevor JavaScript läuft.
  */
 export const dynamicParams = false;
 
@@ -29,7 +28,7 @@ export async function generateMetadata(
   { params }: { params: Promise<{ reihe: string }> }): Promise<Metadata> {
   const r = reiheNach((await params).reihe);
   if (!r) return {};
-  const titel = `${r.titel} – die begehbare Welt`;
+  const titel = `${r.titel} – die begehbaren Welten`;
   return {
     title: titel,
     description: r.einladung,
@@ -38,11 +37,11 @@ export async function generateMetadata(
   };
 }
 
-export default async function WeltSeite({ params }: { params: Promise<{ reihe: string }> }) {
+export default async function SchwellenSeite({ params }: { params: Promise<{ reihe: string }> }) {
   const r = reiheNach((await params).reihe);
   if (!r) notFound();
 
-  const szenen = reiseVon(r);
+  const szenen = schwelleVon(r);
   const baende = oeffentlicheBaendeVon(r);
 
   const strukturierteDaten = {
@@ -59,14 +58,11 @@ export default async function WeltSeite({ params }: { params: Promise<{ reihe: s
       inLanguage: 'de',
       numberOfPages: b.buch.seiten,
       description: b.buch.klappentext,
-      hasPart: b.kapitel.map((k) => ({
-        '@type': 'Chapter', position: k.id, name: k.titel, description: k.unterzeile,
-      })),
+      url: weg(`/buch/${b.buch.id}/`),
     })),
   };
 
-  const erstesBuch = buchNach(baende[0]?.buch.id);
-  const erstes = assetNach(erstesBuch?.coverAsset);
+  const erstes = assetNach(baende[0]?.buch.coverAsset);
   const vorschau = erstes ? vorladen(erstes) : null;
 
   return (

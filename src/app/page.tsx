@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import type { Buch, Reihe } from '@/data/gemeinsam/typen';
 import {
-  LEITBUCH, OEFFENTLICHE_REIHEN, TRENDONIX,
+  OEFFENTLICHE_REIHEN, TRENDONIX,
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
-import { wegBuch, wegImpressum, wegReihe, wegUeber } from '@/world/wege';
+import { wegBuch, wegImpressum, wegReihe, wegUeber, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
@@ -68,16 +68,29 @@ function Buchkarte({ buch }: { buch: Buch }) {
         <p className="klappe">{buch.klappentext}</p>
         <div className="wege">
           <Kaufwege buch={buch} />
-          {reihe && <a className="eintauchen" href={wegReihe(reihe.id)}>In die Welt</a>}
+          {reihe && (
+            <a className="eintauchen" href={wegWelt(reihe.id, buch.id)}>
+              In die Welt von Band {buch.nummer}
+            </a>
+          )}
         </div>
       </div>
     </article>
   );
 }
 
+/**
+ * Der Empfang zeigt das Haus, nicht ein einzelnes Buch.
+ *
+ * Vorher stand oben immer der zuletzt erschienene Band – also dauerhaft Band 1,
+ * mit seinem Kaufweg. Das bewarb einen Titel statt der Reihe und ließ die
+ * anderen Bände wie Zubehör aussehen. Jetzt stehen die Bände nebeneinander,
+ * jeder führt in seine eigene Welt, und die Kaufwege stehen im Regal darunter –
+ * bei dem Buch, zu dem sie gehören.
+ */
 export default function Haus() {
-  const leitreihe = reiheZuBand(LEITBUCH?.id);
-  const leitcover = assetNach(LEITBUCH?.coverAsset);
+  const leitreihe = OEFFENTLICHE_REIHEN[0];
+  const leitbaende = leitreihe ? oeffentlicheBaendeVon(leitreihe) : [];
   const motiv = assetNach(leitreihe?.hausmotiv);
   const buecher = OEFFENTLICHE_REIHEN
     .flatMap((r) => oeffentlicheBaendeVon(r))
@@ -110,24 +123,33 @@ export default function Haus() {
             <span>{TRENDONIX.name}</span>
           </p>
           <h1>{TRENDONIX.versprechen}</h1>
-          {LEITBUCH && (
-            <div className="leitbuch">
-              {leitcover && <Buch3D cover={leitcover} band={LEITBUCH.id} />}
-              <div className="leittext">
-                <p className="eyebrow">
-                  {leitreihe?.titel} · Band {LEITBUCH.nummer}
-                  {LEITBUCH.status === 'erschienen' ? ' · im Handel' : ''}
-                </p>
-                <h2>{LEITBUCH.titel}</h2>
-                {LEITBUCH.unterzeile && <p className="unterzeile">{LEITBUCH.unterzeile}</p>}
-                <p className="klappe">{LEITBUCH.klappentext}</p>
-                <div className="wege">
-                  <Kaufwege buch={LEITBUCH} />
-                  {leitreihe && (
-                    <a className="eintauchen" href={wegReihe(leitreihe.id)}>
-                      Welt betreten
+          {leitreihe && (
+            <div className="reihenschau">
+              <div className="reihenbaende">
+                {leitbaende.map((b) => {
+                  const cover = assetNach(b.buch.coverAsset);
+                  return (
+                    <a key={b.buch.id} className="reihenband"
+                      href={wegWelt(leitreihe.id, b.buch.id)}
+                      aria-label={`Welt von Band ${b.buch.nummer}: ${b.buch.titel}`}>
+                      {cover && <Buch3D cover={cover} band={b.buch.id} />}
+                      <span className="bandzeile">
+                        Band {b.buch.nummer}
+                        {b.buch.status === 'erscheint' && <em> · erscheint</em>}
+                      </span>
                     </a>
-                  )}
+                  );
+                })}
+              </div>
+              <div className="reihentext">
+                <p className="eyebrow">{leitreihe.titel}</p>
+                <p className="klappe">{leitreihe.einladung}</p>
+                <div className="wege">
+                  <a className="kaufen" href={wegReihe(leitreihe.id)}>
+                    Die Welten betreten
+                    <small>{leitbaende.length} Bände · begehbar</small>
+                  </a>
+                  <a className="eintauchen" href="#buecher">Zu den Büchern</a>
                 </div>
               </div>
             </div>

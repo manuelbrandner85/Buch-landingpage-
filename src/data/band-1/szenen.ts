@@ -7,7 +7,12 @@ import type { Szene } from '../gemeinsam/typen';
  */
 export const SZENEN_BAND_1: Szene[] = [
   {
-    // Die Schwelle.
+    // Die Schwelle der Reihe.
+    //
+    // Sie steht technisch in den Daten von Band 1, gehört inhaltlich aber der
+    // Reihe: Ankunft und Weltenwahl sind das, was vor der Wahl liegt. `SCHWELLE`
+    // in `world/registry.ts` hält beide Szenen deshalb aus jeder Bandwelt heraus –
+    // und ihre Zeilen sprechen von der Reihe, nicht von einem einzelnen Band.
     //
     // Hier stand bis zuletzt der abfotografierte Umschlag über die volle Fläche.
     // Ein Bild eines Buches ist aber kein Buch – und der gebundene Band steht
@@ -15,8 +20,8 @@ export const SZENEN_BAND_1: Szene[] = [
     // Eintritt trägt, ist Dunkelheit, ein Lichtpunkt und der Name.
     id: 'ankunft', bandId: 'band-1', typ: 'ankunft',
     titel: 'Die Unsichtbaren Fäden',
-    unterzeile: 'Ursprung und Ordnung',
-    fliesstext: 'Vom ersten Feuer bis zu den ersten Reichen.',
+    unterzeile: 'Drei Bände, drei Welten',
+    fliesstext: 'Vom ersten geteilten Feuer bis zu dem Rechenzentrum, dessen Betreiber Regeln setzt.',
   },
   {
     // Die Wahl steht vor der Reise: Wer nur einen Band will, muss ihn nicht suchen.
@@ -329,7 +334,7 @@ export const SZENEN_BAND_1: Szene[] = [
     id: 'karte', bandId: 'band-1', typ: 'karte',
     titel: 'Die Welt der Fäden',
     fliesstext:
-      'Jeder Punkt ist ein Ort, an dem Band 1 etwas belegt. Der Faden verbindet sie in der Reihenfolge der Kapitel. Die Orte von Band 2 sind noch nicht eingetragen – sie kommen in dieselbe Karte und greifen auf bestehende Punkte zurück.',
+      'Jeder Punkt ist ein Ort, an dem dieser Band etwas belegt. Der Faden verbindet sie in der Reihenfolge der Kapitel – nicht der Geografie.',
   },
   {
     id: 'epilog', bandId: 'band-1', typ: 'papier', buchseite: 195,
@@ -337,5 +342,6 @@ export const SZENEN_BAND_1: Szene[] = [
     zitat: 'Jede Erleichterung erzeugt eine neue Abhängigkeit – und diejenigen, die das Werkzeug verwalten, fallen dabei am wenigsten auf.',
     quelle: 'Epilog, Band 1.',
   },
-  { id: 'buecher', bandId: 'band-1', typ: 'buecher' },
+  // Der Abschluss dieser Welt zeigt diesen Band – und nur ihn.
+  { id: 'abschluss-band-1', bandId: 'band-1', typ: 'buecher' },
 ];

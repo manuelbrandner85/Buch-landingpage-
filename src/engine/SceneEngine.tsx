@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { ReiheId, Szene } from '@/data/gemeinsam/typen';
+import type { BandId, ReiheId, Szene } from '@/data/gemeinsam/typen';
 import { useScrollKamera } from '@/camera/useScrollKamera';
 import { KinoEbene } from './KinoEbene';
 import { KinoWebGL } from './KinoWebGL';
@@ -27,7 +27,8 @@ import { FortschrittGeber } from '@/world/FortschrittKontext';
  * Die Engine kennt sechs Szenentypen und rendert alles aus Daten.
  * Eine neue Szene ist ein neuer Datensatz – keine neue Komponente.
  */
-export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId }) {
+export function SceneEngine(
+  { szenen, reihe, band }: { szenen: Szene[]; reihe: ReiheId; band?: BandId }) {
   const [ruhig, setRuhig] = useState(false);
   const [rueckfall, setRueckfall] = useState(false);
 
@@ -52,7 +53,7 @@ export function SceneEngine({ szenen, reihe }: { szenen: Szene[]; reihe: ReiheId
     <FortschrittGeber>
     <div className={ruhig ? 'welt ruhig' : 'welt'}>
       <a className="sprungmarke" href="#karte">Zur Weltkarte springen</a>
-      <Kopfzeile reihe={reihe} ruhig={ruhig} beiRuhe={() => setRuhig((r) => !r)} />
+      <Kopfzeile reihe={reihe} band={band} ruhig={ruhig} beiRuhe={() => setRuhig((r) => !r)} />
       {/* WebGL zuerst. Trägt es nicht – alter Browser, abgeschaltete
           Beschleunigung, „Bewegung reduzieren“ –, übernimmt die DOM-Fassung. */}
       {ruhig || rueckfall

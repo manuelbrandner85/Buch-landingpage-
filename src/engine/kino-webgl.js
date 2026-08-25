@@ -289,6 +289,7 @@ function fahrt(szene, phase) {
 }
 
 export function starteKino(canvas, szenen, optionen = {}) {
+  if (!szenen?.length) return null;   // ohne Motive gibt es nichts zu zeichnen
   const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'high-performance' });
   if (!gl) return null;
 
@@ -699,7 +700,7 @@ const VORAUS = 3, ZURUECK = 1;
     // und Bild, ohne dass ruckelnd gesucht werden muss.
     const takt = Math.min(2.0, Math.max(0.45, 0.6 + Math.abs(tempo) * 260));
     for (const e of [A, B]) {
-      const q = e.quelle;
+      const q = e?.quelle;
       if (q?.laeuft && Math.abs(q.el.playbackRate - takt) > 0.05) {
         try { q.el.playbackRate = takt; } catch { /* manche Browser begrenzen das */ }
       }

@@ -3,16 +3,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { erzeugeAtmosphaere, type Atmosphaere } from '@/audio/atmosphaere';
 import { Zeitleiste } from './Zeitleiste';
-import type { ReiheId } from '@/data/gemeinsam/typen';
+import type { BandId, ReiheId } from '@/data/gemeinsam/typen';
 import {
-  LEITBUCH, TRENDONIX, oeffentlicheBaendeVon, reiheNach, szeneZuKapitel,
+  TRENDONIX, bandNach, oeffentlicheBaendeVon, reiheNach,
 } from '@/world/registry';
-import { wegHaus, wegUeber } from '@/world/wege';
+import { wegHaus, wegUeber, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 
 /** Die Oberfläche bleibt unsichtbar, bis der Einstieg vorbei ist. */
 export function Kopfzeile(
-  { reihe, ruhig, beiRuhe }: { reihe: ReiheId; ruhig: boolean; beiRuhe: () => void }) {
+  { reihe, band, ruhig, beiRuhe }:
+  { reihe: ReiheId; band?: BandId; ruhig: boolean; beiRuhe: () => void }) {
   const [sichtbar, setSichtbar] = useState(false);
   const [ton, setTon] = useState(false);
   const [zeit, setZeit] = useState(false);
@@ -37,15 +38,22 @@ export function Kopfzeile(
   // Ein Sprung je Band: Wer nur den zweiten Band lesen will, muss nicht durch
   // den ersten scrollen. Nicht erschienene Bände stehen hier nicht.
   const dieseReihe = reiheNach(reihe);
+  const dieserBand = bandNach(band);
+
+  // Die Bandziffern wechseln jetzt die Welt, statt innerhalb einer einzigen
+  // Reise zu springen: Jeder Band hat seine eigene Adresse.
   const baender = (dieseReihe ? oeffentlicheBaendeVon(dieseReihe) : []).map((b) => ({
+    id: b.buch.id,
     nummer: b.buch.nummer,
     titel: b.buch.titel,
-    ziel: szeneZuKapitel(b.kapitel[0]?.id, b.buch.id)?.id,
-  })).filter((b) => b.ziel);
+    hier: b.buch.id === band,
+  }));
 
-  // Der Kaufweg steht in der Kopfzeile und führt direkt zum Buch – nicht zu
-  // einem Abschnitt, der davon erzählt. Gibt es keinen, führt er zur Bücherwand.
-  const kauf = LEITBUCH?.kaufwege[0];
+  // Der Kaufweg gehört dem Band, in dessen Welt man steht – nicht dem
+  // meistverkauften. Auf der Schwelle steht keiner: Dort ist noch nicht
+  // entschieden, um welches Buch es geht.
+  const kauf = dieserBand?.buch.kaufwege[0];
+  const hatKarte = dieserBand?.szenen.some((s) => s.typ === 'karte') ?? false;
 
   return (
     <>
@@ -53,17 +61,21 @@ export function Kopfzeile(
         <a className="marke" href={wegHaus()} aria-label={`${TRENDONIX.name} – Startseite`}>
           <img src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt=""
             width={46} height={31} loading="lazy" decoding="async" />
-          <span className="reihenname">{dieseReihe?.titel}</span>
+          <span className="reihenname">
+            {dieserBand ? `${dieseReihe?.titel} · Band ${dieserBand.buch.nummer}` : dieseReihe?.titel}
+          </span>
         </a>
         <nav>
           <span className="baender">
-            {baender.map((b) => (
-              <a key={b.nummer} href={`#${b.ziel}`} title={b.titel}>
+            {dieseReihe && baender.map((b) => (
+              <a key={b.id} href={wegWelt(dieseReihe.id, b.id)} title={b.titel}
+                aria-current={b.hier ? 'page' : undefined}
+                className={b.hier ? 'hier' : undefined}>
                 <b>{b.nummer}</b>
               </a>
             ))}
           </span>
-          <a href="#karte">Welt</a>
+          {hatKarte && <a href="#karte">Welt</a>}
           <button onClick={() => setZeit(true)}>Zeitleiste</button>
           <a href={wegUeber()}>Über</a>
           <button onClick={tonSchalten} aria-pressed={ton}>{ton ? 'Ton an' : 'Ton aus'}</button>
@@ -71,14 +83,12 @@ export function Kopfzeile(
         </nav>
         {/* Außerhalb der Leiste: Sie lässt sich auf schmalen Geräten schieben,
             der Kaufweg soll dabei nicht unter die anderen Einträge geraten. */}
-        {kauf
-          ? (
-            <a className="kopf-kaufen" href={kauf.url}
-              target="_blank" rel="noopener noreferrer">
-              Buch kaufen
-            </a>
-          )
-          : <a className="kopf-kaufen" href="#buecher">Bücher</a>}
+        {kauf && (
+          <a className="kopf-kaufen" href={kauf.url}
+            target="_blank" rel="noopener noreferrer">
+            Band {dieserBand?.buch.nummer} kaufen
+          </a>
+        )}
       </header>
       {zeit && <Zeitleiste beiSchliessen={() => setZeit(false)} />}
     </>

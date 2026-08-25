@@ -32,6 +32,8 @@ export const BAENDE: Band[] = REIHEN.flatMap((r) => r.baende);
 export const WELT: Record<BandId, Band> =
   Object.fromEntries(BAENDE.map((b) => [b.buch.id, b]));
 
+export const bandNach = (id?: BandId): Band | undefined => (id ? WELT[id] : undefined);
+
 export const reiheZuBand = (id?: BandId): Reihe | undefined =>
   id ? REIHEN.find((r) => r.baende.some((b) => b.buch.id === id)) : undefined;
 
@@ -79,24 +81,36 @@ export const buchNach = (id?: BandId): Buch | undefined => (id ? WELT[id]?.buch 
 // ——— Die begehbare Reise ————————————————————————————————————————————————
 
 /**
- * Drei Szenen gehören nicht einem Band, sondern der Welt der Reihe, und stehen
- * deshalb immer am Ende: die Karte, auf der alles zusammenkommt, der Epilog mit
- * dem Leitsatz und der Bücherbereich. Ohne diesen Griff läge der Schluss von
- * Band 1 mitten in der Reise. Eine Reihe ohne diese Szenen hat sie einfach nicht.
+ * Eine Welt je Band – und eine Schwelle davor.
+ *
+ * Vorher war die Reise **ein** Durchgang über alle Bände. Das las sich gut,
+ * war aber falsch: Wer die Welt von Band 3 betreten will, landete zuerst in
+ * Band 1 und bekam am Ende dessen Bücherwand zu sehen. Eine Welt gehört ihrem
+ * Band. Deshalb gibt es jetzt:
+ *
+ *  · die **Schwelle** der Reihe (`/faeden/`) – Ankunft und Weltenwahl, sonst nichts
+ *  · je Band eine **Welt** (`/faeden/band-2/`) – ausschließlich Szenen dieses Bandes
+ *
+ * `ankunft` und `welten` sind die Schwelle; sie stehen in keiner Bandwelt.
+ * Alles andere gehört dem Band, dessen `bandId` es trägt – auch Karte und
+ * Epilog, die inhaltlich zu ihrem Band gehören und nicht zur Reihe.
  */
-const SCHLUSS = ['karte', 'epilog', 'buecher'];
+const SCHWELLE = ['ankunft', 'welten'];
 
-export function reiseVon(reihe: Reihe): Szene[] {
+/** Was auf der Schwelle der Reihe steht: ankommen und wählen. */
+export function schwelleVon(reihe: Reihe): Szene[] {
   const alle = reihe.baende.flatMap((b) => b.szenen);
-  const offen = oeffentlicheBaendeVon(reihe).flatMap((b) => b.szenen);
-  return [
-    ...offen.filter((s) => !SCHLUSS.includes(s.id)),
-    ...SCHLUSS.map((id) => alle.find((s) => s.id === id)).filter((s): s is Szene => Boolean(s)),
-  ];
+  return SCHWELLE.map((id) => alle.find((s) => s.id === id))
+    .filter((s): s is Szene => Boolean(s));
 }
 
-/** Die Reise der Leitreihe – das, was unter `/faeden` begehbar ist. */
-export const REISE_OEFFENTLICH: Szene[] = reiseVon(LEITREIHE);
+/** Die Welt eines Bandes: seine Szenen, in seiner Reihenfolge, und nichts sonst. */
+export function reiseBand(band: Band): Szene[] {
+  return band.szenen.filter((s) => !SCHWELLE.includes(s.id));
+}
+
+/** Die Schwelle der Leitreihe. */
+export const REISE_OEFFENTLICH: Szene[] = schwelleVon(LEITREIHE);
 
 // ——— Nachschlagen ————————————————————————————————————————————————————————
 

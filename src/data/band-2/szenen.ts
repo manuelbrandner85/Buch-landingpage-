@@ -186,4 +186,6 @@ export const SZENEN_BAND_2: Szene[] = [
       'Was hier begann – erklärte Rechte, gemessene Zeit, aufgeteilte Kontinente und Gesellschaften, die regieren, ohne gewählt zu sein – läuft in die Katastrophen und Ordnungsversuche des 20. Jahrhunderts hinein.',
     quelle: 'Schlusskasten auf Seite 186, wörtlich. Das Motiv ist eine eigene Darstellung ohne Ortsbezug.',
   },
+  // Der Abschluss dieser Welt zeigt diesen Band – und nur ihn.
+  { id: 'abschluss-band-2', bandId: 'band-2', typ: 'buecher' },
 ];
