@@ -28,7 +28,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'zweitausend-zuege', bandId: 'band-3', kapitelId: 12, unterkapitel: '12.2', typ: 'motiv',
-    platte: 'b3-kap12-motiv', buchseite: 22, hoehe: 262, grading: '#4a425c',
+    platte: 'b3-kap12-motiv', motion: 'b3-kap12-motiv', buchseite: 22, hoehe: 262, grading: '#4a425c',
     uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Der Fahrplan',
@@ -55,7 +55,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'der-zettel-an-der-tuer', bandId: 'band-3', kapitelId: 13, typ: 'motiv',
-    platte: 'b3-kap13-motiv', buchseite: 48, hoehe: 262, grading: '#603a38',
+    platte: 'b3-kap13-motiv', motion: 'b3-kap13-motiv', buchseite: 48, hoehe: 262, grading: '#603a38',
     uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Was Sie in diesem Kapitel erwartet',
@@ -82,7 +82,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'ein-hotel-in-new-hampshire', bandId: 'band-3', kapitelId: 14, unterkapitel: '14.1', typ: 'motiv',
-    platte: 'b3-kap14-motiv', buchseite: 84, hoehe: 262, grading: '#38545a',
+    platte: 'b3-kap14-motiv', motion: 'b3-kap14-motiv', buchseite: 84, hoehe: 262, grading: '#38545a',
     uebergang: 'lichtschwenk', fahrt: 'heraus',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Ein Hotel in New Hampshire',
@@ -109,7 +109,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'portalkran-am-leeren-kai', bandId: 'band-3', kapitelId: 15, typ: 'motiv',
-    platte: 'b3-kap15-motiv', buchseite: 118, hoehe: 262, grading: '#564a2e',
+    platte: 'b3-kap15-motiv', motion: 'b3-kap15-motiv', buchseite: 118, hoehe: 262, grading: '#564a2e',
     uebergang: 'aufloesen', fahrt: 'hinein',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Was Sie in diesem Kapitel erwartet',
@@ -136,7 +136,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'gasse-zwischen-schraenken', bandId: 'band-3', kapitelId: 16, typ: 'motiv',
-    platte: 'b3-kap16-motiv', buchseite: 153, hoehe: 236, grading: '#304668',
+    platte: 'b3-kap16-motiv', motion: 'b3-kap16-motiv', buchseite: 153, hoehe: 236, grading: '#304668',
     uebergang: 'wasser', fahrt: 'durchfahrt',
     badge: 'Freie Rekonstruktion',
     eyebrow: 'Was Sie in diesem Kapitel erwartet',
