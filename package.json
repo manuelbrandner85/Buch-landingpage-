@@ -19,7 +19,8 @@
     "tiefenkarten": "node scripts/tiefenkarten.mjs",
     "export": "NEXT_EXPORT=1 next build",
     "pruefe:video": "node scripts/pruefe-bewegtbild.mjs",
-    "pruefe:wege": "node scripts/pruefe-wege.mjs"
+    "pruefe:wege": "node scripts/pruefe-wege.mjs",
+    "vorschaubilder": "node scripts/vorschaubilder.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.5",

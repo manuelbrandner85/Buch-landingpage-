@@ -1,7 +1,9 @@
 import type { Buch, Szene } from '@/data/gemeinsam/typen';
 import { BAENDE, TRENDONIX, assetNach, reiheZuBand } from '@/world/registry';
-import { wegWelt } from '@/world/wege';
+import { wegLeseprobe, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
+import { mailAn } from '@/data/gemeinsam/anbieter';
+import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
 import { Buch3D } from './Buch3D';
 
 /**
@@ -25,7 +27,22 @@ import { Buch3D } from './Buch3D';
  */
 export function Kaufwege({ buch }: { buch: Buch }) {
   if (buch.status === 'erscheint') {
-    return <span className="kaufen wartet">Erscheint in Kürze</span>;
+    // Kein Formular, keine Liste, kein Dienst: eine Mail, die der Leser selbst
+    // abschickt. Das braucht keine Einwilligung, weil nichts gespeichert wird.
+    const bescheid = mailAn(
+      `Bescheid geben: Band ${buch.nummer}`,
+      `Bitte einmal melden, sobald Band ${buch.nummer} zu haben ist.`,
+    );
+    return (
+      <span className="kaufblock">
+        <span className="kaufen wartet">Erscheint in Kürze</span>
+        {bescheid && (
+          <span className="auch">
+            <a href={bescheid}>Bescheid geben lassen</a>
+          </span>
+        )}
+      </span>
+    );
   }
   const [erster, ...weitere] = buch.kaufwege;
   if (!erster) return <span className="kaufen wartet">Produktseite folgt</span>;
@@ -56,6 +73,7 @@ function Tor({ buch }: { buch: Buch }) {
   const offen = buch.status !== 'in Arbeit';
   const cover = assetNach(buch.coverAsset);
   const reihe = reiheZuBand(buch.id);
+  const probe = leseprobeVon(buch.id);
 
   if (!offen) {
     return (
@@ -85,6 +103,12 @@ function Tor({ buch }: { buch: Buch }) {
         {reihe && (
           <a className="eintauchen" href={wegWelt(reihe.id, buch.id)}>
             In die Welt von Band {buch.nummer}
+          </a>
+        )}
+        {probe && (
+          <a className="probe" href={wegLeseprobe(probe.datei)}
+            download={probe.datei} type="application/pdf">
+            Leseprobe · {probe.seiten} Seiten, PDF
           </a>
         )}
       </div>

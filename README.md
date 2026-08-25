@@ -469,9 +469,11 @@ Belege zu behaupten.
 - `/ueber` – wie die Welt gemacht ist: Bildherkunft, Evidenzstufen, Kartengrundlagen,
   was lokal gespeichert wird. Ein Buch, das zu jeder Aussage die Beleglage ausweist,
   kann sich keine Website leisten, die über ihre eigenen Grundlagen schweigt.
-- `/impressum` – Pflichtangaben nach § 5 DDG und Art. 13 DSGVO, als Entwurf mit
-  Platzhaltern in Großbuchstaben. **Vor dem Livegang ausfüllen und rechtlich prüfen
-  lassen.** Erfundene Angaben wären hier besonders schädlich.
+- `/impressum` – Pflichtangaben nach § 5 DDG und Art. 13 DSGVO. Der Inhalt steht
+  nicht in der Seite, sondern in `src/data/gemeinsam/anbieter.ts`: **eine Datei,
+  ein Ausfüllen.** Was dort leer ist, weist die Seite sichtbar als fehlend aus –
+  erfundene Angaben wären hier besonders schädlich. Vor dem Livegang ausfüllen
+  und rechtlich prüfen lassen.
 
 ## Kaufwege
 
@@ -489,6 +491,56 @@ kaufwege: [
 Eine **leere Liste** ist der einzige Platzhalter: Dann steht „Produktseite folgt“
 statt eines Links. Erfundene Adressen gibt es hier nicht. Es gibt keine eigene
 Zahlungsabwicklung; der Kaufweg öffnet den Händler in einem neuen Tab.
+
+## Blick ins Buch und Leseprobe
+
+Ein Bildband verkauft sich über die Seite, nicht über den Klappentext.
+
+**Blick ins Buch** – vier Seiten je Band, aus der Druckdatei mit `pdftoppm -r 150`
+gezogen und nach `public/blick/<band>-<seite>.{webp,avif}` gelegt. Welche Seiten
+und was darauf zu sehen ist, steht in `src/data/gemeinsam/blick.ts`; die
+Beschreibung ist zugleich die Bildunterschrift und der Alternativtext.
+
+**Leseprobe** – ein PDF zum Mitnehmen, `src/data/gemeinsam/leseprobe.ts` und
+`public/leseprobe/`. Ohne Konto, ohne E-Mail-Adresse, ohne Weiterleitung: Eine
+Leseprobe, die erst eine Adresse verlangt, wird nicht gelesen, sondern
+weggeklickt. Band 1 liegt mit 13 Seiten und 1,6 MB bereit – Umschlag,
+vollständiges Inhaltsverzeichnis, erster Kapitelbogen bis zur Zwischenbilanz.
+
+Die Datei ist aus der Druckdatei des Bandes gebaut, nicht neu gesetzt. Der
+Umschlag ist der Trendonix-Umschlag der Website; die Seiten des Startpakets, die
+noch die alte Autorenzeile tragen, sind nicht darin. Wer die Leseprobe erneuert,
+prüft dasselbe: Auf der Seite steht Trendonix, sonst nichts.
+
+## Kontakt ohne Server
+
+Die Seite ist statisch, es gibt kein Formular und keinen Empfänger. Ein Band, der
+noch nicht zu haben ist, bietet stattdessen einen `mailto:`-Weg an
+(`mailAn()` in `anbieter.ts`): Der Leser schickt die Mail selbst ab, die Seite
+speichert nichts, es braucht keine Einwilligung. Solange in `anbieter.ts` keine
+Adresse steht, erscheint **kein Knopf** – ein toter Knopf ist schlimmer als
+keiner.
+
+## Besucherzähler
+
+`src/ui/Zaehler.tsx`, gesteuert über `NEXT_PUBLIC_ZAEHLER`. Ohne diese Variable
+steht im ausgelieferten Quelltext kein einziges fremdes Skript – nicht
+auskommentiert, nicht vorbereitet, gar nicht. Erwartet wird die Zähladresse
+eines cookiefreien Dienstes (etwa `https://<konto>.goatcounter.com/count`):
+kein Cookie, keine wiedererkennbare Kennung, keine gespeicherte IP.
+
+Die Datenschutzerklärung liest denselben Schalter. Ist kein Zähler gesetzt,
+steht dort „Es ist kein Analysedienst und kein Besucherzähler eingebunden“; ist
+einer gesetzt, erscheint der Absatz dazu. Der Text kann nicht lügen, weil er
+nicht von Hand gepflegt wird.
+
+## Vorschaubilder
+
+`npm run vorschaubilder` baut aus `scripts/og-daten.mjs` die Karten unter
+`public/og/` (1200×630): Verlauf, goldene Oberzeile, Titel, kursive Unterzeile,
+TX-Marke. `wegVorschau()` hängt sie an die Metadaten – aber nur, wenn
+`NEXT_PUBLIC_BASIS_URL` gesetzt ist: Ein Netzwerk, das eine Vorschau baut, kann
+keinen relativen Pfad auflösen, und ein falsches Bild ist schlimmer als keines.
 
 ## Interaktive Module
 
@@ -645,23 +697,19 @@ und nichts freizuschalten.
 
 ## Offen
 
-- **Band 2: Orte.** `data/gemeinsam/orte.ts` kennt bisher nur Band 1. Die Karte
-  zeigt deshalb keine Punkte aus Band 2; das steht so auch auf der Kartenszene.
-- **Band 3: Motive für die Website.** Der Band ist mit Kapiteln, Auftakten und
-  Bilanzen in den Daten, aber ohne `platte` – und ohnehin nicht öffentlich.
-- **Band 3, Kapitel 14 und 15:** im Seitenplan verbindlich, im Satz noch offen –
-  deshalb Auftakt ohne Bilanz.
+- **Orte für Band 2 und Band 3.** `data/gemeinsam/orte.ts` kennt bisher nur
+  Band 1. Die Karte zeigt deshalb keine Punkte aus den anderen Bänden; das steht
+  so auch auf der Kartenszene.
+- **Mehr Stationen in der Welt von Band 3.** Fünf Auftakte und fünf Bilanzen
+  stehen; im Satz liegen weitere Motive mit ihren Buchseiten bereit.
 - **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
-- **Band 3 hat keine Bewegtfassungen** – er hat auch keine Motive und ist nicht
-  öffentlich.
-- **Kaufwege für Band 2 und Band 3** – leer, weil es sie noch nicht gibt.
-- **Die Leseprobe fehlt.** Der Kanal, der Buch 1 mit Buch 4 verbindet, ist eine
-  E-Mail-Liste: Kapitel 1 gegen eine Adresse. Ohne sie fängt jeder neue Titel bei
-  null an. Braucht einen Anbieter und eine Datenschutzerklärung – beides offen.
+- **Kaufwege für Band 2 und Band 3** – leer, weil es sie noch nicht gibt. Beide
+  Bände zeigen „Erscheint in Kürze“ und, sobald eine Adresse im Impressum steht,
+  den Weg „Bescheid geben lassen“.
+- **Leseprobe für Band 2 und Band 3** – Band 1 liegt bereit, die anderen nicht.
+- **Das Impressum** ist leer und öffentlich erreichbar: `anbieter.ts` ausfüllen.
 - **Die eigene Domain** ist vorbereitet, aber nicht geschaltet: `DOMAIN.md`.
-- **Das Impressum** trägt weiterhin Platzhalter in Großbuchstaben und ist
-  öffentlich erreichbar.
+- **Bewegtfassung für den Auftakt von Kapitel 16** – das Motiv stammt jetzt aus
+  dem Satz, die Bewegtfassung dazu fehlt noch.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
-- Originalrenderings statt PDF-Ausschnitte (Druck-PDF: eine flache Ebene je Seite)
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion
-- AI-Motion: sieben Sequenzen, Plan und Kosten in `Stufe4_SceneMap_und_Produktionsplan.md`

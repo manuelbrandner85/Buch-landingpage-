@@ -79,7 +79,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-16', bandId: 'band-3', kapitelId: 16, typ: 'auftakt', tor: true,
-    platte: 'b3-kap16-auftakt', motion: 'b3-kap16-auftakt',
+    platte: 'b3-kap16-auftakt',
     buchseite: 152, hoehe: 196, grading: '#304668',
     uebergang: 'wasser', fahrt: 'hinein',
     titel: 'Kabel, Daten\nund Abhängigkeit',

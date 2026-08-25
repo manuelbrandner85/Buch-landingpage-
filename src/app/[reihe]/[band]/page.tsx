@@ -6,7 +6,7 @@ import {
   oeffentlicheBaendeVon, reiheNach, reiseBand,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
-import { weg } from '@/world/wege';
+import { weg, wegVorschau } from '@/world/wege';
 
 /**
  * Die Welt eines Bandes.
@@ -33,7 +33,11 @@ export async function generateMetadata(
     title: titel,
     description: b.buch.unterzeile ?? b.buch.klappentext.slice(0, 160),
     alternates: { canonical: weg(`/${r.id}/${b.buch.id}/`) },
-    openGraph: { type: 'book', title: titel, description: b.buch.klappentext },
+    openGraph: {
+      type: 'book', title: titel, description: b.buch.klappentext,
+      images: wegVorschau(b.buch.id),
+    },
+    twitter: { card: 'summary_large_image', images: wegVorschau(b.buch.id) },
   };
 }
 

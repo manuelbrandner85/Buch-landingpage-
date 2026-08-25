@@ -5,7 +5,7 @@ import {
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
-import { wegBuch, wegImpressum, wegReihe, wegUeber, wegWelt } from '@/world/wege';
+import { wegBuch, wegImpressum, wegReihe, wegUeber, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
@@ -29,7 +29,9 @@ export const metadata: Metadata = {
     type: 'website',
     title: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
     description: TRENDONIX.arbeitsweise,
+    images: wegVorschau('haus'),
   },
+  twitter: { card: 'summary_large_image', images: wegVorschau('haus') },
 };
 
 function Weltentor({ reihe }: { reihe: Reihe }) {

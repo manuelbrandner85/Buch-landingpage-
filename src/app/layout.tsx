@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, EB_Garamond } from 'next/font/google';
 import '@/styles/global.css';
 import { TRENDONIX } from '@/data/gemeinsam/haus';
+import { Zaehler } from '@/ui/Zaehler';
 
 // Nur die Schnitte, die tatsächlich vorkommen. Jeder zusätzliche Schnitt ist
 // eine eigene Datei: Vorher wurden vier Schriftdateien geladen, obwohl die
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${display.variable} ${body.variable}`}>
-      <body>{children}</body>
+      <body>{children}<Zaehler /></body>
     </html>
   );
 }

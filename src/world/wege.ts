@@ -21,4 +21,23 @@ export const wegOrt = (reihe: ReiheId, id: string) => weg(`/${reihe}/ort/${id}/`
 export const wegBegriffe = (reihe: ReiheId) => weg(`/${reihe}/begriffe/`);
 export const wegBuch = (band: BandId) => weg(`/buch/${band}/`);
 export const wegUeber = () => weg('/ueber/');
+export const wegLeseprobe = (datei: string) => weg(`/leseprobe/${datei}`);
 export const wegImpressum = () => weg('/impressum/');
+
+/**
+ * Eine vollständige Adresse mit Schema und Hostnamen.
+ *
+ * Vorschaubilder für geteilte Links müssen absolut sein – ein Netzwerk, das
+ * eine Vorschau baut, hat keinen Kontext, gegen den es einen relativen Pfad
+ * auflösen könnte. Ohne Basis-URL gibt es kein Bild statt eines falschen.
+ */
+export const wegAbsolut = (pfad: string): string | undefined => {
+  const basis = process.env.NEXT_PUBLIC_BASIS_URL;
+  return basis ? `${basis.replace(/\/$/, '')}${weg(pfad)}` : undefined;
+};
+
+/** Das Vorschaubild einer Seite, wenn es eines gibt. */
+export const wegVorschau = (name: string) => {
+  const url = wegAbsolut(`/og/${name}.jpg`);
+  return url ? [{ url, width: 1200, height: 630 }] : undefined;
+};

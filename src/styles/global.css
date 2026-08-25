@@ -1060,3 +1060,45 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
   .tor .buchhalt{display:contents}
   .hausbild .korpus,.hausbild .flaeche .licht,.hausbild .standschatten{animation:none}
 }
+
+/* ---------- Blick ins Buch ----------
+   Vier echte Seiten aus der Druckdatei. Bei einem Bildband ist die Seite selbst
+   die stärkste Auskunft: Wer sieht, wie sie gesetzt ist, weiß in fünf Sekunden
+   mehr als aus jedem Klappentext. */
+.blick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr));
+  gap:clamp(.8rem,2vw,1.4rem);margin-top:1.4rem}
+.blick figure{margin:0}
+.blick a{display:block;border:1px solid rgba(227,200,139,.18);overflow:hidden;
+  transition:border-color .4s,transform .4s}
+.blick a:hover{border-color:var(--gold);transform:translateY(-3px)}
+.blick img{width:100%;height:auto;display:block}
+.blick figcaption{margin-top:.5rem;font-size:.66rem;color:var(--staub);
+  line-height:1.35}
+.lesefassung .blick a{border-bottom:0}
+
+/* Leseprobe: der Weg vom Blättern zum Mitnehmen. */
+.leseprobe{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:clamp(1rem,3vw,2.4rem);margin-top:2.6rem;padding:clamp(1.2rem,3vw,2rem);
+  border:1px solid rgba(227,200,139,.2);background:rgba(227,200,139,.035)}
+.leseprobe > div{flex:1 1 22rem;min-width:0}
+.leseprobe h2{margin-top:0}
+.leseprobe p{margin-bottom:.6rem}
+.leseprobe p:last-child{margin-bottom:0}
+.knopf{display:inline-block;font-family:var(--display),serif;font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;
+  text-decoration:none;padding:.85rem 1.5rem;border:1px solid rgba(227,200,139,.34);
+  transition:background .3s,border-color .3s}
+.knopf:hover{background:rgba(227,200,139,.12);border-color:var(--gold)}
+.lesefassung .knopf{border-bottom:1px solid rgba(227,200,139,.34)}
+@media (max-width:640px){.leseprobe .knopf{width:100%;text-align:center}}
+
+/* Was im Impressum noch fehlt, wird gezeigt – nicht erfunden. */
+.fehlt{color:#c9a961;font-style:italic}
+.quelle.warnung{border-left:2px solid var(--gold-tief);padding-left:.9rem}
+
+/* Der leiseste der drei Wege am Tor – aber der, der nichts kostet. */
+.probe{display:inline-block;font-size:.68rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--staub);text-decoration:none;
+  border-bottom:1px solid rgba(227,200,139,.28);padding-bottom:.2rem;
+  transition:color .3s,border-color .3s}
+.probe:hover{color:var(--gold);border-color:var(--gold)}

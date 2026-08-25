@@ -30,6 +30,6 @@ export const ASSETS_BAND_3: Asset[] = [
     breite: 2528, hoehe: 1696, herkunft: 'Freie Rekonstruktion',
     alt: 'Containerterminal im Morgennebel: gestapelte Container in langen Reihen, zwei Portalkräne über der nassen Kaikante.' },
   { id: 'b3-kap16-auftakt', bandId: 'band-3', datei: 'b3-kap16-auftakt',
-    breite: 2560, hoehe: 1440, herkunft: 'Freie Rekonstruktion',
-    alt: 'Kabelanlandung an einer Nordküste in der Dämmerung: ein Kabelgraben führt von der grauen See in ein niedriges Betongebäude mit erleuchteten Fenstern.' },
+    breite: 1838, hoehe: 1930, herkunft: 'Freie Rekonstruktion',
+    alt: 'Kabelanlandung an einer Nordküste in der Dämmerung: sechs armdicke schwarze Kabel laufen aus der grauen Brandung über Geröll unter einem Maschendrahtzaun hindurch zu einem fensterlosen Betonbau, an dessen Wand eine einzelne orange Lampe brennt.' },
 ];
