@@ -53,7 +53,7 @@ export function Kopfzeile(
   // meistverkauften. Auf der Schwelle steht keiner: Dort ist noch nicht
   // entschieden, um welches Buch es geht.
   const kauf = dieserBand?.buch.kaufwege[0];
-  const hatKarte = dieserBand?.szenen.some((s) => s.typ === 'karte') ?? false;
+  const karte = dieserBand?.szenen.find((s) => s.typ === 'karte');
 
   return (
     <>
@@ -75,7 +75,7 @@ export function Kopfzeile(
               </a>
             ))}
           </span>
-          {hatKarte && <a href="#karte">Welt</a>}
+          {karte && <a href={`#${karte.id}`}>Welt</a>}
           <button onClick={() => setZeit(true)}>Zeitleiste</button>
           <a href={wegUeber()}>Über</a>
           <button onClick={tonSchalten} aria-pressed={ton}>{ton ? 'Ton an' : 'Ton aus'}</button>

@@ -173,6 +173,14 @@ export const SZENEN_BAND_2: Szene[] = [
     quelle: 'Bilanz zu Kapitel 11: Was hier begann, läuft in die Katastrophen und Ordnungsversuche des 20. Jahrhunderts hinein.',
   },
 
+  // --------------------------------------------------------------- Karte
+  {
+    id: 'karte-band-2', bandId: 'band-2', typ: 'karte',
+    titel: 'Die Welt dieses Bandes',
+    fliesstext:
+      'Jeder Punkt ist ein Ort, an dem dieser Band etwas belegt – vom Bosporus bis zur Malaiischen Halbinsel. Der Faden verbindet sie in der Reihenfolge der Kapitel, nicht der Geografie.',
+  },
+
   // ------------------------------------------------------------- Ausblick
   {
     id: 'wohin-dieser-band-fuehrt', bandId: 'band-2', typ: 'motiv',

@@ -79,7 +79,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-16', bandId: 'band-3', kapitelId: 16, typ: 'auftakt', tor: true,
-    platte: 'b3-kap16-auftakt',
+    platte: 'b3-kap16-auftakt', motion: 'b3-kap16-auftakt',
     buchseite: 152, hoehe: 196, grading: '#304668',
     uebergang: 'wasser', fahrt: 'hinein',
     titel: 'Kabel, Daten\nund Abhängigkeit',
@@ -92,6 +92,14 @@ export const SZENEN_BAND_3: Szene[] = [
     zitat: 'Was global wirkt, ist örtlich gebaut. Und wo etwas gebaut ist, gibt es eine Stelle, an der es eng wird.',
     quelle: 'Bilanz zu Kapitel 16 und Schluss der Reihe: fünf Erleichterungen aus zwölftausend Jahren – Vorrat, Schrift, Geld, Fabrik, Netz.',
   },
+  // --------------------------------------------------------------- Karte
+  {
+    id: 'karte-band-3', bandId: 'band-3', typ: 'karte',
+    titel: 'Die Welt dieses Bandes',
+    fliesstext:
+      'Jeder Punkt ist ein Ort, an dem dieser Band etwas belegt – von der Magellanstraße bis zur Luzonstraße. Am Ende stehen die Engstellen: fünf Meerengen, durch die der Welthandel passt.',
+  },
+
   // Der Abschluss dieser Welt zeigt diesen Band – und nur ihn.
   { id: 'abschluss-band-3', bandId: 'band-3', typ: 'buecher' },
 ];

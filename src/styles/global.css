@@ -177,7 +177,10 @@ main{position:relative;z-index:2}
 /* Namen bleiben leise sichtbar – eine Karte ohne Beschriftung ist ein Muster,
    keine Karte. Beim Berühren treten sie hervor. */
 .ort text{fill:var(--staub);font-family:var(--display),serif;font-size:11px;
-  letter-spacing:.08em;opacity:.42;transition:opacity .3s,fill .3s}
+  letter-spacing:.08em;opacity:.42;transition:opacity .3s,fill .3s;
+  /* Ein schmaler Saum in der Farbe der Nacht: Der Name bleibt lesbar, auch wo
+     der Faden hinter ihm durchläuft. */
+  paint-order:stroke;stroke:rgba(6,10,20,.85);stroke-width:3px;stroke-linejoin:round}
 .ort:hover text,.ort[aria-current="true"] text{opacity:1;fill:var(--gold)}
 .karte-netz{stroke:rgba(227,200,139,.09);stroke-width:.6;fill:none}
 .karte-faden{stroke:rgba(227,200,139,.45);stroke-width:1;fill:none;stroke-dasharray:3 5}

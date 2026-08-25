@@ -492,6 +492,29 @@ Eine **leere Liste** ist der einzige Platzhalter: Dann steht „Produktseite fol
 statt eines Links. Erfundene Adressen gibt es hier nicht. Es gibt keine eigene
 Zahlungsabwicklung; der Kaufweg öffnet den Händler in einem neuen Tab.
 
+## Die Karte je Band
+
+`src/data/gemeinsam/orte.ts` hält alle Orte der Reihe – Regel 3: **Orte gehören
+der Welt, nicht dem Band.** Ein Ort kann deshalb in mehreren Bänden vorkommen
+und führt für jeden sein eigenes `vorkommen` mit Kapitel und Seiten; London
+steht in Band 2 und Band 3, Rom in Band 1 und Band 2.
+
+Die Kartenszene zeigt trotzdem nur die Orte *ihres* Bandes. Alles andere wäre
+ein Fremdkörper: Wer die Welt von Band 3 betritt, soll nicht über Uruk
+stolpern. Der Kartenausschnitt wird aus den gezeigten Punkten gerechnet, nicht
+gesetzt – Band 1 spielt zwischen Südafrika und China, Band 3 zwischen der
+Magellanstraße und der Luzonstraße, und ein fester Rahmen könnte nur einem von
+beiden passen.
+
+Die Namen werden gesetzt, nicht gestreut: Jeder Name bekommt die erste Höhe, an
+der er noch frei ist, kippt am Rand auf die andere Seite des Punktes und trägt
+einen schmalen Saum in der Farbe der Nacht, damit er auch über dem Faden lesbar
+bleibt. In Europa liegen sonst sieben Orte auf der Fläche eines Daumens.
+
+Woher die Daten stammen: Ortsregister der Bände (Band 1 S. 203, Band 2 S. 202,
+Band 3 S. 203). Die Kapitelzuordnung folgt den Seitenbereichen der Kapitel,
+nicht einer Einschätzung. Die Koordinaten sind allgemein bekannte Lagewerte.
+
 ## Blick ins Buch und Leseprobe
 
 Ein Bildband verkauft sich über die Seite, nicht über den Klappentext.
@@ -697,9 +720,6 @@ und nichts freizuschalten.
 
 ## Offen
 
-- **Orte für Band 2 und Band 3.** `data/gemeinsam/orte.ts` kennt bisher nur
-  Band 1. Die Karte zeigt deshalb keine Punkte aus den anderen Bänden; das steht
-  so auch auf der Kartenszene.
 - **Mehr Stationen in der Welt von Band 3.** Fünf Auftakte und fünf Bilanzen
   stehen; im Satz liegen weitere Motive mit ihren Buchseiten bereit.
 - **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
@@ -709,7 +729,5 @@ und nichts freizuschalten.
 - **Leseprobe für Band 2 und Band 3** – Band 1 liegt bereit, die anderen nicht.
 - **Das Impressum** ist leer und öffentlich erreichbar: `anbieter.ts` ausfüllen.
 - **Die eigene Domain** ist vorbereitet, aber nicht geschaltet: `DOMAIN.md`.
-- **Bewegtfassung für den Auftakt von Kapitel 16** – das Motiv stammt jetzt aus
-  dem Satz, die Bewegtfassung dazu fehlt noch.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion

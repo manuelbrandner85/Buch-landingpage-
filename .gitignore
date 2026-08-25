@@ -18,3 +18,4 @@ modelle/
 # ein zweites Mal dieselben Bilder als JPEG wären 17 MB ohne Nutzen.
 /assets-quelle/*.jpg
 /assets-quelle/*-motion-roh.mp4
+assets-quelle/**/*-motion-roh.mp4

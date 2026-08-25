@@ -55,8 +55,11 @@ for (const band of BAENDE) {
       if (ton) fehler.push(`${name}: hat eine Tonspur – die Kinoebene läuft stumm.`);
       if (!video) { fehler.push(`${name}: keine Bildspur.`); continue; }
       if (dauer < 1) fehler.push(`${name}: nur ${dauer.toFixed(2)} s lang.`);
-      if (art === 'groß' && video.width < 1600) {
-        warnung.push(`${name}: nur ${video.width} Pixel breit.`);
+      // Die lange Kante zählt, nicht die Breite: Ein Kapitelauftakt aus dem
+      // Satz ist fast quadratisch, ein 1920 Pixel breites Bild daraus wäre
+      // über 2000 Pixel hoch und unnötig schwer.
+      if (art === 'groß' && Math.max(video.width, video.height) < 1280) {
+        warnung.push(`${name}: lange Kante nur ${Math.max(video.width, video.height)} Pixel.`);
       }
       if (art === 'klein' && mb > 3) warnung.push(`${name}: ${mb.toFixed(1)} MB für die kleine Fassung.`);
       if (art === 'groß' && mb > 6) warnung.push(`${name}: ${mb.toFixed(1)} MB – schwer für eine Szene.`);

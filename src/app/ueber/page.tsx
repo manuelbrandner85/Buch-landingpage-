@@ -70,10 +70,15 @@ export default function UeberSeite() {
         <h2>Die Karte</h2>
         <p>
           Die {ORTE.length} Orte tragen ihre tatsächlichen Koordinaten; sie dienen der
-          Verortung, nicht der Vermessung. Die Kartengrundlagen sind dieselben wie im
-          Buch: Satellitenaufnahmen der NASA (Blue Marble Next Generation),
-          Geländemodelle des GMRT, Küstenlinien von Natural Earth. Der Faden verbindet
-          die Orte in der Reihenfolge der Kapitel, nicht der Geografie.
+          Verortung, nicht der Vermessung. Welcher Ort in welchem Kapitel auf welcher
+          Seite steht, stammt aus den Ortsregistern der Bände, nicht aus einer
+          Recherche daneben. Jede Bandwelt zeigt nur die Orte ihres eigenen Bandes und
+          rechnet ihren Kartenausschnitt aus diesen Punkten; ein Ort, der in mehreren
+          Bänden vorkommt, erscheint in jeder Karte mit den Seiten genau dieses Bandes.
+          Die Kartengrundlagen sind dieselben wie im Buch: Satellitenaufnahmen der NASA
+          (Blue Marble Next Generation), Geländemodelle des GMRT, Küstenlinien von
+          Natural Earth. Der Faden verbindet die Orte in der Reihenfolge der Kapitel,
+          nicht der Geografie.
         </p>
       </article>
 
