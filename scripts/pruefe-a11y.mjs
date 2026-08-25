@@ -1,28 +1,88 @@
 /**
- * Barrierefreiheit messen statt schätzen: axe-core gegen die Vorschau.
- * Einmalig: npm i -D puppeteer axe-core   →   npm run pruefe:a11y
+ * Barrierefreiheit messen statt schätzen: axe-core gegen den gebauten Export.
+ *
+ * Geprüft wird, was ausgeliefert wird – nicht die Offlinefassung: das Haus, die
+ * Welt, eine Buchseite, eine Kapitelseite und die Überseite. Ein kleiner
+ * Dateiserver reicht dafür; der Export ist statisch.
+ *
+ *   NEXT_EXPORT=1 npm run build && npm run pruefe:a11y
  *
  * Gefundene und behobene Verstöße:
  *  · Text über Deckkraft abgedunkelt (Quellenzeilen, Fußzeile, Ankunft) – 31 Stellen
  *  · Gold auf Elfenbein: 1,4 : 1 – im Druck tragfähig, auf dem Bildschirm nicht
  *  · Geschlossene Ringe und ungeprüfte Fragen über opacity zurückgesetzt
  *  · Herkunftsbadge stand innerhalb der Definitionsliste
+ *  · Fußzeile des Hauses: Feinschrift zu blass, Links nur farblich unterschieden
  */
 import puppeteer from 'puppeteer';
-import { readFileSync } from 'node:fs';
-const axe = readFileSync(new URL('../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8');
-const b = await puppeteer.launch({args:['--no-sandbox','--disable-dev-shm-usage','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const p = await b.newPage(); await p.setViewport({width:1440,height:900});
-await p.goto(new URL('../vorschau/welt.html', import.meta.url).href,{waitUntil:'domcontentloaded',timeout:90000});
-await new Promise(r=>setTimeout(r,2000));
-await p.evaluate(axe);
-const r = await p.evaluate(async () => await window.axe.run(document, {
-  runOnly: { type: 'tag', values: ['wcag2a','wcag2aa','wcag21a','wcag21aa'] }
-}));
-console.log('Verstöße:', r.violations.length);
-for (const v of r.violations) {
-  console.log(`\n[${v.impact}] ${v.id} – ${v.help} (${v.nodes.length}×)`);
-  console.log('   ', v.nodes[0].html.slice(0,140).replace(/\s+/g,' '));
-  if (v.nodes[0].any?.[0]?.message) console.log('   →', v.nodes[0].any[0].message.slice(0,160));
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { existsSync, statSync } from 'node:fs';
+import { extname, join, normalize } from 'node:path';
+
+const WURZEL = new URL('../out/', import.meta.url).pathname;
+if (!existsSync(WURZEL)) {
+  console.error('Kein Export gefunden. Zuerst: NEXT_EXPORT=1 npm run build');
+  process.exit(1);
 }
+
+const TYPEN = {
+  '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
+  '.json': 'application/json', '.svg': 'image/svg+xml', '.avif': 'image/avif',
+  '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png',
+  '.mp4': 'video/mp4', '.woff2': 'font/woff2',
+};
+
+const server = createServer(async (anfrage, antwort) => {
+  const pfad = decodeURIComponent((anfrage.url ?? '/').split('?')[0]);
+  let datei = join(WURZEL, normalize(pfad).replace(/^(\.\.[/\\])+/, ''));
+  if (existsSync(datei) && statSync(datei).isDirectory()) datei = join(datei, 'index.html');
+  try {
+    const inhalt = await readFile(datei);
+    antwort.writeHead(200, { 'content-type': TYPEN[extname(datei)] ?? 'application/octet-stream' });
+    antwort.end(inhalt);
+  } catch {
+    antwort.writeHead(404).end('nicht da');
+  }
+});
+// Freien Port vom Betriebssystem geben lassen, damit die Prüfung nicht an
+// einem belegten Port scheitert.
+await new Promise((fertig) => server.listen(0, '127.0.0.1', fertig));
+const PORT = server.address().port;
+
+const axe = await readFile(new URL('../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8');
+// Wo kein Chrome von Puppeteer installiert ist, lässt sich über
+// PUPPETEER_EXECUTABLE_PATH ein vorhandener Browser angeben.
+const b = await puppeteer.launch({
+  ...(process.env.PUPPETEER_EXECUTABLE_PATH
+    ? { executablePath: process.env.PUPPETEER_EXECUTABLE_PATH } : {}),
+  args: [
+  '--no-sandbox', '--disable-dev-shm-usage',
+  '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+});
+const p = await b.newPage();
+await p.setViewport({ width: 1440, height: 900 });
+
+const SEITEN = ['/', '/faeden/', '/buch/band-1/', '/faeden/kapitel/1/', '/ueber/', '/impressum/'];
+let gesamt = 0;
+
+for (const seite of SEITEN) {
+  await p.goto(`http://127.0.0.1:${PORT}${seite}`, { waitUntil: 'networkidle2', timeout: 90000 });
+  await new Promise((r) => setTimeout(r, 1500));
+  await p.evaluate(axe);
+  const r = await p.evaluate(async () => await window.axe.run(document, {
+    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
+  }));
+  gesamt += r.violations.length;
+  console.log(`${seite} → ${r.violations.length} Verstöße`);
+  for (const v of r.violations) {
+    console.log(`  [${v.impact}] ${v.id} (${v.nodes.length}×) – ${v.help}`);
+    console.log('   ', v.nodes[0].html.slice(0, 140).replace(/\s+/g, ' '));
+    if (v.nodes[0].any?.[0]?.message) console.log('   →', v.nodes[0].any[0].message.slice(0, 170));
+  }
+}
+
 await b.close();
+server.close();
+console.log(gesamt === 0 ? '\nWCAG 2.1 AA: keine Verstöße.' : `\nInsgesamt ${gesamt} Verstöße.`);
+process.exit(gesamt === 0 ? 0 : 1);

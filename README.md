@@ -512,10 +512,17 @@ stehenblieb, und der Faden, der über das Papier lief statt in der Nacht zu blei
 
 ## Barrierefreiheit
 
-`npm i -D puppeteer axe-core`, dann `npm run pruefe:a11y`: axe-core gegen die Vorschau,
-Stufe WCAG 2.1 AA. Stand: **0 Verstöße**, auch im Hochformat.
+```
+NEXT_EXPORT=1 npm run build && npm run pruefe:a11y
+```
 
-Vier Befunde wurden dabei behoben:
+axe-core gegen den **gebauten Export**, Stufe WCAG 2.1 AA – geprüft wird also,
+was ausgeliefert wird, und nicht die Offlinefassung: Haus, Welt, Buchseite,
+Kapitelseite, Über und Impressum. Stand: **0 Verstöße**, auch im Hochformat.
+Ist kein Chrome von Puppeteer installiert, lässt sich über
+`PUPPETEER_EXECUTABLE_PATH` ein vorhandener Browser angeben.
+
+Fünf Befunde wurden dabei behoben:
 
 - Text war an 31 Stellen über Deckkraft abgedunkelt (Quellenzeilen, Fußzeile,
   Ankunftstext). Deckkraft zerstört den Kontrast – heruntergesetzt wird jetzt über Farbe.
@@ -524,6 +531,9 @@ Vier Befunde wurden dabei behoben:
 - Geschlossene Ringe und ungeprüfte Fragen waren auf 40 Prozent Deckkraft gesetzt,
   obwohl sie Information tragen. Sie treten jetzt über Farbe zurück.
 - Der Herkunftsbadge stand innerhalb der Definitionsliste der Marginalspalte.
+- In der Fußzeile des Hauses war die Feinschrift zu blass (3,84 : 1), und die Links
+  unterschieden sich nur über die Farbe von ihrem Satz. Beides ist behoben:
+  volle Farbe statt Deckkraft, und die Links sind unterstrichen.
 
 ## Datenprüfung
 
