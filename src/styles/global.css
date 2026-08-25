@@ -94,18 +94,49 @@ main{position:relative;z-index:2}
 .ankunft .hinweis{bottom:7vh;font-size:.65rem;animation-delay:3.4s;color:#b3ab98}
 @keyframes auf{to{opacity:1}}
 
-/* ---------- Papier ---------- */
-.papier{background:var(--papier);color:#1a1611;min-height:100svh;display:grid;
-  place-items:center;text-align:center;padding:14vh var(--rand);position:relative;z-index:4}
-.papier .eyebrow{color:var(--weinrot)}
-/* Gold auf Elfenbein trägt im Druck, auf dem Bildschirm nicht: 1,4 : 1.
-   Auf Papierseiten deshalb ein tiefes Bronze, das den Ton hält und lesbar bleibt. */
-.papier .unterzeile{color:#7A5E22}
-.papier h2{color:var(--weinrot);max-width:20ch;margin-inline:auto}
+/* ---------- Tafel (vormals Papier) ----------
+   Der Registerwechsel bleibt, aber er geht nicht mehr ins Weiße.
+   Statt Papier: eine dunkle, polierte Fläche wie der Einband – tiefes Blau,
+   Gold, ein Glanz, der langsam darüber wandert, und die Spiegelung darunter.
+   Eine helle Vollfläche riss die Nacht auf und blendete; das hier hält sie. */
+.papier{background:
+    radial-gradient(120% 90% at 50% -10%,#16233f 0%,#0a1122 45%,#060a14 100%);
+  color:#dcd4c2;min-height:100svh;display:grid;
+  place-items:center;text-align:center;padding:14vh var(--rand);
+  position:relative;z-index:4;overflow:hidden}
+.papier::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(115deg,transparent 38%,rgba(227,200,139,.10) 47%,
+      rgba(255,247,225,.16) 50%,rgba(227,200,139,.10) 53%,transparent 62%);
+  background-size:280% 100%;
+  animation:glanz 14s linear infinite}
+.papier::after{content:"";position:absolute;left:50%;top:0;width:min(46rem,78vw);
+  height:1px;transform:translateX(-50%);pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--gold-tief),transparent);
+  opacity:.5}
+@keyframes glanz{from{background-position:140% 0}to{background-position:-140% 0}}
+.papier > div{position:relative;z-index:1;max-width:44rem}
+.papier .eyebrow{color:var(--gold)}
+.papier .unterzeile{color:#c7ae74}
+.papier h2{color:var(--gold);max-width:20ch;margin-inline:auto;
+  text-shadow:0 1px 0 rgba(0,0,0,.6)}
 .papier blockquote{font-family:var(--display),serif;font-style:italic;
-  font-size:clamp(1.2rem,2.4vw,1.8rem);max-width:40rem;margin:2rem auto 0;line-height:1.5}
-.papier .quelle{color:#6a6152}
-.papier .quelle b{color:var(--weinrot)}
+  font-size:clamp(1.15rem,2.5vw,1.7rem);line-height:1.5;margin:1.6rem auto 0;
+  max-width:34ch;color:#efe7d4}
+/* Die Spiegelung: dasselbe Zitat, gekippt und verlaufend ausgeblendet */
+.spiegel{margin:0 auto;max-width:34ch;font-family:var(--display),serif;
+  font-style:italic;font-size:clamp(1.15rem,2.5vw,1.7rem);line-height:1.5;
+  color:#efe7d4;transform:scaleY(-1);opacity:.10;pointer-events:none;
+  user-select:none;filter:blur(1.4px);
+  -webkit-mask-image:linear-gradient(to top,transparent 10%,#000 86%);
+  mask-image:linear-gradient(to top,transparent 10%,#000 86%);
+  margin-top:.1rem}
+.papier .quelle{color:var(--staub)}
+.papier .quelle b{color:var(--gold)}
+
+@media (prefers-reduced-motion:reduce){
+  .papier::before{animation:none;background-position:50% 0}
+}
 
 /* ---------- Karte ---------- */
 .karte{background:#050810;position:relative;z-index:4;padding:12vh var(--rand)}
@@ -126,23 +157,105 @@ main{position:relative;z-index:2}
   display:block;margin-bottom:.3rem;font-weight:400}
 .ort-info .verweis{display:block;margin-top:.5rem;color:var(--gold);font-size:.78rem}
 
-/* ---------- Bücher ---------- */
-.buecher{background:var(--nacht);position:relative;z-index:4;padding:12vh var(--rand)}
-.buch-raster{display:grid;grid-template-columns:minmax(0,17rem) minmax(0,32rem);
-  gap:clamp(2rem,6vw,5rem);align-items:center;max-width:60rem;margin:0 auto}
-.buch-cover{border:1px solid rgba(227,200,139,.28);box-shadow:0 30px 80px rgba(0,0,0,.7);
-  height:auto}
-.kaufen{display:inline-block;margin-top:1.6rem;font-family:var(--display),serif;
-  font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--nacht);
-  background:var(--gold);text-decoration:none;padding:.85rem 1.7rem;transition:background .3s}
-.kaufen:hover{background:#fff}
-.spaeter{display:flex;gap:2.5rem;flex-wrap:wrap;max-width:60rem;margin:3.5rem auto 0;
-  border-top:1px solid rgba(227,200,139,.16);padding-top:2rem}
-.spaeter div{flex:1 1 12rem}
-.spaeter h3{color:var(--staub)}
-.spaeter p{font-size:.82rem;color:var(--staub);margin-top:.35rem}
+/* Bandwechsel in der Kopfzeile – drei Marken, ein Sprung je Band */
+.baender{display:inline-flex;gap:.35rem;align-items:center;margin-right:.5rem;
+  padding-right:.9rem;border-right:1px solid rgba(227,200,139,.22)}
+.baender a{display:grid;place-items:center;width:1.65rem;height:1.65rem;
+  border:1px solid rgba(227,200,139,.3);border-radius:50%;text-decoration:none;
+  transition:background .3s,border-color .3s}
+.baender a b{font-family:var(--display),serif;font-size:.72rem;color:var(--gold);
+  font-weight:400;line-height:1}
+.baender a:hover{background:rgba(227,200,139,.14);border-color:var(--gold)}
+
+/* Der Kaufweg steht dauerhaft in der Kopfzeile, in Gold */
+.kopf-kaufen{font-family:var(--display),serif;font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:#1a1206 !important;
+  background:linear-gradient(160deg,#f4e0ac,var(--gold) 45%,var(--gold-tief));
+  padding:.5rem 1rem;text-decoration:none;
+  box-shadow:0 6px 18px rgba(168,134,63,.26);transition:filter .3s}
+.kopf-kaufen:hover{filter:brightness(1.12)}
+
+/* ---------- Bücher: die drei Welten ---------- */
+.buecher{background:
+    radial-gradient(90% 60% at 50% 0%,#101c33 0%,#070c18 55%,var(--nacht) 100%);
+  position:relative;z-index:4;padding:12vh var(--rand) 10vh}
+.buecher > .kopf{max-width:62rem;margin:0 auto 4.5rem;text-align:center}
+.buecher > .kopf h2{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--papier)}
+.buecher > .kopf p{color:var(--staub);max-width:44ch;margin:1rem auto 0;font-size:.95rem}
+
+.tore{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(1.5rem,4vw,3.4rem);max-width:74rem;margin:0 auto;
+  perspective:1400px}
+.tor{display:flex;flex-direction:column;align-items:center;text-align:center;
+  transform-style:preserve-3d}
+.tor .rahmen{position:relative;width:100%;max-width:17rem;
+  transform:rotateY(calc(var(--ry,0) * 1deg)) rotateX(calc(var(--rx,0) * 1deg));
+  transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+.tor:hover .rahmen,.tor:focus-within .rahmen{--ry:-9;--rx:5}
+.tor .platte{position:relative;display:block;border:1px solid rgba(227,200,139,.34);
+  box-shadow:0 34px 70px rgba(0,0,0,.75),0 0 0 1px rgba(227,200,139,.08) inset;
+  overflow:hidden;background:#070b14}
+.tor .platte img{display:block;width:100%;height:auto}
+/* Der Glanz wandert beim Kippen über den Einband */
+.tor .platte::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 36%,rgba(255,246,222,.00) 44%,
+    rgba(255,246,222,.30) 50%,rgba(255,246,222,.00) 56%,transparent 64%);
+  background-size:260% 100%;background-position:130% 0;
+  transition:background-position .8s ease,opacity .4s ease;opacity:.75}
+.tor:hover .platte::after,.tor:focus-within .platte::after{background-position:-40% 0}
+/* Die Spiegelung unter dem Band: derselbe Umschlag, gekippt und ausgeblendet */
+.tor .abglanz{position:relative;width:100%;max-width:17rem;height:5.6rem;
+  margin-top:2px;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 88%);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 88%)}
+.tor .abglanz img{display:block;width:100%;height:auto;transform:scaleY(-1);
+  transform-origin:top;margin-top:-0.4rem;filter:blur(1.2px) saturate(.75)}
+.tor.versiegelt .abglanz{background:linear-gradient(to bottom,rgba(227,200,139,.10),transparent 70%)}
+.tor .band-nr{font-family:var(--display),serif;font-size:.66rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.tor h3{font-size:clamp(1.15rem,2.2vw,1.5rem);color:var(--papier);margin-top:.4rem}
+.tor .unterzeile{font-size:.82rem;margin-top:.3rem}
+.tor .klappe{font-size:.82rem;color:var(--staub);margin-top:.9rem;max-width:28ch;
+  line-height:1.55}
+.tor .wege{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;
+  margin-top:1.4rem}
+.tor .kaufen{margin-top:0}
+
+/* Ein Band, der noch nicht erschienen ist: versiegeltes Tor, kein Titel */
+.tor.versiegelt .platte{aspect-ratio:2/3;display:grid;place-items:center;
+  background:repeating-linear-gradient(135deg,#080d18 0 14px,#0b1220 14px 28px);
+  border-style:dashed;border-color:rgba(227,200,139,.2)}
+.tor.versiegelt .siegel{font-family:var(--display),serif;font-size:.62rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold-tief)}
+.tor.versiegelt h3{color:var(--staub)}
+
+.kaufen{display:inline-block;font-family:var(--display),serif;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1206;
+  background:linear-gradient(160deg,#f4e0ac 0%,var(--gold) 42%,var(--gold-tief) 100%);
+  text-decoration:none;padding:.8rem 1.5rem;border:0;cursor:pointer;
+  box-shadow:0 8px 24px rgba(168,134,63,.28);
+  transition:filter .3s,transform .3s}
+.kaufen:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.kaufen.wartet{background:none;color:var(--staub);
+  border:1px solid rgba(227,200,139,.28);box-shadow:none;cursor:default}
+.kaufen.wartet:hover{filter:none;transform:none}
+.eintauchen{display:inline-block;font-family:var(--display),serif;font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  text-decoration:none;padding:.8rem 1.2rem;border:1px solid rgba(227,200,139,.34);
+  transition:background .3s,color .3s}
+.eintauchen:hover{background:rgba(227,200,139,.12)}
+
+.hinweis-zeile{max-width:74rem;margin:3.5rem auto 0;
+  border-top:1px solid rgba(227,200,139,.16);padding-top:1.6rem;
+  font-size:.76rem;color:var(--staub);text-align:center}
+
 footer{background:var(--nacht);position:relative;z-index:4;padding:3rem var(--rand) 6rem;
   text-align:center;font-size:.72rem;color:var(--staub)}
+
+@media (max-width:900px){
+  .tore{grid-template-columns:1fr;gap:3.5rem}
+  .tor .rahmen,.tor .abglanz{max-width:14rem}
+}
 
 /* ---------- Faden und Oberfläche ---------- */
 .faden{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .8s}
@@ -151,14 +264,16 @@ footer{background:var(--nacht);position:relative;z-index:4;padding:3rem var(--ra
 .faden circle{fill:#fff;filter:drop-shadow(0 0 8px rgba(227,200,139,1))}
 
 header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;
-  justify-content:space-between;align-items:center;padding:1rem var(--rand);
+  justify-content:space-between;align-items:center;gap:1.2rem;
+  flex-wrap:wrap;padding:1rem var(--rand);
   opacity:0;pointer-events:none;transition:opacity .6s}
 header.an{opacity:1;pointer-events:auto}
 header::before{content:"";position:absolute;inset:0;z-index:-1;
   background:linear-gradient(to bottom,rgba(6,10,20,.8),transparent)}
 .marke{font-family:var(--display),serif;font-size:.72rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--gold);text-decoration:none}
-nav{display:flex;gap:clamp(.7rem,2vw,1.6rem);align-items:center}
+nav{display:flex;gap:clamp(.7rem,2vw,1.6rem);align-items:center;flex-wrap:wrap;
+  justify-content:flex-end}
 nav a,nav button{font-family:var(--display),serif;font-size:.7rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--papier);text-decoration:none;opacity:.7;
   background:none;border:0;cursor:pointer;padding:.4rem 0;transition:opacity .3s,color .3s}
@@ -339,14 +454,17 @@ nav button[aria-pressed="true"]{color:var(--gold);opacity:1}
   background:rgba(124,22,34,.35)}
 .stationen i{position:absolute;top:-1px;width:2px;height:4px;
   background:rgba(124,22,34,.5);transform:translateX(-50%)}
-.marke{position:absolute;transform:translateX(-50%);transition:left .18s linear;
+/* Auf die Bahn beschränkt: `.marke` heißt in der Kopfzeile die Wortmarke.
+   Unbeschränkt hat diese Regel die Kopfzeile absolut positioniert und den
+   Titel unter die Navigation geschoben. */
+.bahn .marke{position:absolute;transform:translateX(-50%);transition:left .18s linear;
   display:flex;flex-direction:column;align-items:center;font-size:.68rem;
   letter-spacing:.1em;text-transform:uppercase;font-family:var(--display),serif}
-.marke::before{content:"";width:9px;height:9px;border-radius:50%}
-.marke.bote{top:.6rem;color:var(--weinrot)}
-.marke.bote::before{background:var(--weinrot);order:2;margin-top:.4rem}
-.marke.laeufer{top:3rem;color:#6a6152}
-.marke.laeufer::before{background:#8d8677;margin-bottom:.4rem}
+.bahn .marke::before{content:"";width:9px;height:9px;border-radius:50%}
+.bahn .marke.bote{top:.6rem;color:var(--weinrot)}
+.bahn .marke.bote::before{background:var(--weinrot);order:2;margin-top:.4rem}
+.bahn .marke.laeufer{top:3rem;color:#6a6152}
+.bahn .marke.laeufer::before{background:#8d8677;margin-bottom:.4rem}
 .strecke-stand{margin-top:.8rem;font-size:.85rem;color:#6a6152;font-style:italic;
   min-height:3rem}
 .kernsatz{font-family:var(--display),serif;font-style:italic;color:var(--weinrot);

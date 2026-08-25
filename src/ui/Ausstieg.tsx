@@ -14,7 +14,14 @@ export function Ausstieg() {
   const [tief, setTief] = useState(false);
 
   useEffect(() => {
-    const pruefen = () => setTief(window.scrollY > window.innerHeight * 1.5);
+    // Im Bücherbereich ist man nicht mehr in der Tiefe, sondern am Ziel –
+    // dort verdeckte der Rückweg sonst die Klappentexte.
+    const pruefen = () => {
+      const buecher = document.getElementById('buecher');
+      const amZiel = buecher
+        && buecher.getBoundingClientRect().top < window.innerHeight * 0.8;
+      setTief(window.scrollY > window.innerHeight * 1.5 && !amZiel);
+    };
     const zu = (ziel: string) => {
       const el = document.getElementById(ziel);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });

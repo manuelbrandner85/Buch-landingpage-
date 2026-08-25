@@ -13,6 +13,7 @@ export const BUCH_BAND_2: Buch = {
   unterzeile: 'Vom Ende der Antike bis zum Industriezeitalter',
   status: 'erschienen',
   amazonUrl: 'AMAZON_BAND_2_URL',
+  coverAsset: 'cover-band-2',
   seiten: 206,
   klappentext:
     'Am Anfang steht ein Mönch, der abschreibt, was sonst verloren ginge. Am Ende steht eine Fabrik, die Menschen nach der Uhr einteilt. Dazwischen liegt eine Kette von Werkzeugen, die jeweils zweierlei bewirkten: Der Kredit ermöglichte Handel über Meere – und die Schuld als Herrschaftsmittel. Das Schiff verband Kontinente – und verschleppte Millionen. Die Presse verbreitete Aufklärung – und die Verleumdung gleich mit.',

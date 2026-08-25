@@ -285,6 +285,35 @@ src/
    Vorkommen über alle Bände. Ein Ort aus Band 1, der in Band 2 wiederkehrt,
    bekommt dort nur einen weiteren Eintrag in `vorkommen` – kein zweites Asset.
 
+## Die drei Welten
+
+Der Bücherbereich ist der Ort, an dem die Reihe verkauft wird, und er sieht
+jetzt auch so aus: drei Tore nebeneinander, jedes mit Umschlag, Klappentext und
+zwei Wegen — zum Buch und in die Welt. Der Kaufweg steht zuerst; solange die
+Produktseite ein Platzhalter ist, steht dort „Erscheint in Kürze“ statt eines
+toten Links. Ein nicht erschienener Band bekommt ein versiegeltes Tor ohne
+Titel und ohne Umschlag.
+
+Die Tore kippen im Raum (`perspective` auf dem Raster, `rotateY/rotateX` auf dem
+Rahmen), ein Glanz wandert dabei über den Einband, und darunter steht der
+Umschlag gespiegelt und ausgeblendet. In der Kopfzeile liegen drei Marken —
+eine je erschienenem Band —, die direkt in dessen Welt springen, dazu der
+Kaufweg in Gold.
+
+**Keine hellen Vollflächen mehr.** Die Bilanzseiten standen auf Papierweiß; das
+riss mitten in der Fahrt die Nacht auf. Sie stehen jetzt auf einer dunklen,
+polierten Fläche wie der Einband: tiefes Blau, Gold, ein langsam wandernder
+Glanz und die Spiegelung des Satzes darunter. Der Registerwechsel bleibt — er
+geht nur nicht mehr ins Weiße.
+
+Dabei ist ein älterer Fehler aufgefallen: Die Regel `.marke` aus der
+Königsstraßen-Szene galt unbeschränkt und hat die Wortmarke der Kopfzeile
+absolut positioniert, sodass Titel und Navigation übereinanderlagen. Sie ist
+jetzt auf `.bahn` beschränkt.
+
+Geprüft mit axe-core (WCAG 2.1 AA) gegen den gebauten Export: **0 Verstöße** auf
+Weltseite, Kapitelseite und Über-Seite.
+
 ## Die drei Bände
 
 | Band | Kapitel | Seiten | in den Daten | öffentlich |
