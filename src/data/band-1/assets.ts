@@ -7,7 +7,7 @@ import type { Asset } from '../gemeinsam/typen';
  * in mehreren Breiten unter /public/assets/band-1/szenen/.
  */
 export const ASSETS_BAND_1: Asset[] = [
-  { id: 'cover', datei: 'cover', breite: 1000, hoehe: 1520, herkunft: 'Eigene Darstellung',
+  { id: 'cover', datei: 'cover', breite: 1200, hoehe: 1797, herkunft: 'Eigene Darstellung',
     alt: 'Cover Band 1: eine goldene Linie steigt vom Feuer über Ährenfeld und Dorf zur Zikkurat und zu den Säulen von Persepolis.' },
   { id: 'graben', datei: 'graben', breite: 1920, hoehe: 1080, herkunft: 'Freie Rekonstruktion',
     alt: 'Der Ostafrikanische Graben bei Morgendämmerung, Dunstschichten über einer weiten Ebene.' },

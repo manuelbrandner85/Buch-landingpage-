@@ -1,7 +1,9 @@
-import Image from 'next/image';
 import type { Buch } from '@/data/gemeinsam/typen';
 import { BAENDE, WELT, assetNach, szeneZuKapitel } from '@/world/registry';
-import { bildQuelle } from '@/world/bilder';
+import { Buch3D } from './Buch3D';
+
+/** Rückenstärke im Verhältnis zur Umschlagbreite – aus der Druckdatei gemessen. */
+const RUECKEN: Record<string, number> = { 'band-1': 0.0775, 'band-2': 0.0808 };
 
 /**
  * Die drei Welten — und der Weg zum Buch.
@@ -27,10 +29,7 @@ function Tor({ buch }: { buch: Buch }) {
     return (
       <div className="tor versiegelt">
         <p className="band-nr">Band {buch.nummer}</p>
-        <div className="rahmen">
-          <div className="platte"><span className="siegel">Noch verschlossen</span></div>
-        </div>
-        <div className="abglanz" aria-hidden="true" />
+        <div className="siegelplatte"><span className="siegel">Noch verschlossen</span></div>
         <h3>Der dritte Band</h3>
         <p className="klappe">
           Der Faden läuft weiter. Dieser Teil der Welt öffnet sich mit dem Erscheinen.
@@ -42,21 +41,7 @@ function Tor({ buch }: { buch: Buch }) {
   return (
     <div className="tor">
       <p className="band-nr">Band {buch.nummer} · {buch.seiten} Seiten</p>
-      <div className="rahmen">
-        <div className="platte">
-          {cover && (
-            <Image src={bildQuelle(cover, 1000)} alt={cover.alt}
-              width={cover.breite} height={cover.hoehe}
-              sizes="(max-width: 900px) 60vw, 17rem" />
-          )}
-        </div>
-      </div>
-      <div className="abglanz" aria-hidden="true">
-        {cover && (
-          <Image src={bildQuelle(cover, 640)} alt="" aria-hidden="true"
-            width={cover.breite} height={cover.hoehe} sizes="17rem" />
-        )}
-      </div>
+      {cover && <Buch3D cover={cover} band={buch.id} tiefe={RUECKEN[buch.id] ?? 0.078} />}
       <h3>{buch.titel}</h3>
       {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
       <p className="klappe">{buch.klappentext}</p>

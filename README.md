@@ -294,11 +294,29 @@ Produktseite ein Platzhalter ist, steht dort „Erscheint in Kürze“ statt ein
 toten Links. Ein nicht erschienener Band bekommt ein versiegeltes Tor ohne
 Titel und ohne Umschlag.
 
-Die Tore kippen im Raum (`perspective` auf dem Raster, `rotateY/rotateX` auf dem
-Rahmen), ein Glanz wandert dabei über den Einband, und darunter steht der
-Umschlag gespiegelt und ausgeblendet. In der Kopfzeile liegen drei Marken —
+Jedes Tor ist ein **gebundener Band im Raum**, kein Bild eines Buches: sechs
+Flächen mit `transform-style: preserve-3d` — Vorderseite, Rücken und Rückseite
+aus derselben Druckdatei freigestellt, in der sie beim Buchbinder liegen, dazu
+Schnitt, Kopf- und Fußschnitt als Papierlagen. Die Rückenstärke steht als
+Verhältnis in `RUECKEN` und stammt aus der Umschlagrechnung (Band 1: 0,4639 in
+auf 6 in Breite).
+
+Gedreht wird beim Lesen: `animation-timeline: view()` bindet die Drehung an die
+Scrollstrecke, die Kamera geht um den Band herum — Vorderseite, Rücken,
+Rückseite. Die Kurve ist bewusst ungleichmäßig; gleichmäßig gedreht steht der
+Band die halbe Strecke hochkant und ist ein Strich. Trägt der Browser
+scrollgebundene Animationen nicht oder ist „Bewegung reduzieren“ gesetzt, bleibt
+der Band in seiner Ausgangsdrehung stehen und ist immer noch ein Körper.
+
+In der Kopfzeile liegen drei Marken —
 eine je erschienenem Band —, die direkt in dessen Welt springen, dazu der
 Kaufweg in Gold.
+
+**Band 1 trug den falschen Umschlag.** Im Repository lag eine ältere Fassung
+mit „Manuel & Uwe“ in der Verlagszeile; gedruckt steht dort **Trendonix**. Cover,
+Rücken und Rückseite stammen jetzt aus
+`02_Taschenbuch/..._Cover_Taschenbuch_TRENDONIX.pdf`, die Tiefenkarte der
+Coverszene ist neu gerechnet.
 
 **Keine hellen Vollflächen mehr.** Die Bilanzseiten standen auf Papierweiß; das
 riss mitten in der Fahrt die Nacht auf. Sie stehen jetzt auf einer dunklen,
