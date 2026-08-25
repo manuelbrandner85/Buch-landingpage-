@@ -20,7 +20,7 @@ import type { Szene } from '../gemeinsam/typen';
 export const SZENEN_BAND_3: Szene[] = [
   {
     id: 'kapitel-12', bandId: 'band-3', kapitelId: 12, typ: 'auftakt', tor: true,
-    platte: 'b3-kap12-auftakt',
+    platte: 'b3-kap12-auftakt', motion: 'b3-kap12-auftakt',
     buchseite: 12, hoehe: 196, grading: '#4a425c',
     uebergang: 'aufloesen', fahrt: 'hinein',
     titel: 'Krieg, Maschine und\nMassengesellschaft',
@@ -35,7 +35,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-13', bandId: 'band-3', kapitelId: 13, typ: 'auftakt', tor: true,
-    platte: 'b3-kap13-auftakt',
+    platte: 'b3-kap13-auftakt', motion: 'b3-kap13-auftakt',
     buchseite: 47, hoehe: 196, grading: '#603a38',
     uebergang: 'glut', fahrt: 'absenken',
     titel: 'Krise, Ideologie\nund Zusammenbruch',
@@ -50,7 +50,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-14', bandId: 'band-3', kapitelId: 14, typ: 'auftakt', tor: true,
-    platte: 'b3-kap14-auftakt',
+    platte: 'b3-kap14-auftakt', motion: 'b3-kap14-auftakt',
     buchseite: 82, hoehe: 196, grading: '#38545a',
     uebergang: 'aufloesen', fahrt: 'schwenkRechts',
     titel: 'Vertrag, Dollar\nund Blöcke',
@@ -59,7 +59,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-15', bandId: 'band-3', kapitelId: 15, typ: 'auftakt', tor: true,
-    platte: 'b3-kap15-auftakt',
+    platte: 'b3-kap15-auftakt', motion: 'b3-kap15-auftakt',
     buchseite: 117, hoehe: 196, grading: '#564a2e',
     uebergang: 'aufloesen', fahrt: 'durchfahrt',
     titel: 'Öl, Container\nund Konzerne',
