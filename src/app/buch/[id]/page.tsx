@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import {
   OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, buchNach, reiheZuBand,
 } from '@/world/registry';
-import { wegKapitel, wegReihe } from '@/world/wege';
+import { wegHaus, wegKapitel, wegReihe } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Rueckweg } from '@/ui/Rueckweg';
@@ -62,7 +62,7 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
 
   return (
     <main className="lesefassung buchseite">
-      <Rueckweg nach={reihe ? wegReihe(reihe.id) : '/'}
+      <Rueckweg nach={reihe ? wegReihe(reihe.id) : wegHaus()}
         text={reihe ? `Zurück in ${reihe.titel}` : 'Zurück'} />
       <p className="eyebrow">{reihe?.titel} · Band {buch.nummer}</p>
       <h1>{buch.titel}</h1>

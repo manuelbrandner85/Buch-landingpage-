@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { BEGRIFFE } from '@/data/gemeinsam/begriffe';
-import { OEFFENTLICHE_REIHEN } from '@/world/registry';
+import { OEFFENTLICHE_REIHEN, TRENDONIX } from '@/world/registry';
+import { wegHaus, wegUeber } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
 
 /** Die Begriffe gehören der Welt einer Reihe – deshalb liegen sie unter ihr. */
@@ -18,7 +19,7 @@ export default function BegriffeSeite() {
   const sortiert = [...BEGRIFFE].sort((a, b) => a.wort.localeCompare(b.wort, 'de'));
   return (
     <main className="lesefassung">
-      <Rueckweg />
+      <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
       <p className="eyebrow">Anhang</p>
       <h1>Begriffe</h1>
       <p className="unterzeile">Was im Buch in Gold steht, wird hier erklärt.</p>
@@ -36,7 +37,10 @@ export default function BegriffeSeite() {
         <b>Hinweis</b>Das Glossar des Bandes umfasst mehr Einträge. Aufgenommen ist hier,
         was wörtlich aus dem Buch übernommen werden konnte.
       </p>
-      <nav className="fusszeile"><a href="/ueber">Über das Projekt</a>  <a href="/">Zurück in die Welt</a></nav>
+      <nav className="fusszeile">
+        <a href={wegUeber()}>Über das Projekt</a>
+        <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>
+      </nav>
     </main>
   );
 }

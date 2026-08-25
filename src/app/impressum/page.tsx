@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { TRENDONIX } from '@/world/registry';
+import { wegHaus, wegUeber } from '@/world/wege';
 
 export const metadata: Metadata = {
   title: 'Impressum – Die Unsichtbaren Fäden',
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 export default function ImpressumSeite() {
   return (
     <main className="lesefassung">
-      <Rueckweg />
+      <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
       <p className="eyebrow">Pflichtangaben</p>
       <h1>Impressum</h1>
 
@@ -70,7 +72,10 @@ export default function ImpressumSeite() {
         </p>
       </article>
 
-      <nav className="fusszeile"><a href="/ueber">Über das Projekt</a>  <a href="/">Zurück in die Welt</a></nav>
+      <nav className="fusszeile">
+        <a href={wegUeber()}>Über das Projekt</a>
+        <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>
+      </nav>
     </main>
   );
 }

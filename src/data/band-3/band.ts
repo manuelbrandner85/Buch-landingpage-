@@ -6,9 +6,8 @@ import type { Buch, Kapitel } from '../gemeinsam/typen';
  * Kapitelarchitektur (`BAND_3_ARCHITEKTUR.md`), die den Seitenplan 1–206
  * festlegt und mit der Kapitelvorschau verbindlich wird.
  *
- * Stand: Kapitel 12, 13 und 16 sind gesetzt, 14 und 15 sind geplant.
- * Der Band steht deshalb auf „in Arbeit“ – bis zum Erscheinen wird er
- * öffentlich nicht angekündigt.
+ * Titel, Untertitel, Klappentext und die fünf Kapitel sind gegen den gedruckten
+ * Umschlag des Taschenbuchs geprüft und stimmen mit ihm überein.
  */
 export const BUCH_BAND_3: Buch = {
   id: 'band-3',
@@ -16,8 +15,11 @@ export const BUCH_BAND_3: Buch = {
   nummer: 3,
   titel: 'Krieg, Ordnung und Netz',
   unterzeile: 'Vom Weltkrieg bis zur vernetzten Gegenwart',
-  status: 'in Arbeit',
+  // Gesetzt und mit fertigem Umschlag, aber noch nicht im Handel: Die Welt
+  // lässt sich begehen, einen Kaufweg gibt es noch nicht.
+  status: 'erscheint',
   kaufwege: [],
+  coverAsset: 'cover-band-3',
   seiten: 206,
   klappentext:
     'Am Anfang steht ein Schützengraben, in dem die Ordnung der Fabrik auf den Krieg trifft. Am Ende steht ein Rechenzentrum, dessen Betreiber Regeln setzt, ohne gewählt zu sein. Dazwischen liegen drei Anläufe, die Welt zu ordnen – Verträge, Blöcke, Märkte. Jeder hat gehalten, bis der nächste ihn ablöste.',

@@ -1,18 +1,22 @@
 import type { Szene } from '../gemeinsam/typen';
 
 /**
- * Band 3 als Daten. Wie in Band 2 gibt es noch keine eigens erzeugten
- * Bewegtmotive für die Website; die Szenen tragen deshalb kein `platte`.
+ * Band 3 als Daten.
  *
- * Gesetzt sind die Kapitel 12, 13 und 16 – von ihnen stammen Auftaktzeile,
- * Herkunftszeile und der Schlüsselsatz der Kapitelbilanz aus dem Satz selbst.
- * Kapitel 14 und 15 stehen im verbindlichen Seitenplan, sind aber noch nicht
- * gesetzt: Sie bekommen ihren Auftakt, aber keine Bilanz – ein Schlüsselsatz,
- * den es noch nicht gibt, wird hier nicht erfunden.
+ * Alle fünf Kapitel haben ihren Auftakt mit eigenem Motiv und Bewegtfassung.
+ * Titel, Leitfragen und Seitenbereiche sind gegen den gedruckten Umschlag des
+ * Taschenbuchs geprüft und stimmen mit ihm überein.
+ *
+ * Die Kapitelbilanzen von 12, 13 und 16 stammen aus dem Satz selbst. Für 14 und
+ * 15 fehlen sie hier: Die Druckteile im Ordner von Band 3 tragen den Inhalt von
+ * Band 2 (geprüft an den Seiten 81, 82, 117 und 151), es liegt also keine
+ * lesbare Fassung dieser beiden Bilanzen vor. Ein Schlüsselsatz, den man nicht
+ * gelesen hat, wird hier nicht erfunden – dasselbe gilt für ihre Herkunftszeile.
  */
 export const SZENEN_BAND_3: Szene[] = [
   {
     id: 'kapitel-12', bandId: 'band-3', kapitelId: 12, typ: 'auftakt', tor: true,
+    platte: 'b3-kap12-auftakt', motion: 'b3-kap12-auftakt',
     buchseite: 12, hoehe: 196, grading: '#4a425c',
     uebergang: 'aufloesen', fahrt: 'hinein',
     titel: 'Krieg, Maschine und\nMassengesellschaft',
@@ -27,6 +31,7 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-13', bandId: 'band-3', kapitelId: 13, typ: 'auftakt', tor: true,
+    platte: 'b3-kap13-auftakt', motion: 'b3-kap13-auftakt',
     buchseite: 47, hoehe: 196, grading: '#603a38',
     uebergang: 'glut', fahrt: 'absenken',
     titel: 'Krise, Ideologie\nund Zusammenbruch',
@@ -41,22 +46,25 @@ export const SZENEN_BAND_3: Szene[] = [
   },
   {
     id: 'kapitel-14', bandId: 'band-3', kapitelId: 14, typ: 'auftakt', tor: true,
+    platte: 'b3-kap14-auftakt', motion: 'b3-kap14-auftakt',
     buchseite: 82, hoehe: 196, grading: '#38545a',
     uebergang: 'aufloesen', fahrt: 'schwenkRechts',
     titel: 'Vertrag, Dollar\nund Blöcke',
     unterzeile: 'Wer schreibt die Regeln, wenn eine Welt neu geordnet wird',
-    quelle: 'Kapitel 14 steht im verbindlichen Seitenplan des Bandes; die Seite ist noch nicht gesetzt.',
+    quelle: 'Konferenzsaal, freie Rekonstruktion. Die Herkunftszeile dieses Kapitels liegt noch nicht lesbar vor.',
   },
   {
     id: 'kapitel-15', bandId: 'band-3', kapitelId: 15, typ: 'auftakt', tor: true,
+    platte: 'b3-kap15-auftakt', motion: 'b3-kap15-auftakt',
     buchseite: 117, hoehe: 196, grading: '#564a2e',
     uebergang: 'aufloesen', fahrt: 'durchfahrt',
     titel: 'Öl, Container\nund Konzerne',
     unterzeile: 'Wem gehört eine Ordnung, die niemand beschlossen hat',
-    quelle: 'Kapitel 15 steht im verbindlichen Seitenplan des Bandes; die Seite ist noch nicht gesetzt.',
+    quelle: 'Containerterminal, freie Rekonstruktion. Die Herkunftszeile dieses Kapitels liegt noch nicht lesbar vor.',
   },
   {
     id: 'kapitel-16', bandId: 'band-3', kapitelId: 16, typ: 'auftakt', tor: true,
+    platte: 'b3-kap16-auftakt', motion: 'b3-kap16-auftakt',
     buchseite: 152, hoehe: 196, grading: '#304668',
     uebergang: 'wasser', fahrt: 'hinein',
     titel: 'Kabel, Daten\nund Abhängigkeit',

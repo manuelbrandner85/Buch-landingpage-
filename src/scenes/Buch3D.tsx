@@ -20,7 +20,9 @@ import { bildQuelle, ordner } from '@/world/bilder';
  * Beschreibung für den ganzen Band gilt.
  */
 /** Rückenstärke im Verhältnis zur Umschlagbreite – aus der Druckdatei gemessen. */
-const RUECKEN: Record<string, number> = { 'band-1': 0.0775, 'band-2': 0.0808 };
+const RUECKEN: Record<string, number> = {
+  'band-1': 0.0775, 'band-2': 0.0808, 'band-3': 0.0806,
+};
 export const rueckenstaerke = (band: BandId) => RUECKEN[band] ?? 0.078;
 
 export function Buch3D({ cover, band, tiefe = rueckenstaerke(band) }:

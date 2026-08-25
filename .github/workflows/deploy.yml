@@ -61,6 +61,17 @@ jobs:
           fi
           npx next build
 
+      # Ein statischer Export hat keinen Server, der einen falschen Pfad noch
+      # abfängt. Deshalb wird jeder interne Verweis nachgeschlagen, bevor
+      # irgendetwas veröffentlicht wird.
+      - name: Wege prüfen
+        env:
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
+        run: |
+          if [ -n "$SEITEN_DOMAIN" ]; then export NEXT_PUBLIC_BASIS_PFAD=""
+          else export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"; fi
+          node scripts/pruefe-wege.mjs
+
       - name: Jekyll abschalten und Domain hinterlegen
         env:
           SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
