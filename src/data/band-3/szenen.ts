@@ -27,6 +27,18 @@ export const SZENEN_BAND_3: Szene[] = [
     quelle: 'Maschinenhalle mit Transmission. Freie Rekonstruktion.',
   },
   {
+    id: 'zweitausend-zuege', bandId: 'band-3', kapitelId: 12, unterkapitel: '12.2', typ: 'motiv',
+    platte: 'b3-kap12-motiv', buchseite: 22, hoehe: 262, grading: '#4a425c',
+    uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
+    badge: 'Freie Rekonstruktion',
+    eyebrow: 'Der Fahrplan',
+    titel: 'Zweitausendeinhundert-\nfünfzig Züge',
+    unterzeile: 'Der Aufmarsch in Zahlen',
+    fliesstext:
+      'Solche Zahlen sind schwer vorstellbar, und genau darin liegt ihre Wirkung. Ein Zug alle zehn Minuten über eine Brücke ist keine militärische Leistung mehr, sondern eine betriebstechnische. Sie setzt voraus, dass jede Weiche, jeder Wasserkran und jede Ablösung im Voraus eingeplant ist.',
+    quelle: 'Seite 22, wörtlich. Die Zahl stammt aus der Aufmarschliteratur, eine amtliche oder archivalische Quelle war für das Buch nicht erreichbar – deshalb Stufe C. Stellwerk an einer Bahnstrecke, freie Rekonstruktion.',
+  },
+  {
     id: 'faden-12', bandId: 'band-3', kapitelId: 12, typ: 'papier', buchseite: 46,
     titel: 'Der unsichtbare Faden in Kapitel 12',
     zitat: 'Was in der Fabrik erfunden wurde, um Arbeit zu messen, hat binnen dreißig Jahren gemessen, wer jemand ist.',
@@ -40,6 +52,18 @@ export const SZENEN_BAND_3: Szene[] = [
     titel: 'Krise, Ideologie\nund Zusammenbruch',
     unterzeile: 'Warum eine Ordnung zusammenbricht, die auf dem Papier funktioniert',
     quelle: 'Leere Schalterhalle. Freie Rekonstruktion.',
+  },
+  {
+    id: 'der-zettel-an-der-tuer', bandId: 'band-3', kapitelId: 13, typ: 'motiv',
+    platte: 'b3-kap13-motiv', buchseite: 48, hoehe: 262, grading: '#603a38',
+    uebergang: 'aufloesen', fahrt: 'hinein', partikel: 'staub',
+    badge: 'Freie Rekonstruktion',
+    eyebrow: 'Was Sie in diesem Kapitel erwartet',
+    titel: 'Ein geschlossener Laden\nim Winter',
+    unterzeile: 'Der Zettel an der Tür ist das Dokument dieses Kapitels',
+    fliesstext:
+      'Es erklärt nicht mit einer Ursache. Wo die Forschung streitet, steht der Streit im Buch und wird nicht aufgelöst. Und 13.3 behandelt einen Gegenstand, bei dem die Genauigkeit nicht Stilfrage ist, sondern Pflicht: Dort steht kein Satz ohne Beleg.',
+    quelle: 'Kapitelvorschau auf Seite 48, wörtlich. Geschlossener Laden, freie Rekonstruktion.',
   },
   {
     id: 'faden-13', bandId: 'band-3', kapitelId: 13, typ: 'papier', buchseite: 81,
@@ -57,6 +81,18 @@ export const SZENEN_BAND_3: Szene[] = [
     quelle: 'Leerer Konferenzsaal. Freie Rekonstruktion.',
   },
   {
+    id: 'ein-hotel-in-new-hampshire', bandId: 'band-3', kapitelId: 14, unterkapitel: '14.1', typ: 'motiv',
+    platte: 'b3-kap14-motiv', buchseite: 84, hoehe: 262, grading: '#38545a',
+    uebergang: 'lichtschwenk', fahrt: 'heraus',
+    badge: 'Freie Rekonstruktion',
+    eyebrow: 'Ein Hotel in New Hampshire',
+    titel: 'Wie der Dollar\nin die Mitte kam',
+    unterzeile: 'Vierundvierzig Staaten, siebenhundertdreißig Delegierte, drei Wochen',
+    fliesstext:
+      'In diesen Wochen trafen sich im Mount Washington Hotel in Bretton Woods, New Hampshire, Delegationen aus vierundvierzig Staaten – siebenhundertdreißig Personen – zur Währungs- und Finanzkonferenz der Vereinten Nationen. Verhandelt wurde nicht über den Krieg, sondern über die Zeit danach: wie Geld zwischen Staaten fließen soll, wenn wieder Handel möglich ist.',
+    quelle: 'Seite 84, wörtlich. Konferenzunterlagen und Abkommenstext. Das Ferienhotel in den Bergen: freie Rekonstruktion.',
+  },
+  {
     id: 'faden-14', bandId: 'band-3', kapitelId: 14, typ: 'papier', buchseite: 116,
     titel: 'Der unsichtbare Faden in Kapitel 14',
     zitat: 'Jede dieser vier Ordnungen wurde von denen geschrieben, die sie durchsetzen konnten. Genau das ist ihre Stärke und ihre Grenze.',
@@ -72,6 +108,18 @@ export const SZENEN_BAND_3: Szene[] = [
     quelle: 'Containerterminal. Freie Rekonstruktion.',
   },
   {
+    id: 'portalkran-am-leeren-kai', bandId: 'band-3', kapitelId: 15, typ: 'motiv',
+    platte: 'b3-kap15-motiv', buchseite: 118, hoehe: 262, grading: '#564a2e',
+    uebergang: 'aufloesen', fahrt: 'hinein',
+    badge: 'Freie Rekonstruktion',
+    eyebrow: 'Was Sie in diesem Kapitel erwartet',
+    titel: 'Ein Portalkran\nüber einem leeren Kai',
+    unterzeile: 'Diese Ordnung ist nirgends beschlossen worden',
+    fliesstext:
+      'Kapitel 14 handelte von Ordnungen, die jemand unterschrieben hat. Dieses handelt von Ordnungen, die niemand beschlossen hat: ein Preis, ein Maß, eine Rechtsform. Sie sind deshalb nicht weniger verbindlich – im Gegenteil. Gegen einen Vertrag kann man stimmen. Gegen ein Maß, an das sich alle halten, kann man nur verlieren.',
+    quelle: 'Kapitelvorschau auf Seite 118, wörtlich. Portalkran am Kai, freie Rekonstruktion.',
+  },
+  {
     id: 'faden-15', bandId: 'band-3', kapitelId: 15, typ: 'papier', buchseite: 151,
     titel: 'Der unsichtbare Faden in Kapitel 15',
     zitat: 'Über keine dieser fünf Ordnungen ist je abgestimmt worden. Vier davon gelten bis heute – und das ist der unbequemste Befund dieses Bandes.',
@@ -85,6 +133,18 @@ export const SZENEN_BAND_3: Szene[] = [
     titel: 'Kabel, Daten\nund Abhängigkeit',
     unterzeile: 'Das Netz ist kein Ort. Es ist ein Bauwerk mit sehr wenigen Engstellen',
     quelle: 'Kabelregister und Betreiberangaben. Kabelanlandung an einer Nordküste, freie Rekonstruktion.',
+  },
+  {
+    id: 'gasse-zwischen-schraenken', bandId: 'band-3', kapitelId: 16, typ: 'motiv',
+    platte: 'b3-kap16-motiv', buchseite: 153, hoehe: 236, grading: '#304668',
+    uebergang: 'wasser', fahrt: 'durchfahrt',
+    badge: 'Freie Rekonstruktion',
+    eyebrow: 'Was Sie in diesem Kapitel erwartet',
+    titel: 'Eine Gasse zwischen\nzwei Reihen Schränken',
+    unterzeile: 'Was hier steht, gehört selten dem, der es benutzt',
+    fliesstext:
+      'Wissen ist überall in Sekunden erreichbar, eine Nachricht kostet nichts mehr, Waren finden ihren Weg ohne Umweg. Nötig dafür sind ein Bauwerk aus Kabeln, Strom und Kühlung, Regeln, die wenige schreiben und viele befolgen – und die Annahme, dass nichts davon ausfällt.',
+    quelle: 'Kapitelvorschau auf Seite 153. Rechenzentrum, Innenansicht, freie Rekonstruktion.',
   },
   {
     id: 'faden-16', bandId: 'band-3', kapitelId: 16, typ: 'papier', buchseite: 186,

@@ -492,6 +492,26 @@ Eine **leere Liste** ist der einzige Platzhalter: Dann steht „Produktseite fol
 statt eines Links. Erfundene Adressen gibt es hier nicht. Es gibt keine eigene
 Zahlungsabwicklung; der Kaufweg öffnet den Händler in einem neuen Tab.
 
+## Die Partnermarke
+
+`src/ui/Partner.tsx`, sichtbar in der Fußzeile des Hauses und jeder Bandwelt.
+
+Ein fremdes Zeichen auf einer Seite, die sonst nur Gold und Nacht kennt, ist
+eine heikle Sache: zu laut, und es wirbt gegen das Buch; zu leise, und es sieht
+aus wie vergessen. Deshalb liegt die Marke im Ruhezustand bei halber Deckkraft
+und in der Papierfarbe der Seite – nur das V behält sein Blau – und tritt erst
+hervor, wenn jemand hinsieht.
+
+Das Logo liegt freigestellt unter `public/marke/vecom-design.{png,webp,avif}`:
+Der Papierhintergrund der Vorlage ist herausgerechnet (Deckkraft aus dem Abstand
+zum Papierweiß, Vordergrundfarbe zurückgerechnet), die neutralen Teile tragen
+den Papierton der Seite, das Blau der Bildmarke bleibt unangetastet.
+
+Der Glanz ist kein Effekt über dem Bild, sondern durch das Bild: Die bewegte
+Maske hat die Form des Logos, sodass das Licht die Buchstaben entlangläuft und
+nicht über ein Rechteck. Er läuft alle neun Sekunden ein Mal und hält still, wo
+die Seite still sein soll – im Ruhig-Modus und bei „Bewegung reduzieren“.
+
 ## Die Karte je Band
 
 `src/data/gemeinsam/orte.ts` hält alle Orte der Reihe – Regel 3: **Orte gehören
@@ -720,8 +740,6 @@ und nichts freizuschalten.
 
 ## Offen
 
-- **Mehr Stationen in der Welt von Band 3.** Fünf Auftakte und fünf Bilanzen
-  stehen; im Satz liegen weitere Motive mit ihren Buchseiten bereit.
 - **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
 - **Kaufwege für Band 2 und Band 3** – leer, weil es sie noch nicht gibt. Beide
   Bände zeigen „Erscheint in Kürze“ und, sobald eine Adresse im Impressum steht,

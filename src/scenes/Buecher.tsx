@@ -4,6 +4,7 @@ import { wegLeseprobe, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 import { mailAn } from '@/data/gemeinsam/anbieter';
 import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
+import { Partner } from '@/ui/Partner';
 import { Buch3D } from './Buch3D';
 
 /**
@@ -166,11 +167,15 @@ export function Buecher({ szene }: { szene?: Szene }) {
             <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
               alt="" width={120} height={80} loading="lazy" decoding="async" />
           </a>
-          <a href={`${BASIS_PFAD}/ueber`}>Über</a>
-          {' · '}<a href={`${BASIS_PFAD}/impressum`}>Impressum</a>
+          <span className="fusslinks">
+            <a href={`${BASIS_PFAD}/ueber`}>Über</a>
+            <span aria-hidden="true">·</span>
+            <a href={`${BASIS_PFAD}/impressum`}>Impressum</a>
+          </span>
           <span className="feinschrift">
             Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.
           </span>
+          <Partner />
         </footer>
       )}
     </>

@@ -32,4 +32,22 @@ export const ASSETS_BAND_3: Asset[] = [
   { id: 'b3-kap16-auftakt', bandId: 'band-3', datei: 'b3-kap16-auftakt',
     breite: 1838, hoehe: 1930, herkunft: 'Freie Rekonstruktion',
     alt: 'Kabelanlandung an einer Nordküste in der Dämmerung: sechs armdicke schwarze Kabel laufen aus der grauen Brandung über Geröll unter einem Maschendrahtzaun hindurch zu einem fensterlosen Betonbau, an dessen Wand eine einzelne orange Lampe brennt.' },
+
+  // Eine zweite Station je Kapitel. Dieselbe Herkunft wie die Auftakte: die
+  // Bilddateien des Satzes, benannt nach der Buchseite, auf der sie stehen.
+  { id: 'b3-kap12-motiv', bandId: 'band-3', datei: 'b3-kap12-motiv',
+    breite: 2400, hoehe: 1792, herkunft: 'Freie Rekonstruktion',
+    alt: 'Ein Stellwerk mit Holzboden und Fensterfront: an der rechten Wand steht eine lange Reihe rot-weißer Hebel, links liegen Blockapparate auf einem Sims, draußen laufen Gleise auseinander.' },
+  { id: 'b3-kap13-motiv', bandId: 'band-3', datei: 'b3-kap13-motiv',
+    breite: 2528, hoehe: 1696, herkunft: 'Freie Rekonstruktion',
+    alt: 'Ein geschlossener Laden im Winter: heruntergelassenes Rollgitter vor der Schaufensterscheibe, an der Holztür ein einzelner weißer Zettel, davor Schnee auf dem Kopfsteinpflaster.' },
+  { id: 'b3-kap14-motiv', bandId: 'band-3', datei: 'b3-kap14-motiv',
+    breite: 2400, hoehe: 1792, herkunft: 'Freie Rekonstruktion',
+    alt: 'Ein weißes Ferienhotel mit rotem Dach und langer Veranda vor bewaldeten Bergen, davor eine geschwungene Zufahrt über eine Rasenfläche.' },
+  { id: 'b3-kap15-motiv', bandId: 'band-3', datei: 'b3-kap15-motiv',
+    breite: 2528, hoehe: 1696, herkunft: 'Freie Rekonstruktion',
+    alt: 'Ein Portalkran über einem leeren Kai: das rostige Spreadergeschirr hängt an Seilen über dem Beton, im Hintergrund gestapelte Container und Hafenwasser.' },
+  { id: 'b3-kap16-motiv', bandId: 'band-3', datei: 'b3-kap16-motiv',
+    breite: 1616, hoehe: 596, herkunft: 'Freie Rekonstruktion',
+    alt: 'Eine schmale Gasse zwischen zwei Reihen Serverschränken: blaue Kabelbündel unter der Decke, grüne und gelbe Kontrollleuchten in den Fronten, am Ende der Gasse eine geschlossene Tür.' },
 ];

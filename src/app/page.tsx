@@ -9,6 +9,7 @@ import { wegBuch, wegImpressum, wegReihe, wegUeber, wegVorschau, wegWelt } from 
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
+import { Partner } from '@/ui/Partner';
 
 /**
  * Das Haus.
@@ -194,13 +195,17 @@ export default function Haus() {
       <footer>
         <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
           alt={TRENDONIX.name} width={120} height={80} loading="lazy" decoding="async" />
-        <a href={wegUeber()}>Über</a>
-        {' · '}<a href={wegImpressum()}>Impressum</a>
+        <span className="fusslinks">
+          <a href={wegUeber()}>Über</a>
+          <span aria-hidden="true">·</span>
+          <a href={wegImpressum()}>Impressum</a>
+        </span>
         <span className="feinschrift">
           Kein Motiv dieser Seite ist eine historische Fotografie. Alle Bilder
           wurden eigens für die Bände erzeugt und tragen dieselbe Herkunftsangabe
           wie im Buch.
         </span>
+        <Partner />
       </footer>
 
       <script type="application/ld+json"
