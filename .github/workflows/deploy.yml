@@ -98,69 +98,106 @@ jobs:
   # gebaute Seite dorthin hochgeladen, statt die Domain umzuhängen: Am
   # Mailversand ändert sich nichts, und ein Push auf main erneuert die Seite.
   #
-  # Einmalig im Repository einzustellen
-  # (Settings → Secrets and variables → Actions):
+  # EINZURICHTEN IST GENAU EINE SACHE.
   #
-  #   Variables : SEITEN_DOMAIN  z. B. www.trendonix-buecher.de
-  #               FTP_SERVER     die Serveradresse aus der Anbieterverwaltung
-  #               FTP_BENUTZER   der FTP-Benutzername
-  #               FTP_ZIEL       Zielverzeichnis, meist /  (nur wenn abweichend)
-  #               FTP_LOESCHEN   ja  – nur setzen, wenn im Zielverzeichnis
-  #                              ausschließlich diese Seite liegt
-  #   Secrets   : FTP_PASSWORT   das FTP-Kennwort
+  #   Repository → Settings → Secrets and variables → Actions → New repository
+  #   secret. Name: FTP_ZUGANG. Wert in dieser Form:
   #
-  # Fehlt FTP_SERVER, läuft der Auftrag gar nicht erst an – die Seite bleibt
-  # dann einfach auf github.io.
+  #       benutzer:kennwort@server
+  #
+  #   also zum Beispiel   f018ae3e:MEINKENNWORT@w021fb9a.kasserver.com
+  #
+  #   Liegt die Seite nicht im Wurzelverzeichnis des FTP-Zugangs, kommt das
+  #   Verzeichnis hinten dran:  …@server/unterordner
+  #
+  # Server und Benutzer stehen absichtlich mit im Secret und nicht offen im
+  # Repository: Es ist öffentlich, und eine dort veröffentlichte FTP-Kennung
+  # ist eine Einladung. Im Secret werden alle drei Teile in den Protokollen
+  # maskiert.
+  #
+  # Ohne das Secret bricht nichts – der Auftrag steigt nach wenigen Sekunden
+  # wieder aus, und die Seite bleibt auf github.io.
   webspace:
-    if: vars.FTP_SERVER != ''
     runs-on: ubuntu-latest
     steps:
+      - name: Zugang vorhanden?
+        id: zugang
+        env:
+          FTP_ZUGANG: ${{ secrets.FTP_ZUGANG }}
+        run: |
+          if [ -n "$FTP_ZUGANG" ]; then
+            echo "da=ja" >> "$GITHUB_OUTPUT"
+          else
+            echo "da=nein" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Webspace übersprungen::Kein Secret FTP_ZUGANG hinterlegt. Die Seite bleibt auf github.io."
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.zugang.outputs.da == 'ja'
 
       - uses: actions/setup-node@v4
+        if: steps.zugang.outputs.da == 'ja'
         with:
           node-version: 22
           cache: npm
 
       - name: Abhängigkeiten
+        if: steps.zugang.outputs.da == 'ja'
         run: npm ci
 
       - name: Weltdaten prüfen
+        if: steps.zugang.outputs.da == 'ja'
         run: npm run pruefen
 
       - name: Bauen
+        if: steps.zugang.outputs.da == 'ja'
         env:
           NEXT_EXPORT: '1'
           NEXT_PUBLIC_BASIS_PFAD: ''
-          NEXT_PUBLIC_BASIS_URL: https://${{ vars.SEITEN_DOMAIN }}
-        run: npx next build
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
+        run: |
+          export NEXT_PUBLIC_BASIS_URL="https://${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
+          npx next build
 
       # Ohne Server, der einen falschen Pfad abfängt, muss jeder Verweis
       # stimmen, bevor irgendetwas hochgeladen wird.
       - name: Wege prüfen
+        if: steps.zugang.outputs.da == 'ja'
         env:
           NEXT_PUBLIC_BASIS_PFAD: ''
         run: node scripts/pruefe-wege.mjs
 
       - name: Serverregeln beilegen
+        if: steps.zugang.outputs.da == 'ja'
         run: node scripts/htaccess.mjs
 
       - name: Hochladen
+        if: steps.zugang.outputs.da == 'ja'
         env:
-          FTP_SERVER: ${{ vars.FTP_SERVER }}
-          FTP_BENUTZER: ${{ vars.FTP_BENUTZER }}
-          FTP_PASSWORT: ${{ secrets.FTP_PASSWORT }}
-          FTP_ZIEL: ${{ vars.FTP_ZIEL }}
+          FTP_ZUGANG: ${{ secrets.FTP_ZUGANG }}
           FTP_LOESCHEN: ${{ vars.FTP_LOESCHEN }}
         run: |
-          if [ -z "$FTP_PASSWORT" ]; then
-            echo "::error::FTP_PASSWORT fehlt. Repository → Settings → Secrets and variables → Actions → Secrets."
+          set +x
+          # benutzer:kennwort@server[/verzeichnis] auseinandernehmen.
+          # Der Benutzer steht vor dem ersten Doppelpunkt, der Server hinter
+          # dem letzten Klammeraffen – so darf das Kennwort selbst einen
+          # Klammeraffen enthalten, was bei Kennwörtern durchaus vorkommt.
+          BENUTZER="${FTP_ZUGANG%%:*}"
+          REST="${FTP_ZUGANG#*:}"
+          HOST_TEIL="${REST##*@}"
+          KENNWORT="${REST%@*}"
+          case "$HOST_TEIL" in
+            */*) SERVER="${HOST_TEIL%%/*}"; ZIEL="/${HOST_TEIL#*/}" ;;
+            *)   SERVER="$HOST_TEIL";       ZIEL="/" ;;
+          esac
+          if [ -z "$BENUTZER" ] || [ -z "$KENNWORT" ] || [ -z "$SERVER" ]; then
+            echo "::error title=FTP_ZUGANG unlesbar::Erwartet wird benutzer:kennwort@server"
             exit 1
           fi
+          echo "Ziel: $SERVER$ZIEL"
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          ZIEL="${FTP_ZIEL:-/}"
-          # Löschen ist nicht die Vorgabe. Wer im Zielverzeichnis noch etwas
-          # anderes liegen hat, verlöre es sonst mit dem ersten Upload.
+          # Gelöscht wird nur auf ausdrückliche Ansage. Wer im Zielverzeichnis
+          # noch etwas anderes liegen hat, verlöre es sonst mit dem ersten Mal.
           if [ "$FTP_LOESCHEN" = "ja" ]; then LOESCHEN="--delete"; else LOESCHEN=""; fi
           lftp -c "
             set ftp:ssl-force true;
@@ -168,7 +205,8 @@ jobs:
             set ssl:verify-certificate no;
             set net:max-retries 3;
             set net:timeout 20;
-            open -u \"$FTP_BENUTZER\",\"$FTP_PASSWORT\" \"$FTP_SERVER\";
+            set cmd:fail-exit true;
+            open -u \"$BENUTZER\",\"$KENNWORT\" \"$SERVER\";
             mirror -R --parallel=4 --no-perms --ignore-time $LOESCHEN out/ \"$ZIEL\";
           "
-          echo "Hochgeladen nach $FTP_SERVER:$ZIEL"
+          echo "Hochgeladen."

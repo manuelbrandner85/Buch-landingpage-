@@ -28,9 +28,11 @@ Adressen steht:
   Seite, aber mit Basispfad und für Suchmaschinen gesperrt. Er zeigt sofort, ob
   ein Bau durchgelaufen ist, auch wenn der Upload klemmt.
 
-Was einmalig einzustellen ist – Variablen, Kennwort, Zertifikat, Weiterleitung –
-steht in `DOMAIN.md`. Ohne die Variable `FTP_SERVER` läuft der Auftrag
-`webspace` gar nicht erst an; dann bleibt alles auf github.io.
+Einzustellen ist genau ein Eintrag: das Secret `FTP_ZUGANG` in der Form
+`benutzer:kennwort@server`. Fehlt es, steigt der Auftrag `webspace` nach
+wenigen Sekunden mit einem Hinweis wieder aus und die Seite bleibt auf
+github.io. Zertifikat und Weiterleitung gehören zum Anbieter – beides steht in
+`DOMAIN.md`.
 
 Vor jeder Veröffentlichung laufen dieselben Prüfungen wie lokal: Weltdaten,
 Bewegtbild und jeder interne Verweis. Ein statischer Export hat keinen Server,

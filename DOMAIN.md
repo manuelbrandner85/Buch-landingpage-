@@ -24,31 +24,36 @@ fertige Seite per FTP auf den Webspace. Am Mailversand ändert sich dadurch
 nichts — MX-Einträge bleiben unberührt —, und ein Push auf `main` erneuert die
 Seite genauso wie bisher.
 
-### Einmalig im Repository
+### Einmalig im Repository: ein Eintrag
 
-Settings → Secrets and variables → Actions:
-
-**Variables**
+Settings → Secrets and variables → Actions → **New repository secret**
 
 | Name | Wert |
 | --- | --- |
-| `SEITEN_DOMAIN` | `www.trendonix-buecher.de` |
-| `FTP_SERVER` | die Serveradresse aus der Anbieterverwaltung (`…kasserver.com`) |
-| `FTP_BENUTZER` | der FTP-Benutzername aus „Manuelle Einrichtung“ |
-| `FTP_ZIEL` | nur setzen, wenn das Ziel **nicht** `/` ist |
-| `FTP_LOESCHEN` | `ja` — **nur**, wenn im Zielverzeichnis ausschließlich diese Seite liegt |
+| `FTP_ZUGANG` | `benutzer:kennwort@server` |
 
-**Secrets**
+Also zum Beispiel `f018ae3e:MEINKENNWORT@w021fb9a.kasserver.com`. Liegt die
+Seite nicht im Wurzelverzeichnis des FTP-Zugangs, kommt das Verzeichnis hinten
+dran: `…@server/unterordner`.
 
-| Name | Wert |
+Benutzer und Server stehen absichtlich **mit im Secret** und nicht offen als
+Variablen: Das Repository ist öffentlich, und eine dort veröffentlichte
+FTP-Kennung ist eine Einladung. Im Secret maskiert GitHub alle drei Teile in
+den Protokollen.
+
+Ein Klammeraffe oder ein Schrägstrich im Kennwort ist kein Problem – der
+Benutzer wird vor dem ersten Doppelpunkt abgeschnitten, der Server hinter dem
+letzten Klammeraffen.
+
+Ohne das Secret bricht nichts: Der Auftrag `webspace` steigt nach wenigen
+Sekunden mit einem Hinweis wieder aus, und die Seite bleibt auf github.io.
+
+Zwei Dinge sind freiwillig, beide als **Variables**:
+
+| Name | Wirkung |
 | --- | --- |
-| `FTP_PASSWORT` | das FTP-Kennwort |
-
-Server, Benutzer und Kennwort stehen absichtlich **nicht** im Repository: Es ist
-öffentlich, und eine dort veröffentlichte FTP-Kennung ist eine Einladung.
-
-Fehlt `FTP_SERVER`, läuft der Auftrag `webspace` gar nicht erst an — dann bleibt
-alles beim Alten.
+| `SEITEN_DOMAIN` | andere Adresse als `www.trendonix-buecher.de` |
+| `FTP_LOESCHEN` | `ja` – räumt im Zielverzeichnis auf. **Nur** setzen, wenn dort ausschließlich diese Seite liegt |
 
 ### Einmalig beim Anbieter
 
