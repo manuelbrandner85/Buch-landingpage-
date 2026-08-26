@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { Buch, Reihe } from '@/data/gemeinsam/typen';
+import { kanalAdressen } from '@/data/gemeinsam/kanaele';
 import {
   OEFFENTLICHE_REIHEN, TRENDONIX,
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
@@ -9,6 +10,7 @@ import { wegBuch, wegImpressum, wegReihe, wegUeber, wegVorschau, wegWelt } from 
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
+import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Verteiler } from '@/ui/Verteiler';
 
@@ -107,6 +109,9 @@ export default function Haus() {
     description: TRENDONIX.arbeitsweise,
     slogan: TRENDONIX.versprechen,
     logo: `${BASIS_PFAD}/marke/trendonix.png`,
+    // Damit Suchmaschinen die sechs Profile diesem Haus zuordnen und nicht
+    // sechs Fremde daraus machen.
+    sameAs: kanalAdressen(),
   };
 
   return (
@@ -195,6 +200,19 @@ export default function Haus() {
 
       <Verteiler />
 
+      <section className="kanaele" id="kanaele">
+        <div className="kopf">
+          <p className="eyebrow">Zwischen den Bänden</p>
+          <h2>Wo es weitergeht</h2>
+          <p>
+            Ein Buch erscheint einmal, die Arbeit daran läuft weiter: Motive,
+            Fundstücke, Zwischenstände. Auf jedem Kanal steht dasselbe Haus –
+            gesucht wird überall unter {TRENDONIX.name}.
+          </p>
+        </div>
+        <Kanaele variante="wand" />
+      </section>
+
       <footer>
         <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
           alt={TRENDONIX.name} width={120} height={80} loading="lazy" decoding="async" />
@@ -208,6 +226,7 @@ export default function Haus() {
           wurden eigens für die Bände erzeugt und tragen dieselbe Herkunftsangabe
           wie im Buch.
         </span>
+        <Kanaele />
         <Partner />
       </footer>
 

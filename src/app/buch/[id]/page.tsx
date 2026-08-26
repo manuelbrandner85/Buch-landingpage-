@@ -10,6 +10,7 @@ import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { Kanaele } from '@/ui/Kanaele';
 
 /**
  * Die Seite eines einzelnen Buches.
@@ -149,6 +150,7 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
       <nav className="fusszeile">
         {reihe && <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>}
       </nav>
+      <Kanaele />
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
     </main>

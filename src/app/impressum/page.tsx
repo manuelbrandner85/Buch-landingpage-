@@ -4,6 +4,7 @@ import { TRENDONIX } from '@/world/registry';
 import { wegHaus, wegUeber } from '@/world/wege';
 import { ANBIETER, impressumVollstaendig } from '@/data/gemeinsam/anbieter';
 import { zaehlerLaeuft } from '@/ui/Zaehler';
+import { Kanaele } from '@/ui/Kanaele';
 
 export const metadata: Metadata = {
   title: 'Impressum – Die Unsichtbaren Fäden',
@@ -118,6 +119,7 @@ export default function ImpressumSeite() {
         <a href={wegUeber()}>Über das Projekt</a>
         <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>
       </nav>
+      <Kanaele />
     </main>
   );
 }

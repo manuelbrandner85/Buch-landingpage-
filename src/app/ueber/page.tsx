@@ -3,6 +3,7 @@ import { LEITREIHE, TRENDONIX, WELT } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
 import { wegBegriffe, wegHaus, wegImpressum } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { Kanaele } from '@/ui/Kanaele';
 
 export const metadata: Metadata = {
   title: 'Über das Projekt – Trendonix',
@@ -122,6 +123,7 @@ export default function UeberSeite() {
         <a href={wegImpressum()}>Impressum und Datenschutz</a>
         <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>
       </nav>
+      <Kanaele />
     </main>
   );
 }

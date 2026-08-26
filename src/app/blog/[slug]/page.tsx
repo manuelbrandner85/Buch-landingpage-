@@ -4,6 +4,7 @@ import { LEITBUCH, TRENDONIX, buchNach } from '@/world/registry';
 import { beitragNach, sichtbareBeitraege } from '@/world/journal';
 import { wegBuch, wegJournal, wegVorschau } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { Kanaele } from '@/ui/Kanaele';
 
 export const dynamic = 'force-static';
 
@@ -78,6 +79,7 @@ export default async function BeitragSeite(
       )}
 
       <Rueckweg nach={wegJournal()} text="Zurück zum Journal" />
+      <Kanaele />
       <p className="unterzeile">{TRENDONIX.name}</p>
     </main>
   );

@@ -1307,3 +1307,58 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
 .verteiler-feld button:hover{filter:brightness(1.1)}
 .verteiler > .feinschrift{display:block;max-width:34rem;margin:1.4rem auto 0;
   font-size:.7rem;line-height:1.6;color:rgba(226,222,214,.55)}
+/* ---------- Die Kanäle ----------
+   Sechs fremde Marken auf einer Seite, die sonst nur Gold und Nacht kennt,
+   wären ein Werbeblock. Deshalb tragen sie hier dieselbe Strichstärke wie der
+   Faden und dieselbe Farbe wie alles andere; erkennbar bleibt die Form.
+   Das Licht läuft erst, wenn jemand hinsieht – am Seitenrand flimmert nichts. */
+.kanaele{position:relative;z-index:2;padding:clamp(4rem,10vh,7rem) var(--rand);
+  background:var(--nacht);border-top:1px solid rgba(227,200,139,.12)}
+.kanaele > .kopf{max-width:62rem;margin:0 auto 2.6rem;text-align:center}
+.kanaele > .kopf p{color:var(--staub);max-width:52ch;margin:1rem auto 0;font-size:.95rem}
+
+.kanalwand{list-style:none;display:grid;gap:.9rem;max-width:62rem;margin:0 auto;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+.kanalkarte{position:relative;overflow:hidden;display:flex;align-items:center;gap:1rem;
+  height:100%;padding:1.05rem 1.2rem;border-radius:2px;text-decoration:none;
+  color:var(--papier);border:1px solid rgba(227,200,139,.16);
+  background:linear-gradient(180deg,rgba(227,200,139,.05),rgba(6,10,20,0));
+  transition:border-color .5s ease,transform .5s ease,box-shadow .5s ease}
+.kanalkarte:hover,.kanalkarte:focus-visible{border-color:rgba(227,200,139,.5);
+  transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.kanaltext{display:flex;flex-direction:column;gap:.12rem;min-width:0}
+.kanaltext b{font-family:var(--display),serif;font-weight:400;
+  font-size:1.06rem;letter-spacing:.02em;line-height:1.2}
+.kanaltext em{font-style:normal;font-size:.72rem;letter-spacing:.09em;color:var(--gold);
+  overflow-wrap:anywhere}
+.kanaltext small{font-size:.72rem;color:var(--staub);line-height:1.45}
+
+.kanalzeichen{flex:0 0 auto;color:var(--gold);
+  filter:drop-shadow(0 0 0 rgba(227,200,139,0));transition:filter .5s ease}
+.kanalwand .kanalzeichen{width:1.9rem;height:1.9rem}
+.kanalkarte:hover .kanalzeichen{filter:drop-shadow(0 0 10px rgba(227,200,139,.45))}
+
+.kanalglanz{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(104deg,
+    rgba(255,255,255,0) 42%,rgba(227,200,139,.16) 50%,rgba(255,255,255,0) 58%);
+  background-size:280% 100%;background-position:210% 0;transition:opacity .4s ease}
+.kanalkarte:hover .kanalglanz{opacity:1;
+  animation:kanalglanz 2.8s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes kanalglanz{from{background-position:210% 0}to{background-position:-70% 0}}
+
+/* Die stille Fassung für die Fußzeile: nur die Zeichen, in einer Reihe. */
+.kanalband{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;margin-top:1.5rem}
+.kanalband .kanalzeichen{width:1.15rem;height:1.15rem;color:inherit}
+.kanalmal{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;
+  color:var(--staub);border:1px solid rgba(227,200,139,.2);
+  transition:color .45s ease,border-color .45s ease,transform .45s ease,box-shadow .45s ease}
+footer .kanalmal{text-decoration:none}
+.kanalmal:hover,.kanalmal:focus-visible{color:var(--gold);border-color:rgba(227,200,139,.55);
+  transform:translateY(-2px);box-shadow:0 0 18px rgba(227,200,139,.16)}
+
+.ruhig .kanalglanz{animation:none;opacity:0}
+@media (prefers-reduced-motion:reduce){
+  .kanalkarte,.kanalmal,.kanalzeichen{transition:none}
+  .kanalkarte:hover,.kanalmal:hover{transform:none}
+  .kanalglanz{display:none}
+}

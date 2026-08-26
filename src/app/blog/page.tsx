@@ -3,6 +3,7 @@ import { TRENDONIX } from '@/world/registry';
 import { sichtbareBeitraege } from '@/world/journal';
 import { wegBeitrag, wegHaus, wegVorschau } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { Kanaele } from '@/ui/Kanaele';
 
 export const dynamic = 'force-static';
 
@@ -54,6 +55,7 @@ export default function JournalSeite() {
       )}
 
       <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
+      <Kanaele />
     </main>
   );
 }

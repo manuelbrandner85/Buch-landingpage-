@@ -4,6 +4,7 @@ import { wegLeseprobe, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 import { mailAn } from '@/data/gemeinsam/anbieter';
 import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
+import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Buch3D } from './Buch3D';
 
@@ -175,6 +176,7 @@ export function Buecher({ szene }: { szene?: Szene }) {
           <span className="feinschrift">
             Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.
           </span>
+          <Kanaele />
           <Partner />
         </footer>
       )}
