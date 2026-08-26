@@ -10,6 +10,7 @@ import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
 import { Partner } from '@/ui/Partner';
+import { Verteiler } from '@/ui/Verteiler';
 
 /**
  * Das Haus.
@@ -191,6 +192,8 @@ export default function Haus() {
           <p><a className="eintauchen" href={wegUeber()}>Wie diese Welt gemacht ist</a></p>
         </div>
       </section>
+
+      <Verteiler />
 
       <footer>
         <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}

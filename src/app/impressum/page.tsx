@@ -69,7 +69,7 @@ export default function ImpressumSeite() {
       </article>
 
       <article>
-        <h2>Datenschutz</h2>
+        <h2 id="datenschutz">Datenschutz</h2>
         <p>
           Diese Seite speichert im lokalen Browserspeicher, welche Szenen bereits
           gesehen wurden. Diese Angabe bleibt auf Ihrem Gerät und wird nicht übertragen.

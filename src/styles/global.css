@@ -1274,3 +1274,36 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
 /* Wo die Seite still steht, steht auch das Licht still. */
 .ruhig .partner-glanz{animation:none}
 @media (prefers-reduced-motion:reduce){.partner-glanz{animation:none}}
+
+
+/* --- Verteiler ------------------------------------------------------------
+   Derselbe Rahmen wie .arbeitsweise, damit der Abschnitt nicht wie ein
+   angeklebter Werbekasten wirkt, sondern wie ein weiteres Zimmer des Hauses.
+   Das Feld bleibt schmal: Eine Adresse braucht keine Bildschirmbreite.        */
+.verteiler{position:relative;z-index:2;padding:5.2rem 1.4rem 4.4rem;
+  background:var(--nacht);border-top:1px solid rgba(227,200,139,.12)}
+.verteiler > .kopf{max-width:62rem;margin:0 auto}
+.verteiler > .kopf p{color:var(--staub);max-width:52ch}
+.verteiler-feld{max-width:34rem;margin:2.2rem auto 0;display:flex;
+  flex-direction:column;gap:1rem}
+.verteiler-zeile{display:flex;flex-direction:column;gap:.45rem}
+.verteiler-wort{font-family:var(--display),serif;font-size:.7rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.verteiler-feld input[type=email]{width:100%;padding:.85rem 1rem;
+  background:rgba(255,255,255,.04);color:inherit;font:inherit;
+  border:1px solid rgba(227,200,139,.28);border-radius:2px}
+.verteiler-feld input[type=email]:focus-visible{outline:2px solid var(--gold);
+  outline-offset:2px}
+.verteiler-haken{display:flex;gap:.7rem;align-items:flex-start;
+  font-size:.82rem;line-height:1.5;color:var(--staub)}
+.verteiler-haken input{margin-top:.25rem;accent-color:var(--gold);flex:0 0 auto}
+.verteiler-haken a{color:var(--gold)}
+.verteiler-falle{position:absolute;left:-9999px;width:1px;height:1px;
+  overflow:hidden}
+.verteiler-feld button{align-self:flex-start;padding:.8rem 2.1rem;
+  font-family:var(--display),serif;font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--nacht);background:var(--gold);
+  border:0;border-radius:2px;cursor:pointer}
+.verteiler-feld button:hover{filter:brightness(1.1)}
+.verteiler > .feinschrift{display:block;max-width:34rem;margin:1.4rem auto 0;
+  font-size:.7rem;line-height:1.6;color:rgba(226,222,214,.55)}
