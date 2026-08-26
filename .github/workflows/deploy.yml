@@ -3,13 +3,20 @@
 # Einmalig im Repository einzustellen:
 #   Settings → Pages → Build and deployment → Source: "GitHub Actions"
 #
-# Danach genügt ein Push auf main.
+# Danach genügt ein Push auf main. Zusätzlich läuft der Bau täglich,
+# damit terminierte Journal-Beiträge zu ihrem Datum erscheinen.
 name: Welt bauen und veröffentlichen
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Taeglicher Bau, damit terminierte Journal-Beitraege von selbst erscheinen.
+  # Die Seite ist ein statischer Export: Ein Beitrag mit Zukunftsdatum wird erst
+  # sichtbar, wenn nach diesem Datum neu gebaut wird. Ohne diesen Eintrag laege
+  # der Vorrat still.
+  schedule:
+    - cron: '20 4 * * *'   # 04:20 UTC — vor dem deutschen Vormittag
 
 permissions:
   contents: read
