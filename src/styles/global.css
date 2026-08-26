@@ -1232,26 +1232,47 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
    Ein fremdes Zeichen bekommt hier keine Fläche und keinen Rahmen, sondern
    Luft. Ruhezustand halbe Deckkraft, ein feiner Schein in der eigenen Farbe
    des Logos; beim Hinsehen tritt es hervor. */
-.partner{position:relative;display:flex;flex-direction:column;align-items:center;gap:.9rem;
-  text-decoration:none;border-bottom:0;
-  width:fit-content;margin:3.2rem auto 0;padding-top:2.2rem;
-  opacity:.68;transition:opacity .6s ease}
-/* Eine Haarlinie darüber, damit die Marke als eigener Absatz liest und nicht
+/* Aus einer Marke sind mehrere geworden: „Partner" steht einmal darüber, die
+   Zeichen stehen nebeneinander. Auf dem Telefon untereinander, mit Abstand –
+   zwei Marken in einer Zeile werden dort beide unlesbar. */
+.partner{position:relative;display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  width:min(100%,54rem);margin:3.2rem auto 0;padding-top:2.2rem}
+/* Eine Haarlinie darüber, damit die Marken als eigener Absatz lesen und nicht
    als Nachsatz zur Fußzeile. */
 .partner::before{content:'';position:absolute;left:50%;transform:translateX(-50%);
   margin-top:-2.2rem;width:min(220px,40vw);height:1px;
   background:linear-gradient(90deg,transparent,rgba(227,200,139,.28),transparent)}
-.partner:hover,.partner:focus-visible{opacity:1}
 .partner-wort{font-family:var(--display),serif;font-size:.6rem;letter-spacing:.36em;
-  text-transform:uppercase;color:var(--staub)}
+  text-transform:uppercase;color:var(--staub);transition:color .6s ease}
 .partner:hover .partner-wort{color:var(--gold)}
+.partner-reihe{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:clamp(2.2rem,7vw,4.5rem)}
+/* Zwei Marken nebeneinander werden auf dem Telefon beide klein. Untereinander
+   behält jede ihre Größe – und die Adresse stößt nicht an den Rand. */
+@media (max-width:640px){
+  .partner-reihe{flex-direction:column;gap:2.8rem}
+}
+.partner-marke{display:flex;flex-direction:column;align-items:center;gap:.9rem;
+  text-decoration:none;border-bottom:0;opacity:.68;transition:opacity .6s ease}
+footer .partner-marke{text-decoration:none}
+.partner-marke:hover,.partner-marke:focus-visible{opacity:1}
 .partner-mal{position:relative;display:block;width:clamp(118px,16vw,158px);
   filter:drop-shadow(0 0 0 rgba(58,132,255,0));transition:filter .6s ease}
-.partner:hover .partner-mal{filter:drop-shadow(0 0 14px rgba(58,132,255,.32))}
+.partner-marke:hover .partner-mal{filter:drop-shadow(0 0 14px rgba(58,132,255,.32))}
 .partner-mal img{width:100%;height:auto;display:block}
+/* Wer kein Logo hinterlegt hat, steht als Schriftzug – in der Schrift des
+   Hauses, in derselben Höhe wie ein Logo, damit die Reihe ruhig bleibt. */
+.partner-name{display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  text-align:center;padding:.2rem .3rem}
+.partner-name b{font-family:var(--display),serif;font-weight:400;
+  font-size:clamp(1.15rem,2.4vw,1.5rem);letter-spacing:.06em;line-height:1.15;
+  color:var(--papier)}
+.partner-name em{font-style:normal;font-family:var(--display),serif;font-size:.62rem;
+  letter-spacing:.26em;text-transform:uppercase;color:#c9a961;transition:color .5s ease}
+.partner-marke:hover .partner-name em{color:var(--gold)}
 .partner-adresse{font-family:var(--body),serif;font-size:.72rem;letter-spacing:.1em;
   color:#c9c2b2;margin-top:-.2rem;transition:color .5s ease}
-.partner:hover .partner-adresse{color:var(--gold)}
+.partner-marke:hover .partner-adresse{color:var(--gold)}
 
 /* Das Licht läuft durch das Logo, nicht darüber: Die Maske hat die Form des
    Zeichens. Selten, langsam, und nie zweimal gleichzeitig mit dem Blick. */
@@ -1270,7 +1291,7 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
   0%,66%{background-position:210% 0}
   100%{background-position:-90% 0}
 }
-.partner:hover .partner-glanz{animation-duration:3.2s}
+.partner-marke:hover .partner-glanz{animation-duration:3.2s}
 /* Wo die Seite still steht, steht auch das Licht still. */
 .ruhig .partner-glanz{animation:none}
 @media (prefers-reduced-motion:reduce){.partner-glanz{animation:none}}

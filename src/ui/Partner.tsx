@@ -1,36 +1,60 @@
+import type { Partner as PartnerDaten } from '@/data/gemeinsam/partner';
+import { PARTNER } from '@/data/gemeinsam/partner';
 import { BASIS_PFAD } from '@/world/bilder';
 
 /**
- * Die Partnermarke.
+ * Die Partnermarken.
  *
- * Ein fremdes Zeichen auf einer Seite, die sonst nur Gold und Nacht kennt, ist
- * eine heikle Sache: Zu laut, und es wirbt gegen das Buch; zu leise, und es
- * sieht aus wie vergessen. Deshalb liegt es im Ruhezustand bei halber Deckkraft
- * und in der Papierfarbe der Seite – nur das V behält sein Blau – und tritt
- * erst hervor, wenn jemand hinsieht.
+ * Fremde Zeichen auf einer Seite, die sonst nur Gold und Nacht kennt, sind
+ * eine heikle Sache: Zu laut, und sie werben gegen das Buch; zu leise, und sie
+ * sehen aus wie vergessen. Deshalb liegen sie im Ruhezustand bei halber
+ * Deckkraft und treten erst hervor, wenn jemand hinsieht.
  *
- * Der Glanz ist kein Effekt über dem Bild, sondern durch das Bild: Die
- * Bewegtmaske hat die Form des Logos, sodass das Licht die Buchstaben entlang
- * läuft und nicht über ein Rechteck. Er läuft selten (alle neun Sekunden ein
- * Mal) und hält sich still, wo die Seite still sein soll – im Ruhig-Modus und
- * bei „Bewegung reduzieren“.
+ * Wer ein Logo hinterlegt hat, steht mit seinem Logo. Der Glanz ist dann kein
+ * Effekt über dem Bild, sondern durch das Bild: Die Bewegtmaske hat die Form
+ * des Zeichens, sodass das Licht die Buchstaben entlangläuft und nicht über
+ * ein Rechteck. Er läuft selten und hält sich still, wo die Seite still sein
+ * soll – im Ruhig-Modus und bei „Bewegung reduzieren“.
+ *
+ * Wer keines hinterlegt hat, steht als Schriftzug in der Schrift des Hauses.
+ * Ein fremdes Logo wird hier nicht nachgebaut: Lieber ein ehrlicher Name als
+ * ein falsches Zeichen.
  */
-export function Partner({ zeile = 'Partner' }: { zeile?: string }) {
-  const bild = `${BASIS_PFAD}/marke/vecom-design.png`;
+function Marke({ partner }: { partner: PartnerDaten }) {
+  const bild = partner.bild ? `${BASIS_PFAD}/marke/${partner.bild}.png` : undefined;
   return (
-    <a className="partner" href="https://www.vecom-design.it"
+    <a className={`partner-marke${bild ? '' : ' partner-nurschrift'}`} href={partner.ziel}
       target="_blank" rel="noopener noreferrer">
-      <span className="partner-wort">{zeile}</span>
-      <span className="partner-mal" style={{ ['--marke' as string]: `url(${bild})` }}>
-        <picture>
-          <source srcSet={`${BASIS_PFAD}/marke/vecom-design.avif`} type="image/avif" />
-          <source srcSet={`${BASIS_PFAD}/marke/vecom-design.webp`} type="image/webp" />
-          <img src={bild} alt="VECOM Design – Webdesign, Logo Design, Branding"
-            width={660} height={517} loading="lazy" decoding="async" />
-        </picture>
-        <span className="partner-glanz" aria-hidden="true" />
-      </span>
-      <span className="partner-adresse">www.vecom-design.it</span>
+      {bild ? (
+        <span className="partner-mal" style={{ ['--marke' as string]: `url(${bild})` }}>
+          <picture>
+            <source srcSet={`${BASIS_PFAD}/marke/${partner.bild}.avif`} type="image/avif" />
+            <source srcSet={`${BASIS_PFAD}/marke/${partner.bild}.webp`} type="image/webp" />
+            <img src={bild} alt={partner.alt ?? partner.name}
+              width={partner.breite ?? 660} height={partner.hoehe ?? 517}
+              loading="lazy" decoding="async" />
+          </picture>
+          <span className="partner-glanz" aria-hidden="true" />
+        </span>
+      ) : (
+        <span className="partner-name">
+          <b>{partner.name}</b>
+          {partner.unterzeile && <em>{partner.unterzeile}</em>}
+        </span>
+      )}
+      <span className="partner-adresse">{partner.adresse}</span>
     </a>
+  );
+}
+
+export function Partner({ zeile = 'Partner' }: { zeile?: string }) {
+  if (PARTNER.length === 0) return null;
+  return (
+    <div className="partner">
+      <span className="partner-wort">{PARTNER.length > 1 ? 'Partner' : zeile}</span>
+      <div className="partner-reihe">
+        {PARTNER.map((p) => <Marke key={p.id} partner={p} />)}
+      </div>
+    </div>
   );
 }
