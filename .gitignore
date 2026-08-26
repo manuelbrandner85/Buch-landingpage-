@@ -19,3 +19,9 @@ modelle/
 /assets-quelle/*.jpg
 /assets-quelle/*-motion-roh.mp4
 assets-quelle/**/*-motion-roh.mp4
+
+# Zugangsschluessel — niemals ins Repository
+.env
+.env.local
+.env*.local
+!.env.example
