@@ -325,6 +325,24 @@ jobs:
           lftp_tun "mirror -R --parallel=4 --no-perms --ignore-time $LOESCHEN out/ \"$ZIEL\";"
           echo "Hochgeladen nach $ZIEL"
 
+          # ── Zweiter Durchgang: die Seiten selbst ──────────────────────────
+          #
+          # --ignore-time vergleicht nur die Groesse. Das ist fuer 185 MB
+          # Bildmaterial richtig -- ohne das laedt jeder Bau alles neu hoch,
+          # weil ein frischer Checkout allen Dateien das heutige Datum gibt.
+          #
+          # Fuer HTML ist es falsch. Aendert sich am Bau nur der Name einer
+          # CSS-Datei, bleibt die Seite auf das Byte genau gleich lang -- und
+          # wird uebersprungen. Genau das ist am 26.08.2026 passiert: Die neue
+          # CSS-Datei lag oben, die Startseite verwies weiter auf die alte,
+          # der Auftrag war gruen und die Aenderung unsichtbar.
+          #
+          # Deshalb gehen Seiten und Textdateien noch einmal, ohne Vergleich.
+          # Das sind ein paar hundert kleine Dateien, keine Minute.
+          lftp_tun "mirror -R --parallel=4 --no-perms --transfer-all \
+            -I *.html -I *.xml -I *.txt -I .htaccess out/ \"$ZIEL\";"
+          echo "Seiten erneuert"
+
           # Die Sonden wieder einsammeln – auch aus den Verzeichnissen, die
           # sich als falsch erwiesen haben.
           for K in $BESCHRIEBEN; do
@@ -380,6 +398,23 @@ jobs:
               echo "  FEHLT $W"; FEHLER=1
             fi
           done
+
+          # Erreichbar heisst nicht aktuell.
+          #
+          # Eine alte Startseite antwortet mit 200 und enthaelt „Trendonix" --
+          # die Pruefung oben merkt nichts. Die Namen der CSS-Dateien tragen
+          # den Inhalt im Namen: Stimmen die der ausgelieferten Seite mit
+          # denen des Baus ueberein, ist wirklich der neue Stand oben.
+          LOKAL="$(grep -oE '/_next/static/css/[a-z0-9]+\.css' out/index.html | sort -u)"
+          LIVE="$(curl -fsS --max-time 30 "https://$DOMAIN/" | grep -oE '/_next/static/css/[a-z0-9]+\.css' | sort -u)"
+          if [ -n "$LOKAL" ] && [ "$LOKAL" != "$LIVE" ]; then
+            echo "  Bau:  $LOKAL"
+            echo "  Live: $LIVE"
+            echo "::error title=Alter Stand auf der Domain::Die Seite ist erreichbar, verweist aber auf andere Stilvorlagen als der Bau. Der Upload hat die Seiten nicht erneuert."
+            FEHLER=1
+          else
+            echo "  ok   Stand stimmt ($LOKAL)"
+          fi
           if [ "$FEHLER" = "1" ]; then
             echo "::error title=Seite nicht erreichbar::Der Upload lief durch, aber https://$DOMAIN liefert nicht die neue Seite."
             exit 1
