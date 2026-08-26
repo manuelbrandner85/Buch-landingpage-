@@ -3,8 +3,8 @@
 import type { Szene } from '@/data/gemeinsam/typen';
 import { useWeltFortschritt } from '@/world/FortschrittKontext';
 import { TRENDONIX } from '@/world/registry';
-import { BASIS_PFAD } from '@/world/bilder';
 import { wegHaus } from '@/world/wege';
+import { Hausmarke } from '@/ui/Hausmarke';
 
 /**
  * Die Schwelle: Dunkelheit, ein Lichtpunkt, ein Name.
@@ -24,9 +24,8 @@ export function Ankunft({ szene }: { szene: Szene }) {
     <section id={szene.id} className="ankunft">
       <div className="funke" aria-hidden="true" />
       <a className="hausmarke" href={wegHaus()}>
-        <img src={`${BASIS_PFAD}/marke/trendonix-klein.png`}
-          alt={TRENDONIX.name} width={210} height={210}
-          fetchPriority="high" decoding="async" />
+        <Hausmarke datei="trendonix-klein" alt={TRENDONIX.name}
+          breite={210} hoehe={210} zuerst />
       </a>
       {szene.titel && <h1>{szene.titel}</h1>}
       {szene.unterzeile && <p className="unterzeile">{szene.unterzeile}</p>}

@@ -7,6 +7,7 @@ import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Buch3D } from './Buch3D';
+import { Hausmarke } from '@/ui/Hausmarke';
 
 /**
  * Die drei Welten — und der Weg zum Buch.
@@ -165,8 +166,7 @@ export function Buecher({ szene }: { szene?: Szene }) {
       {!amAnfang && (
         <footer>
           <a href={`${BASIS_PFAD}/`} aria-label={TRENDONIX.name}>
-            <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
-              alt="" width={120} height={80} loading="lazy" decoding="async" />
+            <Hausmarke klasse="fussmarke" breite={120} hoehe={80} />
           </a>
           <span className="fusslinks">
             <a href={`${BASIS_PFAD}/ueber`}>Über</a>

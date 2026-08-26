@@ -13,6 +13,7 @@ import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Verteiler } from '@/ui/Verteiler';
+import { Hausmarke } from '@/ui/Hausmarke';
 
 /**
  * Das Haus.
@@ -127,8 +128,7 @@ export default function Haus() {
         )}
         <div className="hausinhalt">
           <p className="marke">
-            <img src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt=""
-              width={140} height={94} fetchPriority="high" decoding="async" />
+            <Hausmarke breite={140} hoehe={94} zuerst />
             <span>{TRENDONIX.name}</span>
           </p>
           <h1>{TRENDONIX.versprechen}</h1>
@@ -214,8 +214,7 @@ export default function Haus() {
       </section>
 
       <footer>
-        <img className="fussmarke" src={`${BASIS_PFAD}/marke/trendonix-tx.png`}
-          alt={TRENDONIX.name} width={120} height={80} loading="lazy" decoding="async" />
+        <Hausmarke klasse="fussmarke" alt={TRENDONIX.name} breite={120} hoehe={80} />
         <span className="fusslinks">
           <a href={wegUeber()}>Über</a>
           <span aria-hidden="true">·</span>

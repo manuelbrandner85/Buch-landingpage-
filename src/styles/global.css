@@ -1383,3 +1383,140 @@ footer .kanalmal{text-decoration:none}
   .kanalkarte:hover,.kanalmal:hover{transform:none}
   .kanalglanz{display:none}
 }
+
+
+/* =========================================================================
+   Gold als Material
+   -------------------------------------------------------------------------
+   Bisher war Gold eine Farbe: #E3C88B, flächig, überall gleich. Echtes Gold
+   ist keine Farbe, sondern eine Oberfläche – es hat eine helle Kante, einen
+   dunklen Grund und antwortet auf Licht. Deshalb bekommt jedes goldene Wort
+   hier einen Verlauf aus fünf Tönen und einen sehr langsamen Lichtlauf
+   darüber, jede goldene Fläche eine Lichtkante oben und einen Schatten unten.
+
+   Alles bleibt knapp unter der Aufmerksamkeitsschwelle: Wer liest, soll den
+   Text lesen und nicht das Blinken. Wo die Seite still steht – im
+   Ruhig-Modus und bei „Bewegung reduzieren“ –, steht auch das Licht still.
+   ========================================================================= */
+:root{
+  --gold-hell:#FBF3D8; --gold-mitte:#E6CD94; --gold-schatten:#6E5320;
+  --goldlauf:linear-gradient(100deg,
+    #a9863f 0%, #e6cd94 16%, #fbf3d8 30%, #d9bd7c 42%,
+    #a9863f 56%, #f1e2b4 74%, #cfae76 88%, #a9863f 100%);
+}
+
+/* ---------- Goldene Schrift ----------
+   Der Verlauf liegt in der Schrift, nicht dahinter: background-clip:text.
+   Die Farbe darunter bleibt gesetzt, damit nichts verschwindet, wo der
+   Browser das nicht kann. */
+.eyebrow,.papier .eyebrow,
+.unterzeile,.ankunft .unterzeile,
+.papier h2,.lesefassung article h2,
+.tortext i,.band h3,.karte-stand,
+.hausbild p.marke span,
+.kanaltext em,.partner-name em{
+  color:var(--gold);
+  background:var(--goldlauf);
+  background-size:260% 100%;
+  background-position:14% 0;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:goldlauf 14s ease-in-out infinite}
+@keyframes goldlauf{
+  0%,100%{background-position:14% 0}
+  50%{background-position:86% 0}
+}
+/* Große goldene Überschriften vertragen etwas mehr Tiefe. */
+.papier h2,.lesefassung article h2{
+  filter:drop-shadow(0 1px 0 rgba(110,83,32,.45))}
+
+/* ---------- Goldene Flächen ----------
+   Ein Knopf aus einem Verlauf mit zwei Stopps sieht aus wie ein Knopf. Ein
+   Knopf mit heller Kante oben, dunklem Fuß und einem Streifen Licht, der
+   selten darüberläuft, sieht aus wie ein Stück Metall. */
+.kaufen{position:relative;overflow:hidden;
+  background:linear-gradient(158deg,
+    #fdf5dc 0%, #ecd69f 16%, #cfae76 38%, #a3833c 56%,
+    #d8bd80 76%, #f7ead0 100%);
+  box-shadow:0 10px 26px rgba(168,134,63,.34),
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 0 rgba(110,83,32,.55)}
+.kaufen::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(104deg,
+    rgba(255,255,255,0) 42%,rgba(255,255,255,.6) 50%,rgba(255,255,255,0) 58%);
+  background-size:300% 100%;background-position:210% 0;
+  animation:flaechenglanz 9s cubic-bezier(.4,0,.2,1) infinite}
+.kaufen:hover::after{animation-duration:3.4s}
+.kaufen > *{position:relative;z-index:1}
+.kaufen.wartet{background:none;box-shadow:none}
+.kaufen.wartet::after{display:none}
+@keyframes flaechenglanz{
+  0%,70%{background-position:210% 0}
+  100%{background-position:-80% 0}
+}
+
+/* ---------- Goldene Linien ----------
+   Haarlinien waren so blass, dass sie auf hellen Bildschirmen verschwanden.
+   Sie tragen die ganze Ordnung der Seite – jetzt sind sie zu sehen. */
+.weltentor{border-color:rgba(227,200,139,.3)}
+.kanalkarte{border-color:rgba(227,200,139,.26)}
+.kanalmal{border-color:rgba(227,200,139,.3)}
+.arbeitsweise{border-top-color:rgba(227,200,139,.22)}
+.kanaele{border-top-color:rgba(227,200,139,.22)}
+.kapitelliste li{border-bottom-color:rgba(227,200,139,.2)}
+.eintauchen{border-color:rgba(227,200,139,.62)}
+.partner::before{width:min(280px,46vw);
+  background:linear-gradient(90deg,transparent,rgba(243,223,168,.45),transparent)}
+
+/* Der Faden selbst ist die hellste Stelle der Seite. Er darf es sein. */
+.faden path{stroke:#F3DFA8;stroke-width:1.4;
+  filter:drop-shadow(0 0 7px rgba(243,223,168,.6))}
+
+/* ---------- Die Marke atmet ----------
+   Über dem TX-Zeichen liegt eine Maske in seiner eigenen Form; durch sie
+   läuft alle acht Sekunden ein schmaler Streifen Licht – die Buchstaben
+   entlang, nicht über ein Rechteck. Dazu ein sehr langsames Atmen des
+   Schimmers ringsum. */
+.hausmal{position:relative;display:inline-block;line-height:0;
+  vertical-align:middle}
+.hausmal img{display:block;
+  animation:hausatem 11s ease-in-out infinite}
+.hausglanz{position:absolute;inset:0;pointer-events:none;
+  -webkit-mask-image:var(--marke);mask-image:var(--marke);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  background:linear-gradient(104deg,
+    rgba(255,255,255,0) 41%,
+    rgba(255,248,224,.85) 50%,
+    rgba(255,255,255,0) 59%);
+  background-size:300% 100%;background-position:210% 0;
+  mix-blend-mode:screen;
+  animation:hausglanz 8s cubic-bezier(.42,0,.2,1) infinite}
+@keyframes hausglanz{
+  0%,74%{background-position:210% 0}
+  100%{background-position:-90% 0}
+}
+@keyframes hausatem{
+  0%,100%{filter:drop-shadow(0 0 3px rgba(227,200,139,.2))}
+  50%{filter:drop-shadow(0 0 13px rgba(227,200,139,.42))}
+}
+/* In der Kopfzeile ist die Marke klein und dauernd im Bild: dort nur der
+   Lichtlauf, kein Atmen. */
+header .marke .hausmal img{animation:none}
+
+/* ---------- Wo die Seite still steht ---------- */
+.ruhig .hausglanz,.ruhig .hausmal img,.ruhig .kaufen::after,
+.ruhig .eyebrow,.ruhig .unterzeile,.ruhig .papier h2{animation:none}
+@media (prefers-reduced-motion:reduce){
+  .hausglanz,.hausmal img,.kaufen::after,
+  .eyebrow,.papier .eyebrow,.unterzeile,.ankunft .unterzeile,
+  .papier h2,.lesefassung article h2,.tortext i,.band h3,.karte-stand,
+  .hausbild p.marke span,
+  .kanaltext em,.partner-name em{animation:none}
+}
+
+/* Die Kopfzeile liegt über den Motiven, nicht über der Nacht. Ein Verlauf mit
+   dunklen Stellen wird dort unleserlich – dort steht helles, volles Gold mit
+   einem Schatten dahinter. */
+header .marke .reihenname{color:#F0DDA9;
+  text-shadow:0 1px 6px rgba(0,0,0,.8)}

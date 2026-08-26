@@ -8,7 +8,7 @@ import {
   TRENDONIX, bandNach, oeffentlicheBaendeVon, reiheNach,
 } from '@/world/registry';
 import { wegHaus, wegUeber, wegWelt } from '@/world/wege';
-import { BASIS_PFAD } from '@/world/bilder';
+import { Hausmarke } from '@/ui/Hausmarke';
 
 /** Die Oberfläche bleibt unsichtbar, bis der Einstieg vorbei ist. */
 export function Kopfzeile(
@@ -59,8 +59,7 @@ export function Kopfzeile(
     <>
       <header className={sichtbar ? 'an' : ''}>
         <a className="marke" href={wegHaus()} aria-label={`${TRENDONIX.name} – Startseite`}>
-          <img src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt=""
-            width={46} height={31} loading="lazy" decoding="async" />
+          <Hausmarke breite={46} hoehe={31} />
           <span className="reihenname">
             {dieserBand ? `${dieseReihe?.titel} · Band ${dieserBand.buch.nummer}` : dieseReihe?.titel}
           </span>
