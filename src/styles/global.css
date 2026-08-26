@@ -465,11 +465,12 @@ main{position:relative;z-index:2}
 .kaufen.wartet{background:none;color:var(--staub);
   border:1px solid rgba(227,200,139,.28);box-shadow:none;cursor:default}
 .kaufen.wartet:hover{filter:none;transform:none}
-.eintauchen{display:inline-block;font-family:var(--display),serif;font-size:.72rem;
+.eintauchen{display:inline-block;font-family:var(--display),serif;font-size:.76rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
-  text-decoration:none;padding:.8rem 1.2rem;border:1px solid rgba(227,200,139,.34);
-  transition:background .3s,color .3s}
-.eintauchen:hover{background:rgba(227,200,139,.12)}
+  text-decoration:none;padding:.82rem 1.35rem;border:1px solid rgba(227,200,139,.55);
+  background:rgba(227,200,139,.07);
+  transition:background .3s,color .3s,border-color .3s}
+.eintauchen:hover{background:rgba(227,200,139,.2);border-color:var(--gold)}
 
 .hinweis-zeile{max-width:74rem;margin:3.5rem auto 0;
   border-top:1px solid rgba(227,200,139,.16);padding-top:1.6rem;
@@ -948,9 +949,27 @@ header .baender a.hier{color:var(--gold);border-color:var(--gold);opacity:1}
   font-size:.92rem;margin-top:.35rem}
 .tortext em{display:block;font-style:normal;font-size:.66rem;letter-spacing:.24em;
   text-transform:uppercase;color:var(--staub);margin-top:.9rem}
-.toraktion{margin-top:1.4rem;font-family:var(--display),serif;font-size:.7rem;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
-.toraktion::after{content:" →"}
+/* Der Eintritt war eine Bildunterschrift: 0,7 rem, weit gesperrt, ohne Kante –
+   auf einer 22 rem hohen Kachel mit Bild darunter übersieht man das. Jetzt ist
+   es ein Knopf mit Rahmen und eigenem Grund, der sich beim Darüberfahren füllt.
+   Die Kachel bleibt der Link; der Knopf sagt nur, dass sie einer ist. */
+.toraktion{margin-top:1.7rem;align-self:flex-start;
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--display),serif;font-size:.82rem;letter-spacing:.2em;
+  text-transform:uppercase;color:#1a1206;
+  padding:.95rem 1.8rem;border:0;
+  background:linear-gradient(160deg,#f4e0ac 0%,var(--gold) 42%,var(--gold-tief) 100%);
+  box-shadow:0 10px 28px rgba(168,134,63,.32);
+  transition:filter .35s ease,box-shadow .35s ease}
+.toraktion::after{content:"→";transition:transform .35s ease}
+.weltentor:hover .toraktion,.weltentor:focus-visible .toraktion{
+  filter:brightness(1.1);box-shadow:0 14px 36px rgba(168,134,63,.44)}
+.weltentor:hover .toraktion::after{transform:translateX(5px)}
+/* Steht nur eine Welt da, sitzt der Knopf mittig unter dem Text. */
+.weltentore:has(> :only-child) .toraktion{align-self:center}
+@media (prefers-reduced-motion:reduce){
+  .toraktion,.toraktion::after{transition:none}
+}
 
 /* ---------- Die Bücherwand ---------- */
 .buecherwand{background:linear-gradient(to bottom,var(--nacht),#080d1a)}
