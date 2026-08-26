@@ -122,6 +122,11 @@ jobs:
   # ist eine Einladung. Im Secret werden alle drei Teile in den Protokollen
   # maskiert.
   #
+  #   Aufgeräumt wird von selbst: Was im Zielverzeichnis liegt und nicht mehr
+  #   zum Bau gehört, wird beim Hochladen entfernt – aber nur in einem
+  #   Verzeichnis, das die Sonde als Dokumentenstamm nachgewiesen hat. Wer das
+  #   nicht will, setzt die Variable FTP_LOESCHEN auf `nein`.
+  #
   # Ohne das Secret bricht nichts – der Auftrag steigt nach wenigen Sekunden
   # wieder aus, und die Seite bleibt auf github.io.
   webspace:
@@ -185,7 +190,9 @@ jobs:
           FTP_LOESCHEN: ${{ vars.FTP_LOESCHEN }}
           SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
         run: |
-          set -eu +x
+          # -f: keine Dateinamen-Ersetzung. Die Ausschlussmuster weiter unten
+          # sind für lftp gedacht, nicht für die Shell.
+          set -euf +x
           DOMAIN="${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
 
           # benutzer:kennwort@server[/verzeichnis] auseinandernehmen.
@@ -247,6 +254,7 @@ jobs:
           printf '%s\n' "$MARKE" > /tmp/_probe.txt
           ZIEL=""
           ERSTER_BESCHREIBBARER=""
+          BESCHRIEBEN=""
           for K in $KANDIDATEN; do
             echo "Prüfe $K"
             if ! lftp_tun "put -O \"$K\" /tmp/_probe.txt -o _probe.txt;" 2>/dev/null; then
@@ -254,6 +262,7 @@ jobs:
               continue
             fi
             [ -n "$ERSTER_BESCHREIBBARER" ] || ERSTER_BESCHREIBBARER="$K"
+            BESCHRIEBEN="$BESCHRIEBEN $K"
             sleep 2
             if curl -fsS --max-time 25 "https://$DOMAIN/_probe.txt" 2>/dev/null | grep -qx "$MARKE"; then
               ZIEL="$K"
@@ -274,7 +283,10 @@ jobs:
           # Deshalb ist die Sonde ein Nachweis, keine Sperre: Bestätigt keiner,
           # wird der erste beschreibbare Kandidat genommen und laut gewarnt.
           # Das letzte Wort hat die Abfrage der fertigen Seite weiter unten.
-          if [ -z "$ZIEL" ]; then
+          if [ -n "$ZIEL" ]; then
+            BESTAETIGT="ja"
+          else
+            BESTAETIGT="nein"
             if [ -n "$ERSTER_BESCHREIBBARER" ]; then
               ZIEL="$ERSTER_BESCHREIBBARER"
               echo "::warning title=Ziel nicht bestätigt::Kein Kandidat war über https://$DOMAIN erreichbar – vermutlich antwortet der Server gerade mit einem Fehler. Es wird nach $ZIEL geladen und danach geprüft."
@@ -285,11 +297,71 @@ jobs:
           fi
           echo "Ziel: $SERVER$ZIEL"
 
-          # Gelöscht wird nur auf ausdrückliche Ansage. Wer im Zielverzeichnis
-          # noch etwas anderes liegen hat, verlöre es sonst mit dem ersten Mal.
-          if [ "${FTP_LOESCHEN:-}" = "ja" ]; then LOESCHEN="--delete"; else LOESCHEN=""; fi
+          # ── Aufräumen ─────────────────────────────────────────────────────
+          #
+          # Was einmal hochgeladen wurde, bleibt sonst für immer liegen: ein
+          # umbenanntes Kapitel, ein ersetztes Bild, ein ganzer Ordner aus
+          # einem alten Bau. Deshalb spiegelt der Upload jetzt wirklich – was
+          # im Ziel liegt und nicht mehr zum Bau gehört, fliegt mit.
+          #
+          # Das gilt nur für ein Verzeichnis, das die Sonde als
+          # Dokumentenstamm dieser Domain nachgewiesen hat. Wurde nur geraten,
+          # wird nichts gelöscht: Ein falsch geratenes Ziel mit --delete wäre
+          # der teuerste Fehler, den dieser Auftrag machen kann.
+          #
+          # Ausgenommen bleibt, was dem Server gehört und nicht uns:
+          # .well-known trägt die Bescheinigungen für das Schloss in der
+          # Adresszeile – wer den Ordner löscht, nimmt sich das Zertifikat.
+          BEWAHREN="-X .well-known/ -X cgi-bin/ -X logs/ -X stats/ -X error_docs/ -X .ftpquota -X _altlasten*/"
+          if [ "${FTP_LOESCHEN:-}" = "nein" ]; then
+            LOESCHEN=""
+            echo "Aufräumen ist abgeschaltet (Variable FTP_LOESCHEN=nein)."
+          elif [ "$BESTAETIGT" != "ja" ]; then
+            LOESCHEN=""
+            echo "::warning title=Nicht aufgeräumt::Das Ziel war nur geraten, nicht nachgewiesen. Es wird nur hinzugefügt, nichts entfernt."
+          else
+            LOESCHEN="--delete $BEWAHREN"
+          fi
           lftp_tun "mirror -R --parallel=4 --no-perms --ignore-time $LOESCHEN out/ \"$ZIEL\";"
           echo "Hochgeladen nach $ZIEL"
+
+          # Die Sonden wieder einsammeln – auch aus den Verzeichnissen, die
+          # sich als falsch erwiesen haben.
+          for K in $BESCHRIEBEN; do
+            if [ "$K" != "$ZIEL" ]; then
+              lftp_tun "rm -f \"$K/_probe.txt\";" 2>/dev/null || true
+            fi
+          done
+
+          # ── Altlasten ─────────────────────────────────────────────────────
+          #
+          # Zwei frühe Veröffentlichungen liefen fehlerfrei durch und landeten
+          # trotzdem daneben: nicht im Dokumentenstamm, sondern im
+          # Anmeldeverzeichnis darüber. Dort liegen auch die anderen Ordner
+          # des Kontos, deshalb wird da nichts gelöscht.
+          #
+          # Was aber Zeichen für Zeichen so heißt wie etwas aus diesem Bau,
+          # stammt aus diesem Bau. Das wandert in einen Keller – verschoben,
+          # nicht gelöscht, umkehrbar mit zwei Klicks. Beim nächsten Mal ist
+          # nichts mehr zu finden, dann tut der Schritt gar nichts.
+          if [ "$BESTAETIGT" = "ja" ] && [ "$ZIEL" != "/" ]; then
+            LISTE="$(lftp_tun "cls -1 /;" 2>/dev/null || true)"
+            ALT=""
+            for N in $(ls -A out); do
+              case "$N" in .*) continue ;; esac
+              if printf '%s\n' "$LISTE" | sed 's#/$##' | grep -qx "$N"; then ALT="$ALT $N"; fi
+            done
+            if [ -n "$ALT" ]; then
+              KELLER="/_altlasten-${GITHUB_RUN_ID}"
+              BEFEHLE="mkdir -p \"$KELLER\";"
+              for N in $ALT; do BEFEHLE="$BEFEHLE mv \"/$N\" \"$KELLER/$N\";"; done
+              if lftp_tun "$BEFEHLE" >/dev/null 2>&1; then
+                echo "::notice title=Altlasten weggeräumt::$ALT liegen jetzt in $KELLER. Verschoben, nicht gelöscht – der Ordner kann von Hand weg, wenn die Seite steht."
+              else
+                echo "::warning title=Altlasten liegen noch::Verschieben hat nicht geklappt:$ALT"
+              fi
+            fi
+          fi
 
       # Der eigentliche Beweis. Alles davor kann grün sein, ohne dass jemand
       # die Seite sehen kann.

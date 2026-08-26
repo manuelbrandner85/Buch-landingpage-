@@ -54,7 +54,7 @@ Zwei Dinge sind freiwillig, beide als **Variables**:
 | --- | --- |
 | `SEITEN_DOMAIN` | andere Adresse als `www.trendonix-buecher.de` |
 | `FTP_ZIEL` | anderer Zielordner als `/trendonix-buecher.de` |
-| `FTP_LOESCHEN` | `ja` – räumt im Zielverzeichnis auf. **Nur** setzen, wenn dort ausschließlich diese Seite liegt |
+| `FTP_LOESCHEN` | `nein` – schaltet das Aufräumen ab (siehe unten). Ohne die Variable wird aufgeräumt |
 
 ### Das Zielverzeichnis findet der Bau selbst
 
@@ -88,6 +88,42 @@ fertigen Seite.
 Und danach fragt der Bau die Seite selbst ab – Startseite, `robots.txt`, eine
 Bandwelt, eine Buchseite. Kommt dort nicht die neue Seite zurück, endet der
 Auftrag rot. Lieber ein rotes Kreuz mit Grund als ein grüner Haken ohne Wirkung.
+
+### Aufgeräumt wird von selbst
+
+Ein Upload, der nur hinzufügt, sammelt an: das umbenannte Kapitel, das
+ersetzte Bild, der ganze Ordner aus einem alten Bau. Nach einem halben Jahr
+liegt auf dem Webspace mehr Vergangenheit als Gegenwart, und niemand weiß mehr,
+was davon noch ausgeliefert wird.
+
+Deshalb spiegelt der Upload wirklich: Was im Zielverzeichnis liegt und nicht
+mehr zum Bau gehört, wird beim Hochladen entfernt. Drei Sicherungen hängen
+daran:
+
+- **Nur im nachgewiesenen Ziel.** Hat die Sonde den Dokumentenstamm nicht
+  bestätigt, sondern wurde nur geraten, wird nichts gelöscht – dann wird
+  hinzugefügt und gewarnt. Ein falsch geratenes Ziel mit `--delete` wäre der
+  teuerste Fehler, den dieser Auftrag machen kann.
+- **Was dem Server gehört, bleibt.** `.well-known` (dort liegen die
+  Bescheinigungen für das Schloss in der Adresszeile), `cgi-bin`, `logs`,
+  `stats`, `error_docs`, `.ftpquota`.
+- **Abschaltbar.** Variable `FTP_LOESCHEN` auf `nein`, und es wird wieder nur
+  hinzugefügt.
+
+### Die Altlasten im Anmeldeverzeichnis
+
+Die zwei Uploads, die danebengingen, liegen noch im Anmeldeverzeichnis über dem
+Dokumentenstamm – rund 185 MB. Dort wird nichts gelöscht: In dieser Wurzel
+liegen auch die anderen Ordner des Kontos, und ein Vertipper ist da nicht
+zurückzuholen.
+
+Stattdessen räumt der Auftrag beiseite. Was in der Wurzel Zeichen für Zeichen
+so heißt wie etwas aus diesem Bau (`index.html`, `_next`, `buch`, `welt` …),
+wandert nach `/_altlasten-<nummer>/` – **verschoben, nicht gelöscht**. In der
+Zusammenfassung des Laufs steht, was wohin gewandert ist. Steht die Seite
+danach, kann der Ordner im WebFTP mit einem Klick weg; das ist der einzige
+Schritt, der von Hand bleibt. Beim nächsten Lauf findet der Schritt nichts mehr
+und tut nichts.
 
 ### Die Platzhalterdatei
 

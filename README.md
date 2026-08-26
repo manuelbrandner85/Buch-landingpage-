@@ -14,7 +14,7 @@ Was öffentlich sichtbar ist, entscheidet **nicht** das Vorhandensein von Daten,
 sondern `status` in `data/<band>/band.ts` – siehe „Die drei Bände“.
 
 **Live:** https://manuelbrandner85.github.io/Buch-landingpage-/
-**Eigene Domain:** vorbereitet, aber noch nicht geschaltet – siehe `DOMAIN.md`.
+**Eigene Domain:** https://www.trendonix-buecher.de – siehe `DOMAIN.md`.
 
 ## Veröffentlichen
 
@@ -32,6 +32,12 @@ Einzustellen ist genau ein Eintrag: das Secret `FTP_ZUGANG` in der Form
 `benutzer:kennwort@server`. Fehlt es, steigt der Auftrag `webspace` nach
 wenigen Sekunden mit einem Hinweis wieder aus und die Seite bleibt auf
 github.io. Zertifikat und Weiterleitung gehören zum Anbieter – beides steht in
+`DOMAIN.md`.
+
+Aufgeräumt wird dabei von selbst: Was auf dem Webspace liegt und nicht mehr
+zum Bau gehört, verschwindet mit der nächsten Veröffentlichung – aber nur in
+dem Verzeichnis, das der Auftrag als Dokumentenstamm nachgewiesen hat, und ohne
+die Ordner des Servers selbst. Warum das drei Sicherungen hat, steht in
 `DOMAIN.md`.
 
 Vor jeder Veröffentlichung laufen dieselben Prüfungen wie lokal: Weltdaten,
@@ -787,10 +793,11 @@ und nichts freizuschalten.
 
 - **`npm run vorschau`** baut die Einzeldatei weiterhin nur aus Band 1.
 - **Kaufwege für Band 2 und Band 3** – leer, weil es sie noch nicht gibt. Beide
-  Bände zeigen „Erscheint in Kürze“ und, sobald eine Adresse im Impressum steht,
-  den Weg „Bescheid geben lassen“.
+  Bände zeigen „Erscheint in Kürze“ und den Weg „Bescheid geben lassen“ ans
+  Postfach.
 - **Leseprobe für Band 2 und Band 3** – Band 1 liegt bereit, die anderen nicht.
-- **Das Impressum** ist leer und öffentlich erreichbar: `anbieter.ts` ausfüllen.
-- **Die eigene Domain** ist vorbereitet, aber nicht geschaltet: `DOMAIN.md`.
+- **Der Ordner `_altlasten-…`** auf dem Webspace: Dort liegen die beiden
+  Uploads, die danebengingen – beiseitegeräumt, nicht gelöscht. Löschen bleibt
+  ein Klick von Hand im WebFTP; siehe `DOMAIN.md`.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion
