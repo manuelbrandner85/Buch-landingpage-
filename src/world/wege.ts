@@ -21,6 +21,8 @@ export const wegOrt = (reihe: ReiheId, id: string) => weg(`/${reihe}/ort/${id}/`
 export const wegBegriffe = (reihe: ReiheId) => weg(`/${reihe}/begriffe/`);
 export const wegBuch = (band: BandId) => weg(`/buch/${band}/`);
 export const wegUeber = () => weg('/ueber/');
+export const wegJournal = () => weg('/blog/');
+export const wegBeitrag = (slug: string) => weg(`/blog/${slug}/`);
 export const wegLeseprobe = (datei: string) => weg(`/leseprobe/${datei}`);
 export const wegImpressum = () => weg('/impressum/');
 

@@ -25,3 +25,9 @@ assets-quelle/**/*-motion-roh.mp4
 .env.local
 .env*.local
 !.env.example
+
+# Arbeitsprotokolle lokaler Laeufe
+build.log
+typecheck.log
+npm-install.log
+st.txt

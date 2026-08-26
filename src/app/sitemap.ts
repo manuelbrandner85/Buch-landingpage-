@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { OEFFENTLICHE_BUECHER, OEFFENTLICHE_REIHEN, oeffentlicheBaendeVon } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
+import { sichtbareBeitraege } from '@/world/journal';
 
 // Beim statischen Export muss die Route zur Bauzeit feststehen.
 export const dynamic = 'force-static';
@@ -16,6 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASIS}/`, changeFrequency: 'monthly', priority: 1 },
     { url: `${BASIS}/ueber/`, changeFrequency: 'yearly', priority: 0.5 },
+    { url: `${BASIS}/blog/`, changeFrequency: 'weekly', priority: 0.7 },
+    ...sichtbareBeitraege().map((b) => ({
+      url: `${BASIS}/blog/${b.slug}/`, changeFrequency: 'yearly' as const, priority: 0.6,
+    })),
     ...OEFFENTLICHE_BUECHER.map((b) => ({
       url: `${BASIS}/buch/${b.id}/`, changeFrequency: 'monthly' as const, priority: 0.9,
     })),
