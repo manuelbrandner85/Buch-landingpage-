@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T19:33:28Z",
+  "stand": "2026-08-27T19:48:57Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -62,7 +62,7 @@
   },
   "besucher": {
     "gelesen": false,
-    "hinweis": "Search Console verarbeitet noch. Erste Zahlen frühestens ab 28.08.",
+    "hinweis": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Leistung und Seitenindexierung melden „Die Daten werden verarbeitet“ — erste Zahlen ab dem 28.08.",
     "klicks7": null,
     "impressionen7": null,
     "position": null,
@@ -531,6 +531,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-27T19:55:00Z",
+      "kanal": "Google",
+      "text": "Search Console: Property unter brandy13062 bestätigt, Sitemap erfolgreich gelesen — 89 Seiten erkannt. Zahlen ab morgen."
+    },
+    {
       "zeit": "2026-08-27T18:55:00Z",
       "kanal": "Cockpit",
       "text": "Verzeichnisschutz greift: der Ordner antwortet mit 401, die Buchseiten weiter mit 200."
@@ -651,7 +656,7 @@
     },
     {
       "was": "Besucher",
-      "warum": "Search Console verarbeitet noch. Erste Zahlen frühestens ab 28.08."
+      "warum": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Leistung und Seitenindexierung melden „Die Daten werden verarbeitet“ — erste Zahlen ab dem 28.08."
     },
     {
       "was": "Wochenbericht",
