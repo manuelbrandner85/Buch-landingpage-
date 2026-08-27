@@ -108,15 +108,30 @@ jobs:
             \"public/$ORDNER/\" \"$ZIEL/$ORDNER\";"
 
           # Beweis statt Hoffnung: Steht der neue Stand wirklich oben?
+          #
+          # Der Ordner traegt einen Verzeichnisschutz. Ueber die Adresse
+          # antwortet er dann mit 401 – das ist kein Fehler, sondern der
+          # Nachweis, dass der Schutz greift. Der Inhalt wird deshalb ueber
+          # dieselbe FTP-Verbindung zurueckgelesen, die ihn hochgeladen hat.
           sleep 3
-          LIVE="$(curl -fsS --max-time 25 "https://$DOMAIN/$ORDNER/cockpit.json" \
+          LIVE="$(lftp_tun "cat \"$ZIEL/$ORDNER/cockpit.json\";" \
             | tr -d ' \n' | grep -o '"stand":"[^"]*"' || true)"
           LOKAL="$(tr -d ' \n' < "public/$ORDNER/cockpit.json" \
             | grep -o '"stand":"[^"]*"' || true)"
-          echo "live:  $LIVE"
+          echo "oben:  $LIVE"
           echo "lokal: $LOKAL"
           if [ -n "$LOKAL" ] && [ "$LIVE" != "$LOKAL" ]; then
-            echo "::error title=Alter Stand::Hochgeladen, aber die Domain liefert weiter den alten Stand."
+            echo "::error title=Alter Stand::Hochgeladen, aber oben liegt weiter der alte Stand."
             exit 1
           fi
-          echo "Cockpit steht."
+
+          # Und liegt der Ordner ueberhaupt unter der Adresse? 200 heisst
+          # offen, 401 heisst geschuetzt – beides beweist, dass er dort
+          # ausgeliefert wird. Alles andere waere das falsche Verzeichnis.
+          CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 \
+            "https://$DOMAIN/$ORDNER/" || true)"
+          case "$CODE" in
+            200|401) echo "Cockpit steht (HTTP $CODE)." ;;
+            *) echo "::error title=Nicht erreichbar::https://$DOMAIN/$ORDNER/ antwortet mit $CODE."
+               exit 1 ;;
+          esac
