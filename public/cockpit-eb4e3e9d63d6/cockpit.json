@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T19:01:55Z",
+  "stand": "2026-08-27T19:12:22Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -263,14 +263,18 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-27T18:02:00Z",
+    "stand": "2026-08-27T19:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": null,
-    "zertifikatTage": 88,
-    "linksGeprueft": 43,
-    "linksKaputt": 1,
+    "deployWann": "2026-08-27T18:51:50Z",
+    "zertifikatTage": 87,
+    "linksGeprueft": 44,
+    "linksKaputt": 2,
     "linksZiele": [
+      {
+        "ziel": "https://www.trendonix-buecher.de/cockpit-eb4e3e9d63d6/",
+        "code": 401
+      },
       {
         "ziel": "https://bsky.app/profile/trendonix-buecher.bsky.social",
         "code": 404
@@ -282,7 +286,7 @@
   "luecken": [
     {
       "was": "Verkäufe",
-      "warum": "ZAHLEN.md gibt es noch nicht. Die Zahlen stehen nur im KDP-Konto; Amazon-Seiten darf keine Automatik abrufen."
+      "warum": "ZAHLEN.md steht bereit, aber es ist noch keine Tageszeile eingetragen. Die Zahlen stehen nur im KDP-Konto."
     },
     {
       "was": "Reichweite",

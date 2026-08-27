@@ -75,8 +75,11 @@ if (zahlenText) {
     });
   }
   tage.sort((a, b) => (a.d < b.d ? -1 : 1));
-} else {
-  fehlt('Verkäufe', 'ZAHLEN.md gibt es noch nicht. Die Zahlen stehen nur im KDP-Konto; Amazon-Seiten darf keine Automatik abrufen.');
+}
+if (!tage.length) {
+  fehlt('Verkäufe', zahlenText
+    ? 'ZAHLEN.md steht bereit, aber es ist noch keine Tageszeile eingetragen. Die Zahlen stehen nur im KDP-Konto.'
+    : 'ZAHLEN.md gibt es noch nicht. Die Zahlen stehen nur im KDP-Konto; Amazon-Seiten darf keine Automatik abrufen.');
 }
 const letzte30 = tage.slice(-30);
 const summe = (feld) => {
