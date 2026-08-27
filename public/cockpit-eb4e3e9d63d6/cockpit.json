@@ -1,11 +1,6 @@
 {
-  "stand": "2026-08-27T22:20:11Z",
-  "warnungen": [
-    {
-      "stufe": "mittel",
-      "text": "1 toter Link auf der Seite — 404 auf https://bsky.app/profile/trendonix-buecher.bsky.social."
-    }
-  ],
+  "stand": "2026-08-27T22:41:51Z",
+  "warnungen": [],
   "aenderungen": {
     "seit": null,
     "punkte": [],
@@ -675,19 +670,14 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-27T22:02:00Z",
+    "stand": "2026-08-27T22:41:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": null,
+    "deployWann": "2026-08-27T22:33:21Z",
     "zertifikatTage": 87,
-    "linksGeprueft": 44,
-    "linksKaputt": 1,
-    "linksZiele": [
-      {
-        "ziel": "https://bsky.app/profile/trendonix-buecher.bsky.social",
-        "code": 404
-      }
-    ],
+    "linksGeprueft": 45,
+    "linksKaputt": 0,
+    "linksZiele": [],
     "seitenGemeldet": 89,
     "journalVorrat": 1
   },
