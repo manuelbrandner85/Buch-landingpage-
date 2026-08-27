@@ -12,85 +12,76 @@
 <style>
 :root{
   --nacht:#060A14; --tiefe:#0C1220; --gold:#E3C88B; --gold-tief:#A8863F;
-  --papier:#F1ECE0; --staub:#9C9482; --rot:#7C1622; --gruen:#4E7D5A;
+  --papier:#F1ECE0; --staub:#9C9482; --rot:#7C1622; --gruen:#5C8A68;
   --rand:1rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{
-  background:var(--nacht); color:var(--papier); font-size:16px; line-height:1.5;
+body{background:var(--nacht);color:var(--papier);font-size:16px;line-height:1.5;
   font-family:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;
-  padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px));
-  -webkit-font-smoothing:antialiased;
-}
+  padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px));-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;line-height:1.15}
 a{color:var(--gold)}
 
-/* ---- Kopf ---- */
-header{
-  position:sticky; top:0; z-index:10; background:rgba(6,10,20,.92);
-  backdrop-filter:blur(12px); border-bottom:1px solid rgba(227,200,139,.18);
+header{position:sticky;top:0;z-index:10;background:rgba(6,10,20,.93);
+  backdrop-filter:blur(12px);border-bottom:1px solid rgba(227,200,139,.18);
   padding:calc(.7rem + env(safe-area-inset-top,0px)) var(--rand) .7rem;
-  display:flex; align-items:center; gap:.7rem;
-}
+  display:flex;align-items:center;gap:.7rem}
 header img{width:34px;height:34px;border-radius:6px;flex:0 0 auto}
 .marke{flex:1;min-width:0}
-.marke b{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.05rem;
-  letter-spacing:.02em}
+.marke b{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.05rem}
 .marke span{display:block;font-size:.7rem;color:var(--staub)}
 .marke span.alt{color:var(--gold-tief)}
-button.neu{
-  background:none;border:1px solid rgba(227,200,139,.35);color:var(--gold);
+button.neu{background:none;border:1px solid rgba(227,200,139,.35);color:var(--gold);
   border-radius:999px;padding:.45rem .8rem;font-size:.72rem;letter-spacing:.1em;
-  text-transform:uppercase;font-family:inherit;cursor:pointer;flex:0 0 auto
-}
+  text-transform:uppercase;font-family:inherit;cursor:pointer;flex:0 0 auto}
 button.neu:active{background:rgba(227,200,139,.12)}
 button.neu[aria-busy="true"]{opacity:.5}
-
 .warnung{background:rgba(124,22,34,.35);border-bottom:1px solid rgba(227,200,139,.2);
-  padding:.55rem var(--rand);font-size:.78rem;color:var(--papier)}
+  padding:.55rem var(--rand);font-size:.78rem}
 
 main{padding:0 var(--rand)}
 section{margin:1.6rem 0}
 h2{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
   font-family:Georgia,serif;margin-bottom:.7rem}
-
-/* ---- Karten ---- */
 .karte{background:var(--tiefe);border:1px solid rgba(227,200,139,.14);
   border-radius:10px;padding:1rem}
-.buchkopf h3{font-size:1.25rem;color:var(--papier)}
+.buchkopf h3{font-size:1.25rem}
 .buchkopf em{font-style:italic;color:var(--gold);font-family:Georgia,serif;font-size:.95rem}
+
 .zeile{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
 .kachel{flex:1 1 30%;min-width:92px;background:rgba(227,200,139,.05);
   border:1px solid rgba(227,200,139,.12);border-radius:8px;padding:.6rem .7rem}
 .kachel .wert{font-family:Georgia,serif;font-size:1.5rem;color:var(--gold);line-height:1.1}
-.kachel .wert.klein{font-size:1.05rem}
 .kachel .was{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--staub);margin-top:.25rem}
-.kachel.leer .wert{color:var(--staub)}
-/* Die Kategorienraenge als Zeilen, nicht als Kacheln: „Vor- & Fruehgeschichte"
-   passt in kein Drittel eines Telefons, ohne in den Nachbarn zu laufen. */
-.rangliste{margin-top:.9rem;border-top:1px solid rgba(227,200,139,.12)}
-.rangliste li{display:flex;justify-content:space-between;align-items:baseline;
-  gap:.8rem;padding:.45rem 0;border-bottom:1px solid rgba(227,200,139,.08);font-size:.86rem}
-.rangliste li:last-child{border-bottom:0}
-.rangliste b{font-family:Georgia,serif;font-weight:400;color:var(--gold);font-size:1.05rem}
+.kachel.leer .wert{color:var(--staub);font-size:1rem}
+.trend{font-size:.72rem;margin-top:.3rem;display:block}
+.trend.gut{color:var(--gruen)} .trend.schlecht{color:#C0685F}
 
 ul{list-style:none}
+.rangliste{margin-top:.9rem;border-top:1px solid rgba(227,200,139,.12)}
+.rangliste li,.suchliste li{display:flex;justify-content:space-between;align-items:baseline;
+  gap:.8rem;padding:.45rem 0;border-bottom:1px solid rgba(227,200,139,.08);font-size:.86rem}
+.rangliste li:last-child,.suchliste li:last-child{border-bottom:0}
+.rangliste b,.suchliste b{font-family:Georgia,serif;font-weight:400;color:var(--gold);font-size:1.05rem}
 .ausgaben li{display:flex;justify-content:space-between;gap:.6rem;padding:.55rem 0;
   border-bottom:1px solid rgba(227,200,139,.1);font-size:.86rem}
 .ausgaben li:last-child{border-bottom:0}
 .ausgaben .zustand{color:var(--staub);font-size:.76rem;text-align:right}
+
+.balken{display:block;width:100%;height:70px;margin-top:.9rem}
+.balken rect{fill:var(--gold-tief)}
+.balken rect.hoch{fill:var(--gold)}
 
 .kanaele{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
 .kanal{background:var(--tiefe);border:1px solid rgba(227,200,139,.14);
   border-radius:10px;padding:.8rem}
 .kanal b{display:block;font-family:Georgia,serif;font-weight:400;font-size:.95rem}
 .kanal .griff{display:block;font-size:.64rem;color:var(--staub);overflow-wrap:anywhere}
-.kanal .zahl{font-family:Georgia,serif;font-size:1.6rem;color:var(--gold);margin-top:.45rem;
-  line-height:1}
+.kanal .zahl{font-family:Georgia,serif;font-size:1.6rem;color:var(--gold);margin-top:.45rem;line-height:1}
 .kanal .zahl.leer{font-size:.9rem;color:var(--staub)}
-.kanal .unten{font-size:.68rem;color:var(--staub);margin-top:.3rem}
+.kanal .unten{display:block;font-size:.68rem;color:var(--staub);margin-top:.3rem}
 
 .lauf li{display:flex;gap:.7rem;padding:.7rem 0;border-bottom:1px solid rgba(227,200,139,.1)}
 .lauf li:last-child{border-bottom:0}
@@ -101,6 +92,14 @@ ul{list-style:none}
 .lauf .meta{display:block;font-size:.68rem;color:var(--staub);margin-top:.25rem;
   text-transform:uppercase;letter-spacing:.08em}
 .lauf .fahne{color:var(--gold);margin-left:.4rem;letter-spacing:.1em}
+
+.vorschlag{border-bottom:1px solid rgba(227,200,139,.1);padding:.85rem 0}
+.vorschlag:last-child{border-bottom:0}
+.vorschlag b{display:block;font-size:.95rem;font-family:Georgia,serif;font-weight:400;color:var(--papier)}
+.vorschlag .warum{display:block;font-size:.8rem;color:var(--staub);margin-top:.3rem}
+.vorschlag .gewinn{display:block;font-size:.8rem;color:var(--gold);margin-top:.35rem}
+.vorschlag .wer{display:block;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold-tief);margin-top:.4rem}
 
 .offen li{display:flex;gap:.7rem;padding:.75rem 0;border-bottom:1px solid rgba(227,200,139,.1)}
 .offen li:last-child{border-bottom:0}
@@ -113,6 +112,8 @@ ul{list-style:none}
 .offen .wer{display:block;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--gold-tief);margin-top:.35rem}
 
+.technik{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.74rem;color:var(--staub)}
+.technik b{color:var(--papier);font-weight:600}
 .hinweis{font-size:.78rem;color:var(--staub);font-style:italic;margin-top:.6rem}
 footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-align:center}
 .tipp{margin:1.2rem var(--rand);padding:.8rem;border:1px dashed rgba(227,200,139,.3);
@@ -120,60 +121,47 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 .tipp b{color:var(--gold);font-weight:400}
 @media (min-width:640px){
   :root{--rand:1.6rem}
-  body{max-width:46rem;margin:0 auto}
+  body{max-width:48rem;margin:0 auto}
   .kanaele{grid-template-columns:repeat(3,1fr)}
 }
 </style>
 </head>
 <body>
-
 <header>
   <img src="icon-192.png" alt="">
-  <span class="marke">
-    <b>Trendonix Dashboard</b>
-    <span id="stand">wird geladen …</span>
-  </span>
+  <span class="marke"><b>Trendonix Dashboard</b><span id="stand">wird geladen …</span></span>
   <button class="neu" id="knopf" type="button">Neu laden</button>
 </header>
-
 <div class="warnung" id="warnung" hidden></div>
-
 <main id="inhalt"></main>
-
 <div class="tipp" id="tipp" hidden>
   <b>Auf den Startbildschirm legen:</b> im Chrome-Menü oben rechts auf
-  „Zum Startbildschirm hinzufügen“. Danach startet das Dashboard wie eine App,
-  mit eigenem Symbol und ohne Adressleiste.
+  „Zum Startbildschirm hinzufügen“. Danach startet das Dashboard wie eine App.
 </div>
-
 <footer>Alle Zahlen sind abgelesen, nicht geschätzt. Fehlt eine, steht das dabei.</footer>
 
 <script>
 (function () {
   'use strict';
-
   var inhalt = document.getElementById('inhalt');
   var standZeile = document.getElementById('stand');
   var warnung = document.getElementById('warnung');
   var knopf = document.getElementById('knopf');
-
-  // Wann der Besitzer zuletzt hingesehen hat. Alles, was danach passiert ist,
-  // bekommt eine Fahne - sonst muesste er jedes Mal die ganze Liste lesen.
   var ZULETZT = 'trendonix-zuletzt';
   var zuletzt = 0;
   try { zuletzt = parseInt(localStorage.getItem(ZULETZT) || '0', 10) || 0; } catch (e) {}
 
-  function zahl(n) {
-    if (n === null || n === undefined) return null;
-    return n.toLocaleString('de-DE');
-  }
-  function euro(n) {
-    return n === null || n === undefined ? null : n.toFixed(2).replace('.', ',') + ' €';
-  }
+  var da = function (w) { return w !== null && w !== undefined; };
+  function zahl(n) { return da(n) ? n.toLocaleString('de-DE') : null; }
+  function euro(n) { return da(n) ? n.toFixed(2).replace('.', ',') + ' €' : null; }
   function datum(iso) {
     if (!iso) return '';
-    var t = new Date(iso);
-    return t.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    return new Date(iso).toLocaleDateString('de-DE',
+      { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+  function kurzDatum(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
   }
   function vorwie(iso) {
     var min = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
@@ -184,123 +172,177 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
     var tage = Math.round(std / 24);
     return 'vor ' + tage + (tage === 1 ? ' Tag' : ' Tagen');
   }
-  function h(text) {
-    return String(text).replace(/[&<>"]/g, function (z) {
+  function h(t) {
+    return String(t).replace(/[&<>"]/g, function (z) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[z];
     });
   }
+  function kachel(wert, was, zusatz) {
+    var leer = !da(wert) || wert === '–';
+    return '<div class="kachel' + (leer ? ' leer' : '') + '">'
+      + '<div class="wert">' + h(leer ? 'keine Daten' : wert) + '</div>'
+      + '<div class="was">' + h(was) + '</div>' + (zusatz || '') + '</div>';
+  }
+  // Weniger ist besser beim Rang, mehr ist besser bei allem anderen.
+  function trend(jetzt, vorher, kleinerIstBesser) {
+    if (!da(jetzt) || !da(vorher) || jetzt === vorher) return '';
+    var rauf = jetzt > vorher;
+    var gut = kleinerIstBesser ? !rauf : rauf;
+    var d = Math.abs(jetzt - vorher);
+    return '<span class="trend ' + (gut ? 'gut' : 'schlecht') + '">'
+      + (rauf ? '▲' : '▼') + ' ' + zahl(d) + '</span>';
+  }
+
+  function balken(tage, feld) {
+    var werte = tage.map(function (t) { return t[feld] || 0; });
+    var hoch = Math.max.apply(null, werte.concat([1]));
+    var b = 100 / werte.length;
+    return '<svg class="balken" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">'
+      + werte.map(function (w, i) {
+          var hoehe = Math.max(1, (w / hoch) * 38);
+          return '<rect class="' + (w === hoch && w > 0 ? 'hoch' : '') + '" x="'
+            + (i * b + b * 0.15).toFixed(2) + '" y="' + (40 - hoehe).toFixed(2)
+            + '" width="' + (b * 0.7).toFixed(2) + '" height="' + hoehe.toFixed(2) + '"/>';
+        }).join('')
+      + '</svg>';
+  }
 
   function malen(d) {
-    var teile = [];
+    var t = [];
 
-    // ---- Das Buch ----
-    var b = d.buch || {};
-    var rez = b.rezensionen || {};
-    teile.push(
-      '<section><h2>Das Buch</h2><div class="karte buchkopf">'
+    // ---- Buch ----
+    var b = d.buch || {}, rez = b.rezensionen || {};
+    t.push('<section><h2>Das Buch</h2><div class="karte buchkopf">'
       + '<h3>' + h(b.titel || '') + '</h3>'
       + (b.untertitel ? '<em>' + h(b.untertitel) + '</em>' : '')
       + '<div class="zeile">'
-      + kachel(zahl(rez.anzahl), 'Rezensionen', rez.anzahl === 0)
-      + kachel(rez.schnitt ? rez.schnitt.toFixed(1).replace('.', ',') : '–',
-               'Sterne', !rez.schnitt)
-      + kachel(b.rangGesamt ? '#' + zahl(b.rangGesamt) : '–', 'Rang in Büchern', !b.rangGesamt)
+      + kachel(zahl(rez.anzahl), 'Rezensionen')
+      + kachel(rez.schnitt ? rez.schnitt.toFixed(1).replace('.', ',') : '–', 'Sterne')
+      + kachel(da(b.rangGesamt) ? '#' + zahl(b.rangGesamt) : '–', 'Rang in Büchern',
+               trend(b.rangGesamt, b.rangVorher, true))
       + '</div>'
       + (b.kategorien && b.kategorien.length
           ? '<ul class="rangliste">' + b.kategorien.map(function (k) {
               return '<li><span>' + h(k.name) + '</span><b>#' + zahl(k.platz) + '</b></li>';
-            }).join('') + '</ul>'
-          : '')
-      + (b.rangStand ? '<p class="hinweis">Rang abgelesen am ' + datum(b.rangStand)
-          + '. Ein Rang entsteht erst nach dem ersten Verkauf.</p>' : '')
-      + '</div></section>',
-    );
+            }).join('') + '</ul>' : '')
+      + (b.rangStand ? '<p class="hinweis">Rang abgelesen am ' + datum(b.rangStand) + '.</p>' : '')
+      + '</div></section>');
 
     // ---- Ausgaben ----
     if (b.ausgaben && b.ausgaben.length) {
-      teile.push('<section><h2>Ausgaben</h2><div class="karte"><ul class="ausgaben">'
+      t.push('<section><h2>Ausgaben</h2><div class="karte"><ul class="ausgaben">'
         + b.ausgaben.map(function (a) {
             return '<li><span>' + h(a.form) + '<br><span class="zustand">'
-              + h(a.haendler || '') + '</span></span>'
-              + '<span class="zustand">' + (euro(a.preis) || '—') + '<br>'
-              + h(a.zustand || '') + '</span></li>';
-          }).join('')
-        + '</ul></div></section>');
+              + h(a.haendler || '') + '</span></span><span class="zustand">'
+              + (euro(a.preis) || '—') + '<br>' + h(a.zustand || '') + '</span></li>';
+          }).join('') + '</ul></div></section>');
     }
 
     // ---- Verkäufe ----
-    var v = d.verkaeufe || {};
-    teile.push('<section><h2>Verkäufe</h2><div class="karte">'
+    var v = d.verkaeufe || {}, s30 = v.summe30 || {};
+    t.push('<section><h2>Verkäufe · 30 Tage</h2><div class="karte">'
+      + '<div class="zeile">' + kachel(zahl(s30.kindle), 'Kindle')
+      + kachel(zahl(s30.taschenbuch), 'Taschenbuch')
+      + kachel(zahl(s30.kenp), 'KENP-Seiten') + '</div>'
       + (v.gelesen && v.tage && v.tage.length
-          ? '<div class="zeile">' + v.tage.slice(0, 3).map(function (t) {
-              return kachel(zahl(t.gesamt), datum(t.d));
-            }).join('') + '</div>'
+          ? balken(v.tage, 'gesamt')
+            + '<p class="hinweis">' + v.tage.length + ' Tage, links alt, rechts heute.</p>'
           : '<p class="hinweis">' + h(v.hinweis || 'Noch keine Daten.') + '</p>')
+      + '</div></section>');
+
+    // ---- Besucher ----
+    var g = d.besucher || {};
+    t.push('<section><h2>Besucher der Website</h2><div class="karte">'
+      + '<div class="zeile">' + kachel(zahl(g.klicks7), 'Klicks · 7 Tage')
+      + kachel(zahl(g.impressionen7), 'Impressionen')
+      + kachel(da(g.position) ? g.position.toFixed(1).replace('.', ',') : '–', 'Ø Position')
+      + '</div>'
+      + (g.suchanfragen && g.suchanfragen.length
+          ? '<ul class="suchliste">' + g.suchanfragen.map(function (a) {
+              return '<li><span>' + h(a.wort) + '</span><b>' + zahl(a.klicks) + '</b></li>';
+            }).join('') + '</ul>' : '')
+      + (da(g.seitenGesamt)
+          ? '<p class="hinweis">' + (da(g.seitenIndexiert) ? zahl(g.seitenIndexiert) + ' von ' : '')
+            + zahl(g.seitenGesamt) + ' Seiten in der Sitemap.</p>' : '')
+      + (g.gelesen ? '' : '<p class="hinweis">' + h(g.hinweis || '') + '</p>')
       + '</div></section>');
 
     // ---- Kanäle ----
     if (d.kanaele && d.kanaele.length) {
-      teile.push('<section><h2>Kanäle</h2><div class="kanaele">'
+      t.push('<section><h2>Kanäle</h2><div class="kanaele">'
         + d.kanaele.map(function (k) {
-            var hat = k.follower !== null && k.follower !== undefined;
+            var hat = da(k.follower);
             return '<div class="kanal"><b>' + h(k.name) + '</b>'
               + '<span class="griff">' + h(k.handle || '') + '</span>'
               + '<div class="zahl' + (hat ? '' : ' leer') + '">'
               + (hat ? zahl(k.follower) : 'keine Daten') + '</div>'
-              + '<div class="unten">' + (hat ? 'Follower' : '')
-              + (k.reaktionen ? ' · ' + zahl(k.reaktionen) + ' '
+              + (hat ? trend(k.follower, k.vorher, false) : '')
+              + '<span class="unten">' + (hat ? 'Follower' : '')
+              + (da(k.reaktionen) ? ' · ' + zahl(k.reaktionen) + ' '
                   + h(k.reaktionenLabel || 'Reaktionen') : '')
               + (k.stand ? '<br>Stand ' + datum(k.stand) : '')
-              + (k.notiz ? '<br>' + h(k.notiz) : '')
-              + '</div></div>';
-          }).join('')
-        + '</div></section>');
+              + (k.notiz ? '<br>' + h(k.notiz) : '') + '</span></div>';
+          }).join('') + '</div></section>');
     }
 
     // ---- Was sich tut ----
     if (d.aktivitaet && d.aktivitaet.length) {
-      var frischeZahl = 0;
-      var eintraege = d.aktivitaet.map(function (a) {
-        var zeit = new Date(a.zeit).getTime();
-        var frisch = zeit > zuletzt;
-        if (frisch) frischeZahl++;
-        return '<li class="' + (frisch ? 'frisch' : '') + '"><span class="punkt"></span>'
-          + '<span><span class="text">' + h(a.text) + '</span>'
+      var frisch = 0;
+      var zeilen = d.aktivitaet.map(function (a) {
+        var neu = new Date(a.zeit).getTime() > zuletzt;
+        if (neu) frisch++;
+        return '<li class="' + (neu ? 'frisch' : '') + '"><span class="punkt"></span><span>'
+          + '<span class="text">' + h(a.text) + '</span>'
           + '<span class="meta">' + h(a.kanal || '') + ' · ' + vorwie(a.zeit)
-          + (frisch ? '<span class="fahne">NEU</span>' : '') + '</span></span></li>';
+          + (neu ? '<span class="fahne">NEU</span>' : '') + '</span></span></li>';
       }).join('');
-      teile.push('<section><h2>Was sich tut'
-        + (frischeZahl ? ' · ' + frischeZahl + ' neu' : '') + '</h2>'
-        + '<div class="karte"><ul class="lauf">' + eintraege + '</ul></div></section>');
+      t.push('<section><h2>Was sich tut' + (frisch ? ' · ' + frisch + ' neu' : '')
+        + '</h2><div class="karte"><ul class="lauf">' + zeilen + '</ul></div></section>');
+    }
+
+    // ---- Vorschläge ----
+    if (d.vorschlaege && d.vorschlaege.length) {
+      t.push('<section><h2>Was ich als Nächstes tun würde</h2><div class="karte">'
+        + d.vorschlaege.map(function (o) {
+            return '<div class="vorschlag"><b>' + h(o.titel) + '</b>'
+              + (o.warum ? '<span class="warum">' + h(o.warum) + '</span>' : '')
+              + (o.gewinn ? '<span class="gewinn">' + h(o.gewinn) + '</span>' : '')
+              + (o.wer ? '<span class="wer">' + h(o.wer) + '</span>' : '') + '</div>';
+          }).join('') + '</div></section>');
     }
 
     // ---- Offene Punkte ----
     if (d.offen && d.offen.length) {
-      teile.push('<section><h2>Offene Punkte</h2><div class="karte"><ul class="offen">'
+      t.push('<section><h2>Offene Punkte</h2><div class="karte"><ul class="offen">'
         + d.offen.map(function (o) {
             return '<li><span class="stufe ' + h(o.stufe || 'klein') + '"></span><span>'
               + '<b>' + h(o.titel) + '</b>'
               + (o.warum ? '<span class="warum">' + h(o.warum) + '</span>' : '')
-              + (o.wer ? '<span class="wer">' + h(o.wer) + '</span>' : '')
-              + '</span></li>';
-          }).join('')
-        + '</ul></div></section>');
+              + (o.wer ? '<span class="wer">' + h(o.wer) + '</span>' : '') + '</span></li>';
+          }).join('') + '</ul></div></section>');
     }
 
-    inhalt.innerHTML = teile.join('');
+    // ---- Technik ----
+    var k = d.technik;
+    if (k) {
+      t.push('<section><h2>Technik</h2><div class="karte"><div class="technik">'
+        + '<span>Veröffentlichung <b>' + h(k.deploy || '—') + '</b></span>'
+        + (da(k.zertifikatTage) ? '<span>Zertifikat <b>' + k.zertifikatTage + ' Tage</b></span>' : '')
+        + (da(k.linksGeprueft) ? '<span>Links <b>' + k.linksGeprueft + '</b> geprüft, <b>'
+            + (k.linksKaputt || 0) + '</b> kaputt</span>' : '')
+        + (da(k.seitenGemeldet) ? '<span>Sitemap <b>' + k.seitenGemeldet + '</b></span>' : '')
+        + '</div>' + (k.stand ? '<p class="hinweis">Stand ' + vorwie(k.stand) + '.</p>' : '')
+        + '</div></section>');
+    }
+
+    inhalt.innerHTML = t.join('');
     standZeile.textContent = 'Stand ' + vorwie(d.stand);
     standZeile.className = '';
     try { localStorage.setItem(ZULETZT, String(Date.now())); } catch (e) {}
   }
 
-  function kachel(wert, was, leer, klein) {
-    return '<div class="kachel' + (leer ? ' leer' : '') + '">'
-      + '<div class="wert' + (klein ? ' klein' : '') + '">' + h(wert === null ? '–' : wert)
-      + '</div><div class="was">' + h(was) + '</div></div>';
-  }
-
   var laeuft = false;
-  function holen(vonHand) {
+  function holen() {
     if (laeuft) return;
     laeuft = true;
     knopf.setAttribute('aria-busy', 'true');
@@ -327,27 +369,18 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
             + 'danach läuft es auch offline.</p></div></section>';
         }
       })
-      .finally(function () {
-        laeuft = false;
-        knopf.removeAttribute('aria-busy');
-      });
+      .finally(function () { laeuft = false; knopf.removeAttribute('aria-busy'); });
   }
 
-  knopf.addEventListener('click', function () { holen(true); });
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) holen(false);
-  });
-  setInterval(function () { if (!document.hidden) holen(false); }, 60000);
-  holen(false);
+  knopf.addEventListener('click', holen);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) holen(); });
+  setInterval(function () { if (!document.hidden) holen(); }, 60000);
+  holen();
 
-  // Der Hinweis zum Installieren verschwindet, sobald die App installiert ist.
-  var alleinstehend = window.matchMedia('(display-mode: standalone)').matches
+  var app = window.matchMedia('(display-mode: standalone)').matches
     || window.navigator.standalone === true;
-  if (!alleinstehend) document.getElementById('tipp').hidden = false;
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(function () {});
-  }
+  if (!app) document.getElementById('tipp').hidden = false;
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
 })();
 </script>
 </body>

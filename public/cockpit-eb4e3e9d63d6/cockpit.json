@@ -1,198 +1,110 @@
 {
-  "stand": "2026-08-27T17:22:00Z",
-  "erzeugtVon": "Sitzung 27.08.2026",
+  "stand": "2026-08-27T17:40:00Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
-    "status": "erschienen",
     "erschienen": "2026-08-08",
     "seiten": 206,
     "rangGesamt": 334543,
+    "rangVorher": null,
     "rangStand": "2026-08-27",
     "kategorien": [
-      {
-        "name": "Kulturgeschichte",
-        "platz": 247
-      },
-      {
-        "name": "Vor- & Frühgeschichte",
-        "platz": 744
-      },
-      {
-        "name": "Archäologie",
-        "platz": 948
-      }
+      { "name": "Kulturgeschichte", "platz": 247 },
+      { "name": "Vor- & Frühgeschichte", "platz": 744 },
+      { "name": "Archäologie", "platz": 948 }
     ],
-    "rezensionen": {
-      "anzahl": 0,
-      "schnitt": null,
-      "sterneBewertungen": 0
-    },
+    "rezensionen": { "anzahl": 0, "schnitt": null },
     "ausgaben": [
-      {
-        "form": "Taschenbuch",
-        "haendler": "Amazon",
-        "preis": 39.9,
-        "isbn": "979-8191493053",
-        "zustand": "im Handel"
-      },
-      {
-        "form": "E-Book",
-        "haendler": "Amazon",
-        "preis": 12.99,
-        "isbn": null,
-        "zustand": "im Handel · Kindle Unlimited"
-      },
-      {
-        "form": "Gebunden",
-        "haendler": "Amazon",
-        "preis": null,
-        "isbn": null,
-        "zustand": "wird von KDP geprüft, vierter Tag"
-      }
+      { "form": "Taschenbuch", "haendler": "Amazon", "preis": 39.9, "isbn": "979-8191493053", "zustand": "im Handel" },
+      { "form": "E-Book", "haendler": "Amazon", "preis": 12.99, "isbn": null, "zustand": "im Handel · Kindle Unlimited" },
+      { "form": "Gebunden", "haendler": "Amazon", "preis": null, "isbn": null, "zustand": "wird von KDP geprüft, vierter Tag" }
     ]
   },
   "verkaeufe": {
     "gelesen": false,
-    "hinweis": "ZAHLEN.md existiert noch nicht — der Tageslauf hat noch keine Zeile geschrieben.",
+    "hinweis": "ZAHLEN.md existiert noch nicht — der Tageslauf hat noch keine Zeile geschrieben. Sobald sie da ist, stehen hier dreißig Tage.",
+    "summe30": { "kindle": null, "taschenbuch": null, "kenp": null },
     "tage": []
   },
+  "besucher": {
+    "gelesen": false,
+    "hinweis": "Die Search Console verarbeitet die Daten noch — die Property wurde heute bestätigt. Erste Zahlen frühestens ab 28.08.",
+    "klicks7": null,
+    "impressionen7": null,
+    "position": null,
+    "seitenIndexiert": null,
+    "seitenGesamt": 89,
+    "suchanfragen": []
+  },
   "kanaele": [
-    {
-      "name": "TikTok",
-      "handle": "@trendonix",
-      "follower": 21600,
-      "reaktionen": 164600,
-      "reaktionenLabel": "Likes gesamt",
-      "stand": "2026-08-26",
-      "notiz": "Lives laufen besser als der Feed"
-    },
-    {
-      "name": "YouTube",
-      "handle": "@Trendonixde",
-      "follower": 10,
-      "reaktionen": 2,
-      "reaktionenLabel": "Kommentare",
-      "stand": "2026-08-27",
-      "notiz": "2 öffentliche Videos, 21 Aufrufe, Community aktiv"
-    },
-    {
-      "name": "Instagram",
-      "handle": "@trendonix_",
-      "follower": null,
-      "reaktionen": null,
-      "stand": null,
-      "notiz": null
-    },
-    {
-      "name": "Facebook",
-      "handle": "Seite Trendonix",
-      "follower": null,
-      "reaktionen": null,
-      "stand": null,
-      "notiz": null
-    },
-    {
-      "name": "Pinterest",
-      "handle": "brandy13062",
-      "follower": null,
-      "reaktionen": null,
-      "stand": null,
-      "notiz": "Entwickler-App wartet auf Freigabe"
-    },
-    {
-      "name": "Bluesky",
-      "handle": "@trendonix-buecher.bsky.social",
-      "follower": null,
-      "reaktionen": null,
-      "stand": null,
-      "notiz": null
-    }
+    { "name": "TikTok", "handle": "@trendonix", "follower": 21600, "vorher": 21504,
+      "reaktionen": 164600, "reaktionenLabel": "Likes", "stand": "2026-08-26",
+      "notiz": "Lives laufen deutlich besser als der Feed" },
+    { "name": "YouTube", "handle": "@Trendonixde", "follower": 10, "vorher": 7,
+      "reaktionen": 2, "reaktionenLabel": "Kommentare", "stand": "2026-08-27",
+      "notiz": "2 Videos, 21 Aufrufe, Community aktiv" },
+    { "name": "Instagram", "handle": "@trendonix_", "follower": null, "vorher": null,
+      "reaktionen": null, "stand": null, "notiz": "Zahl wird im nächsten Lauf geholt" },
+    { "name": "Facebook", "handle": "Seite Trendonix", "follower": null, "vorher": null,
+      "reaktionen": null, "stand": null, "notiz": "Zahl wird im nächsten Lauf geholt" },
+    { "name": "Pinterest", "handle": "brandy13062", "follower": null, "vorher": null,
+      "reaktionen": null, "stand": null, "notiz": "Entwickler-App wartet auf Freigabe" },
+    { "name": "Bluesky", "handle": "trendonix-buecher.bsky.social", "follower": null,
+      "vorher": null, "reaktionen": null, "stand": null,
+      "notiz": "Profillink auf der Website antwortet mit 404 — prüfen" }
+  ],
+  "vorschlaege": [
+    { "titel": "Leserunde starten", "wer": "Manuel",
+      "warum": "Acht Freiexemplare als PDF, alle Texte liegen fertig. Aus Leserunden werden erfahrungsgemäß aus zehn Exemplaren sechs bis acht Rezensionen.",
+      "gewinn": "Die ersten Rezensionen überhaupt — der teuerste fehlende Baustein." },
+    { "titel": "500 YouTube-Abonnenten anpeilen", "wer": "beide",
+      "warum": "Hype, Fan-Funding und die Bestenliste hängen alle an dieser Schwelle. Bei 21.600 TikTok-Followern ist das eine Ansage, keine Kampagne.",
+      "gewinn": "Schaltet den einzigen Mechanismus frei, der kleine Kanäle bevorzugt." },
+    { "titel": "ZAHLEN.md anlegen lassen", "wer": "Claude",
+      "warum": "Der Tageslauf soll dort seit dem 26.08. täglich Verkäufe und Rang eintragen. Die Datei wurde nie erzeugt, deshalb ist dieses Dashboard bei den Verkäufen blind.",
+      "gewinn": "Verkaufszahlen und Rangverlauf erscheinen hier von selbst." },
+    { "titel": "Beim KDP-Support nach der gebundenen Ausgabe fragen", "wer": "Manuel",
+      "warum": "Steht seit vier Tagen auf „wird geprüft“. Üblich sind 72 Stunden.",
+      "gewinn": "Eine dritte Ausgabe, die auf allen Kanälen nachgezogen wird." },
+    { "titel": "Bluesky-Link auf der Website prüfen", "wer": "Claude",
+      "warum": "Die Linkprüfung meldet 404 auf das Bluesky-Profil. Entweder stimmt der Handle nicht oder die Prüfung wurde ausgebremst.",
+      "gewinn": "Ein toter Link weniger auf der Seite." }
   ],
   "aktivitaet": [
-    {
-      "zeit": "2026-08-27T17:22:00Z",
-      "kanal": "Cockpit",
-      "text": "Eigener Upload-Weg: Änderungen hier landen jetzt in unter einer Minute auf dem Telefon, ohne dass die Buchseite neu gebaut wird."
-    },
-    {
-      "zeit": "2026-08-27T15:05:00Z",
-      "kanal": "YouTube",
-      "text": "Community-Funktion aktiviert — Zuschauer können jetzt selbst Beiträge schreiben."
-    },
-    {
-      "zeit": "2026-08-27T14:55:00Z",
-      "kanal": "YouTube",
-      "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis."
-    },
-    {
-      "zeit": "2026-08-27T14:40:00Z",
-      "kanal": "YouTube",
-      "text": "Jonika Venturis hat unter beiden Videos kommentiert — die ersten fremden Kommentare des Kanals. Beantwortet und geliked."
-    },
-    {
-      "zeit": "2026-08-27T14:20:00Z",
-      "kanal": "YouTube",
-      "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen. Vorher führte kein Weg vom Video zum Buch."
-    },
-    {
-      "zeit": "2026-08-27T13:50:00Z",
-      "kanal": "Website",
-      "text": "Ausleihen ist jetzt ein eigener Kaufweg — Bibliotheken erscheinen ohne Preis und ohne Angebot im Datenblatt."
-    },
-    {
-      "zeit": "2026-08-27T13:30:00Z",
-      "kanal": "Website",
-      "text": "Sterne und Leserstimmen eingebaut. Sie erscheinen von selbst, sobald die erste Rezension eingetragen ist."
-    },
-    {
-      "zeit": "2026-08-27T13:00:00Z",
-      "kanal": "Google",
-      "text": "Search Console auf ein Konto zusammengeführt, Duplikat entfernt. Sitemap: 89 Seiten."
-    }
+    { "zeit": "2026-08-27T17:40:00Z", "kanal": "Cockpit", "text": "Dashboard erweitert: Verkäufe, Besucher, Vorschläge, Technik — und ein Passwortschutz ist vorbereitet." },
+    { "zeit": "2026-08-27T17:22:00Z", "kanal": "Cockpit", "text": "Eigener Upload-Weg: Änderungen landen in gut einer Minute auf dem Telefon, ohne dass die Buchseite neu gebaut wird." },
+    { "zeit": "2026-08-27T15:05:00Z", "kanal": "YouTube", "text": "Community-Funktion aktiviert — Zuschauer können jetzt selbst Beiträge schreiben." },
+    { "zeit": "2026-08-27T14:55:00Z", "kanal": "YouTube", "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis." },
+    { "zeit": "2026-08-27T14:40:00Z", "kanal": "YouTube", "text": "Jonika Venturis hat unter beiden Videos kommentiert — die ersten fremden Kommentare des Kanals. Beantwortet und geliked." },
+    { "zeit": "2026-08-27T14:20:00Z", "kanal": "YouTube", "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen. Vorher führte kein Weg vom Video zum Buch." },
+    { "zeit": "2026-08-27T13:50:00Z", "kanal": "Website", "text": "Ausleihen ist jetzt ein eigener Kaufweg — Bibliotheken erscheinen ohne Preis und ohne Angebot im Datenblatt." },
+    { "zeit": "2026-08-27T13:30:00Z", "kanal": "Website", "text": "Sterne und Leserstimmen eingebaut. Sie erscheinen von selbst, sobald die erste Rezension eingetragen ist." },
+    { "zeit": "2026-08-27T13:00:00Z", "kanal": "Google", "text": "Search Console auf ein Konto zusammengeführt, Duplikat entfernt. Sitemap: 89 Seiten." }
   ],
   "offen": [
-    {
-      "titel": "Konto bei buechertreff.de anlegen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Blockiert die Leserunde — die einzige vorbereitete Maßnahme, die Rezensionen bringt."
-    },
-    {
-      "titel": "kie.ai-Schlüssel und FTP-Passwort wechseln",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Beide standen im Klartext im Chat."
-    },
-    {
-      "titel": "Chat-Sitzung „Autopilot“ starten",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "In geplanten Aufgaben ist der Datei-Upload gesperrt: TikTok 03.09. und 04.09., Facebook-Reel, Pinterest-Pin hängen fest."
-    },
-    {
-      "titel": "Instagram-Sicherheitshinweis prüfen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "„Someone's trying to log into Instagram“, seit 26.08. unbeantwortet."
-    },
-    {
-      "titel": "Rezensionsanfragen Stapel 1 freigeben",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md."
-    },
-    {
-      "titel": "ZAHLEN.md fehlt",
-      "wer": "Claude",
-      "stufe": "mittel",
-      "warum": "Der Tageslauf soll dort täglich Verkäufe und Rang eintragen — die Datei wurde nie angelegt."
-    },
-    {
-      "titel": "Bing, Amazon-Autorenseite, Brevo-DNS, YouTube-OAuth",
-      "wer": "Manuel",
-      "stufe": "klein",
-      "warum": "Vier kleine Schritte, die alle eine Anmeldung brauchen."
-    }
-  ]
+    { "titel": "Konto bei buechertreff.de anlegen", "wer": "Manuel", "stufe": "hoch",
+      "warum": "Blockiert die Leserunde — die einzige vorbereitete Maßnahme, die Rezensionen bringt." },
+    { "titel": "kie.ai-Schlüssel und FTP-Passwort wechseln", "wer": "Manuel", "stufe": "hoch",
+      "warum": "Beide standen im Klartext im Chat." },
+    { "titel": "Passwortschutz fürs Cockpit setzen", "wer": "Manuel", "stufe": "hoch",
+      "warum": "Im KAS unter Verzeichnisschutz. Solange er fehlt, kommt jeder mit der Adresse hinein." },
+    { "titel": "Chat-Sitzung „Autopilot“ starten", "wer": "Manuel", "stufe": "mittel",
+      "warum": "In geplanten Aufgaben ist der Datei-Upload gesperrt: TikTok 03.09. und 04.09., Facebook-Reel und Pinterest-Pin hängen fest." },
+    { "titel": "Instagram-Sicherheitshinweis prüfen", "wer": "Manuel", "stufe": "mittel",
+      "warum": "„Someone's trying to log into Instagram“, seit 26.08. unbeantwortet." },
+    { "titel": "Rezensionsanfragen Stapel 1 freigeben", "wer": "Manuel", "stufe": "mittel",
+      "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md." },
+    { "titel": "Bing, Amazon-Autorenseite, Brevo-DNS, YouTube-OAuth", "wer": "Manuel", "stufe": "klein",
+      "warum": "Vier kleine Schritte, die alle eine Anmeldung brauchen." }
+  ],
+  "technik": {
+    "stand": "2026-08-27T17:02:00Z",
+    "deploy": "erfolgreich",
+    "deployWann": "2026-08-27T15:22:42Z",
+    "zertifikatTage": 88,
+    "linksGeprueft": 43,
+    "linksKaputt": 1,
+    "seitenGemeldet": 89,
+    "journalVorrat": null
+  }
 }

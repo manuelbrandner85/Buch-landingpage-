@@ -323,7 +323,13 @@ jobs:
           # Ausgenommen bleibt, was dem Server gehört und nicht uns:
           # .well-known trägt die Bescheinigungen für das Schloss in der
           # Adresszeile – wer den Ordner löscht, nimmt sich das Zertifikat.
+          # .htaccess und .htpasswd des Cockpits gehoeren dazu: Der
+          # Passwortschutz wird im KAS eingerichtet und liegt deshalb nur auf
+          # dem Server, nicht im Repository. Ohne diese Ausnahme wuerde der
+          # naechste vollstaendige Abgleich ihn stillschweigend entfernen - der
+          # Ordner stuende offen, und niemand haette es gemerkt.
           BEWAHREN="-X .well-known/ -X cgi-bin/ -X logs/ -X stats/ -X error_docs/ -X .ftpquota -X _altlasten*/"
+          BEWAHREN="$BEWAHREN -X .htpasswd -X cockpit-*/.htaccess -X cockpit-*/.htpasswd"
           if [ "${FTP_LOESCHEN:-}" = "nein" ]; then
             LOESCHEN=""
             echo "Aufräumen ist abgeschaltet (Variable FTP_LOESCHEN=nein)."
