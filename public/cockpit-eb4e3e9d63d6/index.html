@@ -530,18 +530,28 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
     // ---- Besucher ----
     var g = d.besucher || {};
     t.push('<section data-g="buch"><h2>Besucher der Website</h2><div class="karte">'
-      + '<div class="zeile">' + kachel(zahl(g.klicks7), 'Klicks · 7 Tage')
+      + '<div class="zeile">'
+      // Die Spanne ist nicht immer sieben Tage: Google liefert die letzten
+      // zwei, drei Tage noch nicht. Was drübersteht, ist gemessen, nicht gerundet.
+      + kachel(zahl(g.klicks7), 'Klicks' + (g.tage ? ' · ' + g.tage + ' Tage' : ' · 7 Tage'))
       + kachel(zahl(g.impressionen7), 'Impressionen')
       + kachel(da(g.position) ? g.position.toFixed(1).replace('.', ',') : '–', 'Ø Position')
       + '</div>'
       + (g.suchanfragen && g.suchanfragen.length
           ? '<ul class="suchliste">' + g.suchanfragen.map(function (a) {
-              return '<li><span>' + h(a.wort) + '</span><b>' + zahl(a.klicks) + '</b></li>';
-            }).join('') + '</ul>' : '')
+              return '<li><span>' + h(a.wort)
+                + (da(a.impressionen) ? '<br><span class="zustand">' + zahl(a.impressionen)
+                    + ' mal angezeigt</span>' : '')
+                + '</span><b>' + zahl(a.klicks) + '</b></li>';
+            }).join('') + '</ul>'
+          : (g.gelesen ? '<p class="hinweis">Noch keine Suchanfrage, über die jemand '
+              + 'hergefunden hat.</p>' : ''))
+      + (g.von && g.bis
+          ? '<p class="hinweis">Gemessen vom ' + datum(g.von) + ' bis ' + datum(g.bis) + '.</p>' : '')
       + (da(g.seitenGesamt)
           ? '<p class="hinweis">' + (da(g.seitenIndexiert) ? zahl(g.seitenIndexiert) + ' von ' : '')
             + zahl(g.seitenGesamt) + ' Seiten in der Sitemap.</p>' : '')
-      + (g.gelesen ? '' : '<p class="hinweis">' + h(g.hinweis || '') + '</p>')
+      + (g.hinweis ? '<p class="hinweis">' + h(g.hinweis) + '</p>' : '')
       + '</div></section>');
 
     // ---- Kanäle ----

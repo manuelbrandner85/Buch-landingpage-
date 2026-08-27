@@ -252,7 +252,35 @@ const alteHand = kanaele.filter((k) => {
 for (const k of alteHand) {
   fehlt(k.name, `Die Followerzahl steht seit dem ${k.stand} unverändert. ${k.name} gibt sie ohne Anmeldung nicht heraus; sie altert hier, ohne falsch auszusehen.`);
 }
-if (!basis.besucher?.gelesen) fehlt('Besucher', basis.besucher?.hinweis ?? 'Keine Zahlen aus der Search Console.');
+// ── Besucher: was die Search Console selbst herausgibt ────────────────────
+//
+// `scripts/suche-abruf.mjs` meldet sich mit einem Dienstkonto an und holt
+// Klicks, Impressionen, Position und die häufigsten Suchanfragen. Solange das
+// Dienstkonto nicht eingerichtet ist, bleibt es beim redaktionellen Stand —
+// und der sagt dann auch, warum.
+const sucheAbruf = lies(join(wurzel, 'daten', 'suche-abruf.json'));
+const besucher = { ...basis.besucher };
+if (sucheAbruf && typeof sucheAbruf.klicks === 'number') {
+  besucher.gelesen = true;
+  besucher.klicks7 = sucheAbruf.klicks;
+  besucher.impressionen7 = sucheAbruf.impressionen;
+  besucher.position = sucheAbruf.position;
+  besucher.suchanfragen = sucheAbruf.suchanfragen ?? [];
+  besucher.von = sucheAbruf.von;
+  besucher.bis = sucheAbruf.bis;
+  besucher.tage = sucheAbruf.tage;
+  besucher.quelle = 'abgerufen';
+  // Der eingetragene Hinweis erklärte, warum keine Zahlen da sind. Jetzt sind
+  // welche da; er stünde nur noch im Weg.
+  besucher.hinweis = sucheAbruf.tage < 7
+    ? `Google liefert die letzten Tage mit Verzögerung — hier stehen ${sucheAbruf.tage} gemessene Tage.`
+    : null;
+} else {
+  besucher.gelesen = false;
+  besucher.quelle = sucheAbruf?.eingerichtet ? 'Dienstkonto meldet einen Fehler' : 'noch nicht eingerichtet';
+  if (sucheAbruf?.hinweis) besucher.hinweis = sucheAbruf.hinweis;
+  fehlt('Besucher', besucher.hinweis ?? 'Keine Zahlen aus der Search Console.');
+}
 
 // ── Termine: was ansteht, steht sonst nur in Textdateien ──────────────────
 //
@@ -597,7 +625,7 @@ const raus = {
   buch,
   verkaeufe,
   monat,
-  besucher: basis.besucher,
+  besucher,
   reichweite,
   verlauf,
   termine,

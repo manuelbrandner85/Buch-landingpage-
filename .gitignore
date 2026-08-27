@@ -34,3 +34,10 @@ st.txt
 journal-nachricht.txt
 journal-commit.cmd
 journal-push.cmd
+
+# Der Schluessel des Google-Dienstkontos gehoert nirgends hierher.
+# Er liegt in AUTOPILOT/REGISTRIERUNG/. Diese Zeilen sind das Netz darunter,
+# falls die Datei doch einmal im Repository landet.
+google-dienstkonto.json
+*-dienstkonto.json
+*.serviceaccount.json

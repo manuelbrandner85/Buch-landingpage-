@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T23:05:46Z",
+  "stand": "2026-08-27T23:19:59Z",
   "warnungen": [],
   "aenderungen": {
     "seit": null,
@@ -94,13 +94,14 @@
   },
   "besucher": {
     "gelesen": false,
-    "hinweis": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Am 28.08., 00:50 nachgesehen: Leistung und Seitenindexierung melden weiter „Die Daten werden verarbeitet — bitte versuch es in einem Tag noch einmal“. Eine Property, die vor 30 Stunden angelegt wurde, hat noch keine Zahlen; das ist kein Fehler.",
+    "hinweis": "Die Suchzahlen kommen, sobald das Google-Dienstkonto eingerichtet ist — zehn Minuten, kostenlos. Anleitung: AUTOPILOT/REGISTRIERUNG/10_google-dienstkonto.md.",
     "klicks7": null,
     "impressionen7": null,
     "position": null,
     "seitenIndexiert": null,
     "seitenGesamt": 89,
-    "suchanfragen": []
+    "suchanfragen": [],
+    "quelle": "noch nicht eingerichtet"
   },
   "reichweite": {
     "gesamt": 22657,
@@ -551,6 +552,18 @@
   ],
   "vorschlaege": [
     {
+      "titel": "Google-Dienstkonto einrichten (zehn Minuten)",
+      "wer": "Manuel",
+      "warum": "Der Abruf ist gebaut und wartet nur auf die Schlüsseldatei. Danach holt sich das Dashboard Klicks, Impressionen, Position und die häufigsten Suchanfragen stündlich selbst — das letzte Feld, für das sich heute noch jemand irgendwo einloggen muss. Kostenlos, keine Kreditkarte.",
+      "gewinn": "Der letzte Handgriff im Dashboard fällt weg."
+    },
+    {
+      "titel": "Unternehmensprofil bei Google versuchen",
+      "wer": "Manuel",
+      "warum": "Alles vorbereitet: Name, Kategorie, Beschreibung, Bilder. Ehrlich dabei — Google verlangt Kundenkontakt vor Ort, und ein Buch, das nur über Amazon geht, erfüllt das dem Wortlaut nach nicht. Der Versuch kostet eine Postkarte. Als Dienstleistungsgebiet anlegen, dann bleibt die Wohnadresse verborgen.",
+      "gewinn": "Ein Eintrag in Maps und in der Suche — wenn Google mitspielt."
+    },
+    {
       "titel": "Links in die Videobeschreibungen setzen",
       "wer": "beide",
       "warum": "YouTube hat heute Stufe 3 freigeschaltet. Ab sofort sind externe Links in Beschreibungen anklickbar — betroffen sind die 15 wartenden Shorts und die drei öffentlichen Videos. Bisher stand die Website dort als toter Text.",
@@ -573,21 +586,14 @@
       "wer": "Manuel",
       "warum": "Sie hat das Buch gekauft, die 5-Sterne-Bewertung geschrieben, sich in den Verteiler eingetragen und will ausdrücklich alle Bände. Ihre letzte Nachricht „Bewertung ist drin jetzt!\" steht seit dem 27.08. unbeantwortet. Frühere Sendeversuche an sie schlugen still fehl — es muss also von Hand geprüft werden.",
       "gewinn": "Die erste echte Leserin der Reihe bleibt eine."
-    },
-    {
-      "titel": "Instagram-Profillink auf die Website drehen",
-      "wer": "Manuel",
-      "warum": "1.041 Follower sehen dort den Amazon-Link. Die Website hält den Leser, Amazon verliert ihn an Vorschläge.",
-      "gewinn": "Der größte Kanal führt endlich in die eigene Welt."
-    },
-    {
-      "titel": "Website bei Pinterest verifizieren",
-      "wer": "Manuel",
-      "warum": "Im Business Hub steht neben dem Profil „trendonix-buecher.de verifizieren\". Ohne das trägt kein Pin die Marke, und die Klicks auf die Website tauchen in keiner Statistik auf. Zehn Pins laufen seit Tagen ohne Zuordnung.",
-      "gewinn": "Pinterest fängt an, messbar zu sein — bisher ist der Kanal blind."
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-27T23:20:00Z",
+      "kanal": "Technik",
+      "text": "Der Abruf der Suchzahlen ist gebaut: Dienstkonto statt Anmeldefenster, ohne fremde Pakete. Sobald der Schlüssel liegt, kommen Klicks, Impressionen und Suchanfragen von selbst."
+    },
     {
       "zeit": "2026-08-27T22:40:00Z",
       "kanal": "Amazon",
@@ -642,14 +648,15 @@
       "zeit": "2026-08-27T21:20:00Z",
       "kanal": "Amazon",
       "text": "Die erste Rezension ist da: 5,0 von 5, auf Taschenbuch und Kindle. Der Wortlaut wird auf der Rezensionsseite noch nicht ausgeliefert."
-    },
-    {
-      "zeit": "2026-08-27T19:55:00Z",
-      "kanal": "Google",
-      "text": "Search Console: Property unter brandy13062 bestätigt, Sitemap erfolgreich gelesen — 89 Seiten erkannt. Zahlen ab morgen."
     }
   ],
   "offen": [
+    {
+      "titel": "Google-Dienstkonto anlegen und Schlüssel ablegen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "Der Abruf steht, die Schlüsseldatei fehlt. Anleitung in REGISTRIERUNG/10_google-dienstkonto.md. Bis dahin bleiben Klicks und Impressionen leer."
+    },
     {
       "titel": "Ordner AUTOPILOT für den Rundlauf freigeben",
       "wer": "Manuel",
@@ -720,7 +727,7 @@
   "luecken": [
     {
       "was": "Besucher",
-      "warum": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Am 28.08., 00:50 nachgesehen: Leistung und Seitenindexierung melden weiter „Die Daten werden verarbeitet — bitte versuch es in einem Tag noch einmal“. Eine Property, die vor 30 Stunden angelegt wurde, hat noch keine Zahlen; das ist kein Fehler."
+      "warum": "Die Suchzahlen kommen, sobald das Google-Dienstkonto eingerichtet ist — zehn Minuten, kostenlos. Anleitung: AUTOPILOT/REGISTRIERUNG/10_google-dienstkonto.md."
     },
     {
       "was": "Wochenbericht",
