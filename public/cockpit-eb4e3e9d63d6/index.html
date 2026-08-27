@@ -163,6 +163,45 @@ svg.kurve polyline{fill:none;stroke:var(--gold);stroke-width:1.4;vector-effect:n
 svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
 .kurvenfuss{display:flex;justify-content:space-between;font-size:.68rem;opacity:.45;margin-top:.3rem}
 .kanal svg.kurve{height:22px;margin:.45rem 0 .1rem}
+
+/* ---------- Termine ---------- */
+.termine{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem}
+.termine > li::before{display:none}
+.termine > li{display:block}
+.tagkopf{display:flex;align-items:baseline;gap:.5rem;
+  border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:.3rem;margin-bottom:.45rem}
+.tagkopf b{font-family:Georgia,serif;color:var(--gold);font-size:1rem}
+.tagkopf span{font-size:.72rem;opacity:.5}
+.termine > li.heute .tagkopf b{text-decoration:underline;text-underline-offset:.25em}
+.punkte{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
+.punkte li{display:grid;grid-template-columns:3.1rem 1fr auto;gap:.55rem;align-items:baseline;
+  font-size:.85rem}
+.punkte li::before{display:none}
+.punkte .wann{opacity:.45;font-variant-numeric:tabular-nums;font-size:.78rem}
+.punkte .wasda b{font-weight:600}
+.punkte .wasda .warum{display:block;font-size:.72rem;opacity:.45}
+.punkte .zustand2{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+.punkte li.erledigt{opacity:.4}
+.punkte li.erledigt .zustand2{color:#8fbf9a}
+.punkte li.terminiert .zustand2{color:var(--gold)}
+.punkte li.offen .zustand2{color:#e0a06a}
+.punkte li.steht .zustand2{color:#8fbf9a}
+
+/* ---------- Bericht und Kosten ---------- */
+.bericht{display:grid;gap:.45rem;font-size:.86rem;line-height:1.5}
+.bericht b{color:var(--gold);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  margin-top:.5rem}
+.bericht p{margin:0}
+.bericht .strich{display:block;padding-left:.9rem;position:relative;opacity:.85}
+.bericht .strich::before{content:'';position:absolute;left:0;top:.62em;width:.45rem;height:1px;
+  background:var(--gold);opacity:.6}
+.buchungen{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.55rem}
+.buchungen li{display:flex;justify-content:space-between;gap:.8rem;align-items:baseline;
+  font-size:.85rem}
+.buchungen li::before{display:none}
+.buchungen .zustand2{text-align:right;font-size:.7rem;opacity:.55;white-space:nowrap}
+.buchungen .wasda{display:block}
+.buchungen .wasda .warum{display:block;font-size:.72rem;opacity:.45}
 </style>
 </head>
 <body>
@@ -412,6 +451,26 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
         + '</h2><div class="karte"><ul class="lauf">' + zeilen + '</ul></div></section>');
     }
 
+    // ---- Termine ----
+    if (d.termine && d.termine.length) {
+      t.push('<section data-g="termine"><h2>Die nächsten vierzehn Tage</h2>'
+        + '<div class="karte"><ul class="termine">'
+        + d.termine.map(function (tg) {
+            var ist = tg.d === new Date().toISOString().slice(0, 10);
+            return '<li' + (ist ? ' class="heute"' : '') + '>'
+              + '<div class="tagkopf"><b>' + h(tg.wochentag) + '</b>'
+              + '<span>' + datum(tg.d) + (ist ? ' · heute' : '') + '</span></div>'
+              + '<ul class="punkte">' + tg.punkte.map(function (pk) {
+                  return '<li class="' + h(pk.zustand) + '">'
+                    + '<span class="wann">' + h(pk.zeit || '—') + '</span>'
+                    + '<span class="wasda"><b>' + h(pk.kanal) + '</b>'
+                    + (pk.was ? '<span class="warum">' + h(pk.was) + '</span>' : '')
+                    + (pk.hinweis ? '<span class="warum">' + h(pk.hinweis) + '</span>' : '')
+                    + '</span><span class="zustand2">' + h(pk.zustand) + '</span></li>';
+                }).join('') + '</ul></li>';
+          }).join('') + '</ul></div></section>');
+    }
+
     // ---- Vorschläge ----
     if (d.vorschlaege && d.vorschlaege.length) {
       t.push('<section data-g="aufgaben"><h2>Was ich als Nächstes tun würde</h2><div class="karte">'
@@ -432,6 +491,35 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
               + (o.warum ? '<span class="warum">' + h(o.warum) + '</span>' : '')
               + (o.wer ? '<span class="wer">' + h(o.wer) + '</span>' : '') + '</span></li>';
           }).join('') + '</ul></div></section>');
+    }
+
+    // ---- Wochenbericht ----
+    t.push('<section data-g="bilanz"><h2>Wochenbericht</h2><div class="karte">'
+      + (d.bericht
+          ? '<h3>' + h(d.bericht.titel) + '</h3><div class="bericht">'
+            + d.bericht.zeilen.map(function (z) {
+                if (/^#{2,}/.test(z)) return '<b>' + h(z.replace(/^#+\s*/, '')) + '</b>';
+                if (/^[-*]\s+/.test(z)) return '<span class="strich">' + h(z.replace(/^[-*]\s+/, '')) + '</span>';
+                return '<p>' + h(z) + '</p>';
+              }).join('') + '</div>'
+          : '<p class="hinweis">Es gibt noch keinen Bericht. Der Sonntagslauf schreibt den ersten.</p>')
+      + '</div></section>');
+
+    // ---- Kosten ----
+    if (d.kosten) {
+      var ko = d.kosten;
+      t.push('<section data-g="bilanz"><h2>Kosten</h2><div class="karte">'
+        + '<div class="zeile">' + kachel(zahl(ko.summe), 'Credits gesamt')
+        + kachel(zahl(ko.offenSumme), 'davon ohne Zuordnung') + '</div>'
+        + (ko.buchungen && ko.buchungen.length
+            ? '<ul class="buchungen">' + ko.buchungen.map(function (b) {
+                return '<li><span class="wasda"><b>' + h(b.projekt || '—') + '</b>'
+                  + '<span class="warum">' + h(b.zweck || '') + '</span></span>'
+                  + '<span class="zustand2">' + h(datum(b.datum)) + '<br>' + zahl(b.credits) + '</span></li>';
+              }).join('') + '</ul>'
+            : '<p class="hinweis">Keine Buchungen.</p>')
+        + (da(ko.waehrung) ? '<p class="hinweis">' + h(ko.waehrung) + '.</p>' : '')
+        + '</div></section>');
     }
 
     // ---- Technik ----
@@ -481,7 +569,9 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
     { id: 'heute', name: 'Heute' },
     { id: 'buch', name: 'Buch' },
     { id: 'kanaele', name: 'Kanäle' },
+    { id: 'termine', name: 'Termine' },
     { id: 'aufgaben', name: 'Aufgaben' },
+    { id: 'bilanz', name: 'Bilanz' },
     { id: 'technik', name: 'Technik' }
   ];
   var OFFEN = 'trendonix-cockpit-reiter';

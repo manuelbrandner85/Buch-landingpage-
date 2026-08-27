@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T19:29:36Z",
+  "stand": "2026-08-27T19:33:28Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -82,6 +82,355 @@
     "rezensionen": [],
     "reichweite": [],
     "kanaele": {}
+  },
+  "termine": [
+    {
+      "d": "2026-08-27",
+      "wochentag": "Do",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "08_aehre",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-08-28",
+      "wochentag": "Fr",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "TikTok LIVE",
+          "zeit": "20:00",
+          "was": null,
+          "zustand": "steht",
+          "hinweis": "fester Termin"
+        }
+      ]
+    },
+    {
+      "d": "2026-08-29",
+      "wochentag": "Sa",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "was-ein-unsichtbarer-faden-ist",
+          "zustand": "terminiert",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-08-30",
+      "wochentag": "So",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-08-31",
+      "wochentag": "Mo",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "07_feuer",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-09-01",
+      "wochentag": "Di",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "10_archiv",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-09-02",
+      "wochentag": "Mi",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "13_tempel",
+          "zustand": "terminiert",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "13_tempel",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "13_tempel",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "13_tempel",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-09-03",
+      "wochentag": "Do",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-09-04",
+      "wochentag": "Fr",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "TikTok LIVE",
+          "zeit": "20:00",
+          "was": null,
+          "zustand": "steht",
+          "hinweis": "fester Termin"
+        }
+      ]
+    }
+  ],
+  "bericht": null,
+  "kosten": {
+    "waehrung": "Kie.ai-Credits",
+    "summe": 1824,
+    "offenSumme": 1680,
+    "buchungen": [
+      {
+        "datum": "2026-08-26",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung",
+        "credits": 1680
+      },
+      {
+        "datum": "2026-08-25",
+        "projekt": "Buchwelt",
+        "zweck": "Zwoelf Motive Band 2 plus Tiefenkarten (Depth Anything V2)",
+        "credits": 144
+      }
+    ]
   },
   "kanaele": [
     {
@@ -303,6 +652,10 @@
     {
       "was": "Besucher",
       "warum": "Search Console verarbeitet noch. Erste Zahlen frühestens ab 28.08."
+    },
+    {
+      "was": "Wochenbericht",
+      "warum": "Es gibt noch keinen. Der Sonntagslauf schreibt den ersten."
     }
   ]
 }

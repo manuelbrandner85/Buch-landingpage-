@@ -44,6 +44,8 @@ const lies = (pfad) => {
 };
 const liesText = (pfad) => { try { return readFileSync(pfad, 'utf8'); } catch { return null; } };
 
+const heute = new Date().toISOString().slice(0, 10);
+const beitraegeText = liesText(join(wurzel, 'src', 'data', 'gemeinsam', 'beitraege.ts'));
 const luecken = [];
 const fehlt = (was, warum) => luecken.push({ was, warum });
 
@@ -129,10 +131,8 @@ try {
 } catch { /* ohne Netz bleibt es beim Wert aus der Windows-Aufgabe */ }
 
 // ── Journalvorrat: Beiträge mit Datum in der Zukunft ──────────────────────
-const beitraege = liesText(join(wurzel, 'src', 'data', 'gemeinsam', 'beitraege.ts'));
-const heute = new Date().toISOString().slice(0, 10);
-const journalVorrat = beitraege
-  ? [...beitraege.matchAll(/datum:\s*'(\d{4}-\d{2}-\d{2})'/g)].filter((m) => m[1] > heute).length
+const journalVorrat = beitraegeText
+  ? [...beitraegeText.matchAll(/datum:\s*'(\d{4}-\d{2}-\d{2})'/g)].filter((m) => m[1] > heute).length
   : null;
 
 const technik = {
@@ -162,6 +162,52 @@ if (bekannt.length < basis.kanaele.length) {
   fehlt('Reichweite', `${basis.kanaele.length - bekannt.length} von ${basis.kanaele.length} Kanälen ohne Zahl.`);
 }
 if (!basis.besucher?.gelesen) fehlt('Besucher', basis.besucher?.hinweis ?? 'Keine Zahlen aus der Search Console.');
+
+// ── Termine: was ansteht, steht sonst nur in Textdateien ──────────────────
+//
+// Der Tagesplan liegt in plan.json, die Journalbeiträge im Repository, die
+// Live steht freitags um 20:00. Drei Orte, an denen niemand nachsieht, der
+// gerade auf dem Sofa sitzt. Hier laufen sie zusammen — die nächsten vierzehn
+// Tage, nichts weiter.
+const KANALNAMEN = { tiktok: 'TikTok', instagram: 'Instagram', facebook: 'Facebook', pinterest: 'Pinterest' };
+const WOCHENTAG = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+const plan = autopilot ? lies(join(autopilot, 'plan.json')) : null;
+if (autopilot && !plan) fehlt('Termine', 'plan.json nicht gefunden — der Tagesplan fehlt.');
+const inVierzehn = new Date(Date.now() + 14 * 864e5).toISOString().slice(0, 10);
+const termine = [];
+const tagFinden = (d) => {
+  let t = termine.find((x) => x.d === d);
+  if (!t) { t = { d, wochentag: WOCHENTAG[new Date(d + 'T12:00:00Z').getUTCDay()], punkte: [] }; termine.push(t); }
+  return t;
+};
+for (const tag of plan?.tage ?? []) {
+  if (!tag?.datum || tag.datum < heute || tag.datum > inVierzehn) continue;
+  for (const [schluessel, name] of Object.entries(KANALNAMEN)) {
+    const e = tag[schluessel];
+    if (!e) continue;
+    tagFinden(tag.datum).punkte.push({
+      kanal: name,
+      zeit: e.uhrzeit ?? null,
+      was: tag.beitrag ?? null,
+      zustand: e.erledigt ? 'erledigt' : (e.schon_geplant ? 'terminiert' : 'offen'),
+      hinweis: e.hinweis || null,
+    });
+  }
+}
+// Die Live ist keine Datei, sondern eine Verabredung: freitags 20:00, so steht
+// es in LIVE.md. Sie gehört in den Kalender wie alles andere auch.
+for (let i = 0; i <= 14; i++) {
+  const d = new Date(Date.now() + i * 864e5);
+  if (d.getUTCDay() !== 5) continue;
+  const tag = d.toISOString().slice(0, 10);
+  if (tag < heute) continue;
+  tagFinden(tag).punkte.push({ kanal: 'TikTok LIVE', zeit: '20:00', was: null, zustand: 'steht', hinweis: 'fester Termin' });
+}
+for (const m of beitraegeText ? beitraegeText.matchAll(/slug:\s*'([^']+)'[\s\S]{0,400}?datum:\s*'(\d{4}-\d{2}-\d{2})'/g) : []) {
+  if (m[2] < heute || m[2] > inVierzehn) continue;
+  tagFinden(m[2]).punkte.push({ kanal: 'Journal', zeit: null, was: m[1], zustand: 'terminiert', hinweis: null });
+}
+termine.sort((a, b) => (a.d < b.d ? -1 : 1));
 
 // ── Verlauf: was gestern war, weiß sonst niemand ──────────────────────────
 //
@@ -235,6 +281,37 @@ const verlauf = {
   kanaele: kanalReihen,
 };
 
+// ── Wochenbericht: der jüngste Abschnitt, nicht die ganze Datei ───────────
+const berichtText = autopilot ? liesText(join(autopilot, 'WOCHENBERICHT.md')) : null;
+let bericht = null;
+if (berichtText && berichtText.trim()) {
+  // Der Sonntagslauf hängt oben an; der erste Abschnitt ist der neueste.
+  const teile = berichtText.split(/\n(?=##\s)/).map((x) => x.trim()).filter(Boolean);
+  const erst = teile.find((x) => x.startsWith('##')) ?? teile[0];
+  const zeilen = erst.split('\n').map((z) => z.trim());
+  bericht = {
+    titel: (zeilen[0] || '').replace(/^#+\s*/, '') || 'Wochenbericht',
+    zeilen: zeilen.slice(1).filter(Boolean).slice(0, 40),
+  };
+} else {
+  fehlt('Wochenbericht', 'Es gibt noch keinen. Der Sonntagslauf schreibt den ersten.');
+}
+
+// ── Kosten: was die Bilder gekostet haben ─────────────────────────────────
+const kostenDatei = autopilot ? lies(join(autopilot, 'kosten.json')) : null;
+const alleBuchungen = kostenDatei?.buchungen ?? [];
+const kosten = kostenDatei
+  ? {
+      waehrung: kostenDatei.waehrung ?? null,
+      summe: alleBuchungen.reduce((a, b) => a + (Number(b.credits) || 0), 0),
+      offenSumme: alleBuchungen
+        .filter((b) => String(b.projekt).toLowerCase().includes('nicht zugeordnet'))
+        .reduce((a, b) => a + (Number(b.credits) || 0), 0),
+      buchungen: alleBuchungen.slice(-12).reverse(),
+    }
+  : null;
+if (!kostenDatei) fehlt('Kosten', 'kosten.json nicht gefunden.');
+
 const stand = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 const raus = {
   stand,
@@ -243,6 +320,9 @@ const raus = {
   besucher: basis.besucher,
   reichweite,
   verlauf,
+  termine,
+  bericht,
+  kosten,
   kanaele: basis.kanaele,
   vorschlaege: basis.vorschlaege,
   aktivitaet: basis.aktivitaet,
