@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T22:41:51Z",
+  "stand": "2026-08-27T22:48:54Z",
   "warnungen": [],
   "aenderungen": {
     "seit": null,
@@ -36,9 +36,9 @@
       {
         "form": "Taschenbuch",
         "haendler": "Amazon",
-        "preis": 39.9,
+        "preis": 37.29,
         "isbn": "979-8191493053",
-        "zustand": "im Handel"
+        "zustand": "im Handel · Aktualisierung wird geprüft"
       },
       {
         "form": "E-Book",
@@ -50,9 +50,9 @@
       {
         "form": "Gebunden",
         "haendler": "Amazon",
-        "preis": null,
+        "preis": 46.64,
         "isbn": null,
-        "zustand": "wird von KDP geprüft, vierter Tag"
+        "zustand": "wird von KDP geprüft, fünfter Tag"
       }
     ]
   },
@@ -94,7 +94,7 @@
   },
   "besucher": {
     "gelesen": false,
-    "hinweis": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Leistung und Seitenindexierung melden „Die Daten werden verarbeitet“ — erste Zahlen ab dem 28.08.",
+    "hinweis": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Am 28.08., 00:50 nachgesehen: Leistung und Seitenindexierung melden weiter „Die Daten werden verarbeitet — bitte versuch es in einem Tag noch einmal“. Eine Property, die vor 30 Stunden angelegt wurde, hat noch keine Zahlen; das ist kein Fehler.",
     "klicks7": null,
     "impressionen7": null,
     "position": null,
@@ -103,7 +103,7 @@
     "suchanfragen": []
   },
   "reichweite": {
-    "gesamt": 22656,
+    "gesamt": 22657,
     "kanaeleGezaehlt": 5,
     "kanaeleGesamt": 6
   },
@@ -490,17 +490,17 @@
       "vorher": 8,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-08-27",
-      "notiz": "2 Videos, 190 Aufrufe gesamt. 15 Shorts warten auf Stufe 3."
+      "stand": "2026-08-28",
+      "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut."
     },
     {
       "name": "Instagram",
       "handle": "@trendonix_",
-      "follower": 1040,
-      "vorher": null,
+      "follower": 1041,
+      "vorher": 1040,
       "reaktionen": null,
-      "stand": "2026-08-26",
-      "notiz": "Link im Profil zeigt auf Amazon statt auf die Website."
+      "stand": "2026-08-28",
+      "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website."
     },
     {
       "name": "Facebook",
@@ -513,13 +513,13 @@
     },
     {
       "name": "Pinterest",
-      "handle": "brandy13062",
+      "handle": "@trendonixbuecher",
       "follower": null,
       "vorher": null,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-08-26",
-      "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit."
+      "stand": "2026-08-28",
+      "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen."
     },
     {
       "name": "Bluesky",
@@ -527,49 +527,79 @@
       "follower": 0,
       "vorher": null,
       "reaktionen": null,
-      "stand": "2026-08-26",
-      "notiz": "Profillink auf der Website antwortet mit 404."
+      "stand": "2026-08-28",
+      "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link."
     }
   ],
   "vorschlaege": [
     {
-      "titel": "Die erste Rezension sichtbar machen",
+      "titel": "Links in die Videobeschreibungen setzen",
       "wer": "beide",
-      "warum": "5,0 von 5 steht seit heute auf beiden Ausgaben. Auf der Website erscheinen Sterne erst, wenn die Zahl in stimmen.ts eingetragen ist — die Technik dafür liegt seit gestern bereit.",
-      "gewinn": "Der Kaufweg zeigt eine Bewertung statt einer leeren Stelle."
+      "warum": "YouTube hat heute Stufe 3 freigeschaltet. Ab sofort sind externe Links in Beschreibungen anklickbar — betroffen sind die 15 wartenden Shorts und die drei öffentlichen Videos. Bisher stand die Website dort als toter Text.",
+      "gewinn": "Jedes Video bekommt einen Weg zur eigenen Seite statt zu Amazon."
     },
     {
-      "titel": "KDP-Berichte einmal von Hand ablesen",
+      "titel": "Titel und Vorschaubild gegeneinander testen",
+      "wer": "beide",
+      "warum": "Mit Stufe 3 stehen A/B-Tests offen. Das neueste Video liegt bei 13,8 % Klickrate — deutlich über den 8 bis 10 %, die REICHWEITE.md als gut nennt. Genau da lohnt der Test: nicht um Schaden zu reparieren, sondern um zu erfahren, warum es funktioniert.",
+      "gewinn": "Die erste belastbare Antwort darauf, was auf diesem Kanal zieht."
+    },
+    {
+      "titel": "Die erste Verteiler-Mail schreiben",
       "wer": "Manuel",
-      "warum": "ZAHLEN.md gibt es bis heute nicht, deshalb ist dieses Dashboard bei Verkäufen blind. Amazon-Seiten darf keine Automatik abrufen — die Zahlen müssen aus dem KDP-Konto kommen.",
-      "gewinn": "Verkäufe, KENP und Rangverlauf erscheinen hier ab dann von selbst."
+      "warum": "Brevo meldet die Domain seit heute als authentifiziert, und im Formular stehen 4 Einreichungen und 2 bestätigte Kontakte. Die Post geht jetzt wirklich von info@trendonix-buecher.de hinaus. Zwei Menschen haben zugesagt und seither nichts gehört.",
+      "gewinn": "Der Verteiler hört auf, eine leere Vorrichtung zu sein."
+    },
+    {
+      "titel": "Daggi antworten",
+      "wer": "Manuel",
+      "warum": "Sie hat das Buch gekauft, die 5-Sterne-Bewertung geschrieben, sich in den Verteiler eingetragen und will ausdrücklich alle Bände. Ihre letzte Nachricht „Bewertung ist drin jetzt!\" steht seit dem 27.08. unbeantwortet. Frühere Sendeversuche an sie schlugen still fehl — es muss also von Hand geprüft werden.",
+      "gewinn": "Die erste echte Leserin der Reihe bleibt eine."
     },
     {
       "titel": "Instagram-Profillink auf die Website drehen",
       "wer": "Manuel",
-      "warum": "1.040 Follower sehen dort den Amazon-Link. Die Website hält den Leser, Amazon verliert ihn an Vorschläge.",
+      "warum": "1.041 Follower sehen dort den Amazon-Link. Die Website hält den Leser, Amazon verliert ihn an Vorschläge.",
       "gewinn": "Der größte Kanal führt endlich in die eigene Welt."
     },
     {
-      "titel": "500 YouTube-Abonnenten anpeilen",
-      "wer": "beide",
-      "warum": "Hype, Fan-Funding und die Bestenliste hängen an dieser Schwelle. Bei 21.600 TikTok-Followern ist das eine Ansage, keine Kampagne.",
-      "gewinn": "Schaltet den einzigen Mechanismus frei, der kleine Kanäle bevorzugt."
-    },
-    {
-      "titel": "Beim KDP-Support nach der gebundenen Ausgabe fragen",
+      "titel": "Website bei Pinterest verifizieren",
       "wer": "Manuel",
-      "warum": "Steht seit vier Tagen auf „wird geprüft“. Üblich sind 72 Stunden.",
-      "gewinn": "Eine dritte Ausgabe, die auf allen Kanälen nachgezogen wird."
-    },
-    {
-      "titel": "Bluesky-Handle prüfen",
-      "wer": "Claude",
-      "warum": "Die Linkprüfung meldet seit Tagen 404 auf das Profil.",
-      "gewinn": "Ein toter Link weniger auf der Seite."
+      "warum": "Im Business Hub steht neben dem Profil „trendonix-buecher.de verifizieren\". Ohne das trägt kein Pin die Marke, und die Klicks auf die Website tauchen in keiner Statistik auf. Zehn Pins laufen seit Tagen ohne Zuordnung.",
+      "gewinn": "Pinterest fängt an, messbar zu sein — bisher ist der Kanal blind."
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-27T22:20:00Z",
+      "kanal": "YouTube",
+      "text": "Stufe 3 ist aktiviert. Links in Videobeschreibungen sind ab sofort anklickbar, A/B-Tests für Titel und Vorschaubild stehen offen."
+    },
+    {
+      "zeit": "2026-08-27T22:30:00Z",
+      "kanal": "Verteiler",
+      "text": "Brevo meldet trendonix-buecher.de als authentifiziert. Das Formular zählt 4 Einreichungen und 2 bestätigte Kontakte — die ersten überhaupt."
+    },
+    {
+      "zeit": "2026-08-27T22:35:00Z",
+      "kanal": "Technik",
+      "text": "Der tote Bluesky-Link war keiner: bsky.app antwortet auf HEAD mit 404 und auf GET mit 200. Die Linkprüfung fasst jetzt mit GET nach, bevor sie etwas für kaputt erklärt."
+    },
+    {
+      "zeit": "2026-08-27T22:15:00Z",
+      "kanal": "TikTok",
+      "text": "Die 5-Sterne-Bewertung kommt von Daggi (@kirsche123.5). Sie hat das Buch gekauft, sich in den Verteiler eingetragen und will alle Bände."
+    },
+    {
+      "zeit": "2026-08-27T22:25:00Z",
+      "kanal": "Instagram",
+      "text": "Zwei ausführliche Kommentare von @jonikaventuris zu Landschaft und Evidenzstufen, beide unbeantwortet. Sie folgt dem Konto seit heute."
+    },
+    {
+      "zeit": "2026-08-27T22:40:00Z",
+      "kanal": "Amazon",
+      "text": "Im Bücherregal: Taschenbuch jetzt 37,29 €, gebundene Ausgabe 46,64 € und seit dem 24.08. weiter „wird geprüft“."
+    },
     {
       "zeit": "2026-08-27T22:05:00Z",
       "kanal": "TikTok",
@@ -599,39 +629,15 @@
       "zeit": "2026-08-27T19:55:00Z",
       "kanal": "Google",
       "text": "Search Console: Property unter brandy13062 bestätigt, Sitemap erfolgreich gelesen — 89 Seiten erkannt. Zahlen ab morgen."
-    },
-    {
-      "zeit": "2026-08-27T18:55:00Z",
-      "kanal": "Cockpit",
-      "text": "Verzeichnisschutz greift: der Ordner antwortet mit 401, die Buchseiten weiter mit 200."
-    },
-    {
-      "zeit": "2026-08-27T18:40:00Z",
-      "kanal": "Website",
-      "text": "Admin-Knopf im Fuß der Seite — ein Weg ins Cockpit, ohne die Adresse zu tippen."
-    },
-    {
-      "zeit": "2026-08-27T18:05:00Z",
-      "kanal": "Technik",
-      "text": "Der stündliche Cockpit-Lauf prüft seinen Stand jetzt über FTP; ein geschützter Ordner ist kein Fehler mehr."
-    },
-    {
-      "zeit": "2026-08-27T17:55:00Z",
-      "kanal": "Technik",
-      "text": "Der Spiegel unter github.io baute drei Läufe lang nicht — das Cockpit lag im Export und riss die Wegeprüfung. Es fliegt dort jetzt heraus."
-    },
-    {
-      "zeit": "2026-08-27T15:05:00Z",
-      "kanal": "YouTube",
-      "text": "Community-Funktion aktiviert — Zuschauer können jetzt selbst Beiträge schreiben."
-    },
-    {
-      "zeit": "2026-08-27T14:55:00Z",
-      "kanal": "YouTube",
-      "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis."
     }
   ],
   "offen": [
+    {
+      "titel": "Ordner AUTOPILOT für den Rundlauf freigeben",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Die geplante Aufgabe kennt nur den Ordner „Landingpage\". Alles, was in AUTOPILOT liegt — Regelwerke, ZAHLEN.md, plan.json, die Protokolle — ist für sie nicht vorhanden, und jeder Lesebefehl darauf läuft still ins Leere."
+    },
     {
       "titel": "Konto bei buechertreff.de anlegen",
       "wer": "Manuel",
@@ -654,7 +660,13 @@
       "titel": "Instagram-Sicherheitshinweis prüfen",
       "wer": "Manuel",
       "stufe": "mittel",
-      "warum": "„Someone's trying to log into Instagram“, seit 26.08. unbeantwortet."
+      "warum": "„Someone’s trying to log into Instagram“, seit dem 26.08. unbeantwortet."
+    },
+    {
+      "titel": "Beim KDP-Support nach der gebundenen Ausgabe fragen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "Steht seit dem 24.08. auf „wird geprüft“, Preis 46,64 €. Üblich sind 72 Stunden."
     },
     {
       "titel": "Rezensionsanfragen Stapel 1 freigeben",
@@ -663,10 +675,16 @@
       "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md."
     },
     {
-      "titel": "Bing, Amazon-Autorenseite, Brevo-DNS, YouTube-OAuth",
+      "titel": "Alte Live-Hinweiskommentare entfernen",
       "wer": "Manuel",
       "stufe": "klein",
-      "warum": "Vier kleine Schritte, die alle eine Anmeldung brauchen."
+      "warum": "Zwei eigene Kommentare vom 26.08. laden weiter zu einer Live ein, die seit zwei Tagen vorbei ist. Löschen ist auf diesem Konto Manuels Sache."
+    },
+    {
+      "titel": "Bing, Amazon-Autorenseite, YouTube-OAuth",
+      "wer": "Manuel",
+      "stufe": "klein",
+      "warum": "Drei kleine Schritte, die alle eine Anmeldung brauchen. Der Brevo-DNS-Punkt ist am 28.08. erledigt."
     }
   ],
   "technik": {
@@ -688,7 +706,7 @@
     },
     {
       "was": "Besucher",
-      "warum": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Leistung und Seitenindexierung melden „Die Daten werden verarbeitet“ — erste Zahlen ab dem 28.08."
+      "warum": "Property https://www.trendonix-buecher.de/ bestätigt unter brandy13062@gmail.com (HTML-Datei). Sitemap am 27.08. gelesen: erfolgreich, 89 Seiten erkannt. Am 28.08., 00:50 nachgesehen: Leistung und Seitenindexierung melden weiter „Die Daten werden verarbeitet — bitte versuch es in einem Tag noch einmal“. Eine Property, die vor 30 Stunden angelegt wurde, hat noch keine Zahlen; das ist kein Fehler."
     },
     {
       "was": "Wochenbericht",
