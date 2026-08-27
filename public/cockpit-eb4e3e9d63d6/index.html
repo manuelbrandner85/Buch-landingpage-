@@ -192,6 +192,11 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
 .punkte li.terminiert .zustand2{color:var(--gold)}
 .punkte li.offen .zustand2{color:#e0a06a}
 .punkte li.steht .zustand2{color:#8fbf9a}
+.punkte li.nachholen .zustand2{color:#c9a0d8}
+.punkte li.haengt .zustand2{color:#e0685f}
+.punkte li.haengt .wasda b{color:#e0908a}
+.punkte .mal{display:inline-block;margin-left:.4rem;padding:.02rem .3rem;border-radius:3px;
+  background:rgba(201,160,216,.14);color:#c9a0d8;font-size:.6rem;letter-spacing:.06em}
 
 /* ---------- Bericht und Kosten ---------- */
 .bericht{display:grid;gap:.45rem;font-size:.86rem;line-height:1.5}
@@ -605,7 +610,13 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
       t.push('<section data-g="termine"><h2>Die nächsten vierzehn Tage</h2>'
         + '<div class="karte"><ul class="termine">'
         + d.termine.map(function (tg) {
-            var ist = tg.d === new Date().toISOString().slice(0, 10);
+            // toISOString() rechnet nach UTC um. Zwischen Mitternacht und zwei
+            // Uhr wäre "heute" dann gestern, und die Unterstreichung säße einen
+            // Tag daneben. Das Telefon steht ohnehin auf deutscher Zeit.
+            var n = new Date();
+            var ist = tg.d === n.getFullYear() + '-'
+              + String(n.getMonth() + 1).padStart(2, '0') + '-'
+              + String(n.getDate()).padStart(2, '0');
             return '<li' + (ist ? ' class="heute"' : '') + '>'
               + '<div class="tagkopf"><b>' + h(tg.wochentag) + '</b>'
               + '<span>' + datum(tg.d) + (ist ? ' · heute' : '') + '</span></div>'
@@ -622,13 +633,21 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
                     + ' aria-label="' + h(pk.kanal + ' am ' + tg.d + ' abhaken') + '">'
                     + '<span class="wann">' + h(pk.zeit || '—') + '</span>'
                     + '<span class="wasda"><b>' + h(pk.kanal) + '</b>'
+                    // Wie oft etwas schon verschoben wurde, gehört neben den
+                    // Namen: Der dritte Anlauf ist eine andere Nachricht als
+                    // der erste.
+                    + (pk.verschoben >= 1
+                        ? '<span class="mal">' + (pk.verschoben + 1) + '. Anlauf</span>' : '')
                     + (pk.was ? '<span class="warum">' + h(pk.was) + '</span>' : '')
+                    + (pk.urspruenglich
+                        ? '<span class="warum">ursprünglich ' + datum(pk.urspruenglich) + '</span>' : '')
                     + (pk.hinweis ? '<span class="warum">' + h(pk.hinweis) + '</span>' : '')
                     + '</span><span class="zustand2">' + h(pk.zustand) + '</span></li>';
                 }).join('') + '</ul></li>';
           }).join('') + '</ul>'
-        + '<p class="hinweis">Haken bleiben auf diesem Gerät. Was der Plan selbst '
-        + 'als erledigt meldet, steht fest und lässt sich hier nicht ändern.</p>'
+        + '<p class="hinweis">Nur was noch offen ist. Erledigtes und Vergangenes '
+        + 'verschwindet von selbst; was nicht hinausging, steht als Nachholer zu '
+        + 'einer anderen Uhrzeit wieder da. Haken bleiben auf diesem Gerät.</p>'
         + '</div></section>');
     }
 

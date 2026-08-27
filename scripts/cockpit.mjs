@@ -299,34 +299,87 @@ const tagFinden = (d) => {
   if (!t) { t = { d, wochentag: WOCHENTAG[new Date(d + 'T12:00:00Z').getUTCDay()], punkte: [] }; termine.push(t); }
   return t;
 };
+// Was erledigt, verschoben oder verfallen ist, steht hier nicht mehr.
+//
+// Ein Terminplan, in dem Abgehaktes stehen bleibt, wird mit jedem Tag länger
+// und mit jedem Tag weniger gelesen. Gezeigt wird, was noch zu tun ist —
+// alles andere hat `scripts/termine.mjs` bereits zu den Akten gelegt.
+//
+// Der Stichtag ist der deutsche, nicht der von UTC: Sonst verschwänden
+// zwischen Mitternacht und zwei Uhr die Termine des laufenden Tages.
+const heuteBerlin = new Intl.DateTimeFormat('sv-SE', {
+  timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(new Date());
+const bisWann = new Date(Date.parse(heuteBerlin) + 14 * 864e5).toISOString().slice(0, 10);
+
 for (const tag of plan?.tage ?? []) {
-  if (!tag?.datum || tag.datum < heute || tag.datum > inVierzehn) continue;
+  if (!tag?.datum || tag.datum < heuteBerlin || tag.datum > bisWann) continue;
   for (const [schluessel, name] of Object.entries(KANALNAMEN)) {
     const e = tag[schluessel];
-    if (!e) continue;
+    if (!e || e.erledigt === true || e.verschobenNach || e.verfallen) continue;
     tagFinden(tag.datum).punkte.push({
       kanal: name,
       zeit: e.uhrzeit ?? null,
       was: tag.beitrag ?? null,
-      zustand: e.erledigt ? 'erledigt' : (e.schon_geplant ? 'terminiert' : 'offen'),
-      hinweis: e.hinweis || null,
+      zustand: e.haengt ? 'haengt' : (e.schon_geplant ? 'terminiert' : 'offen'),
+      hinweis: [
+        e.hinweis || null,
+        tag.wiederholung ? 'Wiederholung — neuen Text schreiben, nicht denselben.' : null,
+        e.haengt ? 'Vier Versuche vergeblich. Hier hilft kein neuer Termin.' : null,
+      ].filter(Boolean).join(' ') || null,
     });
   }
+}
+
+// ── Die Nachholer ─────────────────────────────────────────────────────────
+//
+// Was nicht hinausging, ist nicht weg: `termine.mjs` legt es auf einen neuen
+// Tag zu einer anderen Uhrzeit. Im Plan stehen sie getrennt, damit der
+// Rundlauf seinen Tagesaufbau unverändert weiterliest — hier laufen sie mit
+// den regulären Terminen in einer Liste zusammen.
+for (const n of plan?.nachholen ?? []) {
+  if (!n?.datum || n.erledigt) continue;
+  if (n.datum < heuteBerlin || n.datum > bisWann) continue;
+  tagFinden(n.datum).punkte.push({
+    kanal: KANALNAMEN[n.kanal] ?? n.kanal,
+    zeit: n.uhrzeit ?? null,
+    was: n.beitrag ?? null,
+    zustand: n.haengt ? 'haengt' : 'nachholen',
+    verschoben: n.verschoben ?? 1,
+    urspruenglich: n.urspruenglich ?? null,
+    hinweis: n.hinweis || null,
+  });
 }
 // Die Live ist keine Datei, sondern eine Verabredung: freitags 20:00, so steht
 // es in LIVE.md. Sie gehört in den Kalender wie alles andere auch.
 for (let i = 0; i <= 14; i++) {
-  const d = new Date(Date.now() + i * 864e5);
-  if (d.getUTCDay() !== 5) continue;
-  const tag = d.toISOString().slice(0, 10);
-  if (tag < heute) continue;
+  const tag = new Date(Date.parse(heuteBerlin) + i * 864e5).toISOString().slice(0, 10);
+  if (new Date(tag + 'T12:00:00Z').getUTCDay() !== 5) continue;
   tagFinden(tag).punkte.push({ kanal: 'TikTok LIVE', zeit: '20:00', was: null, zustand: 'steht', hinweis: 'fester Termin' });
 }
 for (const m of beitraegeText ? beitraegeText.matchAll(/slug:\s*'([^']+)'[\s\S]{0,400}?datum:\s*'(\d{4}-\d{2}-\d{2})'/g) : []) {
-  if (m[2] < heute || m[2] > inVierzehn) continue;
+  if (m[2] < heuteBerlin || m[2] > bisWann) continue;
   tagFinden(m[2]).punkte.push({ kanal: 'Journal', zeit: null, was: m[1], zustand: 'terminiert', hinweis: null });
 }
 termine.sort((a, b) => (a.d < b.d ? -1 : 1));
+
+// Der Vorrat entscheidet, wie lange der Plan neue Beiträge hat und ab wann er
+// sich wiederholt. Beides ist gerechnet, nicht geschätzt — und beides gehört
+// dorthin, wo ohnehin steht, was das Dashboard nicht weiß.
+const vorratStand = plan?.vorrat ?? null;
+if (vorratStand && !vorratStand.reichtFuerSperre) {
+  fehlt('Vorrat an Beiträgen',
+    `${vorratStand.clips} Clips bei einem Beitrag am Tag: Nach ${vorratStand.reichtTage} Tagen fängt die Rotation von vorn an`
+    + (vorratStand.wiederholungAb ? `, ab dem ${vorratStand.wiederholungAb} laufen Wiederholungen` : '')
+    + `. Für den vorgesehenen Abstand von ${vorratStand.sperreTage} Tagen bräuchte es ${vorratStand.sperreTage} Clips. Erfunden wird keiner.`);
+}
+const haengende = (plan?.nachholen ?? []).filter((n) => n.haengt && !n.erledigt);
+if (haengende.length) {
+  fehlt('Hängende Beiträge',
+    `${haengende.length} Beitrag${haengende.length === 1 ? '' : 'e'} ${haengende.length === 1 ? 'ist' : 'sind'} viermal nicht hinausgegangen: `
+    + haengende.map((n) => `${n.kanal} ${n.beitrag ?? ''}`).join(', ')
+    + '. Ein weiterer Termin hilft dort nicht.');
+}
 
 // ── Verlauf: was gestern war, weiß sonst niemand ──────────────────────────
 //

@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T23:19:59Z",
+  "stand": "2026-08-27T23:36:19Z",
   "warnungen": [],
   "aenderungen": {
     "seit": null,
@@ -121,40 +121,6 @@
   },
   "termine": [
     {
-      "d": "2026-08-27",
-      "wochentag": "Do",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "08_aehre",
-          "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "08_aehre",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "08_aehre",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "08_aehre",
-          "zustand": "offen",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-08-28",
       "wochentag": "Fr",
       "punkte": [
@@ -228,6 +194,33 @@
           "hinweis": null
         },
         {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-22",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-22",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Journal",
           "zeit": null,
           "was": "was-ein-unsichtbarer-faden-ist",
@@ -267,6 +260,33 @@
           "was": "09_muenze",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "03_kochen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-23",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-25",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -301,6 +321,24 @@
           "was": "07_feuer",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "04_ordnung",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-24",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -335,6 +373,24 @@
           "was": "10_archiv",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-25",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -369,6 +425,15 @@
           "was": "13_tempel",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -403,6 +468,15 @@
           "was": "12_schrift",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -437,6 +511,251 @@
           "was": "14_kernthese",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "TikTok LIVE",
+          "zeit": "20:00",
+          "was": null,
+          "zustand": "steht",
+          "hinweis": "fester Termin"
+        }
+      ]
+    },
+    {
+      "d": "2026-09-05",
+      "wochentag": "Sa",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": null
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": null
+        }
+      ]
+    },
+    {
+      "d": "2026-09-06",
+      "wochentag": "So",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "01_neandertaler",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "01_neandertaler",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "01_neandertaler",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "01_neandertaler",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-07",
+      "wochentag": "Mo",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "03_kochen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "03_kochen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "03_kochen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "03_kochen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-08",
+      "wochentag": "Di",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-09",
+      "wochentag": "Mi",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "02_beleggrad",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "02_beleggrad",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "02_beleggrad",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "02_beleggrad",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-10",
+      "wochentag": "Do",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-11",
+      "wochentag": "Fr",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "08_aehre",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
           "kanal": "TikTok LIVE",
@@ -728,6 +1047,10 @@
     {
       "was": "Besucher",
       "warum": "Die Suchzahlen kommen, sobald das Google-Dienstkonto eingerichtet ist — zehn Minuten, kostenlos. Anleitung: AUTOPILOT/REGISTRIERUNG/10_google-dienstkonto.md."
+    },
+    {
+      "was": "Vorrat an Beiträgen",
+      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-06 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
     },
     {
       "was": "Wochenbericht",
