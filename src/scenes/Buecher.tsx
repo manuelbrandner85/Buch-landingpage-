@@ -1,6 +1,6 @@
 import type { Buch, Szene } from '@/data/gemeinsam/typen';
 import { BAENDE, TRENDONIX, assetNach, reiheZuBand } from '@/world/registry';
-import { wegLeseprobe, wegWelt } from '@/world/wege';
+import { WEG_COCKPIT, wegLeseprobe, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 import { mailAn } from '@/data/gemeinsam/anbieter';
 import { VERTEILER } from '@/data/gemeinsam/verteiler';
@@ -186,6 +186,8 @@ export function Buecher({ szene }: { szene?: Szene }) {
             <a href={`${BASIS_PFAD}/ueber`}>Über</a>
             <span aria-hidden="true">·</span>
             <a href={`${BASIS_PFAD}/impressum`}>Impressum</a>
+            <span aria-hidden="true">·</span>
+            <a className="verwaltung" href={WEG_COCKPIT} rel="nofollow noopener">Admin</a>
           </span>
           <span className="feinschrift">
             Alle Motive stammen aus dem Buch und wurden eigens dafür erzeugt.

@@ -27,6 +27,19 @@ export const wegLeseprobe = (datei: string) => weg(`/leseprobe/${datei}`);
 export const wegImpressum = () => weg('/impressum/');
 
 /**
+ * Das Cockpit gehört nicht zur Welt.
+ *
+ * Es wird nicht mitgebaut, sondern liegt als eigener Ordner auf dem Webspace –
+ * hinter einem Verzeichnisschutz, den der Server prüft, bevor irgendetwas
+ * ausgeliefert wird. Deshalb steht hier eine vollständige Adresse und kein
+ * Weg: Auf dem Spiegel unter github.io liegt der Ordner gar nicht, ein
+ * relativer Pfad zeigte dort ins Leere. Die Adresse ist bewusst hart notiert
+ * und nicht aus der Basis-URL abgeleitet – sie zeigt immer auf das eine
+ * Cockpit, gleich von welcher Adresse aus jemand darauf klickt.
+ */
+export const WEG_COCKPIT = 'https://www.trendonix-buecher.de/cockpit-eb4e3e9d63d6/';
+
+/**
  * Eine vollständige Adresse mit Schema und Hostnamen.
  *
  * Vorschaubilder für geteilte Links müssen absolut sein – ein Netzwerk, das

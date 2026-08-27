@@ -6,7 +6,7 @@ import {
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
-import { wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
+import { WEG_COCKPIT, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
@@ -237,6 +237,8 @@ export default function Haus() {
           <a href={wegUeber()}>Über</a>
           <span aria-hidden="true">·</span>
           <a href={wegImpressum()}>Impressum</a>
+          <span aria-hidden="true">·</span>
+          <a className="verwaltung" href={WEG_COCKPIT} rel="nofollow noopener">Admin</a>
         </span>
         <span className="feinschrift">
           Kein Motiv dieser Seite ist eine historische Fotografie. Alle Bilder
