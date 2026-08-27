@@ -394,6 +394,22 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
           : '<p class="hinweis">' + h(v.hinweis || 'Noch keine Daten.') + '</p>')
       + '</div></section>');
 
+    // ---- Der Monat bei KDP ----
+    if (d.monat) {
+      var mo = d.monat;
+      t.push('<section data-g="buch"><h2>' + h(mo.zeitraum || 'Monat') + ' bei KDP</h2><div class="karte">'
+        + '<div class="zeile">' + kachel(zahl(mo.bestellungen), 'Bestellungen')
+        + kachel(euro(mo.tantiemen), 'Tantiemen, geschätzt')
+        + kachel(zahl(mo.kenp), 'KENP-Seiten') + '</div>'
+        + (mo.quellen && mo.quellen.length
+            ? '<ul class="rangliste">' + mo.quellen.map(function (q) {
+                return '<li><span>' + h(q.name) + '</span><b>' + q.anteil + ' %</b></li>';
+              }).join('') + '</ul>' : '')
+        + (mo.hinweis ? '<p class="hinweis">' + h(mo.hinweis) + '</p>' : '')
+        + (mo.stand ? '<p class="hinweis">Abgelesen am ' + datum(mo.stand) + '.</p>' : '')
+        + '</div></section>');
+    }
+
     // ---- Besucher ----
     var g = d.besucher || {};
     t.push('<section data-g="buch"><h2>Besucher der Website</h2><div class="karte">'

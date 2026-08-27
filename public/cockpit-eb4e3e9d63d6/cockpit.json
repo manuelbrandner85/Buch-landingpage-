@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T22:02:29Z",
+  "stand": "2026-08-27T22:04:36Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -54,21 +54,35 @@
     "gelesen": true,
     "hinweis": null,
     "summe30": {
-      "kindle": null,
-      "taschenbuch": null,
-      "kenp": null
+      "kindle": 0,
+      "taschenbuch": 0,
+      "kenp": 0
     },
     "tage": [
       {
         "d": "2026-08-27",
-        "kindle": null,
-        "taschenbuch": null,
-        "kenp": null,
+        "kindle": 0,
+        "taschenbuch": 0,
+        "kenp": 0,
         "rang": 334543,
         "rez": 1,
         "schnitt": 5
       }
     ]
+  },
+  "monat": {
+    "zeitraum": "August 2026",
+    "stand": "2026-08-27",
+    "bestellungen": 13,
+    "tantiemen": 10.81,
+    "kenp": 0,
+    "quellen": [
+      {
+        "name": "Druck",
+        "anteil": 100
+      }
+    ],
+    "hinweis": "Aus dem KDP-Dashboard abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
   },
   "besucher": {
     "gelesen": false,
@@ -547,6 +561,16 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-27T22:05:00Z",
+      "kanal": "TikTok",
+      "text": "@trendonix ist wieder angemeldet. Der Live-Hinweisclip vom 26.08. steht jetzt auf „Nur ich“, die Kommentarliste ist wieder lesbar."
+    },
+    {
+      "zeit": "2026-08-27T22:10:00Z",
+      "kanal": "Amazon",
+      "text": "KDP im August: 13 bearbeitete Bestellungen, 10,81 € geschätzte Tantiemen, 0 KENP-Seiten — die Tantiemen kommen zu 100 % aus dem Druck."
+    },
+    {
       "zeit": "2026-08-27T21:20:00Z",
       "kanal": "Amazon",
       "text": "Die erste Rezension ist da: 5,0 von 5, auf Taschenbuch und Kindle. Der Wortlaut wird auf der Rezensionsseite noch nicht ausgeliefert."
@@ -595,31 +619,9 @@
       "zeit": "2026-08-27T14:55:00Z",
       "kanal": "YouTube",
       "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis."
-    },
-    {
-      "zeit": "2026-08-27T14:40:00Z",
-      "kanal": "YouTube",
-      "text": "Jonika Venturis hat unter beiden Videos kommentiert — die ersten fremden Kommentare des Kanals."
-    },
-    {
-      "zeit": "2026-08-27T14:20:00Z",
-      "kanal": "YouTube",
-      "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen."
     }
   ],
   "offen": [
-    {
-      "titel": "TikTok im Browser auf @trendonix umstellen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Angemeldet ist ein fremdes Konto. Solange das so ist, prüft der Rundlauf auf TikTok gar nichts — und verpasst bleibt verpasst."
-    },
-    {
-      "titel": "Live-Hinweisclip auf „Nur ich\" setzen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "„🔴 LIVE — Ich bin gerade live.\" steht seit dem 26.08. öffentlich, obwohl die Live um 20:31 endete. Geht nur mit dem richtigen Konto."
-    },
     {
       "titel": "Konto bei buechertreff.de anlegen",
       "wer": "Manuel",
@@ -659,9 +661,9 @@
   ],
   "technik": {
     "stand": "2026-08-27T22:02:00Z",
-    "deploy": "fehlgeschlagen",
+    "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": "2026-08-27T21:58:14Z",
+    "deployWann": null,
     "zertifikatTage": 87,
     "linksGeprueft": 44,
     "linksKaputt": 1,
@@ -675,10 +677,6 @@
     "journalVorrat": 1
   },
   "luecken": [
-    {
-      "was": "Verkäufe",
-      "warum": "In ZAHLEN.md stehen Tageszeilen, aber ohne Verkaufszahlen — Kindle, Taschenbuch und KENP sind unausgefüllt. Sie stehen nur im KDP-Konto."
-    },
     {
       "was": "Reichweite",
       "warum": "1 von 6 Kanälen ohne Zahl."

@@ -324,6 +324,7 @@ const raus = {
   stand,
   buch,
   verkaeufe,
+  monat: basis.monat ?? null,
   besucher: basis.besucher,
   reichweite,
   verlauf,

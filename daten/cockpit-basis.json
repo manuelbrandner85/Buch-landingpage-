@@ -159,18 +159,6 @@
   ],
   "offen": [
     {
-      "titel": "TikTok im Browser auf @trendonix umstellen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Angemeldet ist ein fremdes Konto. Solange das so ist, prüft der Rundlauf auf TikTok gar nichts — und verpasst bleibt verpasst."
-    },
-    {
-      "titel": "Live-Hinweisclip auf „Nur ich\" setzen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "„🔴 LIVE — Ich bin gerade live.\" steht seit dem 26.08. öffentlich, obwohl die Live um 20:31 endete. Geht nur mit dem richtigen Konto."
-    },
-    {
       "titel": "Konto bei buechertreff.de anlegen",
       "wer": "Manuel",
       "stufe": "hoch",
@@ -208,6 +196,16 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-27T22:05:00Z",
+      "kanal": "TikTok",
+      "text": "@trendonix ist wieder angemeldet. Der Live-Hinweisclip vom 26.08. steht jetzt auf „Nur ich“, die Kommentarliste ist wieder lesbar."
+    },
+    {
+      "zeit": "2026-08-27T22:10:00Z",
+      "kanal": "Amazon",
+      "text": "KDP im August: 13 bearbeitete Bestellungen, 10,81 € geschätzte Tantiemen, 0 KENP-Seiten — die Tantiemen kommen zu 100 % aus dem Druck."
+    },
     {
       "zeit": "2026-08-27T21:20:00Z",
       "kanal": "Amazon",
@@ -257,16 +255,20 @@
       "zeit": "2026-08-27T14:55:00Z",
       "kanal": "YouTube",
       "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis."
-    },
-    {
-      "zeit": "2026-08-27T14:40:00Z",
-      "kanal": "YouTube",
-      "text": "Jonika Venturis hat unter beiden Videos kommentiert — die ersten fremden Kommentare des Kanals."
-    },
-    {
-      "zeit": "2026-08-27T14:20:00Z",
-      "kanal": "YouTube",
-      "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen."
     }
-  ]
+  ],
+  "monat": {
+    "zeitraum": "August 2026",
+    "stand": "2026-08-27",
+    "bestellungen": 13,
+    "tantiemen": 10.81,
+    "kenp": 0,
+    "quellen": [
+      {
+        "name": "Druck",
+        "anteil": 100
+      }
+    ],
+    "hinweis": "Aus dem KDP-Dashboard abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
+  }
 }
