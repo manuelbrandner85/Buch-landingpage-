@@ -10,10 +10,24 @@ export const BUCH_BAND_1: Buch = {
   // Die beiden Ausgaben bei Amazon, über ihre ASIN adressiert. Das E-Book liegt
   // in KDP Select und ist deshalb dort exklusiv; ein Buchhandelsweg kommt erst
   // mit der geplanten Druckausgabe dazu und wird dann hier ergänzt.
+  //
+  // ISBN, Preise und Erscheinungstermin am 27.08.2026 von den Produktseiten
+  // abgelesen, nicht geschätzt. Ändert Amazon einen Preis, muss er hier
+  // nachgezogen werden – auf der Buchseite steht deshalb sichtbar, von wann
+  // die Angabe ist.
   kaufwege: [
-    { haendler: 'Amazon', form: 'Taschenbuch', url: 'https://www.amazon.de/dp/B0HG4LPJKV' },
-    { haendler: 'Amazon', form: 'E-Book', url: 'https://www.amazon.de/dp/B0HFZFHWKK' },
+    {
+      haendler: 'Amazon', form: 'Taschenbuch',
+      url: 'https://www.amazon.de/dp/B0HG4LPJKV',
+      isbn: '979-8191493053', preis: 39.90,
+    },
+    {
+      haendler: 'Amazon', form: 'E-Book',
+      url: 'https://www.amazon.de/dp/B0HFZFHWKK',
+      preis: 12.99, hinweis: 'in Kindle Unlimited enthalten',
+    },
   ],
+  erschienen: '2026-08-08',
   coverAsset: 'cover',
   seiten: 206,
   klappentext:

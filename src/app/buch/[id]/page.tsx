@@ -5,6 +5,7 @@ import {
 } from '@/world/registry';
 import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
 import { ausgaben, brotkrumen } from '@/world/schema';
+import { PREISSTAND } from '@/data/gemeinsam/stand';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { BASIS_PFAD } from '@/world/bilder';
 import { BLICK } from '@/data/gemeinsam/blick';
@@ -118,9 +119,10 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
             ))}
           </ul>
           <p className="quelle">
-            <b>Hinweis</b>Hier steht, was es wirklich gibt. Kommt eine Ausgabe
-            dazu – eine eigene ISBN, der Buchhandel, tolino –, steht sie an
-            dieser Stelle, sobald sie bestellbar ist.
+            <b>Hinweis</b>Hier steht, was es wirklich gibt, mit den Preisen vom
+            {' '}{PREISSTAND}. Kommt eine Ausgabe dazu – eine eigene ISBN, der
+            Buchhandel, tolino –, steht sie an dieser Stelle, sobald sie
+            bestellbar ist.
           </p>
         </>
       )}

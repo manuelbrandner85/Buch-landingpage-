@@ -8,3 +8,12 @@
  * wirklich etwas ändert. Journalbeiträge bringen ihr eigenes Datum mit.
  */
 export const STAND = '2026-08-27';
+
+/**
+ * Von wann die Preise auf der Buchseite sind.
+ *
+ * Preise stehen bei Amazon, nicht hier – hier steht eine Abschrift. Eine
+ * Abschrift ohne Datum ist eine Behauptung; mit Datum ist sie eine Auskunft.
+ * Ändert sich ein Preis, wandert dieses Datum mit.
+ */
+export const PREISSTAND = '27. August 2026';
