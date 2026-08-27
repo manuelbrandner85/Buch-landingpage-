@@ -82,6 +82,9 @@ ul{list-style:none}
 .kanal .zahl{display:block;font-family:Georgia,serif;font-size:1.6rem;color:var(--gold);margin-top:.45rem;line-height:1}
 .kanal .zahl.leer{font-size:.9rem;color:var(--staub)}
 .kanal .unten{display:block;font-size:.68rem;color:var(--staub);margin-top:.3rem}
+.kanal .hand{display:inline-block;margin-top:.2rem;padding:.05rem .35rem;border-radius:3px;
+  background:rgba(227,200,139,.10);border:1px solid rgba(227,200,139,.22);
+  color:var(--gold-tief);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase}
 
 .lauf li{display:flex;gap:.7rem;padding:.7rem 0;border-bottom:1px solid rgba(227,200,139,.1)}
 .lauf li:last-child{border-bottom:0}
@@ -548,6 +551,7 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
         + '<div class="karte"><div class="zeile">'
         + kachel(zahl(rw.gesamt), 'Follower gesamt')
         + kachel(da(rw.kanaeleGezaehlt) ? rw.kanaeleGezaehlt + ' / ' + rw.kanaeleGesamt : null, 'Kanäle mit Zahl')
+        + kachel(da(rw.abgerufen) ? rw.abgerufen + ' / ' + rw.kanaeleGesamt : null, 'davon selbst geholt')
         + '</div>' + kurveBlock('Verlauf', (d.verlauf || {}).reichweite, false) + '</div>'
         + '<div class="kanaele">'
         + d.kanaele.map(function (k, i) {
@@ -562,7 +566,11 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
               + '<span class="unten">' + (hat ? 'Follower' : '')
               + (da(k.reaktionen) ? (hat ? ' · ' : '') + zahl(k.reaktionen) + ' '
                   + h(k.reaktionenLabel || 'Reaktionen') : '')
-              + (k.stand ? '<br>Stand ' + datum(k.stand) : '') + '</span></button>';
+              + (k.stand ? '<br>Stand ' + datum(k.stand) : '')
+              // Wer die Zahl geholt hat, entscheidet, wie sehr man ihr traut —
+              // und ob hier jemand nachtragen muss.
+              + (k.quelle === 'Handpflege' ? '<br><span class="hand">von Hand</span>' : '')
+              + '</span></button>';
           }).join('') + '</div>'
         + '<div id="kanalblatt"></div></section>');
     }
@@ -743,7 +751,16 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
       + '<div class="zeile">'
       + kachel(zahl(k.follower), 'Follower', trend(k.follower, k.vorher, false))
       + kachel(zahl(k.reaktionen), h(k.reaktionenLabel || 'Reaktionen'))
-      + kachel(k.stand ? datum(k.stand) : null, 'Stand') + '</div>'
+      + kachel(zahl(k.beitraege), 'Beiträge') + '</div>'
+      + '<div class="zeile">'
+      + kachel(k.stand ? datum(k.stand) : null, 'Stand')
+      + kachel(k.quelle === 'abgerufen' ? 'selbst geholt' : 'von Hand', 'Quelle') + '</div>'
+      + (k.vergleichVom
+          ? '<p class="hinweis">Der Pfeil vergleicht mit dem Stand vom '
+            + datum(k.vergleichVom) + '.</p>' : '')
+      + (k.quelle === 'Handpflege'
+          ? '<p class="hinweis">Dieser Kanal gibt seine Zahl ohne Anmeldung nicht '
+            + 'heraus. Sie steht so lange still, bis jemand sie einträgt.</p>' : '')
       + kurveBlock('Verlauf', reihe, false)
       + (zeilen ? '<ul class="blattzahlen">' + zeilen + '</ul>'
                 : '<p class="hinweis">Noch kein Verlauf — er beginnt mit dem zweiten Tagesstand.</p>')

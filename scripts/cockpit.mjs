@@ -203,15 +203,54 @@ const technik = {
   journalVorrat,
 };
 
+// ── Kanäle: erst das Abgerufene, dann die Handpflege ──────────────────────
+//
+// `scripts/kanaele.mjs` liest, was öffentlich zu lesen ist — TikTok, Pinterest,
+// YouTube, Bluesky. Diese Zahlen haben Vorrang vor allem, was in
+// `cockpit-basis.json` steht: Der Abruf lief heute, die Handpflege irgendwann.
+// Instagram und Facebook geben ohne Anmeldung nichts heraus und bleiben, wie
+// sie eingetragen wurden — sichtbar an `quelle: "Handpflege"`.
+const abruf = lies(join(wurzel, 'daten', 'kanaele-abruf.json'));
+if (!abruf) fehlt('Kanalabruf', 'daten/kanaele-abruf.json fehlt — läuft scripts/kanaele.mjs im Stundenlauf?');
+for (const f of abruf?.fehler ?? []) fehlt('Kanalabruf', f);
+
+const kanaele = basis.kanaele.map((k) => {
+  const a = abruf?.kanaele?.[k.name];
+  if (!a || typeof a.follower !== 'number') {
+    return { ...k, quelle: 'Handpflege' };
+  }
+  return {
+    ...k,
+    follower: a.follower,
+    reaktionen: a.reaktionen ?? k.reaktionen ?? null,
+    reaktionenLabel: a.reaktionenLabel ?? k.reaktionenLabel ?? null,
+    beitraege: a.beitraege ?? null,
+    stand: a.stand,
+    quelle: 'abgerufen',
+  };
+});
+
 // ── Reichweite über alle Kanäle, ohne Schätzung ───────────────────────────
-const bekannt = basis.kanaele.filter((k) => typeof k.follower === 'number');
+const bekannt = kanaele.filter((k) => typeof k.follower === 'number');
 const reichweite = {
   gesamt: bekannt.length ? bekannt.reduce((a, k) => a + k.follower, 0) : null,
   kanaeleGezaehlt: bekannt.length,
-  kanaeleGesamt: basis.kanaele.length,
+  kanaeleGesamt: kanaele.length,
+  abgerufen: kanaele.filter((k) => k.quelle === 'abgerufen').length,
 };
-if (bekannt.length < basis.kanaele.length) {
-  fehlt('Reichweite', `${basis.kanaele.length - bekannt.length} von ${basis.kanaele.length} Kanälen ohne Zahl.`);
+if (bekannt.length < kanaele.length) {
+  const ohne = kanaele.filter((k) => typeof k.follower !== 'number').map((k) => k.name);
+  fehlt('Reichweite', `${ohne.join(' und ')} ${ohne.length === 1 ? 'gibt' : 'geben'} ohne Anmeldung keine Followerzahl heraus — die Zahl kommt nur aus der App.`);
+}
+// Eine Zahl von Hand ist so lange gut, wie sie jung ist. Wird sie alt, sieht
+// man ihr das nicht an — sie steht da wie jede andere. Also sagt es das
+// Dashboard selbst, statt darauf zu warten, dass es jemandem auffällt.
+const alteHand = kanaele.filter((k) => {
+  if (k.quelle !== 'Handpflege' || !k.stand) return false;
+  return (Date.parse(heute) - Date.parse(k.stand)) / 864e5 >= 14;
+});
+for (const k of alteHand) {
+  fehlt(k.name, `Die Followerzahl steht seit dem ${k.stand} unverändert. ${k.name} gibt sie ohne Anmeldung nicht heraus; sie altert hier, ohne falsch auszusehen.`);
 }
 if (!basis.besucher?.gelesen) fehlt('Besucher', basis.besucher?.hinweis ?? 'Keine Zahlen aus der Search Console.');
 
@@ -286,7 +325,7 @@ const tagesstand = {
   tant: jungerMonat?.d === heute ? jungerMonat.tantiemen : null,
   dep: technik.deploy ?? null,
 };
-for (const k of basis.kanaele) {
+for (const k of kanaele) {
   if (typeof k.follower === 'number') tagesstand.kanaele[k.name] = k.follower;
 }
 const gezaehlt = Object.values(tagesstand.kanaele);
@@ -326,7 +365,7 @@ const reihe = (nimm) => {
   return p.length >= 2 ? p : [];
 };
 const kanalReihen = {};
-for (const k of basis.kanaele) {
+for (const k of kanaele) {
   const p = reihe((t) => t.kanaele?.[k.name]);
   if (p.length) kanalReihen[k.name] = p;
 }
@@ -340,6 +379,29 @@ const verlauf = {
   tantiemen: reihe((t) => t.tant),
   kanaele: kanalReihen,
 };
+
+// ── „vorher“ gehört nicht in die Handpflege ───────────────────────────────
+//
+// Bisher musste jemand den alten Wert von Hand nach `vorher` schieben, bevor er
+// den neuen eintrug: zwei Handgriffe für eine Zahl. Wird einer vergessen, zeigt
+// das Dashboard einen Pfeil, den es nicht geben dürfte — und niemand merkt es,
+// weil er ja plausibel aussieht. Der Vortageswert steht längst im Verlauf.
+//
+// Solange der Verlauf für einen Kanal noch keinen früheren Tag kennt, bleibt
+// der eingetragene Wert stehen; von seinem zweiten Tag an übernimmt die Maschine.
+const vortag = (nimm) => {
+  for (let i = bisher.length - 1; i >= 0; i--) {
+    if (bisher[i].d >= tagesstand.d) continue;
+    const v = nimm(bisher[i]);
+    if (typeof v === 'number') return { v, d: bisher[i].d };
+  }
+  return null;
+};
+for (const k of kanaele) {
+  const vor = vortag((t) => t.kanaele?.[k.name]);
+  if (vor) { k.vorher = vor.v; k.vergleichVom = vor.d; }
+  else k.vergleichVom = null;
+}
 
 // ── Was ist heute anders? ─────────────────────────────────────────────────
 //
@@ -366,7 +428,7 @@ if (vorTag) {
   bewegt('Rezensionen', vorTag.rez, tagesstand.rez, false);
   bewegt('Follower gesamt', vorTag.gesamt, tagesstand.gesamt, false,
     (v) => v.toLocaleString('de-DE'));
-  for (const k of basis.kanaele) {
+  for (const k of kanaele) {
     bewegt(k.name, vorTag.kanaele?.[k.name], tagesstand.kanaele[k.name], false,
       (v) => v.toLocaleString('de-DE'));
   }
@@ -397,8 +459,13 @@ const aenderungenStand = {
 // falsches Konto im Browser etwa — trägt der Rundlauf in basis.warnungen ein.
 const warnungen = [];
 const warnen = (stufe, text) => warnungen.push({ stufe, text });
+// Eine Handwarnung mit `bis` verschwindet von selbst. Ohne Ablauf bliebe sie
+// stehen, bis jemand daran denkt — und eine Warnung, die eine Woche steht,
+// wird nicht mehr gelesen, auch die nicht, die daneben neu dazukommt.
 for (const wn of basis.warnungen ?? []) {
-  if (wn?.text) warnen(wn.stufe === 'hoch' ? 'hoch' : 'mittel', wn.text);
+  if (!wn?.text) continue;
+  if (wn.bis && wn.bis < heute) continue;
+  warnen(wn.stufe === 'hoch' ? 'hoch' : 'mittel', wn.text);
 }
 if (technik.deploy && technik.deploy !== 'erfolgreich') {
   warnen('hoch', `Die Veröffentlichung steht auf „${technik.deploy}“ — die Website zeigt noch den Stand davor.`);
@@ -431,6 +498,65 @@ const tageHer = letzterKdp ? Math.round((Date.parse(heute) - Date.parse(letzterK
 if (tageHer !== null && tageHer >= 2) {
   warnen('mittel', `Seit ${tageHer} Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still.`);
 }
+
+// ── Ereignisse, die sich selbst aufschreiben ──────────────────────────────
+//
+// „Was sich tut“ war bisher vollständig Handarbeit: Jemand musste einen Satz
+// tippen, damit im Dashboard steht, was passiert ist. Vier Dinge weiß der Lauf
+// aber selbst, und sie sind genau die, die man nicht verpassen will.
+//
+// Sie werden festgehalten statt jedes Mal neu abgeleitet: Morgen ist der
+// Vergleichstag ein anderer, und ein Ereignis, das nur so lange existiert, wie
+// es frisch ist, ist keine Chronik, sondern ein Blinken.
+const EREIGNISSE = join(wurzel, 'daten', 'cockpit-ereignisse.json');
+const ereignisDatei = lies(EREIGNISSE) ?? {
+  _hinweis: 'Von scripts/cockpit.mjs selbst erzeugt: neue Rezension, Wechsel der Veröffentlichung, erschienener Journalbeitrag, Bewegung im Monatsstand. Nicht von Hand pflegen — Handgeschriebenes gehört nach cockpit-basis.json unter „aktivitaet".',
+  eintraege: [],
+};
+const ereignisse = ereignisDatei.eintraege ?? [];
+const schonDa = new Set(ereignisse.map((e) => e.id));
+const jetztIso = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+const merken = (id, kanal, text) => {
+  if (schonDa.has(id)) return;
+  schonDa.add(id);
+  ereignisse.push({ id, zeit: jetztIso, kanal, text });
+};
+
+if (vorTag) {
+  if (typeof tagesstand.rez === 'number' && typeof vorTag.rez === 'number' && tagesstand.rez > vorTag.rez) {
+    const mehr = tagesstand.rez - vorTag.rez;
+    merken(`rez-${tagesstand.d}-${tagesstand.rez}`, 'Amazon',
+      `${mehr === 1 ? 'Eine neue Rezension' : mehr + ' neue Rezensionen'} — jetzt ${tagesstand.rez} insgesamt${buch.rezensionen?.schnitt ? `, Durchschnitt ${String(buch.rezensionen.schnitt).replace('.', ',')}` : ''}.`);
+  }
+  if (vorTag.dep && tagesstand.dep && vorTag.dep !== tagesstand.dep) {
+    merken(`deploy-${tagesstand.d}-${tagesstand.dep}`, 'Technik',
+      tagesstand.dep === 'erfolgreich'
+        ? 'Die Veröffentlichung steht wieder auf grün.'
+        : `Die Veröffentlichung ist auf „${tagesstand.dep}“ gewechselt.`);
+  }
+  if (typeof tagesstand.best === 'number' && typeof vorTag.best === 'number' && tagesstand.best > vorTag.best) {
+    merken(`best-${tagesstand.d}-${tagesstand.best}`, 'Amazon',
+      `${tagesstand.best - vorTag.best} Bestellung${tagesstand.best - vorTag.best === 1 ? '' : 'en'} mehr im Monat — jetzt ${tagesstand.best}.`);
+  }
+}
+// Ein Journalbeitrag, dessen Datum heute ist, steht ab heute auf der Website.
+for (const m of beitraegeText ? beitraegeText.matchAll(/slug:\s*'([^']+)'[\s\S]{0,400}?datum:\s*'(\d{4}-\d{2}-\d{2})'/g) : []) {
+  if (m[2] === heute) merken(`journal-${m[1]}`, 'Website', `Der Journalbeitrag „${m[1]}“ ist heute erschienen.`);
+}
+
+// Ein halber Monat genügt; älteres steht ohnehin nicht mehr in der Liste.
+const grenze = new Date(Date.now() - 21 * 864e5).toISOString();
+ereignisDatei.eintraege = ereignisse.filter((e) => e.zeit >= grenze).slice(-40);
+const ereignisseNeu = JSON.stringify(ereignisDatei.eintraege) !== JSON.stringify(lies(EREIGNISSE)?.eintraege ?? []);
+if (ereignisseNeu && !nurPruefen) {
+  writeFileSync(EREIGNISSE, JSON.stringify(ereignisDatei, null, 2) + '\n', 'utf8');
+}
+
+// Handgeschriebenes und Selbstgeschriebenes in einer Liste, neueste zuerst.
+const aktivitaet = [...(basis.aktivitaet ?? []), ...ereignisDatei.eintraege]
+  .filter((a) => a?.zeit && a?.text)
+  .sort((a, b) => (a.zeit < b.zeit ? 1 : -1))
+  .slice(0, 14);
 
 // ── Wochenbericht: der jüngste Abschnitt, nicht die ganze Datei ───────────
 const berichtText = autopilot ? liesText(join(autopilot, 'WOCHENBERICHT.md')) : null;
@@ -477,9 +603,9 @@ const raus = {
   termine,
   bericht,
   kosten,
-  kanaele: basis.kanaele,
+  kanaele,
   vorschlaege: basis.vorschlaege,
-  aktivitaet: basis.aktivitaet,
+  aktivitaet,
   offen: basis.offen,
   technik,
   luecken,
