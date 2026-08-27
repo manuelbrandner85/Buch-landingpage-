@@ -55,6 +55,21 @@ export interface Kaufweg {
   haendler: string;
   form: 'Taschenbuch' | 'Gebunden' | 'E-Book' | 'Hörbuch';
   url: string;
+  /**
+   * Die ISBN dieser Ausgabe – nicht des Buches: Taschenbuch und E-Book haben
+   * je eine eigene. Solange ein Titel nur über Amazon läuft, gibt es sie
+   * womöglich gar nicht (dort steht eine ASIN); dann bleibt das Feld leer.
+   *
+   * Sobald sie da ist, erscheint sie auf der Buchseite und im Datenblatt für
+   * Suchmaschinen. Über die ISBN findet der Buchhandel den Titel – und Google
+   * verbindet die Buchseite mit den Einträgen bei tolino, Thalia und allen
+   * anderen.
+   */
+  isbn?: string;
+  /** Preis in Euro, wenn er feststeht und überall derselbe ist. */
+  preis?: number;
+  /** Eine halbe Zeile, wenn der Weg eine Erklärung braucht. */
+  hinweis?: string;
 }
 
 export interface Buch {
@@ -74,6 +89,8 @@ export interface Buch {
   status: 'erschienen' | 'erscheint' | 'in Arbeit';
   /** Leer, solange keine Produktseite existiert. Niemals erfundene URLs. */
   kaufwege: Kaufweg[];
+  /** Erscheinungsdatum, ISO. Steht im Datenblatt, sobald es feststeht. */
+  erschienen?: string;
   coverAsset?: AssetId;
   klappentext: string;
   seiten?: number;

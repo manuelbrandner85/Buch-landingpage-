@@ -7,6 +7,7 @@ import {
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
+import { ausgaben } from '@/world/schema';
 
 /**
  * Die Welt eines Bandes.
@@ -28,10 +29,14 @@ export async function generateMetadata(
   const r = reiheNach(reihe);
   const b = bandNach(band);
   if (!r || !b) return {};
-  const titel = `${b.buch.titel} – ${r.titel}, Band ${b.buch.nummer}`;
+  // Kurz genug, dass Google ihn ganz zeigt – und eigen genug, dass er sich von
+  // der Buchseite unterscheidet: Hier geht man hinein, dort kauft man.
+  const titel = `${b.buch.titel}: die begehbare Welt`;
   return {
     title: titel,
-    description: b.buch.unterzeile ?? b.buch.klappentext.slice(0, 160),
+    description: `Band ${b.buch.nummer} der Unsichtbaren Fäden zum Durchschreiten: `
+      + `${b.kapitel.length} Kapitel als Stationen, Motive in Bewegung, zu jeder `
+      + 'Aussage die Angabe, wie gut sie belegt ist.',
     alternates: {
       canonical: wegVollstaendig(wegWelt(r.id, b.buch.id)) ?? wegWelt(r.id, b.buch.id),
     },
@@ -62,6 +67,8 @@ export default async function BandWelt(
     description: b.buch.klappentext,
     publisher: { '@type': 'Organization', name: TRENDONIX.name },
     author: { '@type': 'Organization', name: TRENDONIX.name },
+    ...(b.buch.erschienen ? { datePublished: b.buch.erschienen } : {}),
+    ...(b.buch.kaufwege.length ? { workExample: ausgaben(b.buch.kaufwege) } : {}),
     hasPart: b.kapitel.map((k) => ({
       '@type': 'Chapter', position: k.id, name: k.titel, description: k.unterzeile,
     })),
@@ -75,6 +82,13 @@ export default async function BandWelt(
       {vorschau && (
         <link rel="preload" as="image" href={vorschau.href} type={vorschau.type} fetchPriority="high" />
       )}
+      {/* Die Welt beginnt mit einer Szene, nicht mit einer Überschrift – für
+          das Auge richtig, für Suchmaschinen und Vorleseprogramme ein Loch:
+          Diese Seiten hatten gar keine erste Überschrift. Sie steht jetzt da,
+          nur nicht im Bild. */}
+      <h1 className="nur-lesen">
+        {b.buch.titel} – {r.titel}, Band {b.buch.nummer}: die begehbare Welt
+      </h1>
       <SceneEngine szenen={szenen} reihe={r.id} band={b.buch.id} />
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />

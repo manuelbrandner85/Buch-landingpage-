@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     default: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
     template: `%s · ${TRENDONIX.name}`,
   },
-  description: TRENDONIX.arbeitsweise,
+  description: TRENDONIX.kurzfassung,
   applicationName: TRENDONIX.name,
   ...(process.env.NEXT_PUBLIC_BASIS_URL
     ? { metadataBase: new URL(process.env.NEXT_PUBLIC_BASIS_URL) }

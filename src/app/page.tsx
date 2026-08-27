@@ -30,11 +30,11 @@ import { Unterschrift } from '@/ui/Unterschrift';
  */
 export const metadata: Metadata = {
   title: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
-  description: TRENDONIX.arbeitsweise,
+  description: TRENDONIX.kurzfassung,
   openGraph: {
     type: 'website',
     title: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
-    description: TRENDONIX.arbeitsweise,
+    description: TRENDONIX.kurzfassung,
     images: wegVorschau('haus'),
   },
   twitter: { card: 'summary_large_image', images: wegVorschau('haus') },

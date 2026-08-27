@@ -32,7 +32,9 @@ export function generateStaticParams() {
 }
 
 /** Der erste Teil eines Satzes – für den Titel, der bei etwa 60 Zeichen abreißt. */
-const anriss = (text: string, laenge = 44) => {
+// 30 Zeichen: Der Titel traegt schon den Ortsnamen und die angehaengte Marke;
+// bei mehr riss Google mitten im Wort ab.
+const anriss = (text: string, laenge = 30) => {
   const erster = text.split(/[–:;.]/)[0]?.trim() ?? text;
   return erster.length > laenge ? `${erster.slice(0, laenge - 1).trim()}…` : erster;
 };

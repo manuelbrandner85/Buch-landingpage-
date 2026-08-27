@@ -4,7 +4,7 @@ import {
   OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, buchNach, reiheZuBand,
 } from '@/world/registry';
 import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
-import { brotkrumen } from '@/world/schema';
+import { ausgaben, brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { BASIS_PFAD } from '@/world/bilder';
 import { BLICK } from '@/data/gemeinsam/blick';
@@ -34,7 +34,12 @@ export async function generateMetadata(
   if (!buch) return {};
   const reihe = reiheZuBand(buch.id);
   return {
-    title: `${buch.titel} – ${reihe?.titel} Band ${buch.nummer}`,
+    // Mit Reihentitel wird der Treffer bei zwei von drei Baenden zu lang und
+    // reisst mitten im Wort ab. Dann traegt ihn die Bandzahl allein.
+    title: (() => {
+      const lang = `${buch.titel} – ${reihe?.titel} Band ${buch.nummer}`;
+      return lang.length <= 52 ? lang : `${buch.titel} – Band ${buch.nummer}`;
+    })(),
     description: buch.unterzeile ?? buch.klappentext.slice(0, 160),
     alternates: { canonical: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id) },
     openGraph: {
@@ -70,13 +75,8 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
     // Seite, und was die Seite nicht zeigt, behauptet das Datenblatt nicht.
     ...(wegVorschau(buch.id) ? { image: wegVorschau(buch.id) } : {}),
     url: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id),
-    ...(buch.kaufwege.length
-      ? { workExample: buch.kaufwege.map((k) => ({
-        '@type': 'Book', bookFormat: k.form === 'E-Book'
-          ? 'https://schema.org/EBook' : 'https://schema.org/Paperback',
-        url: k.url, inLanguage: 'de',
-      })) }
-      : {}),
+    ...(buch.erschienen ? { datePublished: buch.erschienen } : {}),
+    ...(buch.kaufwege.length ? { workExample: ausgaben(buch.kaufwege) } : {}),
   };
 
   return (
@@ -97,6 +97,33 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           <div className="wege"><Kaufwege buch={buch} /></div>
         </div>
       </div>
+
+      {buch.kaufwege.length > 0 && (
+        <>
+          <h2>Wo es das Buch gibt</h2>
+          <ul className="ausgabenliste">
+            {buch.kaufwege.map((k) => (
+              <li key={`${k.form}-${k.haendler}`}>
+                <a href={k.url} target="_blank" rel="noopener noreferrer">
+                  {k.form} bei {k.haendler}
+                </a>
+                {k.preis !== undefined && (
+                  <span className="seite">
+                    {' · '}{k.preis.toFixed(2).replace('.', ',')} €
+                  </span>
+                )}
+                {k.isbn && <span className="seite">{' · ISBN '}{k.isbn}</span>}
+                {k.hinweis && <span className="seite">{' · '}{k.hinweis}</span>}
+              </li>
+            ))}
+          </ul>
+          <p className="quelle">
+            <b>Hinweis</b>Hier steht, was es wirklich gibt. Kommt eine Ausgabe
+            dazu – eine eigene ISBN, der Buchhandel, tolino –, steht sie an
+            dieser Stelle, sobald sie bestellbar ist.
+          </p>
+        </>
+      )}
 
       {blick.length > 0 && (
         <>

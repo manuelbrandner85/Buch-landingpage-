@@ -83,3 +83,45 @@ export const begriffssammlung = (
     ...(e.weg && wegVollstaendig(e.weg) ? { url: wegVollstaendig(e.weg) } : {}),
   })),
 });
+
+/**
+ * Die Ausgaben eines Buches für das Datenblatt.
+ *
+ * Ein Titel ist ein Werk, eine Ausgabe ist ein Ding mit eigener Nummer: Das
+ * Taschenbuch hat eine andere ISBN als das E-Book, und im Buchhandel wird über
+ * genau diese Nummer bestellt. Steht sie hier, verbindet Google die Buchseite
+ * mit den Einträgen bei tolino, Thalia und jeder Buchhandlung, die den Titel
+ * führt – ohne sie bleibt die Seite ein Text neben dem Handel.
+ *
+ * Preis und Verfügbarkeit nur, wenn beides feststeht: Ein Datenblatt, das
+ * einen falschen Preis nennt, wird von Google nicht ignoriert, sondern
+ * abgestraft.
+ */
+const FORMEN: Record<string, string> = {
+  'Taschenbuch': 'https://schema.org/Paperback',
+  'Gebunden': 'https://schema.org/Hardcover',
+  'E-Book': 'https://schema.org/EBook',
+  'Hörbuch': 'https://schema.org/AudiobookFormat',
+};
+
+export const ausgaben = (kaufwege: {
+  haendler: string; form: string; url: string; isbn?: string; preis?: number;
+}[]) => kaufwege.map((k) => ({
+  '@type': 'Book',
+  bookFormat: FORMEN[k.form] ?? 'https://schema.org/Paperback',
+  url: k.url,
+  inLanguage: 'de',
+  ...(k.isbn ? { isbn: k.isbn } : {}),
+  ...(k.preis
+    ? {
+      offers: {
+        '@type': 'Offer',
+        price: k.preis,
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock',
+        url: k.url,
+        seller: { '@type': 'Organization', name: k.haendler },
+      },
+    }
+    : {}),
+}));

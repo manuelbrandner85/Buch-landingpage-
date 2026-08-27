@@ -14,6 +14,12 @@ export interface Haus {
   versprechen: string;
   /** Das Verfahren, das alle Bücher teilen – unabhängig vom Thema. */
   arbeitsweise: string;
+  /**
+   * Dasselbe in 150 Zeichen – für die Zeile unter dem Treffer bei Google.
+   * Was länger ist, wird dort abgeschnitten, und abgeschnitten wird immer am
+   * unpassendsten Ort. `arbeitsweise` ist mit 223 Zeichen zu lang dafür.
+   */
+  kurzfassung: string;
 }
 
 export const TRENDONIX: Haus = {
@@ -23,6 +29,9 @@ export const TRENDONIX: Haus = {
     'Jeder Band beginnt bei etwas Sichtbarem – einem Feuer, einer Münze, einer Maschine – '
     + 'und fragt, welcher unsichtbare Faden daran hängt. Behauptet wird nichts, was sich '
     + 'nicht prüfen lässt: Jede Seite nennt, woher sie es weiß.',
+  kurzfassung:
+    'Sachbücher über die Fäden zwischen den Dingen. Jede Aussage nennt ihre '
+    + 'Quelle und wie sicher sie ist – von gesichert bis umstritten.',
 };
 
 /**

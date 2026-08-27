@@ -22,7 +22,9 @@ export async function generateMetadata(
   const b = beitragNach(slug);
   if (!b) return { title: 'Nicht gefunden – Trendonix' };
   return {
-    title: b.titel,
+    // Ein langer Titel plus „ · Trendonix“ reisst bei Google ab. Ueber 52
+    // Zeichen steht er deshalb allein.
+    title: b.titel.length > 52 ? { absolute: b.titel } : b.titel,
     description: b.auszug,
     alternates: { canonical: wegVollstaendig(wegBeitrag(b.slug)) ?? wegBeitrag(b.slug) },
     openGraph: {
