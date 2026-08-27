@@ -24,7 +24,8 @@ export type Verteiler = {
 };
 
 export const VERTEILER: Verteiler = {
-  formular: '',
+  formular:
+    'https://fc625fea.sibforms.com/serve/MUIFAJpcYPlvHXtS_Kis1MiiXqABz4Yv_WejEh3rHJEYh6tsrWOFpmsq0qwpXXOUuKFFW8q8UiuviVfVJXm4kmPfYPbrutLPBl3EZKIiFduqeRRv998z8fKCvrrl4qGGjldgX82FwMVl5Dnof-s0D1mChU0jTTW_IR2WpYNSUu6NRj7t0yHS7ct4BceXYIhAxzXTjfK2CUTvHFORiw==',
   titel: 'Wenn der nächste Band fertig ist',
   text:
     'Die Reihe wächst langsam. Wer wissen möchte, wann ein Band erscheint, '
