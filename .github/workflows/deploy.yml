@@ -76,6 +76,16 @@ jobs:
           export NEXT_PUBLIC_BASIS_URL="https://manuelbrandner85.github.io/Buch-landingpage-"
           npx next build
 
+      # Das Cockpit ist kein Teil der Welt. Es liegt in public/, damit es
+      # unveraendert auf den Webspace kommt – dort wird der Ordner mit einem
+      # Verzeichnisschutz versehen. Auf dem oeffentlichen github.io-Spiegel
+      # gaebe es diesen Schutz nicht, und seine Verweise sind bewusst relativ
+      # (die App laeuft unter ihrer eigenen Adresse, nicht unter dem
+      # Basispfad des Spiegels). Deshalb wird er hier herausgenommen, bevor
+      # die Wege geprueft werden.
+      - name: Cockpit gehoert nicht in den Spiegel
+        run: rm -rf out/cockpit-eb4e3e9d63d6
+
       # Ein statischer Export hat keinen Server, der einen falschen Pfad noch
       # abfängt. Deshalb wird jeder interne Verweis nachgeschlagen, bevor
       # irgendetwas veröffentlicht wird.
