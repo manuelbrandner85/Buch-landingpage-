@@ -3,6 +3,7 @@ import { BAENDE, TRENDONIX, assetNach, reiheZuBand } from '@/world/registry';
 import { wegLeseprobe, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 import { mailAn } from '@/data/gemeinsam/anbieter';
+import { VERTEILER } from '@/data/gemeinsam/verteiler';
 import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
@@ -30,12 +31,20 @@ import { Hausmarke } from '@/ui/Hausmarke';
  */
 export function Kaufwege({ buch }: { buch: Buch }) {
   if (buch.status === 'erscheint') {
-    // Kein Formular, keine Liste, kein Dienst: eine Mail, die der Leser selbst
-    // abschickt. Das braucht keine Einwilligung, weil nichts gespeichert wird.
-    const bescheid = mailAn(
-      `Bescheid geben: Band ${buch.nummer}`,
-      `Bitte einmal melden, sobald Band ${buch.nummer} zu haben ist.`,
-    );
+    // Seit dem 27.08.2026 fuehrt der Hinweis in den Verteiler, nicht mehr ins
+    // E-Mail-Programm. Grund: Ein mailto-Link oeffnet auf dem Handy haeufig gar
+    // nichts, und wer eine Mail schreibt, landet auf keiner Liste - beim
+    // naechsten Band muesste er sich selbst erinnern.
+    //
+    // Der Rueckfallweg bleibt: Steht in `VERTEILER.formular` keine Adresse,
+    // zeigt der Verteiler sich ohnehin nicht, und dann ist die Mail besser als
+    // ein Anker, der ins Leere springt.
+    const bescheid = VERTEILER.formular
+      ? '#verteiler'
+      : mailAn(
+          `Bescheid geben: Band ${buch.nummer}`,
+          `Bitte einmal melden, sobald Band ${buch.nummer} zu haben ist.`,
+        );
     return (
       <span className="kaufblock">
         <span className="kaufen wartet">Erscheint in Kürze</span>
