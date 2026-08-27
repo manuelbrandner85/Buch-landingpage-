@@ -13,6 +13,7 @@ import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
+import { Kaufleiste } from '@/ui/Kaufleiste';
 
 /**
  * Die Seite eines einzelnen Buches.
@@ -159,6 +160,7 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
         {reihe && <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>}
       </nav>
       <Kanaele />
+      <Kaufleiste buch={buch} />
       <Datenblatt daten={strukturierteDaten} />
       <Datenblatt daten={brotkrumen([
         { name: 'Start', weg: wegHaus() },

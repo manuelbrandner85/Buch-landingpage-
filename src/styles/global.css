@@ -1571,3 +1571,26 @@ header .marke .reihenname{color:#F0DDA9;
 .lesefassung blockquote{margin:1.2rem 0;padding-left:1.2rem;
   border-left:1px solid rgba(227,200,139,.38);font-family:var(--display),serif;
   font-style:italic;font-size:1.1rem;color:var(--papier)}
+
+/* ---------- Der Kaufweg, der mitkommt ----------
+   Nur auf schmalen Geräten und nur, wenn der eigentliche Kaufblock oben aus
+   dem Bild ist. Sie schiebt sich hoch, statt zu erscheinen: ein Aufblitzen
+   unten am Rand ist auf dem Telefon ein Schreck, kein Angebot. */
+.kaufleiste{position:fixed;left:0;right:0;bottom:0;z-index:30;
+  display:flex;align-items:center;gap:1rem;
+  padding:.7rem clamp(.9rem,4vw,1.4rem);
+  padding-bottom:calc(.7rem + env(safe-area-inset-bottom,0px));
+  background:rgba(6,10,20,.94);backdrop-filter:blur(10px);
+  border-top:1px solid rgba(227,200,139,.3);
+  transform:translateY(120%);transition:transform .4s cubic-bezier(.22,.61,.36,1);
+  pointer-events:none}
+.kaufleiste.da{transform:translateY(0);pointer-events:auto}
+.kaufleiste-text{display:flex;flex-direction:column;gap:.1rem;min-width:0;flex:1}
+.kaufleiste-text b{font-family:var(--display),serif;font-weight:400;font-size:.95rem;
+  color:var(--papier);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kaufleiste-text em{font-style:normal;font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--staub)}
+.kaufleiste .kaufen{flex:0 0 auto;padding:.7rem 1.2rem;font-size:.68rem}
+body.mit-kaufleiste{padding-bottom:4.6rem}
+@media (min-width:901px){ .kaufleiste{display:none} }
+@media (prefers-reduced-motion:reduce){ .kaufleiste{transition:none} }

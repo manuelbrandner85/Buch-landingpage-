@@ -4,7 +4,8 @@ import { OEFFENTLICHE_REIHEN, TRENDONIX } from '@/world/registry';
 import { wegBegriffe, wegHaus, wegReihe, wegUeber, wegVollstaendig } from '@/world/wege';
 import { begriffssammlung, brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
-import { LEITREIHE } from '@/world/registry';
+import { LEITREIHE, WELT } from '@/world/registry';
+import { wegKapitel } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
 
 /** Die Begriffe gehören der Welt einer Reihe – deshalb liegen sie unter ihr. */
@@ -21,6 +22,22 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Elf Begriffe, elf eigene Seiten? Nein.
+ *
+ * Der Plan war, jedem Begriff eine eigene Adresse zu geben – mehr Seiten, mehr
+ * Treffer. Bei vierzig Wörtern Erklärung wären das elf dünne Seiten geworden,
+ * genau der Fehler, den die Ortsseiten gerade hinter sich haben. Eine
+ * vollständige Seite mit Sprungmarken (`/begriffe/#satrapie`) ist für
+ * Suchmaschinen dasselbe Ziel und für Lesende die bessere Liste.
+ *
+ * Was der Seite gefehlt hat, ist der Weg weiter: Zu jedem Begriff steht jetzt
+ * das Kapitel, in dem er vorkommt – gefunden über die Buchseite, nicht von
+ * Hand zugeordnet.
+ */
+const kapitelZurSeite = (seite: number) =>
+  (WELT['band-1']?.kapitel ?? []).find((k) => seite >= k.seiten[0] && seite <= k.seiten[1]);
+
 export default function BegriffeSeite() {
   const sortiert = [...BEGRIFFE].sort((a, b) => a.wort.localeCompare(b.wort, 'de'));
   return (
@@ -34,7 +51,23 @@ export default function BegriffeSeite() {
         {sortiert.map((b) => (
           <div key={b.id} id={b.id}>
             <dt>{b.wort}</dt>
-            <dd>{b.erklaerung}<span className="seite"> · Band 1, Seite {b.seite}</span></dd>
+            <dd>
+              {b.erklaerung}
+              <span className="seite">
+                {' · Band 1, Seite '}{b.seite}
+                {(() => {
+                  const k = kapitelZurSeite(b.seite);
+                  return k ? (
+                    <>
+                      {' · '}
+                      <a href={wegKapitel(LEITREIHE.id, k.id)}>
+                        Kapitel {k.id}: {k.titel}
+                      </a>
+                    </>
+                  ) : null;
+                })()}
+              </span>
+            </dd>
           </div>
         ))}
       </dl>
