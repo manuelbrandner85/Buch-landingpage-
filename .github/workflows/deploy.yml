@@ -79,6 +79,7 @@ jobs:
         run: |
           export NEXT_PUBLIC_BASIS_PFAD="/Buch-landingpage-"
           node scripts/pruefe-wege.mjs
+          node scripts/pruefe-suche.mjs
 
       - name: Jekyll abschalten
         run: touch out/.nojekyll
@@ -177,7 +178,9 @@ jobs:
         if: steps.zugang.outputs.da == 'ja'
         env:
           NEXT_PUBLIC_BASIS_PFAD: ''
-        run: node scripts/pruefe-wege.mjs
+        run: |
+          node scripts/pruefe-wege.mjs
+          node scripts/pruefe-suche.mjs
 
       - name: Serverregeln beilegen
         if: steps.zugang.outputs.da == 'ja'
