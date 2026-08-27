@@ -1,0 +1,122 @@
+# Laedt nur das Trendonix Dashboard auf den Webspace.
+#
+# Die App ist eine eigene kleine Web-App: ein Ordner mit sechs Dateien, von
+# denen sich im Betrieb genau eine aendert – cockpit.json. Sie liegt zwar auf
+# derselben Domain wie die Buchseite, hat mit deren Bau aber nichts zu tun.
+#
+# Der grosse Auftrag baut 175 Seiten, erzeugt Bilder und spiegelt den ganzen
+# Export – drei Minuten. Fuer eine geaenderte Followerzahl ist das absurd.
+# Dieser Auftrag laedt zwanzig Kilobyte hoch und ist in unter einer Minute
+# durch. Deshalb schliesst der grosse Auftrag diesen Ordner aus.
+name: Cockpit hochladen
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/cockpit-eb4e3e9d63d6/**'
+      - '.github/workflows/cockpit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Nicht in die Quere kommen: Laeuft der grosse Auftrag gerade, wartet dieser.
+concurrency:
+  group: webspace
+  cancel-in-progress: false
+
+jobs:
+  hochladen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Auf den Webspace
+        env:
+          FTP_ZUGANG: ${{ secrets.FTP_ZUGANG }}
+          FTP_ZIEL: ${{ vars.FTP_ZIEL }}
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
+        run: |
+          set -euf +x
+          if [ -z "${FTP_ZUGANG:-}" ]; then
+            echo "::notice title=Kein Zugang::Ohne Secret FTP_ZUGANG wird nichts geladen."
+            exit 0
+          fi
+          DOMAIN="${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
+          ORDNER="cockpit-eb4e3e9d63d6"
+
+          # benutzer:kennwort@server[/verzeichnis] auseinandernehmen. Benutzer
+          # vor dem ersten Doppelpunkt, Server hinter dem letzten Klammeraffen –
+          # so darf das Kennwort selbst einen Klammeraffen enthalten.
+          BENUTZER="${FTP_ZUGANG%%:*}"
+          REST="${FTP_ZUGANG#*:}"
+          HOST_TEIL="${REST##*@}"
+          KENNWORT="${REST%@*}"
+          case "$HOST_TEIL" in
+            */*) SERVER="${HOST_TEIL%%/*}"; VORGABE="/${HOST_TEIL#*/}" ;;
+            *)   SERVER="$HOST_TEIL";       VORGABE="" ;;
+          esac
+          if [ -z "$BENUTZER" ] || [ -z "$KENNWORT" ] || [ -z "$SERVER" ]; then
+            echo "::error title=FTP_ZUGANG unlesbar::Erwartet wird benutzer:kennwort@server"
+            exit 1
+          fi
+
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+          lftp_tun() {
+            lftp -c "
+              set ftp:ssl-force true;
+              set ftp:ssl-protect-data true;
+              set ssl:verify-certificate no;
+              set net:max-retries 2;
+              set net:timeout 20;
+              set cmd:fail-exit true;
+              open -u \"$BENUTZER\",\"$KENNWORT\" \"$SERVER\";
+              $1
+            "
+          }
+
+          # Wohin? Dieselbe Frage wie beim grossen Auftrag, nur kuerzer
+          # beantwortet: Die App liegt bereits auf dem Server, also genuegt es
+          # zu pruefen, wo ihre index.html liegt. Eine Sonde ist nicht noetig.
+          OHNE_WWW="${DOMAIN#www.}"
+          if [ -n "$VORGABE" ]; then KANDIDATEN="$VORGABE"
+          elif [ -n "${FTP_ZIEL:-}" ]; then KANDIDATEN="$FTP_ZIEL"
+          else
+            KONTO="${SERVER%%.*}"
+            KANDIDATEN="/ /$OHNE_WWW /$DOMAIN /htdocs /htdocs/$OHNE_WWW"
+            KANDIDATEN="$KANDIDATEN /$KONTO/$OHNE_WWW /www/htdocs/$KONTO/$OHNE_WWW"
+          fi
+
+          ZIEL=""
+          for K in $KANDIDATEN; do
+            if lftp_tun "cls -1 \"$K/$ORDNER/index.html\";" >/dev/null 2>&1; then
+              ZIEL="$K"; echo "Ziel: $K"; break
+            fi
+          done
+          if [ -z "$ZIEL" ]; then
+            echo "::error title=Ordner nicht gefunden::Das Cockpit liegt noch nirgends. Einmal den grossen Auftrag laufen lassen, danach greift dieser hier."
+            exit 1
+          fi
+
+          # --transfer-all: Die Datei aendert oft nur ihren Inhalt, nicht ihre
+          # Groesse. Ein Abgleich nach Groesse haette sie stehen lassen – genau
+          # der Fehler, der am 26.08. schon einmal eine Veroeffentlichung
+          # verschluckt hat.
+          lftp_tun "mirror -R --no-perms --transfer-all \
+            \"public/$ORDNER/\" \"$ZIEL/$ORDNER\";"
+
+          # Beweis statt Hoffnung: Steht der neue Stand wirklich oben?
+          sleep 3
+          LIVE="$(curl -fsS --max-time 25 "https://$DOMAIN/$ORDNER/cockpit.json" \
+            | tr -d ' \n' | grep -o '"stand":"[^"]*"' || true)"
+          LOKAL="$(tr -d ' \n' < "public/$ORDNER/cockpit.json" \
+            | grep -o '"stand":"[^"]*"' || true)"
+          echo "live:  $LIVE"
+          echo "lokal: $LOKAL"
+          if [ -n "$LOKAL" ] && [ "$LIVE" != "$LOKAL" ]; then
+            echo "::error title=Alter Stand::Hochgeladen, aber die Domain liefert weiter den alten Stand."
+            exit 1
+          fi
+          echo "Cockpit steht."

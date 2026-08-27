@@ -10,6 +10,12 @@ name: Welt bauen und veröffentlichen
 on:
   push:
     branches: [main]
+    # Das Cockpit hat einen eigenen, winzigen Weg auf den Webspace
+    # (cockpit.yml). Es aendert sich stuendlich; jedes Mal die ganze Welt neu
+    # zu bauen und zu spiegeln waere drei Minuten Arbeit fuer eine geaenderte
+    # Zahl. Aendert sich sonst etwas, kommt der Ordner ohnehin mit.
+    paths-ignore:
+      - 'public/cockpit-eb4e3e9d63d6/**'
   workflow_dispatch:
   # Taeglicher Bau, damit terminierte Journal-Beitraege von selbst erscheinen.
   # Die Seite ist ein statischer Export: Ein Beitrag mit Zukunftsdatum wird erst
