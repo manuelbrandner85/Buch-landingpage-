@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T19:12:22Z",
+  "stand": "2026-08-27T19:21:15Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -74,6 +74,14 @@
     "gesamt": 22656,
     "kanaeleGezaehlt": 5,
     "kanaeleGesamt": 6
+  },
+  "verlauf": {
+    "tage": 1,
+    "seit": "2026-08-27",
+    "rang": [],
+    "rezensionen": [],
+    "reichweite": [],
+    "kanaele": {}
   },
   "kanaele": [
     {

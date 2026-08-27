@@ -1,0 +1,18 @@
+{
+  "_hinweis": "Ein Tagesstand je Zeile, geschrieben von scripts/cockpit.mjs. Nicht von Hand pflegen. Was fehlt, fehlt — es wird nichts nachgetragen und nichts geglättet.",
+  "tage": [
+    {
+      "d": "2026-08-27",
+      "rang": 334543,
+      "rez": 0,
+      "gesamt": 22656,
+      "kanaele": {
+        "TikTok": 21600,
+        "YouTube": 10,
+        "Instagram": 1040,
+        "Facebook": 6,
+        "Bluesky": 0
+      }
+    }
+  ]
+}

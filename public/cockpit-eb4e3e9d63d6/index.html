@@ -152,6 +152,17 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 .kaputt li::before{display:none}
 .kaputt b{color:#e0908a}
 .kaputt span{word-break:break-all;opacity:.6}
+
+/* ---------- Kurven ---------- */
+.kurvenblock{margin-top:1rem}
+.kurventitel{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);opacity:.7;margin-bottom:.35rem}
+svg.kurve{display:block;width:100%;height:38px;overflow:visible}
+svg.kurve polyline{fill:none;stroke:var(--gold);stroke-width:1.4;vector-effect:non-scaling-stroke;
+  stroke-linejoin:round;stroke-linecap:round}
+svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
+.kurvenfuss{display:flex;justify-content:space-between;font-size:.68rem;opacity:.45;margin-top:.3rem}
+.kanal svg.kurve{height:22px;margin:.45rem 0 .1rem}
 </style>
 </head>
 <body>
@@ -235,12 +246,53 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
       + '</svg>';
   }
 
+  /**
+   * Eine Kurve aus Tagesständen.
+   *
+   * Kein Raster, keine Achsenbeschriftung, keine Legende — auf einem Telefon
+   * ist beides Platzverschwendung. Was zählt, steht daneben: erster Wert,
+   * letzter Wert, wie viele Tage dazwischen liegen. Beim Rang zeigt die Kurve
+   * nach oben, wenn die Zahl kleiner wird; alles andere hätte man jedes Mal
+   * neu im Kopf umdrehen müssen.
+   */
+  function kurve(punkte, invers) {
+    if (!punkte || punkte.length < 2) return '';
+    var w = punkte.map(function (p) { return p.v; });
+    var min = Math.min.apply(null, w), max = Math.max.apply(null, w);
+    var spanne = max - min || 1;
+    var B = 100, H = 34;
+    var xy = punkte.map(function (p, i) {
+      // Ein Rand von zwei Einheiten links und rechts: sonst klebt der Punkt
+      // des jüngsten Tages an der Kartenkante und wird halb abgeschnitten.
+      var x = punkte.length === 1 ? B / 2 : 2 + (i / (punkte.length - 1)) * (B - 4);
+      var teil = (p.v - min) / spanne;
+      var y = H - (invers ? 1 - teil : teil) * H;
+      return x.toFixed(2) + ',' + y.toFixed(2);
+    });
+    var letzterX = (B - 2).toFixed(2);
+    var letzterY = xy[xy.length - 1].split(',')[1];
+    return '<svg class="kurve" viewBox="0 0 ' + B + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true">'
+      + '<polyline points="' + xy.join(' ') + '"/>'
+      + '<circle cx="' + letzterX + '" cy="' + letzterY + '" r="1.6"/></svg>';
+  }
+
+  function kurveBlock(titel, punkte, invers, formt) {
+    if (!punkte || punkte.length < 2) return '';
+    var erst = punkte[0], letzt = punkte[punkte.length - 1];
+    var f = formt || function (v) { return zahl(v); };
+    return '<div class="kurvenblock"><span class="kurventitel">' + h(titel) + '</span>'
+      + kurve(punkte, invers)
+      + '<span class="kurvenfuss"><span>' + h(f(erst.v)) + '</span>'
+      + '<span>' + punkte.length + ' Tage</span>'
+      + '<span>' + h(f(letzt.v)) + '</span></span></div>';
+  }
+
   function malen(d) {
     var t = [];
 
     // ---- Überblick: die fünf Zahlen, für die man das Telefon herauszieht ----
     var ub = d.buch || {}, urez = ub.rezensionen || {}, uv = (d.verkaeufe || {}).summe30 || {};
-    var ur = d.reichweite || {}, ut = d.technik || {};
+    var ur = d.reichweite || {}, ut = d.technik || {}, vl = d.verlauf || {};
     var verkauft = null;
     if (da(uv.kindle) || da(uv.taschenbuch)) verkauft = (uv.kindle || 0) + (uv.taschenbuch || 0);
     var gruen = ut.deploy === 'erfolgreich';
@@ -257,6 +309,10 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
       + '<div class="ampel ' + (gruen ? 'gut' : 'schlecht') + '">'
       + (gruen ? 'Die Seite steht' : 'Veröffentlichung: ' + h(ut.deploy || 'unbekannt'))
       + (ut.deployWann ? ' · zuletzt ' + vorwie(ut.deployWann) : '') + '</div>'
+      + kurveBlock('Rang · Verlauf', vl.rang, true, function (v) { return '#' + zahl(v); })
+      + kurveBlock('Follower gesamt · Verlauf', vl.reichweite, false)
+      + (vl.tage < 2
+          ? '<p class="hinweis">Die Kurven beginnen morgen — heute steht der erste Tagesstand.</p>' : '')
       + '</div></section>');
 
     // ---- Buch ----
@@ -323,7 +379,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
         + '<div class="karte"><div class="zeile">'
         + kachel(zahl(rw.gesamt), 'Follower gesamt')
         + kachel(da(rw.kanaeleGezaehlt) ? rw.kanaeleGezaehlt + ' / ' + rw.kanaeleGesamt : null, 'Kanäle mit Zahl')
-        + '</div></div>'
+        + '</div>' + kurveBlock('Verlauf', (d.verlauf || {}).reichweite, false) + '</div>'
         + '<div class="kanaele">'
         + d.kanaele.map(function (k) {
             var hat = da(k.follower);
@@ -332,6 +388,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
               + '<div class="zahl' + (hat ? '' : ' leer') + '">'
               + (hat ? zahl(k.follower) : 'keine Daten') + '</div>'
               + (hat ? trend(k.follower, k.vorher, false) : '')
+              + kurve(((d.verlauf || {}).kanaele || {})[k.name], false)
               + '<span class="unten">' + (hat ? 'Follower' : '')
               + (da(k.reaktionen) ? (hat ? ' · ' : '') + zahl(k.reaktionen) + ' '
                   + h(k.reaktionenLabel || 'Reaktionen') : '')

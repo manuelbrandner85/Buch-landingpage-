@@ -163,6 +163,78 @@ if (bekannt.length < basis.kanaele.length) {
 }
 if (!basis.besucher?.gelesen) fehlt('Besucher', basis.besucher?.hinweis ?? 'Keine Zahlen aus der Search Console.');
 
+// ── Verlauf: was gestern war, weiß sonst niemand ──────────────────────────
+//
+// Ein Dashboard ohne Gedächtnis zeigt immer nur den Augenblick. Ob 22.656
+// Follower viel oder wenig sind, entscheidet sich daran, wie viele es vorige
+// Woche waren. Deshalb legt jeder Lauf einen Tagesstand ab — einen je Tag, der
+// letzte des Tages gewinnt. Geschrieben wird nur, wenn sich etwas geändert
+// hat: Sonst wüchse die Datei stündlich um eine Zeile ohne Neuigkeit.
+const VERLAUF = join(wurzel, 'daten', 'cockpit-verlauf.json');
+const verlaufDatei = lies(VERLAUF) ?? {
+  _hinweis: 'Ein Tagesstand je Zeile, geschrieben von scripts/cockpit.mjs. Nicht von Hand pflegen. Was fehlt, fehlt — es wird nichts nachgetragen und nichts geglättet.',
+  tage: [],
+};
+const tagesstand = {
+  d: new Date().toISOString().slice(0, 10),
+  rang: buch.rangGesamt ?? null,
+  rez: buch.rezensionen?.anzahl ?? null,
+  gesamt: null,
+  kanaele: {},
+};
+for (const k of basis.kanaele) {
+  if (typeof k.follower === 'number') tagesstand.kanaele[k.name] = k.follower;
+}
+const gezaehlt = Object.values(tagesstand.kanaele);
+if (gezaehlt.length) tagesstand.gesamt = gezaehlt.reduce((a, b) => a + b, 0);
+
+// Ein Tag, eine Zeile: Käme dieselbe Datumsangabe zweimal vor, zeigte die
+// Kurve einen Sprung, den es nie gab. Der spätere Eintrag gewinnt.
+const nachTag = new Map();
+for (const t of verlaufDatei.tage ?? []) if (t && t.d) nachTag.set(t.d, t);
+const bisher = [...nachTag.values()];
+const heutiger = bisher.find((t) => t.d === tagesstand.d);
+const gleichwie = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// Hat das Entdoppeln etwas entfernt, gehört die bereinigte Fassung auf die
+// Platte — sonst bliebe der Fehler dort für immer stehen.
+let verlaufNeu = bisher.length !== (verlaufDatei.tage ?? []).length;
+if (!heutiger) {
+  bisher.push(tagesstand);
+  verlaufNeu = true;
+} else if (!gleichwie(heutiger, tagesstand)) {
+  Object.assign(heutiger, tagesstand);
+  verlaufNeu = true;
+}
+bisher.sort((a, b) => (a.d < b.d ? -1 : 1));
+// Ein halbes Jahr genügt; was älter ist, beantwortet keine Frage mehr, die
+// heute gestellt wird.
+while (bisher.length > 180) bisher.shift();
+verlaufDatei.tage = bisher;
+if (verlaufNeu && !nurPruefen) {
+  writeFileSync(VERLAUF, JSON.stringify(verlaufDatei, null, 2) + '\n', 'utf8');
+}
+
+// Fürs Dashboard nur die letzten 30 Tage, und nur Reihen mit mindestens zwei
+// Punkten — eine Kurve aus einem einzigen Wert ist keine Kurve.
+const letzte = bisher.slice(-30);
+const reihe = (nimm) => {
+  const p = letzte.map((t) => ({ d: t.d, v: nimm(t) })).filter((x) => typeof x.v === 'number');
+  return p.length >= 2 ? p : [];
+};
+const kanalReihen = {};
+for (const k of basis.kanaele) {
+  const p = reihe((t) => t.kanaele?.[k.name]);
+  if (p.length) kanalReihen[k.name] = p;
+}
+const verlauf = {
+  tage: letzte.length,
+  seit: letzte.length ? letzte[0].d : null,
+  rang: reihe((t) => t.rang),
+  rezensionen: reihe((t) => t.rez),
+  reichweite: reihe((t) => t.gesamt),
+  kanaele: kanalReihen,
+};
+
 const stand = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 const raus = {
   stand,
@@ -170,6 +242,7 @@ const raus = {
   verkaeufe,
   besucher: basis.besucher,
   reichweite,
+  verlauf,
   kanaele: basis.kanaele,
   vorschlaege: basis.vorschlaege,
   aktivitaet: basis.aktivitaet,
@@ -191,4 +264,4 @@ if (nurPruefen) {
 }
 if (gleich) { console.log('Cockpit: unverändert, nichts geschrieben.'); process.exit(0); }
 writeFileSync(ZIEL, text, 'utf8');
-console.log(`Cockpit geschrieben: ${tage.length} Tage Verkäufe, ${bekannt.length}/${basis.kanaele.length} Kanäle mit Zahl, ${luecken.length} Lücke(n).`);
+console.log(`Cockpit geschrieben: ${tage.length} Tage Verkäufe, ${bekannt.length}/${basis.kanaele.length} Kanäle mit Zahl, ${luecken.length} Lücke(n), Verlauf ${bisher.length} Tag(e)${verlaufNeu ? ' (neu)' : ''}.`);
