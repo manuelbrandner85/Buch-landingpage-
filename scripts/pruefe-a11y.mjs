@@ -19,8 +19,13 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { existsSync, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const WURZEL = new URL('../out/', import.meta.url).pathname;
+// `.pathname` einer file-URL ist unter Windows kein gueltiger Pfad: Er beginnt
+// mit einem Schraegstrich vor dem Laufwerksbuchstaben, und Umlaute stehen darin
+// prozentkodiert. `fileURLToPath` macht daraus den Pfad, den das Dateisystem
+// versteht — sonst behauptet die Pruefung, es gaebe keinen Export.
+const WURZEL = fileURLToPath(new URL('../out/', import.meta.url));
 if (!existsSync(WURZEL)) {
   console.error('Kein Export gefunden. Zuerst: NEXT_EXPORT=1 npm run build');
   process.exit(1);

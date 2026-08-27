@@ -1055,7 +1055,10 @@ footer > a:not(:has(.fussmarke)){display:inline}
 /* Der Weg ins Cockpit steht im Fuß, aber er drängt sich nicht vor: Er ist
    für einen Menschen gedacht, nicht für den Lesefluss. Hinter ihm wartet
    ohnehin die Passwortabfrage des Servers. */
-.fusslinks .verwaltung{opacity:.42}
+/* Nicht blasser: Bei .42 kam der Kontrast auf 2,9 und die
+   Barrierefreiheitsprüfung schlug zu Recht Alarm. Dezent heißt zurückhaltend,
+   nicht unlesbar. */
+.fusslinks .verwaltung{opacity:.72}
 .fusslinks .verwaltung:hover,.fusslinks .verwaltung:focus-visible{opacity:1}
 
 /* ---------- Kopfzeile: eine Zeile, auch auf dem schmalsten Gerät ----------

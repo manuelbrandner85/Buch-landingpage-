@@ -48,7 +48,11 @@ const vorhanden = (pfad) => {
 
 for (const seite of seiten) {
   const html = readFileSync(seite, 'utf8');
-  const woher = seite.slice(WURZEL.length + 1);
+  // Windows trennt Pfade mit Rueckstrich, Adressen tun das nie. Ohne diese
+  // Zeile loest `posix.dirname` einen Seitenpfad wie `ordner\index.html` nicht
+  // auf, jeder relative Verweis wird gegen die Wurzel geprueft und meldet
+  // faelschlich „fuehrt ins Leere“ — auf dem Server war alles in Ordnung.
+  const woher = seite.slice(WURZEL.length + 1).split('\\').join('/');
   for (const [, roh] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|tel:|data:|#|\/\/)/.test(roh)) continue;
     const ohneAnker = roh.split('#')[0].split('?')[0];
