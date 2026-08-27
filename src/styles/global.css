@@ -920,12 +920,12 @@ header .baender a.hier{color:var(--gold);border-color:var(--gold);opacity:1}
   animation-fill-mode:both;animation-timeline:auto;animation-range:normal}
 
 /* ---------- Die Welten ---------- */
-.welten,.buecherwand,.arbeitsweise{position:relative;z-index:2;
+.welten,.buecherwand,.arbeitsweise,.leserstimmen{position:relative;z-index:2;
   padding:clamp(5rem,12vh,9rem) var(--rand)}
 .welten{background:
   radial-gradient(120% 80% at 50% 0%,rgba(124,22,34,.10),transparent 60%),var(--nacht)}
-.welten > .kopf,.buecherwand > .kopf,.arbeitsweise > .kopf{max-width:62rem;
-  margin:0 auto 3.8rem;text-align:center}
+.welten > .kopf,.buecherwand > .kopf,.arbeitsweise > .kopf,
+.leserstimmen > .kopf{max-width:62rem;margin:0 auto 3.8rem;text-align:center}
 .welten > .kopf p,.arbeitsweise > .kopf p{color:var(--staub);max-width:52ch;
   margin:1rem auto 0;font-size:.95rem}
 
@@ -1603,3 +1603,65 @@ body.mit-kaufleiste{padding-bottom:4.6rem}
 .ausgabenliste a{color:var(--gold);text-decoration:none;
   border-bottom:1px solid rgba(227,200,139,.4)}
 .ausgabenliste a:hover{border-bottom-color:var(--gold)}
+
+/* ---------- Stimmen ----------
+   Sterne sind das einzige Element dieser Seite, das nicht aus dem Buch kommt
+   und trotzdem mehr wiegt als alles andere. Sie stehen deshalb dort, wo die
+   Entscheidung fällt – neben dem Kaufweg –, und sie sind aus Gold wie alles,
+   was hier Gewicht hat. Solange es keine Bewertung gibt, gibt es auch keine
+   dieser Zeilen: Der ganze Abschnitt fehlt dann einfach. */
+.sterne{position:relative;display:inline-flex;vertical-align:-.18em;line-height:0;
+  /* Nicht dehnen: In einer Spalte aus Flex würde die Sternleiste sonst so
+     breit wie die Karte, und die gefüllte Reihe – sie misst in Prozent davon –
+     stünde immer auf fünf Sternen, egal wie viele vergeben wurden. */
+  flex:0 0 auto;align-self:flex-start;width:max-content}
+.sterne-grund,.sterne-reihe{display:inline-flex;gap:.08em;line-height:0}
+.sterne svg{fill:currentColor;flex:0 0 auto}
+.sterne-grund{color:rgba(227,200,139,.26)}
+.sterne-voll{position:absolute;inset:0;overflow:hidden;white-space:nowrap;
+  color:var(--gold)}
+/* Kein Verlauf im Stern: Bei sechzehn Pixeln Kantenlänge sieht ein Verlauf
+   nur schmutzig aus. Die Tiefe kommt stattdessen aus einem Schatten in der
+   dunklen Goldstufe – dasselbe Metall, nur klein. */
+.sterne-voll .sterne-reihe svg{filter:drop-shadow(0 1px 0 rgba(168,134,63,.6))}
+.sternzeile{display:flex;align-items:center;gap:.55rem;margin:1.1rem 0 .2rem;
+  font-size:.82rem;color:var(--staub)}
+.sternzeile a{color:var(--staub);text-decoration:none;
+  border-bottom:1px solid transparent}
+.sternzeile a:hover{border-bottom-color:rgba(227,200,139,.5)}
+.sternzeile b{font-family:var(--display),serif;font-weight:400;font-size:1rem;
+  color:var(--gold);margin-right:.1rem}
+.buchkarte .sternzeile{margin:.7rem 0 0}
+
+.stimmen{margin:3rem 0}
+.stimmenreihe{display:grid;gap:1.4rem;margin:1.6rem 0 2rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr))}
+.stimme{border:1px solid rgba(227,200,139,.18);border-radius:2px;
+  padding:1.3rem 1.4rem;background:rgba(227,200,139,.035);
+  display:flex;flex-direction:column;gap:.7rem}
+.stimme blockquote{margin:0;padding:0;border:0;
+  font-family:var(--display),serif;font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.5;color:var(--papier)}
+.stimme blockquote::before{content:'\201C';color:var(--gold);margin-right:.1em}
+.stimme blockquote::after{content:'\201D';color:var(--gold);margin-left:.05em}
+.stimme figcaption{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--staub);margin-top:auto}
+.stimme figcaption a{color:var(--gold);text-decoration:none;
+  border-bottom:1px solid rgba(227,200,139,.4)}
+.stimme figcaption .seite{text-transform:none;letter-spacing:0}
+
+.bewertungsliste{list-style:none;margin:1.2rem 0 1.4rem;display:grid;gap:.7rem}
+.bewertungsliste li{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;
+  padding:0 0 .7rem;border-bottom:1px solid rgba(227,200,139,.16);
+  font-size:.9rem;color:var(--staub)}
+/* Kein Aufzählungspunkt vor einer Zeile, die mit fünf Sternen beginnt. */
+.bewertungsliste li::before{display:none}
+.bewertungsliste a{color:var(--gold);text-decoration:none;
+  border-bottom:1px solid rgba(227,200,139,.4)}
+.bewertungsliste a:hover{border-bottom-color:var(--gold)}
+
+/* Im Haus stehen die Sätze unter der Überschrift wie die anderen Abschnitte
+   auch – Kopf mittig, darunter die Reihe. Weniger hoch als die Weltentore:
+   Zitate sind Beiwerk, nicht der Grund, warum jemand hier ist. */
+.leserstimmen{padding-block:clamp(3.5rem,9vw,7rem)}
+.leserstimmen .stimmenreihe{max-width:66rem;margin-inline:auto;margin-block:0}

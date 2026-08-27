@@ -18,7 +18,10 @@ import type { Buch } from '@/data/gemeinsam/typen';
  * der Kaufblock zurück im Bild ist, und sie taucht gar nicht erst auf, wenn es
  * nichts zu kaufen gibt.
  */
-export function Kaufleiste({ buch }: { buch: Buch }) {
+export function Kaufleiste(
+  { buch, urteil }:
+  { buch: Buch; urteil?: { schnitt: number; anzahl: number } | null },
+) {
   const [sichtbar, setSichtbar] = useState(false);
   const weg = buch.kaufwege[0];
   const gemerkt = useRef(false);
@@ -59,7 +62,20 @@ export function Kaufleiste({ buch }: { buch: Buch }) {
     <div className={`kaufleiste${sichtbar ? ' da' : ''}`} aria-hidden={!sichtbar}>
       <span className="kaufleiste-text">
         <b>{buch.titel}</b>
-        <em>{weg.form}{weg.haendler ? ` · ${weg.haendler}` : ''}</em>
+        <em>
+          {weg.form}{weg.haendler ? ` · ${weg.haendler}` : ''}
+          {urteil && (
+            <>
+              {' · '}
+              <span aria-hidden="true">★ </span>
+              {urteil.schnitt.toFixed(1).replace('.', ',')}
+              <span className="nur-lesen">
+                {' '}von 5 Sternen aus {urteil.anzahl}
+                {urteil.anzahl === 1 ? ' Bewertung' : ' Bewertungen'}
+              </span>
+            </>
+          )}
+        </em>
       </span>
       <a className="kaufen" href={weg.url} target="_blank" rel="noopener noreferrer"
         tabIndex={sichtbar ? 0 : -1}>

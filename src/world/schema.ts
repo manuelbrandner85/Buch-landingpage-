@@ -125,3 +125,46 @@ export const ausgaben = (kaufwege: {
     }
     : {}),
 }));
+
+/**
+ * Sternzahl und Rezensionen für das Datenblatt.
+ *
+ * Google zeigt Sterne im Treffer – aber nur, wenn dieselben Zahlen auch auf
+ * der Seite stehen. Ein `aggregateRating` für eine Seite ohne sichtbare
+ * Bewertungen ist kein Vorteil, sondern ein Verstoß: Google nennt das
+ * unzulässige Auszeichnung und nimmt dann der ganzen Domain die
+ * Sonderdarstellung weg. Deshalb gibt beides hier `undefined` zurück, sobald
+ * die Daten fehlen, und die Seite zeigt genau das, was hier steht.
+ */
+export const urteil = (
+  wert: { schnitt: number; anzahl: number; skala?: number } | null,
+) => (wert && wert.anzahl > 0
+  ? {
+    '@type': 'AggregateRating',
+    ratingValue: wert.schnitt,
+    ratingCount: wert.anzahl,
+    bestRating: wert.skala ?? 5,
+    worstRating: 1,
+  }
+  : undefined);
+
+export const stimmen = (liste: {
+  text: string; autor?: string; quelle: string; sterne?: number;
+  skala?: number; datum?: string;
+}[]) => liste.map((s) => ({
+  '@type': 'Review',
+  reviewBody: s.text,
+  author: { '@type': 'Person', name: s.autor ?? 'Leser' },
+  publisher: { '@type': 'Organization', name: s.quelle },
+  ...(s.datum ? { datePublished: s.datum } : {}),
+  ...(s.sterne !== undefined
+    ? {
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: s.sterne,
+        bestRating: s.skala ?? 5,
+        worstRating: 1,
+      },
+    }
+    : {}),
+}));

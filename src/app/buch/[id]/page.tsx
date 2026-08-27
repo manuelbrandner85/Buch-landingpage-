@@ -4,8 +4,9 @@ import {
   OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, buchNach, reiheZuBand,
 } from '@/world/registry';
 import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
-import { ausgaben, brotkrumen } from '@/world/schema';
+import { ausgaben, brotkrumen, stimmen as stimmenBlatt, urteil } from '@/world/schema';
 import { PREISSTAND } from '@/data/gemeinsam/stand';
+import { gesamturteil, stimmenVon } from '@/data/gemeinsam/stimmen';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { BASIS_PFAD } from '@/world/bilder';
 import { BLICK } from '@/data/gemeinsam/blick';
@@ -15,6 +16,7 @@ import { Kaufwege } from '@/scenes/Buecher';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Kaufleiste } from '@/ui/Kaufleiste';
+import { Leserstimmen, Sternzeile } from '@/ui/Stimmen';
 
 /**
  * Die Seite eines einzelnen Buches.
@@ -60,6 +62,11 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
   const kapitel = WELT[buch.id]?.kapitel ?? [];
   const blick = BLICK[buch.id] ?? [];
   const probe = leseprobeVon(buch.id);
+  // Sterne und Zitate: heute leer, deshalb unsichtbar. Sobald in
+  // data/gemeinsam/stimmen.ts eine Zeile steht, erscheinen sie hier oben am
+  // Kaufweg, weiter unten als Abschnitt und im Datenblatt.
+  const bewertet = gesamturteil(buch.id);
+  const zitate = stimmenVon(buch.id);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -78,6 +85,9 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
     url: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id),
     ...(buch.erschienen ? { datePublished: buch.erschienen } : {}),
     ...(buch.kaufwege.length ? { workExample: ausgaben(buch.kaufwege) } : {}),
+    // Nur, wenn dieselben Zahlen auch auf der Seite stehen.
+    ...(urteil(bewertet) ? { aggregateRating: urteil(bewertet) } : {}),
+    ...(zitate.length ? { review: stimmenBlatt(zitate) } : {}),
   };
 
   return (
@@ -95,6 +105,7 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           {buch.seiten && (
             <p className="quelle"><b>Umfang</b>{buch.seiten} Seiten</p>
           )}
+          <Sternzeile bandId={buch.id} />
           <div className="wege"><Kaufwege buch={buch} /></div>
         </div>
       </div>
@@ -126,6 +137,8 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           </p>
         </>
       )}
+
+      <Leserstimmen bandId={buch.id} />
 
       {blick.length > 0 && (
         <>
@@ -189,7 +202,7 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
         {reihe && <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>}
       </nav>
       <Kanaele />
-      <Kaufleiste buch={buch} />
+      <Kaufleiste buch={buch} urteil={bewertet} />
       <Datenblatt daten={strukturierteDaten} />
       <Datenblatt daten={brotkrumen([
         { name: 'Start', weg: wegHaus() },

@@ -603,6 +603,24 @@ Umschlag ist der Trendonix-Umschlag der Website; die Seiten des Startpakets, die
 noch die alte Autorenzeile tragen, sind nicht darin. Wer die Leseprobe erneuert,
 prüft dasselbe: Auf der Seite steht Trendonix, sonst nichts.
 
+**Stimmen** – Sterne und Rezensionen, `src/data/gemeinsam/stimmen.ts`. Zwei
+Listen: `BEWERTUNGEN` sind Schnitt und Anzahl bei einem Händler, `STIMMEN` sind
+wörtliche Zitate. Beide sind heute leer, und solange sie leer sind, zeigt die
+Seite an keiner Stelle Sterne – keinen Kasten, kein „noch keine Bewertungen“.
+
+Sobald irgendwo eine Bewertung steht – Amazon, tolino, Thalia, Goodreads,
+LovelyBooks, eine Leserunde –, kommt sie hier hinein und erscheint an vier
+Stellen von selbst: neben dem Kaufweg auf der Buchseite, in der Kaufleiste auf
+dem Telefon, als Abschnitt „Was Leser sagen“ und auf der Startseite. Zugleich
+geht sie als `aggregateRating` und `review` ins Datenblatt.
+
+Vier Regeln stehen im Kopf der Datei und gelten ohne Ausnahme: nichts erfinden;
+nichts anzeigen, solange nichts da ist; nur zitieren, was öffentlich steht, mit
+Link zur Fundstelle; und jede Zahl trägt den Tag, an dem sie abgelesen wurde.
+Der Grund ist nicht nur Anstand: Ein `aggregateRating` ohne sichtbare
+Entsprechung auf der Seite ist bei Google eine unzulässige Auszeichnung und
+kostet der ganzen Domain die Sonderdarstellung.
+
 ## Kontakt ohne Server
 
 Die Seite ist statisch, es gibt kein Formular und keinen Empfänger. Ein Band, der

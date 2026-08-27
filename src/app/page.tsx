@@ -15,6 +15,8 @@ import { Partner } from '@/ui/Partner';
 import { Verteiler } from '@/ui/Verteiler';
 import { Hausmarke } from '@/ui/Hausmarke';
 import { Unterschrift } from '@/ui/Unterschrift';
+import { Sternzeile, Stimmenwand } from '@/ui/Stimmen';
+import { esGibtStimmen } from '@/data/gemeinsam/stimmen';
 
 /**
  * Das Haus.
@@ -75,6 +77,7 @@ function Buchkarte({ buch }: { buch: Buch }) {
           {buch.seiten ? ` · ${buch.seiten} Seiten` : ''}
         </p>
         <h3><a href={wegBuch(buch.id)}>{buch.titel}</a></h3>
+        <Sternzeile bandId={buch.id} nach={`${wegBuch(buch.id)}#stimmen`} />
         {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
         <p className="klappe">{buch.klappentext}</p>
         <div className="wege">
@@ -192,6 +195,16 @@ export default function Haus() {
         </div>
         {buecher.map((b) => <Buchkarte key={b.id} buch={b} />)}
       </section>
+
+      {esGibtStimmen() && (
+        <section className="leserstimmen" id="leserstimmen">
+          <div className="kopf">
+            <p className="eyebrow">Von denen, die es gelesen haben</p>
+            <h2>Was Leser sagen</h2>
+          </div>
+          <Stimmenwand baende={buecher.map((b) => b.id)} />
+        </section>
+      )}
 
       <section className="arbeitsweise">
         <div className="kopf">
