@@ -1,13 +1,18 @@
 import type { Metadata } from 'next';
 import { LEITREIHE, TRENDONIX, WELT } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
-import { wegBegriffe, wegHaus, wegImpressum } from '@/world/wege';
+import { wegBegriffe, wegHaus, wegImpressum, wegUeber, wegVollstaendig } from '@/world/wege';
+import { brotkrumen } from '@/world/schema';
+import { Datenblatt } from '@/ui/Datenblatt';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Unterschrift } from '@/ui/Unterschrift';
 
 export const metadata: Metadata = {
-  title: 'Über das Projekt – Trendonix',
+  // Die Marke hängt die Vorlage im Rahmen an. Stand sie hier noch einmal,
+  // hieß der Treffer „Über das Projekt – Trendonix · Trendonix“.
+  title: 'Über das Projekt: Bildherkunft, Belege, Karten',
+  alternates: { canonical: wegVollstaendig(wegUeber()) ?? wegUeber() },
   description:
     'Wie diese Welt entstanden ist: Bildherkunft, Evidenzstufen, Kartengrundlagen und was die Seite über ihre Besucher speichert.',
 };
@@ -126,6 +131,10 @@ export default function UeberSeite() {
         <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>
       </nav>
       <Kanaele />
+      <Datenblatt daten={brotkrumen([
+        { name: 'Start', weg: wegHaus() },
+        { name: 'Über das Projekt', weg: wegUeber() },
+      ])} />
     </main>
   );
 }

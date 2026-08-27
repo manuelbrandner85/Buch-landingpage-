@@ -181,6 +181,8 @@ jobs:
 
       - name: Serverregeln beilegen
         if: steps.zugang.outputs.da == 'ja'
+        env:
+          SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
         run: node scripts/htaccess.mjs
 
       - name: Hochladen

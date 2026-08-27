@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LEITBUCH, TRENDONIX, buchNach } from '@/world/registry';
 import { beitragNach, sichtbareBeitraege } from '@/world/journal';
-import { wegBuch, wegJournal, wegVorschau } from '@/world/wege';
+import { wegBeitrag, wegBuch, wegHaus, wegJournal, wegVollstaendig, wegVorschau } from '@/world/wege';
+import { aufsatz, brotkrumen } from '@/world/schema';
+import { Datenblatt } from '@/ui/Datenblatt';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Unterschrift } from '@/ui/Unterschrift';
@@ -20,9 +22,13 @@ export async function generateMetadata(
   const b = beitragNach(slug);
   if (!b) return { title: 'Nicht gefunden – Trendonix' };
   return {
-    title: `${b.titel} – Trendonix`,
+    title: b.titel,
     description: b.auszug,
-    openGraph: { title: b.titel, description: b.auszug, images: wegVorschau('haus') },
+    alternates: { canonical: wegVollstaendig(wegBeitrag(b.slug)) ?? wegBeitrag(b.slug) },
+    openGraph: {
+      type: 'article', title: b.titel, description: b.auszug,
+      publishedTime: b.datum, images: wegVorschau('haus'),
+    },
   };
 }
 
@@ -80,6 +86,15 @@ export default async function BeitragSeite(
       )}
 
       <Unterschrift />
+      <Datenblatt daten={aufsatz({
+        titel: beitrag.titel, beschreibung: beitrag.auszug,
+        weg: wegBeitrag(beitrag.slug), datum: beitrag.datum,
+      })} />
+      <Datenblatt daten={brotkrumen([
+        { name: 'Start', weg: wegHaus() },
+        { name: 'Journal', weg: wegJournal() },
+        { name: beitrag.titel, weg: wegBeitrag(beitrag.slug) },
+      ])} />
       <Rueckweg nach={wegJournal()} text="Zurück zum Journal" />
       <Kanaele />
       <p className="unterzeile">{TRENDONIX.name}</p>

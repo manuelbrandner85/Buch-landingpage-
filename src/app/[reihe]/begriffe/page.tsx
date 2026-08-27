@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { BEGRIFFE } from '@/data/gemeinsam/begriffe';
 import { OEFFENTLICHE_REIHEN, TRENDONIX } from '@/world/registry';
-import { wegHaus, wegUeber } from '@/world/wege';
+import { wegBegriffe, wegHaus, wegReihe, wegUeber, wegVollstaendig } from '@/world/wege';
+import { begriffssammlung, brotkrumen } from '@/world/schema';
+import { Datenblatt } from '@/ui/Datenblatt';
+import { LEITREIHE } from '@/world/registry';
 import { Rueckweg } from '@/ui/Rueckweg';
 
 /** Die Begriffe gehören der Welt einer Reihe – deshalb liegen sie unter ihr. */
@@ -13,6 +16,9 @@ export function generateStaticParams() {
 export const metadata: Metadata = {
   title: 'Begriffe – Die Unsichtbaren Fäden',
   description: 'Fachbegriffe des Bandes, erklärt: von in situ über Satrapie bis Höhle 17.',
+  alternates: {
+    canonical: wegVollstaendig(wegBegriffe(LEITREIHE.id)) ?? wegBegriffe(LEITREIHE.id),
+  },
 };
 
 export default function BegriffeSeite() {
@@ -37,6 +43,19 @@ export default function BegriffeSeite() {
         <b>Hinweis</b>Das Glossar des Bandes umfasst mehr Einträge. Aufgenommen ist hier,
         was wörtlich aus dem Buch übernommen werden konnte.
       </p>
+      <Datenblatt daten={begriffssammlung({
+        titel: 'Begriffe der Unsichtbaren Fäden',
+        weg: wegBegriffe(LEITREIHE.id),
+        eintraege: sortiert.map((b) => ({
+          wort: b.wort, erklaerung: b.erklaerung,
+          weg: `${wegBegriffe(LEITREIHE.id)}#${b.id}`,
+        })),
+      })} />
+      <Datenblatt daten={brotkrumen([
+        { name: 'Start', weg: wegHaus() },
+        { name: LEITREIHE.titel, weg: wegReihe(LEITREIHE.id) },
+        { name: 'Begriffe', weg: wegBegriffe(LEITREIHE.id) },
+      ])} />
       <nav className="fusszeile">
         <a href={wegUeber()}>Über das Projekt</a>
         <a href={wegHaus()}>Zurück zu {TRENDONIX.name}</a>

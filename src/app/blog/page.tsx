@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import { TRENDONIX } from '@/world/registry';
 import { sichtbareBeitraege } from '@/world/journal';
-import { wegBeitrag, wegHaus, wegVorschau } from '@/world/wege';
+import { wegBeitrag, wegHaus, wegJournal, wegVollstaendig, wegVorschau } from '@/world/wege';
+import { brotkrumen } from '@/world/schema';
+import { Datenblatt } from '@/ui/Datenblatt';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Journal – Trendonix',
+  title: 'Journal: wie die Quellen geprüft werden',
   description:
     'Texte zum Stoff der Bücher: wie die Quellen geprüft werden, was ein unsichtbarer Faden ist, und was in den Bänden dahintersteckt.',
+  alternates: { canonical: wegVollstaendig(wegJournal()) ?? wegJournal() },
   openGraph: { images: wegVorschau('haus') },
 };
 
@@ -56,6 +59,10 @@ export default function JournalSeite() {
 
       <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
       <Kanaele />
+      <Datenblatt daten={brotkrumen([
+        { name: 'Start', weg: wegHaus() },
+        { name: 'Journal', weg: wegJournal() },
+      ])} />
     </main>
   );
 }

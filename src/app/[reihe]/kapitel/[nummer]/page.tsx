@@ -4,7 +4,9 @@ import {
   HAUS, OEFFENTLICHE_REIHEN, WELT, oeffentlicheBaendeVon, reiheNach,
 } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
-import { wegBegriffe, wegOrt, wegReihe, wegUeber } from '@/world/wege';
+import { wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegUeber, wegVollstaendig } from '@/world/wege';
+import { aufsatz, brotkrumen } from '@/world/schema';
+import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
 import { Rueckweg } from '@/ui/Rueckweg';
 
@@ -30,8 +32,16 @@ export async function generateMetadata(
   const { reihe, nummer } = await params;
   const r = reiheNach(reihe);
   const k = kapitelDerReihe(reihe).find((x) => x.id === Number(nummer));
+  // Die Kapitelnummer gehört in den Titel: Sie unterscheidet sechzehn Seiten,
+  // die sonst alle „… – Die Unsichtbaren Fäden“ heißen.
   return k && r
-    ? { title: `${k.titel} – ${r.titel}`, description: k.unterzeile }
+    ? {
+      title: `Kapitel ${k.id}: ${k.titel}`,
+      description: k.unterzeile,
+      alternates: {
+        canonical: wegVollstaendig(wegKapitel(r.id, k.id)) ?? wegKapitel(r.id, k.id),
+      },
+    }
     : {};
 }
 
@@ -79,6 +89,16 @@ export default async function KapitelSeite(
           </ul>
         </>
       )}
+      <Datenblatt daten={aufsatz({
+        titel: `Kapitel ${kapitel.id}: ${kapitel.titel}`,
+        beschreibung: kapitel.unterzeile,
+        weg: wegKapitel(r.id, kapitel.id),
+      })} />
+      <Datenblatt daten={brotkrumen([
+        { name: 'Start', weg: wegHaus() },
+        { name: r.titel, weg: wegReihe(r.id) },
+        { name: `Kapitel ${kapitel.id}`, weg: wegKapitel(r.id, kapitel.id) },
+      ])} />
       <nav className="fusszeile">
         <Rueckweg nach={wegReihe(r.id)} text={`Zurück in ${r.titel}`} />
         <a href={wegBegriffe(r.id)}>Begriffe</a>

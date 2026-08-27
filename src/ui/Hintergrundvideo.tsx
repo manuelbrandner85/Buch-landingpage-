@@ -22,11 +22,44 @@ export function Hintergrundvideo(
     if (!video) return;
     const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)');
     const schmal = window.matchMedia('(max-width: 760px)');
+
+    // Wer wenig Daten hat, bekommt das Standbild.
+    //
+    // „Datensparmodus“ und eine langsame Verbindung sind eine Ansage, keine
+    // Vermutung: Ein halbes Megabyte Video für einen Hintergrund ist dann
+    // respektlos – und die Seite steht ohne es genauso.
+    const netz = (navigator as unknown as {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+    if (netz?.saveData || /^(slow-)?2g$/.test(netz?.effectiveType ?? '')) return;
+
     const waehlen = () => setQuelle(
       ruhig.matches ? null : (schmal.matches && videoKlein ? videoKlein : video));
-    waehlen();
+
+    // Erst das Bild, dann der Film.
+    //
+    // Das Standbild ist das größte Element des ersten Bildschirms – und damit
+    // das, woran Google die Ladezeit misst. Lädt daneben schon das Video, wird
+    // die Messung schlechter, obwohl der Betrachter nichts davon hat: Das
+    // Video wird erst gebraucht, wenn das Bild steht.
+    let abgesagt = false;
+    const start = () => { if (!abgesagt) waehlen(); };
+    const zeitplan = (window as unknown as {
+      requestIdleCallback?: (f: () => void, o?: { timeout: number }) => number;
+    }).requestIdleCallback;
+    const kennung = zeitplan
+      ? zeitplan(start, { timeout: 2500 })
+      : window.setTimeout(start, 1200);
+
     ruhig.addEventListener('change', waehlen);
-    return () => ruhig.removeEventListener('change', waehlen);
+    return () => {
+      abgesagt = true;
+      const abbrechen = (window as unknown as {
+        cancelIdleCallback?: (id: number) => void;
+      }).cancelIdleCallback;
+      if (zeitplan && abbrechen) abbrechen(kennung); else window.clearTimeout(kennung);
+      ruhig.removeEventListener('change', waehlen);
+    };
   }, [video, videoKlein]);
 
   /**
@@ -64,7 +97,7 @@ export function Hintergrundvideo(
       <img src={bild} alt={alt} decoding="async" fetchPriority="high" />
       {quelle && (
         <video ref={film} key={quelle} src={quelle} poster={bild}
-          autoPlay muted loop playsInline preload="auto"
+          autoPlay muted loop playsInline preload="metadata"
           disablePictureInPicture />
       )}
       <span className="schleier" />

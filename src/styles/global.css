@@ -1552,3 +1552,22 @@ header .marke .reihenname{color:#F0DDA9;
 /* Auf den Leseseiten steht sie linksbündig unter dem Text, wie unter einem
    Brief – im Haus mittig unter dem Satz, den sie unterschreibt. */
 .lesefassung .unterschrift,.papier .unterschrift{margin-left:0}
+
+/* ---------- Ortsseiten ----------
+   Lage, Vorkommen, Schichten als kurze Tafel unter dem Titel: Wer eine
+   Ortsseite über die Suche findet, will zuerst wissen, wo das ist und wo es
+   im Buch steht – nicht scrollen. */
+.ortdaten{display:grid;gap:.9rem;margin:1.8rem 0 2.4rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));
+  border-top:1px solid rgba(227,200,139,.22);
+  border-bottom:1px solid rgba(227,200,139,.22);padding:1.2rem 0}
+.ortdaten dt{font-family:var(--display),serif;font-size:.62rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--staub);margin-bottom:.35rem}
+.ortdaten dd{font-size:.95rem;color:var(--papier)}
+.ortzahlen{list-style:none;margin:1rem 0;display:grid;gap:.5rem}
+.ortzahlen li{font-size:.9rem;color:var(--staub)}
+.ortzahlen b{font-family:var(--display),serif;font-weight:400;font-size:1.15rem;
+  color:var(--gold);margin-right:.5rem}
+.lesefassung blockquote{margin:1.2rem 0;padding-left:1.2rem;
+  border-left:1px solid rgba(227,200,139,.38);font-family:var(--display),serif;
+  font-style:italic;font-size:1.1rem;color:var(--papier)}

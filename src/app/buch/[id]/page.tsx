@@ -3,7 +3,9 @@ import type { Metadata } from 'next';
 import {
   OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, buchNach, reiheZuBand,
 } from '@/world/registry';
-import { wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVorschau } from '@/world/wege';
+import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
+import { brotkrumen } from '@/world/schema';
+import { Datenblatt } from '@/ui/Datenblatt';
 import { BASIS_PFAD } from '@/world/bilder';
 import { BLICK } from '@/data/gemeinsam/blick';
 import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
@@ -33,6 +35,7 @@ export async function generateMetadata(
   return {
     title: `${buch.titel} – ${reihe?.titel} Band ${buch.nummer}`,
     description: buch.unterzeile ?? buch.klappentext.slice(0, 160),
+    alternates: { canonical: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id) },
     openGraph: {
       type: 'book', title: buch.titel, description: buch.klappentext,
       images: wegVorschau(buch.id),
@@ -61,6 +64,11 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
     description: buch.klappentext,
     publisher: { '@type': 'Organization', name: TRENDONIX.name },
     author: { '@type': 'Organization', name: TRENDONIX.name },
+    // Das Cover: Google zeigt es im Buchtreffer an. Preis, ISBN und
+    // Erscheinungsdatum fehlen hier bewusst – sie stehen nirgends auf der
+    // Seite, und was die Seite nicht zeigt, behauptet das Datenblatt nicht.
+    ...(wegVorschau(buch.id) ? { image: wegVorschau(buch.id) } : {}),
+    url: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id),
     ...(buch.kaufwege.length
       ? { workExample: buch.kaufwege.map((k) => ({
         '@type': 'Book', bookFormat: k.form === 'E-Book'
@@ -151,8 +159,12 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
         {reihe && <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>}
       </nav>
       <Kanaele />
-      <script type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
+      <Datenblatt daten={strukturierteDaten} />
+      <Datenblatt daten={brotkrumen([
+        { name: 'Start', weg: wegHaus() },
+        ...(reihe ? [{ name: reihe.titel, weg: wegReihe(reihe.id) }] : []),
+        { name: buch.titel, weg: wegBuch(buch.id) },
+      ])} />
     </main>
   );
 }

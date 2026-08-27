@@ -6,13 +6,23 @@
  * liefert der Server bei einer falschen Adresse seine eigene Fehlerseite und
  * lädt bei jedem Besuch alle Schriften und Bilder neu.
  *
- * Bewusst ohne Umleitungen: Ob die Seite unter www und über HTTPS erreichbar
- * ist, gehört in die Domainverwaltung des Anbieters und nicht in eine Datei,
- * die niemand mehr findet, wenn sie einmal eine Schleife baut.
+ * Seit dem 27.08.2026 steht hier auch die Umleitung auf eine einzige Adresse.
+ * Vorher antwortete die Seite unter vier Adressen mit 200: mit und ohne www,
+ * mit und ohne HTTPS. Für eine Suchmaschine sind das vier Kopien jeder Seite,
+ * die sich gegenseitig die Kraft nehmen.
  *
- *   node scripts/htaccess.mjs
+ * Die frühere Vorsicht („Umleitungen gehören zum Anbieter, nicht in eine Datei,
+ * die eine Schleife bauen kann") bleibt berechtigt – deshalb prüft die Regel
+ * zwei Merkmale statt einem: `HTTPS=on` und `X-Forwarded-Proto`. Erst wenn
+ * beide nein sagen, wird umgeleitet. Und die Veröffentlichung ruft danach die
+ * Seite selbst ab; kommt nicht der neue Stand zurück, endet sie rot.
+ *
+ *   SEITEN_DOMAIN=www.trendonix-buecher.de node scripts/htaccess.mjs
  */
 import { writeFileSync } from 'node:fs';
+
+const DOMAIN = process.env.SEITEN_DOMAIN || 'www.trendonix-buecher.de';
+const OHNE_WWW = DOMAIN.replace(/^www\./, '');
 
 const inhalt = `# Erzeugt von scripts/htaccess.mjs – nicht von Hand ändern.
 #
@@ -23,6 +33,23 @@ const inhalt = `# Erzeugt von scripts/htaccess.mjs – nicht von Hand ändern.
 # jede Anfrage mit 500. Die Seite war dadurch nicht kaputt – sie war weg.
 # Dasselbe gilt für Options, wenn der Anbieter es nicht freigegeben hat;
 # deshalb steht es hier gar nicht erst.
+
+# Eine Adresse, nicht vier.
+#
+# https://www.<domain> ist die richtige. Alles andere – ohne www, ohne
+# Verschlüsselung – wird dauerhaft (301) dorthin geschickt. Zwei Bedingungen
+# vor der ersten Regel, damit keine Schleife entsteht, wenn die
+# Verschlüsselung vor dem Server endet.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://${DOMAIN}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{HTTP_HOST} !^${DOMAIN.replace(/\./g, '\\.')}$ [NC]
+RewriteRule ^ https://${DOMAIN}%{REQUEST_URI} [R=301,L]
+</IfModule>
 
 # Die eigene Startseite zuerst.
 #

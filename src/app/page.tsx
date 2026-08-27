@@ -6,7 +6,7 @@ import {
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
-import { wegBuch, wegImpressum, wegReihe, wegUeber, wegVorschau, wegWelt } from '@/world/wege';
+import { wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
@@ -38,6 +38,9 @@ export const metadata: Metadata = {
     images: wegVorschau('haus'),
   },
   twitter: { card: 'summary_large_image', images: wegVorschau('haus') },
+  // Eine Adresse zählt. Ohne diese Zeile hat die Startseite unter vier
+  // Schreibweisen gleichzeitig existiert.
+  alternates: { canonical: wegVollstaendig(wegHaus()) ?? wegHaus() },
 };
 
 function Weltentor({ reihe }: { reihe: Reihe }) {
