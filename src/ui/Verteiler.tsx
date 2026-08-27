@@ -54,6 +54,10 @@ export function Verteiler() {
             autoComplete="off" />
         </div>
         <input type="hidden" name="locale" value="de" />
+        {/* Ohne `html_type` antwortet der Dienst mit nacktem JSON statt mit
+            einer Weiterleitung. Der Leser sieht dann `{"success":true,...}`
+            und haelt es fuer einen Fehler. */}
+        <input type="hidden" name="html_type" value="simple" />
 
         <button type="submit">{VERTEILER.knopf}</button>
       </form>
