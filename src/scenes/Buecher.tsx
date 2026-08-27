@@ -56,12 +56,17 @@ export function Kaufwege({ buch }: { buch: Buch }) {
       </span>
     );
   }
-  const [erster, ...weitere] = buch.kaufwege;
+  // Der grosse Knopf ist ein Kaufweg, nie eine Ausleihe: Wer auf einer
+  // Buchseite steht, soll das Buch kaufen koennen. Die Bibliothek steht
+  // darunter bei den uebrigen Wegen, wo sie hingehoert.
+  const kaufbar = buch.kaufwege.filter((k) => k.art !== 'ausleihe');
+  const geordnet = [...kaufbar, ...buch.kaufwege.filter((k) => k.art === 'ausleihe')];
+  const [erster, ...weitere] = geordnet;
   if (!erster) return <span className="kaufen wartet">Produktseite folgt</span>;
   return (
     <span className="kaufblock">
       <a className="kaufen" href={erster.url} target="_blank" rel="noopener noreferrer">
-        Band {buch.nummer} kaufen
+        Band {buch.nummer} {erster.art === 'ausleihe' ? 'ausleihen' : 'kaufen'}
         <small>{erster.form} · {erster.haendler}</small>
       </a>
       {weitere.length > 0 && (

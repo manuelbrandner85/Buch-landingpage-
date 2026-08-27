@@ -106,13 +106,17 @@ const FORMEN: Record<string, string> = {
 
 export const ausgaben = (kaufwege: {
   haendler: string; form: string; url: string; isbn?: string; preis?: number;
+  art?: 'kauf' | 'ausleihe';
 }[]) => kaufwege.map((k) => ({
   '@type': 'Book',
   bookFormat: FORMEN[k.form] ?? 'https://schema.org/Paperback',
   url: k.url,
   inLanguage: 'de',
   ...(k.isbn ? { isbn: k.isbn } : {}),
-  ...(k.preis
+  // Eine Ausleihe ist kein Angebot: kein Preis, keine Verfuegbarkeit, kein
+  // Verkaeufer. Wer eine Bibliothek als Offer auszeichnet, behauptet einen
+  // Handel, den es nicht gibt.
+  ...(k.preis && k.art !== 'ausleihe'
     ? {
       offers: {
         '@type': 'Offer',

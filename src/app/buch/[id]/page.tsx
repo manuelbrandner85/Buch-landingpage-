@@ -115,11 +115,11 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           <h2>Wo es das Buch gibt</h2>
           <ul className="ausgabenliste">
             {buch.kaufwege.map((k) => (
-              <li key={`${k.form}-${k.haendler}`}>
+              <li key={`${k.form}-${k.haendler}-${k.url}`}>
                 <a href={k.url} target="_blank" rel="noopener noreferrer">
-                  {k.form} bei {k.haendler}
+                  {k.form} {k.art === 'ausleihe' ? 'ausleihen bei' : 'bei'} {k.haendler}
                 </a>
-                {k.preis !== undefined && (
+                {k.preis !== undefined && k.art !== 'ausleihe' && (
                   <span className="seite">
                     {' · '}{k.preis.toFixed(2).replace('.', ',')} €
                   </span>

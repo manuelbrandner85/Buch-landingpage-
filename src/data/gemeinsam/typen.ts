@@ -56,6 +56,17 @@ export interface Kaufweg {
   form: 'Taschenbuch' | 'Gebunden' | 'E-Book' | 'Hörbuch';
   url: string;
   /**
+   * Kaufen oder ausleihen. Ohne Angabe: kaufen.
+   *
+   * Eine Bibliothek ist kein Händler, und eine Ausleihe ist kein Angebot.
+   * Der Unterschied ist nicht Wortklauberei: Ein `Offer` im Datenblatt sagt
+   * Google, dass es hier etwas für Geld gibt. Bei einer Onleihe oder einem
+   * Bibliotheksbestand stimmt das nicht, und eine falsche Auszeichnung kostet
+   * die ganze Domain die Sonderdarstellung. Deshalb bekommt eine Ausleihe kein
+   * Angebot, keinen Preis und auf der Seite ein anderes Wort.
+   */
+  art?: 'kauf' | 'ausleihe';
+  /**
    * Die ISBN dieser Ausgabe – nicht des Buches: Taschenbuch und E-Book haben
    * je eine eigene. Solange ein Titel nur über Amazon läuft, gibt es sie
    * womöglich gar nicht (dort steht eine ASIN); dann bleibt das Feld leer.
