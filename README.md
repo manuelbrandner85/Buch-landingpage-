@@ -796,8 +796,8 @@ und nichts freizuschalten.
   Bände zeigen „Erscheint in Kürze“ und den Weg „Bescheid geben lassen“ ans
   Postfach.
 - **Leseprobe für Band 2 und Band 3** – Band 1 liegt bereit, die anderen nicht.
-- **Der Ordner `_altlasten-…`** auf dem Webspace: Dort liegen die beiden
-  Uploads, die danebengingen – beiseitegeräumt, nicht gelöscht. Löschen bleibt
-  ein Klick von Hand im WebFTP; siehe `DOMAIN.md`.
+- **ISBN und Preise** fehlen noch. Die Felder stehen (`Kaufweg.isbn`,
+  `Kaufweg.preis`); sobald sie gefüllt sind, zeigt die Buchseite sie an und das
+  Datenblatt meldet sie an Google.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion

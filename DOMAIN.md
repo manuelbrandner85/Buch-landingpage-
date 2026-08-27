@@ -110,20 +110,24 @@ daran:
 - **Abschaltbar.** Variable `FTP_LOESCHEN` auf `nein`, und es wird wieder nur
   hinzugefügt.
 
-### Die Altlasten im Anmeldeverzeichnis
+### Die Altlasten – erledigt, und warum sie nie welche waren
 
-Die zwei Uploads, die danebengingen, liegen noch im Anmeldeverzeichnis über dem
-Dokumentenstamm – rund 185 MB. Dort wird nichts gelöscht: In dieser Wurzel
-liegen auch die anderen Ordner des Kontos, und ein Vertipper ist da nicht
-zurückzuholen.
+Zwei frühe Veröffentlichungen liefen fehlerfrei durch und waren trotzdem
+unsichtbar. Der Verdacht lautete: Sie liegen im falschen Verzeichnis. Der
+Befund war ein anderer – sie lagen richtig, aber Apache lieferte die
+Platzhalterdatei `index.htm` des Anbieters aus, weil sie in `DirectoryIndex`
+vor `index.html` stand. Was im WebFTP wie Datenmüll aussah, war die Seite
+selbst.
 
-Stattdessen räumt der Auftrag beiseite. Was in der Wurzel Zeichen für Zeichen
-so heißt wie etwas aus diesem Bau (`index.html`, `_next`, `buch`, `welt` …),
-wandert nach `/_altlasten-<nummer>/` – **verschoben, nicht gelöscht**. In der
-Zusammenfassung des Laufs steht, was wohin gewandert ist. Steht die Seite
-danach, kann der Ordner im WebFTP mit einem Klick weg; das ist der einzige
-Schritt, der von Hand bleibt. Beim nächsten Lauf findet der Schritt nichts mehr
-und tut nichts.
+Erledigt hat sich das mit dem Aufräumen: Der Dokumentenstamm ist die Wurzel des
+FTP-Zugangs, und seit `mirror --delete` fällt dort alles weg, was nicht zum Bau
+gehört – auch die Platzhalterdatei. Nachgeprüft am 27.08.2026: `/index.htm`,
+`/Buch-landingpage-/` und `/_probe.txt` antworten mit 404, die Seite mit 200.
+
+Der Schritt, der Reste in einen Keller verschiebt, steht weiter im Auftrag. Er
+greift nur, wenn der Dokumentenstamm **nicht** die Wurzel ist – bei diesem
+Anbieter also nie. Er bleibt für den Tag, an dem der Zugang anders geschnitten
+ist.
 
 ### Die Platzhalterdatei
 
