@@ -79,7 +79,7 @@ ul{list-style:none}
   border-radius:10px;padding:.8rem}
 .kanal b{display:block;font-family:Georgia,serif;font-weight:400;font-size:.95rem}
 .kanal .griff{display:block;font-size:.64rem;color:var(--staub);overflow-wrap:anywhere}
-.kanal .zahl{font-family:Georgia,serif;font-size:1.6rem;color:var(--gold);margin-top:.45rem;line-height:1}
+.kanal .zahl{display:block;font-family:Georgia,serif;font-size:1.6rem;color:var(--gold);margin-top:.45rem;line-height:1}
 .kanal .zahl.leer{font-size:.9rem;color:var(--staub)}
 .kanal .unten{display:block;font-size:.68rem;color:var(--staub);margin-top:.3rem}
 
@@ -126,9 +126,12 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 }
 
 /* ---------- Reiter, Überblick, Lücken ---------- */
+/* Der Kopf klebt schon oben. Klebte die Reiterleiste an derselben Stelle,
+   schöbe sie sich beim Rollen darunter und wäre mit dem Daumen nicht mehr zu
+   treffen — sie muss unterhalb des Kopfes stehen bleiben. */
 .reiter{display:flex;gap:.25rem;overflow-x:auto;margin:0 0 1rem;padding:.25rem;
-  position:sticky;top:0;z-index:5;background:var(--nacht,#060A14);
-  scrollbar-width:none}
+  position:sticky;top:calc(3.6rem + env(safe-area-inset-top,0px));z-index:5;
+  background:var(--nacht,#060A14);scrollbar-width:none}
 .reiter::-webkit-scrollbar{display:none}
 .reiter button{flex:0 0 auto;border:1px solid rgba(255,255,255,.10);background:transparent;
   color:inherit;font:inherit;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;
@@ -202,6 +205,62 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
 .buchungen .zustand2{text-align:right;font-size:.7rem;opacity:.55;white-space:nowrap}
 .buchungen .wasda{display:block}
 .buchungen .wasda .warum{display:block;font-size:.72rem;opacity:.45}
+
+/* ---------- Warnzeile ---------- */
+.alarm{background:rgba(124,22,34,.30);border-bottom:1px solid rgba(210,120,110,.45);
+  padding:.55rem var(--rand)}
+.alarm ul{display:grid;gap:.35rem;margin:0;padding:0;list-style:none}
+.alarm li{display:flex;gap:.55rem;align-items:baseline;font-size:.82rem}
+.alarm li::before{display:none}
+.alarm .punkt2{flex:0 0 auto;width:7px;height:7px;border-radius:50%;
+  background:#e0685f;margin-top:.35rem}
+.alarm li.mittel .punkt2{background:var(--gold-tief)}
+
+/* ---------- Was ist heute anders ---------- */
+.delta{display:grid;gap:.15rem;list-style:none;margin:0;padding:0}
+.delta li{display:grid;grid-template-columns:1fr auto;gap:0 .9rem;
+  padding:.45rem 0;border-bottom:1px solid rgba(227,200,139,.08)}
+.delta li:last-child{border-bottom:0}
+.delta li::before{display:none}
+.delta b{grid-column:1;grid-row:1;font-weight:600;font-size:.88rem}
+.delta .von{grid-column:1;grid-row:2;font-size:.74rem;opacity:.5;
+  font-variant-numeric:tabular-nums}
+.delta .dz{grid-column:2;grid-row:1 / span 2;align-self:center;
+  font-family:Georgia,serif;font-size:1.1rem;white-space:nowrap}
+.delta li.gut .dz{color:var(--gruen)}
+.delta li.schlecht .dz{color:#C0685F}
+
+/* ---------- Termine abhaken ---------- */
+.punkte li{grid-template-columns:1.3rem 3.1rem 1fr auto}
+.punkte input[type=checkbox]{width:1rem;height:1rem;accent-color:var(--gold);
+  margin:0;align-self:center;cursor:pointer}
+.punkte li.abgehakt .wasda,.punkte li.abgehakt .wann{opacity:.35;
+  text-decoration:line-through;text-decoration-thickness:1px}
+
+/* ---------- Kanal-Detailblatt ---------- */
+.kanal{cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+.kanal:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.kanal[aria-expanded="true"]{border-color:rgba(227,200,139,.45);
+  background:rgba(227,200,139,.06)}
+.blatt{margin-top:.6rem}
+.blatt .kopf{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
+.blatt .kopf h3{font-size:1.05rem}
+.blatt .kopf .griff{font-size:.7rem;color:var(--staub);overflow-wrap:anywhere}
+.blattzahlen{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.3rem;
+  font-size:.82rem}
+.blattzahlen li{display:grid;grid-template-columns:4.2rem 1fr auto;gap:.6rem;
+  align-items:baseline;padding:.3rem 0;border-bottom:1px solid rgba(227,200,139,.07);
+  font-variant-numeric:tabular-nums}
+.blattzahlen li:last-child{border-bottom:0}
+.blattzahlen li::before{display:none}
+.blattzahlen .tag{opacity:.45;font-size:.76rem}
+.blattzahlen .wert2{font-family:Georgia,serif;color:var(--gold)}
+.blattzahlen .dz{text-align:right;font-size:.76rem;opacity:.6}
+.blattzahlen .dz.gut{color:var(--gruen);opacity:1}
+.blattzahlen .dz.schlecht{color:#C0685F;opacity:1}
+.zuklappen{margin-top:.9rem;background:none;border:1px solid rgba(227,200,139,.3);
+  color:var(--gold);border-radius:999px;padding:.35rem .8rem;font:inherit;
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 </style>
 </head>
 <body>
@@ -210,6 +269,7 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
   <span class="marke"><b>Trendonix Dashboard</b><span id="stand">wird geladen …</span></span>
   <button class="neu" id="knopf" type="button">Neu laden</button>
 </header>
+<div class="alarm" id="alarm" hidden></div>
 <div class="warnung" id="warnung" hidden></div>
 <main id="inhalt"></main>
 <div class="tipp" id="tipp" hidden>
@@ -224,10 +284,26 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
   var inhalt = document.getElementById('inhalt');
   var standZeile = document.getElementById('stand');
   var warnung = document.getElementById('warnung');
+  var alarm = document.getElementById('alarm');
   var knopf = document.getElementById('knopf');
   var ZULETZT = 'trendonix-zuletzt';
   var zuletzt = 0;
   try { zuletzt = parseInt(localStorage.getItem(ZULETZT) || '0', 10) || 0; } catch (e) {}
+
+  /**
+   * Abgehakte Termine leben nur auf diesem Gerät.
+   *
+   * Sie in cockpit.json zurückzuschreiben hieße, aus dem Dashboard einen
+   * Schreibzugriff auf das Repository zu machen — für einen Haken zu viel
+   * Maschinerie und ein Weg, den jeder gehen könnte, der die Adresse errät.
+   * Was der Plan selbst als erledigt meldet, bleibt davon unberührt.
+   */
+  var HAKEN = 'trendonix-haken';
+  var haken = {};
+  try { haken = JSON.parse(localStorage.getItem(HAKEN) || '{}') || {}; } catch (e) { haken = {}; }
+  function hakenMerken() {
+    try { localStorage.setItem(HAKEN, JSON.stringify(haken)); } catch (e) {}
+  }
 
   var da = function (w) { return w !== null && w !== undefined; };
   function zahl(n) { return da(n) ? n.toLocaleString('de-DE') : null; }
@@ -329,6 +405,39 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
   function malen(d) {
     var t = [];
 
+    // ---- Die Warnzeile: was hängt, hängt ganz oben ----
+    //
+    // Ein rotes Feld im Technik-Reiter hat noch nie jemanden erreicht, der das
+    // Telefon herauszieht, um den Rang zu sehen. Deshalb steht das Kaputte
+    // über allem, vor den Reitern, und verschwindet von selbst, sobald es
+    // wieder in Ordnung ist.
+    var wn = d.warnungen || [];
+    if (wn.length) {
+      alarm.innerHTML = '<ul>' + wn.map(function (x) {
+        return '<li class="' + (x.stufe === 'hoch' ? 'hoch' : 'mittel') + '">'
+          + '<span class="punkt2"></span><span>' + h(x.text) + '</span></li>';
+      }).join('') + '</ul>';
+      alarm.hidden = false;
+    } else {
+      alarm.hidden = true;
+      alarm.innerHTML = '';
+    }
+
+    // ---- Was ist heute anders? ----
+    var ae = d.aenderungen || {};
+    t.push('<section data-g="heute"><h2>Was ist heute anders?</h2><div class="karte">'
+      + (ae.punkte && ae.punkte.length
+          ? '<ul class="delta">' + ae.punkte.map(function (p) {
+              return '<li class="' + h(p.richtung || '') + '"><b>' + h(p.was) + '</b>'
+                + '<span class="von">' + h(p.von) + ' → ' + h(p.nach) + '</span>'
+                + '<span class="dz">' + h(p.delta || '') + '</span></li>';
+            }).join('') + '</ul>'
+          : '')
+      + (ae.hinweis ? '<p class="hinweis">' + h(ae.hinweis) + '</p>' : '')
+      + (ae.seit && ae.punkte && ae.punkte.length
+          ? '<p class="hinweis">Verglichen mit dem Stand vom ' + datum(ae.seit) + '.</p>' : '')
+      + '</div></section>');
+
     // ---- Überblick: die fünf Zahlen, für die man das Telefon herauszieht ----
     var ub = d.buch || {}, urez = ub.rezensionen || {}, uv = (d.verkaeufe || {}).summe30 || {};
     var ur = d.reichweite || {}, ut = d.technik || {}, vl = d.verlauf || {};
@@ -401,6 +510,11 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
         + '<div class="zeile">' + kachel(zahl(mo.bestellungen), 'Bestellungen')
         + kachel(euro(mo.tantiemen), 'Tantiemen, geschätzt')
         + kachel(zahl(mo.kenp), 'KENP-Seiten') + '</div>'
+        + (da(mo.ebook) || da(mo.druck)
+            ? '<div class="zeile">' + kachel(zahl(mo.ebook), 'davon eBook')
+              + kachel(zahl(mo.druck), 'davon Druck') + '</div>' : '')
+        + kurveBlock('Tantiemen im Monat · Verlauf', vl.tantiemen, false, euro)
+        + kurveBlock('Bestellungen im Monat · Verlauf', vl.bestellungen, false)
         + (mo.quellen && mo.quellen.length
             ? '<ul class="rangliste">' + mo.quellen.map(function (q) {
                 return '<li><span>' + h(q.name) + '</span><b>' + q.anteil + ' %</b></li>';
@@ -436,20 +550,21 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
         + kachel(da(rw.kanaeleGezaehlt) ? rw.kanaeleGezaehlt + ' / ' + rw.kanaeleGesamt : null, 'Kanäle mit Zahl')
         + '</div>' + kurveBlock('Verlauf', (d.verlauf || {}).reichweite, false) + '</div>'
         + '<div class="kanaele">'
-        + d.kanaele.map(function (k) {
+        + d.kanaele.map(function (k, i) {
             var hat = da(k.follower);
-            return '<div class="kanal"><b>' + h(k.name) + '</b>'
+            return '<button type="button" class="kanal" data-blatt="' + i + '"'
+              + ' aria-expanded="false"><b>' + h(k.name) + '</b>'
               + '<span class="griff">' + h(k.handle || '') + '</span>'
-              + '<div class="zahl' + (hat ? '' : ' leer') + '">'
-              + (hat ? zahl(k.follower) : 'keine Daten') + '</div>'
+              + '<span class="zahl' + (hat ? '' : ' leer') + '">'
+              + (hat ? zahl(k.follower) : 'keine Daten') + '</span>'
               + (hat ? trend(k.follower, k.vorher, false) : '')
               + kurve(((d.verlauf || {}).kanaele || {})[k.name], false)
               + '<span class="unten">' + (hat ? 'Follower' : '')
               + (da(k.reaktionen) ? (hat ? ' · ' : '') + zahl(k.reaktionen) + ' '
                   + h(k.reaktionenLabel || 'Reaktionen') : '')
-              + (k.stand ? '<br>Stand ' + datum(k.stand) : '')
-              + (k.notiz ? '<br>' + h(k.notiz) : '') + '</span></div>';
-          }).join('') + '</div></section>');
+              + (k.stand ? '<br>Stand ' + datum(k.stand) : '') + '</span></button>';
+          }).join('') + '</div>'
+        + '<div id="kanalblatt"></div></section>');
     }
 
     // ---- Was sich tut ----
@@ -477,14 +592,26 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
               + '<div class="tagkopf"><b>' + h(tg.wochentag) + '</b>'
               + '<span>' + datum(tg.d) + (ist ? ' · heute' : '') + '</span></div>'
               + '<ul class="punkte">' + tg.punkte.map(function (pk) {
-                  return '<li class="' + h(pk.zustand) + '">'
+                  // Der Schlüssel muss den Punkt überleben, auch wenn der Plan
+                  // umsortiert wird: Tag, Kanal, Uhrzeit und Vorhaben — nie der
+                  // Listenplatz, der sich beim nächsten Lauf verschiebt.
+                  var s = tg.d + '|' + pk.kanal + '|' + (pk.zeit || '') + '|' + (pk.was || '');
+                  var ab = haken[s] === true || pk.zustand === 'erledigt';
+                  return '<li class="' + h(pk.zustand) + (ab ? ' abgehakt' : '') + '">'
+                    + '<input type="checkbox" data-haken="' + h(s) + '"'
+                    + (ab ? ' checked' : '')
+                    + (pk.zustand === 'erledigt' ? ' disabled' : '')
+                    + ' aria-label="' + h(pk.kanal + ' am ' + tg.d + ' abhaken') + '">'
                     + '<span class="wann">' + h(pk.zeit || '—') + '</span>'
                     + '<span class="wasda"><b>' + h(pk.kanal) + '</b>'
                     + (pk.was ? '<span class="warum">' + h(pk.was) + '</span>' : '')
                     + (pk.hinweis ? '<span class="warum">' + h(pk.hinweis) + '</span>' : '')
                     + '</span><span class="zustand2">' + h(pk.zustand) + '</span></li>';
                 }).join('') + '</ul></li>';
-          }).join('') + '</ul></div></section>');
+          }).join('') + '</ul>'
+        + '<p class="hinweis">Haken bleiben auf diesem Gerät. Was der Plan selbst '
+        + 'als erledigt meldet, steht fest und lässt sich hier nicht ändern.</p>'
+        + '</div></section>');
     }
 
     // ---- Vorschläge ----
@@ -566,12 +693,90 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
           }).join('') + '</ul></div></section>');
     }
 
+    letzteDaten = d;
     inhalt.innerHTML = '<nav class="reiter" id="reiter"></nav>' + t.join('');
     reiterBauen();
+    if (offenesBlatt !== null) blattZeigen(offenesBlatt);
     standZeile.textContent = 'Stand ' + vorwie(d.stand);
     standZeile.className = '';
     try { localStorage.setItem(ZULETZT, String(Date.now())); } catch (e) {}
   }
+
+  /**
+   * Das Kanal-Detailblatt.
+   *
+   * Auf der Kachel steht die Zahl; hier steht, wie sie zustande kam — der
+   * Verlauf Tag für Tag, mit dem Unterschied zum Vortag daneben. Wer wissen
+   * will, ob die 96 neuen Follower vom Live-Abend blieben, sieht es hier in
+   * einer Spalte statt in einer Kurve, die man mit dem Daumen abfährt.
+   */
+  var letzteDaten = null;
+  var offenesBlatt = null;
+
+  function blattSchliessen() {
+    offenesBlatt = null;
+    var f = document.getElementById('kanalblatt');
+    if (f) f.innerHTML = '';
+    var kn = inhalt.querySelectorAll('.kanal[data-blatt]');
+    for (var i = 0; i < kn.length; i++) kn[i].setAttribute('aria-expanded', 'false');
+  }
+
+  function blattZeigen(i) {
+    var d = letzteDaten;
+    var fach = document.getElementById('kanalblatt');
+    if (!d || !fach || !d.kanaele || !d.kanaele[i]) return;
+    var k = d.kanaele[i];
+    var reihe = ((d.verlauf || {}).kanaele || {})[k.name] || [];
+    var zeilen = reihe.slice(-10).reverse().map(function (p, j, alle) {
+      var vor = alle[j + 1];
+      var dz = vor ? p.v - vor.v : null;
+      return '<li><span class="tag">' + kurzDatum(p.d) + '</span>'
+        + '<span class="wert2">' + zahl(p.v) + '</span>'
+        + '<span class="dz' + (dz === null || dz === 0 ? '' : (dz > 0 ? ' gut' : ' schlecht')) + '">'
+        + (dz === null ? '' : (dz === 0 ? '±0' : (dz > 0 ? '+' : '−') + zahl(Math.abs(dz))))
+        + '</span></li>';
+    }).join('');
+    offenesBlatt = i;
+    fach.innerHTML = '<div class="karte blatt">'
+      + '<div class="kopf"><h3>' + h(k.name) + '</h3>'
+      + '<span class="griff">' + h(k.handle || '') + '</span></div>'
+      + '<div class="zeile">'
+      + kachel(zahl(k.follower), 'Follower', trend(k.follower, k.vorher, false))
+      + kachel(zahl(k.reaktionen), h(k.reaktionenLabel || 'Reaktionen'))
+      + kachel(k.stand ? datum(k.stand) : null, 'Stand') + '</div>'
+      + kurveBlock('Verlauf', reihe, false)
+      + (zeilen ? '<ul class="blattzahlen">' + zeilen + '</ul>'
+                : '<p class="hinweis">Noch kein Verlauf — er beginnt mit dem zweiten Tagesstand.</p>')
+      + (k.notiz ? '<p class="hinweis">' + h(k.notiz) + '</p>' : '')
+      + '<button type="button" class="zuklappen">Zuklappen</button></div>';
+    var kn = inhalt.querySelectorAll('.kanal[data-blatt]');
+    for (var m = 0; m < kn.length; m++) {
+      kn[m].setAttribute('aria-expanded', kn[m].getAttribute('data-blatt') === String(i) ? 'true' : 'false');
+    }
+  }
+
+  // Ein einziger Zuhörer für alles, was im Inhalt geklickt wird: Der Inhalt
+  // wird jede Minute neu gezeichnet, einzeln gebundene Knöpfe wären danach
+  // taub — und mit jedem Neuzeichnen käme ein weiterer Zuhörer dazu.
+  inhalt.addEventListener('click', function (e) {
+    var z = e.target.closest ? e.target.closest('.kanal[data-blatt]') : null;
+    if (z) {
+      var i = parseInt(z.getAttribute('data-blatt'), 10);
+      if (offenesBlatt === i) blattSchliessen(); else blattZeigen(i);
+      return;
+    }
+    if (e.target.closest && e.target.closest('.zuklappen')) blattSchliessen();
+  });
+
+  inhalt.addEventListener('change', function (e) {
+    var f = e.target;
+    if (!f || !f.getAttribute || !f.getAttribute('data-haken')) return;
+    var s = f.getAttribute('data-haken');
+    if (f.checked) haken[s] = true; else delete haken[s];
+    hakenMerken();
+    var zeile = f.closest ? f.closest('li') : null;
+    if (zeile) zeile.classList.toggle('abgehakt', f.checked);
+  });
 
   /**
    * Reiter statt einer endlosen Rolle.

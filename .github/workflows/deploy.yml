@@ -50,6 +50,12 @@ jobs:
       - name: Weltdaten prüfen
         run: npm run pruefen
 
+      # Das Cockpit hat keinen Übersetzer über sich: eine einzelne HTML-Datei,
+      # die niemand baut. Ein Tippfehler darin fällt sonst erst auf dem Telefon
+      # auf, als weiße Seite.
+      - name: Cockpit prüfen
+        run: npm run pruefe:cockpit
+
       # Zwei Adressen, ein Bau.
       #
       # Ohne eigene Domain liegt die Seite in einem Unterordner von github.io –

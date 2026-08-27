@@ -31,3 +31,6 @@ build.log
 typecheck.log
 npm-install.log
 st.txt
+journal-nachricht.txt
+journal-commit.cmd
+journal-push.cmd

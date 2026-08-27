@@ -80,6 +80,51 @@ if (zahlenText) {
 }
 const letzte30 = tage.slice(-30);
 
+// ── Der Monat: eine zweite Zeilenart in derselben Datei ───────────────────
+//
+// Die Tageszeile sagt, was an einem Tag verkauft wurde; die Monatszeile sagt,
+// wo der Monat steht. Beides in einer Zeile zu führen wäre kürzer und falsch —
+// „13 Bestellungen“ ist keine Tagesangabe, und wer sie als eine liest, addiert
+// den Monat dreißigmal.
+//   JJJJ-MM-TT | Monat JJJJ-MM | Bestellungen n | eBook n | Druck n | KENP n | Tantiemen x,xx
+const monatRe = /^(\d{4}-\d{2}-\d{2})\s*\|\s*Monat\s+(\d{4}-\d{2})\s*\|\s*Bestellungen\s+(\S+)\s*\|\s*eBook\s+(\S+)\s*\|\s*Druck\s+(\S+)\s*\|\s*KENP\s+(\S+)\s*\|\s*Tantiemen\s+(\S+)/i;
+const monatsTage = [];
+if (zahlenText) {
+  for (const roh of zahlenText.split(/\r?\n/)) {
+    const m = roh.trim().match(monatRe);
+    if (!m) continue;
+    monatsTage.push({
+      d: m[1], monat: m[2], bestellungen: zzahl(m[3]), ebook: zzahl(m[4]),
+      druck: zzahl(m[5]), kenp: zzahl(m[6]), tantiemen: zzahl(m[7]),
+    });
+  }
+  monatsTage.sort((a, b) => (a.d < b.d ? -1 : 1));
+}
+const MONATSNAMEN = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+  'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+const jungerMonat = monatsTage[monatsTage.length - 1] ?? null;
+let monat = basis.monat ?? null;
+if (jungerMonat) {
+  const [jahr, mm] = jungerMonat.monat.split('-');
+  const zeitraum = `${MONATSNAMEN[Number(mm) - 1]} ${jahr}`;
+  // Die Aufteilung der Tantiemenquellen steht nicht in der Zeile. Sie aus einem
+  // älteren Stand weiterzuschleppen wäre eine Zahl, die niemand abgelesen hat —
+  // sie bleibt nur, wenn sie zum selben Monat und zum selben Tag gehört.
+  const passt = basis.monat?.zeitraum === zeitraum && basis.monat?.stand === jungerMonat.d;
+  monat = {
+    zeitraum,
+    stand: jungerMonat.d,
+    bestellungen: jungerMonat.bestellungen,
+    ebook: jungerMonat.ebook,
+    druck: jungerMonat.druck,
+    tantiemen: jungerMonat.tantiemen,
+    kenp: jungerMonat.kenp,
+    quellen: passt ? (basis.monat.quellen ?? null) : null,
+    hinweis: passt ? (basis.monat.hinweis ?? null)
+      : 'Aus dem KDP-Bericht abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken.',
+  };
+}
+
 // Eine Zeile ohne Verkaufszahlen ist keine Verkaufszahl: Steht in allen Feldern
 // ein Strich, bleibt die Luecke sichtbar, auch wenn die Datei da ist.
 const keineVerkaeufe = !tage.length
@@ -234,6 +279,12 @@ const tagesstand = {
   rez: buch.rezensionen?.anzahl ?? null,
   gesamt: null,
   kanaele: {},
+  // Der Monatsstand gehört nur dann zu diesem Tag, wenn er auch an diesem Tag
+  // abgelesen wurde. Eine gestrige Zahl als heutige zu führen hieße, eine
+  // waagerechte Kurve zu zeichnen, wo in Wahrheit niemand nachgesehen hat.
+  best: jungerMonat?.d === heute ? jungerMonat.bestellungen : null,
+  tant: jungerMonat?.d === heute ? jungerMonat.tantiemen : null,
+  dep: technik.deploy ?? null,
 };
 for (const k of basis.kanaele) {
   if (typeof k.follower === 'number') tagesstand.kanaele[k.name] = k.follower;
@@ -285,8 +336,101 @@ const verlauf = {
   rang: reihe((t) => t.rang),
   rezensionen: reihe((t) => t.rez),
   reichweite: reihe((t) => t.gesamt),
+  bestellungen: reihe((t) => t.best),
+  tantiemen: reihe((t) => t.tant),
   kanaele: kanalReihen,
 };
+
+// ── Was ist heute anders? ─────────────────────────────────────────────────
+//
+// Die eigentliche Frage an ein Dashboard lautet nicht „wie steht es“, sondern
+// „was hat sich seit gestern bewegt“. Alles andere ist Nachschlagen. Verglichen
+// wird gegen den jüngsten Tag, der nicht der heutige ist — nicht gegen den
+// vorigen Lauf: sonst meldete jede Stunde dieselbe Bewegung noch einmal.
+const vorTag = bisher.filter((t) => t.d < tagesstand.d).pop() ?? null;
+const aenderungen = [];
+const bewegt = (was, alt, neu, kleinerIstBesser, formt) => {
+  if (typeof alt !== 'number' || typeof neu !== 'number' || alt === neu) return;
+  const f = formt ?? ((v) => String(v));
+  const rauf = neu > alt;
+  aenderungen.push({
+    was,
+    von: f(alt),
+    nach: f(neu),
+    delta: (rauf ? '+' : '−') + f(Math.abs(neu - alt)),
+    richtung: (kleinerIstBesser ? !rauf : rauf) ? 'gut' : 'schlecht',
+  });
+};
+if (vorTag) {
+  bewegt('Rang', vorTag.rang, tagesstand.rang, true, (v) => '#' + v.toLocaleString('de-DE'));
+  bewegt('Rezensionen', vorTag.rez, tagesstand.rez, false);
+  bewegt('Follower gesamt', vorTag.gesamt, tagesstand.gesamt, false,
+    (v) => v.toLocaleString('de-DE'));
+  for (const k of basis.kanaele) {
+    bewegt(k.name, vorTag.kanaele?.[k.name], tagesstand.kanaele[k.name], false,
+      (v) => v.toLocaleString('de-DE'));
+  }
+  bewegt('Bestellungen im Monat', vorTag.best, tagesstand.best, false);
+  bewegt('Tantiemen im Monat', vorTag.tant, tagesstand.tant, false,
+    (v) => v.toFixed(2).replace('.', ',') + ' €');
+  if (vorTag.dep && tagesstand.dep && vorTag.dep !== tagesstand.dep) {
+    aenderungen.push({
+      was: 'Veröffentlichung', von: vorTag.dep, nach: tagesstand.dep, delta: null,
+      richtung: tagesstand.dep === 'erfolgreich' ? 'gut' : 'schlecht',
+    });
+  }
+}
+const aenderungenStand = {
+  seit: vorTag?.d ?? null,
+  punkte: aenderungen,
+  hinweis: !vorTag
+    ? 'Heute steht der erste Tagesstand. Ab morgen steht hier, was sich bewegt hat.'
+    : (aenderungen.length ? null : 'Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt.'),
+};
+
+// ── Die Warnzeile ─────────────────────────────────────────────────────────
+//
+// Vier Dinge dürfen nicht im Technik-Reiter versauern, weil sie mit jedem Tag
+// teurer werden: eine rote Veröffentlichung, ein ablaufendes Zertifikat, tote
+// Links und ein Rechnerlauf, der sich nicht mehr meldet. Sie stehen ganz oben
+// und in Rot. Was ein Mensch bemerkt hat und keine Maschine messen kann — ein
+// falsches Konto im Browser etwa — trägt der Rundlauf in basis.warnungen ein.
+const warnungen = [];
+const warnen = (stufe, text) => warnungen.push({ stufe, text });
+for (const wn of basis.warnungen ?? []) {
+  if (wn?.text) warnen(wn.stufe === 'hoch' ? 'hoch' : 'mittel', wn.text);
+}
+if (technik.deploy && technik.deploy !== 'erfolgreich') {
+  warnen('hoch', `Die Veröffentlichung steht auf „${technik.deploy}“ — die Website zeigt noch den Stand davor.`);
+}
+if (typeof technik.zertifikatTage === 'number' && technik.zertifikatTage < 30) {
+  warnen('hoch', `Das Zertifikat läuft in ${technik.zertifikatTage} Tagen ab.`);
+}
+if (technik.linksKaputt) {
+  const erste = technik.linksZiele[0];
+  warnen('mittel', `${technik.linksKaputt} tote${technik.linksKaputt === 1 ? 'r' : ''} Link${technik.linksKaputt === 1 ? '' : 's'} auf der Seite${erste ? ` — ${erste.code} auf ${erste.ziel}` : ''}.`);
+}
+const stundenHer = (iso) => {
+  const t = Date.parse(iso ?? '');
+  return Number.isFinite(t) ? (Date.now() - t) / 36e5 : null;
+};
+const laufAlt = stundenHer(technik.stand);
+if (laufAlt === null) {
+  warnen('mittel', 'Vom stündlichen Rechnerlauf liegt kein Stand vor — läuft die Aufgabe „Trendonix PC“ noch?');
+} else if (laufAlt > 6) {
+  // In Stufen, nicht auf die Stunde genau: Eine Warnung, die sich stündlich
+  // umformuliert, schiebt stündlich eine neue Datei hoch, ohne etwas Neues zu
+  // sagen. Was zählt, ist die Größenordnung.
+  const wie = laufAlt > 48 ? `seit ${Math.floor(laufAlt / 24)} Tagen`
+    : laufAlt > 24 ? 'seit über einem Tag'
+      : laufAlt > 12 ? 'seit mehr als zwölf Stunden' : 'seit mehr als sechs Stunden';
+  warnen('mittel', `Der stündliche Rechnerlauf hat sich ${wie} nicht gemeldet.`);
+}
+const letzterKdp = tage.length ? tage[tage.length - 1].d : null;
+const tageHer = letzterKdp ? Math.round((Date.parse(heute) - Date.parse(letzterKdp)) / 864e5) : null;
+if (tageHer !== null && tageHer >= 2) {
+  warnen('mittel', `Seit ${tageHer} Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still.`);
+}
 
 // ── Wochenbericht: der jüngste Abschnitt, nicht die ganze Datei ───────────
 const berichtText = autopilot ? liesText(join(autopilot, 'WOCHENBERICHT.md')) : null;
@@ -322,9 +466,11 @@ if (!kostenDatei) fehlt('Kosten', 'kosten.json nicht gefunden.');
 const stand = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 const raus = {
   stand,
+  warnungen,
+  aenderungen: aenderungenStand,
   buch,
   verkaeufe,
-  monat: basis.monat ?? null,
+  monat,
   besucher: basis.besucher,
   reichweite,
   verlauf,
@@ -352,4 +498,4 @@ if (nurPruefen) {
 }
 if (gleich) { console.log('Cockpit: unverändert, nichts geschrieben.'); process.exit(0); }
 writeFileSync(ZIEL, text, 'utf8');
-console.log(`Cockpit geschrieben: ${tage.length} Tage Verkäufe, ${bekannt.length}/${basis.kanaele.length} Kanäle mit Zahl, ${luecken.length} Lücke(n), Verlauf ${bisher.length} Tag(e)${verlaufNeu ? ' (neu)' : ''}.`);
+console.log(`Cockpit geschrieben: ${tage.length} Tage Verkäufe, ${bekannt.length}/${basis.kanaele.length} Kanäle mit Zahl, ${warnungen.length} Warnung(en), ${aenderungen.length} Änderung(en), ${luecken.length} Lücke(n), Verlauf ${bisher.length} Tag(e)${verlaufNeu ? ' (neu)' : ''}.`);

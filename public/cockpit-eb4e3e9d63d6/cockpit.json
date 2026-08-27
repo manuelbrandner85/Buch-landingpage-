@@ -1,5 +1,16 @@
 {
-  "stand": "2026-08-27T22:04:36Z",
+  "stand": "2026-08-27T22:20:11Z",
+  "warnungen": [
+    {
+      "stufe": "mittel",
+      "text": "1 toter Link auf der Seite — 404 auf https://bsky.app/profile/trendonix-buecher.bsky.social."
+    }
+  ],
+  "aenderungen": {
+    "seit": null,
+    "punkte": [],
+    "hinweis": "Heute steht der erste Tagesstand. Ab morgen steht hier, was sich bewegt hat."
+  },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -74,6 +85,8 @@
     "zeitraum": "August 2026",
     "stand": "2026-08-27",
     "bestellungen": 13,
+    "ebook": 12,
+    "druck": 1,
     "tantiemen": 10.81,
     "kenp": 0,
     "quellen": [
@@ -82,7 +95,7 @@
         "anteil": 100
       }
     ],
-    "hinweis": "Aus dem KDP-Dashboard abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
+    "hinweis": "Aus dem KDP-Bericht „Bestellungen“ abgelesen: alle 13 Einheiten entfallen auf Band 1, die neun anderen Titel stehen bei null. Die Tantiemen stammen zu 100 % aus dem Druck — das eine Taschenbuch bringt mehr als zwölf eBooks über Kindle Unlimited. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
   },
   "besucher": {
     "gelesen": false,
@@ -105,6 +118,8 @@
     "rang": [],
     "rezensionen": [],
     "reichweite": [],
+    "bestellungen": [],
+    "tantiemen": [],
     "kanaele": {}
   },
   "termine": [
