@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T19:48:57Z",
+  "stand": "2026-08-27T20:00:19Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -625,10 +625,10 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-27T19:29:00Z",
+    "stand": "2026-08-27T19:59:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": "2026-08-27T19:27:32Z",
+    "deployWann": "2026-08-27T19:55:13Z",
     "zertifikatTage": 87,
     "linksGeprueft": 44,
     "linksKaputt": 2,
