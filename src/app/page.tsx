@@ -14,6 +14,7 @@ import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Verteiler } from '@/ui/Verteiler';
 import { Hausmarke } from '@/ui/Hausmarke';
+import { Unterschrift } from '@/ui/Unterschrift';
 
 /**
  * Das Haus.
@@ -195,6 +196,7 @@ export default function Haus() {
           <h2>Behauptet wird nichts, was sich nicht prüfen lässt</h2>
           <p>{TRENDONIX.arbeitsweise}</p>
           <p><a className="eintauchen" href={wegUeber()}>Wie diese Welt gemacht ist</a></p>
+          <Unterschrift />
         </div>
       </section>
 

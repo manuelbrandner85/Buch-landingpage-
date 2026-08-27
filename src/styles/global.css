@@ -1520,3 +1520,35 @@ header .marke .hausmal img{animation:none}
    einem Schatten dahinter. */
 header .marke .reihenname{color:#F0DDA9;
   text-shadow:0 1px 6px rgba(0,0,0,.8)}
+
+/* ---------- Die Unterschrift ----------
+   Sie steht am Ende eines Versprechens, nicht als Zierat am Seitenrand: unter
+   der Arbeitsweise im Haus, am Ende des Textes über die Welt, unter jedem
+   Journalbeitrag. Geschrieben wird sie erst, wenn sie im Bild ist – einmal.
+   Ohne Skript, im Ruhig-Modus und bei „Bewegung reduzieren“ steht sie
+   fertig da. */
+.unterschrift{display:block;width:clamp(180px,24vw,300px);margin:2.8rem auto 0}
+.unterschrift svg{display:block;width:100%;height:auto;overflow:visible;
+  filter:drop-shadow(0 0 16px rgba(227,200,139,.2))}
+.unterschrift .feder{stroke-dasharray:var(--zug);stroke-dashoffset:0}
+.unterschrift.wartet .feder{stroke-dashoffset:var(--zug)}
+.unterschrift.schreibt .feder{stroke-dashoffset:var(--zug);
+  animation-name:schreiben;animation-timing-function:linear;
+  animation-fill-mode:forwards}
+@keyframes schreiben{to{stroke-dashoffset:0}}
+/* Der Lichtstreifen wandert erst, wenn geschrieben ist. */
+.unterschrift-glanz{transform:translateX(-560px);
+  animation:unterschriftglanz 9s cubic-bezier(.4,0,.2,1) 5.2s infinite}
+@keyframes unterschriftglanz{
+  0%,66%{transform:translateX(-560px)}
+  100%{transform:translateX(1520px)}
+}
+.unterschrift.wartet .unterschrift-glanz{animation:none}
+.ruhig .unterschrift-glanz{animation:none}
+@media (prefers-reduced-motion:reduce){
+  .unterschrift .feder{stroke-dashoffset:0;animation:none}
+  .unterschrift-glanz{animation:none}
+}
+/* Auf den Leseseiten steht sie linksbündig unter dem Text, wie unter einem
+   Brief – im Haus mittig unter dem Satz, den sie unterschreibt. */
+.lesefassung .unterschrift,.papier .unterschrift{margin-left:0}

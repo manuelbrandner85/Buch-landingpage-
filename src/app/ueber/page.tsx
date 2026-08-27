@@ -4,6 +4,7 @@ import { ORTE } from '@/data/gemeinsam/orte';
 import { wegBegriffe, wegHaus, wegImpressum } from '@/world/wege';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
+import { Unterschrift } from '@/ui/Unterschrift';
 
 export const metadata: Metadata = {
   title: 'Über das Projekt – Trendonix',
@@ -118,6 +119,7 @@ export default function UeberSeite() {
       <p className="quelle">
         <b>Bildnachweis</b>Alle Angaben folgen dem Bildnachweis des Bandes, Seite 201.
       </p>
+      <Unterschrift />
       <nav className="fusszeile">
         <a href={wegBegriffe(LEITREIHE.id)}>Begriffe</a>
         <a href={wegImpressum()}>Impressum und Datenschutz</a>
