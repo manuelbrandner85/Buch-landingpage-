@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T20:03:27Z",
+  "stand": "2026-08-27T20:27:39Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -625,18 +625,14 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-27T20:02:00Z",
+    "stand": "2026-08-27T20:27:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": null,
+    "deployWann": "2026-08-27T20:13:36Z",
     "zertifikatTage": 87,
     "linksGeprueft": 44,
-    "linksKaputt": 2,
+    "linksKaputt": 1,
     "linksZiele": [
-      {
-        "ziel": "https://www.trendonix-buecher.de/cockpit-eb4e3e9d63d6/",
-        "code": 401
-      },
       {
         "ziel": "https://bsky.app/profile/trendonix-buecher.bsky.social",
         "code": 404
