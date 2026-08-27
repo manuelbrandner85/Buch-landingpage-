@@ -1,0 +1,17 @@
+{
+  "name": "Trendonix Dashboard",
+  "short_name": "Trendonix",
+  "description": "Was sich bei den Büchern tut: Verkäufe, Rang, Rezensionen, Kanäle, offene Punkte.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060A14",
+  "theme_color": "#060A14",
+  "lang": "de",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

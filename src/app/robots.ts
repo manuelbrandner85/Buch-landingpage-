@@ -18,7 +18,12 @@ const SPIEGEL = process.env.NEXT_PUBLIC_SPIEGEL === '1';
 export default function robots(): MetadataRoute.Robots {
   if (SPIEGEL) return { rules: { userAgent: '*', disallow: '/' } };
   return {
-    rules: { userAgent: '*', allow: '/' },
+    // Das Cockpit ist die Innenansicht des Hauses: Verkaufszahlen, offene
+    // Punkte, Kanalzahlen. Es steht auf demselben Webspace, weil es dort ohne
+    // eigenen Server auskommt – gefunden werden soll es aber nicht. Die Adresse
+    // traegt deshalb eine unratbare Kennung, die Seite selbst ein `noindex`,
+    // und hier steht die dritte Sperre.
+    rules: { userAgent: '*', allow: '/', disallow: '/cockpit-eb4e3e9d63d6/' },
     sitemap: `${BASIS}/sitemap.xml`,
   };
 }
