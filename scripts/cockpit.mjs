@@ -78,12 +78,19 @@ if (zahlenText) {
   }
   tage.sort((a, b) => (a.d < b.d ? -1 : 1));
 }
-if (!tage.length) {
+const letzte30 = tage.slice(-30);
+
+// Eine Zeile ohne Verkaufszahlen ist keine Verkaufszahl: Steht in allen Feldern
+// ein Strich, bleibt die Luecke sichtbar, auch wenn die Datei da ist.
+const keineVerkaeufe = !tage.length
+  || letzte30.every((t) => t.kindle === null && t.taschenbuch === null && t.kenp === null);
+if (keineVerkaeufe) {
   fehlt('Verkäufe', zahlenText
-    ? 'ZAHLEN.md steht bereit, aber es ist noch keine Tageszeile eingetragen. Die Zahlen stehen nur im KDP-Konto.'
+    ? (tage.length
+        ? 'In ZAHLEN.md stehen Tageszeilen, aber ohne Verkaufszahlen — Kindle, Taschenbuch und KENP sind unausgefüllt. Sie stehen nur im KDP-Konto.'
+        : 'ZAHLEN.md steht bereit, aber es ist noch keine Tageszeile eingetragen. Die Zahlen stehen nur im KDP-Konto.')
     : 'ZAHLEN.md gibt es noch nicht. Die Zahlen stehen nur im KDP-Konto; Amazon-Seiten darf keine Automatik abrufen.');
 }
-const letzte30 = tage.slice(-30);
 const summe = (feld) => {
   const werte = letzte30.map((t) => t[feld]).filter((w) => w !== null);
   return werte.length ? werte.reduce((a, b) => a + b, 0) : null;

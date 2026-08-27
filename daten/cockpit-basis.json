@@ -121,10 +121,10 @@
   ],
   "vorschlaege": [
     {
-      "titel": "Leserunde starten",
-      "wer": "Manuel",
-      "warum": "Acht Freiexemplare als PDF, alle Texte liegen fertig. Es fehlt nur das Konto bei buechertreff.de.",
-      "gewinn": "Die ersten Rezensionen überhaupt — der teuerste fehlende Baustein."
+      "titel": "Die erste Rezension sichtbar machen",
+      "wer": "beide",
+      "warum": "5,0 von 5 steht seit heute auf beiden Ausgaben. Auf der Website erscheinen Sterne erst, wenn die Zahl in stimmen.ts eingetragen ist — die Technik dafür liegt seit gestern bereit.",
+      "gewinn": "Der Kaufweg zeigt eine Bewertung statt einer leeren Stelle."
     },
     {
       "titel": "KDP-Berichte einmal von Hand ablesen",
@@ -158,6 +158,18 @@
     }
   ],
   "offen": [
+    {
+      "titel": "TikTok im Browser auf @trendonix umstellen",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Angemeldet ist ein fremdes Konto. Solange das so ist, prüft der Rundlauf auf TikTok gar nichts — und verpasst bleibt verpasst."
+    },
+    {
+      "titel": "Live-Hinweisclip auf „Nur ich\" setzen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "„🔴 LIVE — Ich bin gerade live.\" steht seit dem 26.08. öffentlich, obwohl die Live um 20:31 endete. Geht nur mit dem richtigen Konto."
+    },
     {
       "titel": "Konto bei buechertreff.de anlegen",
       "wer": "Manuel",
@@ -196,6 +208,21 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-27T21:20:00Z",
+      "kanal": "Amazon",
+      "text": "Die erste Rezension ist da: 5,0 von 5, auf Taschenbuch und Kindle. Der Wortlaut wird auf der Rezensionsseite noch nicht ausgeliefert."
+    },
+    {
+      "zeit": "2026-08-27T21:22:00Z",
+      "kanal": "TikTok",
+      "text": "TikTok ist im Browser mit einem fremden Konto angemeldet — Kommentare, Postfach und Live-Nacharbeit fallen aus, bis @trendonix wieder angemeldet ist."
+    },
+    {
+      "zeit": "2026-08-27T21:47:00Z",
+      "kanal": "Technik",
+      "text": "Der stündliche Rundlauf läuft wieder: eigene Aufgabe mit Ordnerfreigabe und Zeitplan 07:20–23:20."
+    },
     {
       "zeit": "2026-08-27T19:55:00Z",
       "kanal": "Google",
@@ -240,16 +267,6 @@
       "zeit": "2026-08-27T14:20:00Z",
       "kanal": "YouTube",
       "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen."
-    },
-    {
-      "zeit": "2026-08-27T13:50:00Z",
-      "kanal": "Website",
-      "text": "Ausleihen ist jetzt ein eigener Kaufweg — Bibliotheken erscheinen ohne Preis."
-    },
-    {
-      "zeit": "2026-08-27T13:30:00Z",
-      "kanal": "Website",
-      "text": "Sterne und Leserstimmen eingebaut. Sie erscheinen, sobald die erste Rezension da ist."
     }
   ]
 }
