@@ -75,7 +75,21 @@ export interface Leserstimme {
  * zeigt die Seite an keiner Stelle Sterne. Das ist kein Versäumnis, sondern
  * der Zustand.
  */
-export const BEWERTUNGEN: Bewertungsstand[] = [];
+export const BEWERTUNGEN: Bewertungsstand[] = [
+  // Die erste Bewertung überhaupt, abgelesen am 27.08.2026 auf den eigenen
+  // Produktseiten: 5,0 von 5 bei einer globalen Bewertung, auf Taschenbuch und
+  // E-Book identisch — es ist dieselbe Bewertung, Amazon zeigt sie bei beiden
+  // Ausgaben. Deshalb steht sie hier einmal und nicht zweimal; zweimal gezählt
+  // wäre sie eine erfundene Bewertung.
+  {
+    bandId: 'band-1',
+    quelle: 'Amazon',
+    url: 'https://www.amazon.de/dp/B0HG4LPJKV',
+    schnitt: 5,
+    anzahl: 1,
+    stand: '2026-08-27',
+  },
+];
 
 export const STIMMEN: Leserstimme[] = [];
 
