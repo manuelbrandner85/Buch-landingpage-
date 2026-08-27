@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T20:27:39Z",
+  "stand": "2026-08-27T21:17:39Z",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
@@ -415,9 +415,15 @@
   "bericht": null,
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 1824,
-    "offenSumme": 1680,
+    "summe": 1836,
+    "offenSumme": 1692,
     "buchungen": [
+      {
+        "datum": "2026-08-27",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung",
+        "credits": 12
+      },
       {
         "datum": "2026-08-26",
         "projekt": "nicht zugeordnet",
@@ -625,10 +631,10 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-27T20:27:00Z",
+    "stand": "2026-08-27T21:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": "2026-08-27T20:13:36Z",
+    "deployWann": "2026-08-27T20:28:35Z",
     "zertifikatTage": 87,
     "linksGeprueft": 44,
     "linksKaputt": 1,
