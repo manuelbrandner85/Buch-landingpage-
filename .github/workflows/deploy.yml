@@ -184,12 +184,18 @@ jobs:
         if: steps.zugang.outputs.da == 'ja'
         run: npm run pruefen
 
+      # Die Mess-Kennung kommt aus den Repository-Variablen, nicht aus dem Code:
+      # Repository → Settings → Secrets and variables → Actions → Variables →
+      # `GA4_KENNUNG`, Wert `G-XXXXXXXXXX`. Ist sie leer, enthält die gebaute
+      # Seite weder Analytics noch Einwilligungsbanner — nicht auskommentiert,
+      # gar nicht. Nur auf der eigenen Domain: Der github.io-Spiegel misst nie.
       - name: Bauen
         if: steps.zugang.outputs.da == 'ja'
         env:
           NEXT_EXPORT: '1'
           NEXT_PUBLIC_BASIS_PFAD: ''
           SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
+          NEXT_PUBLIC_GA4: ${{ vars.GA4_KENNUNG }}
         run: |
           export NEXT_PUBLIC_BASIS_URL="https://${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
           npx next build

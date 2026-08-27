@@ -1673,3 +1673,42 @@ body.mit-kaufleiste{padding-bottom:4.6rem}
    Zitate sind Beiwerk, nicht der Grund, warum jemand hier ist. */
 .leserstimmen{padding-block:clamp(3.5rem,9vw,7rem)}
 .leserstimmen .stimmenreihe{max-width:66rem;margin-inline:auto;margin-block:0}
+
+/* ---------- Einwilligung in die Reichweitenmessung ----------
+   Erscheint nur, wenn NEXT_PUBLIC_GA4 gesetzt ist. Zwei Knoepfe, gleich gross,
+   gleich hell: Ablehnen darf nicht schwerer sein als Zustimmen, sonst ist die
+   Einwilligung keine. Deshalb hat "Nein, danke" denselben Rahmen und dieselbe
+   Schriftgroesse wie "Einverstanden" - nur die Fuellung unterscheidet sie. */
+.zustimmung{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(6,10,20,.97);border-top:1px solid var(--gold-tief);
+  padding:1rem var(--rand) calc(1rem + env(safe-area-inset-bottom,0px));
+  display:flex;flex-wrap:wrap;gap:.9rem 1.6rem;align-items:center;
+  justify-content:space-between;
+  box-shadow:0 -18px 40px rgba(0,0,0,.5)}
+.zustimmung-text{flex:1 1 22rem;min-width:0}
+.zustimmung-text b{display:block;font-family:var(--display),serif;font-weight:400;
+  color:var(--gold);font-size:1.05rem;margin-bottom:.25rem}
+.zustimmung-text p{font-size:.86rem;line-height:1.5;color:var(--papier);max-width:46rem}
+.zustimmung-text a{color:var(--gold);text-decoration:underline;
+  text-underline-offset:.2em}
+.zustimmung-knoepfe{display:flex;gap:.7rem;flex:0 0 auto}
+.zustimmung-knoepfe button{font-family:var(--display),serif;font-size:.82rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:.7rem 1.3rem;border-radius:999px;cursor:pointer;
+  border:1px solid var(--gold);background:transparent;color:var(--gold)}
+/* Beide Knoepfe sehen gleich aus - kein gefuellter neben einem hohlen.
+   Die Aufsichtsbehoerden nennen genau das als Beispiel fuer eine Gestaltung,
+   die die Ablehnung benachteiligt; und wer ablehnen will, soll nicht erst den
+   unauffaelligeren Knopf suchen muessen. */
+.zustimmung-knoepfe button:hover{background:rgba(227,200,139,.14)}
+@media (max-width:34rem){
+  .zustimmung-knoepfe{width:100%}
+  .zustimmung-knoepfe button{flex:1 1 0}
+}
+
+/* Der Widerruf im Impressum. */
+.widerruf{margin-top:1.4rem;font-size:.86rem;color:var(--papier)}
+.widerruf button{font:inherit;font-size:.78rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);background:transparent;
+  border:1px solid var(--gold-tief);border-radius:999px;
+  padding:.35rem .9rem;margin-left:.4rem;cursor:pointer}

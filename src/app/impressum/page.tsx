@@ -4,6 +4,8 @@ import { TRENDONIX } from '@/world/registry';
 import { wegHaus, wegUeber } from '@/world/wege';
 import { ANBIETER, impressumVollstaendig } from '@/data/gemeinsam/anbieter';
 import { zaehlerLaeuft } from '@/ui/Zaehler';
+import { ZustimmungAendern } from '@/ui/Zustimmung';
+import { messungLaeuft } from '@/data/gemeinsam/messung';
 import { Kanaele } from '@/ui/Kanaele';
 
 export const metadata: Metadata = {
@@ -27,6 +29,7 @@ function Zeile({ wert, was }: { wert: string; was: string }) {
 export default function ImpressumSeite() {
   const fertig = impressumVollstaendig();
   const zaehlt = zaehlerLaeuft();
+  const misst = messungLaeuft();
 
   return (
     <main className="lesefassung">
@@ -74,10 +77,43 @@ export default function ImpressumSeite() {
         <p>
           Diese Seite speichert im lokalen Browserspeicher, welche Szenen bereits
           gesehen wurden. Diese Angabe bleibt auf Ihrem Gerät und wird nicht übertragen.
-          Es werden keine Konten geführt und keine Werbenetzwerke geladen. Es gibt
-          keine Cookies und keine Einwilligungsabfrage, weil es nichts gibt, worin
-          eingewilligt werden müsste.
+          Es werden keine Konten geführt und keine Werbenetzwerke geladen.
+          {misst
+            ? ' Für die Reichweitenmessung wird einmalig um Einwilligung gebeten; ohne sie wird kein Cookie gesetzt.'
+            : ' Es gibt keine Cookies und keine Einwilligungsabfrage, weil es nichts gibt, worin eingewilligt werden müsste.'}
         </p>
+        {misst && (
+          <>
+            <p>
+              <b>Google Analytics 4.</b> Um zu erfahren, wie viele Menschen diese Seite
+              lesen und über welchen Weg sie herkommen, ist Google Analytics 4
+              eingebunden (Google Ireland Limited, Gordon House, Barrow Street,
+              Dublin 4, Irland). Erhoben werden dabei unter anderem aufgerufene Seiten,
+              Verweildauer, ungefährer Standort, Gerätetyp und die verweisende Adresse.
+              Google setzt dafür Cookies und vergibt eine Kennung, mit der wiederkehrende
+              Besuche als solche erkannt werden.
+            </p>
+            <p>
+              <b>Nur mit Ihrer Einwilligung.</b> Das Skript von Google wird erst geladen,
+              nachdem Sie im Hinweis am unteren Rand auf „Einverstanden“ geklickt haben.
+              Vorher besteht keine Verbindung zu Google, und es wird kein Cookie gesetzt.
+              Rechtsgrundlage ist Ihre Einwilligung nach § 25 Abs. 1 TDDDG und
+              Art. 6 Abs. 1 lit. a DSGVO. Sie können sie jederzeit mit Wirkung für die
+              Zukunft widerrufen; die bis dahin erfolgte Verarbeitung bleibt rechtmäßig.
+            </p>
+            <p>
+              Die IP-Adresse wird gekürzt verarbeitet, Werbefunktionen und die
+              Verknüpfung mit Google-Konten sind abgeschaltet. Eine Übermittlung in die
+              USA lässt sich dabei nicht ausschließen; Google stützt sich hierfür auf das
+              EU-US Data Privacy Framework. Einzelheiten und die Widerspruchsmöglichkeit
+              gegenüber Google:{' '}
+              <a href="https://policies.google.com/privacy" rel="noopener nofollow">
+                policies.google.com/privacy
+              </a>
+            </p>
+            <ZustimmungAendern />
+          </>
+        )}
         {zaehlt ? (
           <p>
             Zur Reichweitenmessung wird gezählt, wie oft eine Seite aufgerufen wird.
