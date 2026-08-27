@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-27T15:10:00Z",
+  "stand": "2026-08-27T17:22:00Z",
   "erzeugtVon": "Sitzung 27.08.2026",
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
@@ -10,15 +10,46 @@
     "rangGesamt": 334543,
     "rangStand": "2026-08-27",
     "kategorien": [
-      { "name": "Kulturgeschichte", "platz": 247 },
-      { "name": "Vor- & Frühgeschichte", "platz": 744 },
-      { "name": "Archäologie", "platz": 948 }
+      {
+        "name": "Kulturgeschichte",
+        "platz": 247
+      },
+      {
+        "name": "Vor- & Frühgeschichte",
+        "platz": 744
+      },
+      {
+        "name": "Archäologie",
+        "platz": 948
+      }
     ],
-    "rezensionen": { "anzahl": 0, "schnitt": null, "sterneBewertungen": 0 },
+    "rezensionen": {
+      "anzahl": 0,
+      "schnitt": null,
+      "sterneBewertungen": 0
+    },
     "ausgaben": [
-      { "form": "Taschenbuch", "haendler": "Amazon", "preis": 39.9, "isbn": "979-8191493053", "zustand": "im Handel" },
-      { "form": "E-Book", "haendler": "Amazon", "preis": 12.99, "isbn": null, "zustand": "im Handel · Kindle Unlimited" },
-      { "form": "Gebunden", "haendler": "Amazon", "preis": null, "isbn": null, "zustand": "wird von KDP geprüft, vierter Tag" }
+      {
+        "form": "Taschenbuch",
+        "haendler": "Amazon",
+        "preis": 39.9,
+        "isbn": "979-8191493053",
+        "zustand": "im Handel"
+      },
+      {
+        "form": "E-Book",
+        "haendler": "Amazon",
+        "preis": 12.99,
+        "isbn": null,
+        "zustand": "im Handel · Kindle Unlimited"
+      },
+      {
+        "form": "Gebunden",
+        "haendler": "Amazon",
+        "preis": null,
+        "isbn": null,
+        "zustand": "wird von KDP geprüft, vierter Tag"
+      }
     ]
   },
   "verkaeufe": {
@@ -27,39 +58,141 @@
     "tage": []
   },
   "kanaele": [
-    { "name": "TikTok", "handle": "@trendonix", "follower": 21600, "reaktionen": 164600,
-      "reaktionenLabel": "Likes gesamt", "stand": "2026-08-26", "notiz": "Lives laufen besser als der Feed" },
-    { "name": "YouTube", "handle": "@Trendonixde", "follower": 10, "reaktionen": 2,
-      "reaktionenLabel": "Kommentare", "stand": "2026-08-27", "notiz": "2 öffentliche Videos, 21 Aufrufe, Community aktiv" },
-    { "name": "Instagram", "handle": "@trendonix_", "follower": null, "reaktionen": null, "stand": null, "notiz": null },
-    { "name": "Facebook", "handle": "Seite Trendonix", "follower": null, "reaktionen": null, "stand": null, "notiz": null },
-    { "name": "Pinterest", "handle": "brandy13062", "follower": null, "reaktionen": null, "stand": null,
-      "notiz": "Entwickler-App wartet auf Freigabe" },
-    { "name": "Bluesky", "handle": "@trendonix-buecher.bsky.social", "follower": null, "reaktionen": null, "stand": null, "notiz": null }
+    {
+      "name": "TikTok",
+      "handle": "@trendonix",
+      "follower": 21600,
+      "reaktionen": 164600,
+      "reaktionenLabel": "Likes gesamt",
+      "stand": "2026-08-26",
+      "notiz": "Lives laufen besser als der Feed"
+    },
+    {
+      "name": "YouTube",
+      "handle": "@Trendonixde",
+      "follower": 10,
+      "reaktionen": 2,
+      "reaktionenLabel": "Kommentare",
+      "stand": "2026-08-27",
+      "notiz": "2 öffentliche Videos, 21 Aufrufe, Community aktiv"
+    },
+    {
+      "name": "Instagram",
+      "handle": "@trendonix_",
+      "follower": null,
+      "reaktionen": null,
+      "stand": null,
+      "notiz": null
+    },
+    {
+      "name": "Facebook",
+      "handle": "Seite Trendonix",
+      "follower": null,
+      "reaktionen": null,
+      "stand": null,
+      "notiz": null
+    },
+    {
+      "name": "Pinterest",
+      "handle": "brandy13062",
+      "follower": null,
+      "reaktionen": null,
+      "stand": null,
+      "notiz": "Entwickler-App wartet auf Freigabe"
+    },
+    {
+      "name": "Bluesky",
+      "handle": "@trendonix-buecher.bsky.social",
+      "follower": null,
+      "reaktionen": null,
+      "stand": null,
+      "notiz": null
+    }
   ],
   "aktivitaet": [
-    { "zeit": "2026-08-27T15:05:00Z", "kanal": "YouTube", "text": "Community-Funktion aktiviert — Zuschauer können jetzt selbst Beiträge schreiben." },
-    { "zeit": "2026-08-27T14:55:00Z", "kanal": "YouTube", "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis." },
-    { "zeit": "2026-08-27T14:40:00Z", "kanal": "YouTube", "text": "Jonika Venturis hat unter beiden Videos kommentiert — die ersten fremden Kommentare des Kanals. Beantwortet und geliked." },
-    { "zeit": "2026-08-27T14:20:00Z", "kanal": "YouTube", "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen. Vorher führte kein Weg vom Video zum Buch." },
-    { "zeit": "2026-08-27T13:50:00Z", "kanal": "Website", "text": "Ausleihen ist jetzt ein eigener Kaufweg — Bibliotheken erscheinen ohne Preis und ohne Angebot im Datenblatt." },
-    { "zeit": "2026-08-27T13:30:00Z", "kanal": "Website", "text": "Sterne und Leserstimmen eingebaut. Sie erscheinen von selbst, sobald die erste Rezension eingetragen ist." },
-    { "zeit": "2026-08-27T13:00:00Z", "kanal": "Google", "text": "Search Console auf ein Konto zusammengeführt, Duplikat entfernt. Sitemap: 89 Seiten." }
+    {
+      "zeit": "2026-08-27T17:22:00Z",
+      "kanal": "Cockpit",
+      "text": "Eigener Upload-Weg: Änderungen hier landen jetzt in unter einer Minute auf dem Telefon, ohne dass die Buchseite neu gebaut wird."
+    },
+    {
+      "zeit": "2026-08-27T15:05:00Z",
+      "kanal": "YouTube",
+      "text": "Community-Funktion aktiviert — Zuschauer können jetzt selbst Beiträge schreiben."
+    },
+    {
+      "zeit": "2026-08-27T14:55:00Z",
+      "kanal": "YouTube",
+      "text": "Erster Kanalbeitrag veröffentlicht, mit Erwähnung von Jonika Venturis."
+    },
+    {
+      "zeit": "2026-08-27T14:40:00Z",
+      "kanal": "YouTube",
+      "text": "Jonika Venturis hat unter beiden Videos kommentiert — die ersten fremden Kommentare des Kanals. Beantwortet und geliked."
+    },
+    {
+      "zeit": "2026-08-27T14:20:00Z",
+      "kanal": "YouTube",
+      "text": "Amazon-Kaufwege in beide Videobeschreibungen eingetragen. Vorher führte kein Weg vom Video zum Buch."
+    },
+    {
+      "zeit": "2026-08-27T13:50:00Z",
+      "kanal": "Website",
+      "text": "Ausleihen ist jetzt ein eigener Kaufweg — Bibliotheken erscheinen ohne Preis und ohne Angebot im Datenblatt."
+    },
+    {
+      "zeit": "2026-08-27T13:30:00Z",
+      "kanal": "Website",
+      "text": "Sterne und Leserstimmen eingebaut. Sie erscheinen von selbst, sobald die erste Rezension eingetragen ist."
+    },
+    {
+      "zeit": "2026-08-27T13:00:00Z",
+      "kanal": "Google",
+      "text": "Search Console auf ein Konto zusammengeführt, Duplikat entfernt. Sitemap: 89 Seiten."
+    }
   ],
   "offen": [
-    { "titel": "Konto bei buechertreff.de anlegen", "wer": "Manuel", "stufe": "hoch",
-      "warum": "Blockiert die Leserunde — die einzige vorbereitete Maßnahme, die Rezensionen bringt." },
-    { "titel": "kie.ai-Schlüssel und FTP-Passwort wechseln", "wer": "Manuel", "stufe": "hoch",
-      "warum": "Beide standen im Klartext im Chat." },
-    { "titel": "Chat-Sitzung „Autopilot“ starten", "wer": "Manuel", "stufe": "mittel",
-      "warum": "In geplanten Aufgaben ist der Datei-Upload gesperrt: TikTok 03.09. und 04.09., Facebook-Reel, Pinterest-Pin hängen fest." },
-    { "titel": "Instagram-Sicherheitshinweis prüfen", "wer": "Manuel", "stufe": "mittel",
-      "warum": "„Someone's trying to log into Instagram“, seit 26.08. unbeantwortet." },
-    { "titel": "Rezensionsanfragen Stapel 1 freigeben", "wer": "Manuel", "stufe": "mittel",
-      "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md." },
-    { "titel": "ZAHLEN.md fehlt", "wer": "Claude", "stufe": "mittel",
-      "warum": "Der Tageslauf soll dort täglich Verkäufe und Rang eintragen — die Datei wurde nie angelegt." },
-    { "titel": "Bing, Amazon-Autorenseite, Brevo-DNS, YouTube-OAuth", "wer": "Manuel", "stufe": "klein",
-      "warum": "Vier kleine Schritte, die alle eine Anmeldung brauchen." }
+    {
+      "titel": "Konto bei buechertreff.de anlegen",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Blockiert die Leserunde — die einzige vorbereitete Maßnahme, die Rezensionen bringt."
+    },
+    {
+      "titel": "kie.ai-Schlüssel und FTP-Passwort wechseln",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Beide standen im Klartext im Chat."
+    },
+    {
+      "titel": "Chat-Sitzung „Autopilot“ starten",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "In geplanten Aufgaben ist der Datei-Upload gesperrt: TikTok 03.09. und 04.09., Facebook-Reel, Pinterest-Pin hängen fest."
+    },
+    {
+      "titel": "Instagram-Sicherheitshinweis prüfen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "„Someone's trying to log into Instagram“, seit 26.08. unbeantwortet."
+    },
+    {
+      "titel": "Rezensionsanfragen Stapel 1 freigeben",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md."
+    },
+    {
+      "titel": "ZAHLEN.md fehlt",
+      "wer": "Claude",
+      "stufe": "mittel",
+      "warum": "Der Tageslauf soll dort täglich Verkäufe und Rang eintragen — die Datei wurde nie angelegt."
+    },
+    {
+      "titel": "Bing, Amazon-Autorenseite, Brevo-DNS, YouTube-OAuth",
+      "wer": "Manuel",
+      "stufe": "klein",
+      "warum": "Vier kleine Schritte, die alle eine Anmeldung brauchen."
+    }
   ]
 }
