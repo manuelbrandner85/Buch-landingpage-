@@ -124,6 +124,34 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
   body{max-width:48rem;margin:0 auto}
   .kanaele{grid-template-columns:repeat(3,1fr)}
 }
+
+/* ---------- Reiter, Überblick, Lücken ---------- */
+.reiter{display:flex;gap:.25rem;overflow-x:auto;margin:0 0 1rem;padding:.25rem;
+  position:sticky;top:0;z-index:5;background:var(--nacht,#060A14);
+  scrollbar-width:none}
+.reiter::-webkit-scrollbar{display:none}
+.reiter button{flex:0 0 auto;border:1px solid rgba(255,255,255,.10);background:transparent;
+  color:inherit;font:inherit;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.5rem .9rem;border-radius:999px;opacity:.55;cursor:pointer}
+.reiter button.an{opacity:1;border-color:rgba(214,181,106,.55);
+  background:rgba(214,181,106,.10);color:var(--gold,#d6b56a)}
+.zeile.gross .kachel .wert{font-size:clamp(1.5rem,7vw,2.1rem)}
+.zeile.gross{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.zeile.gross .kachel{flex:none;min-width:0}
+.kachel .zusatz{display:block;font-size:.7rem;opacity:.5;margin-top:.2rem}
+.ampel{margin-top:.9rem;padding:.55rem .75rem;border-radius:.6rem;font-size:.85rem;
+  border:1px solid rgba(255,255,255,.10)}
+.ampel.gut{border-color:rgba(120,190,140,.35);background:rgba(120,190,140,.08)}
+.ampel.schlecht{border-color:rgba(210,120,110,.40);background:rgba(210,120,110,.10)}
+.luecken{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.luecken li{display:block}
+.luecken li::before{display:none}
+.luecken b{display:block}
+.kaputt{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.35rem;font-size:.8rem}
+.kaputt li{display:flex;gap:.5rem;align-items:baseline}
+.kaputt li::before{display:none}
+.kaputt b{color:#e0908a}
+.kaputt span{word-break:break-all;opacity:.6}
 </style>
 </head>
 <body>
@@ -210,9 +238,30 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
   function malen(d) {
     var t = [];
 
+    // ---- Überblick: die fünf Zahlen, für die man das Telefon herauszieht ----
+    var ub = d.buch || {}, urez = ub.rezensionen || {}, uv = (d.verkaeufe || {}).summe30 || {};
+    var ur = d.reichweite || {}, ut = d.technik || {};
+    var verkauft = null;
+    if (da(uv.kindle) || da(uv.taschenbuch)) verkauft = (uv.kindle || 0) + (uv.taschenbuch || 0);
+    var gruen = ut.deploy === 'erfolgreich';
+    t.push('<section data-g="heute"><h2>Überblick</h2><div class="karte">'
+      + '<div class="zeile gross">'
+      + kachel(da(ub.rangGesamt) ? '#' + zahl(ub.rangGesamt) : null, 'Rang',
+               trend(ub.rangGesamt, ub.rangVorher, true))
+      + kachel(zahl(urez.anzahl), 'Rezensionen')
+      + kachel(zahl(ur.gesamt), 'Follower gesamt',
+               da(ur.gesamt) && ur.kanaeleGezaehlt < ur.kanaeleGesamt
+                 ? '<span class="zusatz">aus ' + ur.kanaeleGezaehlt + ' von ' + ur.kanaeleGesamt + ' Kanälen</span>' : '')
+      + kachel(zahl(verkauft), 'Verkauft · 30 Tage')
+      + '</div>'
+      + '<div class="ampel ' + (gruen ? 'gut' : 'schlecht') + '">'
+      + (gruen ? 'Die Seite steht' : 'Veröffentlichung: ' + h(ut.deploy || 'unbekannt'))
+      + (ut.deployWann ? ' · zuletzt ' + vorwie(ut.deployWann) : '') + '</div>'
+      + '</div></section>');
+
     // ---- Buch ----
     var b = d.buch || {}, rez = b.rezensionen || {};
-    t.push('<section><h2>Das Buch</h2><div class="karte buchkopf">'
+    t.push('<section data-g="buch"><h2>Das Buch</h2><div class="karte buchkopf">'
       + '<h3>' + h(b.titel || '') + '</h3>'
       + (b.untertitel ? '<em>' + h(b.untertitel) + '</em>' : '')
       + '<div class="zeile">'
@@ -230,7 +279,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 
     // ---- Ausgaben ----
     if (b.ausgaben && b.ausgaben.length) {
-      t.push('<section><h2>Ausgaben</h2><div class="karte"><ul class="ausgaben">'
+      t.push('<section data-g="buch"><h2>Ausgaben</h2><div class="karte"><ul class="ausgaben">'
         + b.ausgaben.map(function (a) {
             return '<li><span>' + h(a.form) + '<br><span class="zustand">'
               + h(a.haendler || '') + '</span></span><span class="zustand">'
@@ -240,7 +289,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 
     // ---- Verkäufe ----
     var v = d.verkaeufe || {}, s30 = v.summe30 || {};
-    t.push('<section><h2>Verkäufe · 30 Tage</h2><div class="karte">'
+    t.push('<section data-g="buch"><h2>Verkäufe · 30 Tage</h2><div class="karte">'
       + '<div class="zeile">' + kachel(zahl(s30.kindle), 'Kindle')
       + kachel(zahl(s30.taschenbuch), 'Taschenbuch')
       + kachel(zahl(s30.kenp), 'KENP-Seiten') + '</div>'
@@ -252,7 +301,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 
     // ---- Besucher ----
     var g = d.besucher || {};
-    t.push('<section><h2>Besucher der Website</h2><div class="karte">'
+    t.push('<section data-g="buch"><h2>Besucher der Website</h2><div class="karte">'
       + '<div class="zeile">' + kachel(zahl(g.klicks7), 'Klicks · 7 Tage')
       + kachel(zahl(g.impressionen7), 'Impressionen')
       + kachel(da(g.position) ? g.position.toFixed(1).replace('.', ',') : '–', 'Ø Position')
@@ -269,7 +318,13 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 
     // ---- Kanäle ----
     if (d.kanaele && d.kanaele.length) {
-      t.push('<section><h2>Kanäle</h2><div class="kanaele">'
+      var rw = d.reichweite || {};
+      t.push('<section data-g="kanaele"><h2>Kanäle</h2>'
+        + '<div class="karte"><div class="zeile">'
+        + kachel(zahl(rw.gesamt), 'Follower gesamt')
+        + kachel(da(rw.kanaeleGezaehlt) ? rw.kanaeleGezaehlt + ' / ' + rw.kanaeleGesamt : null, 'Kanäle mit Zahl')
+        + '</div></div>'
+        + '<div class="kanaele">'
         + d.kanaele.map(function (k) {
             var hat = da(k.follower);
             return '<div class="kanal"><b>' + h(k.name) + '</b>'
@@ -278,7 +333,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
               + (hat ? zahl(k.follower) : 'keine Daten') + '</div>'
               + (hat ? trend(k.follower, k.vorher, false) : '')
               + '<span class="unten">' + (hat ? 'Follower' : '')
-              + (da(k.reaktionen) ? ' · ' + zahl(k.reaktionen) + ' '
+              + (da(k.reaktionen) ? (hat ? ' · ' : '') + zahl(k.reaktionen) + ' '
                   + h(k.reaktionenLabel || 'Reaktionen') : '')
               + (k.stand ? '<br>Stand ' + datum(k.stand) : '')
               + (k.notiz ? '<br>' + h(k.notiz) : '') + '</span></div>';
@@ -296,13 +351,13 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
           + '<span class="meta">' + h(a.kanal || '') + ' · ' + vorwie(a.zeit)
           + (neu ? '<span class="fahne">NEU</span>' : '') + '</span></span></li>';
       }).join('');
-      t.push('<section><h2>Was sich tut' + (frisch ? ' · ' + frisch + ' neu' : '')
+      t.push('<section data-g="heute"><h2>Was sich tut' + (frisch ? ' · ' + frisch + ' neu' : '')
         + '</h2><div class="karte"><ul class="lauf">' + zeilen + '</ul></div></section>');
     }
 
     // ---- Vorschläge ----
     if (d.vorschlaege && d.vorschlaege.length) {
-      t.push('<section><h2>Was ich als Nächstes tun würde</h2><div class="karte">'
+      t.push('<section data-g="aufgaben"><h2>Was ich als Nächstes tun würde</h2><div class="karte">'
         + d.vorschlaege.map(function (o) {
             return '<div class="vorschlag"><b>' + h(o.titel) + '</b>'
               + (o.warum ? '<span class="warum">' + h(o.warum) + '</span>' : '')
@@ -313,7 +368,7 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
 
     // ---- Offene Punkte ----
     if (d.offen && d.offen.length) {
-      t.push('<section><h2>Offene Punkte</h2><div class="karte"><ul class="offen">'
+      t.push('<section data-g="aufgaben"><h2>Offene Punkte</h2><div class="karte"><ul class="offen">'
         + d.offen.map(function (o) {
             return '<li><span class="stufe ' + h(o.stufe || 'klein') + '"></span><span>'
               + '<b>' + h(o.titel) + '</b>'
@@ -325,20 +380,91 @@ footer{padding:1.5rem var(--rand) 0;font-size:.7rem;color:var(--staub);text-alig
     // ---- Technik ----
     var k = d.technik;
     if (k) {
-      t.push('<section><h2>Technik</h2><div class="karte"><div class="technik">'
+      t.push('<section data-g="technik"><h2>Technik</h2><div class="karte"><div class="technik">'
         + '<span>Veröffentlichung <b>' + h(k.deploy || '—') + '</b></span>'
         + (da(k.zertifikatTage) ? '<span>Zertifikat <b>' + k.zertifikatTage + ' Tage</b></span>' : '')
         + (da(k.linksGeprueft) ? '<span>Links <b>' + k.linksGeprueft + '</b> geprüft, <b>'
             + (k.linksKaputt || 0) + '</b> kaputt</span>' : '')
         + (da(k.seitenGemeldet) ? '<span>Sitemap <b>' + k.seitenGemeldet + '</b></span>' : '')
-        + '</div>' + (k.stand ? '<p class="hinweis">Stand ' + vorwie(k.stand) + '.</p>' : '')
+        + (da(k.journalVorrat) ? '<span>Journal <b>' + k.journalVorrat + '</b> im Vorrat</span>' : '')
+        + '</div>'
+        + (k.linksZiele && k.linksZiele.length
+            ? '<ul class="kaputt">' + k.linksZiele.map(function (z) {
+                return '<li><b>' + z.code + '</b> <span>' + h(z.ziel) + '</span></li>';
+              }).join('') + '</ul>' : '')
+        + (k.stand ? '<p class="hinweis">Stand ' + vorwie(k.stand) + '.</p>' : '')
         + '</div></section>');
     }
 
-    inhalt.innerHTML = t.join('');
+    // ---- Wo das Dashboard blind ist ----
+    if (d.luecken && d.luecken.length) {
+      t.push('<section data-g="technik"><h2>Wo dieses Dashboard blind ist</h2>'
+        + '<div class="karte"><ul class="luecken">'
+        + d.luecken.map(function (l) {
+            return '<li><b>' + h(l.was) + '</b><span class="warum">' + h(l.warum) + '</span></li>';
+          }).join('') + '</ul></div></section>');
+    }
+
+    inhalt.innerHTML = '<nav class="reiter" id="reiter"></nav>' + t.join('');
+    reiterBauen();
     standZeile.textContent = 'Stand ' + vorwie(d.stand);
     standZeile.className = '';
     try { localStorage.setItem(ZULETZT, String(Date.now())); } catch (e) {}
+  }
+
+  /**
+   * Reiter statt einer endlosen Rolle.
+   *
+   * Neun Abschnitte auf einem Telefon sind drei Bildschirmlängen Daumenarbeit,
+   * bevor die Zahl kommt, wegen der man das Gerät herausgeholt hat. Die Reiter
+   * zeigen immer nur eine Gruppe; welche zuletzt offen war, merkt sich das
+   * Gerät für sich allein.
+   */
+  var GRUPPEN = [
+    { id: 'heute', name: 'Heute' },
+    { id: 'buch', name: 'Buch' },
+    { id: 'kanaele', name: 'Kanäle' },
+    { id: 'aufgaben', name: 'Aufgaben' },
+    { id: 'technik', name: 'Technik' }
+  ];
+  var OFFEN = 'trendonix-cockpit-reiter';
+  var offen = 'heute';
+  try { offen = localStorage.getItem(OFFEN) || 'heute'; } catch (e) {}
+
+  function zeigen(id) {
+    offen = id;
+    try { localStorage.setItem(OFFEN, id); } catch (e) {}
+    var s = inhalt.querySelectorAll('section[data-g]');
+    for (var i = 0; i < s.length; i++) {
+      s[i].hidden = s[i].getAttribute('data-g') !== id;
+    }
+    var kn = inhalt.querySelectorAll('.reiter button');
+    for (var j = 0; j < kn.length; j++) {
+      var an = kn[j].getAttribute('data-g') === id;
+      kn[j].className = an ? 'an' : '';
+      kn[j].setAttribute('aria-selected', an ? 'true' : 'false');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function reiterBauen() {
+    var leiste = document.getElementById('reiter');
+    if (!leiste) return;
+    var da2 = {};
+    var s = inhalt.querySelectorAll('section[data-g]');
+    for (var i = 0; i < s.length; i++) da2[s[i].getAttribute('data-g')] = true;
+    var hat = GRUPPEN.filter(function (g) { return da2[g.id]; });
+    if (!hat.length) return;
+    if (!da2[offen]) offen = hat[0].id;
+    leiste.setAttribute('role', 'tablist');
+    leiste.innerHTML = hat.map(function (g) {
+      return '<button type="button" role="tab" data-g="' + g.id + '">' + g.name + '</button>';
+    }).join('');
+    leiste.addEventListener('click', function (e) {
+      var z = e.target.closest ? e.target.closest('button[data-g]') : null;
+      if (z) zeigen(z.getAttribute('data-g'));
+    });
+    zeigen(offen);
   }
 
   var laeuft = false;

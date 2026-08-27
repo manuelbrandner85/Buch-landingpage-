@@ -8,7 +8,7 @@
  * kommt die letzte bekannte Fassung aus dem Speicher, und die App schreibt
  * sichtbar dazu, von wann sie ist.
  */
-const LAGER = 'trendonix-cockpit-v1';
+const LAGER = 'trendonix-cockpit-v2';
 const HUELLE = ['./', './index.html', './app.webmanifest', './icon-192.png'];
 
 self.addEventListener('install', (e) => {
@@ -41,6 +41,23 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Hülle: Speicher zuerst, damit die App sofort dasteht.
-  e.respondWith(caches.match(e.request).then((t) => t || fetch(e.request)));
+  // Hülle: Speicher zuerst, damit die App sofort dasteht - aber im selben
+  // Atemzug wird im Hintergrund nachgesehen, ob es eine neuere Fassung gibt.
+  // Ohne diesen zweiten Schritt bliebe ein einmal gespeichertes Dashboard fuer
+  // immer stehen: Ein Umbau waere gebaut, hochgeladen, geprueft - und auf dem
+  // Telefon trotzdem unsichtbar.
+  e.respondWith(
+    caches.match(e.request).then((gespeichert) => {
+      const ausDemNetz = fetch(e.request)
+        .then((antwort) => {
+          if (antwort && antwort.ok) {
+            const kopie = antwort.clone();
+            caches.open(LAGER).then((c) => c.put(e.request, kopie));
+          }
+          return antwort;
+        })
+        .catch(() => gespeichert);
+      return gespeichert || ausDemNetz;
+    }),
+  );
 });
