@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T01:07:20Z",
+  "stand": "2026-08-28T01:27:07Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -479,6 +479,13 @@
           "verschoben": 1,
           "urspruenglich": "2026-08-27",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "seit-wann-beherrscht-der-mensch-das-feuer",
+          "zustand": "terminiert",
+          "hinweis": null
         }
       ]
     },
@@ -606,6 +613,13 @@
           "was": null,
           "zustand": "steht",
           "hinweis": "fester Termin"
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "was-heisst-gesicherter-befund",
+          "zustand": "terminiert",
+          "hinweis": null
         }
       ]
     },
@@ -708,6 +722,13 @@
           "was": "03_kochen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "wer-hat-die-pyramiden-gebaut",
+          "zustand": "terminiert",
+          "hinweis": null
         }
       ]
     },
@@ -810,6 +831,13 @@
           "was": "05_reiterstafette",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "koenigsstrasse-neun-tage-statt-neunzig",
+          "zustand": "terminiert",
+          "hinweis": null
         }
       ]
     },
@@ -1000,6 +1028,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-28T02:55:00Z",
+      "kanal": "Technik",
+      "text": "Vier Journalbeiträge geschrieben und für den 1., 4., 7. und 10. September datiert — Feuer, die Belegstufen, die Pyramiden und die persische Königsstraße. Sie sind noch unsichtbar: Ein Beitrag mit Datum in der Zukunft erscheint erst an seinem Tag. Dazu kann das Journal seit heute nach innen verweisen; Regel 4 der Themenliste war bis dahin technisch nicht erfüllbar. Vorrat: 1 → 5."
+    },
+    {
       "zeit": "2026-08-28T02:10:00Z",
       "kanal": "Technik",
       "text": "Vollständiger Marketingbefund geschrieben (AUTOPILOT/BEFUND_MARKETING_2026-08-28.md): Druckkosten und Tantiemen für alle drei Ausgaben nachgerechnet, Kanäle gegen ihren Ertrag gestellt, 18 Vorschläge nach Wirkung je Aufwand sortiert. Die Tantiemenrechnung geht auf den Cent auf — 60 % von 37,29 € minus 11,57 € Druck sind exakt die 10,81 € aus dem KDP-Bericht."
@@ -1063,11 +1096,6 @@
       "zeit": "2026-08-27T22:05:00Z",
       "kanal": "TikTok",
       "text": "@trendonix ist wieder angemeldet. Der Live-Hinweisclip vom 26.08. steht jetzt auf „Nur ich“, die Kommentarliste ist wieder lesbar."
-    },
-    {
-      "zeit": "2026-08-27T21:20:00Z",
-      "kanal": "Amazon",
-      "text": "Die erste Rezension ist da: 5,0 von 5, auf Taschenbuch und Kindle. Der Wortlaut wird auf der Rezensionsseite noch nicht ausgeliefert."
     }
   ],
   "offen": [
@@ -1154,7 +1182,7 @@
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 89,
-    "journalVorrat": 1
+    "journalVorrat": 5
   },
   "luecken": [
     {
