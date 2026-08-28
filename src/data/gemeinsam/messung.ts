@@ -18,6 +18,11 @@
  *   NEXT_PUBLIC_GA4=G-XXXXXXXXXX
  *
  * Die Kennung ist kein Geheimnis – sie steht in jeder Seite, die sie benutzt.
+ * Sie steht deshalb im Klartext in `.github/workflows/deploy.yml`, und nur
+ * dort: G-H5TVRKQ9E4, Property „Trendonix Bücher" im Analytics-Konto
+ * Trendonix2. Gesetzt wird sie ausschließlich für den Bau, der auf die eigene
+ * Domain geht. Der github.io-Spiegel bekommt sie nicht und misst deshalb nie –
+ * das ist keine Einstellung, sondern eine fehlende Variable.
  */
 
 /** Die Mess-Kennung, oder leer, wenn nicht gemessen wird. */

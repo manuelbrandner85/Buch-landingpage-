@@ -184,18 +184,24 @@ jobs:
         if: steps.zugang.outputs.da == 'ja'
         run: npm run pruefen
 
-      # Die Mess-Kennung kommt aus den Repository-Variablen, nicht aus dem Code:
-      # Repository → Settings → Secrets and variables → Actions → Variables →
-      # `GA4_KENNUNG`, Wert `G-XXXXXXXXXX`. Ist sie leer, enthält die gebaute
-      # Seite weder Analytics noch Einwilligungsbanner — nicht auskommentiert,
-      # gar nicht. Nur auf der eigenen Domain: Der github.io-Spiegel misst nie.
+      # Die Mess-Kennung steht hier im Klartext, und das ist Absicht: Sie ist
+      # kein Geheimnis — sie steht in jeder ausgelieferten Seite, die sie
+      # benutzt. Im Repository sichtbar zu sein heißt, dass ein Blick in den
+      # Verlauf zeigt, seit wann gemessen wird und mit welcher Property.
+      # Wer sie überschreiben will, legt die Repository-Variable
+      # `GA4_KENNUNG` an (Settings → Secrets and variables → Actions →
+      # Variables); ist sie leer, gilt der Wert unten.
+      #
+      # Property „Trendonix Bücher" (551931799) im Konto Trendonix2, Datenstrom
+      # https://www.trendonix-buecher.de. Nur auf der eigenen Domain: Der
+      # github.io-Spiegel bekommt die Kennung nicht und misst deshalb nie.
       - name: Bauen
         if: steps.zugang.outputs.da == 'ja'
         env:
           NEXT_EXPORT: '1'
           NEXT_PUBLIC_BASIS_PFAD: ''
           SEITEN_DOMAIN: ${{ vars.SEITEN_DOMAIN }}
-          NEXT_PUBLIC_GA4: ${{ vars.GA4_KENNUNG }}
+          NEXT_PUBLIC_GA4: ${{ vars.GA4_KENNUNG || 'G-H5TVRKQ9E4' }}
         run: |
           export NEXT_PUBLIC_BASIS_URL="https://${SEITEN_DOMAIN:-www.trendonix-buecher.de}"
           npx next build
