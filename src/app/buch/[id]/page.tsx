@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import {
   OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, buchNach, reiheZuBand,
 } from '@/world/registry';
-import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
+import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { ausgaben, brotkrumen, stimmen as stimmenBlatt, urteil } from '@/world/schema';
 import { PREISSTAND } from '@/data/gemeinsam/stand';
 import { gesamturteil, stimmenVon } from '@/data/gemeinsam/stimmen';
@@ -17,6 +17,12 @@ import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Kaufleiste } from '@/ui/Kaufleiste';
 import { Verteiler } from '@/ui/Verteiler';
+
+/** „24. August 2026“ – dieselbe Schreibweise wie im Journal. */
+const standDatum = (iso: string) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString('de-DE', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
 import { Leserstimmen, Sternzeile } from '@/ui/Stimmen';
 
 /**
@@ -135,6 +141,44 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
             {' '}{PREISSTAND}. Kommt eine Ausgabe dazu – eine eigene ISBN, der
             Buchhandel, tolino –, steht sie an dieser Stelle, sobald sie
             bestellbar ist.
+          </p>
+        </>
+      )}
+
+      {/* Wo ein Band steht, der noch nicht zu haben ist.
+          Hier stand vorher nichts — nur ein Knopf, auf dem „Erscheint in
+          Kürze“ zu lesen war. Wer auf einer Buchseite landet, die nichts
+          verkauft, hat genau eine Frage: warum nicht, und wann? Die zweite
+          Hälfte bleibt unbeantwortet, solange kein Datum feststeht — die
+          erste lässt sich beantworten, und zwar wahr. */}
+      {buch.status === 'erscheint' && buch.stand && (
+        <>
+          <h2>Wo dieser Band steht</h2>
+          <p>{buch.stand.satz}</p>
+          <p>
+            Ein Erscheinungsdatum steht hier erst, wenn es eines gibt. Das ist
+            keine Geheimniskrämerei, sondern dieselbe Regel wie im Buch:
+            angekündigt wird, was zu haben ist. Ein „demnächst“ wäre schneller
+            geschrieben und weniger wert.
+          </p>
+          {reihe && (
+            <p>
+              Durchschreiten lässt sich der Band trotzdem schon —{' '}
+              <a href={wegWelt(reihe.id, buch.id)}>
+                in die Welt von Band {buch.nummer}
+              </a>. Die Kapitel, die Orte und die Motive sind dieselben wie im
+              gedruckten Band.
+            </p>
+          )}
+          <p>
+            Und wer ihn zuerst lesen will: Der nächste Band geht als
+            Leseexemplar zuerst an den Verteiler, bevor er erscheint.{' '}
+            <a href="#verteiler">Weiter unten auf dieser Seite</a> steht das
+            Feld dafür.
+          </p>
+          <p className="quelle">
+            <b>Stand</b>{standDatum(buch.stand.vom)}. Diese Zeile bewegt sich,
+            wenn die Arbeit sich bewegt.
           </p>
         </>
       )}

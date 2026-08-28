@@ -17,6 +17,14 @@ export const BUCH_BAND_2: Buch = {
   kaufwege: [],
   coverAsset: 'cover-band-2',
   seiten: 206,
+  // Abgeschrieben aus `Band 2/09_Produktion/STAND_Band_2.md` vom 24.08.2026:
+  // Druckdatei mit 206 Seiten, Leseansicht, Umschlag mit gemessenem Rücken.
+  stand: {
+    kurz: 'Fertig gesetzt',
+    satz: 'Der Band ist fertig: 206 Seiten, fünf Kapitel, Umschlag und Motive '
+      + 'stehen, die Druckdatei ist gebaut. Was fehlt, ist der Kaufweg.',
+    vom: '2026-08-24',
+  },
   klappentext:
     'Am Anfang steht ein Mönch, der abschreibt, was sonst verloren ginge. Am Ende steht eine Fabrik, die Menschen nach der Uhr einteilt. Dazwischen liegt eine Kette von Werkzeugen, die jeweils zweierlei bewirkten: Der Kredit ermöglichte Handel über Meere – und die Schuld als Herrschaftsmittel. Das Schiff verband Kontinente – und verschleppte Millionen. Die Presse verbreitete Aufklärung – und die Verleumdung gleich mit.',
 };

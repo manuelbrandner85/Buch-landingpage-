@@ -45,9 +45,14 @@ export function Kaufwege({ buch }: { buch: Buch }) {
           `Bescheid geben: Band ${buch.nummer}`,
           `Bitte einmal melden, sobald Band ${buch.nummer} zu haben ist.`,
         );
+    // „Erscheint in Kürze“ stand hier bis zum 28.08.2026 und war das
+    // Schwächste, was an dieser Stelle stehen kann: ein Versprechen ohne
+    // Deckung. Wo ein Band eine Standmeldung hat, steht jetzt sie — sie ist
+    // wahr, sie ist genauer, und ein fertig gesetzter Band, den es noch nicht
+    // zu kaufen gibt, weckt mehr Neugier als ein „bald“.
     return (
       <span className="kaufblock">
-        <span className="kaufen wartet">Erscheint in Kürze</span>
+        <span className="kaufen wartet">{buch.stand?.kurz ?? 'Erscheint in Kürze'}</span>
         {bescheid && (
           <span className="auch">
             <a href={bescheid}>Bescheid geben lassen</a>

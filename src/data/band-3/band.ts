@@ -21,6 +21,17 @@ export const BUCH_BAND_3: Buch = {
   kaufwege: [],
   coverAsset: 'cover-band-3',
   seiten: 206,
+  // Abgeschrieben aus `Band 3/09_Produktion/STAND_Band_3.md` und
+  // `KORREKTUREN_offen.md`, beide vom 25.08.2026. Der Buchblock steht; offen
+  // ist ein Schlussdurchgang, in dem eingetragene Korrekturen gesetzt werden.
+  stand: {
+    kurz: 'In der Schlusskorrektur',
+    satz: 'Der Buchblock steht: 206 Seiten, fünf Kapitel, 91 Motive und sechs '
+      + 'Karten. Offen ist ein Schlussdurchgang — eingetragene Korrekturen '
+      + 'werden in einem Zug gesetzt, darunter mehrere, die eine Belegstufe '
+      + 'herabsetzen. Das dauert, so lange es dauert.',
+    vom: '2026-08-25',
+  },
   klappentext:
     'Am Anfang steht ein Schützengraben, in dem die Ordnung der Fabrik auf den Krieg trifft. Am Ende steht ein Rechenzentrum, dessen Betreiber Regeln setzt, ohne gewählt zu sein. Dazwischen liegen drei Anläufe, die Welt zu ordnen – Verträge, Blöcke, Märkte. Jeder hat gehalten, bis der nächste ihn ablöste.',
 };

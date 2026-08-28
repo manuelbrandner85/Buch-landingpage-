@@ -105,6 +105,32 @@ export interface Buch {
   coverAsset?: AssetId;
   klappentext: string;
   seiten?: number;
+  /**
+   * Wo ein noch nicht erschienener Band gerade steht.
+   *
+   * Hausregel 4 sagt: Angekündigt wird, was zu haben ist. Ein Datum steht
+   * deshalb nirgends, solange keines feststeht — „demnächst“ ist ein
+   * Versprechen, das niemand einlöst, und wer es dreimal liest, glaubt es
+   * beim vierten Mal nicht mehr.
+   *
+   * Was stattdessen gesagt werden kann, ist die Wahrheit: wie weit der Band
+   * ist. Das ist keine schwächere Auskunft, sondern eine stärkere — ein
+   * fertig gesetzter Band, den es noch nicht zu kaufen gibt, ist
+   * interessanter als ein „bald“. Und die Zeile bewegt sich, wenn die Arbeit
+   * sich bewegt.
+   *
+   * `vom` ist Pflicht: Eine Standmeldung ohne Datum ist eine Behauptung.
+   */
+  stand?: Stand;
+}
+
+export interface Stand {
+  /** Zwei bis vier Wörter, dort wo sonst der Kaufknopf steht. */
+  kurz: string;
+  /** Ein bis drei Sätze auf der Buchseite. Was fertig ist und was fehlt. */
+  satz: string;
+  /** Von wann die Auskunft ist, ISO. */
+  vom: string;
 }
 
 export interface Kapitel {
