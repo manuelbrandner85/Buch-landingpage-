@@ -1,6 +1,11 @@
 {
-  "stand": "2026-08-28T20:02:42Z",
-  "warnungen": [],
+  "stand": "2026-08-28T20:36:56Z",
+  "warnungen": [
+    {
+      "stufe": "mittel",
+      "text": "TikTok-Studio-Upload hängt, solange die Live läuft — Live-Clip live_b nicht gepostet, bitte aus der App posten. Live läuft ohne Titel."
+    }
+  ],
   "aenderungen": {
     "seit": "2026-08-27",
     "punkte": [],
@@ -1070,6 +1075,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-28T20:45:00Z",
+      "kanal": "TikTok",
+      "text": "LIVE seit 21:56 (ohne Titel): zwei Hinweis-Kommentare unter den jüngsten Videos gesetzt, Begrüßung im Live-Chat. Live-Clip live_b hing dreimal im Studio-Upload — Manuel gebeten, ihn aus der App zu posten."
+    },
+    {
       "zeit": "2026-08-28T19:26:00Z",
       "kanal": "TikTok",
       "text": "Postfach: Dagmars Abendgruß von 20:59 kurz beantwortet (Dank + Wochenendwunsch). Kommentare, FB, IG, Pinterest, YouTube, Bluesky, Amazon geprüft — sonst nichts Neues."
@@ -1123,11 +1133,6 @@
       "zeit": "2026-08-28T02:55:00Z",
       "kanal": "Technik",
       "text": "Vier Journalbeiträge geschrieben und für den 1., 4., 7. und 10. September datiert — Feuer, die Belegstufen, die Pyramiden und die persische Königsstraße. Sie sind noch unsichtbar: Ein Beitrag mit Datum in der Zukunft erscheint erst an seinem Tag. Dazu kann das Journal seit heute nach innen verweisen; Regel 4 der Themenliste war bis dahin technisch nicht erfüllbar. Vorrat: 1 → 5."
-    },
-    {
-      "zeit": "2026-08-28T02:10:00Z",
-      "kanal": "Technik",
-      "text": "Vollständiger Marketingbefund geschrieben (AUTOPILOT/BEFUND_MARKETING_2026-08-28.md): Druckkosten und Tantiemen für alle drei Ausgaben nachgerechnet, Kanäle gegen ihren Ertrag gestellt, 18 Vorschläge nach Wirkung je Aufwand sortiert. Die Tantiemenrechnung geht auf den Cent auf — 60 % von 37,29 € minus 11,57 € Druck sind exakt die 10,81 € aus dem KDP-Bericht."
     },
     {
       "id": "deploy-2026-08-28-fehlgeschlagen",
