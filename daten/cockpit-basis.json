@@ -156,8 +156,7 @@
     {
       "titel": "Die erste Verteiler-Mail schreiben",
       "wer": "Manuel",
-      "warum": "Brevo meldet die Domain seit heute als authentifiziert, und im Formular stehen 4 Einreichungen und 2 bestätigte Kontakte. Die Post geht jetzt wirklich von info@trendonix-buecher.de hinaus. Zwei Menschen haben zugesagt und seither nichts gehört.",
-      "gewinn": "Der Verteiler hört auf, eine leere Vorrichtung zu sein."
+      "warum": "Brevo meldet die Domain als authentifiziert, im Formular stehen vier Einreichungen und zwei bestätigte Kontakte. Seit heute steht dort ein Versprechen — der nächste Band als Leseexemplar, bevor er erscheint. Eine erste kurze Nachricht macht aus zwei Adressen zwei Menschen, die wissen, worauf sie sich eingelassen haben."
     }
   ],
   "offen": [
@@ -235,6 +234,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-28T03:40:00Z",
+      "kanal": "Verteiler",
+      "text": "Der Verteiler hat jetzt ein Argument: Wer sich einträgt, bekommt den nächsten Band als Leseexemplar, bevor er erscheint. Ohne Bedingung — keine Bewertung als Gegenleistung. Das Anmeldefeld steht ab sofort auch auf der Buchseite, direkt hinter der Leseprobe. Die Datenschutzerklärung nennt endlich Brevo, Zweck, Doppelbestätigung und Widerruf; bisher stand dort nichts dazu, obwohl das Kästchen im Formular darauf verweist. Der Ablauf für Band 2 steht verbindlich in VERTRIEBSWEGE.md, Abschnitt 9."
+    },
     {
       "zeit": "2026-08-28T02:55:00Z",
       "kanal": "Technik",

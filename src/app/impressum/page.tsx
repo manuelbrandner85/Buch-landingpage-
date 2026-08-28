@@ -138,6 +138,25 @@ export default function ImpressumSeite() {
           Datenschutzbestimmungen von Amazon.
         </p>
         <p>
+          <b>Der Verteiler.</b> Wer sich einträgt, gibt eine E-Mail-Adresse an. Sie
+          wird verwendet, um über einen neuen Band zu informieren und zu fragen, ob
+          ein Leseexemplar erwünscht ist – mehr nicht. Rechtsgrundlage ist Ihre
+          Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Die Eintragung erfolgt im
+          Doppelbestätigungsverfahren: Ohne den Klick in der Bestätigungsmail wird
+          niemand aufgenommen. Sie können die Einwilligung jederzeit mit Wirkung für
+          die Zukunft widerrufen – über den Abmeldelink in jeder Nachricht oder
+          formlos an die oben genannte Adresse. Danach wird die Adresse gelöscht.
+        </p>
+        <p>
+          Versand und Verwaltung der Liste übernimmt Brevo als Auftragsverarbeiter
+          nach Art. 28 DSGVO. Das Anmeldeformular auf dieser Seite wird bei Brevo
+          gehostet; mit dem Absenden werden die eingegebene Adresse und technische
+          Verbindungsdaten dorthin übertragen. Brevo gibt für die Verarbeitung einen
+          Serverstandort in der EU an. Einzelheiten:{' '}
+          <a href="https://www.brevo.com/de/legal/privacypolicy/"
+            rel="noopener nofollow">brevo.com/de/legal/privacypolicy</a>
+        </p>
+        <p>
           Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
           Verarbeitung, Datenübertragbarkeit und Widerspruch sowie ein
           Beschwerderecht bei einer Aufsichtsbehörde. Wenden Sie sich dafür an{' '}

@@ -44,7 +44,8 @@ export function Verteiler() {
           <input type="checkbox" name="OPT_IN" value="1" required />
           <span>
             Ich möchte benachrichtigt werden, wenn ein neuer Band erscheint, und
-            habe die <a href={`${wegImpressum()}#datenschutz`}>Datenschutzhinweise</a> gelesen.
+            vorher gefragt werden, ob ich ein Leseexemplar möchte. Die{' '}
+            <a href={`${wegImpressum()}#datenschutz`}>Datenschutzhinweise</a> habe ich gelesen.
           </span>
         </label>
 

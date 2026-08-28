@@ -16,6 +16,7 @@ import { Kaufwege } from '@/scenes/Buecher';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Kaufleiste } from '@/ui/Kaufleiste';
+import { Verteiler } from '@/ui/Verteiler';
 import { Leserstimmen, Sternzeile } from '@/ui/Stimmen';
 
 /**
@@ -197,6 +198,11 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           </ul>
         </>
       )}
+
+      {/* Wer bis hierher gelesen und die Leseprobe genommen hat, ist der
+          einzige Mensch auf dieser Seite, für den der Verteiler etwas bedeutet.
+          Auf der Startseite steht er auch – hier steht er richtig. */}
+      <Verteiler />
 
       <nav className="fusszeile">
         {reihe && <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>}
