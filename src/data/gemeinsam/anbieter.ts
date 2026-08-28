@@ -34,7 +34,11 @@ export const ANBIETER: Anbieter = {
   email: 'Info@trendonix-buecher.de',
   telefon: '',
   ustId: '',
-  hoster: 'GitHub Pages, GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA',
+  // Die Seite liegt seit dem Umzug auf die eigene Domain nicht mehr bei
+  // GitHub Pages, sondern auf dem eigenen Webspace (siehe DOMAIN.md).
+  // github.io ist nur noch der Bau-Spiegel und für Suchmaschinen gesperrt —
+  // ausgeliefert wird von hier, und deshalb steht hier, wer ausliefert.
+  hoster: 'ALL-INKL.COM – Neue Medien Münnich, Inhaber René Münnich, Hauptstraße 68, 02742 Friedersdorf, Deutschland',
 };
 
 /** Steht genug im Impressum, um die Seite live zu schalten? */

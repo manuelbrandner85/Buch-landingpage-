@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T01:35:11Z",
+  "stand": "2026-08-28T01:44:47Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -1027,6 +1027,16 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-28T04:20:00Z",
+      "kanal": "Verteiler",
+      "text": "Die erste Verteiler-Mail ist entworfen und liegt in AUTOPILOT/VERTEILER_MAIL_01.md — Betreff, Text, Pflichtangaben und eine Prüfliste vor dem Absenden. Verschickt ist nichts; das bleibt Manuels Klick. Anlass ist ehrlich: Die zwei Kontakte haben sich unter dem alten Versprechen eingetragen und sollen vom neuen erfahren, bevor es zufällig auffällt."
+    },
+    {
+      "zeit": "2026-08-28T04:15:00Z",
+      "kanal": "Technik",
+      "text": "Die Datenschutzerklärung nannte GitHub Pages als Hoster. Seit dem Umzug auf die eigene Domain stimmt das nicht mehr: Ausgeliefert wird vom Webspace bei ALL-INKL, github.io ist nur noch der gesperrte Bau-Spiegel. Korrigiert, mit der Anschrift aus dem Impressum des Anbieters, nicht aus dem Gedächtnis."
+    },
+    {
       "zeit": "2026-08-28T03:40:00Z",
       "kanal": "Verteiler",
       "text": "Der Verteiler hat jetzt ein Argument: Wer sich einträgt, bekommt den nächsten Band als Leseexemplar, bevor er erscheint. Ohne Bedingung — keine Bewertung als Gegenleistung. Das Anmeldefeld steht ab sofort auch auf der Buchseite, direkt hinter der Leseprobe. Die Datenschutzerklärung nennt endlich Brevo, Zweck, Doppelbestätigung und Widerruf; bisher stand dort nichts dazu, obwohl das Kästchen im Formular darauf verweist. Der Ablauf für Band 2 steht verbindlich in VERTRIEBSWEGE.md, Abschnitt 9."
@@ -1085,16 +1095,6 @@
       "zeit": "2026-08-27T22:20:00Z",
       "kanal": "YouTube",
       "text": "Stufe 3 ist aktiviert. Links in Videobeschreibungen sind ab sofort anklickbar, A/B-Tests für Titel und Vorschaubild stehen offen."
-    },
-    {
-      "zeit": "2026-08-27T22:15:00Z",
-      "kanal": "TikTok",
-      "text": "Die 5-Sterne-Bewertung kommt von Daggi (@kirsche123.5). Sie hat das Buch gekauft, sich in den Verteiler eingetragen und will alle Bände."
-    },
-    {
-      "zeit": "2026-08-27T22:10:00Z",
-      "kanal": "Amazon",
-      "text": "KDP im August: 13 bearbeitete Bestellungen, 10,81 € geschätzte Tantiemen, 0 KENP-Seiten — die Tantiemen kommen zu 100 % aus dem Druck."
     }
   ],
   "offen": [
