@@ -1,0 +1,11 @@
+{
+  "_hinweis": "Von scripts/cockpit.mjs selbst erzeugt: neue Rezension, Wechsel der Veröffentlichung, erschienener Journalbeitrag, Bewegung im Monatsstand. Nicht von Hand pflegen — Handgeschriebenes gehört nach cockpit-basis.json unter „aktivitaet\".",
+  "eintraege": [
+    {
+      "id": "deploy-2026-08-28-fehlgeschlagen",
+      "zeit": "2026-08-28T02:02:14Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
+    }
+  ]
+}
