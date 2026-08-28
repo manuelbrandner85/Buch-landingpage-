@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T21:02:56Z",
+  "stand": "2026-08-28T22:04:46Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -214,33 +214,6 @@
     }
   },
   "termine": [
-    {
-      "d": "2026-08-28",
-      "wochentag": "Fr",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "06_fuenf_fragen",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "TikTok LIVE",
-          "zeit": "20:00",
-          "was": null,
-          "zustand": "steht",
-          "hinweis": "fester Termin"
-        }
-      ]
-    },
     {
       "d": "2026-08-29",
       "wochentag": "Sa",
@@ -529,6 +502,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-28",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -891,6 +873,40 @@
           "hinweis": "fester Termin"
         }
       ]
+    },
+    {
+      "d": "2026-09-12",
+      "wochentag": "Sa",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "06_fuenf_fragen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
     }
   ],
   "bericht": null,
@@ -1216,11 +1232,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-28T21:02:00Z",
+    "stand": "2026-08-28T22:03:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-28T20:38:21Z",
+    "deployWann": "2026-08-28T21:03:54Z",
     "zertifikatTage": 86,
     "linksGeprueft": 46,
     "linksKaputt": 0,
