@@ -122,13 +122,13 @@
       "name": "Verteiler",
       "handle": "info@trendonix-buecher.de",
       "eigen": true,
-      "follower": null,
+      "follower": 2,
       "folgerLabel": "bestätigte Kontakte",
       "vorher": null,
       "reaktionen": null,
       "reaktionenLabel": "Einreichungen",
-      "stand": null,
-      "notiz": "Der einzige Kanal, der niemandem gehört außer dem Haus — deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus; sie steht unter Kontakte und wird hier von Hand eingetragen. Seit dem 28.08.2026 hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen."
+      "stand": "2026-08-28",
+      "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen."
     }
   ],
   "vorschlaege": [
@@ -246,6 +246,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-28T06:00:00Z",
+      "kanal": "Verteiler",
+      "text": "Im Brevo-Konto nachgezählt statt geschätzt: zwei bestätigte Kontakte, beide angemeldet, keiner blockiert — und einer davon die eigene Testadresse. Es steht also genau ein Leser auf der Liste, und es ist Daggi, mit der auf TikTok noch eine unbeantwortete Nachricht offen ist. Die vier Einreichungen von gestern heißen im Umkehrschluss: Zwei Menschen haben die Bestätigungsmail nicht angeklickt."
+    },
     {
       "zeit": "2026-08-28T05:05:00Z",
       "kanal": "Verteiler",
