@@ -241,6 +241,21 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-28T13:31:00Z",
+      "kanal": "TikTok",
+      "text": "Postfach: Dagmars „Bewertung ist drin jetzt!“ mit kurzem Dank beantwortet — sie ist zugleich die erste echte Verteiler-Anmeldung (in Brevo bestätigt)."
+    },
+    {
+      "zeit": "2026-08-28T13:37:00Z",
+      "kanal": "TikTok",
+      "text": "Live-Nacharbeit vom 26.08. abgeschlossen: die zwei „Bin gerade live“-Hinweiskommentare unter den jüngsten Videos entfernt."
+    },
+    {
+      "zeit": "2026-08-28T13:42:00Z",
+      "kanal": "Verteiler",
+      "text": "Brevo: Formular „Verteiler Website“ jetzt 5 Einreichungen / 3 neue Kontakte (vorher 4/2); Liste führt daggi.richter@… als ersten Leser-Kontakt."
+    },
+    {
       "zeit": "2026-08-28T06:20:00Z",
       "kanal": "Technik",
       "text": "Der Vorschlag „Analytics: einmal auf Weiter klicken“ ist aus dem Cockpit raus — er war seit heute Nacht gegenstandslos. Die Property liegt in einem Konto, dessen Nutzungsbedingungen seit Juni 2024 angenommen sind; der Klick, auf den gewartet wurde, war nie nötig."
@@ -284,66 +299,6 @@
       "zeit": "2026-08-28T00:45:00Z",
       "kanal": "Technik",
       "text": "Das Google-Unternehmensprofil „Trendonix“ ist angelegt: Kategorie Buchverlag, Beschreibung aus dem Hausbuch, das schwarz-goldene Logo, Website verlinkt. Kein Standort, den Kunden aufsuchen können — die Anschrift dient nur der Bestätigung und bleibt verborgen. Zur Bestätigung bietet Google nur noch ein Video an, keine Postkarte."
-    },
-    {
-      "zeit": "2026-08-28T00:15:00Z",
-      "kanal": "Technik",
-      "text": "Das Google-Dienstkonto steht: Projekt „Trendonix“, Search Console API an, trendonix-cockpit als eingeschränkter Nutzer der Property. Der Abruf meldet „Verbindung steht“ — Google hat für die junge Property nur noch keine Zahlen."
-    },
-    {
-      "zeit": "2026-08-28T00:25:00Z",
-      "kanal": "Technik",
-      "text": "Analytics-Konto „Trendonix“ vorbereitet, alle vier Datenfreigabe-Haken abgewählt. Es fehlt nur noch die Zustimmung zu den Nutzungsbedingungen."
-    },
-    {
-      "zeit": "2026-08-27T23:20:00Z",
-      "kanal": "Technik",
-      "text": "Der Abruf der Suchzahlen ist gebaut: Dienstkonto statt Anmeldefenster, ohne fremde Pakete. Sobald der Schlüssel liegt, kommen Klicks, Impressionen und Suchanfragen von selbst."
-    },
-    {
-      "zeit": "2026-08-27T22:20:00Z",
-      "kanal": "YouTube",
-      "text": "Stufe 3 ist aktiviert. Links in Videobeschreibungen sind ab sofort anklickbar, A/B-Tests für Titel und Vorschaubild stehen offen."
-    },
-    {
-      "zeit": "2026-08-27T22:30:00Z",
-      "kanal": "Verteiler",
-      "text": "Brevo meldet trendonix-buecher.de als authentifiziert. Das Formular zählt 4 Einreichungen und 2 bestätigte Kontakte — die ersten überhaupt."
-    },
-    {
-      "zeit": "2026-08-27T22:35:00Z",
-      "kanal": "Technik",
-      "text": "Der tote Bluesky-Link war keiner: bsky.app antwortet auf HEAD mit 404 und auf GET mit 200. Die Linkprüfung fasst jetzt mit GET nach, bevor sie etwas für kaputt erklärt."
-    },
-    {
-      "zeit": "2026-08-27T22:15:00Z",
-      "kanal": "TikTok",
-      "text": "Die 5-Sterne-Bewertung kommt von Daggi (@kirsche123.5). Sie hat das Buch gekauft, sich in den Verteiler eingetragen und will alle Bände."
-    },
-    {
-      "zeit": "2026-08-27T22:25:00Z",
-      "kanal": "Instagram",
-      "text": "Zwei ausführliche Kommentare von @jonikaventuris zu Landschaft und Evidenzstufen, beide unbeantwortet. Sie folgt dem Konto seit heute."
-    },
-    {
-      "zeit": "2026-08-27T22:40:00Z",
-      "kanal": "Amazon",
-      "text": "Im Bücherregal: Taschenbuch jetzt 37,29 €, gebundene Ausgabe 46,64 € und seit dem 24.08. weiter „wird geprüft“."
-    },
-    {
-      "zeit": "2026-08-27T22:05:00Z",
-      "kanal": "TikTok",
-      "text": "@trendonix ist wieder angemeldet. Der Live-Hinweisclip vom 26.08. steht jetzt auf „Nur ich“, die Kommentarliste ist wieder lesbar."
-    },
-    {
-      "zeit": "2026-08-27T22:10:00Z",
-      "kanal": "Amazon",
-      "text": "KDP im August: 13 bearbeitete Bestellungen, 10,81 € geschätzte Tantiemen, 0 KENP-Seiten — die Tantiemen kommen zu 100 % aus dem Druck."
-    },
-    {
-      "zeit": "2026-08-27T21:20:00Z",
-      "kanal": "Amazon",
-      "text": "Die erste Rezension ist da: 5,0 von 5, auf Taschenbuch und Kindle. Der Wortlaut wird auf der Rezensionsseite noch nicht ausgeliefert."
     }
   ],
   "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",
