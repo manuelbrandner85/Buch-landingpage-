@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T02:11:45Z",
+  "stand": "2026-08-28T02:16:13Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -1012,12 +1012,6 @@
       "warum": "Eine einzige LIVE brachte 8.836 Aufrufe und 96 neue Follower. Achtundzwanzig Tage regulärer Beiträge brachten 920 Aufrufe und netto neun Follower weniger. Das ist der stärkste gemessene Befund im ganzen Konto — Faktor zehn, kostenlos, freigeschaltet, und liefert nebenbei den Stoff für zehn Videos."
     },
     {
-      "titel": "Analytics: einmal auf „Weiter“ klicken",
-      "wer": "Manuel",
-      "warum": "Konto und Datenfreigabe sind fertig eingestellt — alle vier Freigabe-Haken habe ich abgewählt. Was fehlt, ist die Zustimmung zu Googles Nutzungsbedingungen, und die gehört dir, nicht mir. Danach hole ich Mess-ID, Aufbewahrungsdauer und die GitHub-Variable selbst.",
-      "gewinn": "Der Banner geht an, und die Seite zählt endlich mit."
-    },
-    {
       "titel": "Unternehmensprofil: Video drehen oder liegen lassen",
       "wer": "Manuel",
       "warum": "Das Profil „Trendonix“ ist angelegt — Buchverlag, Beschreibung, Logo, Website, kein Kartenpunkt, Adresse verborgen. Google bietet zur Bestätigung nur noch eines an: ein Video von Standort, Ausstattung und Verwaltungsbefugnis, in einem Stück, nicht öffentlich. Keine Postkarte, kein Code. Ohne Bestätigung bleibt der Eintrag unsichtbar, geht aber auch nicht verloren. Meine Einschätzung: liegen lassen, bis jemand nach „Trendonix“ sucht — die Abwägung steht in REGISTRIERUNG/11_google-unternehmensprofil.md."
@@ -1035,12 +1029,17 @@
       "gewinn": "Die erste belastbare Antwort darauf, was auf diesem Kanal zieht."
     },
     {
-      "titel": "Die erste Verteiler-Mail schreiben",
+      "titel": "Die erste Verteiler-Mail abschicken",
       "wer": "Manuel",
-      "warum": "Brevo meldet die Domain als authentifiziert, im Formular stehen vier Einreichungen und zwei bestätigte Kontakte. Seit heute steht dort ein Versprechen — der nächste Band als Leseexemplar, bevor er erscheint. Eine erste kurze Nachricht macht aus zwei Adressen zwei Menschen, die wissen, worauf sie sich eingelassen haben."
+      "warum": "Der Entwurf liegt fertig in AUTOPILOT/VERTEILER_MAIL_01.md — Betreff, Text, Pflichtangaben, Prüfliste. Auf der Liste steht genau ein Leser: Daggi, dieselbe, mit der auf TikTok noch eine Nachricht offen ist. Sie hat sich unter dem alten Versprechen eingetragen und weiß noch nichts vom neuen. Verschicken kannst nur du."
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-28T06:20:00Z",
+      "kanal": "Technik",
+      "text": "Der Vorschlag „Analytics: einmal auf Weiter klicken“ ist aus dem Cockpit raus — er war seit heute Nacht gegenstandslos. Die Property liegt in einem Konto, dessen Nutzungsbedingungen seit Juni 2024 angenommen sind; der Klick, auf den gewartet wurde, war nie nötig."
+    },
     {
       "zeit": "2026-08-28T06:00:00Z",
       "kanal": "Verteiler",
@@ -1106,11 +1105,6 @@
       "zeit": "2026-08-27T22:40:00Z",
       "kanal": "Amazon",
       "text": "Im Bücherregal: Taschenbuch jetzt 37,29 €, gebundene Ausgabe 46,64 € und seit dem 24.08. weiter „wird geprüft“."
-    },
-    {
-      "zeit": "2026-08-27T22:35:00Z",
-      "kanal": "Technik",
-      "text": "Der tote Bluesky-Link war keiner: bsky.app antwortet auf HEAD mit 404 und auf GET mit 200. Die Linkprüfung fasst jetzt mit GET nach, bevor sie etwas für kaputt erklärt."
     }
   ],
   "offen": [
