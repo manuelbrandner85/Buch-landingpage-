@@ -1,8 +1,8 @@
 {
-  "_hinweis": "Von scripts/suche-abruf.mjs geholt. Nicht von Hand pflegen.",
-  "stand": null,
-  "eingerichtet": false,
-  "hinweis": "Die Suchzahlen kommen, sobald das Google-Dienstkonto eingerichtet ist — zehn Minuten, kostenlos. Anleitung: AUTOPILOT/REGISTRIERUNG/10_google-dienstkonto.md.",
+  "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
+  "stand": "2026-08-28T00:13:14Z",
+  "eingerichtet": true,
+  "hinweis": "Verbindung steht, aber Google hat für diese Property noch keine Suchdaten. Neue Properties brauchen dafür einige Tage.",
   "klicks": null,
   "impressionen": null,
   "position": null,
