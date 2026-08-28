@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T00:37:49Z",
+  "stand": "2026-08-28T01:07:20Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -959,6 +959,16 @@
   ],
   "vorschlaege": [
     {
+      "titel": "E-Book: Dateigröße ablesen, dann 9,99 € oder 12,99 €",
+      "wer": "Manuel",
+      "warum": "Auf amazon.de gilt die 70-%-Stufe nur von 2,99 € bis 9,99 €; bei 12,99 € läuft Band 1 in der 35-%-Stufe und bringt 4,25 € je Verkauf. Bei 9,99 € mit 70 % zieht Amazon 0,12 € je MB ab. Unter 27 MB konvertierter Dateigröße ist 9,99 € gleichzeitig der niedrigere Preis und die höhere Tantieme, darüber nicht. Die Zahl steht in KDP unter Rechte und Preisgestaltung."
+    },
+    {
+      "titel": "LIVE zum Hauptformat machen",
+      "wer": "Manuel",
+      "warum": "Eine einzige LIVE brachte 8.836 Aufrufe und 96 neue Follower. Achtundzwanzig Tage regulärer Beiträge brachten 920 Aufrufe und netto neun Follower weniger. Das ist der stärkste gemessene Befund im ganzen Konto — Faktor zehn, kostenlos, freigeschaltet, und liefert nebenbei den Stoff für zehn Videos."
+    },
+    {
       "titel": "Analytics: einmal auf „Weiter“ klicken",
       "wer": "Manuel",
       "warum": "Konto und Datenfreigabe sind fertig eingestellt — alle vier Freigabe-Haken habe ich abgewählt. Was fehlt, ist die Zustimmung zu Googles Nutzungsbedingungen, und die gehört dir, nicht mir. Danach hole ich Mess-ID, Aufbewahrungsdauer und die GitHub-Variable selbst.",
@@ -989,6 +999,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-28T02:10:00Z",
+      "kanal": "Technik",
+      "text": "Vollständiger Marketingbefund geschrieben (AUTOPILOT/BEFUND_MARKETING_2026-08-28.md): Druckkosten und Tantiemen für alle drei Ausgaben nachgerechnet, Kanäle gegen ihren Ertrag gestellt, 18 Vorschläge nach Wirkung je Aufwand sortiert. Die Tantiemenrechnung geht auf den Cent auf — 60 % von 37,29 € minus 11,57 € Druck sind exakt die 10,81 € aus dem KDP-Bericht."
+    },
     {
       "zeit": "2026-08-28T00:45:00Z",
       "kanal": "Technik",
@@ -1057,6 +1072,24 @@
   ],
   "offen": [
     {
+      "titel": "Band 2/3: Farbart entscheiden, bevor veröffentlicht wird",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Nach der Veröffentlichung sperrt KDP die Farb- und Papierart für immer. Premiumfarbe kostet bei 206 Seiten 11,57 € Druck, Standardfarbe 5,69 € — 5,88 € je Exemplar, dauerhaft. Bei Band 1 ist diese Tür zu. Ein Autorenexemplar in Standardfarbe (5,69 € plus Porto) beantwortet die Frage, ob die Bilder es tragen. Vorher prüfen: Standardfarbe gibt es nicht bei A4 und nicht über 21,59 × 27,94 cm."
+    },
+    {
+      "titel": "Preis der Website und Preis bei KDP gehen auseinander",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Die Buchseite nennt 39,90 €, im Bücherregal steht 37,29 € mit dem Vermerk „Aktualisierung wird geprüft\". Der Preis steht auch im Datenblatt für Google. Amazon-Produktseiten rufe ich nicht ab — welche Zahl dort heute steht, musst du einmal ablesen; danach ziehe ich band.ts und PREISSTAND nach."
+    },
+    {
+      "titel": "12 eBook-Einheiten, aber 0 € Kindle-Tantiemen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "Zwölf verkaufte E-Books müssten bei 12,99 € und 35 % rund 51 € bringen; im August stehen 10,81 €, vollständig aus dem einen Druckexemplar. Das passt nur bei Gratis-Downloads, Rückgaben oder einer nachlaufenden Abrechnung zusammen. KDP → Berichte → Verkaufs- und Umsatzbericht, Spalte „Kostenlose Einheiten“. Im Fall Gratis-Aktion sind zwölf Leser unterwegs, von denen keiner eine Seite gelesen hat (KENP 0)."
+    },
+    {
       "titel": "Ordner AUTOPILOT für den Rundlauf freigeben",
       "wer": "Manuel",
       "stufe": "hoch",
@@ -1112,10 +1145,10 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-28T00:02:00Z",
+    "stand": "2026-08-28T01:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "Abzeichen",
-    "deployWann": null,
+    "deployWann": "2026-08-28T01:01:01Z",
     "zertifikatTage": 87,
     "linksGeprueft": 46,
     "linksKaputt": 0,
