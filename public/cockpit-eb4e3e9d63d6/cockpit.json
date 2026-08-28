@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T01:44:47Z",
+  "stand": "2026-08-28T01:53:30Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -1027,6 +1027,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-28T05:05:00Z",
+      "kanal": "Verteiler",
+      "text": "Die Anmeldekette ist zum ersten Mal ganz durchgelaufen: Formular → Brevo → Bestätigungsmail, angekommen und von Manuel bestätigt. Damit steht nicht nur die Domain-Authentifizierung, sondern der Weg, den ein Leser wirklich geht — einschließlich des neuen Anmeldefelds auf der Buchseite."
+    },
+    {
       "zeit": "2026-08-28T04:20:00Z",
       "kanal": "Verteiler",
       "text": "Die erste Verteiler-Mail ist entworfen und liegt in AUTOPILOT/VERTEILER_MAIL_01.md — Betreff, Text, Pflichtangaben und eine Prüfliste vor dem Absenden. Verschickt ist nichts; das bleibt Manuels Klick. Anlass ist ehrlich: Die zwei Kontakte haben sich unter dem alten Versprechen eingetragen und sollen vom neuen erfahren, bevor es zufällig auffällt."
@@ -1090,11 +1095,6 @@
       "zeit": "2026-08-27T22:25:00Z",
       "kanal": "Instagram",
       "text": "Zwei ausführliche Kommentare von @jonikaventuris zu Landschaft und Evidenzstufen, beide unbeantwortet. Sie folgt dem Konto seit heute."
-    },
-    {
-      "zeit": "2026-08-27T22:20:00Z",
-      "kanal": "YouTube",
-      "text": "Stufe 3 ist aktiviert. Links in Videobeschreibungen sind ab sofort anklickbar, A/B-Tests für Titel und Vorschaubild stehen offen."
     }
   ],
   "offen": [
