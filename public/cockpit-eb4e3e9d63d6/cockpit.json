@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T19:04:45Z",
+  "stand": "2026-08-28T19:27:37Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -891,9 +891,15 @@
   "bericht": null,
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 1960,
-    "offenSumme": 1816,
+    "summe": 2032,
+    "offenSumme": 1888,
     "buchungen": [
+      {
+        "datum": "2026-08-28",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung",
+        "credits": 72
+      },
       {
         "datum": "2026-08-28",
         "projekt": "nicht zugeordnet",
@@ -1064,6 +1070,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-28T19:26:00Z",
+      "kanal": "TikTok",
+      "text": "Postfach: Dagmars Abendgruß von 20:59 kurz beantwortet (Dank + Wochenendwunsch). Kommentare, FB, IG, Pinterest, YouTube, Bluesky, Amazon geprüft — sonst nichts Neues."
+    },
+    {
       "zeit": "2026-08-28T13:42:00Z",
       "kanal": "Verteiler",
       "text": "Brevo: Formular „Verteiler Website“ jetzt 5 Einreichungen / 3 neue Kontakte (vorher 4/2); Liste führt daggi.richter@… als ersten Leser-Kontakt."
@@ -1123,11 +1134,6 @@
       "zeit": "2026-08-28T02:02:14Z",
       "kanal": "Technik",
       "text": "Das Cockpit meldete die Veröffentlichung als fehlgeschlagen. Sie war es nicht: GitHub zeigt einen abgebrochenen Lauf im Abzeichen als „failing“, und abgebrochen wird jeder Lauf, dem ein neuer Push zuvorkommt. Seit dem Umbau liest das Cockpit die Lauf-Liste statt des Bildes und kennt „abgebrochen“ als eigenen Zustand. Dieser Eintrag bleibt stehen, weil er passiert ist — nur richtiggestellt."
-    },
-    {
-      "zeit": "2026-08-28T00:45:00Z",
-      "kanal": "Technik",
-      "text": "Das Google-Unternehmensprofil „Trendonix“ ist angelegt: Kategorie Buchverlag, Beschreibung aus dem Hausbuch, das schwarz-goldene Logo, Website verlinkt. Kein Standort, den Kunden aufsuchen können — die Anschrift dient nur der Bestätigung und bleibt verborgen. Zur Bestätigung bietet Google nur noch ein Video an, keine Postkarte."
     }
   ],
   "offen": [
