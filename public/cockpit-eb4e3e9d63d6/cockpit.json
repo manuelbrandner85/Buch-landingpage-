@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T13:38:05Z",
+  "stand": "2026-08-28T14:04:13Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -221,20 +221,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "06_fuenf_fragen",
@@ -428,6 +414,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-08-26",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -607,6 +602,15 @@
           "was": "14_kernthese",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "TikTok LIVE",
@@ -1177,11 +1181,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-28T13:02:00Z",
+    "stand": "2026-08-28T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-28T12:05:28Z",
+    "deployWann": "2026-08-28T13:39:12Z",
     "zertifikatTage": 87,
     "linksGeprueft": 46,
     "linksKaputt": 0,
