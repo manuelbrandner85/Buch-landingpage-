@@ -127,16 +127,9 @@
       "gewinn": "Der Banner geht an, und die Seite zählt endlich mit."
     },
     {
-      "titel": "Unternehmensprofil: Adresse entscheiden",
+      "titel": "Unternehmensprofil: Telefonnummer für den Code eintragen",
       "wer": "Manuel",
-      "warum": "Im Konto steht schon ein bestätigtes Profil („Mensaena — Nachbarschaftshilfe“), ein zweites lässt sich anlegen. Offen ist die eine Frage, die ich nicht für dich entscheiden kann: als Dienstleistungsgebiet, dann bleibt Im Wahlsberg 10 verborgen — oder mit Kartenpunkt auf dem Haus. Ich empfehle das Gebiet.",
-      "gewinn": "Ein Eintrag in Maps, ohne dass die Wohnadresse auf der Karte steht."
-    },
-    {
-      "titel": "Unternehmensprofil bei Google versuchen",
-      "wer": "Manuel",
-      "warum": "Alles vorbereitet: Name, Kategorie, Beschreibung, Bilder. Ehrlich dabei — Google verlangt Kundenkontakt vor Ort, und ein Buch, das nur über Amazon geht, erfüllt das dem Wortlaut nach nicht. Der Versuch kostet eine Postkarte. Als Dienstleistungsgebiet anlegen, dann bleibt die Wohnadresse verborgen.",
-      "gewinn": "Ein Eintrag in Maps und in der Suche — wenn Google mitspielt."
+      "warum": "Das Profil „Trendonix“ ist angelegt — Kategorie Buchverlag, Beschreibung, Logo, Website, kein Kartenpunkt, Adresse verborgen. Google verlangt vor der Bestätigung eine Telefonnummer, an die es den Code schickt; sie bleibt für Kunden unsichtbar. Die Seite liegt fertig ausgefüllt bereit: business.google.com/u/3/verify/l/01043213805481987713 — Nummer eintragen, Weiter, Code eintippen. Telefonnummern und Codes gebe ich nirgends ein."
     },
     {
       "titel": "Links in die Videobeschreibungen setzen",
@@ -214,6 +207,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-28T00:45:00Z",
+      "kanal": "Technik",
+      "text": "Das Google-Unternehmensprofil „Trendonix“ ist angelegt: Kategorie Buchverlag, Beschreibung aus dem Hausbuch, das schwarz-goldene Logo, Website verlinkt. Kein Standort, den Kunden aufsuchen können — die Anschrift dient nur der Bestätigung und bleibt verborgen. Offen: die Telefonnummer für den Code."
+    },
     {
       "zeit": "2026-08-28T00:15:00Z",
       "kanal": "Technik",
