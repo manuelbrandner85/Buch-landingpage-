@@ -5,6 +5,7 @@ import { beitragNach, sichtbareBeitraege } from '@/world/journal';
 import { wegBeitrag, wegBuch, wegHaus, wegJournal, wegVollstaendig, wegVorschau } from '@/world/wege';
 import { aufsatz, brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
+import { Absatz } from '@/ui/Absatz';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Unterschrift } from '@/ui/Unterschrift';
@@ -67,7 +68,7 @@ export default async function BeitragSeite(
         {beitrag.absaetze.map((a, i) =>
           a.startsWith('## ')
             ? <h2 key={i}>{a.slice(3)}</h2>
-            : <p key={i}>{a}</p>,
+            : <Absatz key={i} text={a} />,
         )}
       </article>
 
