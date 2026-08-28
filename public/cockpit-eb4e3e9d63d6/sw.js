@@ -8,7 +8,7 @@
  * kommt die letzte bekannte Fassung aus dem Speicher, und die App schreibt
  * sichtbar dazu, von wann sie ist.
  */
-const LAGER = 'trendonix-cockpit-v4';
+const LAGER = 'trendonix-cockpit-v6';
 const HUELLE = ['./', './index.html', './app.webmanifest', './icon-192.png'];
 
 self.addEventListener('install', (e) => {

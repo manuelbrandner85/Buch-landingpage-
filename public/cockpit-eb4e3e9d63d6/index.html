@@ -464,7 +464,10 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
       + '</div>'
       + '<div class="ampel ' + (gruen ? 'gut' : 'schlecht') + '">'
       + (gruen ? 'Die Seite steht' : 'Veröffentlichung: ' + h(ut.deploy || 'unbekannt'))
-      + (ut.deployWann ? ' · zuletzt ' + vorwie(ut.deployWann) : '') + '</div>'
+      + (ut.deployWann ? ' · zuletzt ' + vorwie(ut.deployWann) : '')
+      // Ein laufender Bau ist keine Warnung, aber er erklärt, warum der Stand
+      // daneben gleich ein anderer sein kann.
+      + (ut.deployLaeuft ? ' · gerade läuft einer' : '') + '</div>'
       + kurveBlock('Rang · Verlauf', vl.rang, true, function (v) { return '#' + zahl(v); })
       + kurveBlock('Follower gesamt · Verlauf', vl.reichweite, false)
       + (vl.tage < 2
@@ -567,7 +570,11 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
         + kachel(zahl(rw.gesamt), 'Follower gesamt')
         + kachel(da(rw.kanaeleGezaehlt) ? rw.kanaeleGezaehlt + ' / ' + rw.kanaeleGesamt : null, 'Kanäle mit Zahl')
         + kachel(da(rw.abgerufen) ? rw.abgerufen + ' / ' + rw.kanaeleGesamt : null, 'davon selbst geholt')
-        + '</div>' + kurveBlock('Verlauf', (d.verlauf || {}).reichweite, false) + '</div>'
+        + '</div>'
+        // Wer die Zeilen darunter zusammenzaehlt, kommt auf eine andere Zahl
+        // als die Kachel. Das ist Absicht, und deshalb steht hier, warum.
+        + (rw.hinweis ? '<p class="hinweis">' + h(rw.hinweis) + '</p>' : '')
+        + kurveBlock('Verlauf', (d.verlauf || {}).reichweite, false) + '</div>'
         + '<div class="kanaele">'
         + d.kanaele.map(function (k, i) {
             var hat = da(k.follower);
@@ -578,7 +585,7 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
               + (hat ? zahl(k.follower) : 'keine Daten') + '</span>'
               + (hat ? trend(k.follower, k.vorher, false) : '')
               + kurve(((d.verlauf || {}).kanaele || {})[k.name], false)
-              + '<span class="unten">' + (hat ? 'Follower' : '')
+              + '<span class="unten">' + (hat ? h(k.folgerLabel || 'Follower') : '')
               + (da(k.reaktionen) ? (hat ? ' · ' : '') + zahl(k.reaktionen) + ' '
                   + h(k.reaktionenLabel || 'Reaktionen') : '')
               + (k.stand ? '<br>Stand ' + datum(k.stand) : '')
@@ -778,7 +785,7 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
       + '<div class="kopf"><h3>' + h(k.name) + '</h3>'
       + '<span class="griff">' + h(k.handle || '') + '</span></div>'
       + '<div class="zeile">'
-      + kachel(zahl(k.follower), 'Follower', trend(k.follower, k.vorher, false))
+      + kachel(zahl(k.follower), h(k.folgerLabel || 'Follower'), trend(k.follower, k.vorher, false))
       + kachel(zahl(k.reaktionen), h(k.reaktionenLabel || 'Reaktionen'))
       + kachel(zahl(k.beitraege), 'Beiträge') + '</div>'
       + '<div class="zeile">'

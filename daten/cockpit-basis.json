@@ -117,6 +117,18 @@
       "reaktionen": null,
       "stand": "2026-08-28",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link."
+    },
+    {
+      "name": "Verteiler",
+      "handle": "info@trendonix-buecher.de",
+      "eigen": true,
+      "follower": null,
+      "folgerLabel": "bestätigte Kontakte",
+      "vorher": null,
+      "reaktionen": null,
+      "reaktionenLabel": "Einreichungen",
+      "stand": null,
+      "notiz": "Der einzige Kanal, der niemandem gehört außer dem Haus — deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus; sie steht unter Kontakte und wird hier von Hand eingetragen. Seit dem 28.08.2026 hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen."
     }
   ],
   "vorschlaege": [

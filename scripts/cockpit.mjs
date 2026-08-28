@@ -168,17 +168,41 @@ const links = w?.links?.find((l) => l.kurz === 'autorenseite') ?? null;
 // ── Der Deploy-Stand aus erster Hand ──────────────────────────────────────
 //
 // cockpit-windows.json wird stündlich geschrieben und ist zwischendurch alt;
-// ein rotes Feld, das längst wieder grün ist, ist schlimmer als keins. Das
-// Abzeichen des Arbeitsablaufs ist öffentlich, braucht keinen Schlüssel und
-// sagt in einem Wort, wie der letzte Lauf ausging.
+// ein rotes Feld, das längst wieder grün ist, ist schlimmer als keins.
+//
+// Hier stand bis zum 28.08.2026 das Abzeichen des Arbeitsablaufs. Das war ein
+// Fehler: **GitHub malt einen abgebrochenen Lauf genauso rot wie einen
+// gescheiterten** — beide heißen dort „failing“. Folgen zwei Pushes schnell
+// aufeinander, bricht der Ablauf den ersten ab (so ist er eingestellt), und
+// das Dashboard rief „Die Veröffentlichung ist fehlgeschlagen“, während in
+// Wahrheit alles lief. Ein Alarm, der regelmäßig ohne Grund kommt, wird nach
+// dem dritten Mal überlesen — und dann fehlt er, wenn es zählt.
+//
+// Deshalb jetzt die öffentliche Liste der Läufe statt des Bildes: Sie nennt
+// zu jedem Lauf `status` und `conclusion` getrennt. Was auf der Website
+// liegt, ist der jüngste Lauf, der zu einem anderen Ende als „abgebrochen“
+// gekommen ist. Kein Schlüssel nötig, das Repository ist öffentlich.
 let badge = null;
+let deployLaeuft = null;
 try {
-  const a = await fetch('https://github.com/manuelbrandner85/Buch-landingpage-/actions/workflows/deploy.yml/badge.svg',
-    { signal: AbortSignal.timeout(15000), headers: { 'cache-control': 'no-cache' } });
+  const a = await fetch(
+    'https://api.github.com/repos/manuelbrandner85/Buch-landingpage-/actions/workflows/deploy.yml/runs'
+      + '?branch=main&per_page=10',
+    {
+      signal: AbortSignal.timeout(15000),
+      headers: { accept: 'application/vnd.github+json', 'user-agent': 'trendonix-cockpit' },
+    });
   if (a.ok) {
-    const svg = await a.text();
-    if (/>passing</.test(svg)) badge = 'erfolgreich';
-    else if (/>failing</.test(svg)) badge = 'fehlgeschlagen';
+    const laeufe = (await a.json())?.workflow_runs ?? [];
+    if (laeufe.length) {
+      deployLaeuft = laeufe.some((l) => l.status !== 'completed');
+      const fertig = laeufe.filter((l) => l.status === 'completed');
+      const zaehlt = fertig.find((l) => l.conclusion !== 'cancelled') ?? fertig[0] ?? null;
+      if (zaehlt) {
+        badge = zaehlt.conclusion === 'success' ? 'erfolgreich'
+          : zaehlt.conclusion === 'cancelled' ? 'abgebrochen' : 'fehlgeschlagen';
+      }
+    }
   }
 } catch { /* ohne Netz bleibt es beim Wert aus der Windows-Aufgabe */ }
 
@@ -190,7 +214,9 @@ const journalVorrat = beitraegeText
 const technik = {
   stand: w?.erzeugtAm ?? null,
   deploy: badge ?? (deploy ? (deploy.ergebnis === 'success' ? 'erfolgreich' : deploy.ergebnis) : null),
-  deployQuelle: badge ? 'Abzeichen' : (deploy ? 'Windows-Lauf' : null),
+  deployQuelle: badge ? 'GitHub' : (deploy ? 'Windows-Lauf' : null),
+  // Läuft gerade einer, ist der Stand oben der davor — und gleich ein anderer.
+  deployLaeuft,
   // Widerspricht das Abzeichen dem Windows-Lauf, ist dessen Zeitstempel der
   // eines anderen Laufs — dann lieber keine Zeit als eine falsche.
   deployWann: (!badge || !deploy || (badge === 'erfolgreich') === (deploy.ergebnis === 'success'))
@@ -231,16 +257,33 @@ const kanaele = basis.kanaele.map((k) => {
 });
 
 // ── Reichweite über alle Kanäle, ohne Schätzung ───────────────────────────
+//
+// Ein Kanal mit `eigen: true` steht in derselben Liste, zählt aber nicht in
+// die Summe. „Follower gesamt“ meint Menschen, die eine fremde Plattform uns
+// zeigt und jederzeit wieder wegnehmen kann. Eine E-Mail-Adresse gehört dem
+// Haus. Beides in einer Zahl wäre eine schönere Zahl und eine falsche — und
+// die Kurve machte einen Sprung an dem Tag, an dem jemand den Verteiler
+// einträgt, ohne dass irgendjemand dazugekommen wäre.
+//
+// Gezählt und „selbst geholt“ laufen dagegen über *alle* Kanäle: Diese beiden
+// Kacheln stehen neben der Liste, und die zeigt den Verteiler mit an.
+const eigeneKanaele = new Set(kanaele.filter((k) => k.eigen).map((k) => k.name));
 const bekannt = kanaele.filter((k) => typeof k.follower === 'number');
+const geliehen = bekannt.filter((k) => !eigeneKanaele.has(k.name));
 const reichweite = {
-  gesamt: bekannt.length ? bekannt.reduce((a, k) => a + k.follower, 0) : null,
+  gesamt: geliehen.length ? geliehen.reduce((a, k) => a + k.follower, 0) : null,
   kanaeleGezaehlt: bekannt.length,
   kanaeleGesamt: kanaele.length,
   abgerufen: kanaele.filter((k) => k.quelle === 'abgerufen').length,
+  hinweis: eigeneKanaele.size
+    ? `${[...eigeneKanaele].join(' und ')} zählt hier nicht mit. Diese Adressen `
+      + 'gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die '
+      + 'Summe daneben und lassen sich nicht mit ihr verrechnen.'
+    : null,
 };
 if (bekannt.length < kanaele.length) {
   const ohne = kanaele.filter((k) => typeof k.follower !== 'number').map((k) => k.name);
-  fehlt('Reichweite', `${ohne.join(' und ')} ${ohne.length === 1 ? 'gibt' : 'geben'} ohne Anmeldung keine Followerzahl heraus — die Zahl kommt nur aus der App.`);
+  fehlt('Reichweite', `${ohne.join(' und ')} ${ohne.length === 1 ? 'gibt' : 'geben'} ohne Anmeldung keine Zahl heraus — sie steht nur in der App.`);
 }
 // Eine Zahl von Hand ist so lange gut, wie sie jung ist. Wird sie alt, sieht
 // man ihr das nicht an — sie steht da wie jede andere. Also sagt es das
@@ -409,7 +452,12 @@ const tagesstand = {
 for (const k of kanaele) {
   if (typeof k.follower === 'number') tagesstand.kanaele[k.name] = k.follower;
 }
-const gezaehlt = Object.values(tagesstand.kanaele);
+// Der eigene Kanal steht im Tagesstand — er bekommt seine eigene Kurve —,
+// aber nicht in der Summe. Sonst spränge „Follower gesamt“ an dem Tag, an dem
+// die erste Kontaktzahl eingetragen wird.
+const gezaehlt = Object.entries(tagesstand.kanaele)
+  .filter(([name]) => !eigeneKanaele.has(name))
+  .map(([, wert]) => wert);
 if (gezaehlt.length) tagesstand.gesamt = gezaehlt.reduce((a, b) => a + b, 0);
 
 // Ein Tag, eine Zeile: Käme dieselbe Datumsangabe zweimal vor, zeigte die
@@ -548,8 +596,10 @@ for (const wn of basis.warnungen ?? []) {
   if (wn.bis && wn.bis < heute) continue;
   warnen(wn.stufe === 'hoch' ? 'hoch' : 'mittel', wn.text);
 }
-if (technik.deploy && technik.deploy !== 'erfolgreich') {
-  warnen('hoch', `Die Veröffentlichung steht auf „${technik.deploy}“ — die Website zeigt noch den Stand davor.`);
+// „abgebrochen“ ist kein Alarm: Der Ablauf bricht den vorigen Lauf ab, wenn
+// ein neuer Push kommt. Das ist eingestellt und richtig so.
+if (technik.deploy === 'fehlgeschlagen') {
+  warnen('hoch', 'Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor.');
 }
 if (typeof technik.zertifikatTage === 'number' && technik.zertifikatTage < 30) {
   warnen('hoch', `Das Zertifikat läuft in ${technik.zertifikatTage} Tagen ab.`);

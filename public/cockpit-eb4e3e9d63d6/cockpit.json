@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-28T01:58:18Z",
+  "stand": "2026-08-28T02:04:34Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-27",
@@ -106,8 +106,9 @@
   "reichweite": {
     "gesamt": 22657,
     "kanaeleGezaehlt": 6,
-    "kanaeleGesamt": 6,
-    "abgerufen": 4
+    "kanaeleGesamt": 7,
+    "abgerufen": 4,
+    "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
     "tage": 2,
@@ -983,6 +984,20 @@
       "beitraege": 1,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-27"
+    },
+    {
+      "name": "Verteiler",
+      "handle": "info@trendonix-buecher.de",
+      "eigen": true,
+      "follower": null,
+      "folgerLabel": "bestätigte Kontakte",
+      "vorher": null,
+      "reaktionen": null,
+      "reaktionenLabel": "Einreichungen",
+      "stand": null,
+      "notiz": "Der einzige Kanal, der niemandem gehört außer dem Haus — deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus; sie steht unter Kontakte und wird hier von Hand eingetragen. Seit dem 28.08.2026 hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
+      "quelle": "Handpflege",
+      "vergleichVom": null
     }
   ],
   "vorschlaege": [
@@ -1057,6 +1072,12 @@
       "text": "Vollständiger Marketingbefund geschrieben (AUTOPILOT/BEFUND_MARKETING_2026-08-28.md): Druckkosten und Tantiemen für alle drei Ausgaben nachgerechnet, Kanäle gegen ihren Ertrag gestellt, 18 Vorschläge nach Wirkung je Aufwand sortiert. Die Tantiemenrechnung geht auf den Cent auf — 60 % von 37,29 € minus 11,57 € Druck sind exakt die 10,81 € aus dem KDP-Bericht."
     },
     {
+      "id": "deploy-2026-08-28-fehlgeschlagen",
+      "zeit": "2026-08-28T02:02:14Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
+    },
+    {
       "zeit": "2026-08-28T00:45:00Z",
       "kanal": "Technik",
       "text": "Das Google-Unternehmensprofil „Trendonix“ ist angelegt: Kategorie Buchverlag, Beschreibung aus dem Hausbuch, das schwarz-goldene Logo, Website verlinkt. Kein Standort, den Kunden aufsuchen können — die Anschrift dient nur der Bestätigung und bleibt verborgen. Zur Bestätigung bietet Google nur noch ein Video an, keine Postkarte."
@@ -1090,11 +1111,6 @@
       "zeit": "2026-08-27T22:30:00Z",
       "kanal": "Verteiler",
       "text": "Brevo meldet trendonix-buecher.de als authentifiziert. Das Formular zählt 4 Einreichungen und 2 bestätigte Kontakte — die ersten überhaupt."
-    },
-    {
-      "zeit": "2026-08-27T22:25:00Z",
-      "kanal": "Instagram",
-      "text": "Zwei ausführliche Kommentare von @jonikaventuris zu Landschaft und Evidenzstufen, beide unbeantwortet. Sie folgt dem Konto seit heute."
     }
   ],
   "offen": [
@@ -1172,10 +1188,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-28T01:02:00Z",
+    "stand": "2026-08-28T02:02:00Z",
     "deploy": "erfolgreich",
-    "deployQuelle": "Abzeichen",
-    "deployWann": "2026-08-28T01:01:01Z",
+    "deployQuelle": "GitHub",
+    "deployLaeuft": true,
+    "deployWann": null,
     "zertifikatTage": 87,
     "linksGeprueft": 46,
     "linksKaputt": 0,
@@ -1184,6 +1201,10 @@
     "journalVorrat": 5
   },
   "luecken": [
+    {
+      "was": "Reichweite",
+      "warum": "Verteiler gibt ohne Anmeldung keine Zahl heraus — sie steht nur in der App."
+    },
     {
       "was": "Besucher",
       "warum": "Verbindung steht, aber Google hat für diese Property noch keine Suchdaten. Neue Properties brauchen dafür einige Tage."
