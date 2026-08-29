@@ -167,6 +167,12 @@
   ],
   "offen": [
     {
+      "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
+    },
+    {
       "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
       "wer": "Manuel",
       "stufe": "mittel",
@@ -240,6 +246,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-29T22:10:00Z",
+      "kanal": "Website",
+      "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
+    },
     {
       "zeit": "2026-08-29T13:30:00Z",
       "kanal": "TikTok",
