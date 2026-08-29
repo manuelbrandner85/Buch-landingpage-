@@ -21,7 +21,15 @@ export async function generateMetadata(
   if (!ziel) return { title: 'Nicht gefunden – Trendonix', robots: { index: false } };
   const pfad = weg(`/q/${qrSchluessel(ziel.nr)}/`);
   return {
-    title: `${ziel.kapitel} – selbst nachsehen`,
+    // Das Layout hängt an jeden Titel „ · Trendonix“ – zwölf Zeichen, die
+    // mitzählen. Für den Zusatz „– selbst nachsehen“ bleiben damit 53; wo ein
+    // Kapitelname länger ist, trägt er den Titel allein. Google schneidet
+    // sonst mitten im Wort ab, und abgeschnitten steht dort nicht die
+    // Aufforderung, sondern ein Wortfragment.
+    title: (() => {
+      const voll = `${ziel.kapitel} – selbst nachsehen`;
+      return voll.length <= 53 ? voll : ziel.kapitel;
+    })(),
     description: ziel.hinweis,
     // Vor dem Erscheinen des Buches steht hier nichts im Index. Eine Seite,
     // die den Titel nennt, wäre sonst die Ankündigung.

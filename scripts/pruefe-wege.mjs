@@ -89,7 +89,34 @@ if (BASIS) {
   }
 }
 
-console.log(`${seiten.length} Seiten, ${geprueft} interne Verweise geprüft.`);
+/**
+ * Vorschaubilder für geteilte Links.
+ *
+ * Sie stehen nicht in einem `href`, sondern als vollständige Adresse im
+ * Metadaten-Kopf – die Schleife oben sieht sie deshalb nicht. Genau dort ist
+ * es passiert: „Alles nur Zufall?“ kam auf die Seite, sein Bild stand in
+ * `og:image`, und die Datei gab es nicht. Sichtbar wäre das erst geworden,
+ * wenn jemand den Link geteilt hätte und das Vorschaufeld leer geblieben wäre.
+ *
+ * Deshalb hier: Jede Adresse, die auf `/og/…` zeigt, muss auch als Datei
+ * liegen. Wer eine Seite anlegt, ohne `scripts/og-daten.mjs` zu ergänzen,
+ * erfährt es beim Bauen statt beim Teilen.
+ */
+const bilder = new Map();
+for (const seite of seiten) {
+  const woher = seite.slice(WURZEL.length + 1).split('\\').join('/');
+  for (const [, name] of readFileSync(seite, 'utf8').matchAll(/\/og\/([\w.-]+\.jpg)/g)) {
+    if (!bilder.has(name)) bilder.set(name, woher);
+  }
+}
+for (const [name, woher] of bilder) {
+  geprueft++;
+  if (!existsSync(join(WURZEL, 'og', name))) {
+    fehler.push(`${woher}: Vorschaubild "og/${name}" fehlt — ist es in scripts/og-daten.mjs eingetragen?`);
+  }
+}
+
+console.log(`${seiten.length} Seiten, ${geprueft} interne Verweise geprüft, ${bilder.size} Vorschaubilder.`);
 if (fehler.length) {
   for (const f of [...new Set(fehler)]) console.error('Fehler:', f);
   process.exit(1);

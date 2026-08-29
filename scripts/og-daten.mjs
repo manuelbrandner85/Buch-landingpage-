@@ -24,4 +24,9 @@ export default [
   { datei: 'band-3', motiv: 'public/assets/band-3/szenen/b3-kap16-auftakt-1600.webp',
     eyebrow: 'Band 3 · erscheint', titel: 'Krieg, Ordnung und Netz',
     unterzeile: 'Vom Weltkrieg bis zur vernetzten Gegenwart' },
+
+  // Ein Einzeltitel ohne Welt: kein Motiv, dafür der Umschlag selbst.
+  { datei: 'zufall', umschlag: 'public/assets/zufall/szenen/cover-zufall-1000.webp',
+    eyebrow: 'Einzelband · erscheint', titel: 'Alles nur Zufall?',
+    unterzeile: '40 Theorien, die die Welt erklären. Angeblich.' },
 ];
