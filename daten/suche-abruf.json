@@ -1,13 +1,13 @@
 {
   "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
-  "stand": "2026-08-28T00:13:14Z",
+  "stand": "2026-08-29T20:02:40Z",
   "eingerichtet": true,
-  "hinweis": "Verbindung steht, aber Google hat für diese Property noch keine Suchdaten. Neue Properties brauchen dafür einige Tage.",
-  "klicks": null,
-  "impressionen": null,
-  "position": null,
-  "von": null,
-  "bis": null,
-  "tage": 0,
+  "hinweis": null,
+  "klicks": 0,
+  "impressionen": 1,
+  "position": 5,
+  "von": "2026-08-27",
+  "bis": "2026-08-27",
+  "tage": 1,
   "suchanfragen": []
 }

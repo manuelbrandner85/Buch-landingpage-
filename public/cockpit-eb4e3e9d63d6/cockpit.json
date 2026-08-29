@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-29T19:02:36Z",
+  "stand": "2026-08-29T20:02:40Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -98,15 +98,18 @@
     "hinweis": "Aus dem KDP-Bericht „Bestellungen“ abgelesen: alle 13 Einheiten entfallen auf Band 1, die neun anderen Titel stehen bei null. Die Tantiemen stammen zu 100 % aus dem Druck — das eine Taschenbuch bringt mehr als zwölf eBooks über Kindle Unlimited. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
   },
   "besucher": {
-    "gelesen": false,
-    "hinweis": "Verbindung steht, aber Google hat für diese Property noch keine Suchdaten. Neue Properties brauchen dafür einige Tage.",
-    "klicks7": null,
-    "impressionen7": null,
-    "position": null,
+    "gelesen": true,
+    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 1 gemessene Tage.",
+    "klicks7": 0,
+    "impressionen7": 1,
+    "position": 5,
     "seitenIndexiert": null,
     "seitenGesamt": 89,
     "suchanfragen": [],
-    "quelle": "Dienstkonto meldet einen Fehler"
+    "von": "2026-08-27",
+    "bis": "2026-08-27",
+    "tage": 1,
+    "quelle": "abgerufen"
   },
   "reichweite": {
     "gesamt": 22657,
@@ -1312,11 +1315,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-29T19:02:00Z",
+    "stand": "2026-08-29T20:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-29T18:03:27Z",
+    "deployWann": "2026-08-29T19:03:32Z",
     "zertifikatTage": 85,
     "linksGeprueft": 46,
     "linksKaputt": 0,
@@ -1325,10 +1328,6 @@
     "journalVorrat": 4
   },
   "luecken": [
-    {
-      "was": "Besucher",
-      "warum": "Verbindung steht, aber Google hat für diese Property noch keine Suchdaten. Neue Properties brauchen dafür einige Tage."
-    },
     {
       "was": "Vorrat an Beiträgen",
       "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-06 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
