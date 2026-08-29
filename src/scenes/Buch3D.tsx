@@ -22,6 +22,7 @@ import { bildQuelle, ordner } from '@/world/bilder';
 /** Rückenstärke im Verhältnis zur Umschlagbreite – aus der Druckdatei gemessen. */
 const RUECKEN: Record<string, number> = {
   'band-1': 0.0775, 'band-2': 0.0808, 'band-3': 0.0806,
+  zufall: 0.1712,
 };
 export const rueckenstaerke = (band: BandId) => RUECKEN[band] ?? 0.078;
 

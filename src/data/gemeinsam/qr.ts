@@ -38,7 +38,7 @@ export type QrZiel = {
 };
 
 /** Umschalter für den Erscheinungstag. Vorher: unsichtbar für Suchmaschinen. */
-export const QR_VEROEFFENTLICHT = false;
+export const QR_VEROEFFENTLICHT = true;
 
 export const QR_BUCH = 'Alles nur Zufall?';
 

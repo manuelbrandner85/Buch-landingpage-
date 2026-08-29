@@ -2,8 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SceneEngine } from '@/engine/SceneEngine';
 import {
-  OEFFENTLICHE_REIHEN, TRENDONIX, assetNach, bandNach,
-  oeffentlicheBaendeVon, reiheNach, reiseBand,
+  TRENDONIX, assetNach, bandNach, reiheNach, reiseBand, REIHEN_MIT_WELT, begehbareBaendeVon,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
@@ -19,8 +18,8 @@ import { ausgaben } from '@/world/schema';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return OEFFENTLICHE_REIHEN.flatMap((r) =>
-    oeffentlicheBaendeVon(r).map((b) => ({ reihe: r.id, band: b.buch.id })));
+  return REIHEN_MIT_WELT.flatMap((r) =>
+    begehbareBaendeVon(r).map((b) => ({ reihe: r.id, band: b.buch.id })));
 }
 
 export async function generateMetadata(

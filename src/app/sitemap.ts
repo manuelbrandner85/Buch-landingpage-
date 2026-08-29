@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { OEFFENTLICHE_BUECHER, OEFFENTLICHE_REIHEN, oeffentlicheBaendeVon } from '@/world/registry';
+import { OEFFENTLICHE_BUECHER, REIHEN_MIT_WELT, begehbareBaendeVon } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
 import { sichtbareBeitraege } from '@/world/journal';
 import { STAND } from '@/data/gemeinsam/stand';
@@ -44,18 +44,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
           })),
         ]
       : []),
-    ...OEFFENTLICHE_REIHEN.flatMap((r) => [
+    ...REIHEN_MIT_WELT.flatMap((r) => [
       { url: `${BASIS}/${r.id}/`, changeFrequency: 'monthly' as const,
         priority: 0.9, lastModified: STAND },
       { url: `${BASIS}/${r.id}/begriffe/`, changeFrequency: 'yearly' as const,
         priority: 0.4, lastModified: STAND },
       // Die Bandwelten fehlten hier – ausgerechnet die inhaltsreichsten Seiten
       // der ganzen Seite (1200 bis 2400 Wörter) standen in keiner Sitemap.
-      ...oeffentlicheBaendeVon(r).map((b) => ({
+      ...begehbareBaendeVon(r).map((b) => ({
         url: `${BASIS}/${r.id}/${b.buch.id}/`,
         changeFrequency: 'monthly' as const, priority: 0.9, lastModified: STAND,
       })),
-      ...oeffentlicheBaendeVon(r).flatMap((b) => b.kapitel).map((k) => ({
+      ...begehbareBaendeVon(r).flatMap((b) => b.kapitel).map((k) => ({
         url: `${BASIS}/${r.id}/kapitel/${k.id}/`,
         changeFrequency: 'yearly' as const, priority: 0.8, lastModified: STAND,
       })),

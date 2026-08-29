@@ -2,8 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SceneEngine } from '@/engine/SceneEngine';
 import {
-  OEFFENTLICHE_REIHEN, TRENDONIX, assetNach, oeffentlicheBaendeVon,
-  reiheNach, schwelleVon,
+  TRENDONIX, assetNach, oeffentlicheBaendeVon, reiheNach, schwelleVon, REIHEN_MIT_WELT,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { weg, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
@@ -21,7 +20,7 @@ import { weg, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return OEFFENTLICHE_REIHEN.map((r) => ({ reihe: r.id }));
+  return REIHEN_MIT_WELT.map((r) => ({ reihe: r.id }));
 }
 
 export async function generateMetadata(

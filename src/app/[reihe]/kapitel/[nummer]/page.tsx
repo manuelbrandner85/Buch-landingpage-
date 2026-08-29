@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
-  HAUS, OEFFENTLICHE_REIHEN, WELT, oeffentlicheBaendeVon, reiheNach,
+  HAUS, WELT, oeffentlicheBaendeVon, reiheNach, REIHEN_MIT_WELT, begehbareBaendeVon,
 } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
 import { wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegUeber, wegVollstaendig } from '@/world/wege';
@@ -22,8 +22,8 @@ const kapitelDerReihe = (reihe: string) =>
   (HAUS[reihe] ? oeffentlicheBaendeVon(HAUS[reihe]).flatMap((b) => b.kapitel) : []);
 
 export function generateStaticParams() {
-  return OEFFENTLICHE_REIHEN.flatMap((r) =>
-    oeffentlicheBaendeVon(r).flatMap((b) =>
+  return REIHEN_MIT_WELT.flatMap((r) =>
+    begehbareBaendeVon(r).flatMap((b) =>
       b.kapitel.map((k) => ({ reihe: r.id, nummer: String(k.id) }))));
 }
 

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ORTE, ortNach } from '@/data/gemeinsam/orte';
-import { OEFFENTLICHE_REIHEN, WELT, kapitelNach, reiheNach } from '@/world/registry';
+import { WELT, kapitelNach, reiheNach, REIHEN_MIT_WELT } from '@/world/registry';
 import {
   wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegVollstaendig,
 } from '@/world/wege';
@@ -28,7 +28,7 @@ import { Rueckweg } from '@/ui/Rueckweg';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return OEFFENTLICHE_REIHEN.flatMap((r) => ORTE.map((o) => ({ reihe: r.id, id: o.id })));
+  return REIHEN_MIT_WELT.flatMap((r) => ORTE.map((o) => ({ reihe: r.id, id: o.id })));
 }
 
 /** Der erste Teil eines Satzes – für den Titel, der bei etwa 60 Zeichen abreißt. */

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { Buch, Reihe } from '@/data/gemeinsam/typen';
 import { kanalAdressen } from '@/data/gemeinsam/kanaele';
 import {
-  OEFFENTLICHE_REIHEN, TRENDONIX,
+  OEFFENTLICHE_REIHEN, REIHEN_MIT_WELT, TRENDONIX, bandzeile, hatWelt, WELT,
   assetNach, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
@@ -68,13 +68,14 @@ function Weltentor({ reihe }: { reihe: Reihe }) {
 function Buchkarte({ buch }: { buch: Buch }) {
   const cover = assetNach(buch.coverAsset);
   const reihe = reiheZuBand(buch.id);
+  const band = WELT[buch.id];
   return (
     <article className="buchkarte">
       {cover && <Buch3D cover={cover} band={buch.id} />}
       <div className="text">
         <p className="band-nr">
-          {reihe?.titel} · Band {buch.nummer}
-          {buch.seiten ? ` · ${buch.seiten} Seiten` : ''}
+          {[bandzeile(buch), buch.seiten ? `${buch.seiten} Seiten` : '']
+            .filter(Boolean).join(' · ')}
         </p>
         <h3><a href={wegBuch(buch.id)}>{buch.titel}</a></h3>
         <Sternzeile bandId={buch.id} nach={`${wegBuch(buch.id)}#stimmen`} />
@@ -82,7 +83,7 @@ function Buchkarte({ buch }: { buch: Buch }) {
         <p className="klappe">{buch.klappentext}</p>
         <div className="wege">
           <Kaufwege buch={buch} />
-          {reihe && (
+          {reihe && band && hatWelt(band) && (
             <a className="eintauchen" href={wegWelt(reihe.id, buch.id)}>
               In die Welt von Band {buch.nummer}
             </a>
@@ -184,7 +185,7 @@ export default function Haus() {
           </p>
         </div>
         <div className="weltentore">
-          {OEFFENTLICHE_REIHEN.map((r) => <Weltentor key={r.id} reihe={r} />)}
+          {REIHEN_MIT_WELT.map((r) => <Weltentor key={r.id} reihe={r} />)}
         </div>
       </section>
 

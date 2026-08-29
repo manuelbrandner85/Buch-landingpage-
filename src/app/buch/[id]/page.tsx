@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
-  OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, buchNach, reiheZuBand,
+  OEFFENTLICHE_BUECHER, TRENDONIX, WELT, assetNach, bandzeile, buchNach,
+  hatWelt, istEinzeltitel, reiheZuBand,
 } from '@/world/registry';
 import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { ausgaben, brotkrumen, stimmen as stimmenBlatt, urteil } from '@/world/schema';
@@ -47,6 +48,7 @@ export async function generateMetadata(
     // Mit Reihentitel wird der Treffer bei zwei von drei Baenden zu lang und
     // reisst mitten im Wort ab. Dann traegt ihn die Bandzahl allein.
     title: (() => {
+      if (istEinzeltitel(reihe)) return buch.titel;
       const lang = `${buch.titel} – ${reihe?.titel} Band ${buch.nummer}`;
       return lang.length <= 52 ? lang : `${buch.titel} – Band ${buch.nummer}`;
     })(),
@@ -65,6 +67,7 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
   if (!buch) notFound();
 
   const reihe = reiheZuBand(buch.id);
+  const welt = Boolean(reihe && hatWelt(WELT[buch.id]!));
   const cover = assetNach(buch.coverAsset);
   const kapitel = WELT[buch.id]?.kapitel ?? [];
   const blick = BLICK[buch.id] ?? [];
@@ -78,8 +81,9 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
   const strukturierteDaten = {
     '@context': 'https://schema.org',
     '@type': 'Book',
-    name: `${reihe?.titel} – Band ${buch.nummer}: ${buch.titel}`,
-    bookEdition: `Band ${buch.nummer}`,
+    name: istEinzeltitel(reihe)
+      ? buch.titel : `${reihe?.titel} – Band ${buch.nummer}: ${buch.titel}`,
+    ...(istEinzeltitel(reihe) ? {} : { bookEdition: `Band ${buch.nummer}` }),
     inLanguage: 'de',
     numberOfPages: buch.seiten,
     description: buch.klappentext,
@@ -99,9 +103,11 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
 
   return (
     <main className="lesefassung buchseite">
-      <Rueckweg nach={reihe ? wegReihe(reihe.id) : wegHaus()}
-        text={reihe ? `Zurück in ${reihe.titel}` : 'Zurück'} />
-      <p className="eyebrow">{reihe?.titel} · Band {buch.nummer}</p>
+      {/* Eine Reihe ohne begehbare Welt hat keine Schwellenseite — dorthin
+          zurückzuschicken hieße, ins Leere zu verweisen. */}
+      <Rueckweg nach={welt ? wegReihe(reihe!.id) : wegHaus()}
+        text={welt ? `Zurück in ${reihe!.titel}` : 'Zurück ins Regal'} />
+      {bandzeile(buch) && <p className="eyebrow">{bandzeile(buch)}</p>}
       <h1>{buch.titel}</h1>
       {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
 
@@ -161,10 +167,10 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
             angekündigt wird, was zu haben ist. Ein „demnächst“ wäre schneller
             geschrieben und weniger wert.
           </p>
-          {reihe && (
+          {welt && (
             <p>
               Durchschreiten lässt sich der Band trotzdem schon —{' '}
-              <a href={wegWelt(reihe.id, buch.id)}>
+              <a href={wegWelt(reihe!.id, buch.id)}>
                 in die Welt von Band {buch.nummer}
               </a>. Die Kapitel, die Orte und die Motive sind dieselben wie im
               gedruckten Band.

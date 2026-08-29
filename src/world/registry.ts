@@ -1,5 +1,6 @@
 import type { Band, BandId, Buch, Kapitel, Reihe, ReiheId, Szene } from '@/data/gemeinsam/typen';
 import { REIHE_FAEDEN, STIMMUNG_FAEDEN } from '@/data/faeden';
+import { REIHE_ZUFALL } from '@/data/zufall';
 import { ORTE } from '@/data/gemeinsam/orte';
 
 export { TRENDONIX } from '@/data/gemeinsam/haus';
@@ -9,7 +10,7 @@ export { TRENDONIX } from '@/data/gemeinsam/haus';
  * sonst nirgends. Die Engine, die Kopfzeile, die Sitemap und die Kapitelseiten
  * fragen bei diesem Modul nach und wissen von keiner einzelnen Reihe etwas.
  */
-export const REIHEN: Reihe[] = [REIHE_FAEDEN];
+export const REIHEN: Reihe[] = [REIHE_FAEDEN, REIHE_ZUFALL];
 
 export const HAUS: Record<ReiheId, Reihe> =
   Object.fromEntries(REIHEN.map((r) => [r.id, r]));
@@ -52,6 +53,37 @@ export const reiheZuBand = (id?: BandId): Reihe | undefined =>
  */
 export const istOeffentlich = (buch: Buch) => buch.status !== 'in Arbeit';
 
+/**
+ * Ein Band hat eine Welt, wenn er Szenen hat — sonst nicht.
+ *
+ * „Alles nur Zufall?" ist ein Lesebuch mit vierzig kurzen Kapiteln, kein Ort.
+ * Es bekommt deshalb kein Weltentor, keine Kapitelseiten und keinen Eintrag in
+ * der Sitemap unter `/<reihe>/<band>`. Das ist keine Ausnahme, sondern die
+ * Regel, die schon immer gegolten hat — sie stand nur nirgends geschrieben,
+ * weil bis jetzt jeder Band Szenen hatte.
+ */
+export const hatWelt = (band: Band) => band.szenen.length > 0;
+
+/**
+ * Ein Einzeltitel ist eine Reihe mit genau einem Band.
+ *
+ * Wo sonst „Band 2" steht, steht bei ihm nichts: „Alles nur Zufall? · Band 1"
+ * wäre eine Zählung ohne Gezähltes. Die Datenform bleibt gleich, nur die
+ * Anzeige lässt die Ziffer weg.
+ */
+export const istEinzeltitel = (reihe?: Reihe) => reihe?.baende.length === 1;
+
+/**
+ * Die Bandangabe, wie sie über dem Titel steht: „Die Unsichtbaren Fäden ·
+ * Band 2". Bei einem Einzeltitel bleibt sie leer — dort stünde sonst der
+ * Buchtitel zweimal untereinander, einmal klein und einmal groß.
+ */
+export const bandzeile = (buch: Buch): string => {
+  const reihe = reiheZuBand(buch.id);
+  if (!reihe || istEinzeltitel(reihe)) return '';
+  return `${reihe.titel} · Band ${buch.nummer}`;
+};
+
 export const OEFFENTLICHE_BAENDE: Band[] = BAENDE.filter((b) => istOeffentlich(b.buch));
 export const OEFFENTLICHE_KAPITEL: Kapitel[] = OEFFENTLICHE_BAENDE.flatMap((b) => b.kapitel);
 export const ALLE_KAPITEL: Kapitel[] = BAENDE.flatMap((b) => b.kapitel);
@@ -60,6 +92,13 @@ export const REISE: Szene[] = BAENDE.flatMap((b) => b.szenen);
 /** Reihen, von denen überhaupt etwas gezeigt werden darf. */
 export const OEFFENTLICHE_REIHEN: Reihe[] =
   REIHEN.filter((r) => r.baende.some((b) => istOeffentlich(b.buch)));
+
+/** Reihen mit begehbarer Welt — nur die bekommen ein Tor und eine Weltadresse. */
+export const REIHEN_MIT_WELT: Reihe[] =
+  OEFFENTLICHE_REIHEN.filter((r) => r.baende.some((b) => istOeffentlich(b.buch) && hatWelt(b)));
+
+export const begehbareBaendeVon = (r: Reihe): Band[] =>
+  r.baende.filter((b) => istOeffentlich(b.buch) && hatWelt(b));
 
 export const oeffentlicheBaendeVon = (r: Reihe): Band[] =>
   r.baende.filter((b) => istOeffentlich(b.buch));
