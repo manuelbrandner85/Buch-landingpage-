@@ -254,15 +254,25 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           Auf der Startseite steht er auch – hier steht er richtig. */}
       <Verteiler />
 
+      {/* Wohin von hier aus weiter.
+          Ein Band mit Welt führt in seine Welt. Ein Buch ohne Welt – „Alles
+          nur Zufall?“ ist das erste – hat keine Reihenschwelle; sein Weg
+          zurück ist das Regal, in dem es steht. Bis zum 29.08.2026 stand hier
+          für beide dasselbe, und für das zweite führte es auf eine Seite, die
+          es nicht gibt. */}
       <nav className="fusszeile">
-        {reihe && <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>}
+        {welt && reihe
+          ? <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>
+          : <a href={`${wegHaus()}#buecher`}>Zurück ins Regal</a>}
       </nav>
       <Kanaele />
       <Kaufleiste buch={buch} urteil={bewertet} />
       <Datenblatt daten={strukturierteDaten} />
       <Datenblatt daten={brotkrumen([
         { name: 'Start', weg: wegHaus() },
-        ...(reihe ? [{ name: reihe.titel, weg: wegReihe(reihe.id) }] : []),
+        // Nur eine Reihe mit Welt hat eine eigene Seite. Bei einem
+        // Einzeltitel stünde hier ohnehin zweimal derselbe Titel.
+        ...(welt && reihe ? [{ name: reihe.titel, weg: wegReihe(reihe.id) }] : []),
         { name: buch.titel, weg: wegBuch(buch.id) },
       ])} />
     </main>

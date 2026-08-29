@@ -1,5 +1,5 @@
 import type { Buch, Szene } from '@/data/gemeinsam/typen';
-import { BAENDE, TRENDONIX, assetNach, reiheZuBand } from '@/world/registry';
+import { BAENDE, LEITREIHE, TRENDONIX, assetNach, bandNach, hatWelt, istEinzeltitel, reiheZuBand } from '@/world/registry';
 import { WEG_COCKPIT, wegLeseprobe, wegWelt } from '@/world/wege';
 import { BASIS_PFAD } from '@/world/bilder';
 import { mailAn } from '@/data/gemeinsam/anbieter';
@@ -30,6 +30,9 @@ import { Hausmarke } from '@/ui/Hausmarke';
  * Ohne Kaufweg wird nichts verlinkt: erfundene Adressen gibt es hier nicht.
  */
 export function Kaufwege({ buch }: { buch: Buch }) {
+  // „Band 1 kaufen“ wäre bei einem Einzeltitel eine Zählung ohne Gezähltes –
+  // dieselbe Regel wie bei `bandzeile` in der Registry.
+  const einzeln = istEinzeltitel(reiheZuBand(buch.id));
   if (buch.status === 'erscheint') {
     // Seit dem 27.08.2026 fuehrt der Hinweis in den Verteiler, nicht mehr ins
     // E-Mail-Programm. Grund: Ein mailto-Link oeffnet auf dem Handy haeufig gar
@@ -42,8 +45,8 @@ export function Kaufwege({ buch }: { buch: Buch }) {
     const bescheid = VERTEILER.formular
       ? '#verteiler'
       : mailAn(
-          `Bescheid geben: Band ${buch.nummer}`,
-          `Bitte einmal melden, sobald Band ${buch.nummer} zu haben ist.`,
+          `Bescheid geben: ${einzeln ? buch.titel : `Band ${buch.nummer}`}`,
+          `Bitte einmal melden, sobald ${einzeln ? '„' + buch.titel + '“' : `Band ${buch.nummer}`} zu haben ist.`,
         );
     // „Erscheint in Kürze“ stand hier bis zum 28.08.2026 und war das
     // Schwächste, was an dieser Stelle stehen kann: ein Versprechen ohne
@@ -71,7 +74,8 @@ export function Kaufwege({ buch }: { buch: Buch }) {
   return (
     <span className="kaufblock">
       <a className="kaufen" href={erster.url} target="_blank" rel="noopener noreferrer">
-        Band {buch.nummer} {erster.art === 'ausleihe' ? 'ausleihen' : 'kaufen'}
+        {einzeln ? 'Buch' : `Band ${buch.nummer}`}
+        {' '}{erster.art === 'ausleihe' ? 'ausleihen' : 'kaufen'}
         <small>{erster.form} · {erster.haendler}</small>
       </a>
       {weitere.length > 0 && (
@@ -95,6 +99,7 @@ function Tor({ buch }: { buch: Buch }) {
   const offen = buch.status !== 'in Arbeit';
   const cover = assetNach(buch.coverAsset);
   const reihe = reiheZuBand(buch.id);
+  const band = bandNach(buch.id);
   const probe = leseprobeVon(buch.id);
 
   if (!offen) {
@@ -122,7 +127,7 @@ function Tor({ buch }: { buch: Buch }) {
       <p className="klappe">{buch.klappentext}</p>
       <div className="wege">
         <Kaufwege buch={buch} />
-        {reihe && (
+        {reihe && band && hatWelt(band) && (
           <a className="eintauchen" href={wegWelt(reihe.id, buch.id)}>
             In die Welt von Band {buch.nummer}
           </a>
@@ -146,8 +151,17 @@ export function Buecher({ szene }: { szene?: Szene }) {
   // Buch ein Fremdkörper und würde von dem ablenken, wofür man gerade zwei
   // Stunden Lesezeit investiert hat.
   const amAnfang = szene?.id === 'welten';
+  // Die Schwelle gehört ihrer Reihe, nicht dem Haus.
+  //
+  // Bis zum 29.08.2026 stand hier `BAENDE` – alle Bände überhaupt. Das ging
+  // gut, solange es genau eine Reihe gab. Mit „Alles nur Zufall?“ ging es
+  // schief: ein Buch ohne Welt bekam ein Tor mit der Aufschrift „In die Welt
+  // von Band 1“, das nirgendwohin führte. Was hier steht, sind die Welten
+  // dieser Reihe. Ein Buch ohne Welt steht im Regal auf der Startseite –
+  // dort, wo es hingehört.
+  const dieseReihe = reiheZuBand(szene?.bandId) ?? LEITREIHE;
   const buecher = amAnfang
-    ? BAENDE.map((b) => b.buch)
+    ? dieseReihe.baende.filter(hatWelt).map((b) => b.buch)
     : BAENDE.map((b) => b.buch).filter((b) => b.id === szene?.bandId);
   const wartend = buecher.filter((b) => b.status === 'erschienen' && b.kaufwege.length === 0);
 
