@@ -3,6 +3,7 @@ import { OEFFENTLICHE_BUECHER, OEFFENTLICHE_REIHEN, oeffentlicheBaendeVon } from
 import { ORTE } from '@/data/gemeinsam/orte';
 import { sichtbareBeitraege } from '@/world/journal';
 import { STAND } from '@/data/gemeinsam/stand';
+import { QR_VEROEFFENTLICHT, QR_ZIELE, qrSchluessel } from '@/data/gemeinsam/qr';
 
 // Beim statischen Export muss die Route zur Bauzeit feststehen.
 export const dynamic = 'force-static';
@@ -29,6 +30,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASIS}/buch/${b.id}/`, changeFrequency: 'monthly' as const,
       priority: 0.9, lastModified: STAND,
     })),
+    // Die Nachschlage-Seiten zum Buch „Alles nur Zufall?“. Sie stehen erst
+    // drin, wenn das Buch erschienen ist — vorher wäre die Sitemap die
+    // Ankündigung.
+    ...(QR_VEROEFFENTLICHT
+      ? [
+          { url: `${BASIS}/q/`, changeFrequency: 'monthly' as const,
+            priority: 0.6, lastModified: STAND },
+          ...QR_ZIELE.map((z) => ({
+            url: `${BASIS}/q/${qrSchluessel(z.nr)}/`,
+            changeFrequency: 'yearly' as const, priority: 0.5,
+            lastModified: STAND,
+          })),
+        ]
+      : []),
     ...OEFFENTLICHE_REIHEN.flatMap((r) => [
       { url: `${BASIS}/${r.id}/`, changeFrequency: 'monthly' as const,
         priority: 0.9, lastModified: STAND },
