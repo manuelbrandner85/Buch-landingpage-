@@ -3,7 +3,7 @@ import type { Buch, Reihe } from '@/data/gemeinsam/typen';
 import { kanalAdressen } from '@/data/gemeinsam/kanaele';
 import {
   OEFFENTLICHE_REIHEN, REIHEN_MIT_WELT, TRENDONIX, bandzeile, hatWelt, WELT,
-  assetNach, oeffentlicheBaendeVon, reiheZuBand,
+  assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
 import { WEG_COCKPIT, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
@@ -69,12 +69,17 @@ function Buchkarte({ buch }: { buch: Buch }) {
   const cover = assetNach(buch.coverAsset);
   const reihe = reiheZuBand(buch.id);
   const band = WELT[buch.id];
+  // Wo bei einem Band „Die Unsichtbaren Fäden · Band 2“ steht, stünde bei
+  // einem Einzeltitel nichts – die Zeile fiele auf die Seitenzahl zusammen
+  // und sähe aus wie ein Fehler. „Einzelband“ ist keine Zählung, sondern
+  // eine Auskunft: Dieses Buch gehört zu keiner Reihe.
+  const zeile = istEinzeltitel(reihe) ? 'Einzelband' : bandzeile(buch);
   return (
     <article className="buchkarte">
       {cover && <Buch3D cover={cover} band={buch.id} />}
       <div className="text">
         <p className="band-nr">
-          {[bandzeile(buch), buch.seiten ? `${buch.seiten} Seiten` : '']
+          {[zeile, buch.seiten ? `${buch.seiten} Seiten` : '']
             .filter(Boolean).join(' · ')}
         </p>
         <h3><a href={wegBuch(buch.id)}>{buch.titel}</a></h3>
@@ -110,6 +115,15 @@ export default function Haus() {
   const buecher = OEFFENTLICHE_REIHEN
     .flatMap((r) => oeffentlicheBaendeVon(r))
     .map((b) => b.buch);
+  // Das Regal zeigt die Reihen. Darunter steht, was zu keiner gehört.
+  //
+  // Ein Einzeltitel mitten zwischen den Bänden einer Reihe sieht aus wie ein
+  // vierter Band, dem die Nummer abhandengekommen ist. Deshalb zwei
+  // Abschnitte statt einer Liste. Der zweite erscheint nur, wenn es etwas
+  // gibt, das hineingehört – solange nicht, ist die Startseite genau die,
+  // die sie vorher war.
+  const inReihen = buecher.filter((b) => !istEinzeltitel(reiheZuBand(b.id)));
+  const einzelbaende = buecher.filter((b) => istEinzeltitel(reiheZuBand(b.id)));
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -189,13 +203,30 @@ export default function Haus() {
         </div>
       </section>
 
-      <section className="buecherwand" id="buecher">
-        <div className="kopf">
-          <p className="eyebrow">Alle Bücher</p>
-          <h2>Im Regal von {TRENDONIX.name}</h2>
-        </div>
-        {buecher.map((b) => <Buchkarte key={b.id} buch={b} />)}
-      </section>
+      {inReihen.length > 0 && (
+        <section className="buecherwand" id="buecher">
+          <div className="kopf">
+            <p className="eyebrow">Alle Bücher</p>
+            <h2>Im Regal von {TRENDONIX.name}</h2>
+          </div>
+          {inReihen.map((b) => <Buchkarte key={b.id} buch={b} />)}
+        </section>
+      )}
+
+      {einzelbaende.length > 0 && (
+        <section className="buecherwand weitere" id="weitere-buecher">
+          <div className="kopf">
+            <p className="eyebrow">Weitere Bücher</p>
+            <h2>Einzeln, außerhalb der Reihen</h2>
+            <p>
+              Nicht jedes Buch gehört in eine Reihe. Diese hier stehen für
+              sich – dasselbe Haus, dieselbe Arbeitsweise, dieselbe Regel:
+              Behauptet wird nichts, was sich nicht prüfen lässt.
+            </p>
+          </div>
+          {einzelbaende.map((b) => <Buchkarte key={b.id} buch={b} />)}
+        </section>
+      )}
 
       {esGibtStimmen() && (
         <section className="leserstimmen" id="leserstimmen">

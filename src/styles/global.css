@@ -954,6 +954,15 @@ header .baender a.hier{color:var(--gold);border-color:var(--gold);opacity:1}
 
 /* ---------- Die Bücherwand ---------- */
 .buecherwand{background:linear-gradient(to bottom,var(--nacht),#080d1a)}
+/* Der zweite Abschnitt der Bücherwand: Einzelbände, die zu keiner Reihe
+   gehören. Er führt den Verlauf nach unten weiter, statt neu anzusetzen –
+   eine Haarlinie trennt, kein Farbsprung. */
+.buecherwand.weitere{background:linear-gradient(to bottom,#080d1a,var(--nacht));
+  border-top:1px solid rgba(227,200,139,.12);
+  padding-top:clamp(3.5rem,8vh,6rem)}
+.buecherwand.weitere > .kopf{margin-bottom:clamp(2.4rem,5vh,3.4rem)}
+.buecherwand.weitere > .kopf p{color:var(--staub);max-width:52ch;
+  margin:1rem auto 0;font-size:.95rem}
 .buchkarte{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr);
   gap:clamp(1.8rem,4vw,3.5rem);align-items:center;max-width:64rem;
   margin:0 auto clamp(3rem,7vh,5rem)}
