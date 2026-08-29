@@ -1,10 +1,6 @@
 {
-  "stand": "2026-08-29T22:04:17Z",
+  "stand": "2026-08-29T23:04:12Z",
   "warnungen": [
-    {
-      "stufe": "hoch",
-      "text": "Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor."
-    },
     {
       "stufe": "mittel",
       "text": "Seit 2 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -12,16 +8,8 @@
   ],
   "aenderungen": {
     "seit": "2026-08-28",
-    "punkte": [
-      {
-        "was": "Veröffentlichung",
-        "von": "erfolgreich",
-        "nach": "fehlgeschlagen",
-        "delta": null,
-        "richtung": "schlecht"
-      }
-    ],
-    "hinweis": null
+    "punkte": [],
+    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
@@ -1196,6 +1184,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-29T22:10:00Z",
+      "kanal": "Website",
+      "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
+    },
+    {
       "id": "deploy-2026-08-29-fehlgeschlagen",
       "zeit": "2026-08-29T22:04:17Z",
       "kanal": "Technik",
@@ -1261,14 +1254,15 @@
       "zeit": "2026-08-28T04:15:00Z",
       "kanal": "Technik",
       "text": "Die Datenschutzerklärung nannte GitHub Pages als Hoster. Seit dem Umzug auf die eigene Domain stimmt das nicht mehr: Ausgeliefert wird vom Webspace bei ALL-INKL, github.io ist nur noch der gesperrte Bau-Spiegel. Korrigiert, mit der Anschrift aus dem Impressum des Anbieters, nicht aus dem Gedächtnis."
-    },
-    {
-      "zeit": "2026-08-28T03:40:00Z",
-      "kanal": "Verteiler",
-      "text": "Der Verteiler hat jetzt ein Argument: Wer sich einträgt, bekommt den nächsten Band als Leseexemplar, bevor er erscheint. Ohne Bedingung — keine Bewertung als Gegenleistung. Das Anmeldefeld steht ab sofort auch auf der Buchseite, direkt hinter der Leseprobe. Die Datenschutzerklärung nennt endlich Brevo, Zweck, Doppelbestätigung und Widerruf; bisher stand dort nichts dazu, obwohl das Kästchen im Formular darauf verweist. Der Ablauf für Band 2 steht verbindlich in VERTRIEBSWEGE.md, Abschnitt 9."
     }
   ],
   "offen": [
+    {
+      "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
+    },
     {
       "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
       "wer": "Manuel",
@@ -1343,13 +1337,13 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-29T22:02:00Z",
-    "deploy": "fehlgeschlagen",
+    "stand": "2026-08-29T23:02:00Z",
+    "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-29T21:59:47Z",
+    "deployWann": "2026-08-29T22:22:55Z",
     "zertifikatTage": 85,
-    "linksGeprueft": 46,
+    "linksGeprueft": 50,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 89,
