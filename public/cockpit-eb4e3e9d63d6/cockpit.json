@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-29T08:03:31Z",
+  "stand": "2026-08-29T09:02:36Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -297,33 +297,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "01_neandertaler",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-22",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "01_neandertaler",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-22",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Journal",
           "zeit": null,
           "was": "was-ein-unsichtbarer-faden-ist",
@@ -496,6 +469,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Pinterest",
           "zeit": "11:00",
           "was": "08_aehre",
@@ -598,6 +580,15 @@
           "hinweis": null
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-22",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Instagram",
           "zeit": "11:00",
           "was": "08_aehre",
@@ -696,6 +687,15 @@
           "was": "15_website",
           "zustand": "offen",
           "hinweis": null
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-22",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1312,11 +1312,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-29T08:02:00Z",
+    "stand": "2026-08-29T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-29T07:04:23Z",
+    "deployWann": "2026-08-29T08:04:15Z",
     "zertifikatTage": 86,
     "linksGeprueft": 46,
     "linksKaputt": 0,
