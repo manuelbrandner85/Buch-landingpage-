@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-29T13:32:45Z",
+  "stand": "2026-08-29T14:03:28Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -272,20 +272,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "11_statuen",
@@ -540,6 +526,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-08-28",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "11_statuen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-29",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -726,6 +721,15 @@
           "was": "01_neandertaler",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "11_statuen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-29",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1308,11 +1312,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-29T13:02:00Z",
+    "stand": "2026-08-29T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-29T12:03:31Z",
+    "deployWann": "2026-08-29T13:38:43Z",
     "zertifikatTage": 86,
     "linksGeprueft": 46,
     "linksKaputt": 0,
