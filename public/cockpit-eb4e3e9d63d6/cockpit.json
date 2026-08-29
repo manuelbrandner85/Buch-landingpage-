@@ -1,6 +1,10 @@
 {
-  "stand": "2026-08-29T21:03:21Z",
+  "stand": "2026-08-29T22:04:17Z",
   "warnungen": [
+    {
+      "stufe": "hoch",
+      "text": "Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor."
+    },
     {
       "stufe": "mittel",
       "text": "Seit 2 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -8,8 +12,16 @@
   ],
   "aenderungen": {
     "seit": "2026-08-28",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Veröffentlichung",
+        "von": "erfolgreich",
+        "nach": "fehlgeschlagen",
+        "delta": null,
+        "richtung": "schlecht"
+      }
+    ],
+    "hinweis": null
   },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
@@ -263,33 +275,6 @@
     }
   },
   "termine": [
-    {
-      "d": "2026-08-29",
-      "wochentag": "Sa",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "11_statuen",
-          "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Journal",
-          "zeit": null,
-          "was": "was-ein-unsichtbarer-faden-ist",
-          "zustand": "terminiert",
-          "hinweis": null
-        }
-      ]
-    },
     {
       "d": "2026-08-30",
       "wochentag": "So",
@@ -635,6 +620,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "11_statuen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-29",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "TikTok LIVE",
           "zeit": "20:00",
           "was": null,
@@ -960,6 +954,40 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         }
       ]
+    },
+    {
+      "d": "2026-09-13",
+      "wochentag": "So",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
     }
   ],
   "bericht": null,
@@ -1168,6 +1196,12 @@
   ],
   "aktivitaet": [
     {
+      "id": "deploy-2026-08-29-fehlgeschlagen",
+      "zeit": "2026-08-29T22:04:17Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
+    },
+    {
       "zeit": "2026-08-29T13:30:00Z",
       "kanal": "TikTok",
       "text": "Live-Nacharbeit erledigt: beide veralteten „Bin gerade live“-Hinweis-Kommentare im Studio entfernt (Live endete 04:14). Kein Live-Clip zu privatisieren — der Upload war am 28.08. gescheitert. TikTok, YouTube (inkl. Community), Bluesky geprüft: nichts Offenes."
@@ -1232,12 +1266,6 @@
       "zeit": "2026-08-28T03:40:00Z",
       "kanal": "Verteiler",
       "text": "Der Verteiler hat jetzt ein Argument: Wer sich einträgt, bekommt den nächsten Band als Leseexemplar, bevor er erscheint. Ohne Bedingung — keine Bewertung als Gegenleistung. Das Anmeldefeld steht ab sofort auch auf der Buchseite, direkt hinter der Leseprobe. Die Datenschutzerklärung nennt endlich Brevo, Zweck, Doppelbestätigung und Widerruf; bisher stand dort nichts dazu, obwohl das Kästchen im Formular darauf verweist. Der Ablauf für Band 2 steht verbindlich in VERTRIEBSWEGE.md, Abschnitt 9."
-    },
-    {
-      "id": "deploy-2026-08-28-fehlgeschlagen",
-      "zeit": "2026-08-28T02:02:14Z",
-      "kanal": "Technik",
-      "text": "Das Cockpit meldete die Veröffentlichung als fehlgeschlagen. Sie war es nicht: GitHub zeigt einen abgebrochenen Lauf im Abzeichen als „failing“, und abgebrochen wird jeder Lauf, dem ein neuer Push zuvorkommt. Seit dem Umbau liest das Cockpit die Lauf-Liste statt des Bildes und kennt „abgebrochen“ als eigenen Zustand. Dieser Eintrag bleibt stehen, weil er passiert ist — nur richtiggestellt."
     }
   ],
   "offen": [
@@ -1315,11 +1343,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-29T21:02:00Z",
-    "deploy": "erfolgreich",
+    "stand": "2026-08-29T22:02:00Z",
+    "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-29T20:08:39Z",
+    "deployWann": "2026-08-29T21:59:47Z",
     "zertifikatTage": 85,
     "linksGeprueft": 46,
     "linksKaputt": 0,

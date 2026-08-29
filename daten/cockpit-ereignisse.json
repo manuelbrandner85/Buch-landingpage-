@@ -12,6 +12,12 @@
       "zeit": "2026-08-29T00:02:33Z",
       "kanal": "Website",
       "text": "Der Journalbeitrag „was-ein-unsichtbarer-faden-ist“ ist heute erschienen."
+    },
+    {
+      "id": "deploy-2026-08-29-fehlgeschlagen",
+      "zeit": "2026-08-29T22:04:17Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
     }
   ]
 }
