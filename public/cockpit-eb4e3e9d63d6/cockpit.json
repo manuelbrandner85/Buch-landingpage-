@@ -1,10 +1,6 @@
 {
-  "stand": "2026-08-29T13:02:38Z",
+  "stand": "2026-08-29T13:32:45Z",
   "warnungen": [
-    {
-      "stufe": "mittel",
-      "text": "TikTok-Studio-Upload hängt, solange die Live läuft — Live-Clip live_b nicht gepostet, bitte aus der App posten. Live läuft ohne Titel."
-    },
     {
       "stufe": "mittel",
       "text": "Seit 2 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -962,9 +958,15 @@
   "bericht": null,
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 3832,
-    "offenSumme": 3688,
+    "summe": 3844,
+    "offenSumme": 3700,
     "buchungen": [
+      {
+        "datum": "2026-08-29",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (13:08 UTC)",
+        "credits": 12
+      },
       {
         "datum": "2026-08-29",
         "projekt": "nicht zugeordnet",
@@ -1030,12 +1032,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung",
         "credits": 1680
-      },
-      {
-        "datum": "2026-08-25",
-        "projekt": "Buchwelt",
-        "zweck": "Zwoelf Motive Band 2 plus Tiefenkarten (Depth Anything V2)",
-        "credits": 144
       }
     ]
   },
@@ -1165,6 +1161,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-29T13:30:00Z",
+      "kanal": "TikTok",
+      "text": "Live-Nacharbeit erledigt: beide veralteten „Bin gerade live“-Hinweis-Kommentare im Studio entfernt (Live endete 04:14). Kein Live-Clip zu privatisieren — der Upload war am 28.08. gescheitert. TikTok, YouTube (inkl. Community), Bluesky geprüft: nichts Offenes."
+    },
+    {
       "id": "journal-was-ein-unsichtbarer-faden-ist",
       "zeit": "2026-08-29T00:02:33Z",
       "kanal": "Website",
@@ -1224,11 +1225,6 @@
       "zeit": "2026-08-28T03:40:00Z",
       "kanal": "Verteiler",
       "text": "Der Verteiler hat jetzt ein Argument: Wer sich einträgt, bekommt den nächsten Band als Leseexemplar, bevor er erscheint. Ohne Bedingung — keine Bewertung als Gegenleistung. Das Anmeldefeld steht ab sofort auch auf der Buchseite, direkt hinter der Leseprobe. Die Datenschutzerklärung nennt endlich Brevo, Zweck, Doppelbestätigung und Widerruf; bisher stand dort nichts dazu, obwohl das Kästchen im Formular darauf verweist. Der Ablauf für Band 2 steht verbindlich in VERTRIEBSWEGE.md, Abschnitt 9."
-    },
-    {
-      "zeit": "2026-08-28T02:55:00Z",
-      "kanal": "Technik",
-      "text": "Vier Journalbeiträge geschrieben und für den 1., 4., 7. und 10. September datiert — Feuer, die Belegstufen, die Pyramiden und die persische Königsstraße. Sie sind noch unsichtbar: Ein Beitrag mit Datum in der Zukunft erscheint erst an seinem Tag. Dazu kann das Journal seit heute nach innen verweisen; Regel 4 der Themenliste war bis dahin technisch nicht erfüllbar. Vorrat: 1 → 5."
     },
     {
       "id": "deploy-2026-08-28-fehlgeschlagen",
