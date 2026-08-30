@@ -140,7 +140,9 @@ const DOCK: App[] = [
 ];
 
 const klemmen = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const glaetten = (x: number) => x * x * (3 - 2 * x);
+/* Geklemmt, aus demselben Grund wie in FeedWelt.tsx: Die Kurve fällt jenseits
+   von 1 wieder ab, und dann schrumpft, was fertig aufgezogen sein sollte. */
+const glaetten = (x: number) => { const k = klemmen(x); return k * k * (3 - 2 * k); };
 
 /**
  * Hülle und Symbol sind zwei Elemente, und das hat einen Grund: Ein
@@ -197,9 +199,20 @@ export function Startbildschirm({ hell, tipp, oeffnet }: {
   const gedrueckt = tipp > 0 && oeffnet <= 0;
   const druck = glaetten(klemmen(tipp / 0.4));
 
+  /**
+   * Die Fläche ist bei neun Zehnteln schon ganz aufgezogen.
+   *
+   * Das letzte Zehntel gehört dem Verblassen. Vorher fielen beide Vorgänge
+   * zusammen: Die Fläche wuchs noch, während sie schon durchsichtig wurde —
+   * und in dem Spalt, der ringsum noch fehlte, sah man das laufende Video
+   * zwischen den Symbolen des Startbildschirms. Getrennt sieht es aus wie auf
+   * einem Telefon: erst deckt die App alles zu, dann gibt sie den Blick frei.
+   */
+  const AUFGEZOGEN = 0.9;
+
   const flaeche2 = (() => {
     if (oeffnet <= 0 || !kachel || !schirm) return null;
-    const e = glaetten(oeffnet);
+    const e = glaetten(klemmen(oeffnet / AUFGEZOGEN));
     return {
       left: `${(kachel.left - schirm.left) * (1 - e)}px`,
       top: `${(kachel.top - schirm.top) * (1 - e)}px`,
@@ -210,7 +223,7 @@ export function Startbildschirm({ hell, tipp, oeffnet }: {
   })();
 
   return (
-    <div className="fw-start" style={{ opacity: hell * (1 - klemmen((oeffnet - 0.86) / 0.14)) }}>
+    <div className="fw-start" style={{ opacity: hell }}>
       {/* Die Superellipse. Ein border-radius hat eine Stelle, an der die
           Krümmung springt; die Ecke eines Telefonsymbols hat das nicht. */}
       <svg className="fw-formen" aria-hidden="true" focusable="false">
@@ -219,6 +232,10 @@ export function Startbildschirm({ hell, tipp, oeffnet }: {
         </clipPath>
       </svg>
 
+      {/* Sobald die App den Schirm füllt, ist der Startbildschirm weg. Vorher
+          verblasste er langsam und man sah für einen Moment das Symbolgitter
+          über dem laufenden Video — das tut ein Telefon nie. */}
+      {oeffnet < AUFGEZOGEN && <>
       <div className="fw-statusleiste">
         <span>9:41</span>
         <span className="fw-statuszeichen" aria-hidden="true">
@@ -257,8 +274,28 @@ export function Startbildschirm({ hell, tipp, oeffnet }: {
       <div className="fw-dock" aria-hidden="true">
         {DOCK.map((app) => <Symbol key={app.name} app={app} />)}
       </div>
+      </>}
 
-      {flaeche2 && <div className="fw-appflaeche" style={flaeche2} />}
+      {/* Der Startbildschirm der App.
+          Ein echtes Telefon zeigt beim Öffnen erst das Zeichen der App und
+          dann ihren Inhalt. Genau das passiert hier: Die Fläche wächst aus der
+          Kachel, das Zeichen tritt darin hervor — und verblasst, sobald der
+          Feed dahinter läuft. */}
+      {flaeche2 && (
+        <div className="fw-appflaeche" style={{
+          ...flaeche2,
+          /* Deckt zu, bis sie ganz aufgezogen ist — dann erst verblasst sie
+             und der Feed, der dahinter längst läuft, steht da. */
+          opacity: 1 - klemmen((oeffnet - AUFGEZOGEN) / (1 - AUFGEZOGEN)),
+        }}>
+          {/* Kurz und früh: Das Zeichen steht da, sobald die Fläche über die
+              Kachel hinaus ist, hält, und ist weg, bevor die Fläche verblasst.
+              So macht es ein Telefon — Zeichen, dann Inhalt, ohne Pause. */}
+          <img className="fw-appstart"
+            src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt="" width={128} height={88}
+            style={{ opacity: klemmen((oeffnet - 0.12) / 0.22) * (1 - klemmen((oeffnet - 0.78) / 0.12)) }} />
+        </div>
+      )}
     </div>
   );
 }

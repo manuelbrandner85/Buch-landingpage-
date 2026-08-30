@@ -79,15 +79,34 @@ const ordnung: Feedkapitel[] = LESEORDNUNG
   .map((nr) => FEED.find((k) => k.nr === nr))
   .filter((k): k is Feedkapitel => Boolean(k));
 
-const glaetten = (x: number) => x * x * (3 - 2 * x);
 const klemmen = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+/**
+ * Weiche Kurve von 0 auf 1 — und ausdrücklich nur dort.
+ *
+ * `x²(3−2x)` fällt jenseits von 1 wieder ab. Genau das passierte am Ende der
+ * Fahrt: Der Anteil lief bis 1,09, die Kurve gab 0,97 zurück, und der
+ * Bildschirm blieb drei Pixel unter der Fensterhöhe stehen. Oben und unten
+ * stand ein schwarzer Streifen. Deshalb wird hier geklemmt, nicht an jeder
+ * Aufrufstelle einzeln.
+ */
+const glaetten = (x: number) => { const k = klemmen(x); return k * k * (3 - 2 * k); };
 
 export function FeedWelt() {
   const [t, setT] = useState(0);          // 0 = Gerät liegt da, 1 = Bildschirm ist alles
   const [index, setIndex] = useState(0);
   const [bewegung, setBewegung] = useState(true);
-  const [mass, setMass] = useState({ s: 1, b: 0, h: 0 });
+  const [mass, setMass] = useState({ s: 1, b: 0, h: 0, foto: 0 });
   const [schmal, setSchmal] = useState(false);
+  /**
+   * Die Scrollstrecke in Pixeln, nicht in `svh`.
+   *
+   * Auf dem Telefon ist `svh` die Höhe MIT eingeblendeter Adressleiste,
+   * `window.innerHeight` die aktuelle. Beide auseinanderzuhalten wäre in
+   * Ordnung — beide zu mischen ist es nicht: Die Seite war dann höher oder
+   * niedriger als die Rechnung, und die letzten Beiträge blieben unerreichbar
+   * oder der Schluss kam zu früh. Jetzt kommt beides aus derselben Zahl.
+   */
+  const [hoehe, setHoehe] = useState(0);
   /**
    * Wie oft jemand auf „Sieh selbst nach“ gedrückt hat.
    *
@@ -97,6 +116,48 @@ export function FeedWelt() {
    */
   const [nachgesehen, setNachgesehen] = useState(0);
   const rahmen = useRef(0);
+
+  /**
+   * Die Fenstermaße, absichtlich eingefroren.
+   *
+   * Das war der Grund für die verkehrte Wischrichtung auf dem Telefon. Beim
+   * Wischen nach vorn blendet sich die Adressleiste aus; `innerHeight` springt
+   * dabei um bis zu ein Sechstel nach oben. Wurde damit gerechnet, wuchs die
+   * Scrollstrecke genau in dem Moment, in dem man vorwärts wischte — und weil
+   * der Fortschritt Weg durch Strecke ist, wurde er dabei KLEINER. Die Kamera
+   * fuhr also zurück, während der Finger nach vorn ging. Genau so fühlt sich
+   * „falschherum“ an.
+   *
+   * Deshalb zählt hier nur eine echte Änderung: andere Breite, oder ein
+   * Höhensprung von mehr als einem Fünftel. Das ist Drehen oder ein neues
+   * Fenster — nicht die Adressleiste.
+   */
+  const sicht = useRef({ b: 0, h: 0 });
+
+  const messenSicht = useCallback(() => {
+    const vb = window.innerWidth;
+    const vh = window.innerHeight;
+    const alt = sicht.current;
+    if (alt.h !== 0 && alt.b === vb && Math.abs(vh - alt.h) <= alt.h * 0.2) return false;
+    sicht.current = { b: vb, h: vh };
+    return true;
+  }, []);
+
+  /**
+   * Die Welt fängt immer vorn an.
+   *
+   * Browser merken sich die Scrollhöhe und stellen sie beim Zurückkommen
+   * wieder her. Bei einer Seite, die 45 Bildschirme hoch ist, landet man
+   * dadurch irgendwo mittendrin — und wer mitten in einem Feed aufwacht, hält
+   * die Wischrichtung für verkehrt herum. Deshalb: Wiederherstellung aus, und
+   * einmal nach oben.
+   */
+  useEffect(() => {
+    const vorher = history.scrollRestoration;
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    return () => { history.scrollRestoration = vorher; };
+  }, []);
 
   useEffect(() => {
     const wenigerBewegung = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -115,8 +176,9 @@ export function FeedWelt() {
    * Foto und das Fenster gleichzeitig.
    */
   const messen = useCallback(() => {
-    const vb = window.innerWidth;
-    const vh = window.innerHeight;
+    const vb = sicht.current.b;
+    const vh = sicht.current.h;
+    if (!vb || !vh) return;
     const y = window.scrollY;
 
     const eintauchenHoehe = EINTAUCHEN * vh;
@@ -152,8 +214,9 @@ export function FeedWelt() {
         ? sNah
         : sNah + glaetten((fortschritt - HINEIN) / (DRIN - HINEIN)) * (sVoll - sNah);
 
-    setMass({ s, b: schirmB * s, h: schirmH * s });
+    setMass({ s, b: schirmB * s, h: schirmH * s, foto: fotoB });
     setSchmal(vb < 700);
+    setHoehe(vh * (EINTAUCHEN + (ordnung.length + 1) * JE_BEITRAG));
   }, []);
 
   useEffect(() => {
@@ -161,27 +224,40 @@ export function FeedWelt() {
       cancelAnimationFrame(rahmen.current);
       rahmen.current = requestAnimationFrame(messen);
     };
+    /* Nur bei einer echten Änderung neu rechnen — siehe `messenSicht`. */
+    const beiGroesse = () => { if (messenSicht()) beiScroll(); };
+    messenSicht();
     messen();
     window.addEventListener('scroll', beiScroll, { passive: true });
-    window.addEventListener('resize', beiScroll);
+    window.addEventListener('resize', beiGroesse);
+    window.addEventListener('orientationchange', beiGroesse);
     return () => {
       cancelAnimationFrame(rahmen.current);
       window.removeEventListener('scroll', beiScroll);
-      window.removeEventListener('resize', beiScroll);
+      window.removeEventListener('resize', beiGroesse);
+      window.removeEventListener('orientationchange', beiGroesse);
     };
-  }, [messen]);
+  }, [messen, messenSicht]);
 
+  /** Wie weit die App aufgezogen ist: 0 = noch Kachel, 1 = ganzer Schirm. */
+  const oeffnet = klemmen((t - OEFFNET) / (OFFEN - OEFFNET));
   const imFeed = t >= DRIN;
   const amEnde = index >= ordnung.length;
   const aktuell = ordnung[index];
   const gesamt = EINTAUCHEN * 100 + (ordnung.length + 1) * JE_BEITRAG * 100;
 
   return (
-    <div className="feedwelt" style={{ height: `${gesamt}svh` }}>
+    <div className="feedwelt"
+      style={{ height: hoehe > 0 ? `${hoehe}px` : `${gesamt}svh` }}>
       <div className="fw-buehne">
         {/* Das Gerät verschwindet nicht — es wird zu groß fürs Bild. */}
         <div className="fw-geraet" style={{
-          width: `min(100vw, ${(BILD.b / BILD.h) * 100}svh)`,
+          /* Dieselbe Zahl wie in `messen()`, nicht dieselbe Formel in CSS:
+             `svh` und `innerHeight` sind auf dem Telefon zwei verschiedene
+             Höhen. Das Foto wäre dann anders breit gewesen als die Rechnung,
+             mit der das Fenster darauf gesetzt wird — der Bildschirm hätte
+             neben seiner eigenen Scheibe gelegen. */
+          width: mass.foto ? `${mass.foto}px` : `min(100vw, ${(BILD.b / BILD.h) * 100}svh)`,
           transform: `translate(-${(SCHIRM.links + SCHIRM.rechts) / 2}%, `
             + `-${(SCHIRM.oben + SCHIRM.unten) / 2}%) scale(${mass.s})`,
           transformOrigin: `${(SCHIRM.links + SCHIRM.rechts) / 2}% ${(SCHIRM.oben + SCHIRM.unten) / 2}%`,
@@ -214,7 +290,15 @@ export function FeedWelt() {
               Der Feed erscheint erst, wenn die App ihn aufzieht. */}
           <div className="fw-band" style={{
             transform: `translate3d(0, ${-index * 100}%, 0)`,
-            opacity: t >= OEFFNET ? 1 : 0,
+            /* Erst wenn die App den Schirm fast ganz bedeckt.
+               Vorher lag der Feed schon hinter dem Startbildschirm, und
+               dessen Grund ist beinahe durchsichtig — man sah das laufende
+               Video zwischen den Symbolen durchscheinen. Ein Telefon zeigt
+               nie beides gleichzeitig. Jetzt blendet der Feed hinter der
+               undurchsichtigen App-Fläche ein, also unsichtbar; wenn sie
+               verblasst, steht er längst da. Laufen tut er ohnehin schon —
+               das hängt am Beitrag, nicht an dieser Deckkraft. */
+            opacity: oeffnet >= 0.9 ? 1 : 0,
           }}>
             {ordnung.map((k, i) => (
               <Beitrag key={k.nr} kapitel={k} nah={Math.abs(i - index) <= 2}
@@ -229,7 +313,7 @@ export function FeedWelt() {
             <Startbildschirm
               hell={klemmen((t - WACH) / 0.06)}
               tipp={klemmen((t - TIPP) / (OEFFNET - TIPP))}
-              oeffnet={klemmen((t - OEFFNET) / (OFFEN - OEFFNET))} />
+              oeffnet={oeffnet} />
           )}
 
           {/* Der Glasglanz.
@@ -297,14 +381,32 @@ function Beitrag({ kapitel, nah, spielt, schmal }: {
   useEffect(() => {
     const v = video.current;
     if (!v) return;
-    if (spielt) {
+    if (!spielt) {
+      v.pause();
+      try { v.currentTime = 0; } catch { /* dito */ }
+      return;
+    }
+    /**
+     * Abspielen, auch wenn es beim ersten Versuch nicht klappt.
+     *
+     * Auf dem Telefon schlägt `play()` fehl, solange das Video noch keine
+     * Daten hat — und dann bleibt das Standbild stehen, was aussieht wie ein
+     * kaputtes Video. Deshalb wird es beim nächsten `canplay` noch einmal
+     * versucht. `muted` und `playsInline` stehen am Element; ohne sie
+     * verweigert iOS das Abspielen ganz oder reißt es auf Vollbild.
+     */
+    const anwerfen = () => {
       try { v.currentTime = 0; } catch { /* noch nicht ladbar, egal */ }
       const p = v.play();
       if (p) p.catch(() => {});
-    } else {
-      v.pause();
-      try { v.currentTime = 0; } catch { /* dito */ }
-    }
+    };
+    anwerfen();
+    v.addEventListener('canplay', anwerfen, { once: true });
+    v.addEventListener('loadeddata', anwerfen, { once: true });
+    return () => {
+      v.removeEventListener('canplay', anwerfen);
+      v.removeEventListener('loadeddata', anwerfen);
+    };
   }, [spielt]);
 
   return (
@@ -316,8 +418,14 @@ function Beitrag({ kapitel, nah, spielt, schmal }: {
         /* Ein <source media="…"> wirkt bei <video> nicht: Der Browser nimmt
            die erste Quelle, die er abspielen kann, und das wäre auf jedem
            Telefon die große Datei gewesen. Deshalb wird die Fassung hier
-           ausgewählt und nicht dem Browser überlassen. */
-        <video ref={video} className="fw-clip" muted loop playsInline preload="metadata"
+           ausgewählt und nicht dem Browser überlassen.
+
+           `autoPlay` steht nur beim laufenden Beitrag: Die beiden Nachbarn
+           werden im Voraus geladen, sollen aber nicht mitlaufen — vier stumme
+           Videos im Hintergrund kosten auf dem Telefon Akku und Bandbreite
+           und bringen nichts, weil sie niemand sieht. */
+        <video ref={video} className="fw-clip" muted loop playsInline
+          autoPlay={spielt} preload={spielt ? 'auto' : 'metadata'}
           src={`${BASIS_PFAD}/assets/zufall/szenen/kap${nr}-motion${schmal ? '-klein' : ''}.mp4`}
           poster={`${BASIS_PFAD}/assets/zufall/szenen/kap${nr}-1000.webp`} />
       ) : (
