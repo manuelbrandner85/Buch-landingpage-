@@ -160,6 +160,10 @@ export default function Haus() {
             <Hausmarke breite={140} hoehe={94} zuerst />
             <span>{TRENDONIX.name}</span>
           </p>
+          {/* Die Zahl auch hier oben, unter dem Namen des Hauses.
+              Sie steht bewusst über der Überschrift und nicht daneben: als
+              Auskunft, wer sonst noch hier war — nicht als Schlagzeile. */}
+          <Besucherzahl stelle="kopf" />
           <h1>{TRENDONIX.versprechen}</h1>
           {leitreihe && (
             <div className="reihenschau">
