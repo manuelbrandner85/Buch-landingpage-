@@ -2242,3 +2242,24 @@ html:has(.feedwelt){scroll-snap-type:y proximity}
 @media (prefers-reduced-motion: reduce){
   .feedwelt .fw-zeile{animation:none}
 }
+
+/* Auswahl im Verteiler: was jemand bekommen möchte.
+   Ein fieldset ohne Rahmen – die Gruppe braucht eine Überschrift für
+   Screenreader, aber keine Kiste um sich herum. */
+.verteiler-wahl {
+  border: 0;
+  margin: 1.1rem 0 0.4rem;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.verteiler-wahl legend {
+  padding: 0;
+  margin-bottom: 0.55rem;
+}
+
+.verteiler-wahl .verteiler-haken strong {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}

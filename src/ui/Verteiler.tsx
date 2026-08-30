@@ -40,11 +40,35 @@ export function Verteiler() {
             placeholder="name@beispiel.de" />
         </label>
 
+        {/* Die Feldnamen stammen aus dem Brevo-Formular selbst (Einfaches HTML,
+            Stand 30.08.2026): `lists_25[]` mit 4 = Bucherscheinungen und
+            5 = Newsletter. Andere Namen wirft Brevo stillschweigend weg -
+            deshalb nicht raten, sondern dort nachsehen, wenn sich etwas
+            aendert. Bucherscheinung ist vorausgewaehlt, weil genau das die
+            Ueberschrift dieses Abschnitts verspricht; der Newsletter ist der
+            freiwillige Zusatz und bleibt leer. */}
+        <fieldset className="verteiler-wahl">
+          <legend className="verteiler-wort">Was möchten Sie bekommen?</legend>
+          <label className="verteiler-haken">
+            <input type="checkbox" name="lists_25[]" value="4" defaultChecked />
+            <span>
+              <strong>Bucherscheinungen</strong> – eine kurze Nachricht, wenn ein
+              Band erschienen ist. Höchstens eine je Band.
+            </span>
+          </label>
+          <label className="verteiler-haken">
+            <input type="checkbox" name="lists_25[]" value="5" />
+            <span>
+              <strong>Newsletter</strong> – etwa einmal im Monat, über die Arbeit
+              an den nächsten Bänden.
+            </span>
+          </label>
+        </fieldset>
+
         <label className="verteiler-haken">
           <input type="checkbox" name="OPT_IN" value="1" required />
           <span>
-            Ich möchte benachrichtigt werden, wenn ein neuer Band erscheint, und
-            vorher gefragt werden, ob ich ein Leseexemplar möchte. Die{' '}
+            Ich möchte die oben gewählten Nachrichten erhalten. Die{' '}
             <a href={`${wegImpressum()}#datenschutz`}>Datenschutzhinweise</a> habe ich gelesen.
           </span>
         </label>

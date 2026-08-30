@@ -10,16 +10,19 @@
  * Ein Anmeldefeld, das ins Leere läuft, ist schlimmer als keines: Wer sich
  * einträgt und nie etwas hört, kommt nicht wieder.
  *
- * **Was hier versprochen wird, ist eine Verpflichtung.** Seit dem 28.08.2026
- * steht hier, dass der nächste Band zuerst an diese Liste geht – als
- * Leseexemplar, vor dem Erscheinen. Wer das ändert, ändert ein Versprechen,
- * das Menschen mit ihrer Adresse bezahlt haben. Der Ablauf dazu steht in
- * `AUTOPILOT/VERTRIEBSWEGE.md`, Abschnitt 9.
+ * **Was hier versprochen wird, ist eine Verpflichtung.** Wer das ändert,
+ * ändert ein Versprechen, das Menschen mit ihrer Adresse bezahlt haben.
  *
- * Zwei Dinge stehen bewusst *nicht* dort: kein Titel und kein Datum des
- * nächsten Bandes (Hausregel 4 – angekündigt wird, was zu haben ist), und
- * keine Gegenleistung. Ein Leseexemplar gegen eine Bewertung wäre bei Amazon
- * ein Verstoß und hier eine Unehrlichkeit.
+ * Stand 30.08.2026 (Uwe): Es gibt **kein Leseexemplar** mehr. Eintragen kann
+ * man sich für zwei Dinge, einzeln wählbar:
+ *   1. Bucherscheinung – eine kurze Nachricht, wenn ein Band erschienen ist.
+ *   2. Newsletter – etwa monatlich, über die Arbeit an den nächsten Bänden.
+ * Die frühere Zusage „nächster Band zuerst als Leseexemplar" ist damit
+ * aufgehoben. Sie stand vom 28.08. bis 30.08.2026 auf der Seite; in dieser
+ * Zeit haben sich zwei Adressen eingetragen, beide dem Haus bekannt.
+ *
+ * Ein Titel oder Datum eines noch nicht erschienenen Bandes steht hier
+ * weiterhin bewusst *nicht* – Hausregel 4: angekündigt wird, was zu haben ist.
  */
 export type Verteiler = {
   /** Vollständige Adresse des gehosteten Formulars (POST-Ziel). Leer = aus. */
@@ -37,16 +40,16 @@ export type Verteiler = {
 export const VERTEILER: Verteiler = {
   formular:
     'https://fc625fea.sibforms.com/serve/MUIFAJpcYPlvHXtS_Kis1MiiXqABz4Yv_WejEh3rHJEYh6tsrWOFpmsq0qwpXXOUuKFFW8q8UiuviVfVJXm4kmPfYPbrutLPBl3EZKIiFduqeRRv998z8fKCvrrl4qGGjldgX82FwMVl5Dnof-s0D1mChU0jTTW_IR2WpYNSUu6NRj7t0yHS7ct4BceXYIhAxzXTjfK2CUTvHFORiw==',
-  titel: 'Den nächsten Band vor allen anderen lesen',
+  titel: 'Erfahren, wenn ein neues Buch da ist',
   text:
-    'Die Reihe wächst langsam. Ist der nächste Band fertig, geht er zuerst an '
-    + 'diese Liste – als Leseexemplar, bevor er erscheint. Wer keines möchte, '
-    + 'erfährt hier trotzdem als Erstes, dass es ihn gibt.',
+    'Die Reihe wächst langsam. Wer hier steht, erfährt es, sobald ein neuer '
+    + 'Band erschienen ist – und kann zusätzlich den Newsletter dazunehmen, '
+    + 'in dem steht, woran gerade gearbeitet wird.',
   knopf: 'Eintragen',
   versprechen:
-    'Höchstens eine Nachricht je Band, dazu die eine Frage, ob ein '
-    + 'Leseexemplar erwünscht ist. Daran hängt keine Bedingung – keine '
-    + 'Bewertung als Gegenleistung, keine Verpflichtung zu irgendetwas. Kein '
-    + 'Weiterverkauf der Adresse, keine Werbung Dritter. Abmelden geht mit '
-    + 'einem Klick in jeder Nachricht.',
+    'Zwei Dinge zur Auswahl: eine kurze Nachricht, wenn ein Buch erschienen '
+    + 'ist – höchstens eine je Band. Und der Newsletter, etwa einmal im Monat, '
+    + 'über die Arbeit an den nächsten Bänden. Beides einzeln an- und '
+    + 'abwählbar. Kein Weiterverkauf der Adresse, keine Werbung Dritter. '
+    + 'Abmelden geht mit einem Klick in jeder Nachricht.',
 };
