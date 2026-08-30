@@ -35,7 +35,26 @@ export const metadata: Metadata = {
   // Der Bau-Spiegel unter github.io hält sich aus den Suchergebnissen heraus.
   ...(process.env.NEXT_PUBLIC_SPIEGEL === '1'
     ? { robots: { index: false, follow: false } }
-    : {}),
+    : {
+      /**
+       * Der Nachweis, dass diese Domain uns gehört — für Pinterest.
+       *
+       * Ohne ihn ordnet Pinterest die Pins niemandem zu: kein Name und kein
+       * Logo am Pin, keine Rich Pins, keine Klickzahlen je Domain — und wer
+       * ein Bild von der Seite weiterpinnt, hängt seinen eigenen Link daran.
+       * Der Nachweis kostet nichts als diese eine Zeile.
+       *
+       * Es ist eine tote Zeichenkette, kein Skript: Sie lädt nichts nach,
+       * setzt kein Cookie und stellt keine Verbindung zu Pinterest her. Das
+       * ist der Unterschied zum „Pinterest-Tag", den der Business Hub
+       * daneben anbietet — der ist ein Besucherverfolger mit Cookie und
+       * kommt hier nicht auf die Seite.
+       *
+       * Nur auf der eigenen Domain. Ein Nachweis für trendonix-buecher.de
+       * hat auf github.io nichts zu suchen.
+       */
+      verification: { other: { 'p:domain_verify': 'f79d235806383d1a9cbeefd14f2082ef' } },
+    }),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
