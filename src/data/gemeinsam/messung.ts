@@ -33,3 +33,27 @@ export const messungLaeuft = (): boolean => GA4.length > 0;
 
 /** Der Schlüssel im lokalen Speicher. Drei Zustände: fehlt, 'ja', 'nein'. */
 export const ZUSTIMMUNG_SCHLUESSEL = 'trendonix-messung';
+
+/**
+ * Ein Ereignis melden — unter denselben drei Bedingungen wie alles andere.
+ *
+ * Keine Kennung, keine Zustimmung, kein geladenes `gtag`: dann passiert nichts,
+ * still und ohne Fehler. Diese Funktion prüft das selbst, damit keine
+ * aufrufende Stelle es vergessen kann. Sie wirft nie — eine Messung darf eine
+ * Seite nicht kaputtmachen.
+ *
+ * Gemeldet wird die Strecke, nicht die Person: welcher Punkt einer Welt
+ * erreicht wurde, nicht wer ihn erreicht hat. Namen, Adressen, Kennungen gehen
+ * hier nie hinein.
+ */
+export function melden(name: string, daten: Record<string, unknown> = {}): void {
+  if (!messungLaeuft() || typeof window === 'undefined') return;
+  try {
+    if (window.localStorage.getItem(ZUSTIMMUNG_SCHLUESSEL) !== 'ja') return;
+  } catch {
+    return; // Kein Zugriff auf den Speicher heißt: keine nachweisbare Zustimmung.
+  }
+  const w = window as unknown as { dataLayer?: unknown[] };
+  if (!w.dataLayer) return;
+  w.dataLayer.push(['event', name, daten]);
+}

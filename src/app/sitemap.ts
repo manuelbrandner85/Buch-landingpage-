@@ -55,6 +55,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${BASIS}/${r.id}/${b.buch.id}/`,
         changeFrequency: 'monthly' as const, priority: 0.9, lastModified: STAND,
       })),
+      // Die stille Fassung einer Feed-Welt. Sie steht hier, weil sie das
+      // Gegenteil der Welt ist: lesbar ohne Scrollen, also überhaupt
+      // erfassbar. Nur dort, wo es eine Feed-Szene gibt - ein Weg durch eine
+      // Landschaft hat keine Liste von Beiträgen.
+      ...begehbareBaendeVon(r)
+        .filter((b) => b.szenen.some((s) => s.typ === 'feed'))
+        .map((b) => ({
+          url: `${BASIS}/${r.id}/${b.buch.id}/liste/`,
+          changeFrequency: 'monthly' as const, priority: 0.7, lastModified: STAND,
+        })),
       ...begehbareBaendeVon(r).flatMap((b) => b.kapitel).map((k) => ({
         url: `${BASIS}/${r.id}/kapitel/${k.id}/`,
         changeFrequency: 'yearly' as const, priority: 0.8, lastModified: STAND,

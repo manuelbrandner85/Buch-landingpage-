@@ -4,8 +4,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Feedkapitel } from '@/data/gemeinsam/typen';
 import { FEED, LESEORDNUNG } from '@/data/zufall/feed';
 import { QR_VEROEFFENTLICHT, qrSchluessel, qrZielNach } from '@/data/gemeinsam/qr';
+import { VERTEILER } from '@/data/gemeinsam/verteiler';
+import { melden } from '@/data/gemeinsam/messung';
 import { BASIS_PFAD } from '@/world/bilder';
-import { weg, wegBuch } from '@/world/wege';
+import { weg, wegBuch, wegImpressum, wegWelt } from '@/world/wege';
 import { Hausmarke } from '@/ui/Hausmarke';
 import { Startbildschirm } from './Startbildschirm';
 
@@ -79,6 +81,43 @@ const ordnung: Feedkapitel[] = LESEORDNUNG
   .map((nr) => FEED.find((k) => k.nr === nr))
   .filter((k): k is Feedkapitel => Boolean(k));
 
+/**
+ * Nach wie vielen Beiträgen der Zwischenruf steht.
+ *
+ * Am Ende steht eine Zahl: wie oft jemand nachgesehen hat. Bei fast allen ist
+ * sie null, und das ist die Pointe. Nur kommt sie nach vierzig Bildschirmen so
+ * spät, dass sie eine Behauptung über den Leser ist statt einer Beobachtung an
+ * ihm. Zehn Beiträge sind früh genug, dass er sich noch erinnert, und spät
+ * genug, dass die Zahl schon etwas heißt. Danach läuft der Feed weiter — der
+ * Zwischenruf hält nicht auf, er stellt nur einmal fest.
+ */
+const ZWISCHENRUF_NACH = 10;
+
+/** Eine Stelle auf der Strecke: ein Beitrag, der Zwischenruf oder der Schluss. */
+type Stelle =
+  | { art: 'beitrag'; kapitel: Feedkapitel }
+  | { art: 'ruf' }
+  | { art: 'schluss' };
+
+/**
+ * Die Strecke als eine einzige Liste.
+ *
+ * Vorher war der Schluss ein Sonderfall hinter dem Ende der Beiträge, und der
+ * Zwischenruf hätte ein zweiter werden müssen. Als Liste ist beides dasselbe:
+ * ein Bildschirm, der drankommt, wenn er dran ist. Alles, was zählt — Höhe der
+ * Seite, laufender Index, Rastpunkte —, zählt diese Liste.
+ */
+const FOLGE: Stelle[] = [
+  ...ordnung.slice(0, ZWISCHENRUF_NACH).map((kapitel): Stelle => ({ art: 'beitrag', kapitel })),
+  { art: 'ruf' },
+  ...ordnung.slice(ZWISCHENRUF_NACH).map((kapitel): Stelle => ({ art: 'beitrag', kapitel })),
+  { art: 'schluss' },
+];
+
+/** Wie viele Beiträge bis hierher gezeigt wurden (der Zwischenruf zählt nicht mit). */
+const beitraegeBis = (index: number) =>
+  FOLGE.slice(0, index + 1).filter((s) => s.art === 'beitrag').length;
+
 const klemmen = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 /**
  * Weiche Kurve von 0 auf 1 — und ausdrücklich nur dort.
@@ -124,6 +163,17 @@ export function FeedWelt() {
    * sein, und genau davon handelt das Buch. Nichts davon verlässt das Gerät.
    */
   const [nachgesehen, setNachgesehen] = useState(0);
+  /**
+   * Welche Quelle gerade offen liegt — oder keine.
+   *
+   * „Sieh selbst nach“ führte bisher auf eine eigene Seite, und damit war der
+   * Aufenthalt zu Ende. Das ist die falsche Belohnung: Wer wissen will, ob
+   * etwas stimmt, soll nicht dafür bestraft werden, dass er nachsieht. Jetzt
+   * fährt die Quelle als Blatt über den Feed und wieder weg; man steht danach
+   * bei demselben Beitrag. Der Verweis bleibt trotzdem ein echter Link — ohne
+   * Skript führt er auf die Seite, die es weiterhin gibt.
+   */
+  const [quelle, setQuelle] = useState<Feedkapitel | null>(null);
   const rahmen = useRef(0);
 
   /**
@@ -156,7 +206,7 @@ export function FeedWelt() {
    * Die Welt fängt immer vorn an.
    *
    * Browser merken sich die Scrollhöhe und stellen sie beim Zurückkommen
-   * wieder her. Bei einer Seite, die 45 Bildschirme hoch ist, landet man
+   * wieder her. Bei einer Seite, die 46 Bildschirme hoch ist, landet man
    * dadurch irgendwo mittendrin — und wer mitten in einem Feed aufwacht, hält
    * die Wischrichtung für verkehrt herum. Deshalb: Wiederherstellung aus, und
    * einmal nach oben.
@@ -164,7 +214,15 @@ export function FeedWelt() {
   useEffect(() => {
     const vorher = history.scrollRestoration;
     history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
+    /* Es sei denn, der Link nennt ein Kapitel — dann ist „vorn“ dort, und der
+       Sprung weiter unten erledigt es. */
+    if (!/^#k\d{1,2}$/.test(window.location.hash)) {
+      /* Ausdrücklich `instant`: In der Seite steht
+         `html{scroll-behavior:smooth}`, und ohne diese Angabe würde der
+         Browser vom wiederhergestellten Stand aus nach oben *fahren* —
+         sichtbar, langsam, quer durch den halben Feed. */
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
     return () => { history.scrollRestoration = vorher; };
   }, []);
 
@@ -194,7 +252,7 @@ export function FeedWelt() {
     const fortschritt = klemmen(y / eintauchenHoehe);
     setT(fortschritt);
     const nachher = Math.max(0, y - eintauchenHoehe);
-    setIndex(klemmen(Math.round(nachher / (JE_BEITRAG * vh)), 0, ordnung.length));
+    setIndex(klemmen(Math.round(nachher / (JE_BEITRAG * vh)), 0, FOLGE.length - 1));
 
     // Das Foto liegt 3:4 im Bild und ist so groß, wie es ganz hineinpasst.
     const fotoB = Math.min(vb, vh * (BILD.b / BILD.h));
@@ -241,7 +299,7 @@ export function FeedWelt() {
     setMass({ s, b: schirmB * s, h: schirmH * s, foto: fotoB });
     setSchmal(vb < 700);
     setBreit(schirmB * sVoll < vb - 1);
-    setHoehe(vh * (EINTAUCHEN + (ordnung.length + 1) * JE_BEITRAG));
+    setHoehe(vh * (EINTAUCHEN + FOLGE.length * JE_BEITRAG));
   }, []);
 
   useEffect(() => {
@@ -264,21 +322,151 @@ export function FeedWelt() {
     };
   }, [messen, messenSicht]);
 
+  /**
+   * Ein Link, der bei einem bestimmten Beitrag aufmacht.
+   *
+   * `…/zufall/zufall/#k23` landet nicht am Anfang, sondern bei Kapitel 23.
+   * Das ist die Voraussetzung dafür, dass Teilen etwas taugt: Wer einen
+   * Beitrag weitergibt, gibt diesen Beitrag weiter und nicht die Adresse einer
+   * vierzig Bildschirme langen Seite. Der Sprung geschieht genau einmal und
+   * erst, wenn die Seite ihre Höhe kennt — vorher gäbe es nichts, wohin man
+   * springen könnte.
+   */
+  const gesprungen = useRef(false);
+  useEffect(() => {
+    if (gesprungen.current || hoehe <= 0) return;
+    gesprungen.current = true;
+    const treffer = /^#k(\d{1,2})$/.exec(window.location.hash);
+    if (!treffer) return;
+    const nr = Number(treffer[1]);
+    const stelle = FOLGE.findIndex((s) => s.art === 'beitrag' && s.kapitel.nr === nr);
+    if (stelle < 0) return;
+
+    /**
+     * Dreimal springen, und zwar mit Absicht.
+     *
+     * Der Router richtet nach dem Aufwachen die Scrollhöhe selbst ein: Findet
+     * er zu `#k34` kein Element mit dieser Kennung — und es gibt keines, die
+     * Beiträge sind Bildschirme, keine Anker —, setzt er die Seite nach oben.
+     * Das passiert nach dieser Wirkung, nicht davor, und ist von hier aus
+     * nicht abzustellen. Also wird nachgesetzt, solange die Seite noch ganz
+     * oben steht. Sobald jemand selbst gescrollt hat, hört es auf; niemandem
+     * wird die Seite unter der Hand weggezogen.
+     *
+     * `instant`, weil in der Seite `html{scroll-behavior:smooth}` steht: sonst
+     * führte der Browser die ganze Strecke sichtbar ab — über das Eintauchen
+     * und dreißig fremde Beiträge hinweg. Ein Link soll ankommen, nicht
+     * vorführen.
+     */
+    const ziel = (EINTAUCHEN + stelle) * sicht.current.h;
+    const springen = () => window.scrollTo({ top: ziel, behavior: 'instant' });
+    springen();
+    const uhren = [60, 220, 500].map((ms) => window.setTimeout(() => {
+      if (window.scrollY < sicht.current.h / 2) springen();
+    }, ms));
+    return () => uhren.forEach(window.clearTimeout);
+  }, [hoehe]);
+
+  /**
+   * Tasten für den Laptop.
+   *
+   * Am Telefon wischt man, am Rechner sitzt die Hand auf der Tastatur. Pfeil,
+   * Bild-auf/ab und die Leertaste springen deshalb um genau einen Bildschirm —
+   * so, wie das Rasten es beim Wischen tut. Escape schließt die Quelle.
+   * Eingabefelder bleiben unangetastet: Im Schluss steht eines.
+   */
+  useEffect(() => {
+    const zu = (e: KeyboardEvent) => {
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+      const ziel = e.target as HTMLElement | null;
+      if (ziel && (ziel.tagName === 'INPUT' || ziel.tagName === 'TEXTAREA'
+        || ziel.isContentEditable)) return;
+      if (quelle) {
+        if (e.key === 'Escape') { e.preventDefault(); setQuelle(null); }
+        return;
+      }
+      const vh = sicht.current.h;
+      if (!vh) return;
+      const runter = e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ';
+      const rauf = e.key === 'ArrowUp' || e.key === 'PageUp';
+      if (!runter && !rauf) return;
+      e.preventDefault();
+      const jetzt = Math.round(window.scrollY / vh);
+      const wohin = klemmen(jetzt + (runter ? 1 : -1), 0, EINTAUCHEN + FOLGE.length - 1);
+      window.scrollTo({ top: wohin * vh, behavior: bewegung ? 'smooth' : 'auto' });
+    };
+    window.addEventListener('keydown', zu);
+    return () => window.removeEventListener('keydown', zu);
+  }, [quelle, bewegung]);
+
+  /**
+   * Vier Marken auf der Strecke — mehr nicht.
+   *
+   * Die Frage, die diese Welt beantworten muss, ist nicht „wie viele waren
+   * da“, sondern „wie weit sind sie gekommen“. Vier Punkte genügen dafür, und
+   * jeder wird höchstens einmal gemeldet. Gemessen wird nur mit Zustimmung;
+   * darum kümmert sich `melden` selbst.
+   */
+  const gemeldet = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const stelle = FOLGE[index];
+    if (!stelle || t < DRIN) return;
+    const gesehen = beitraegeBis(index);
+    const marke = stelle.art === 'schluss' ? 'feed_schluss'
+      : gesehen >= 30 ? 'feed_dreissig'
+        : gesehen >= 20 ? 'feed_zwanzig'
+          : gesehen >= 10 ? 'feed_zehn'
+            : 'feed_erster';
+    if (gemeldet.current.has(marke)) return;
+    gemeldet.current.add(marke);
+    melden(marke, { welt: 'zufall', beitraege: gesehen });
+  }, [index, t]);
+
   /** Wie weit die App aufgezogen ist: 0 = noch Kachel, 1 = ganzer Schirm. */
   const oeffnet = klemmen((t - OEFFNET) / (OFFEN - OEFFNET));
   const imFeed = t >= DRIN;
-  const amEnde = index >= ordnung.length;
-  const aktuell = ordnung[index];
-  const gesamt = EINTAUCHEN * 100 + (ordnung.length + 1) * JE_BEITRAG * 100;
+  const stelle = FOLGE[index];
+  const aktuell = stelle?.art === 'beitrag' ? stelle.kapitel : undefined;
+  const gesamt = EINTAUCHEN * 100 + FOLGE.length * JE_BEITRAG * 100;
+  /** Ein Bildschirm in Pixeln — die Rastpunkte brauchen ihn. */
+  const schritt = hoehe > 0 ? hoehe / (EINTAUCHEN + FOLGE.length) : 0;
 
   return (
     <div className={breit ? 'feedwelt fw-breit' : 'feedwelt'}
       style={{ height: hoehe > 0 ? `${hoehe}px` : `${gesamt}svh` }}>
+      {/* Die Rastpunkte.
+          Ein Feed springt von Beitrag zu Beitrag; frei scrollen kann man auf
+          einer Textseite. Hier steht deshalb für jeden Bildschirm des Feeds
+          ein unsichtbares Kästchen, an dem der Browser einrastet — erst ab dem
+          Eintauchen, denn die Fahrt hinein soll fließen und nicht rucken.
+          `proximity` statt `mandatory`: Wer bewusst dazwischen stehen bleiben
+          will, darf das. */}
+      {schritt > 0 && (
+        <div className="fw-raster" aria-hidden="true"
+          style={{ top: `${EINTAUCHEN * schritt}px` }}>
+          {FOLGE.map((_, i) => <i key={i} style={{ height: `${schritt}px` }} />)}
+        </div>
+      )}
+
       {/* `--fw-scheibe` ist die Breite des Bildschirms in Pixeln. Die
           Oberfläche hängt sich daran, damit sie auf breiten Schirmen an der
           Scheibe klebt statt am Browserfenster. */}
       <div className="fw-buehne"
         style={{ '--fw-scheibe': mass.b ? `${mass.b}px` : '100%' } as React.CSSProperties}>
+        {/* Der Grund neben der Scheibe.
+            Auf einem Laptop steht der Feed als hochkante Fläche in der Mitte,
+            und daneben war schwarzes Nichts. So sieht ein solches Netz im
+            Browser nicht aus: Dort liegt das Bild selbst dahinter, weit
+            unscharf und abgedunkelt. Das Standbild genügt dafür — ein zweites
+            laufendes Video wäre doppelte Arbeit für etwas, das man ohnehin
+            nicht erkennen soll. */}
+        {breit && imFeed && aktuell && (
+          <div className="fw-grund" aria-hidden="true" style={{
+            backgroundImage: `url(${BASIS_PFAD}/assets/zufall/szenen/`
+              + `kap${String(aktuell.nr).padStart(2, '0')}-640.webp)`,
+          }} />
+        )}
+
         {/* Das Gerät verschwindet nicht — es wird zu groß fürs Bild. */}
         <div className="fw-geraet" style={{
           /* Dieselbe Zahl wie in `messen()`, nicht dieselbe Formel in CSS:
@@ -334,11 +522,17 @@ export function FeedWelt() {
                das hängt am Beitrag, nicht an dieser Deckkraft. */
             opacity: oeffnet >= 0.9 ? 1 : 0,
           }}>
-            {ordnung.map((k, i) => (
-              <Beitrag key={k.nr} kapitel={k} nah={Math.abs(i - index) <= 2}
-                spielt={bewegung && i === index} schmal={schmal} />
+            {FOLGE.map((s, i) => (
+              s.art === 'beitrag' ? (
+                <Beitrag key={`k${s.kapitel.nr}`} kapitel={s.kapitel}
+                  nah={Math.abs(i - index) <= 2}
+                  spielt={bewegung && i === index} schmal={schmal} />
+              ) : s.art === 'ruf' ? (
+                <Zwischenruf key="ruf" gesehen={ZWISCHENRUF_NACH} nachgesehen={nachgesehen} />
+              ) : (
+                <Schluss key="schluss" gesehen={ordnung.length} nachgesehen={nachgesehen} />
+              )
             ))}
-            <Schluss gesehen={ordnung.length} nachgesehen={nachgesehen} />
           </div>
 
           {/* Startbildschirm und App-Öffnung liegen im Fenster, nicht darüber:
@@ -364,11 +558,15 @@ export function FeedWelt() {
 
         {/* Die Oberfläche des laufenden Beitrags — und der Hinweis des Buches,
             sichtbar und nicht im Kleingedruckten. */}
-        {imFeed && !amEnde && aktuell && (
+        {imFeed && aktuell && (
           <Oberflaeche key={aktuell.nr} kapitel={aktuell}
-            beiNachsehen={() => setNachgesehen((n) => n + 1)} />
+            beiNachsehen={() => {
+              setNachgesehen((n) => n + 1);
+              melden('feed_nachgesehen', { kapitel: aktuell.nr });
+              setQuelle(aktuell);
+            }} />
         )}
-        {imFeed && !amEnde && (
+        {imFeed && aktuell && (
           <p className="fw-erfunden">Konten und Zahlen sind erfunden. Die Quellen nicht.</p>
         )}
 
@@ -388,13 +586,98 @@ export function FeedWelt() {
             <span aria-hidden="true">×</span> Raus hier
           </a>
         )}
-        {imFeed && !amEnde && (
+        {imFeed && aktuell && (
           <p className="fw-staerke" aria-hidden="true">
-            <span style={{ width: `${((index + 1) / ordnung.length) * 100}%` }} />
+            <span style={{ width: `${(beitraegeBis(index) / ordnung.length) * 100}%` }} />
           </p>
         )}
+
+        {/* Die Quelle, aufgeschlagen im Gerät. */}
+        {quelle && <Quellenblatt kapitel={quelle} beiZu={() => setQuelle(null)} />}
       </div>
     </div>
+  );
+}
+
+/**
+ * Die Quelle als Blatt über dem Feed.
+ *
+ * Dieselben Angaben wie auf /q/NN — dieselbe Datenquelle, nicht abgeschrieben.
+ * Was hier NICHT steht, ist das Kapitel: Die Seite sagt, wo man nachsieht,
+ * nicht was dabei herauskommt. Das steht im Buch.
+ *
+ * Die auswärtigen Verweise öffnen ein neues Fenster. Das ist hier keine
+ * Geschmacksfrage: Wer eine Behörde aufruft und dann zurückwill, soll nicht
+ * vierzig Bildschirme neu laden müssen.
+ */
+function Quellenblatt({ kapitel, beiZu }: { kapitel: Feedkapitel; beiZu: () => void }) {
+  const nr = qrSchluessel(kapitel.nr);
+  const ziel = qrZielNach(nr);
+  return (
+    <div className="fw-blatt" role="dialog" aria-modal="true"
+      aria-label={`Quelle zu Kapitel ${kapitel.nr}`}>
+      <div className="fw-blattinhalt">
+        <button type="button" className="fw-blattzu" onClick={beiZu}>
+          <span aria-hidden="true">×</span> Zurück in den Feed
+        </button>
+        <p className="eyebrow">Kapitel {kapitel.nr} · Buchseite {kapitel.seite}</p>
+        <h2>{ziel?.kapitel ?? kapitel.titel}</h2>
+        {ziel?.hinweis && <p className="fw-blatthinweis">{ziel.hinweis}</p>}
+
+        {ziel && ziel.quellen.length > 0 ? (
+          <ul className="fw-blattliste">
+            {ziel.quellen.map((q) => (
+              <li key={q.url}>
+                <a href={q.url} target="_blank" rel="noopener noreferrer">{q.anbieter}</a>
+                <span>{q.was}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="fw-blatthinweis">
+            Die Quelle zu diesem Kapitel wird eingetragen. Bis dahin gilt, was im
+            Buch steht: Der Weg führt über die Suche der jeweiligen Einrichtung,
+            nicht über eine Zusammenfassung.
+          </p>
+        )}
+
+        <p className="fw-blattfein">
+          Diese Adressen führen aus der Welt hinaus; für ihre Inhalte ist die
+          jeweilige Einrichtung verantwortlich. Was dort steht, ist die eine
+          Hälfte. Die andere — was daraus folgt — steht im Kapitel.
+        </p>
+        <p className="fw-blattfein">
+          <a href={weg(`/q/${nr}/`)}>Dieselbe Seite zum Behalten und Teilen</a>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Der Zwischenruf nach zehn Beiträgen.
+ *
+ * Er sieht aus wie ein Beitrag und ist keiner: kein Konto, keine Zahlen, kein
+ * Ton. Genau der Bruch ist die Absicht. Er behauptet nichts über den Leser,
+ * er zählt nur, was er selbst getan hat — und geht dann weg.
+ */
+function Zwischenruf({ gesehen, nachgesehen }: { gesehen: number; nachgesehen: number }) {
+  return (
+    <article className="fw-beitrag fw-ruf">
+      <div className="fw-rufinhalt">
+        <p className="eyebrow">Zwischendurch</p>
+        <p className="fw-rufzahl">
+          {gesehen} Behauptungen.
+          <br />
+          <span>Nachgesehen: {nachgesehen}.</span>
+        </p>
+        <p>
+          {nachgesehen === 0
+            ? 'Kein Vorwurf — nur die Zahl. Weiter geht es sowieso; genau das ist der Punkt.'
+            : 'Das sind mehr als bei den meisten. Weiter geht es trotzdem.'}
+        </p>
+      </div>
+    </article>
   );
 }
 
@@ -558,17 +841,62 @@ function Oberflaeche({ kapitel, beiNachsehen }: {
 
       <div className="fw-leiste">
         {QR_VEROEFFENTLICHT && ziel && (
-          <a className="fw-nachsehen" href={weg(`/q/${nr}/`)} onClick={beiNachsehen}>
+          /* Ein echter Link, kein Knopf: Ohne Skript führt er auf /q/NN, und
+             das ist die richtige Seite. Mit Skript bleibt man im Gerät. */
+          <a className="fw-nachsehen" href={weg(`/q/${nr}/`)}
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+              e.preventDefault();
+              beiNachsehen();
+            }}>
             <span className="fw-lupe" aria-hidden="true">⌕</span>
             Sieh selbst nach
           </a>
         )}
         <Zahl art="herz" wert={kapitel.zahlen[0]} was="Gefällt mir" />
         <Zahl art="rede" wert={kapitel.zahlen[1]} was="Kommentare" />
-        <Zahl art="teilen" wert={kapitel.zahlen[2]} was="geteilt" />
+        <Teilen kapitel={kapitel} wert={kapitel.zahlen[2]} />
         <span className="fw-marke"><Hausmarke breite={34} hoehe={23} /></span>
       </div>
     </div>
+  );
+}
+
+/**
+ * Teilen — der einzige Knopf im Feed, der wirklich etwas tut.
+ *
+ * Herz und Kommentarzahl sind Kulisse; sie stehen im Buch und stehen hier.
+ * Dieser hier gibt einen Link weiter, der bei genau diesem Beitrag aufmacht.
+ * Auf dem Telefon übernimmt das Gerät, am Rechner geht die Adresse in die
+ * Zwischenablage und der Knopf sagt es für zwei Sekunden.
+ */
+function Teilen({ kapitel, wert }: { kapitel: Feedkapitel; wert?: string }) {
+  const [kopiert, setKopiert] = useState(false);
+
+  const geben = async () => {
+    const adresse = `${window.location.origin}${window.location.pathname}#k${kapitel.nr}`;
+    melden('feed_teilen', { kapitel: kapitel.nr });
+    const daten = {
+      title: `Alles nur Zufall? — ${kapitel.titel}`,
+      text: kapitel.caption,
+      url: adresse,
+    };
+    try {
+      if (navigator.share) { await navigator.share(daten); return; }
+      await navigator.clipboard.writeText(adresse);
+      setKopiert(true);
+      window.setTimeout(() => setKopiert(false), 2000);
+    } catch {
+      /* Abgebrochen oder verboten — dann eben nicht. Kein Fehlerdialog. */
+    }
+  };
+
+  return (
+    <button type="button" className="fw-zahl fw-teilknopf" onClick={geben}>
+      <span className="fw-sinnbild fw-teilen" aria-hidden="true">↗</span>
+      <b>{kopiert ? 'kopiert' : wert ?? 'Teilen'}</b>
+      <i>{kopiert ? 'Link kopiert' : 'Diesen Beitrag teilen'}</i>
+    </button>
   );
 }
 
@@ -644,16 +972,68 @@ function Schluss({ gesehen, nachgesehen }: { gesehen: number; nachgesehen: numbe
           im Ausguck, weil ein Offizier den Schlüssel zum Schrank in der Tasche
           mitnahm.
         </p>
+
+        {/* Der Beleg, dass diese Welt keine Werbeidee ist.
+            Seite 9 steht im Buch, lange bevor es diese Seite gab, und nennt
+            genau die Reihenfolge, in der die vierzig Beiträge hier gelaufen
+            sind. Sie verrät von keinem Kapitel etwas — sie erklärt nur, warum
+            man sie so liest. Ein Satz darüber wäre eine Behauptung mehr; die
+            Seite selbst ist keine. */}
+        <figure className="fw-buchseite">
+          <img
+            src={`${BASIS_PFAD}/assets/zufall/buch/leseordnung-900.webp`}
+            srcSet={`${BASIS_PFAD}/assets/zufall/buch/leseordnung-900.webp 900w, `
+              + `${BASIS_PFAD}/assets/zufall/buch/leseordnung-1400.webp 1400w`}
+            sizes="(max-width: 700px) 62vw, 20rem"
+            width={900} height={1359} loading="lazy" decoding="async"
+            alt="Seite 9 des Buches: „Die zweite Leseordnung – Lies das Buch wie
+              einen Feed“, darunter die Reihenfolge 23 · 6 · 34 · 11 · 27 und so
+              weiter." />
+          <figcaption>
+            Seite 9. Diese Reihenfolge ist die, in der Sie gerade gelesen haben.
+          </figcaption>
+        </figure>
+
         <p className="fw-fein">
           456 Seiten · vierzig Kapitel · vierzig Quellen, die jeder öffnen kann
         </p>
 
+        {/* Der Verteiler steht hier und nicht zwei Klicks weiter.
+            Vorher führte der Knopf auf die Buchseite, zum Abschnitt
+            #verteiler. Nach vierzig Bildschirmen ist jeder weitere Klick einer
+            zu viel — wer jetzt nicht schreibt, schreibt nicht mehr. */}
+        {VERTEILER.formular && (
+          <form className="fw-verteiler" action={VERTEILER.formular} method="POST">
+            <p className="fw-verteilerwort">{VERTEILER.titel}</p>
+            <label>
+              <span className="nur-lesen">E-Mail-Adresse</span>
+              <input type="email" name="EMAIL" autoComplete="email" required
+                placeholder="name@beispiel.de" />
+            </label>
+            <label className="fw-haken">
+              <input type="checkbox" name="OPT_IN" value="1" required />
+              <span>
+                Bescheid geben, wenn es zu haben ist. Die{' '}
+                <a href={`${wegImpressum()}#datenschutz`}>Datenschutzhinweise</a>{' '}
+                habe ich gelesen.
+              </span>
+            </label>
+            {/* Fangfrage für Maschinen — für Menschen unsichtbar und leer. */}
+            <div className="verteiler-falle" aria-hidden="true">
+              <input type="text" name="email_address_check" defaultValue="" tabIndex={-1}
+                autoComplete="off" />
+            </div>
+            <input type="hidden" name="locale" value="de" />
+            <input type="hidden" name="html_type" value="simple" />
+            <button type="submit">{VERTEILER.knopf}</button>
+          </form>
+        )}
+
         <div className="fw-wege">
-          <a className="kaufen" href={`${wegBuch('zufall')}#verteiler`}>
-            Bescheid geben lassen
-            <small>wenn es zu haben ist</small>
-          </a>
           <a className="eintauchen" href={weg('/q/')}>Die vierzig Quellen — offen, kostenlos</a>
+          <a className="eintauchen" href={`${wegWelt('zufall', 'zufall')}liste/`}>
+            Alles zum Nachlesen, ohne Scrollen
+          </a>
           <a className="eintauchen" href={wegBuch('zufall')}>Zum Buch</a>
         </div>
 

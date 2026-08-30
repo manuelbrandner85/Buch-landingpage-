@@ -1890,6 +1890,156 @@ html:has(.feedwelt) body::-webkit-scrollbar{width:0;height:0;display:none}
 .feedwelt .fw-staerke span{display:block;height:100%;background:var(--gold);
   transition:width .5s ease}
 
+/* ---------- Die stille Fassung ----------
+
+   Kein Feed, sondern eine Liste. Sie darf nicht so tun, als wäre sie das
+   Erlebnis — sie ist das Nachschlagewerk dazu: Standbild links, Text rechts,
+   Platznummer davor, damit die Leseordnung sichtbar bleibt und nicht bloß
+   behauptet wird.                                                          */
+
+.feedliste-liste{list-style:none;margin:2.5rem 0 3rem;padding:0;
+  display:flex;flex-direction:column;gap:1.9rem}
+.feedliste-liste li{display:grid;gap:.55rem 1.1rem;
+  grid-template-columns:auto minmax(0,7rem) minmax(0,1fr);align-items:start;
+  padding-bottom:1.9rem;border-bottom:1px solid rgba(241,236,224,.1)}
+.feedliste-liste li:last-child{border-bottom:0}
+.feedliste-platz{font-family:var(--display),serif;font-size:.8rem;
+  letter-spacing:.1em;color:rgba(156,148,130,.7);padding-top:.2em;
+  font-variant-numeric:tabular-nums}
+/* Ebene 0 plus Hairline: Das Bild liegt in der Zeile, nicht darüber. Zwei
+   Höhen ineinander ergäben Matsch — siehe `auflage`. */
+.feedliste-bild{display:block;width:100%;height:auto;border-radius:4px;
+  box-shadow:0 0 0 1px rgba(241,236,224,.14)}
+.feedliste-text h2{font-family:var(--display),serif;font-size:1.05rem;
+  line-height:1.25;margin:0 0 .25em}
+.feedliste-text h2 a{color:var(--papier);text-decoration:none}
+.feedliste-text h2 a:hover{color:var(--gold)}
+.feedliste-unterzeile{margin:0 0 .5em;font-size:.86rem;line-height:1.45;
+  color:var(--staub);font-style:italic}
+.feedliste-konto{margin:0 0 .3em;font-weight:700;font-size:.84rem;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:rgba(241,236,224,.9)}
+.feedliste-wort{margin:0 0 .45em;font-size:.9rem;line-height:1.55;color:var(--staub);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.feedliste-marken{margin:0 0 .5em;font-size:.8rem;color:rgba(227,200,139,.75);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.feedliste-marken span{margin-right:.5em}
+.feedliste-fein{margin:0;font-size:.76rem;line-height:1.5;
+  color:rgba(156,148,130,.85)}
+.feedliste-fein a{color:var(--gold)}
+
+@media (max-width:640px){
+  .feedliste-liste li{grid-template-columns:auto minmax(0,1fr)}
+  /* Auf schmalen Fenstern rutscht das Bild über den Text, sonst bliebe für
+     beides zu wenig übrig. Die Platznummer bleibt in ihrer Spalte. */
+  .feedliste-bild{grid-column:2;max-width:11rem}
+  .feedliste-text{grid-column:2}
+}
+
+/* ---------- Rasten, Grund, Blatt, Zwischenruf ---------- */
+
+/* Die Rastpunkte liegen unsichtbar in der Seite und tun nichts, außer dem
+   Browser zu sagen, wo ein Bildschirm anfängt. `proximity`: Es rastet, wenn
+   man ohnehin in der Nähe zum Stehen kommt — es reißt einem nichts aus der
+   Hand. Wer die Bewegung abgestellt hat, bekommt gar kein Rasten. */
+html:has(.feedwelt){scroll-snap-type:y proximity}
+@media (prefers-reduced-motion:reduce){html:has(.feedwelt){scroll-snap-type:none}}
+.feedwelt .fw-raster{position:absolute;left:0;right:0;bottom:0;pointer-events:none}
+.feedwelt .fw-raster i{display:block;scroll-snap-align:start}
+
+/* Der Grund neben der Scheibe auf breiten Fenstern. Er soll nicht erkennbar
+   sein, nur da — deshalb weit unscharf, stark abgedunkelt und eine Spur über
+   den Rand gezogen, damit die Unschärfe nicht am Fensterrand ausfranst. */
+.feedwelt .fw-grund{position:absolute;inset:-6%;z-index:0;
+  background-size:cover;background-position:center;
+  filter:blur(54px) saturate(1.15) brightness(.34);
+  transform:scale(1.08);transition:background-image .4s ease}
+
+/* Das Quellenblatt.
+   Es liegt über allem, auch über dem Ausgang: Solange es offen ist, ist es
+   das Einzige, was zählt. Auf dem Telefon füllt es den Schirm, auf breiten
+   Fenstern steht es als Blatt in der Mitte — dieselbe Breite wie die Scheibe,
+   damit es aus dem Gerät zu kommen scheint und nicht aus dem Browser. */
+.feedwelt .fw-blatt{position:absolute;inset:0;z-index:9;
+  display:grid;place-items:center;padding:1rem;
+  background:rgba(4,7,14,.82);backdrop-filter:blur(10px);
+  animation:fwblatt .28s cubic-bezier(.16,1,.3,1) both}
+@keyframes fwblatt{from{opacity:0}to{opacity:1}}
+.feedwelt .fw-blattinhalt{width:min(100%,var(--fw-scheibe,100%));max-width:34rem;
+  max-height:100%;overflow-y:auto;padding:1.4rem 1.3rem 1.6rem;
+  border-radius:14px;
+  /* Dark Mode: Die Höhe kommt aus der aufgehellten Fläche und der Lichtkante
+     oben, nicht aus einem Schatten — auf Schwarz trägt Schatten nicht. */
+  background:linear-gradient(180deg,#141b2e,#0a0e1a);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 24px 60px rgba(0,0,0,.55)}
+.feedwelt .fw-blattzu{display:inline-flex;align-items:center;gap:.45em;
+  margin:0 0 1.1rem;padding:.45em .85em;border-radius:2em;cursor:pointer;
+  background:rgba(255,255,255,.06);border:1px solid rgba(241,236,224,.28);
+  color:var(--papier);font-family:var(--display),serif;font-size:.72rem;
+  letter-spacing:.13em}
+.feedwelt .fw-blattzu:hover{border-color:var(--gold);color:var(--gold)}
+.feedwelt .fw-blattinhalt h2{font-family:var(--display),serif;color:var(--papier);
+  font-size:clamp(1.15rem,4.4vw,1.5rem);line-height:1.2;margin:.2em 0 .5em}
+.feedwelt .fw-blatthinweis{color:var(--staub);font-size:.92rem;line-height:1.55;
+  margin:0 0 1.1em}
+.feedwelt .fw-blattliste{list-style:none;margin:0 0 1.2em;padding:0;
+  display:flex;flex-direction:column;gap:.9em}
+.feedwelt .fw-blattliste li{display:flex;flex-direction:column;gap:.2em;
+  padding-left:.9em;border-left:2px solid rgba(227,200,139,.4)}
+.feedwelt .fw-blattliste a{color:var(--gold);font-weight:600;text-decoration:none}
+.feedwelt .fw-blattliste a:hover{text-decoration:underline}
+.feedwelt .fw-blattliste span{color:var(--staub);font-size:.86rem;line-height:1.5}
+.feedwelt .fw-blattfein{margin:0 0 .7em;font-size:.76rem;line-height:1.55;
+  color:rgba(156,148,130,.9)}
+.feedwelt .fw-blattfein a{color:var(--staub)}
+
+/* Der Zwischenruf: ein Bildschirm ohne Bild. Nach zehn lauten ist die Stille
+   selbst das Argument — dieselbe Regel wie beim Schluss. */
+.feedwelt .fw-beitrag.fw-ruf{display:grid;place-items:center;
+  background:radial-gradient(120% 90% at 50% 0%,#141b2e,#05070d 72%);
+  padding:2rem 1.6rem;text-align:center}
+.feedwelt .fw-rufinhalt{max-width:26rem}
+.feedwelt .fw-rufzahl{font-family:var(--display),serif;color:var(--papier);
+  font-size:clamp(1.5rem,7vw,2.2rem);line-height:1.2;margin:.3em 0 .9em}
+.feedwelt .fw-rufzahl span{color:var(--gold)}
+.feedwelt .fw-rufinhalt p{color:var(--staub);font-size:.95rem;line-height:1.6;margin:0}
+
+/* Teilen sieht aus wie die anderen Zahlen, ist aber ein Knopf. */
+.feedwelt .fw-teilknopf{background:none;border:0;padding:0;cursor:pointer;
+  color:inherit;font:inherit;pointer-events:auto}
+.feedwelt .fw-teilknopf:hover .fw-sinnbild{color:var(--gold)}
+
+/* Die Buchseite im Schluss. Ein Foto einer hellen Seite auf dunklem Grund
+   braucht keine Aufhellung, sondern eine Kante: sonst schwebt das Weiß. */
+.feedwelt .fw-buchseite{margin:.4rem auto 1.4rem;max-width:20rem;text-align:center}
+.feedwelt .fw-buchseite img{display:block;width:100%;height:auto;border-radius:3px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.12),0 2px 4px rgba(0,0,0,.5),
+    0 18px 44px rgba(0,0,0,.45)}
+.feedwelt .fw-buchseite figcaption{margin-top:.7em;font-family:var(--display),serif;
+  font-size:.76rem;letter-spacing:.06em;color:rgba(156,148,130,.95)}
+
+/* Das Eintragefeld im Schluss — schmal, ruhig, kein zweiter Marktschreier. */
+.feedwelt .fw-verteiler{display:flex;flex-direction:column;gap:.7rem;
+  max-width:24rem;margin:0 auto 1.4rem;text-align:left}
+.feedwelt .fw-verteilerwort{margin:0;font-family:var(--display),serif;
+  color:var(--papier);font-size:1rem;text-align:center}
+.feedwelt .fw-verteiler input[type=email]{width:100%;padding:.7em .9em;
+  border-radius:6px;border:1px solid rgba(241,236,224,.32);
+  background:rgba(255,255,255,.05);color:var(--papier);font:inherit;font-size:.95rem}
+.feedwelt .fw-verteiler input[type=email]:focus{outline:2px solid var(--gold);
+  outline-offset:1px;border-color:var(--gold)}
+.feedwelt .fw-haken{display:flex;gap:.6em;align-items:flex-start;
+  font-size:.78rem;line-height:1.5;color:var(--staub)}
+.feedwelt .fw-haken input{margin-top:.2em;flex:0 0 auto;accent-color:var(--gold)}
+.feedwelt .fw-haken a{color:var(--staub)}
+.feedwelt .fw-verteiler button{padding:.75em 1.2em;border-radius:6px;cursor:pointer;
+  border:1px solid var(--gold);background:var(--gold);color:#0a0e1a;
+  font-family:var(--display),serif;font-size:.82rem;letter-spacing:.12em;
+  transition:box-shadow .24s cubic-bezier(.16,1,.3,1),transform .24s cubic-bezier(.16,1,.3,1)}
+.feedwelt .fw-verteiler button:hover{transform:translateY(-2px);
+  box-shadow:0 2px 4px rgba(74,58,16,.5),0 10px 24px rgba(74,58,16,.35)}
+.feedwelt .fw-verteiler button:active{transform:scale(.98)}
+
 /* Der Schluss redet wieder wie das Haus: Garamond, Gold, ruhig. Nach vierzig
    lauten Bildschirmen ist die Stille selbst das Argument. */
 /* Spalte mit `margin-block:auto` statt zentriertem Gitter: So steht der

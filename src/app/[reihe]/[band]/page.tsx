@@ -97,6 +97,19 @@ export default async function BandWelt(
         {b.buch.titel}
         {bandzeile(b.buch) ? ` – ${bandzeile(b.buch)}` : ''}: die begehbare Welt
       </h1>
+      {/* Der Weg zur stillen Fassung.
+          Eine Feed-Welt besteht aus Bildschirmen, die erst beim Wischen
+          entstehen; im ausgelieferten HTML steht davon nichts. Ohne diesen
+          Verweis wäre die Liste nur über die Sitemap zu finden — und ein
+          Vorleseprogramm käme gar nicht auf sie. Er steht nicht im Bild, aber
+          er steht da, und das ist der Unterschied. */}
+      {b.szenen.some((s) => s.typ === 'feed') && (
+        <p className="nur-lesen">
+          <a href={`${wegWelt(r.id, b.buch.id)}liste/`}>
+            Alle vierzig Beiträge zum Nachlesen, ohne Bewegung
+          </a>
+        </p>
+      )}
       <SceneEngine szenen={szenen} reihe={r.id} band={b.buch.id} />
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
