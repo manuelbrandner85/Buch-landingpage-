@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T08:03:54Z",
+  "stand": "2026-08-30T09:03:41Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -334,33 +334,6 @@
           "was": "09_muenze",
           "zustand": "offen",
           "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "03_kochen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-23",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "02_beleggrad",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-25",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-27",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -603,6 +576,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-08-27",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -712,6 +694,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-22",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-25",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -789,6 +780,15 @@
           "was": "03_kochen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "03_kochen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-23",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Journal",
@@ -1383,11 +1383,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T08:02:00Z",
+    "stand": "2026-08-30T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T07:04:24Z",
+    "deployWann": "2026-08-30T08:05:03Z",
     "zertifikatTage": 85,
     "linksGeprueft": 52,
     "linksKaputt": 0,
