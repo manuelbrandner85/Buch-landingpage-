@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T02:04:13Z",
+  "stand": "2026-08-30T03:04:00Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1224,6 +1224,16 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-30T03:10:00Z",
+      "kanal": "Website",
+      "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
+    },
+    {
+      "zeit": "2026-08-30T02:05:00Z",
+      "kanal": "Website",
+      "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
+    },
+    {
       "zeit": "2026-08-30T01:10:00Z",
       "kanal": "Website",
       "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
@@ -1284,16 +1294,6 @@
       "zeit": "2026-08-28T06:00:00Z",
       "kanal": "Verteiler",
       "text": "Im Brevo-Konto nachgezählt statt geschätzt: zwei bestätigte Kontakte, beide angemeldet, keiner blockiert — und einer davon die eigene Testadresse. Es steht also genau ein Leser auf der Liste, und es ist Daggi, mit der auf TikTok noch eine unbeantwortete Nachricht offen ist. Die vier Einreichungen von gestern heißen im Umkehrschluss: Zwei Menschen haben die Bestätigungsmail nicht angeklickt."
-    },
-    {
-      "zeit": "2026-08-28T05:05:00Z",
-      "kanal": "Verteiler",
-      "text": "Die Anmeldekette ist zum ersten Mal ganz durchgelaufen: Formular → Brevo → Bestätigungsmail. Sie kam im Posteingang an, nicht im Spam — die Domain-Authentifizierung trägt also bis zum Empfänger. Damit ist nicht nur die Technik eingerichtet, sondern der Weg geprüft, den ein Leser wirklich geht, einschließlich des neuen Anmeldefelds auf der Buchseite."
-    },
-    {
-      "zeit": "2026-08-28T04:20:00Z",
-      "kanal": "Verteiler",
-      "text": "Die erste Verteiler-Mail ist entworfen und liegt in AUTOPILOT/VERTEILER_MAIL_01.md — Betreff, Text, Pflichtangaben und eine Prüfliste vor dem Absenden. Verschickt ist nichts; das bleibt Manuels Klick. Anlass ist ehrlich: Die zwei Kontakte haben sich unter dem alten Versprechen eingetragen und sollen vom neuen erfahren, bevor es zufällig auffällt."
     }
   ],
   "offen": [
@@ -1304,10 +1304,10 @@
       "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
     },
     {
-      "titel": "Feed-Welt auf dem Telefon gegenprüfen",
+      "titel": "Feed-Welt einmal selbst durchgehen",
       "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Die Welt ist am Rechner gebaut und dort geprüft. Sie ist aber für ein Telefon gedacht, und dort ist alles anders: Die Bühne bemisst sich an der Fensterbreite, die Clips werden in der kleinen Fassung geladen, und der Kommentarstrom hat weniger Platz. Einmal durchscrollen auf dem eigenen Gerät, vom Eintauchen bis zum Schluss."
+      "stufe": "klein",
+      "warum": "Gemessen ist sie bei 375x812 und 1440x820: 46 Bildschirme, ganzes Geraet beim Heranfahren sichtbar, Symbolgitter weg bevor der Feed erscheint, Bildschirm deckt am Ende genau, keine Scrollleiste, Video startet von selbst und das vorige springt auf null. Was eine Messung nicht ersetzt: wie es sich unter dem Daumen anfuehlt, ob der Zwischenruf nach zehn Beitraegen an der richtigen Stelle sitzt und ob das Quellenblatt eher haelt oder eher unterbricht. Einmal durchscrollen auf dem eigenen Geraet, vom Eintauchen bis zum Schluss."
     },
     {
       "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
@@ -1383,11 +1383,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T02:02:00Z",
+    "stand": "2026-08-30T03:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": false,
-    "deployWann": "2026-08-30T02:01:41Z",
+    "deployLaeuft": true,
+    "deployWann": null,
     "zertifikatTage": 85,
     "linksGeprueft": 52,
     "linksKaputt": 0,
