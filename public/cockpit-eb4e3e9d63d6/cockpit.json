@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T20:02:41Z",
+  "stand": "2026-08-30T21:03:26Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-29",
@@ -1495,11 +1495,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T20:02:00Z",
+    "stand": "2026-08-30T21:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T19:03:36Z",
+    "deployWann": "2026-08-30T20:03:44Z",
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
