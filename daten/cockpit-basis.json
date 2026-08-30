@@ -173,10 +173,10 @@
       "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
     },
     {
-      "titel": "Feed-Welt auf dem Telefon gegenprüfen",
+      "titel": "Feed-Welt einmal selbst durchgehen",
       "wer": "Manuel",
       "stufe": "klein",
-      "warum": "Am Rechner und in zwei Fenstergroessen nachgemessen (375x812 und 1280x800): Seitenhoehe stimmt, das ganze Geraet ist beim Heranfahren sichtbar, das Symbolgitter ist weg, bevor der Feed erscheint, der Bildschirm deckt am Ende genau, keine Scrollleiste, und das laufende Video startet von selbst, waehrend das vorige auf null zurueckspringt. Was eine Messung nicht ersetzt: wie es sich unter dem Daumen anfuehlt. Einmal durchscrollen auf dem eigenen Geraet, vom Eintauchen bis zum Schluss."
+      "warum": "Gemessen ist sie bei 375x812 und 1440x820: 46 Bildschirme, ganzes Geraet beim Heranfahren sichtbar, Symbolgitter weg bevor der Feed erscheint, Bildschirm deckt am Ende genau, keine Scrollleiste, Video startet von selbst und das vorige springt auf null. Was eine Messung nicht ersetzt: wie es sich unter dem Daumen anfuehlt, ob der Zwischenruf nach zehn Beitraegen an der richtigen Stelle sitzt und ob das Quellenblatt eher haelt oder eher unterbricht. Einmal durchscrollen auf dem eigenen Geraet, vom Eintauchen bis zum Schluss."
     },
     {
       "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
@@ -252,6 +252,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-30T03:10:00Z",
+      "kanal": "Website",
+      "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
+    },
     {
       "zeit": "2026-08-30T02:05:00Z",
       "kanal": "Website",
