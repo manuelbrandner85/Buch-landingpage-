@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T14:03:35Z",
+  "stand": "2026-08-30T15:03:32Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1254,6 +1254,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-30T14:10:00Z",
+      "kanal": "Kanäle",
+      "text": "Alle sechs Kanaele auf www.trendonix-buecher.de geprueft. TikTok, YouTube und Bluesky waren richtig. Pinterest stand auf http statt https - umgestellt, und die Domain wird gerade verifiziert (Nachweis liegt als Meta-Zeile im Kopf jeder Seite). Facebook zeigte nur auf Amazon; die Website steht jetzt als zweiter Link daneben, der Kaufweg blieb. Instagram zeigt weiter auf Amazon - Meta laesst Links nur in der App aendern, das muss Manuel selbst tun. Der Groessenvergleich: TikTok hat 21.600 Follower, alle uebrigen Kanaele zusammen 1.047 (Instagram 1.041, Facebook 6, Pinterest 0, Bluesky 0 bei einem Beitrag). Neu angelegt: die geplante Aufgabe \"Trendonix Mittagsplatz\" - ein Kurzvideo um 12:20 auf YouTube und TikTok, zuerst mit kie.ai (Guthaben 490,5 Punkte), sonst mit vorhandenem Material, immer mit deutschen Untertiteln. Sie wartet auf Manuels Freigabe. Der Pinterest-Tag wurde ausdruecklich NICHT installiert - er ist ein Cookie-Verfolger und wuerde den Einwilligungsbanner zurueckbringen."
+    },
+    {
       "id": "deploy-2026-08-30-fehlgeschlagen",
       "zeit": "2026-08-30T10:06:03Z",
       "kanal": "Technik",
@@ -1320,14 +1325,21 @@
       "zeit": "2026-08-28T13:37:00Z",
       "kanal": "TikTok",
       "text": "Live-Nacharbeit vom 26.08. abgeschlossen: die zwei „Bin gerade live“-Hinweiskommentare unter den jüngsten Videos entfernt."
-    },
-    {
-      "zeit": "2026-08-28T13:31:00Z",
-      "kanal": "TikTok",
-      "text": "Postfach: Dagmars „Bewertung ist drin jetzt!“ mit kurzem Dank beantwortet — sie ist zugleich die erste echte Verteiler-Anmeldung (in Brevo bestätigt)."
     }
   ],
   "offen": [
+    {
+      "titel": "Doppelter Ordner \"Die unsichtbare Faeden\" mit kaputtem Namen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "Neben dem richtigen Ordner liegt ein zweiter, dessen Name statt des Umlauts zwei falsche Zeichen enthaelt - entstanden, weil ein Werkzeug mit der falschen Zeichenkodierung geschrieben hat. Darin steht nur Landingpage\\_zufall-quelle\\zufall-innen.txt. Nicht gefaehrlich, aber verwirrend: Wer ihn oeffnet, sieht ein fast leeres Projekt und haelt es fuer das echte. Inhalt sichern, dann loeschen."
+    },
+    {
+      "titel": "Der Ordner AUTOPILOT ist auf dem Rechner nicht vorhanden",
+      "wer": "Manuel",
+      "stufe": "hoch",
+      "warum": "Am 30.08.2026 nachgesehen: Unter C:\\Users\\manue gibt es fuenf Ebenen tief keinen Ordner AUTOPILOT. Der \"Trendonix Rundlauf\" laeuft aber 17-mal am Tag und liest in fast jedem Schritt daraus - KANAELE.md, SUCHE.md, KOMMENTARE.md, STANDARD.md, LIVE.md, PINS_TEXTE.md, ZAHLEN.md, LOG.md, live-clips/, BEFUND/, REGISTRIERUNG/ZUGAENGE.env. Jeder dieser Lesebefehle laeuft ins Leere, ohne Fehlermeldung. Das erklaert, warum Pinterest-Pins liegen bleiben und ZAHLEN.md nicht gefuellt wird. Der bisherige Punkt \"Ordner AUTOPILOT freigeben\" traf es nicht: Es ist keine Frage der Freigabe, der Ordner ist auf diesem Rechner nicht da. Entweder liegt er auf einem anderen Geraet, oder er ist verlorengegangen. Solange das nicht geklaert ist, arbeitet der Rundlauf ohne sein Regelwerk."
+    },
     {
       "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
       "wer": "Manuel",
@@ -1357,12 +1369,6 @@
       "wer": "Manuel",
       "stufe": "mittel",
       "warum": "Zwölf verkaufte E-Books müssten bei 12,99 € und 35 % rund 51 € bringen; im August stehen 10,81 €, vollständig aus dem einen Druckexemplar. Das passt nur bei Gratis-Downloads, Rückgaben oder einer nachlaufenden Abrechnung zusammen. KDP → Berichte → Verkaufs- und Umsatzbericht, Spalte „Kostenlose Einheiten“. Im Fall Gratis-Aktion sind zwölf Leser unterwegs, von denen keiner eine Seite gelesen hat (KENP 0)."
-    },
-    {
-      "titel": "Ordner AUTOPILOT für den Rundlauf freigeben",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Die geplante Aufgabe kennt nur den Ordner „Landingpage\". Alles, was in AUTOPILOT liegt — Regelwerke, ZAHLEN.md, plan.json, die Protokolle — ist für sie nicht vorhanden, und jeder Lesebefehl darauf läuft still ins Leere."
     },
     {
       "titel": "Konto bei buechertreff.de anlegen",
@@ -1414,11 +1420,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T14:02:00Z",
+    "stand": "2026-08-30T15:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T13:59:49Z",
+    "deployWann": "2026-08-30T14:15:39Z",
     "zertifikatTage": 85,
     "linksGeprueft": 53,
     "linksKaputt": 0,
