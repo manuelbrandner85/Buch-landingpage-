@@ -867,20 +867,10 @@ main{z-index:3}
 .hausinhalt > h1{max-width:19ch;text-wrap:balance;
   font-size:clamp(2.2rem,4.8vw,3.8rem)}
 
-/* Der Besucherzähler im Empfang.
-   Er steht zwischen dem Namen des Hauses und der Überschrift, in derselben
-   Schrift und mit ähnlichem Sperrsatz wie die Zeile darüber — leiser als sie,
-   damit er die Überschrift nicht zerteilt. `min-height` hält die Zeile schon
-   frei, bevor die Zahl da ist: Sonst springt die ganze Überschrift beim
-   Nachladen um zwölf Pixel nach unten, und das sieht man auf einem Bild, das
-   den ganzen Schirm füllt, sofort. Auf schmalen Geräten fällt er weg — dort
-   zählt jede Zeile über der Überschrift doppelt. */
-.hausinhalt > .hauszaehler{min-height:1.3em;margin:-.5rem 0 1.2rem;
-  font-family:var(--display),serif;font-size:.72rem;letter-spacing:.16em;
-  color:var(--staub)}
-.hausinhalt > .hauszaehler b{color:var(--gold);font-weight:600;
-  font-variant-numeric:tabular-nums;letter-spacing:.1em}
-@media (max-width:640px){ .hausinhalt > .hauszaehler{display:none} }
+/* Der Besucherzähler im Empfang ist am 30.08.2026 entfallen.
+   Er stand zwischen dem Namen des Hauses und der Überschrift und war damit
+   das Zweite, was jemand las. Die Zahl selbst ist geblieben: In der Fußzeile
+   steht sie weiter, unter `footer #zaehler`. */
 
 /* Die Reihe im Empfang: die Bände nebeneinander, keiner davor.
    Vorher stand hier ein einzelnes Buch mit seinem Kaufweg – das bewarb einen

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, EB_Garamond } from 'next/font/google';
 import '@/styles/global.css';
 import { TRENDONIX } from '@/data/gemeinsam/haus';
+import { weg, wegVorschau } from '@/world/wege';
 import { Zaehler } from '@/ui/Zaehler';
 import { Zustimmung } from '@/ui/Zustimmung';
 
@@ -29,6 +30,28 @@ export const metadata: Metadata = {
   },
   description: TRENDONIX.kurzfassung,
   applicationName: TRENDONIX.name,
+  /**
+   * Ein Vorschaubild für jede Seite, die keines mitbringt.
+   *
+   * Bis zum 30.08.2026 hatten dreizehn von zweihundertzwanzig Seiten eines.
+   * Alle anderen — Kapitel, Orte, Begriffe, Über, Impressum — wurden beim
+   * Teilen als graues Rechteck mit Adresszeile angezeigt. Ein Link ohne Bild
+   * wird auf jeder Plattform seltener angeklickt als einer mit; das ist kein
+   * Geschmack, sondern die Fläche, die er im Verlauf einnimmt.
+   *
+   * Was hier steht, gilt als Rückfallweg: Next ersetzt den ganzen Block,
+   * sobald eine Seite ihren eigenen `openGraph` setzt. Kapitel- und Ortsseiten
+   * tun das mit ihrem eigenen Motiv — der Rest erbt das Haus.
+   */
+  openGraph: {
+    type: 'website',
+    siteName: TRENDONIX.name,
+    locale: 'de_DE',
+    images: wegVorschau('haus'),
+  },
+  // Ohne diese Zeile zeigt X den Link als schmale Zeile mit Daumennagel statt
+  // als Bild. Es kostet nichts und gilt für jede Seite.
+  twitter: { card: 'summary_large_image' },
   ...(process.env.NEXT_PUBLIC_BASIS_URL
     ? { metadataBase: new URL(process.env.NEXT_PUBLIC_BASIS_URL) }
     : {}),
@@ -60,6 +83,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${display.variable} ${body.variable}`}>
+      <head>
+        {/*
+          Der Feed des Journals – die einzige Stelle, an der er auffindbar ist.
+
+          Ein Atom-Feed steht nicht im Text, er steht im Kopf: Leseprogramme,
+          Sammeldienste und ein Teil der Automatisierungen suchen genau diese
+          Zeile und finden sonst nichts. Sie gehört bewusst nicht in die
+          Metadaten-Schnittstelle: Dort läge sie unter `alternates`, und jede
+          Seite, die dort ihre kanonische Adresse einträgt, würde sie wieder
+          löschen. Hier steht sie auf jeder der zweihundertzwanzig Seiten.
+        */}
+        <link rel="alternate" type="application/atom+xml"
+          title={`${TRENDONIX.name} – Journal`} href={weg('/feed.xml')} />
+      </head>
       <body>{children}<Zaehler /><Zustimmung /></body>
     </html>
   );

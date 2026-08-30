@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ORTE, ortNach } from '@/data/gemeinsam/orte';
 import { WELT, kapitelNach, reiheNach, REIHEN_MIT_KAPITELN } from '@/world/registry';
 import {
-  wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegVollstaendig,
+  wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegVollstaendig, wegVorschau,
 } from '@/world/wege';
 import { brotkrumen, ort as ortDatenblatt } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
@@ -50,6 +50,14 @@ export async function generateMetadata(
     title: `${o.name} – ${anriss(o.text)}`,
     description: o.text,
     alternates: { canonical: wegVollstaendig(wegOrt(r.id, o.id)) ?? wegOrt(r.id, o.id) },
+    // Ein Ort gehört keinem Band, sondern der Welt – geteilt wird deshalb das
+    // Motiv der Welt und nicht das Cover eines beliebigen Bandes.
+    openGraph: {
+      type: 'article',
+      title: `${o.name} – ${anriss(o.text)}`,
+      description: o.text,
+      images: wegVorschau(`welt-${r.id}`),
+    },
   };
 }
 

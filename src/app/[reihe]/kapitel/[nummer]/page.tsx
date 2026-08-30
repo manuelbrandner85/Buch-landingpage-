@@ -4,7 +4,9 @@ import {
   HAUS, WELT, oeffentlicheBaendeVon, reiheNach, REIHEN_MIT_WELT, begehbareBaendeVon,
 } from '@/world/registry';
 import { ORTE } from '@/data/gemeinsam/orte';
-import { wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegUeber, wegVollstaendig } from '@/world/wege';
+import {
+  wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegUeber, wegVollstaendig, wegVorschau,
+} from '@/world/wege';
 import { aufsatz, brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
@@ -40,6 +42,15 @@ export async function generateMetadata(
       description: k.unterzeile,
       alternates: {
         canonical: wegVollstaendig(wegKapitel(r.id, k.id)) ?? wegKapitel(r.id, k.id),
+      },
+      // Geteilt wird der Band, zu dem das Kapitel gehört. Ein eigenes Motiv je
+      // Kapitel wäre schöner, aber es gibt keines im Format 1200×630 – und ein
+      // falsch beschnittenes Bild ist schlechter als das richtige Cover.
+      openGraph: {
+        type: 'article',
+        title: `Kapitel ${k.id}: ${k.titel}`,
+        description: k.unterzeile,
+        images: wegVorschau(k.bandId),
       },
     }
     : {};

@@ -160,10 +160,17 @@ export default function Haus() {
             <Hausmarke breite={140} hoehe={94} zuerst />
             <span>{TRENDONIX.name}</span>
           </p>
-          {/* Die Zahl auch hier oben, unter dem Namen des Hauses.
-              Sie steht bewusst über der Überschrift und nicht daneben: als
-              Auskunft, wer sonst noch hier war — nicht als Schlagzeile. */}
-          <Besucherzahl stelle="kopf" />
+          {/* Hier stand bis zum 30.08.2026 die Besucherzahl — zwischen dem
+              Namen des Hauses und der Überschrift.
+
+              Sie war damit das Zweite, was ein Besucher liest, noch vor dem
+              Satz, um dessentwillen die Seite existiert. Bei 53 Besuchen sagt
+              die Zahl über das Haus nichts, was für den Leser gilt; sie sagt
+              nur, dass hier wenig los ist. Eine Auskunft, die niemand verlangt
+              hat, und die an dieser Stelle gegen die Seite arbeitet.
+
+              In der Fußzeile steht sie weiter. Dort ist sie das, was sie sein
+              soll: eine Angabe für den, der nachsieht. */}
           <h1>{TRENDONIX.versprechen}</h1>
           {leitreihe && (
             <div className="reihenschau">

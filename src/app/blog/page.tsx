@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { TRENDONIX } from '@/world/registry';
 import { sichtbareBeitraege } from '@/world/journal';
-import { wegBeitrag, wegHaus, wegJournal, wegVollstaendig, wegVorschau } from '@/world/wege';
+import { weg, wegBeitrag, wegHaus, wegJournal, wegVollstaendig, wegVorschau } from '@/world/wege';
 import { brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Rueckweg } from '@/ui/Rueckweg';
@@ -56,6 +56,15 @@ export default function JournalSeite() {
           </article>
         ))
       )}
+
+      {/* Der Feed steht im Kopf jeder Seite, aber im Kopf sieht ihn nur ein
+          Programm. Wer ihn selbst abonnieren will, braucht die Adresse dort,
+          wo die Beiträge stehen. */}
+      <p className="quelle">
+        <b>Abonnieren</b>
+        Die Beiträge gibt es auch als{' '}
+        <a href={weg('/feed.xml')}>Atom-Feed</a> – ohne Anmeldung, ohne Konto.
+      </p>
 
       <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
       <Kanaele />
