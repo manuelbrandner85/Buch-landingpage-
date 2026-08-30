@@ -1,10 +1,6 @@
 {
-  "stand": "2026-08-30T12:03:10Z",
+  "stand": "2026-08-30T13:04:46Z",
   "warnungen": [
-    {
-      "stufe": "hoch",
-      "text": "Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor."
-    },
     {
       "stufe": "mittel",
       "text": "Seit 3 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -12,16 +8,8 @@
   ],
   "aenderungen": {
     "seit": "2026-08-29",
-    "punkte": [
-      {
-        "was": "Veröffentlichung",
-        "von": "erfolgreich",
-        "nach": "fehlgeschlagen",
-        "delta": null,
-        "richtung": "schlecht"
-      }
-    ],
-    "hinweis": null
+    "punkte": [],
+    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
@@ -1396,13 +1384,13 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T12:02:00Z",
-    "deploy": "fehlgeschlagen",
+    "stand": "2026-08-30T13:02:00Z",
+    "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": null,
+    "deployWann": "2026-08-30T12:55:55Z",
     "zertifikatTage": 85,
-    "linksGeprueft": 52,
+    "linksGeprueft": 53,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 89,
