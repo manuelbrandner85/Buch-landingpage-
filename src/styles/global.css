@@ -989,6 +989,17 @@ footer a{color:var(--gold);text-decoration:underline;text-underline-offset:3px;
   text-decoration-color:rgba(227,200,139,.5)}
 footer a:hover{text-decoration-color:var(--gold)}
 
+/* Der Besucherzähler.
+   Die Zahl in der Hausfarbe, der Rest im Grau der Fußzeile — sie ist eine
+   Auskunft, keine Schlagzeile. `tabular-nums`, damit sie beim Hochzählen nicht
+   in der Breite zappelt, und `margin-top:.5rem` statt der vollen 1,1 der
+   übrigen Feinschrift: Sie gehört zur Zeile darüber, nicht zum nächsten Block.
+   Steht keine Zahl da — kein PHP, keine Antwort —, verschwindet der Absatz
+   ganz, statt eine leere Zeile in die Fußleiste zu setzen. */
+footer #zaehler{margin-top:.5rem;letter-spacing:.02em}
+footer #zaehler:empty{display:none}
+footer #zaehler b{color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+
 /* ---------- Die Buchseite ---------- */
 .buchseite .buchkopf{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr);
   gap:clamp(1.8rem,4vw,3rem);align-items:start;margin:2.5rem 0}

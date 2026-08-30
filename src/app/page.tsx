@@ -14,6 +14,7 @@ import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Verteiler } from '@/ui/Verteiler';
 import { Hausmarke } from '@/ui/Hausmarke';
+import { Besucherzahl } from '@/ui/Besucherzahl';
 import { Unterschrift } from '@/ui/Unterschrift';
 import { Sternzeile, Stimmenwand } from '@/ui/Stimmen';
 import { esGibtStimmen } from '@/data/gemeinsam/stimmen';
@@ -283,6 +284,10 @@ export default function Haus() {
           wurden eigens für die Bände erzeugt und tragen dieselbe Herkunftsangabe
           wie im Buch.
         </span>
+        {/* Die Zahl steht ganz unten, wo sonst das Copyright steht: eine
+            Auskunft, keine Werbung. Gezählt wird auf dem eigenen Server —
+            siehe public/z.php. */}
+        <Besucherzahl />
         <Kanaele />
         <Partner />
       </footer>

@@ -358,6 +358,11 @@ jobs:
           # Ordner stuende offen, und niemand haette es gemerkt.
           BEWAHREN="-X .well-known/ -X cgi-bin/ -X logs/ -X stats/ -X error_docs/ -X .ftpquota -X _altlasten*/"
           BEWAHREN="$BEWAHREN -X .htpasswd -X cockpit-*/.htaccess -X cockpit-*/.htpasswd"
+          # besuche.csv entsteht auf dem Server, nicht im Bau. Ohne diese
+          # Ausnahme loescht der Abgleich sie bei jeder Veroeffentlichung, und
+          # der Besucherzaehler faengt jedes Mal wieder bei null an. Das ist
+          # keine Kleinigkeit: Es waere still passiert, mit gruenem Haken.
+          BEWAHREN="$BEWAHREN -X besuche.csv"
           if [ "${FTP_LOESCHEN:-}" = "nein" ]; then
             LOESCHEN=""
             echo "Aufräumen ist abgeschaltet (Variable FTP_LOESCHEN=nein)."
@@ -384,8 +389,11 @@ jobs:
           #
           # Deshalb gehen Seiten und Textdateien noch einmal, ohne Vergleich.
           # Das sind ein paar hundert kleine Dateien, keine Minute.
+          # *.php steht mit in der Liste: Aendert sich am Zaehlskript nur eine
+          # Zeile gleicher Laenge, uebersieht der Groessenvergleich oben es
+          # genauso wie bei einer HTML-Datei.
           lftp_tun "mirror -R --parallel=4 --no-perms --transfer-all \
-            -I *.html -I *.xml -I *.txt -I .htaccess out/ \"$ZIEL\";"
+            -I *.html -I *.xml -I *.txt -I *.php -I .htaccess out/ \"$ZIEL\";"
           echo "Seiten erneuert"
 
           # Die Sonden wieder einsammeln – auch aus den Verzeichnissen, die

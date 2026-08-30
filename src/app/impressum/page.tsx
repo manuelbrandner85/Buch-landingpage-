@@ -116,11 +116,18 @@ export default function ImpressumSeite() {
         )}
         {zaehlt ? (
           <p>
-            Zur Reichweitenmessung wird gezählt, wie oft eine Seite aufgerufen wird.
-            Der Zähler setzt keinen Cookie, vergibt keine wiedererkennbare Kennung und
-            speichert keine IP-Adresse; gezählt wird der Aufruf, nicht die Person. Ein
-            Personenbezug entsteht dabei nicht. Rechtsgrundlage für die Reichweiten­messung
-            ist Art. 6 Abs. 1 lit. f DSGVO.
+            <b>Der Besucherzähler.</b> Zur Reichweitenmessung wird gezählt, wie oft
+            eine Seite aufgerufen wird. Der Zähler läuft auf demselben Server wie
+            diese Seite; es ist kein fremder Dienst eingebunden und es werden keine
+            Daten an Dritte übermittelt. Gespeichert werden je Aufruf vier Angaben:
+            Datum, Stunde, die Domain, von der der Aufruf kam, und ob es ein Handy
+            oder ein Rechner war. Der Zähler setzt <b>keinen Cookie</b>, liest nichts
+            vom Gerät aus, vergibt keine wiedererkennbare Kennung und speichert
+            <b> keine IP-Adresse</b>; gezählt wird der Aufruf, nicht die Person. Ein
+            Personenbezug entsteht dabei nicht, auch nicht durch Zusammenführung
+            mehrerer Einträge. Weil nichts auf dem Endgerät gespeichert oder
+            ausgelesen wird, ist keine Einwilligung nach § 25 TDDDG erforderlich;
+            Rechtsgrundlage für die Reichweiten­messung ist Art. 6 Abs. 1 lit. f DSGVO.
           </p>
         ) : (
           <p>Es ist kein Analysedienst und kein Besucherzähler eingebunden.</p>

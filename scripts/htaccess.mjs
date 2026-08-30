@@ -61,6 +61,39 @@ DirectoryIndex index.html index.htm index.php
 # Die eigene Fehlerseite statt der des Servers.
 ErrorDocument 404 /404.html
 
+# Der Zaehler darf nie aus dem Zwischenspeicher kommen.
+#
+# Weiter unten steht ExpiresDefault "access plus 1 hour". Das gilt auch fuer
+# das, was z.php ausliefert - und mod_expires ueberschreibt dabei die
+# Kopfzeilen, die das Skript selbst setzt. Der Browser holte das Pixel dann
+# einmal und eine Stunde lang nicht wieder: Die Seite waere besucht, der
+# Zaehler stuende still. Dasselbe fuer zahl.php, sonst zeigt die Fussleiste
+# eine Zahl von vorgestern.
+<FilesMatch "\\.php$">
+  <IfModule mod_expires.c>
+    ExpiresActive Off
+  </IfModule>
+  <IfModule mod_headers.c>
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </IfModule>
+</FilesMatch>
+
+# Die Zaehldatei geht niemanden etwas an.
+#
+# Sie liegt im Dokumentenstamm, also waere sie ohne diese Regel unter
+# https://<domain>/besuche.csv abrufbar. Es steht nichts Persoenliches darin -
+# keine IP, keine Kennung -, aber wer wie viel Zulauf hat, ist trotzdem eine
+# Geschaeftszahl und keine Auskunft fuer jedermann.
+<Files "besuche.csv">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</Files>
+
 # Next legt seine Bausteine unter Namen ab, die sich mit dem Inhalt ändern.
 # Sie dürfen deshalb lange im Zwischenspeicher bleiben; die Seite selbst nie,
 # sonst sieht niemand die neue Fassung nach einer Veröffentlichung.
