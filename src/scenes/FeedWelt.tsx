@@ -45,19 +45,33 @@ const BILD = { b: 1728, h: 2304 };
 const SCHIRM = { links: 30.85, rechts: 68.90, oben: 22.4, unten: 70.2 };
 
 /** Scrollstrecke des Eintauchens, in Bildschirmhöhen. */
-const EINTAUCHEN = 3;
+const EINTAUCHEN = 4;
 
 /**
- * Was auf dem Weg hinein wann passiert, als Anteil der Strecke.
+ * Der Ablauf des Eintauchens, als Anteil der Strecke.
  *
- * Erst liegt das Gerät nur da. Dann geht der Bildschirm an und zeigt einen
- * Startbildschirm — mit einer App darauf. Die öffnet sich, wie sich eine App
- * öffnet: Das Symbol wächst über den ganzen Schirm, und darunter läuft schon,
- * was danach kommt.
+ * Fünf Schritte, und jeder hat einen Grund:
+ *
+ *  1. **Heranfahren.** Die Kamera geht auf das Gerät zu, bis es das Bild füllt
+ *     — aber ganz. Man sieht das ganze Telefon, von der Oberkante bis zum
+ *     Anschluss unten. Vorher fuhr die Kamera gleich in den Bildschirm; dann
+ *     war das Gerät weg, bevor man es angesehen hatte.
+ *  2. **Aufwachen.** Der Bildschirm geht an, der Startbildschirm liegt da.
+ *  3. **Tippen.** Man sieht, worauf gedrückt wird: Ein Berührungspunkt legt
+ *     sich auf die Trendonix-App, das Symbol geht unter dem Druck nach innen.
+ *     So machen es Bildschirmaufnahmen, und deshalb liest man es sofort.
+ *  4. **Öffnen.** Die App zieht sich aus ihrer Kachel über den ganzen Schirm.
+ *  5. **Hinein.** Jetzt erst fährt die Kamera in den Bildschirm, bis Rahmen
+ *     und Schiefer aus dem Bild sind und nur noch der Inhalt dasteht.
  */
-const WACH = 0.26;        // ab hier ist der Bildschirm an
-const OEFFNET = 0.60;     // ab hier wächst das App-Symbol
-const DRIN = 0.90;        // ab hier ist nur noch der Feed da
+const NAH = 0.26;         // bis hierher wird herangefahren
+const WACH = 0.34;        // ab hier ist der Bildschirm an
+const TIPP = 0.46;        // ab hier liegt der Finger auf der App
+const OEFFNET = 0.58;     // ab hier wächst die App
+const OFFEN = 0.72;       // ab hier ist sie ganz offen
+const HINEIN = 0.76;      // ab hier fährt die Kamera in den Schirm
+const DRIN = 0.98;        // ab hier ist nur noch der Feed da
+
 /** Scrollstrecke je Beitrag. Eins heißt: ein Wisch, ein Beitrag. */
 const JE_BEITRAG = 1;
 
@@ -116,8 +130,28 @@ export function FeedWelt() {
     const fotoH = fotoB * (BILD.h / BILD.b);
     const schirmB = fotoB * (SCHIRM.rechts - SCHIRM.links) / 100;
     const schirmH = fotoH * (SCHIRM.unten - SCHIRM.oben) / 100;
-    const nötig = Math.max(vb / schirmB, vh / schirmH);
-    const s = 1 + glaetten(klemmen(fortschritt / 0.94)) * (nötig - 1);
+
+    /**
+     * Zwei Ziele, nacheinander.
+     *
+     * `sNah` ist der Maßstab, bei dem das ganze Gerät das Bild füllt. Gemessen
+     * vom Mittelpunkt der Scheibe aus, denn um den dreht sich alles: Nach oben
+     * sind es bis zur Gerätekante 24,6 Prozent der Bildhöhe, nach unten 32,7,
+     * zur Seite 19,7 der Breite. Der weiteste Weg bestimmt den Maßstab, und
+     * sechs Prozent Luft bleiben, damit das Gerät nicht am Rand klebt.
+     *
+     * `sVoll` ist der Maßstab, bei dem die Scheibe allein das Bild füllt.
+     * Dorthin geht es erst im letzten Schritt.
+     */
+    const sNah = Math.min(vh / (0.654 * fotoH), vb / (0.394 * fotoB)) * 0.94;
+    const sVoll = Math.max(vb / schirmB, vh / schirmH);
+
+    const s = fortschritt < NAH
+      ? 1 + glaetten(fortschritt / NAH) * (sNah - 1)
+      : fortschritt < HINEIN
+        ? sNah
+        : sNah + glaetten((fortschritt - HINEIN) / (DRIN - HINEIN)) * (sVoll - sNah);
+
     setMass({ s, b: schirmB * s, h: schirmH * s });
     setSchmal(vb < 700);
   }, []);
@@ -151,7 +185,9 @@ export function FeedWelt() {
           transform: `translate(-${(SCHIRM.links + SCHIRM.rechts) / 2}%, `
             + `-${(SCHIRM.oben + SCHIRM.unten) / 2}%) scale(${mass.s})`,
           transformOrigin: `${(SCHIRM.links + SCHIRM.rechts) / 2}% ${(SCHIRM.oben + SCHIRM.unten) / 2}%`,
-          opacity: klemmen(1 - (t - 0.84) / 0.12),
+          /* Das Gerät bleibt, bis die Kamera in den Schirm fährt. Erst dann
+             tritt es zurück — vorher soll man es ja gerade ansehen. */
+          opacity: klemmen(1 - (t - (HINEIN + 0.1)) / 0.1),
         }}>
           <picture>
             <source srcSet={`${BASIS_PFAD}/assets/zufall/szenen/buehne-handy-1600.webp`}
@@ -189,10 +225,11 @@ export function FeedWelt() {
 
           {/* Startbildschirm und App-Öffnung liegen im Fenster, nicht darüber:
               Sie gehören zum Gerät und wachsen mit ihm. */}
-          {t >= WACH && t < DRIN && (
+          {t >= WACH && t < OFFEN + 0.06 && (
             <Startbildschirm
-              hell={klemmen((t - WACH) / 0.1)}
-              oeffnet={klemmen((t - OEFFNET) / (DRIN - OEFFNET))} />
+              hell={klemmen((t - WACH) / 0.06)}
+              tipp={klemmen((t - TIPP) / (OEFFNET - TIPP))}
+              oeffnet={klemmen((t - OEFFNET) / (OFFEN - OEFFNET))} />
           )}
 
           {/* Der Glasglanz.
@@ -203,7 +240,7 @@ export function FeedWelt() {
               man drin ist: Wer im Bild steht, sieht keine Scheibe mehr. */}
           {t < DRIN && (
             <div className="fw-glas" aria-hidden="true"
-              style={{ opacity: 1 - klemmen((t - 0.55) / (DRIN - 0.55)) }} />
+              style={{ opacity: 1 - klemmen((t - HINEIN) / (DRIN - HINEIN)) }} />
           )}
         </div>
 
@@ -220,8 +257,8 @@ export function FeedWelt() {
         {/* Der Anfangstext gehört zum dunklen Gerät. Sobald der Bildschirm
             angeht, ist er weg — sonst stünde er über dem Startbildschirm, und
             ein Telefon hat keine Bildunterschrift. */}
-        {t < WACH && (
-          <div className="fw-anfang" style={{ opacity: klemmen(1 - t / (WACH * 0.8)) }}>
+        {t < NAH && (
+          <div className="fw-anfang" style={{ opacity: klemmen(1 - t / (NAH * 0.7)) }}>
             <p className="eyebrow">Alles nur Zufall?</p>
             <p className="fw-satz">Vierzig Theorien, die die Welt erklären. Angeblich.</p>
             <p className="fw-wink">Scrollen</p>

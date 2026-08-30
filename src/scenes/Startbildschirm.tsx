@@ -160,7 +160,17 @@ function Symbol({ app }: { app: App }) {
   );
 }
 
-export function Startbildschirm({ hell, oeffnet }: { hell: number; oeffnet: number }) {
+/**
+ * `tipp` läuft von 0 auf 1, während auf die App gedrückt wird.
+ *
+ * Sichtbar gemacht wird das so, wie es eine Bildschirmaufnahme tut: ein
+ * weicher Berührungspunkt legt sich auf das Symbol, das Symbol geht unter dem
+ * Druck nach innen. Kein gezeichneter Finger — der sähe nach Erklärvideo aus
+ * und würde die halbe Kachel verdecken, auf die es ankommt.
+ */
+export function Startbildschirm({ hell, tipp, oeffnet }: {
+  hell: number; tipp: number; oeffnet: number;
+}) {
   const symbol = useRef<HTMLSpanElement>(null);
   const [kachel, setKachel] = useState<DOMRect | null>(null);
   const [schirm, setSchirm] = useState<DOMRect | null>(null);
@@ -181,6 +191,11 @@ export function Startbildschirm({ hell, oeffnet }: { hell: number; oeffnet: numb
       window.removeEventListener('scroll', messen);
     };
   }, []);
+
+  // Der Druck auf die Kachel: Das Symbol geht nach innen und wird eine Spur
+  // heller, solange der Berührungspunkt daraufliegt.
+  const gedrueckt = tipp > 0 && oeffnet <= 0;
+  const druck = glaetten(klemmen(tipp / 0.4));
 
   const flaeche2 = (() => {
     if (oeffnet <= 0 || !kachel || !schirm) return null;
@@ -214,11 +229,20 @@ export function Startbildschirm({ hell, oeffnet }: { hell: number; oeffnet: numb
       <div className="fw-gitter">
         {APPS.map((app, i) => (i === 5 ? (
           <span key="trendonix" className="fw-kachel fw-kachel-eigen">
-            <span ref={symbol} className="fw-huelle"
-              style={{ '--sh': app.schatten } as React.CSSProperties}>
+            <span ref={symbol} className="fw-huelle" style={{
+              '--sh': app.schatten,
+              transform: `scale(${1 - druck * 0.09})`,
+              filter: gedrueckt ? `brightness(${1 + druck * 0.22})` : undefined,
+            } as React.CSSProperties}>
               <span className="fw-symbol fw-symbol-eigen">
                 <img src={`${BASIS_PFAD}/marke/trendonix-tx.png`} alt="" width={64} height={44} />
               </span>
+              {tipp > 0 && oeffnet <= 0 && (
+                <span className="fw-tipp" style={{
+                  opacity: klemmen(tipp / 0.25) * (1 - klemmen((tipp - 0.9) / 0.1)),
+                  transform: `translate(-50%, -50%) scale(${0.72 + druck * 0.28})`,
+                }} />
+              )}
             </span>
             <span className="fw-kname">Trendonix</span>
           </span>
