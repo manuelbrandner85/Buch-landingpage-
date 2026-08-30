@@ -56,8 +56,8 @@
     },
     {
       "d": "2026-08-30",
-      "rang": 334543,
-      "rez": 1,
+      "rang": 512190,
+      "rez": 2,
       "gesamt": 22657,
       "kanaele": {
         "TikTok": 21600,
@@ -68,8 +68,8 @@
         "Bluesky": 0,
         "Verteiler": 2
       },
-      "best": null,
-      "tant": null,
+      "best": 13,
+      "tant": 10.81,
       "dep": "erfolgreich"
     }
   ]

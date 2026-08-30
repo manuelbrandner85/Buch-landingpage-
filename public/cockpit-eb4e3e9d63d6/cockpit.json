@@ -1,24 +1,34 @@
 {
-  "stand": "2026-08-30T16:02:41Z",
-  "warnungen": [
-    {
-      "stufe": "mittel",
-      "text": "Seit 3 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
-    }
-  ],
+  "stand": "2026-08-30T16:33:13Z",
+  "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-29",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Rang",
+        "von": "#334.543",
+        "nach": "#512.190",
+        "delta": "+#177.647",
+        "richtung": "schlecht"
+      },
+      {
+        "was": "Rezensionen",
+        "von": "1",
+        "nach": "2",
+        "delta": "+1",
+        "richtung": "gut"
+      }
+    ],
+    "hinweis": null
   },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
     "untertitel": "Ursprung und Ordnung",
     "erschienen": "2026-08-08",
     "seiten": 206,
-    "rangGesamt": 334543,
-    "rangVorher": null,
-    "rangStand": "2026-08-27",
+    "rangGesamt": 512190,
+    "rangVorher": 334543,
+    "rangStand": "2026-08-30",
     "kategorien": [
       {
         "name": "Kulturgeschichte",
@@ -34,7 +44,7 @@
       }
     ],
     "rezensionen": {
-      "anzahl": 1,
+      "anzahl": 2,
       "schnitt": 5
     },
     "ausgaben": [
@@ -78,24 +88,28 @@
         "rang": 334543,
         "rez": 1,
         "schnitt": 5
+      },
+      {
+        "d": "2026-08-30",
+        "kindle": 0,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": 512190,
+        "rez": 2,
+        "schnitt": 5
       }
     ]
   },
   "monat": {
     "zeitraum": "August 2026",
-    "stand": "2026-08-27",
+    "stand": "2026-08-30",
     "bestellungen": 13,
     "ebook": 12,
     "druck": 1,
     "tantiemen": 10.81,
     "kenp": 0,
-    "quellen": [
-      {
-        "name": "Druck",
-        "anteil": 100
-      }
-    ],
-    "hinweis": "Aus dem KDP-Bericht „Bestellungen“ abgelesen: alle 13 Einheiten entfallen auf Band 1, die neun anderen Titel stehen bei null. Die Tantiemen stammen zu 100 % aus dem Druck — das eine Taschenbuch bringt mehr als zwölf eBooks über Kindle Unlimited. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
+    "quellen": null,
+    "hinweis": "Aus dem KDP-Bericht abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
   },
   "besucher": {
     "gelesen": true,
@@ -162,7 +176,7 @@
       },
       {
         "d": "2026-08-30",
-        "v": 334543
+        "v": 512190
       }
     ],
     "rezensionen": [
@@ -180,7 +194,7 @@
       },
       {
         "d": "2026-08-30",
-        "v": 1
+        "v": 2
       }
     ],
     "reichweite": [
@@ -201,8 +215,26 @@
         "v": 22657
       }
     ],
-    "bestellungen": [],
-    "tantiemen": [],
+    "bestellungen": [
+      {
+        "d": "2026-08-27",
+        "v": 13
+      },
+      {
+        "d": "2026-08-30",
+        "v": 13
+      }
+    ],
+    "tantiemen": [
+      {
+        "d": "2026-08-27",
+        "v": 10.81
+      },
+      {
+        "d": "2026-08-30",
+        "v": 10.81
+      }
+    ],
     "kanaele": {
       "TikTok": [
         {
@@ -1048,12 +1080,60 @@
       ]
     }
   ],
-  "bericht": null,
+  "bericht": {
+    "titel": "Woche 24.–30.08.2026 (geschrieben 30.08., 18-Uhr-Lauf)",
+    "zeilen": [
+      "**Verkäufe:** 0 in dieser Woche ab dem 28.08. — der Monat steht seit dem 27.08.",
+      "unverändert bei 13 Bestellungen / 10,81 € (Quelle: KDP-Dashboard, ZAHLEN.md).",
+      "Drei Tage null ist die auffälligste Zahl der Woche. Rang von 334.543 auf",
+      "512.190 gefallen (eigene Buchseite, 30.08.).",
+      "**Rezensionen:** Die zweite ist da — „Würmchen\", 5 Sterne, verifizierter Kauf,",
+      "27.08.: „SUPER BUCH, VIELEN HERZLICHEN DANK! ICH EMPFEHLE ES UNBEDINGT WEITER!\"",
+      "Beide Rezensionen 5,0.",
+      "**Kanäle diese Woche:** Heute (Sonntag) liefen erstmals alle sechs Kanäle an",
+      "einem Tag: Pinterest-Pin, YouTube-Short, Instagram-Reels (2, nach 9 Tagen",
+      "Stillstand), Bluesky (Text + Video über die Schnittstelle), TikTok stumm,",
+      "Facebook-Reel. TikTok, letzte 7 Tage: 1.900 Aufrufe (+600 %), 65 Likes,",
+      "30 Kommentare, 76 Profilaufrufe. Instagram-Stillstand seit 21.08. aufgeklärt:",
+      "das Profil ist nicht mit der Facebook-Seite verknüpft, deshalb kann nichts",
+      "geplant werden — Details im LOG vom 30.08.",
+      "**YouTube (Studio → Analytics, 28 Tage):** 510 Aufrufe, +3 Abos (jetzt 10).",
+      "Klickrate 8,6 % — im grünen Bereich (Maßstab 8–10 %), Titel und Vorschaubilder",
+      "dürfen bleiben. Mittlere Wiedergabedauer 0:52 je Aufruf; der Neandertaler-Short",
+      "hält 70,6 %, das 1:06-Video nur 40,3 % — unter der 50-%-Marke, die längeren",
+      "Stücke verlieren die Leute. Stufe 3 seit heute AKTIV (Links anklickbar,",
+      "A/B-Tests verfügbar).",
+      "**Lives:** 1 (28.08., 234 Minuten). Zuschauerzahl: keine Daten (LIVE Center",
+      "wird freitags geprüft). Keine neue Einschränkung bekannt.",
+      "**Teilungen der Woche:** TikTok **3** — nach sieben Tagen null in der Vorwoche",
+      "das erste Lebenszeichen. Übrige Kanäle: keine Daten.",
+      "**Verteiler (Brevo):** 6 Einreichungen, 3 bestätigte Kontakte — die Hälfte",
+      "bestätigt nicht; die Bestätigungsmail bleibt die Schwachstelle. Seit heute ist",
+      "die Domain authentifiziert, die Mails gehen echt von info@trendonix-buecher.de.",
+      "**Was messbar etwas gebracht hat:** das Suchfragen-Format (Neandertaler-Short:",
+      "474 Aufrufe bei 70,6 % Haltedauer) und die ersten drei TikTok-Teilungen.",
+      "**Was Zeit gekostet und nichts gebracht hat:** der Instagram-Plan hat 13 fertige",
+      "Reels neun Tage lang stumm weitergeschoben, ohne zu melden — Reichweite, die",
+      "einfach verfiel. Und: sechs bediente Kanäle haben diese Woche keinen einzigen",
+      "Verkauf ausgelöst — Reichweite und Kauf sind noch nicht verbunden.",
+      "**Die eine Empfehlung:** Manuel verknüpft @trendonix_ mit der Seite Trendonix",
+      "(Business Suite → Einstellungen → Instagram-Konto verknüpfen, ~5 Minuten).",
+      "Das schaltet die geplante Ausspielung der 13 fertigen Reels frei — ein Beitrag",
+      "pro Tag, ohne Claude, ohne laufenden PC.",
+      "---"
+    ]
+  },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 5570,
-    "offenSumme": 5426,
+    "summe": 5628,
+    "offenSumme": 5484,
     "buchungen": [
+      {
+        "datum": "2026-08-30",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (16:07 UTC; LOG.md nennt fuer den Nachmittag den Videomotor als Ursache, eine Buchung dafuer fehlt)",
+        "credits": 58
+      },
       {
         "datum": "2026-08-30",
         "projekt": "nicht zugeordnet",
@@ -1119,12 +1199,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung",
         "credits": 8
-      },
-      {
-        "datum": "2026-08-28",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung",
-        "credits": 60
       }
     ]
   },
@@ -1254,6 +1328,12 @@
   ],
   "aktivitaet": [
     {
+      "id": "rez-2026-08-30-2",
+      "zeit": "2026-08-30T16:33:13Z",
+      "kanal": "Amazon",
+      "text": "Eine neue Rezension — jetzt 2 insgesamt, Durchschnitt 5."
+    },
+    {
       "zeit": "2026-08-30T14:10:00Z",
       "kanal": "Kanäle",
       "text": "Alle sechs Kanaele auf www.trendonix-buecher.de geprueft. TikTok, YouTube und Bluesky waren richtig. Pinterest stand auf http statt https - umgestellt, und die Domain wird gerade verifiziert (Nachweis liegt als Meta-Zeile im Kopf jeder Seite). Facebook zeigte nur auf Amazon; die Website steht jetzt als zweiter Link daneben, der Kaufweg blieb. Instagram zeigt weiter auf Amazon - Meta laesst Links nur in der App aendern, das muss Manuel selbst tun. Der Groessenvergleich: TikTok hat 21.600 Follower, alle uebrigen Kanaele zusammen 1.047 (Instagram 1.041, Facebook 6, Pinterest 0, Bluesky 0 bei einem Beitrag). Neu angelegt: die geplante Aufgabe \"Trendonix Mittagsplatz\" - ein Kurzvideo um 12:20 auf YouTube und TikTok, zuerst mit kie.ai (Guthaben 490,5 Punkte), sonst mit vorhandenem Material, immer mit deutschen Untertiteln. Sie wartet auf Manuels Freigabe. Der Pinterest-Tag wurde ausdruecklich NICHT installiert - er ist ein Cookie-Verfolger und wuerde den Einwilligungsbanner zurueckbringen."
@@ -1320,11 +1400,6 @@
       "zeit": "2026-08-28T13:42:00Z",
       "kanal": "Verteiler",
       "text": "Brevo: Formular „Verteiler Website“ jetzt 5 Einreichungen / 3 neue Kontakte (vorher 4/2); Liste führt daggi.richter@… als ersten Leser-Kontakt."
-    },
-    {
-      "zeit": "2026-08-28T13:37:00Z",
-      "kanal": "TikTok",
-      "text": "Live-Nacharbeit vom 26.08. abgeschlossen: die zwei „Bin gerade live“-Hinweiskommentare unter den jüngsten Videos entfernt."
     }
   ],
   "offen": [
@@ -1436,10 +1511,6 @@
     {
       "was": "Vorrat an Beiträgen",
       "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-06 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
-    },
-    {
-      "was": "Wochenbericht",
-      "warum": "Es gibt noch keinen. Der Sonntagslauf schreibt den ersten."
     }
   ]
 }
