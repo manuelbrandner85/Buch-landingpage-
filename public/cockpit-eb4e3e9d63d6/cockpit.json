@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T22:04:00Z",
+  "stand": "2026-08-30T23:03:53Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-29",
@@ -1148,9 +1148,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 5628,
-    "offenSumme": 5484,
+    "summe": 5676,
+    "offenSumme": 5532,
     "buchungen": [
+      {
+        "datum": "2026-08-30",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (22:07 UTC)",
+        "credits": 48
+      },
       {
         "datum": "2026-08-30",
         "projekt": "nicht zugeordnet",
@@ -1216,12 +1222,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung",
         "credits": 72
-      },
-      {
-        "datum": "2026-08-28",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung",
-        "credits": 8
       }
     ]
   },
@@ -1518,11 +1518,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T22:02:00Z",
+    "stand": "2026-08-30T23:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T21:04:14Z",
+    "deployWann": "2026-08-30T22:04:56Z",
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
