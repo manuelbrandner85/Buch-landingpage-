@@ -175,8 +175,8 @@
     {
       "titel": "Feed-Welt auf dem Telefon gegenprüfen",
       "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Die Welt ist am Rechner gebaut und dort geprüft. Sie ist aber für ein Telefon gedacht, und dort ist alles anders: Die Bühne bemisst sich an der Fensterbreite, die Clips werden in der kleinen Fassung geladen, und der Kommentarstrom hat weniger Platz. Einmal durchscrollen auf dem eigenen Gerät, vom Eintauchen bis zum Schluss."
+      "stufe": "klein",
+      "warum": "Am Rechner und in zwei Fenstergroessen nachgemessen (375x812 und 1280x800): Seitenhoehe stimmt, das ganze Geraet ist beim Heranfahren sichtbar, das Symbolgitter ist weg, bevor der Feed erscheint, der Bildschirm deckt am Ende genau, keine Scrollleiste, und das laufende Video startet von selbst, waehrend das vorige auf null zurueckspringt. Was eine Messung nicht ersetzt: wie es sich unter dem Daumen anfuehlt. Einmal durchscrollen auf dem eigenen Geraet, vom Eintauchen bis zum Schluss."
     },
     {
       "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
@@ -252,6 +252,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-30T02:05:00Z",
+      "kanal": "Website",
+      "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
+    },
     {
       "zeit": "2026-08-30T01:10:00Z",
       "kanal": "Website",
