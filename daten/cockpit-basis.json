@@ -173,6 +173,12 @@
       "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
     },
     {
+      "titel": "Feed-Welt auf dem Telefon gegenprüfen",
+      "wer": "Manuel",
+      "stufe": "mittel",
+      "warum": "Die Welt ist am Rechner gebaut und dort geprüft. Sie ist aber für ein Telefon gedacht, und dort ist alles anders: Die Bühne bemisst sich an der Fensterbreite, die Clips werden in der kleinen Fassung geladen, und der Kommentarstrom hat weniger Platz. Einmal durchscrollen auf dem eigenen Gerät, vom Eintauchen bis zum Schluss."
+    },
+    {
       "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
       "wer": "Manuel",
       "stufe": "mittel",
@@ -246,6 +252,11 @@
     }
   ],
   "aktivitaet": [
+    {
+      "zeit": "2026-08-30T01:10:00Z",
+      "kanal": "Website",
+      "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
+    },
     {
       "zeit": "2026-08-29T22:10:00Z",
       "kanal": "Website",
