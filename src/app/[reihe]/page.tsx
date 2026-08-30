@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SceneEngine } from '@/engine/SceneEngine';
 import {
-  TRENDONIX, assetNach, oeffentlicheBaendeVon, reiheNach, schwelleVon, REIHEN_MIT_WELT,
+  TRENDONIX, assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheNach, schwelleVon,
+  REIHEN_MIT_WELT,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { weg, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
@@ -19,8 +20,16 @@ import { weg, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
  */
 export const dynamicParams = false;
 
+/**
+ * Nur Reihen mit mehr als einem Band haben eine Schwelle.
+ *
+ * Auf ihr wird gewählt, welche Welt man betritt. Bei einem Einzeltitel gäbe es
+ * nichts zu wählen: Die Seite zeigte eine Ankunft ohne Ziel und einen Titel,
+ * der eine Zeile tiefer noch einmal steht. Sein Tor auf der Startseite führt
+ * deshalb direkt in die Welt, und diese Adresse gibt es gar nicht erst.
+ */
 export function generateStaticParams() {
-  return REIHEN_MIT_WELT.map((r) => ({ reihe: r.id }));
+  return REIHEN_MIT_WELT.filter((r) => !istEinzeltitel(r)).map((r) => ({ reihe: r.id }));
 }
 
 export async function generateMetadata(

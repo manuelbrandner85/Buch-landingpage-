@@ -48,8 +48,14 @@ export const metadata: Metadata = {
 function Weltentor({ reihe }: { reihe: Reihe }) {
   const baende = oeffentlicheBaendeVon(reihe);
   const motiv = assetNach(reihe.hausmotiv);
+  // Eine Reihe mit mehreren Bänden hat eine Schwelle, auf der man wählt. Ein
+  // Einzeltitel hat nichts zu wählen — sein Tor führt direkt hinein.
+  const erster = baende[0];
+  const hinein = erster && istEinzeltitel(reihe)
+    ? wegWelt(reihe.id, erster.buch.id)
+    : wegReihe(reihe.id);
   return (
-    <a className="weltentor" href={wegReihe(reihe.id)}
+    <a className="weltentor" href={hinein}
       style={{ ['--signatur' as string]: reihe.signatur }}>
       {motiv && (
         <img src={bildQuelle(motiv, 1000)} alt="" aria-hidden="true"
@@ -58,7 +64,7 @@ function Weltentor({ reihe }: { reihe: Reihe }) {
       <span className="tortext">
         <b>{reihe.titel}</b>
         {reihe.unterzeile && <i>{reihe.unterzeile}</i>}
-        <em>{baende.length} {baende.length === 1 ? 'Band' : 'Bände'} · begehbar</em>
+        <em>{istEinzeltitel(reihe) ? 'Einzelband' : `${baende.length} Bände`} · begehbar</em>
       </span>
       <span className="toraktion">Welt betreten</span>
     </a>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { BEGRIFFE } from '@/data/gemeinsam/begriffe';
-import { TRENDONIX, REIHEN_MIT_WELT } from '@/world/registry';
+import { TRENDONIX, REIHEN_MIT_KAPITELN } from '@/world/registry';
 import { wegBegriffe, wegHaus, wegReihe, wegUeber, wegVollstaendig } from '@/world/wege';
 import { begriffssammlung, brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
@@ -11,7 +11,7 @@ import { Rueckweg } from '@/ui/Rueckweg';
 /** Die Begriffe gehören der Welt einer Reihe – deshalb liegen sie unter ihr. */
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return REIHEN_MIT_WELT.map((r) => ({ reihe: r.id }));
+  return REIHEN_MIT_KAPITELN.map((r) => ({ reihe: r.id }));
 }
 
 export const metadata: Metadata = {

@@ -103,10 +103,18 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
 
   return (
     <main className="lesefassung buchseite">
-      {/* Eine Reihe ohne begehbare Welt hat keine Schwellenseite — dorthin
-          zurückzuschicken hieße, ins Leere zu verweisen. */}
-      <Rueckweg nach={welt ? wegReihe(reihe!.id) : wegHaus()}
-        text={welt ? `Zurück in ${reihe!.titel}` : 'Zurück ins Regal'} />
+      {/* Zurück wohin?
+          In die Welt, wenn es eine gibt — bei einem Einzeltitel direkt in seine,
+          denn eine Reihenschwelle hat er nicht; die Seite gibt es gar nicht.
+          Ohne Welt ins Regal, denn ins Leere zu verweisen ist schlimmer als
+          eine Ebene zu überspringen. */}
+      <Rueckweg
+        nach={welt && reihe
+          ? (istEinzeltitel(reihe) ? wegWelt(reihe.id, buch.id) : wegReihe(reihe.id))
+          : wegHaus()}
+        text={!welt || !reihe ? 'Zurück ins Regal'
+          : istEinzeltitel(reihe) ? 'In die Welt dieses Buches'
+          : `Zurück in ${reihe.titel}`} />
       {bandzeile(buch) && <p className="eyebrow">{bandzeile(buch)}</p>}
       <h1>{buch.titel}</h1>
       {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
@@ -262,7 +270,11 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           es nicht gibt. */}
       <nav className="fusszeile">
         {welt && reihe
-          ? <a href={wegReihe(reihe.id)}>In die Welt dieses Bandes</a>
+          ? (
+            <a href={istEinzeltitel(reihe) ? wegWelt(reihe.id, buch.id) : wegReihe(reihe.id)}>
+              {istEinzeltitel(reihe) ? 'In die Welt dieses Buches' : 'In die Welt dieses Bandes'}
+            </a>
+          )
           : <a href={`${wegHaus()}#buecher`}>Zurück ins Regal</a>}
       </nav>
       <Kanaele />
@@ -270,9 +282,10 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
       <Datenblatt daten={strukturierteDaten} />
       <Datenblatt daten={brotkrumen([
         { name: 'Start', weg: wegHaus() },
-        // Nur eine Reihe mit Welt hat eine eigene Seite. Bei einem
-        // Einzeltitel stünde hier ohnehin zweimal derselbe Titel.
-        ...(welt && reihe ? [{ name: reihe.titel, weg: wegReihe(reihe.id) }] : []),
+        // Nur eine Reihe mit mehreren Bänden hat eine eigene Seite. Bei einem
+        // Einzeltitel stünde dort ohnehin zweimal derselbe Titel.
+        ...(welt && reihe && !istEinzeltitel(reihe)
+          ? [{ name: reihe.titel, weg: wegReihe(reihe.id) }] : []),
         { name: buch.titel, weg: wegBuch(buch.id) },
       ])} />
     </main>

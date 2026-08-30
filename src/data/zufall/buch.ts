@@ -1,4 +1,4 @@
-import type { Asset, Buch } from '../gemeinsam/typen';
+import type { Buch } from '../gemeinsam/typen';
 
 /**
  * „Alles nur Zufall?" — ein Einzeltitel, keine Reihe.
@@ -43,23 +43,3 @@ export const BUCH_ZUFALL: Buch = {
     + 'Untersuchungsbericht, eine Tabelle des Statistischen Bundesamtes: '
     + 'öffentlich, kostenlos, fast nie gelesen.',
 };
-
-/**
- * Der Umschlag, aus derselben Druckdatei freigestellt wie bei den Fäden
- * (scripts/umschlag.mjs). Rücken 0,1712 der Umschlagbreite — 456 Seiten
- * sind ein dicker Band.
- */
-export const ASSETS_ZUFALL: Asset[] = [
-  {
-    id: 'cover-zufall',
-    bandId: 'zufall',
-    datei: 'cover-zufall',
-    breite: 1200,
-    hoehe: 1800,
-    herkunft: 'Eigene Darstellung',
-    alt: 'Umschlag von „Alles nur Zufall?“: heller Papierton, darüber das '
-      + 'goldene Trendonix-Monogramm, der Titel in schwerer Versalschrift, '
-      + 'darunter in Rot der Untertitel und ein nachgestellter '
-      + 'Kommentarverlauf zwischen vier Sprechenden.',
-  },
-];

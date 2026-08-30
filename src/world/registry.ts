@@ -97,6 +97,17 @@ export const OEFFENTLICHE_REIHEN: Reihe[] =
 export const REIHEN_MIT_WELT: Reihe[] =
   OEFFENTLICHE_REIHEN.filter((r) => r.baende.some((b) => istOeffentlich(b.buch) && hatWelt(b)));
 
+/**
+ * Reihen mit Kapiteln — nur die haben Orte und Begriffe.
+ *
+ * Beides hängt an Kapiteln, nicht an der Welt. „Alles nur Zufall?“ hat eine
+ * Welt, aber keine Kapitelseiten; ohne diese Zeile stünden unter
+ * /zufall/ort/… einundsechzig Schauplätze der Fäden, die mit dem Buch nichts
+ * zu tun haben, und unter /zufall/begriffe/ deren Glossar.
+ */
+export const REIHEN_MIT_KAPITELN: Reihe[] = REIHEN_MIT_WELT
+  .filter((r) => r.baende.some((b) => istOeffentlich(b.buch) && b.kapitel.length > 0));
+
 export const begehbareBaendeVon = (r: Reihe): Band[] =>
   r.baende.filter((b) => istOeffentlich(b.buch) && hatWelt(b));
 

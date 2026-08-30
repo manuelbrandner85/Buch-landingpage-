@@ -15,5 +15,9 @@ export const REIHE_ZUFALL: Reihe = {
   einladung:
     'Man muss nicht wissen, wie etwas funktioniert. Man muss nachsehen, ob es stimmt.',
   signatur: '#c41e1a',
+  // Das Tor auf der Startseite zeigt kein Kapitelmotiv, sondern das Gerät —
+  // weil man in dieser Welt nicht in eine Landschaft geht, sondern in ein
+  // Telefon.
+  hausmotiv: 'buehne-handy',
   baende: [BAND_ZUFALL],
 };

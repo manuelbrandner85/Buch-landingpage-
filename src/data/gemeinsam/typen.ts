@@ -40,7 +40,12 @@ export type Herkunft =
  */
 export type SzeneTyp =
   | 'ankunft' | 'auftakt' | 'motiv' | 'papier' | 'karte' | 'buecher'
-  | 'interaktion';
+  | 'interaktion'
+  // „Alles nur Zufall?“ spielt nicht in einer Landschaft, sondern in einem
+  // Telefon. `eintauchen` ist der Weg hinein — die Kamera fährt in ein
+  // ausgeschaltetes Gerät, bis der Bildschirm das Bild ist. `feed` ist, was
+  // dann kommt: vierzig Behauptungen hintereinander, ohne Auflösung.
+  | 'eintauchen' | 'feed';
 
 /** Interaktive Module: Argumente, die man nur begreift, wenn man sie bedient. */
 export type InteraktionsModul = 'ringe' | 'denar' | 'laufzeit' | 'pruefung';
@@ -211,6 +216,59 @@ export interface Beleg {
   beleglage: string;
   grad: string;
   evidenz?: Evidenz;
+}
+
+// ——— „Alles nur Zufall?“ — der Feed —————————————————————————————————————
+
+/**
+ * Ein Kapitel des Buches, so weit die Welt davon zeigen darf.
+ *
+ * Die Grenze ist bewusst gezogen und sie ist eng: Was hier steht, ist der
+ * Beitrag, mit dem ein Kapitel aufmacht — die Behauptung, so wie sie im Netz
+ * steht. Was das Buch daraus macht, steht nicht hier. Kein Kapiteltext, keine
+ * Kommentarspalte, kein Nachtrag, kein Steckbrief.
+ *
+ * Das ist keine Sparsamkeit, sondern der Sinn der Sache. Der Feed ist die
+ * Behauptung ohne Auflösung; genau so trifft man sie auch sonst. Wer die
+ * Auflösung will, hat zwei Wege: die Quellenseite unter /q/NN/, die ohnehin
+ * öffentlich ist — oder das Buch.
+ */
+export interface Feedkapitel {
+  nr: number;
+  /** Die Kapitelüberschrift, wie im Inhaltsverzeichnis. */
+  titel: string;
+  unterzeile: string;
+  /** Gedruckte Seite des Feed-Beitrags — die Rückbindung an die Quelle. */
+  seite: number;
+  /**
+   * Das Konto. Mal mit Klammeraffe („@NoCurveHere"), mal ohne
+   * („verborgene.welt.archiv") — das Buch setzt beide Formen, weil beide im
+   * Netz vorkommen. Hier steht, was dort steht.
+   */
+  handle?: string;
+  /** Die Bildunterschrift des Beitrags, im Wortlaut des Satzes. */
+  caption: string;
+  hashtags: string[];
+  /**
+   * Die Zahlen am rechten Rand, in der Reihenfolge des Satzes: Gefällt mir,
+   * Kommentare, geteilt. Nicht jede Seite hat sie — dann bleibt die Liste
+   * leer, und in der Welt steht dort nichts. Erfundene Zahlen zu erfundenen
+   * Zahlen wären eine Lage zu viel.
+   */
+  zahlen: string[];
+  /** Was hinter „Originalton —" steht: ein Konto, ein Geräusch, ein Spott. */
+  ton?: string;
+  /** „KI-generiert · Stimme synthetisch" — der Hinweis, den das Buch setzt. */
+  kiHinweis?: boolean;
+  /**
+   * Sechs Zeilen aus der Kommentarspalte des Kapitels — nicht die Spalte.
+   *
+   * Sie ziehen in der Welt vorbei wie in einem Livestream. Dass sie erfunden
+   * sind, sagt das Buch in seinem Vorwort und die Welt an sichtbarer Stelle:
+   * „Die @-Konten gibt es nicht, die Kommentare sind von mir geschrieben, und
+   * die Zahlen darunter sind ausgedacht."
+   */
+  kommentare?: { von: string; text: string }[];
 }
 
 /** Eine Szene ist ein Datensatz, kein Bauteil. Die Engine rendert sie anhand von `typ`. */

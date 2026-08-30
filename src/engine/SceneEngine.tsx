@@ -15,6 +15,7 @@ import { DenarSzene } from '@/scenes/DenarSzene';
 import { LaufzeitSzene } from '@/scenes/LaufzeitSzene';
 import { PruefungSzene } from '@/scenes/PruefungSzene';
 import { Buecher } from '@/scenes/Buecher';
+import { FeedWelt } from '@/scenes/FeedWelt';
 import { Kopfzeile } from '@/ui/Kopfzeile';
 import { Kapitelmarke } from '@/ui/Kapitelmarke';
 import { EvidenzRegler } from '@/ui/EvidenzRegler';
@@ -31,6 +32,17 @@ export function SceneEngine(
   { szenen, reihe, band }: { szenen: Szene[]; reihe: ReiheId; band?: BandId }) {
   const [ruhig, setRuhig] = useState(false);
   const [rueckfall, setRueckfall] = useState(false);
+
+  /**
+   * Eine Welt, die in einem Telefon spielt, bekommt keine Kinoebene.
+   *
+   * Die Kinoebene legt Bildplatten hinter die Abschnitte und fährt eine Kamera
+   * darüber — richtig für eine Landschaft, falsch für einen Feed. „Alles nur
+   * Zufall?“ hat deshalb eine eigene Bauform, und das ist die einzige Stelle,
+   * an der das Haus davon weiß. Erkannt wird sie an den Daten, nicht am Namen
+   * der Reihe: Wo eine Szene `feed` heißt, gilt die andere Bauform.
+   */
+  if (szenen.some((s) => s.typ === 'feed')) return <FeedWelt />;
 
   /**
    * GSAP nur noch dort, wo es gebraucht wird: in der DOM-Fassung.

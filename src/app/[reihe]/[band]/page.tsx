@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SceneEngine } from '@/engine/SceneEngine';
 import {
-  TRENDONIX, assetNach, bandNach, reiheNach, reiseBand, REIHEN_MIT_WELT, begehbareBaendeVon,
+  TRENDONIX, assetNach, bandNach, bandzeile, istEinzeltitel, reiheNach, reiseBand,
+  REIHEN_MIT_WELT, begehbareBaendeVon,
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
@@ -31,11 +32,18 @@ export async function generateMetadata(
   // Kurz genug, dass Google ihn ganz zeigt – und eigen genug, dass er sich von
   // der Buchseite unterscheidet: Hier geht man hinein, dort kauft man.
   const titel = `${b.buch.titel}: die begehbare Welt`;
+  // Die Beschreibung folgt dem, was der Band ist. „Band 2 der Unsichtbaren
+  // Fäden mit 5 Kapiteln als Stationen“ stimmte, solange es nur eine Reihe
+  // gab; bei einem Einzeltitel ohne Kapitelseiten wäre es dreimal falsch.
+  const beschreibung = istEinzeltitel(r)
+    ? 'Vierzig Behauptungen, wie sie im Feed stehen — die Motive des Buches in '
+      + 'Bewegung, und zu jeder die Quelle, mit der man selbst nachsehen kann.'
+    : `Band ${b.buch.nummer} der ${r.titel} zum Durchschreiten: `
+      + `${b.kapitel.length} Kapitel als Stationen, Motive in Bewegung, zu jeder `
+      + 'Aussage die Angabe, wie gut sie belegt ist.';
   return {
     title: titel,
-    description: `Band ${b.buch.nummer} der Unsichtbaren Fäden zum Durchschreiten: `
-      + `${b.kapitel.length} Kapitel als Stationen, Motive in Bewegung, zu jeder `
-      + 'Aussage die Angabe, wie gut sie belegt ist.',
+    description: beschreibung,
     alternates: {
       canonical: wegVollstaendig(wegWelt(r.id, b.buch.id)) ?? wegWelt(r.id, b.buch.id),
     },
@@ -86,7 +94,8 @@ export default async function BandWelt(
           Diese Seiten hatten gar keine erste Überschrift. Sie steht jetzt da,
           nur nicht im Bild. */}
       <h1 className="nur-lesen">
-        {b.buch.titel} – {r.titel}, Band {b.buch.nummer}: die begehbare Welt
+        {b.buch.titel}
+        {bandzeile(b.buch) ? ` – ${bandzeile(b.buch)}` : ''}: die begehbare Welt
       </h1>
       <SceneEngine szenen={szenen} reihe={r.id} band={b.buch.id} />
       <script type="application/ld+json"

@@ -41,3 +41,17 @@ journal-push.cmd
 google-dienstkonto.json
 *-dienstkonto.json
 *.serviceaccount.json
+
+# „Alles nur Zufall?“ — Rohmaterial bleibt draußen (319 MB).
+# Die vierzig Kapitelmotive sind der Satz des Buches, die Bewegtfassungen
+# kommen von kie.ai, die Hochformate entstehen dazwischen. Alles davon ist
+# jederzeit wiederherzustellen: Motive aus dem Buchordner,
+# `node scripts/zufall-hochkant-alle.mjs`, dann `scripts/zufall-motion.mjs`.
+# Ins Web geht ohnehin nur, was unter public/assets/zufall/ liegt.
+assets-quelle/zufall/kapitel/
+assets-quelle/zufall/motion/
+assets-quelle/zufall/hochkant/
+assets-quelle/zufall/probe/
+assets-quelle/zufall/kontaktabzug.jpg
+# Die Bühne bleibt drin: `handy-gerade.jpg` ist das entzerrte Foto, und die
+# Entzerrung steckt in vier gemessenen Eckpunkten, nicht in einem Skript.
