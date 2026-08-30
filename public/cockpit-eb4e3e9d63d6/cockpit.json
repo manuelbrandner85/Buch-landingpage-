@@ -1,6 +1,10 @@
 {
-  "stand": "2026-08-30T09:03:41Z",
+  "stand": "2026-08-30T10:06:03Z",
   "warnungen": [
+    {
+      "stufe": "hoch",
+      "text": "Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor."
+    },
     {
       "stufe": "mittel",
       "text": "Seit 3 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -8,8 +12,16 @@
   ],
   "aenderungen": {
     "seit": "2026-08-29",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Veröffentlichung",
+        "von": "erfolgreich",
+        "nach": "fehlgeschlagen",
+        "delta": null,
+        "richtung": "schlecht"
+      }
+    ],
+    "hinweis": null
   },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
@@ -1224,6 +1236,12 @@
   ],
   "aktivitaet": [
     {
+      "id": "deploy-2026-08-30-fehlgeschlagen",
+      "zeit": "2026-08-30T10:06:03Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
+    },
+    {
       "zeit": "2026-08-30T06:30:00Z",
       "kanal": "Suche",
       "text": "Search Console liefert die ersten Zahlen: 1 Impression, 0 Klicks, Position 5 (7 Tage, Datenstand 27.08.). Seitenindexierung wird noch verarbeitet."
@@ -1289,11 +1307,6 @@
       "zeit": "2026-08-28T13:31:00Z",
       "kanal": "TikTok",
       "text": "Postfach: Dagmars „Bewertung ist drin jetzt!“ mit kurzem Dank beantwortet — sie ist zugleich die erste echte Verteiler-Anmeldung (in Brevo bestätigt)."
-    },
-    {
-      "zeit": "2026-08-28T06:20:00Z",
-      "kanal": "Technik",
-      "text": "Der Vorschlag „Analytics: einmal auf Weiter klicken“ ist aus dem Cockpit raus — er war seit heute Nacht gegenstandslos. Die Property liegt in einem Konto, dessen Nutzungsbedingungen seit Juni 2024 angenommen sind; der Klick, auf den gewartet wurde, war nie nötig."
     }
   ],
   "offen": [
@@ -1383,13 +1396,13 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T09:02:00Z",
-    "deploy": "erfolgreich",
+    "stand": "2026-08-30T10:02:00Z",
+    "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T08:05:03Z",
-    "zertifikatTage": 85,
-    "linksGeprueft": 52,
+    "deployWann": "2026-08-30T09:58:09Z",
+    "zertifikatTage": null,
+    "linksGeprueft": 0,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 89,
