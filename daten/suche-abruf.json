@@ -1,13 +1,39 @@
 {
   "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
-  "stand": "2026-08-29T20:02:40Z",
+  "stand": "2026-08-30T14:03:34Z",
   "eingerichtet": true,
   "hinweis": null,
   "klicks": 0,
-  "impressionen": 1,
-  "position": 5,
+  "impressionen": 7,
+  "position": 45.1,
   "von": "2026-08-27",
-  "bis": "2026-08-27",
-  "tage": 1,
-  "suchanfragen": []
+  "bis": "2026-08-28",
+  "tage": 2,
+  "suchanfragen": [
+    {
+      "wort": "an welchem fluss liegt london",
+      "klicks": 0,
+      "impressionen": 1
+    },
+    {
+      "wort": "bab al-mandab",
+      "klicks": 0,
+      "impressionen": 1
+    },
+    {
+      "wort": "bab el-mandeb",
+      "klicks": 0,
+      "impressionen": 1
+    },
+    {
+      "wort": "fluss durch liverpool",
+      "klicks": 0,
+      "impressionen": 1
+    },
+    {
+      "wort": "tor der tränen",
+      "klicks": 0,
+      "impressionen": 1
+    }
+  ]
 }

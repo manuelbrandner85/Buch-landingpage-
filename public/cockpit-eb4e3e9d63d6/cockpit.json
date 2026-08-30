@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T13:04:46Z",
+  "stand": "2026-08-30T14:03:35Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -99,16 +99,42 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 1 gemessene Tage.",
+    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 2 gemessene Tage.",
     "klicks7": 0,
-    "impressionen7": 1,
-    "position": 5,
+    "impressionen7": 7,
+    "position": 45.1,
     "seitenIndexiert": null,
     "seitenGesamt": 89,
-    "suchanfragen": [],
+    "suchanfragen": [
+      {
+        "wort": "an welchem fluss liegt london",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "bab al-mandab",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "bab el-mandeb",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "fluss durch liverpool",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "tor der tränen",
+        "klicks": 0,
+        "impressionen": 1
+      }
+    ],
     "von": "2026-08-27",
-    "bis": "2026-08-27",
-    "tage": 1,
+    "bis": "2026-08-28",
+    "tage": 2,
     "quelle": "abgerufen"
   },
   "reichweite": {
@@ -312,20 +338,6 @@
           "zeit": "15:30",
           "was": "09_muenze",
           "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "09_muenze",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "09_muenze",
-          "zustand": "offen",
           "hinweis": null
         },
         {
@@ -639,6 +651,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "09_muenze",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "TikTok LIVE",
           "zeit": "20:00",
           "was": null,
@@ -830,6 +851,15 @@
           "was": "04_ordnung",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "09_muenze",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1384,11 +1414,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T13:02:00Z",
+    "stand": "2026-08-30T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T12:55:55Z",
+    "deployWann": "2026-08-30T13:59:49Z",
     "zertifikatTage": 85,
     "linksGeprueft": 53,
     "linksKaputt": 0,
