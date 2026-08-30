@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T21:03:26Z",
+  "stand": "2026-08-30T22:04:00Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-29",
@@ -361,26 +361,6 @@
     }
   },
   "termine": [
-    {
-      "d": "2026-08-30",
-      "wochentag": "So",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "09_muenze",
-          "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "09_muenze",
-          "zustand": "offen",
-          "hinweis": null
-        }
-      ]
-    },
     {
       "d": "2026-08-31",
       "wochentag": "Mo",
@@ -799,6 +779,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-08-29",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "09_muenze",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1074,6 +1063,40 @@
           "kanal": "Pinterest",
           "zeit": null,
           "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-14",
+      "wochentag": "Mo",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "09_muenze",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         }
@@ -1495,11 +1518,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-30T21:02:00Z",
+    "stand": "2026-08-30T22:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-30T20:03:44Z",
+    "deployWann": "2026-08-30T21:04:14Z",
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
