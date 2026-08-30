@@ -98,6 +98,15 @@ export function FeedWelt() {
   const [mass, setMass] = useState({ s: 1, b: 0, h: 0, foto: 0 });
   const [schmal, setSchmal] = useState(false);
   /**
+   * Bleibt neben der Scheibe Platz? Dann ist es kein Telefon.
+   *
+   * Auf einem Laptop steht der Feed als hochkante Scheibe in der Mitte. Alles,
+   * was auf dem Telefon am Fensterrand klebt — Bildunterschrift, Knöpfe,
+   * Fortschritt —, muss dann an der Scheibe kleben und nicht am Browser, sonst
+   * steht die Schrift einen halben Meter neben dem Bild.
+   */
+  const [breit, setBreit] = useState(false);
+  /**
    * Die Scrollstrecke in Pixeln, nicht in `svh`.
    *
    * Auf dem Telefon ist `svh` die Höhe MIT eingeblendeter Adressleiste,
@@ -206,7 +215,22 @@ export function FeedWelt() {
      * Dorthin geht es erst im letzten Schritt.
      */
     const sNah = Math.min(vh / (0.654 * fotoH), vb / (0.394 * fotoB)) * 0.94;
-    const sVoll = Math.max(vb / schirmB, vh / schirmH);
+    /**
+     * `sVoll` bemisst sich an der HÖHE, nie an der Breite.
+     *
+     * Vorher stand hier `Math.max(vb / schirmB, vh / schirmH)` — deckt das
+     * Fenster in jedem Fall. Auf dem Telefon ist das dasselbe wie die Höhe
+     * allein, weil ein Telefon schmaler ist als ein Hochkantvideo. Auf einem
+     * Laptop nicht: Dort gewann die Breite, das Fenster wurde 1280 × 2144
+     * Pixel, und vom Video sah man den mittleren Streifen — riesig und
+     * beschnitten. Genau das ist ihm aufgefallen.
+     *
+     * An der Höhe gemessen entsteht auf breiten Schirmen eine hochkante
+     * Scheibe in der Mitte, so wie ein solches Netz im Browser aussieht, und
+     * auf schmalen ändert sich nichts: Ist das Fenster schmaler als 0,597
+     * seiner Höhe, deckt die Höhenanpassung die Breite ohnehin mit.
+     */
+    const sVoll = vh / schirmH;
 
     const s = fortschritt < NAH
       ? 1 + glaetten(fortschritt / NAH) * (sNah - 1)
@@ -216,6 +240,7 @@ export function FeedWelt() {
 
     setMass({ s, b: schirmB * s, h: schirmH * s, foto: fotoB });
     setSchmal(vb < 700);
+    setBreit(schirmB * sVoll < vb - 1);
     setHoehe(vh * (EINTAUCHEN + (ordnung.length + 1) * JE_BEITRAG));
   }, []);
 
@@ -247,9 +272,13 @@ export function FeedWelt() {
   const gesamt = EINTAUCHEN * 100 + (ordnung.length + 1) * JE_BEITRAG * 100;
 
   return (
-    <div className="feedwelt"
+    <div className={breit ? 'feedwelt fw-breit' : 'feedwelt'}
       style={{ height: hoehe > 0 ? `${hoehe}px` : `${gesamt}svh` }}>
-      <div className="fw-buehne">
+      {/* `--fw-scheibe` ist die Breite des Bildschirms in Pixeln. Die
+          Oberfläche hängt sich daran, damit sie auf breiten Schirmen an der
+          Scheibe klebt statt am Browserfenster. */}
+      <div className="fw-buehne"
+        style={{ '--fw-scheibe': mass.b ? `${mass.b}px` : '100%' } as React.CSSProperties}>
         {/* Das Gerät verschwindet nicht — es wird zu groß fürs Bild. */}
         <div className="fw-geraet" style={{
           /* Dieselbe Zahl wie in `messen()`, nicht dieselbe Formel in CSS:
@@ -283,7 +312,12 @@ export function FeedWelt() {
              über 139 der 680 Pixel Gerätebreite, also gut fünfzehn Prozent —
              nicht neun, wie ich zuerst annahm. Bei neun schnitt die Ecke über
              den Gehäuserand, und genau das stand oben rechts heraus. */
-          borderRadius: `${mass.b * 0.155 * klemmen(1 - t / 0.72)}px`,
+          /* Auf breiten Schirmen bleibt eine kleine Rundung stehen: Die
+             Scheibe läuft dort nicht mehr aus dem Bild, sondern steht als
+             Fläche darin — und eine Fläche mit scharfen Ecken auf schwarzem
+             Grund sieht aus wie ein Loch, nicht wie ein Bildschirm. */
+          borderRadius: `${Math.max(breit && t >= HINEIN ? 14 : 0,
+            mass.b * 0.155 * klemmen(1 - t / 0.72))}px`,
         }}>
           {/* Solange die App nicht offen ist, liegt hinter dem Startbildschirm
               nichts — man sieht die echte, ausgeschaltete Scheibe des Fotos.
