@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-30T06:03:55Z",
+  "stand": "2026-08-30T06:27:32Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1224,6 +1224,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-08-30T06:30:00Z",
+      "kanal": "Suche",
+      "text": "Search Console liefert die ersten Zahlen: 1 Impression, 0 Klicks, Position 5 (7 Tage, Datenstand 27.08.). Seitenindexierung wird noch verarbeitet."
+    },
+    {
       "zeit": "2026-08-30T03:10:00Z",
       "kanal": "Website",
       "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
@@ -1289,11 +1294,6 @@
       "zeit": "2026-08-28T06:20:00Z",
       "kanal": "Technik",
       "text": "Der Vorschlag „Analytics: einmal auf Weiter klicken“ ist aus dem Cockpit raus — er war seit heute Nacht gegenstandslos. Die Property liegt in einem Konto, dessen Nutzungsbedingungen seit Juni 2024 angenommen sind; der Klick, auf den gewartet wurde, war nie nötig."
-    },
-    {
-      "zeit": "2026-08-28T06:00:00Z",
-      "kanal": "Verteiler",
-      "text": "Im Brevo-Konto nachgezählt statt geschätzt: zwei bestätigte Kontakte, beide angemeldet, keiner blockiert — und einer davon die eigene Testadresse. Es steht also genau ein Leser auf der Liste, und es ist Daggi, mit der auf TikTok noch eine unbeantwortete Nachricht offen ist. Die vier Einreichungen von gestern heißen im Umkehrschluss: Zwei Menschen haben die Bestätigungsmail nicht angeklickt."
     }
   ],
   "offen": [
