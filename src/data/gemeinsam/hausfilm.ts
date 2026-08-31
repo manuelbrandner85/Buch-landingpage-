@@ -31,10 +31,30 @@ export interface Hausfilmangabe {
   text: string[];
 }
 
+/**
+ * Die Fassungsnummer hinter jeder Adresse — und warum sie nicht fehlen darf.
+ *
+ * Der Webserver schickt zu jeder mp4 den Kopfeintrag
+ * `Cache-Control: public, max-age=31536000, immutable` (siehe
+ * scripts/htaccess.mjs). Das ist für alles richtig, dessen Dateiname sich mit
+ * dem Inhalt ändert — bei Next.js ist das alles. Für eine Datei mit festem
+ * Namen, die überschrieben wird, ist es eine Falle: `immutable` heißt, dass
+ * der Browser **gar nicht mehr nachfragt**. Ein Jahr lang.
+ *
+ * Am 31.08.2026 lag deshalb kurzzeitig eine Tonspur mit einem
+ * Kodierungsfehler auf der Seite, und wer sie in diesen Stunden geladen
+ * hatte, hätte sie bis 2027 behalten — auch nach dem Neuladen.
+ *
+ * Eine geänderte Adresse ist ein anderer Eintrag im Zwischenspeicher. Also:
+ * **Wer den Film austauscht, zählt hier hoch.** Ohne das ist der Austausch
+ * für jeden, der schon einmal da war, wirkungslos.
+ */
+const FASSUNG = '2';
+
 export const HAUSFILM: Hausfilmangabe = {
-  datei: '/film/trendonix-film.mp4',
-  dateiKlein: '/film/trendonix-film-klein.mp4',
-  poster: '/film/trendonix-film.jpg',
+  datei: `/film/trendonix-film.mp4?f=${FASSUNG}`,
+  dateiKlein: `/film/trendonix-film-klein.mp4?f=${FASSUNG}`,
+  poster: `/film/trendonix-film.jpg?f=${FASSUNG}`,
   titel: 'Der Film über Trendonix',
   laenge: '1:24 Minuten',
   text: [
