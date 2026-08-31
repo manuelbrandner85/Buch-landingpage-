@@ -32,6 +32,24 @@ export function bildQuelle(asset: Asset, wunsch = 1600, format: 'avif' | 'webp' 
 }
 
 /**
+ * Alle vorhandenen Stufen eines Motivs als `srcset`.
+ *
+ * Der Grund im Empfang wurde bis zum 31.08.2026 fest in 1920 Pixeln geladen —
+ * auch auf einem Telefon mit 390 Pixeln Breite. Das ist das größte Element des
+ * ersten Bildschirms und damit das, woran die Ladezeit gemessen wird: Dort
+ * 57 KB zu laden, wo 25 KB dasselbe Bild ergeben, verzögert den Aufbau ohne
+ * jeden sichtbaren Gewinn.
+ *
+ * Mit `srcset` und `sizes` entscheidet der Browser — er kennt Breite,
+ * Bildpunktdichte und, anders als wir hier, auch die Verbindung.
+ */
+export function bildSatzHtml(asset: Asset, format: 'avif' | 'webp' = 'avif'): string {
+  return verfuegbar(asset)
+    .map((b) => `${pfad(asset, b, format)} ${b}w`)
+    .join(', ');
+}
+
+/**
  * Hintergrundquelle für die Kinoebene: `image-set()` überlässt dem Browser
  * die Wahl zwischen AVIF und WebP sowie zwischen den Auflösungen.
  * Auf Mobilgeräten reicht die kleinere Stufe – das spart Bandbreite,

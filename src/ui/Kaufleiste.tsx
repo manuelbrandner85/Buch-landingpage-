@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { Buch } from '@/data/gemeinsam/typen';
+import { einstieg } from '@/data/gemeinsam/kaufweg';
 
 /**
  * Der Kaufweg, der auf dem Telefon nicht verschwindet.
@@ -23,7 +24,12 @@ export function Kaufleiste(
   { buch: Buch; urteil?: { schnitt: number; anzahl: number } | null },
 ) {
   const [sichtbar, setSichtbar] = useState(false);
-  const weg = buch.kaufwege[0];
+  // Derselbe Weg, der oben auf dem großen Knopf steht: der günstigste Kauf.
+  // Bis zum 31.08.2026 stand hier `buch.kaufwege[0]` — also die teuerste
+  // Ausgabe, weil die Liste nach Wertigkeit sortiert ist. Zwei Knöpfe auf
+  // derselben Seite, die verschiedene Ausgaben meinen, sind schlimmer als ein
+  // zu teurer: Der Leser glaubt, er habe sich verklickt.
+  const weg = einstieg(buch);
   const gemerkt = useRef(false);
 
   useEffect(() => {

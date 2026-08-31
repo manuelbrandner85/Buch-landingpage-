@@ -418,6 +418,34 @@ main{position:relative;z-index:2}
   100%{transform:translateX(-6%) scaleX(1)}
 }
 
+/* ---------- Die Wiege: Drehung, die den Umschlag nie verlässt ----------
+
+   `umrunden` ist die richtige Bewegung auf einer Buchseite: Dort will jemand
+   den Band ansehen, und ihn einmal ganz herumzudrehen zeigt, dass er ein
+   Körper ist. Auf dem ersten Bildschirm des Hauses ist dieselbe Bewegung ein
+   Fehler. Dort SIND die drei Umschläge der Inhalt — die Titel stehen auf
+   ihnen, sonst nirgends. Eine Drehung über 26 Sekunden bis auf die Rückseite
+   bedeutet, dass drei Viertel der Zeit kein Titel zu lesen ist. Gemessen am
+   31.08.2026: Auf dem ersten Bildschirm standen drei Buchkörper, von denen
+   keiner seinen Umschlag zeigte.
+
+   Deshalb hier eine andere Bewegung mit demselben Zweck: eine Wiege zwischen
+   9 und 31 Grad. Der Band bleibt ein Körper — die Kante läuft, das Licht
+   wandert, der Standschatten atmet —, aber der Umschlag ist zu jeder
+   Sekunde lesbar. */
+@keyframes wiegen{
+  0%{transform:rotateX(8deg) rotateY(-9deg)}
+  100%{transform:rotateX(6deg) rotateY(-31deg)}
+}
+@keyframes wiegeVorn{ 0%{opacity:.05} 100%{opacity:.15} }
+@keyframes wiegeHinten{ 0%{opacity:.94} 100%{opacity:.84} }
+@keyframes wiegeRuecken{ 0%{opacity:.84} 100%{opacity:.54} }
+@keyframes wiegeSchnitt{ 0%{opacity:.30} 100%{opacity:.52} }
+@keyframes wiegeschatten{
+  0%{transform:translateX(5%) scaleX(1)}
+  100%{transform:translateX(-2%) scaleX(.84)}
+}
+
 @media (prefers-reduced-motion:reduce){
   .korpus,.standschatten,.flaeche .licht{animation:none}
   .korpus{transform:rotateX(6deg) rotateY(-19deg)}
@@ -877,9 +905,19 @@ main{z-index:3}
    Titel statt der Reihe und ließ die anderen wie Zubehör aussehen. */
 .reihenschau{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,20rem);
   gap:clamp(2rem,5vw,4rem);align-items:center;margin-top:clamp(1.8rem,4.5vh,3.2rem)}
-.reihenbaende{display:flex;gap:clamp(.9rem,2.4vw,2rem);align-items:flex-end}
-.reihenband{display:block;text-decoration:none;flex:1 1 0;max-width:11rem;
-  transition:transform .45s}
+.reihenbaende{display:flex;gap:clamp(.9rem,2.4vw,2rem);align-items:stretch}
+/* Spalte statt Block, und die Bandzeile unten festgehalten.
+   Vorher hingen die drei Bände am unteren Rand ihrer eigenen Kachel — und weil
+   „Band 2 · erscheint“ auf dem Telefon zweizeilig umbricht, „Band 1“ aber
+   nicht, stand Band 1 um eine Zeilenhöhe tiefer als seine Nachbarn. Drei
+   Bücher auf drei Höhen sehen nicht nach Absicht aus, sondern nach Fehler.
+
+   Die Bandzeile bekommt bewusst KEIN `margin-top:auto`: Damit stünde die
+   einzeilige („Band 1“) auf Höhe der zweiten Zeile der zweizeiligen — und der
+   Versatz wäre nur um eine Zeile nach unten gewandert. Alle Umschläge sind
+   gleich hoch, also beginnen die Zeilen von selbst auf derselben Höhe. */
+.reihenband{display:flex;flex-direction:column;text-decoration:none;flex:1 1 0;
+  max-width:11rem;transition:transform .45s}
 .reihenband:hover{transform:translateY(-6px)}
 .reihenband .buch3d{margin-bottom:.8rem;max-width:100%}
 .bandzeile{display:block;font-family:var(--display),serif;font-size:.62rem;
@@ -890,17 +928,61 @@ main{z-index:3}
 .reihenschau .wege,.buchkarte .wege{display:flex;gap:.8rem;flex-wrap:wrap;
   align-items:center;margin-top:1.6rem}
 
-/* Im Empfang zeigen die Bände ihre Vorderseite und drehen sich langsam. */
-.reihenband .korpus{animation:umrunden 26s ease-in-out infinite alternate;
+/* Im Empfang zeigen die Bände ihre Vorderseite – und zwar durchgehend.
+   Die Begründung steht oben bei @keyframes wiegen. */
+.reihenband .korpus{animation:wiegen 22s ease-in-out infinite alternate;
   animation-timeline:auto;animation-range:normal}
 .reihenband .flaeche .licht,.reihenband .standschatten{
-  animation-duration:26s;animation-timing-function:ease-in-out;
+  animation-duration:22s;animation-timing-function:ease-in-out;
   animation-iteration-count:infinite;animation-direction:alternate;
   animation-fill-mode:both;animation-timeline:auto;animation-range:normal}
-.reihenband:nth-child(2) .korpus,.reihenband:nth-child(2) .flaeche .licht{animation-delay:-2s}
-.reihenband:nth-child(3) .korpus,.reihenband:nth-child(3) .flaeche .licht{animation-delay:-4s}
+.reihenband .vorn .licht{animation-name:wiegeVorn}
+.reihenband .hinten .licht{animation-name:wiegeHinten}
+.reihenband .ruecken .licht{animation-name:wiegeRuecken}
+.reihenband .schnitt .licht,.reihenband .kopfschnitt .licht,
+.reihenband .fussschnitt .licht{animation-name:wiegeSchnitt}
+.reihenband .standschatten{animation-name:wiegeschatten}
+/* Drei Bände, die im Gleichtakt wippen, sehen aus wie eine Grafik. Die
+   Versätze sind gegen die 22 Sekunden ungerade, damit sie nie zusammenlaufen. */
+.reihenband:nth-child(2) .korpus,.reihenband:nth-child(2) .flaeche .licht,
+.reihenband:nth-child(2) .standschatten{animation-delay:-7s}
+.reihenband:nth-child(3) .korpus,.reihenband:nth-child(3) .flaeche .licht,
+.reihenband:nth-child(3) .standschatten{animation-delay:-15s}
 @media (prefers-reduced-motion:reduce){
   .reihenband .korpus,.reihenband .flaeche .licht,.reihenband .standschatten{animation:none}
+}
+
+/* Die Neuzeile: was außerhalb der Reihe steht, auf dem ersten Bildschirm.
+   Bewusst eine Zeile und keine Kachel — sie soll die Reihe nicht verdrängen,
+   nur nicht verschweigen, dass daneben noch etwas liegt. Der Preis steht
+   dabei, weil er das Argument ist: Es ist der günstigste Weg ins Haus. */
+.neuzeile{display:flex;align-items:baseline;gap:clamp(.7rem,2vw,1.2rem);
+  margin-top:clamp(1.6rem,3.6vh,2.6rem);padding:.85rem 1.1rem;
+  text-decoration:none;color:var(--papier);
+  border:1px solid rgba(227,200,139,.22);border-left:2px solid var(--gold-tief);
+  background:linear-gradient(to right,rgba(227,200,139,.06),transparent 62%);
+  transition:border-color .3s,background .3s,transform .3s}
+.neuzeile:hover{border-color:rgba(227,200,139,.5);transform:translateX(3px);
+  background:linear-gradient(to right,rgba(227,200,139,.11),transparent 62%)}
+.neumarke{flex:0 0 auto;font-family:var(--display),serif;font-size:.58rem;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.neutext{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;min-width:0}
+.neutext b{font-family:var(--display),serif;font-weight:400;
+  font-size:clamp(.98rem,1.9vw,1.16rem);color:var(--papier)}
+.neutext i{font-style:italic;color:var(--staub);font-size:.82rem}
+.neupreis{flex:0 0 auto;margin-left:auto;font-size:.74rem;letter-spacing:.1em;
+  color:var(--gold)}
+.neupfeil{flex:0 0 auto;color:var(--gold-tief);transition:transform .3s}
+.neuzeile:hover .neupfeil{transform:translateX(4px);color:var(--gold)}
+@media (max-width:640px){
+  /* Auf dem Telefon fällt die Unterzeile weg — in einer Zeile, die schon
+     Titel, Preis und Pfeil trägt, wäre sie der vierte Umbruch. */
+  .neutext i{display:none}
+  .neuzeile{gap:.6rem;padding:.75rem .85rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .neuzeile,.neupfeil{transition:none}
+  .neuzeile:hover{transform:none}
 }
 
 /* Die Bandziffer der Welt, in der man gerade steht. */
@@ -914,15 +996,22 @@ header .baender a.hier{color:var(--gold);border-color:var(--gold);opacity:1}
 .kaufblock .auch a{color:var(--gold);text-underline-offset:3px}
 
 /* Der Band im Empfang hängt nicht am Scrollen – dort ist noch nichts gescrollt.
-   Er dreht sich von selbst: einmal ganz herum bis auf die Rückseite und wieder
-   zurück, mit Verweilen an beiden Enden. Dieselbe Kurve wie beim Scrollen,
-   nur von der Zeit getrieben; deshalb stimmt auch das Licht auf den Flächen. */
-.hausbild .korpus{animation:umrunden 26s ease-in-out infinite alternate;
+   Er bewegt sich von selbst, aber er dreht sich nicht weg: Die Wiege hält den
+   Umschlag durchgehend lesbar, während Kante, Licht und Standschatten weiter
+   zeigen, dass da ein Körper steht und keine Abbildung. Diese Regel steht
+   hinter der von `.reihenband` und muss deshalb dasselbe sagen. */
+.hausbild .korpus{animation:wiegen 22s ease-in-out infinite alternate;
   animation-timeline:auto;animation-range:normal}
 .hausbild .flaeche .licht,.hausbild .standschatten{
-  animation-duration:26s;animation-timing-function:ease-in-out;
+  animation-duration:22s;animation-timing-function:ease-in-out;
   animation-iteration-count:infinite;animation-direction:alternate;
   animation-fill-mode:both;animation-timeline:auto;animation-range:normal}
+.hausbild .vorn .licht{animation-name:wiegeVorn}
+.hausbild .hinten .licht{animation-name:wiegeHinten}
+.hausbild .ruecken .licht{animation-name:wiegeRuecken}
+.hausbild .schnitt .licht,.hausbild .kopfschnitt .licht,
+.hausbild .fussschnitt .licht{animation-name:wiegeSchnitt}
+.hausbild .standschatten{animation-name:wiegeschatten}
 
 /* ---------- Die Welten ---------- */
 .welten,.buecherwand,.arbeitsweise,.leserstimmen{position:relative;z-index:2;
@@ -1703,10 +1792,24 @@ body.mit-kaufleiste{padding-bottom:4.6rem}
    Sie wächst mit – eigene ISBN, Buchhandel, tolino stehen hier, sobald sie
    bestellbar sind. */
 .ausgabenliste{list-style:none;margin:1.2rem 0 1.6rem;display:grid;gap:.7rem}
-.ausgabenliste li{padding-bottom:.7rem;border-bottom:1px solid rgba(227,200,139,.16)}
+.ausgabenliste li{padding:0 0 .7rem 1rem;border-bottom:1px solid rgba(227,200,139,.16);
+  /* Die durchsichtige Kante ist kein Zierrat: Sie hält für jede Zeile den
+     Platz frei, den der Hauptweg mit seiner goldenen Kante belegt. Ohne sie
+     stünde die hervorgehobene Zeile um zwei Pixel versetzt zu den anderen –
+     der klassische Fehler bei hervorgehobenen Listenzeilen. */
+  border-left:2px solid transparent}
 .ausgabenliste a{color:var(--gold);text-decoration:none;
   border-bottom:1px solid rgba(227,200,139,.4)}
 .ausgabenliste a:hover{border-bottom-color:var(--gold)}
+/* Ein Hauptweg, der Rest daneben. Die erste Zeile ist der günstigste Kauf –
+   sie bekommt Fläche, eine Goldkante links und ihre Marke; die übrigen bleiben
+   Zeilen. Kein Preis wird versteckt, nur die Reihenfolge ist entschieden. */
+.ausgabenliste .hauptweg{padding:.85rem 1rem .9rem;border-bottom:none;
+  border-left-color:var(--gold-tief);
+  background:linear-gradient(to right,rgba(227,200,139,.07),transparent 70%)}
+.ausgabenliste .hauptweg a{font-size:1.06rem;border-bottom-color:var(--gold)}
+.ausgabenliste .wegmarke{display:block;font-size:.6rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold-tief);margin-bottom:.3rem}
 
 /* ---------- Stimmen ----------
    Sterne sind das einzige Element dieser Seite, das nicht aus dem Buch kommt

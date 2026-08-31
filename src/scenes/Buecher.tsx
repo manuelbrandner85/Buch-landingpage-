@@ -5,6 +5,7 @@ import { BASIS_PFAD } from '@/world/bilder';
 import { mailAn } from '@/data/gemeinsam/anbieter';
 import { VERTEILER } from '@/data/gemeinsam/verteiler';
 import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
+import { angebotsreihenfolge } from '@/data/gemeinsam/kaufweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Buch3D } from './Buch3D';
@@ -67,9 +68,11 @@ export function Kaufwege({ buch }: { buch: Buch }) {
   // Der grosse Knopf ist ein Kaufweg, nie eine Ausleihe: Wer auf einer
   // Buchseite steht, soll das Buch kaufen koennen. Die Bibliothek steht
   // darunter bei den uebrigen Wegen, wo sie hingehoert.
-  const kaufbar = buch.kaufwege.filter((k) => k.art !== 'ausleihe');
-  const geordnet = [...kaufbar, ...buch.kaufwege.filter((k) => k.art === 'ausleihe')];
-  const [erster, ...weitere] = geordnet;
+  //
+  // Und er ist seit dem 31.08.2026 der *guenstigste* Kaufweg, nicht der erste
+  // der Liste: Die Reihenfolge in den Daten steht nach Wertigkeit, der Knopf
+  // trug damit das teuerste Format. Die Begruendung steht in `kaufweg.ts`.
+  const [erster, ...weitere] = angebotsreihenfolge(buch.kaufwege);
   if (!erster) return <span className="kaufen wartet">Produktseite folgt</span>;
   return (
     <span className="kaufblock">

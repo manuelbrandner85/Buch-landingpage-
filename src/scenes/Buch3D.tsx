@@ -26,10 +26,37 @@ const RUECKEN: Record<string, number> = {
 };
 export const rueckenstaerke = (band: BandId) => RUECKEN[band] ?? 0.078;
 
-export function Buch3D({ cover, band, tiefe = rueckenstaerke(band) }:
-  { cover: Asset; band: BandId; tiefe?: number }) {
+/**
+ * Der Band bekommt seine Flächen in der Größe, in der er wirklich steht.
+ *
+ * Bis zum 31.08.2026 holte jeder Band seinen Umschlag in 1000 Pixeln Breite,
+ * überall gleich. Im Empfang ist er 176 Pixel breit, im Regal 208 — dort wurde
+ * also das Vierfache der gebrauchten Fläche geladen und wieder weggeworfen.
+ * Gemessen auf dem Telefon: rund 46 KB je Band, siebenmal auf der Startseite.
+ */
+export function Buch3D({
+  cover, band, tiefe = rueckenstaerke(band), breite = 368, rundum = true,
+}: {
+  cover: Asset; band: BandId; tiefe?: number;
+  /** Angezeigte Breite in CSS-Pixeln. Bestimmt, welche Bildstufe geladen wird. */
+  breite?: number;
+  /**
+   * Dreht sich der Band an dieser Stelle bis auf die Rückseite?
+   *
+   * Wo er das nicht tut — im Empfang wiegt er nur zwischen 9 und 31 Grad —,
+   * ist die Rückseite ein Bild, das niemand je zu sehen bekommt. Sie wiegt
+   * 78 bis 87 KB je Band. Die Fläche bleibt, sie ist dann eine dunkle Platte;
+   * der Körper ist genauso geschlossen, nur ohne die Ladung.
+   */
+  rundum?: boolean;
+}) {
   const basis = cover.datei;
-  const flaeche = (teil: string) => ordner(`${basis}-${teil}.webp`, band);
+  // Rücken und Rückseite lagen als WebP und als AVIF nebeneinander, geladen
+  // wurde immer das WebP — bei der Rückseite 78 statt 61 KB, bei einem Rücken
+  // 22 statt 10. Die Vorderseite kommt seit jeher als AVIF; für die übrigen
+  // Flächen gilt derselbe Browserstand, und ein eigener Rückfallweg für sie
+  // wäre ein Fallnetz für einen Fall, den es beim Umschlag schon nicht gibt.
+  const flaeche = (teil: string) => ordner(`${basis}-${teil}.avif`, band);
 
   // Zwei Hüllen um den Band. Sie sind normalerweise nicht da – `display:contents`
   // macht sie für das Layout unsichtbar. Erst wo der Band sich beim Scrollen
@@ -44,14 +71,16 @@ export function Buch3D({ cover, band, tiefe = rueckenstaerke(band) }:
     <div className="buch3d" style={{ ['--tiefe' as string]: tiefe }}>
       <div className="korpus">
         <div className="flaeche vorn">
-          <img src={bildQuelle(cover, 1000)} alt={cover.alt}
+          <img src={bildQuelle(cover, breite * 2)} alt={cover.alt}
             width={cover.breite} height={cover.hoehe} loading="lazy" decoding="async" />
           <span className="lack" aria-hidden="true" />
           <span className="licht" aria-hidden="true" />
         </div>
         <div className="flaeche hinten">
-          <img src={flaeche('rueckseite')} alt="" aria-hidden="true"
-            loading="lazy" decoding="async" />
+          {rundum && (
+            <img src={flaeche('rueckseite')} alt="" aria-hidden="true"
+              loading="lazy" decoding="async" />
+          )}
           <span className="lack" aria-hidden="true" />
           <span className="licht" aria-hidden="true" />
         </div>

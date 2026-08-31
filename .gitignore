@@ -58,3 +58,10 @@ assets-quelle/zufall/kontaktabzug.jpg
   
 # Berichte der Pruefskripte - sie entstehen bei jedem Lauf neu.  
 *.log  
+
+# Messungen der Seitenpruefung (scripts/seiten-pruefung.mjs): Bilder und
+# Bericht entstehen bei jedem Lauf neu und sind Arbeitsstand, kein Quellcode.
+qa/
+
+# Ablage fuer Dateien, die geloescht werden sollen.
+_to_delete/

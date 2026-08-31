@@ -7,6 +7,7 @@ import {
 import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { ausgaben, brotkrumen, stimmen as stimmenBlatt, urteil } from '@/world/schema';
 import { PREISSTAND } from '@/data/gemeinsam/stand';
+import { angebotsreihenfolge } from '@/data/gemeinsam/kaufweg';
 import { gesamturteil, stimmenVon } from '@/data/gemeinsam/stimmen';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { BASIS_PFAD } from '@/world/bilder';
@@ -123,7 +124,8 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
       {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
 
       <div className="buchkopf">
-        {cover && <Buch3D cover={cover} band={buch.id} />}
+        {/* Der Buchkopf ist 208 Pixel breit (13rem), auf dem Telefon weniger. */}
+        {cover && <Buch3D cover={cover} band={buch.id} breite={208} />}
         <div>
           <p className="klappe">{buch.klappentext}</p>
           {buch.seiten && (
@@ -137,9 +139,18 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
       {buch.kaufwege.length > 0 && (
         <>
           <h2>Wo es das Buch gibt</h2>
+          {/* Bis zum 31.08.2026 standen hier alle Ausgaben gleich groß
+              untereinander — drei Links, drei Preise, gleiches Gewicht. Wer
+              sich noch nicht entschieden hat, entscheidet an so einer Liste
+              gar nichts; er liest sie und scrollt weiter.
+              Jetzt trägt der günstigste Kaufweg die Zeile, die übrigen stehen
+              als Alternativen darunter. Es fehlt nichts — es ist nur klar,
+              womit man anfängt. */}
           <ul className="ausgabenliste">
-            {buch.kaufwege.map((k) => (
-              <li key={`${k.form}-${k.haendler}-${k.url}`}>
+            {angebotsreihenfolge(buch.kaufwege).map((k, i) => (
+              <li key={`${k.form}-${k.haendler}-${k.url}`}
+                className={i === 0 ? 'hauptweg' : undefined}>
+                {i === 0 && <span className="wegmarke">Einstieg</span>}
                 <a href={k.url} target="_blank" rel="noopener noreferrer">
                   {k.form} {k.art === 'ausleihe' ? 'ausleihen bei' : 'bei'} {k.haendler}
                 </a>

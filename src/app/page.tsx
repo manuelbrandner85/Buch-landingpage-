@@ -5,7 +5,7 @@ import {
   OEFFENTLICHE_REIHEN, REIHEN_MIT_WELT, TRENDONIX, bandzeile, hatWelt, WELT,
   assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
-import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
+import { BASIS_PFAD, bildQuelle, bildSatzHtml, ordner } from '@/world/bilder';
 import { WEG_COCKPIT, weg, wegAbsolut, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
@@ -21,6 +21,7 @@ import { Besucherzahl } from '@/ui/Besucherzahl';
 import { Unterschrift } from '@/ui/Unterschrift';
 import { Sternzeile, Stimmenwand } from '@/ui/Stimmen';
 import { esGibtStimmen } from '@/data/gemeinsam/stimmen';
+import { einstieg } from '@/data/gemeinsam/kaufweg';
 
 /**
  * Das Haus.
@@ -86,7 +87,8 @@ function Buchkarte({ buch }: { buch: Buch }) {
   const zeile = istEinzeltitel(reihe) ? 'Einzelband' : bandzeile(buch);
   return (
     <article className="buchkarte">
-      {cover && <Buch3D cover={cover} band={buch.id} />}
+      {/* Im Regal steht der Band 208 Pixel breit — die 640er Stufe reicht. */}
+      {cover && <Buch3D cover={cover} band={buch.id} breite={208} />}
       <div className="text">
         <p className="band-nr">
           {[zeile, buch.seiten ? `${buch.seiten} Seiten` : '']
@@ -134,6 +136,24 @@ export default function Haus() {
   // die sie vorher war.
   const inReihen = buecher.filter((b) => !istEinzeltitel(reiheZuBand(b.id)));
   const einzelbaende = buecher.filter((b) => istEinzeltitel(reiheZuBand(b.id)));
+
+  // Was außerhalb der Reihen steht, stand bis zum 31.08.2026 erst nach vier
+  // Bildschirmen — hinter dem Film, den Welten und dem ganzen Regal. Für
+  // „Alles nur Zufall?“ hieß das: Der Titel, den es seit gestern zu kaufen
+  // gibt und der mit 9,99 € der günstigste Einstieg ins Haus ist, kam auf dem
+  // ersten Bildschirm nicht vor.
+  //
+  // Er bekommt jetzt eine Zeile unter der Reihe. Keine zweite Kachel: Der
+  // Empfang gehört der Reihe, und ein vierter Buchkörper daneben sähe aus wie
+  // ein Band, dem die Nummer fehlt. Eine Zeile reicht, um zu wissen, dass es
+  // ihn gibt.
+  //
+  // Genommen wird der zuletzt erschienene Einzeltitel, der wirklich zu kaufen
+  // ist. Gibt es keinen, fehlt die Zeile — sie erfindet nichts.
+  const neuling = einzelbaende
+    .filter((b) => b.status === 'erschienen' && b.kaufwege.length > 0)
+    .sort((a, b) => (b.erschienen ?? '').localeCompare(a.erschienen ?? ''))[0];
+  const neulingWeg = neuling ? einstieg(neuling) : undefined;
 
   // Das Datenblatt zum Film.
   //
@@ -184,6 +204,7 @@ export default function Haus() {
         {motiv && (
           <Hintergrundvideo
             bild={bildQuelle(motiv, 1920)}
+            bildsatz={bildSatzHtml(motiv)}
             video={ordner(`${motiv.datei}-motion.mp4`, motiv.bandId ?? 'band-1')}
             videoKlein={ordner(`${motiv.datei}-motion-klein.mp4`, motiv.bandId ?? 'band-1')}
             alt={motiv.alt}
@@ -215,7 +236,14 @@ export default function Haus() {
                     <a key={b.buch.id} className="reihenband"
                       href={wegWelt(leitreihe.id, b.buch.id)}
                       aria-label={`Welt von Band ${b.buch.nummer}: ${b.buch.titel}`}>
-                      {cover && <Buch3D cover={cover} band={b.buch.id} />}
+                      {/* 176 CSS-Pixel breit, und die Wiege zeigt die
+                          Rückseite nie: kleinere Bildstufe, kein
+                          Rückseitenbild. Beides zusammen spart auf dem
+                          ersten Bildschirm rund 370 KB. */}
+                      {cover && (
+                        <Buch3D cover={cover} band={b.buch.id}
+                          breite={176} rundum={false} />
+                      )}
                       <span className="bandzeile">
                         Band {b.buch.nummer}
                         {b.buch.status === 'erscheint' && <em> · erscheint</em>}
@@ -236,6 +264,21 @@ export default function Haus() {
                 </div>
               </div>
             </div>
+          )}
+          {neuling && (
+            <a className="neuzeile" href={wegBuch(neuling.id)}>
+              <span className="neumarke">Neu</span>
+              <span className="neutext">
+                <b>{neuling.titel}</b>
+                {neuling.unterzeile && <i>{neuling.unterzeile}</i>}
+              </span>
+              {neulingWeg?.preis !== undefined && (
+                <span className="neupreis">
+                  ab {neulingWeg.preis.toFixed(2).replace('.', ',')} €
+                </span>
+              )}
+              <span className="neupfeil" aria-hidden="true">→</span>
+            </a>
           )}
         </div>
       </section>

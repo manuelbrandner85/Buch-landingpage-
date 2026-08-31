@@ -12,8 +12,9 @@ import { useEffect, useRef, useState } from 'react';
  * wird das erst im Browser, damit nichts doppelt geladen wird.
  */
 export function Hintergrundvideo(
-  { bild, video, videoKlein, alt }:
-  { bild: string; video?: string; videoKlein?: string; alt: string }) {
+  { bild, bildsatz, video, videoKlein, alt }:
+  { bild: string; bildsatz?: string; video?: string; videoKlein?: string;
+    alt: string }) {
   const [quelle, setQuelle] = useState<string | null>(null);
   const huelle = useRef<HTMLDivElement>(null);
   const film = useRef<HTMLVideoElement>(null);
@@ -94,7 +95,11 @@ export function Hintergrundvideo(
 
   return (
     <div className="grund" aria-hidden="true" ref={huelle}>
-      <img src={bild} alt={alt} decoding="async" fetchPriority="high" />
+      {/* `sizes="100vw"`, weil der Grund immer die volle Breite füllt. Damit
+          holt ein Telefon die 1000er Stufe statt der 1920er — dasselbe Bild,
+          weniger als die Hälfte der Bytes, und es steht früher. */}
+      <img src={bild} srcSet={bildsatz} sizes={bildsatz ? '100vw' : undefined}
+        alt={alt} decoding="async" fetchPriority="high" />
       {quelle && (
         <video ref={film} key={quelle} src={quelle} poster={bild}
           autoPlay muted loop playsInline preload="metadata"
