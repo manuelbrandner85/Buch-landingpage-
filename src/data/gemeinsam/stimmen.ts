@@ -70,28 +70,56 @@ export interface Leserstimme {
 }
 
 /**
- * Stand 27.08.2026: Band 1 hat auf der Amazon-Produktseite null Rezensionen,
- * andere Wege gibt es noch nicht. Deshalb steht hier nichts – und deshalb
- * zeigt die Seite an keiner Stelle Sterne. Das ist kein Versäumnis, sondern
- * der Zustand.
+ * Stand 31.08.2026: Band 1 hat zwei Kundenrezensionen bei Amazon, beide fünf
+ * Sterne. Die anderen Wege — tolino, Buchhandel, Goodreads — gibt es noch
+ * nicht; von dort steht deshalb nichts hier.
  */
 export const BEWERTUNGEN: Bewertungsstand[] = [
-  // Die erste Bewertung überhaupt, abgelesen am 27.08.2026 auf den eigenen
-  // Produktseiten: 5,0 von 5 bei einer globalen Bewertung, auf Taschenbuch und
-  // E-Book identisch — es ist dieselbe Bewertung, Amazon zeigt sie bei beiden
-  // Ausgaben. Deshalb steht sie hier einmal und nicht zweimal; zweimal gezählt
-  // wäre sie eine erfundene Bewertung.
+  // Abgelesen am 31.08.2026 auf der Rezensionsseite: zwei Kundenrezensionen,
+  // beide fünf Sterne, also 5,0 im Schnitt.
+  //
+  // Sie stehen hier einmal und nicht dreimal. Amazon zeigt dieselben
+  // Rezensionen bei Taschenbuch, gebundener Ausgabe und Kindle — je Ausgabe
+  // gezählt wären es sechs Bewertungen, die es nicht gibt. Beide sind zum
+  // Taschenbuch abgegeben.
   {
     bandId: 'band-1',
     quelle: 'Amazon',
     url: 'https://www.amazon.de/dp/B0HG4LPJKV',
     schnitt: 5,
-    anzahl: 1,
-    stand: '2026-08-27',
+    anzahl: 2,
+    stand: '2026-08-31',
   },
 ];
 
-export const STIMMEN: Leserstimme[] = [];
+/**
+ * Wörtlich, wie sie öffentlich stehen — auch die Großschreibung.
+ *
+ * Umformuliert wird nichts: Ein geglättetes Zitat ist kein Zitat mehr, und wer
+ * es mit dem Original vergleicht, findet den Unterschied sofort. Zitiert ist
+ * jeweils der Rezensionstext, nicht die Überschrift; die Überschriften tragen
+ * Emojis, die auf dieser Seite nichts zu suchen haben.
+ */
+export const STIMMEN: Leserstimme[] = [
+  {
+    bandId: 'band-1',
+    quelle: 'Amazon',
+    text: 'SUPER BUCH, VIELEN HERZLICHEN DANK! ICH EMPFEHLE ES UNBEDINGT WEITER!',
+    autor: 'Würmchen',
+    sterne: 5,
+    datum: '2026-08-27',
+    url: 'https://www.amazon.de/dp/B0HG4LPJKV',
+  },
+  {
+    bandId: 'band-1',
+    quelle: 'Amazon',
+    text: 'Gigantisch',
+    autor: 'Amazon Kunde',
+    sterne: 5,
+    datum: '2026-08-27',
+    url: 'https://www.amazon.de/dp/B0HG4LPJKV',
+  },
+];
 
 // Eine Sternzahl über der Skala ist ein Tippfehler, kein Lob – sie würde als
 // volle fünf Sterne angezeigt und ins Datenblatt wandern. Solche Zeilen zählen

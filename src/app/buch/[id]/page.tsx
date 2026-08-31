@@ -72,9 +72,10 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
   const kapitel = WELT[buch.id]?.kapitel ?? [];
   const blick = BLICK[buch.id] ?? [];
   const probe = leseprobeVon(buch.id);
-  // Sterne und Zitate: heute leer, deshalb unsichtbar. Sobald in
-  // data/gemeinsam/stimmen.ts eine Zeile steht, erscheinen sie hier oben am
-  // Kaufweg, weiter unten als Abschnitt und im Datenblatt.
+  // Sterne und Zitate kommen aus data/gemeinsam/stimmen.ts. Steht dort für
+  // diesen Band nichts, bleibt hier alles unsichtbar; steht etwas drin,
+  // erscheint es oben am Kaufweg, weiter unten als Abschnitt und im
+  // Datenblatt. Für Band 1 stehen seit dem 31.08.2026 zwei Rezensionen drin.
   const bewertet = gesamturteil(buch.id);
   const zitate = stimmenVon(buch.id);
 
