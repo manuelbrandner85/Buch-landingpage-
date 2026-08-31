@@ -9,6 +9,7 @@ import { Absatz } from '@/ui/Absatz';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Unterschrift } from '@/ui/Unterschrift';
+import { og } from '@/world/og';
 
 export const dynamic = 'force-static';
 
@@ -28,10 +29,10 @@ export async function generateMetadata(
     title: b.titel.length > 52 ? { absolute: b.titel } : b.titel,
     description: b.auszug,
     alternates: { canonical: wegVollstaendig(wegBeitrag(b.slug)) ?? wegBeitrag(b.slug) },
-    openGraph: {
+    openGraph: og({
       type: 'article', title: b.titel, description: b.auszug,
       publishedTime: b.datum, images: wegVorschau('haus'),
-    },
+    }, wegVollstaendig(wegBeitrag(b.slug))),
   };
 }
 

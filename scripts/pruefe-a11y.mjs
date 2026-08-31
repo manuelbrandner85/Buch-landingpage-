@@ -73,7 +73,26 @@ let gesamt = 0;
 
 for (const seite of SEITEN) {
   await p.goto(`http://127.0.0.1:${PORT}${seite}`, { waitUntil: 'networkidle2', timeout: 90000 });
-  await new Promise((r) => setTimeout(r, 1500));
+  // Warten, bis nichts mehr einblendet — nicht anderthalb Sekunden raten.
+  //
+  // Der Hinweis „Scrollen" auf der Schwelle steht zuerst auf Deckkraft 0 und
+  // blendet ab der dritten Sekunde ein. Wer vorher misst, misst eine Farbe,
+  // die es im Ruhezustand nicht gibt: Die Prüfung meldete 3,09 : 1, während
+  // die Zeile fertig eingeblendet auf 8,66 : 1 kommt.
+  //
+  // Ein Prüfbericht, der zuverlässig eine Warnung erfindet, wird nach dem
+  // dritten Mal überlesen — und dann fehlt er, wenn es zählt. Also wird auf
+  // die tatsächlichen Übergänge gewartet, mit einer Obergrenze, damit eine
+  // Dauerschleife die Prüfung nicht anhält.
+  await p.evaluate(async () => {
+    const laufende = document.getAnimations()
+      .filter((a) => a.playState === 'running' || a.playState === 'pending');
+    await Promise.race([
+      Promise.allSettled(laufende.map((a) => a.finished)),
+      new Promise((f) => setTimeout(f, 9000)),
+    ]);
+  });
+  await new Promise((r) => setTimeout(r, 400));
   await p.evaluate(axe);
   const r = await p.evaluate(async () => await window.axe.run(document, {
     runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },

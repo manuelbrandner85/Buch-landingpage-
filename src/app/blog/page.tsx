@@ -6,6 +6,7 @@ import { brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
+import { og } from '@/world/og';
 
 export const dynamic = 'force-static';
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description:
     'Texte zum Stoff der Bücher: wie die Quellen geprüft werden, was ein unsichtbarer Faden ist, und was in den Bänden dahintersteckt.',
   alternates: { canonical: wegVollstaendig(wegJournal()) ?? wegJournal() },
-  openGraph: { images: wegVorschau('haus') },
+  openGraph: og({ images: wegVorschau('haus') }, wegVollstaendig(wegJournal())),
 };
 
 const datum = (iso: string) =>

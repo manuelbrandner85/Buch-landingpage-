@@ -9,6 +9,7 @@ import { brotkrumen, ort as ortDatenblatt } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { og } from '@/world/og';
 
 /**
  * Ein Ort gehört der Welt, nicht einem Band – deshalb listet er alle Vorkommen.
@@ -52,12 +53,12 @@ export async function generateMetadata(
     alternates: { canonical: wegVollstaendig(wegOrt(r.id, o.id)) ?? wegOrt(r.id, o.id) },
     // Ein Ort gehört keinem Band, sondern der Welt – geteilt wird deshalb das
     // Motiv der Welt und nicht das Cover eines beliebigen Bandes.
-    openGraph: {
+    openGraph: og({
       type: 'article',
       title: `${o.name} – ${anriss(o.text)}`,
       description: o.text,
       images: wegVorschau(`welt-${r.id}`),
-    },
+    }, wegVollstaendig(wegOrt(r.id, o.id))),
   };
 }
 

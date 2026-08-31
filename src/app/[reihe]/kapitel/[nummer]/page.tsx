@@ -11,6 +11,7 @@ import { aufsatz, brotkrumen } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
 import { Rueckweg } from '@/ui/Rueckweg';
+import { og } from '@/world/og';
 
 /**
  * Eigene URL je Kapitel – damit Suchmaschinen die Welt verstehen.
@@ -46,12 +47,12 @@ export async function generateMetadata(
       // Geteilt wird der Band, zu dem das Kapitel gehört. Ein eigenes Motiv je
       // Kapitel wäre schöner, aber es gibt keines im Format 1200×630 – und ein
       // falsch beschnittenes Bild ist schlechter als das richtige Cover.
-      openGraph: {
+      openGraph: og({
         type: 'article',
         title: `Kapitel ${k.id}: ${k.titel}`,
         description: k.unterzeile,
         images: wegVorschau(k.bandId),
-      },
+      }, wegVollstaendig(wegKapitel(r.id, k.id))),
     }
     : {};
 }

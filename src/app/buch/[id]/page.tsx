@@ -26,6 +26,7 @@ const standDatum = (iso: string) =>
     day: 'numeric', month: 'long', year: 'numeric',
   });
 import { Leserstimmen, Sternzeile } from '@/ui/Stimmen';
+import { og } from '@/world/og';
 
 /**
  * Die Seite eines einzelnen Buches.
@@ -55,10 +56,10 @@ export async function generateMetadata(
     })(),
     description: buch.unterzeile ?? buch.klappentext.slice(0, 160),
     alternates: { canonical: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id) },
-    openGraph: {
+    openGraph: og({
       type: 'book', title: buch.titel, description: buch.klappentext,
       images: wegVorschau(buch.id),
-    },
+    }, wegVollstaendig(wegBuch(buch.id))),
     twitter: { card: 'summary_large_image', images: wegVorschau(buch.id) },
   };
 }

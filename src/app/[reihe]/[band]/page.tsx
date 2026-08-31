@@ -8,6 +8,7 @@ import {
 import { vorladen } from '@/world/bilder';
 import { wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { ausgaben } from '@/world/schema';
+import { og } from '@/world/og';
 
 /**
  * Die Welt eines Bandes.
@@ -47,10 +48,10 @@ export async function generateMetadata(
     alternates: {
       canonical: wegVollstaendig(wegWelt(r.id, b.buch.id)) ?? wegWelt(r.id, b.buch.id),
     },
-    openGraph: {
+    openGraph: og({
       type: 'book', title: titel, description: b.buch.klappentext,
       images: wegVorschau(b.buch.id),
-    },
+    }, wegVollstaendig(wegWelt(r.id, b.buch.id))),
     twitter: { card: 'summary_large_image', images: wegVorschau(b.buch.id) },
   };
 }

@@ -120,6 +120,41 @@ ErrorDocument 404 /404.html
   </FilesMatch>
 </IfModule>
 
+# ── Kopfzeilen, die nichts kosten und einiges verhindern ──────────────────
+#
+# Bis zum 31.08.2026 schickte der Server keine einzige davon. Für eine
+# Buchseite ohne Anmeldung ist das kein akutes Risiko — aber es sind vier
+# Zeilen, und jede schließt eine Tür, die sonst offen steht.
+#
+# Strict-Transport-Security ist der Unterschied zwischen „die Verbindung ist
+# verschlüsselt" und „sie kann gar nicht anders". Ohne sie genügt ein Klick auf
+# http://…, um den ersten Aufruf unverschlüsselt zu machen; danach greift zwar
+# die Umleitung, aber der erste ist gelaufen.
+#
+# Ohne includeSubDomains und ohne preload: Beides ist auf ein Jahr
+# bindend und lässt sich nicht zurücknehmen: Wer später eine Unterdomain ohne
+# Zertifikat braucht, kommt nicht mehr an sie heran. Für die Hauptdomain reicht
+# die Zeile so, wie sie hier steht.
+#
+# Keine Content-Security-Policy: Sie müsste die Bausteine von Next.js und den
+# bedingt geladenen Analysedienst treffen, und eine zu enge Regel macht die
+# Seite weiß statt sicher. Eine falsche CSP ist schlechter als keine — sie
+# gehört gemessen eingeführt, nicht nebenbei.
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # Kein Ratespiel über Dateitypen: Was als Bild ausgeliefert wird, darf der
+  # Browser nicht als Skript ausführen.
+  Header always set X-Content-Type-Options "nosniff"
+  # Beim Klick nach außen geht die Domain mit, aber nicht der Pfad.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Die Seite braucht weder Standort noch Mikrofon noch Kamera. Was sie nicht
+  # braucht, soll sie auch nicht anfragen dürfen.
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+  # Die Seite gehört nicht in einen fremden Rahmen — so wird aus ihr keine
+  # Kulisse für einen fremden Knopf.
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript
   AddOutputFilterByType DEFLATE application/json image/svg+xml text/plain

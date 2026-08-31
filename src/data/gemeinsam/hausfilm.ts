@@ -28,6 +28,19 @@ export interface Hausfilmangabe {
   titel: string;
   /** Als Wort, wie es unter dem Abspielknopf steht: „1:26 Minuten“. */
   laenge?: string;
+  /**
+   * Dieselbe Länge in der Schreibweise, die Suchmaschinen lesen (ISO 8601).
+   *
+   * Ohne sie zeigt Google den Film im Treffer nicht als Video an — und ein
+   * Treffer mit Vorschaubild und Laufzeit wird ungleich häufiger geklickt als
+   * eine Textzeile. Zwei Schreibweisen derselben Zahl sind lästig; eine
+   * gerechnete wäre schlimmer, weil sie stillschweigend falsch würde.
+   */
+  dauerISO?: string;
+  /** Wann der Film veröffentlicht wurde, ISO. Gehört ins Datenblatt. */
+  erschienen?: string;
+  /** Ein Satz für das Datenblatt — nicht der Text, sondern worum es geht. */
+  worum?: string;
   text: string[];
 }
 
@@ -57,6 +70,12 @@ export const HAUSFILM: Hausfilmangabe = {
   poster: `/film/trendonix-film.jpg?f=${FASSUNG}`,
   titel: 'Der Film über Trendonix',
   laenge: '1:24 Minuten',
+  dauerISO: 'PT1M24S',
+  erschienen: '2026-08-31',
+  worum:
+    'Ein Film über das Haus Trendonix: die Fragen, an denen es arbeitet, die '
+    + 'begehbaren Welten zu den Büchern und die eine Regel, nach der hier '
+    + 'nichts behauptet wird, was sich nicht prüfen lässt.',
   text: [
     'Vor mehr als drei Millionen Jahren geht jemand durch feuchte Asche.',
     'Was blieb, sind Fußspuren. Mehr nicht.',

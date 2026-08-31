@@ -7,6 +7,7 @@ import {
 } from '@/world/registry';
 import { vorladen } from '@/world/bilder';
 import { weg, wegReihe, wegVollstaendig, wegVorschau } from '@/world/wege';
+import { og } from '@/world/og';
 
 /**
  * Die Schwelle einer Reihe.
@@ -41,10 +42,10 @@ export async function generateMetadata(
     title: titel,
     description: r.einladung,
     alternates: { canonical: wegVollstaendig(wegReihe(r.id)) ?? wegReihe(r.id) },
-    openGraph: {
+    openGraph: og({
       type: 'book', title: titel, description: r.einladung,
       images: wegVorschau(`welt-${r.id}`),
-    },
+    }, wegVollstaendig(wegReihe(r.id))),
     twitter: { card: 'summary_large_image', images: wegVorschau(`welt-${r.id}`) },
   };
 }

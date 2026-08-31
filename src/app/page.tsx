@@ -6,11 +6,12 @@ import {
   assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
-import { WEG_COCKPIT, weg, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
+import { WEG_COCKPIT, weg, wegAbsolut, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
 import { Hausfilm } from '@/ui/Hausfilm';
+import { og } from '@/world/og';
 import { HAUSFILM } from '@/data/gemeinsam/hausfilm';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
@@ -36,12 +37,12 @@ import { esGibtStimmen } from '@/data/gemeinsam/stimmen';
 export const metadata: Metadata = {
   title: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
   description: TRENDONIX.kurzfassung,
-  openGraph: {
+  openGraph: og({
     type: 'website',
     title: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
     description: TRENDONIX.kurzfassung,
     images: wegVorschau('haus'),
-  },
+  }, wegVollstaendig(wegHaus())),
   twitter: { card: 'summary_large_image', images: wegVorschau('haus') },
   // Eine Adresse zählt. Ohne diese Zeile hat die Startseite unter vier
   // Schreibweisen gleichzeitig existiert.
@@ -133,6 +134,37 @@ export default function Haus() {
   // die sie vorher war.
   const inReihen = buecher.filter((b) => !istEinzeltitel(reiheZuBand(b.id)));
   const einzelbaende = buecher.filter((b) => istEinzeltitel(reiheZuBand(b.id)));
+
+  // Das Datenblatt zum Film.
+  //
+  // Google zeigt zu einem Treffer ein Vorschaubild mit Laufzeit an, wenn es
+  // weiß, dass dort ein Video liegt — und nur dann. Der Film steht seit dem
+  // 31.08.2026 auf dieser Seite, und ohne diese zwölf Zeilen wüsste keine
+  // Suchmaschine davon.
+  //
+  // `description` ist der Satz, worum es geht, nicht der gesprochene Text.
+  // Der steht als `transcript` daneben: Er ist der eigentliche Inhalt, und er
+  // ist derselbe, den Vorleseprogramme unter dem Film bekommen — eine Quelle,
+  // zwei Verwendungen, keine Abweichung möglich.
+  const filmblatt = HAUSFILM.datei && wegVollstaendig(wegHaus())
+    ? {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: HAUSFILM.titel,
+      description: HAUSFILM.worum ?? TRENDONIX.kurzfassung,
+      // Ohne die Fassungsnummer: Sie gehört an die Adresse im Browser, damit
+      // ein Austausch ankommt — im Datenblatt wäre sie eine Adresse, die sich
+      // bei jeder neuen Fassung ändert, und Google zählte den Film zweimal.
+      thumbnailUrl: wegAbsolut(HAUSFILM.poster.replace(/\?.*$/, '')),
+      contentUrl: wegAbsolut(HAUSFILM.datei.replace(/\?.*$/, '')),
+      embedUrl: wegVollstaendig(wegHaus()),
+      ...(HAUSFILM.dauerISO ? { duration: HAUSFILM.dauerISO } : {}),
+      ...(HAUSFILM.erschienen ? { uploadDate: HAUSFILM.erschienen } : {}),
+      inLanguage: 'de',
+      transcript: HAUSFILM.text.join(' '),
+      publisher: { '@type': 'Organization', name: TRENDONIX.name },
+    }
+    : null;
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -324,6 +356,10 @@ export default function Haus() {
 
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
+      {filmblatt && (
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(filmblatt) }} />
+      )}
     </main>
   );
 }

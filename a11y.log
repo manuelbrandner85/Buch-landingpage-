@@ -1,0 +1,11 @@
+/ → 0 Verstöße
+/faeden/ → 1 Verstöße
+  [serious] color-contrast (1×) – Elements must meet minimum color contrast ratio thresholds
+    <p class="hinweis">Scrollen</p>
+   → Element has insufficient color contrast of 3.09 (foreground color: #5f5b50, background color: #000000, font size: 7.7pt (10.24px), font weight: normal). Expected contrast
+/buch/band-1/ → 0 Verstöße
+/faeden/kapitel/1/ → 0 Verstöße
+/ueber/ → 0 Verstöße
+/impressum/ → 0 Verstöße
+
+Insgesamt 1 Verstöße.
