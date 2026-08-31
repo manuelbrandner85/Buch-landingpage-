@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-31T12:06:08Z",
+  "stand": "2026-08-31T12:17:57Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
@@ -1258,7 +1258,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-08-30",
+      "stand": "2026-08-31",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 48,
       "quelle": "abgerufen",
@@ -1271,7 +1271,7 @@
       "vorher": 10,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-08-30",
+      "stand": "2026-08-31",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -1306,7 +1306,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-08-30",
+      "stand": "2026-08-31",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 16,
       "quelle": "abgerufen",
@@ -1543,11 +1543,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T11:59:00Z",
+    "stand": "2026-08-31T12:08:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-31T10:58:24Z",
+    "deployWann": null,
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
@@ -1556,6 +1556,10 @@
     "journalVorrat": 4
   },
   "luecken": [
+    {
+      "was": "Kanalabruf",
+      "warum": "Bluesky: The operation was aborted due to timeout"
+    },
     {
       "was": "Vorrat an Beiträgen",
       "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-06 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."

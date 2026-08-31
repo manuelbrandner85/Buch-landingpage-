@@ -1,25 +1,25 @@
 {
   "_hinweis": "Von scripts/kanaele.mjs abgerufen, nicht von Hand pflegen. Instagram und Facebook stehen hier nicht: Beide geben ihre Zahlen ohne Anmeldung nicht heraus.",
-  "stand": "2026-08-30T16:02:37Z",
+  "stand": "2026-08-31T12:17:30Z",
   "kanaele": {
     "TikTok": {
       "follower": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
       "beitraege": 48,
-      "stand": "2026-08-30",
-      "gelesenAm": "2026-08-30T16:02:37Z"
+      "stand": "2026-08-31",
+      "gelesenAm": "2026-08-31T12:17:30Z"
     },
     "Pinterest": {
       "follower": 0,
       "beitraege": 16,
-      "stand": "2026-08-30",
-      "gelesenAm": "2026-08-30T16:02:37Z"
+      "stand": "2026-08-31",
+      "gelesenAm": "2026-08-31T12:17:30Z"
     },
     "YouTube": {
       "follower": 10,
-      "stand": "2026-08-30",
-      "gelesenAm": "2026-08-30T16:02:37Z"
+      "stand": "2026-08-31",
+      "gelesenAm": "2026-08-31T12:17:30Z"
     },
     "Bluesky": {
       "follower": 0,
@@ -28,5 +28,7 @@
       "gelesenAm": "2026-08-30T16:02:37Z"
     }
   },
-  "fehler": []
+  "fehler": [
+    "Bluesky: The operation was aborted due to timeout"
+  ]
 }
