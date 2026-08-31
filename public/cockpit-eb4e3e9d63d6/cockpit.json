@@ -1,6 +1,11 @@
 {
-  "stand": "2026-08-31T15:43:59Z",
-  "warnungen": [],
+  "stand": "2026-08-31T16:04:30Z",
+  "warnungen": [
+    {
+      "stufe": "mittel",
+      "text": "2 tote Links auf der Seite — 404 auf https://www.trendonix-buecher.de/_next/static/css/f3e28a778f040c79.css."
+    }
+  ],
   "aenderungen": {
     "seit": "2026-08-30",
     "punkte": [],
@@ -1708,15 +1713,24 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T15:02:00Z",
+    "stand": "2026-08-31T16:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": false,
-    "deployWann": "2026-08-31T14:22:23Z",
+    "deployLaeuft": true,
+    "deployWann": null,
     "zertifikatTage": 84,
     "linksGeprueft": 54,
-    "linksKaputt": 0,
-    "linksZiele": [],
+    "linksKaputt": 2,
+    "linksZiele": [
+      {
+        "ziel": "https://www.trendonix-buecher.de/_next/static/css/f3e28a778f040c79.css",
+        "code": 404
+      },
+      {
+        "ziel": "https://bsky.app/profile/trendonix-buecher.bsky.social",
+        "code": 0
+      }
+    ],
     "seitenGemeldet": 89,
     "journalVorrat": 4
   },
