@@ -1361,6 +1361,42 @@ footer .partner-marke{text-decoration:none}
 .verteiler-feld button:hover{filter:brightness(1.1)}
 .verteiler > .feinschrift{display:block;max-width:34rem;margin:1.4rem auto 0;
   font-size:.7rem;line-height:1.6;color:rgba(226,222,214,.55)}
+
+/* ---------- Bewertung schreiben ----------
+   Dasselbe Formular wie der Verteiler, deshalb dieselben Klassen — hier stehen
+   nur die drei Bauteile, die dort nicht vorkommen: das Textfeld, die
+   Sternauswahl und das einzelne Namensfeld. Ein eigener Formularstil wäre eine
+   zweite Wahrheit über dieselbe Sache.
+
+   Die Sterne sind Auswahlknöpfe in einer Reihe. Untereinander sähen sie aus
+   wie eine Liste von Bedingungen; nebeneinander sieht man auf einen Blick,
+   dass es eine Skala ist. */
+.bewerten{position:relative;z-index:2;padding:4.4rem 1.4rem 4.4rem;
+  background:var(--nacht);border-top:1px solid rgba(227,200,139,.12)}
+.bewerten > .kopf{max-width:62rem;margin:0 auto}
+.bewerten > .kopf p{color:var(--staub);max-width:52ch}
+.bewerten > .feinschrift{display:block;max-width:34rem;margin:1.4rem auto 0;
+  font-size:.7rem;line-height:1.6;color:rgba(226,222,214,.55)}
+.verteiler-feld input[type=text],
+.verteiler-feld textarea{width:100%;padding:.85rem 1rem;
+  background:rgba(255,255,255,.04);color:inherit;font:inherit;
+  border:1px solid rgba(227,200,139,.28);border-radius:2px}
+.verteiler-feld textarea{resize:vertical;min-height:8rem;line-height:1.6}
+.verteiler-feld input[type=text]:focus-visible,
+.verteiler-feld textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.bewerten-sterne{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;
+  gap:.5rem 1.1rem;align-items:baseline}
+.bewerten-sterne legend{padding:0;margin-bottom:.55rem}
+.bewerten-sterne .verteiler-haken{gap:.4rem;font-size:.8rem}
+.bewerten-sterne .verteiler-haken input{margin-top:.15rem}
+
+/* Die Zwischenüberschrift über den Zuschriften. Kleiner als eine echte
+   Überschrift, weil sie eine Herkunft trennt und keinen neuen Abschnitt
+   aufmacht — aber sichtbar genug, dass niemand die beiden Quellen für
+   dieselbe hält. */
+.stimmen-zwischen{max-width:62rem;margin:2.6rem auto 1.1rem;
+  font-family:var(--display),serif;font-weight:400;font-size:.72rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
 /* ---------- Die Kanäle ----------
    Sechs fremde Marken auf einer Seite, die sonst nur Gold und Nacht kennt,
    wären ein Werbeblock. Deshalb tragen sie hier dieselbe Strichstärke wie der

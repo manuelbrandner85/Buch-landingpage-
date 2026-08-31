@@ -35,7 +35,13 @@ import type { BandId } from './typen';
  * Buchseite, auf der Startseite und im Datenblatt.
  */
 
-/** Die Sternzahl eines Händlers zu einem Stichtag. */
+/**
+ * Die Sternzahl eines Händlers zu einem Stichtag.
+ *
+ * Hier steht nur, was eine Plattform selbst ausweist. Ein Durchschnitt aus
+ * Zuschriften an dieses Haus gehört nicht hierher: Er ließe sich nirgends
+ * nachzählen, stünde aber neben einer Zahl, die sich nachzählen lässt.
+ */
 export interface Bewertungsstand {
   bandId: BandId;
   /** Wo sie steht: „Amazon“, „tolino“, „Thalia“, „Goodreads“, „BücherTreff“. */
@@ -56,6 +62,23 @@ export interface Bewertungsstand {
 export interface Leserstimme {
   bandId: BandId;
   quelle: string;
+  /**
+   * Woher die Stimme kommt – und das ist mehr als eine Herkunftsangabe.
+   *
+   *  · `haendler` (Vorgabe) – sie steht öffentlich bei Amazon, tolino oder
+   *    sonstwo. Jeder kann sie dort nachlesen; die Plattform sagt selbst, ob
+   *    ein Kauf dahintersteht. Nur diese Stimmen gehen ins Datenblatt für
+   *    Suchmaschinen.
+   *  · `direkt` – über das Formular auf dieser Seite eingegangen. Echt, aber
+   *    nirgends nachprüfbar: Ob der Absender das Buch gekauft hat, weiß hier
+   *    niemand. Deshalb steht sie in einem eigenen Abschnitt, zählt nicht in
+   *    den Schnitt und erscheint nicht im Datenblatt. Eine selbst
+   *    eingesammelte Bewertung als `review` auszuzeichnen ist nicht verboten,
+   *    aber es ist der Punkt, an dem eine Domain ihre Sterne bei Google
+   *    verlieren kann – und dieser Preis steht in keinem Verhältnis zu dem,
+   *    was ein zusätzlicher Eintrag brächte.
+   */
+  art?: 'haendler' | 'direkt';
   /** Wörtlich. Auslassungen mit […], nichts umformuliert. */
   text: string;
   /** Der Name, unter dem die Rezension öffentlich steht. Sonst weglassen. */
@@ -131,9 +154,22 @@ const brauchbar = (b: Bewertungsstand) =>
 export const bewertungenVon = (bandId: BandId) =>
   BEWERTUNGEN.filter((b) => b.bandId === bandId && brauchbar(b));
 
-/** Die Zitate eines Bandes, höchstens so viele wie gewünscht. */
+const vomHaendler = (s: Leserstimme) => (s.art ?? 'haendler') === 'haendler';
+
+/**
+ * Die nachprüfbaren Zitate eines Bandes, höchstens so viele wie gewünscht.
+ *
+ * Nur, was öffentlich bei einem Händler steht. Was über das Formular kam,
+ * holt `direktstimmenVon` – getrennt, weil es getrennt gezeigt wird.
+ */
 export const stimmenVon = (bandId: BandId, hoechstens?: number) => {
-  const alle = STIMMEN.filter((s) => s.bandId === bandId);
+  const alle = STIMMEN.filter((s) => s.bandId === bandId && vomHaendler(s));
+  return hoechstens === undefined ? alle : alle.slice(0, hoechstens);
+};
+
+/** Die Zuschriften über das Formular dieser Seite. */
+export const direktstimmenVon = (bandId: BandId, hoechstens?: number) => {
+  const alle = STIMMEN.filter((s) => s.bandId === bandId && !vomHaendler(s));
   return hoechstens === undefined ? alle : alle.slice(0, hoechstens);
 };
 

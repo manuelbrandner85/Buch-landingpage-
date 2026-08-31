@@ -18,6 +18,7 @@ import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
 import { Kaufleiste } from '@/ui/Kaufleiste';
 import { Verteiler } from '@/ui/Verteiler';
+import { Bewerten } from '@/ui/Bewerten';
 
 /** „24. August 2026“ – dieselbe Schreibweise wie im Journal. */
 const standDatum = (iso: string) =>
@@ -257,6 +258,12 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
           </ul>
         </>
       )}
+
+      {/* Ganz unten, nicht oben bei den Sternen: Oben entscheidet jemand, ob
+          er das Buch kauft; hier unten steht jemand, der es gelesen hat. Das
+          Formular erscheint nur, wenn in data/gemeinsam/bewertung.ts eine
+          Adresse steht, und nur bei erschienenen Büchern. */}
+      <Bewerten buch={buch} />
 
       {/* Wer bis hierher gelesen und die Leseprobe genommen hat, ist der
           einzige Mensch auf dieser Seite, für den der Verteiler etwas bedeutet.

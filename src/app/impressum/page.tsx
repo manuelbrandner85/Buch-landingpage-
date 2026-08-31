@@ -6,6 +6,7 @@ import { ANBIETER, impressumVollstaendig } from '@/data/gemeinsam/anbieter';
 import { zaehlerLaeuft } from '@/ui/Zaehler';
 import { ZustimmungAendern } from '@/ui/Zustimmung';
 import { messungLaeuft } from '@/data/gemeinsam/messung';
+import { BEWERTUNGSFORMULAR } from '@/data/gemeinsam/bewertung';
 import { Kanaele } from '@/ui/Kanaele';
 
 export const metadata: Metadata = {
@@ -30,6 +31,11 @@ export default function ImpressumSeite() {
   const fertig = impressumVollstaendig();
   const zaehlt = zaehlerLaeuft();
   const misst = messungLaeuft();
+  // Der Absatz zum Bewertungsformular steht nur da, wenn es das Formular
+  // wirklich gibt. Eine Datenschutzerklärung, die eine Verarbeitung
+  // beschreibt, die gar nicht stattfindet, ist genauso falsch wie eine, die
+  // eine verschweigt.
+  const bewertbar = Boolean(BEWERTUNGSFORMULAR.formular);
 
   return (
     <main className="lesefassung">
@@ -163,6 +169,22 @@ export default function ImpressumSeite() {
           <a href="https://www.brevo.com/de/legal/privacypolicy/"
             rel="noopener nofollow">brevo.com/de/legal/privacypolicy</a>
         </p>
+        {bewertbar && (
+          <p>
+            <b>Das Bewertungsformular.</b> Wer eine Bewertung schreibt, gibt eine
+            E-Mail-Adresse, einen frei gewählten Namen, eine Sternzahl und einen
+            Text an. Veröffentlicht werden auf dieser Seite nur der Name, die
+            Sterne und der Text – die E-Mail-Adresse nicht; sie dient allein der
+            Rückfrage. Nichts erscheint automatisch: Jede Zuschrift wird gelesen
+            und erst danach eingestellt. Rechtsgrundlage ist Ihre Einwilligung
+            nach Art. 6 Abs. 1 lit. a DSGVO, die Sie jederzeit mit Wirkung für
+            die Zukunft widerrufen können – eine formlose Nachricht an die unten
+            genannte Adresse genügt, die Bewertung wird dann entfernt. Die
+            Übermittlung des Formulars läuft über Brevo (siehe oben); die
+            Adresse wird nicht in den Verteiler aufgenommen und nicht für
+            Werbung verwendet.
+          </p>
+        )}
         <p>
           Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
           Verarbeitung, Datenübertragbarkeit und Widerspruch sowie ein

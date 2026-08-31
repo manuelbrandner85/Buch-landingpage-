@@ -1,8 +1,9 @@
 import type { BandId } from '@/data/gemeinsam/typen';
 import {
-  bewertungenVon, gesamturteil, stimmenVon,
+  bewertungenVon, direktstimmenVon, gesamturteil, stimmenVon,
   type Leserstimme,
 } from '@/data/gemeinsam/stimmen';
+import { BEWERTUNGSFORMULAR } from '@/data/gemeinsam/bewertung';
 
 /**
  * Die Sterne und die Sätze.
@@ -116,7 +117,8 @@ export function Leserstimmen({ bandId, titel = 'Was Leser sagen' }:
 { bandId: BandId; titel?: string }) {
   const stimmen = stimmenVon(bandId);
   const zahlen = bewertungenVon(bandId);
-  if (stimmen.length === 0 && zahlen.length === 0) return null;
+  const zuschriften = direktstimmenVon(bandId);
+  if (stimmen.length === 0 && zahlen.length === 0 && zuschriften.length === 0) return null;
   return (
     <section className="stimmen" id="stimmen">
       <h2>{titel}</h2>
@@ -141,11 +143,31 @@ export function Leserstimmen({ bandId, titel = 'Was Leser sagen' }:
           ))}
         </ul>
       )}
+      {/* Zuschriften über das Formular dieser Seite.
+          Eigener Block, eigene Überschrift, eigener Hinweis – und nicht im
+          Datenblatt für Suchmaschinen. Der Grund steht in
+          data/gemeinsam/bewertung.ts: Sie sind echt, aber nirgends
+          nachzählbar, und neben einer Zahl, die sich nachzählen lässt, wäre
+          das eine stille Unwahrheit. */}
+      {zuschriften.length > 0 && (
+        <>
+          <h3 className="stimmen-zwischen">Direkt an uns geschrieben</h3>
+          <div className="stimmenreihe">
+            {zuschriften.map((s, i) => <Stimme key={`direkt-${i}`} stimme={s} />)}
+          </div>
+        </>
+      )}
+      {/* Die Pflichtangabe nach § 5b Abs. 3 UWG: Wer Verbraucherbewertungen
+          zeigt, muss sagen, ob und wie er prüft, dass sie von Käufern stammen.
+          Sie steht hier und nicht im Impressum – dort läse sie niemand, der
+          gerade die Sterne ansieht. */}
       <p className="quelle">
-        <b>Hinweis</b>Alle Stimmen stehen öffentlich bei den genannten Händlern
-        und sind hier wörtlich zitiert, gekürzt höchstens am Anfang oder Ende.
-        Die Sternzahlen sind abgelesen, nicht gerundet, und tragen den Tag, an
-        dem sie abgelesen wurden.
+        <b>Hinweis</b>Alle Stimmen stehen wörtlich so, wie sie geschrieben
+        wurden, gekürzt höchstens am Anfang oder Ende. Die Sternzahlen der
+        Händler sind abgelesen, nicht gerundet, und tragen den Tag, an dem sie
+        abgelesen wurden; ob ein Kauf dahintersteht, weist die jeweilige
+        Plattform selbst aus.
+        {zuschriften.length > 0 ? ` ${BEWERTUNGSFORMULAR.pruefung}` : ''}
       </p>
     </section>
   );
