@@ -36,7 +36,7 @@ export const HAUSFILM: Hausfilmangabe = {
   dateiKlein: '/film/trendonix-film-klein.mp4',
   poster: '/film/trendonix-film.jpg',
   titel: 'Der Film über Trendonix',
-  laenge: '1:26 Minuten',
+  laenge: '1:35 Minuten',
   text: [
     'Vor mehr als drei Millionen Jahren geht jemand durch feuchte Asche.',
     'Was blieb, sind Fußspuren. Mehr nicht.',
