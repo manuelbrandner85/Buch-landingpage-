@@ -7,12 +7,13 @@ export const BUCH_BAND_1: Buch = {
   titel: 'Ursprung und Ordnung',
   unterzeile: 'Von der Menschwerdung bis zu den Imperien der Antike',
   status: 'erschienen',
-  // Die beiden Ausgaben bei Amazon, über ihre ASIN adressiert. Das E-Book liegt
-  // in KDP Select und ist deshalb dort exklusiv; ein Buchhandelsweg kommt erst
-  // mit der geplanten Druckausgabe dazu und wird dann hier ergänzt.
+  // Drei Ausgaben bei Amazon, über ihre ASIN adressiert. Das E-Book liegt
+  // in KDP Select und ist deshalb dort exklusiv; ein Buchhandelsweg kommt
+  // erst mit einer eigenen ISBN dazu und wird dann hier ergänzt.
   //
-  // ISBN, Preise und Erscheinungstermin am 27.08.2026 von den Produktseiten
-  // abgelesen, nicht geschätzt. Ändert Amazon einen Preis, muss er hier
+  // ISBN, Preise und Erscheinungstermin von den Produktseiten abgelesen,
+  // nicht geschätzt (Taschenbuch und E-Book am 27.08.2026, die gebundene
+  // Ausgabe am 31.08.2026). Ändert Amazon einen Preis, muss er hier
   // nachgezogen werden – auf der Buchseite steht deshalb sichtbar, von wann
   // die Angabe ist.
   kaufwege: [
@@ -20,6 +21,16 @@ export const BUCH_BAND_1: Buch = {
       haendler: 'Amazon', form: 'Taschenbuch',
       url: 'https://www.amazon.de/dp/B0HG4LPJKV',
       isbn: '979-8191493053', preis: 39.90,
+    },
+    // Seit dem 31.08.2026 gibt es den Band auch gebunden. Der Preis ist auf
+    // der Produktseite abgelesen (49,90 €, „Preisangaben inkl. USt."), nicht
+    // aus dem KDP-Nettowert von 46,64 € gerechnet — auch wenn beides hier
+    // zufällig dasselbe ergibt. Die ISBN der gebundenen Ausgabe steht noch
+    // aus; das Feld bleibt leer, bis sie abgelesen ist.
+    {
+      haendler: 'Amazon', form: 'Gebunden',
+      url: 'https://www.amazon.de/dp/B0HH9N6VJV',
+      preis: 49.90,
     },
     {
       haendler: 'Amazon', form: 'E-Book',
