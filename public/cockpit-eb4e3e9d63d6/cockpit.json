@@ -1,11 +1,6 @@
 {
-  "stand": "2026-08-31T16:04:30Z",
-  "warnungen": [
-    {
-      "stufe": "mittel",
-      "text": "2 tote Links auf der Seite — 404 auf https://www.trendonix-buecher.de/_next/static/css/f3e28a778f040c79.css."
-    }
-  ],
+  "stand": "2026-08-31T19:38:31Z",
+  "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
     "punkte": [],
@@ -1343,9 +1338,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 5676,
+    "summe": 7347,
     "offenSumme": 5532,
     "buchungen": [
+      {
+        "datum": "2026-08-31",
+        "projekt": "Trendonix-Hausfilm",
+        "zweck": "14 Einstellungen 1080p ueber bytedance/v1-pro-image-to-video plus Bilder ueber seedream/4.5-text-to-image, dazu fehlgeschlagene Sprachauftraege bei elevenlabs. Der 1080p-Motor kostet rund 88 Credits je Einstellung statt der 22,5 des lite-Motors bei 720p — das war die Fehleinschaetzung. Guthaben danach 4,5: Fuer die Sprecherstimme und den taeglichen Betrieb muss aufgeladen werden.",
+        "credits": 1671
+      },
       {
         "datum": "2026-08-30",
         "projekt": "nicht zugeordnet",
@@ -1411,12 +1412,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (20:08 UTC, nachgetragen)",
         "credits": 342
-      },
-      {
-        "datum": "2026-08-28",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung",
-        "credits": 72
       }
     ]
   },
@@ -1713,24 +1708,15 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T16:02:00Z",
+    "stand": "2026-08-31T19:37:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": true,
-    "deployWann": null,
-    "zertifikatTage": 84,
+    "deployLaeuft": false,
+    "deployWann": "2026-08-31T18:28:40Z",
+    "zertifikatTage": 83,
     "linksGeprueft": 54,
-    "linksKaputt": 2,
-    "linksZiele": [
-      {
-        "ziel": "https://www.trendonix-buecher.de/_next/static/css/f3e28a778f040c79.css",
-        "code": 404
-      },
-      {
-        "ziel": "https://bsky.app/profile/trendonix-buecher.bsky.social",
-        "code": 0
-      }
-    ],
+    "linksKaputt": 0,
+    "linksZiele": [],
     "seitenGemeldet": 89,
     "journalVorrat": 4
   },
