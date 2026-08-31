@@ -1362,6 +1362,41 @@ footer .partner-marke{text-decoration:none}
 .verteiler > .feinschrift{display:block;max-width:34rem;margin:1.4rem auto 0;
   font-size:.7rem;line-height:1.6;color:rgba(226,222,214,.55)}
 
+/* ---------- Der Hausfilm ----------
+   Er steht gleich unter dem Empfang und läuft von selbst an, sobald er im
+   Bild ist. Deshalb hat er keinen Rahmen, keine Schatten unter der Fläche und
+   keinen Rand: Alles, was ihn als „Element" markiert, macht aus einem Film ein
+   Bauteil. Nur eine hauchdünne Goldlinie, damit die dunkle Fläche nicht in den
+   dunklen Grund ausfranst.
+
+   Die Höhe steht fest im Seitenverhältnis, nicht in Pixeln — sonst springt
+   die Seite, während der Film noch lädt, und alles darunter rutscht. */
+.hausfilm{position:relative;z-index:2;padding:clamp(3rem,7vh,5.5rem) var(--rand);
+  background:var(--nacht);border-top:1px solid rgba(227,200,139,.12)}
+.hausfilm figure{margin:0;max-width:74rem;margin-inline:auto}
+.hausfilm-rahmen{position:relative;aspect-ratio:16/9;border-radius:2px;
+  overflow:hidden;background:#05080f;
+  box-shadow:0 0 0 1px rgba(227,200,139,.14),0 18px 48px -12px rgba(3,5,11,.75)}
+.hausfilm video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
+
+/* Der Tonknopf liegt im Bild, nicht darunter: Wer ihn sucht, sucht ihn dort,
+   wo der Ton herkommt. Klein, ruhig, immer erreichbar — auch wenn der Ton
+   schon läuft, denn ein Film, den man nicht wieder leise bekommt, ist eine
+   Zumutung. */
+.hausfilm-ton,.hausfilm-start{position:absolute;right:.9rem;bottom:.9rem;
+  padding:.42rem 1rem;font-family:var(--display),serif;font-size:.66rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  background:rgba(6,10,20,.62);backdrop-filter:blur(6px);
+  border:1px solid rgba(227,200,139,.34);border-radius:2px;cursor:pointer;
+  transition:background .3s ease,border-color .3s ease}
+.hausfilm-ton:hover,.hausfilm-start:hover{background:rgba(6,10,20,.85);
+  border-color:rgba(227,200,139,.6)}
+.hausfilm-start{right:50%;bottom:50%;transform:translate(50%,50%);
+  padding:.7rem 1.5rem;font-size:.7rem}
+@media (max-width:640px){
+  .hausfilm-ton{right:.6rem;bottom:.6rem;font-size:.6rem;padding:.35rem .8rem}
+}
+
 /* ---------- Bewertung schreiben ----------
    Dasselbe Formular wie der Verteiler, deshalb dieselben Klassen — hier stehen
    nur die drei Bauteile, die dort nicht vorkommen: das Textfeld, die

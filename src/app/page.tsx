@@ -6,10 +6,12 @@ import {
   assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
 import { BASIS_PFAD, bildQuelle, ordner } from '@/world/bilder';
-import { WEG_COCKPIT, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
+import { WEG_COCKPIT, weg, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
+import { Hausfilm } from '@/ui/Hausfilm';
+import { HAUSFILM } from '@/data/gemeinsam/hausfilm';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
 import { Verteiler } from '@/ui/Verteiler';
@@ -205,6 +207,23 @@ export default function Haus() {
           )}
         </div>
       </section>
+
+      {/* Der Film über das Haus.
+          Er steht hier und nicht ganz oben: Oben entscheidet sich in zwei
+          Sekunden, ob jemand bleibt, und dafür ist ein Standbild mit einem
+          Satz schneller als jedes Video. Wer weiterscrollt, ist geblieben —
+          und genau dann läuft der Film an, von selbst und, sobald der Browser
+          es zulässt, mit Ton. Warum das nicht immer sofort geht, steht in
+          ui/Hausfilm.tsx. */}
+      {HAUSFILM.datei && (
+        <Hausfilm
+          film={weg(HAUSFILM.datei)}
+          filmKlein={HAUSFILM.dateiKlein ? weg(HAUSFILM.dateiKlein) : undefined}
+          poster={weg(HAUSFILM.poster)}
+          titel={HAUSFILM.titel}
+          laenge={HAUSFILM.laenge}
+          text={HAUSFILM.text} />
+      )}
 
       <section className="welten" id="welten">
         <div className="kopf">
