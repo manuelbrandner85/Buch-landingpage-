@@ -1,14 +1,14 @@
 {
   "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
-  "stand": "2026-08-30T14:03:34Z",
+  "stand": "2026-08-31T12:06:05Z",
   "eingerichtet": true,
   "hinweis": null,
   "klicks": 0,
-  "impressionen": 7,
-  "position": 45.1,
+  "impressionen": 29,
+  "position": 54.8,
   "von": "2026-08-27",
-  "bis": "2026-08-28",
-  "tage": 2,
+  "bis": "2026-08-29",
+  "tage": 3,
   "suchanfragen": [
     {
       "wort": "an welchem fluss liegt london",
@@ -31,7 +31,7 @@
       "impressionen": 1
     },
     {
-      "wort": "tor der tränen",
+      "wort": "hauptstadt moskau",
       "klicks": 0,
       "impressionen": 1
     }

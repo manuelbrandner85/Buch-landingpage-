@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-31T04:02:40Z",
+  "stand": "2026-08-31T12:06:08Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
@@ -98,10 +98,10 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 2 gemessene Tage.",
+    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 3 gemessene Tage.",
     "klicks7": 0,
-    "impressionen7": 7,
-    "position": 45.1,
+    "impressionen7": 29,
+    "position": 54.8,
     "seitenIndexiert": null,
     "seitenGesamt": 89,
     "suchanfragen": [
@@ -126,14 +126,14 @@
         "impressionen": 1
       },
       {
-        "wort": "tor der tränen",
+        "wort": "hauptstadt moskau",
         "klicks": 0,
         "impressionen": 1
       }
     ],
     "von": "2026-08-27",
-    "bis": "2026-08-28",
-    "tage": 2,
+    "bis": "2026-08-29",
+    "tage": 3,
     "quelle": "abgerufen"
   },
   "reichweite": {
@@ -417,33 +417,6 @@
           "was": "07_feuer",
           "zustand": "offen",
           "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "04_ordnung",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-24",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "06_fuenf_fragen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -761,6 +734,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-25",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -858,6 +840,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Journal",
           "zeit": null,
           "was": "wer-hat-die-pyramiden-gebaut",
@@ -940,6 +931,15 @@
           "was": "02_beleggrad",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "04_ordnung",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-24",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1543,11 +1543,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T04:02:00Z",
+    "stand": "2026-08-31T11:59:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-31T03:03:29Z",
+    "deployWann": "2026-08-31T10:58:24Z",
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
