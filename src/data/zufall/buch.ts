@@ -18,21 +18,33 @@ export const BUCH_ZUFALL: Buch = {
   nummer: 1,
   titel: 'Alles nur Zufall?',
   unterzeile: '40 Theorien, die die Welt erklären. Angeblich.',
-  // Beide Ausgaben sind bei KDP eingereicht und liegen in der Prüfung.
-  // Solange keine Produktseite existiert, gibt es keinen Kaufweg — und
-  // niemals einen erfundenen Link.
-  status: 'erscheint',
-  kaufwege: [],
+  // Seit dem 31.08.2026 im Handel. Beide Ausgaben stehen im KDP-Bücherregal
+  // auf „Live"; ASIN, Preise und ISBN sind dort abgelesen, nicht geschätzt.
+  //
+  // Achtung bei den Preisen: KDP zeigt beim Taschenbuch den NETTO-Preis
+  // (28,03 €), auf der Produktseite steht der Ladenpreis mit sieben Prozent
+  // Buchsteuer — 29,99 €. Genau der gehört hierher, sonst steht auf der
+  // eigenen Seite ein anderer Preis als bei Amazon. Beim E-Book ist der
+  // KDP-Wert schon der Ladenpreis.
+  status: 'erschienen',
+  kaufwege: [
+    {
+      haendler: 'Amazon', form: 'Taschenbuch',
+      url: 'https://www.amazon.de/dp/B0HH65RRKG',
+      isbn: '979-8170553914', preis: 29.99,
+    },
+    {
+      haendler: 'Amazon', form: 'E-Book',
+      url: 'https://www.amazon.de/dp/B0HH8KFYDY',
+      preis: 9.99, hinweis: 'in Kindle Unlimited enthalten',
+    },
+  ],
+  // Das Datum aus dem KDP-Bücherregal: Das Taschenbuch steht dort als „Live,
+  // eingereicht am 30. August 2026". Weicht der Erscheinungstermin auf der
+  // Produktseite davon ab, gilt der — er ist der öffentliche.
+  erschienen: '2026-08-30',
   coverAsset: 'cover-zufall',
   seiten: 456,
-  stand: {
-    kurz: 'Bei Amazon in Prüfung',
-    satz: 'Taschenbuch und Kindle-Ausgabe sind eingereicht und liegen in der '
-      + 'Prüfung. Sobald die Produktseiten stehen, erscheinen hier die '
-      + 'Kaufwege. Der Innenteil ist fertig gesetzt: 456 Seiten, vierzig '
-      + 'Kapitel, vierzig Abbildungen, vierzig nachschlagbare Quellen.',
-    vom: '2026-08-29',
-  },
   klappentext:
     'Die Erde ist eine Scheibe. Die Mondlandung war ein Filmset. Und über dir '
     + 'versprüht jemand Chemikalien, damit du müde bleibst. Vierzig Theorien, '
