@@ -55,3 +55,6 @@ assets-quelle/zufall/probe/
 assets-quelle/zufall/kontaktabzug.jpg
 # Die Bühne bleibt drin: `handy-gerade.jpg` ist das entzerrte Foto, und die
 # Entzerrung steckt in vier gemessenen Eckpunkten, nicht in einem Skript.
+  
+# Berichte der Pruefskripte - sie entstehen bei jedem Lauf neu.  
+*.log  
