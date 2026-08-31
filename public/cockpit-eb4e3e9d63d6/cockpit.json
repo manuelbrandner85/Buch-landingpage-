@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-31T22:03:37Z",
+  "stand": "2026-08-31T23:05:54Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
@@ -1448,7 +1448,7 @@
       "reaktionenLabel": "Likes",
       "stand": "2026-08-31",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
-      "beitraege": 50,
+      "beitraege": 51,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-30"
     },
@@ -1509,7 +1509,7 @@
       "stand": "2026-08-31",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 4,
+      "beitraege": 5,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-30"
     },
@@ -1731,11 +1731,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T22:02:00Z",
+    "stand": "2026-08-31T23:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-31T21:38:30Z",
+    "deployWann": "2026-08-31T22:04:28Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,

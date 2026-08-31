@@ -1,31 +1,31 @@
 {
   "_hinweis": "Von scripts/kanaele.mjs abgerufen, nicht von Hand pflegen. Instagram und Facebook stehen hier nicht: Beide geben ihre Zahlen ohne Anmeldung nicht heraus.",
-  "stand": "2026-08-31T15:02:48Z",
+  "stand": "2026-08-31T23:05:50Z",
   "kanaele": {
     "TikTok": {
       "follower": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "beitraege": 50,
+      "beitraege": 51,
       "stand": "2026-08-31",
-      "gelesenAm": "2026-08-31T15:02:48Z"
+      "gelesenAm": "2026-08-31T23:05:50Z"
     },
     "Pinterest": {
       "follower": 0,
       "beitraege": 17,
       "stand": "2026-08-31",
-      "gelesenAm": "2026-08-31T15:02:48Z"
+      "gelesenAm": "2026-08-31T23:05:50Z"
     },
     "YouTube": {
       "follower": 10,
       "stand": "2026-08-31",
-      "gelesenAm": "2026-08-31T15:02:48Z"
+      "gelesenAm": "2026-08-31T23:05:50Z"
     },
     "Bluesky": {
       "follower": 0,
-      "beitraege": 4,
+      "beitraege": 5,
       "stand": "2026-08-31",
-      "gelesenAm": "2026-08-31T15:02:48Z"
+      "gelesenAm": "2026-08-31T23:05:50Z"
     }
   },
   "fehler": []
