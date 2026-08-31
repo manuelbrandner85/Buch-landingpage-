@@ -1,10 +1,171 @@
 {
-  "stand": "2026-08-31T15:02:52Z",
+  "stand": "2026-08-31T15:43:59Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
     "punkte": [],
     "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+  },
+  "regal": {
+    "buecher": [
+      {
+        "id": "band-1",
+        "name": "Die Unsichtbaren Fäden — Band 1",
+        "titel": "Ursprung und Ordnung",
+        "unterzeile": "Von der Menschwerdung bis zu den Imperien der Antike",
+        "reihe": "Die Unsichtbaren Fäden",
+        "nummer": 1,
+        "status": "erschienen",
+        "erschienen": "2026-08-08",
+        "tageDraussen": 23,
+        "seiten": 206,
+        "weg": "/buch/band-1/",
+        "ausgaben": [
+          {
+            "form": "Taschenbuch",
+            "haendler": "Amazon",
+            "url": "https://www.amazon.de/dp/B0HG4LPJKV",
+            "isbn": "979-8191493053",
+            "preis": 39.9,
+            "hinweis": null,
+            "art": "kauf"
+          },
+          {
+            "form": "Gebunden",
+            "haendler": "Amazon",
+            "url": "https://www.amazon.de/dp/B0HH9N6VJV",
+            "isbn": null,
+            "preis": 49.9,
+            "hinweis": null,
+            "art": "kauf"
+          },
+          {
+            "form": "E-Book",
+            "haendler": "Amazon",
+            "url": "https://www.amazon.de/dp/B0HFZFHWKK",
+            "isbn": null,
+            "preis": 12.99,
+            "hinweis": "in Kindle Unlimited enthalten",
+            "art": "kauf"
+          }
+        ],
+        "formen": [
+          "Taschenbuch",
+          "Gebunden",
+          "E-Book"
+        ],
+        "bewertung": {
+          "schnitt": 5,
+          "anzahl": 2,
+          "quellen": [
+            "Amazon"
+          ],
+          "stand": "2026-08-31"
+        },
+        "zitate": 2,
+        "arbeitsstand": null,
+        "mangel": [
+          "Gebunden: keine ISBN"
+        ]
+      },
+      {
+        "id": "band-2",
+        "name": "Die Unsichtbaren Fäden — Band 2",
+        "titel": "Glaube, Gold und Revolution",
+        "unterzeile": "Vom Ende der Antike bis zum Industriezeitalter",
+        "reihe": "Die Unsichtbaren Fäden",
+        "nummer": 2,
+        "status": "erscheint",
+        "erschienen": null,
+        "tageDraussen": null,
+        "seiten": 206,
+        "weg": "/buch/band-2/",
+        "ausgaben": [],
+        "formen": [],
+        "bewertung": null,
+        "zitate": 0,
+        "arbeitsstand": {
+          "kurz": "Fertig gesetzt",
+          "satz": "Der Band ist fertig: 206 Seiten, fünf Kapitel, Umschlag und Motive stehen, die Druckdatei ist gebaut. Was fehlt, ist der Kaufweg.",
+          "vom": "2026-08-24"
+        },
+        "mangel": []
+      },
+      {
+        "id": "band-3",
+        "name": "Die Unsichtbaren Fäden — Band 3",
+        "titel": "Krieg, Ordnung und Netz",
+        "unterzeile": "Vom Weltkrieg bis zur vernetzten Gegenwart",
+        "reihe": "Die Unsichtbaren Fäden",
+        "nummer": 3,
+        "status": "erscheint",
+        "erschienen": null,
+        "tageDraussen": null,
+        "seiten": 206,
+        "weg": "/buch/band-3/",
+        "ausgaben": [],
+        "formen": [],
+        "bewertung": null,
+        "zitate": 0,
+        "arbeitsstand": {
+          "kurz": "In der Schlusskorrektur",
+          "satz": "Der Buchblock steht: 206 Seiten, fünf Kapitel, 91 Motive und sechs Karten. Offen ist ein Schlussdurchgang — eingetragene Korrekturen werden in einem Zug gesetzt, darunter mehrere, die eine Belegstufe herabsetzen. Das dauert, so lange es dauert.",
+          "vom": "2026-08-25"
+        },
+        "mangel": []
+      },
+      {
+        "id": "zufall",
+        "name": "Alles nur Zufall?",
+        "titel": "Alles nur Zufall?",
+        "unterzeile": "40 Theorien, die die Welt erklären. Angeblich.",
+        "reihe": "Alles nur Zufall?",
+        "nummer": 1,
+        "status": "erschienen",
+        "erschienen": "2026-08-30",
+        "tageDraussen": 1,
+        "seiten": 456,
+        "weg": "/buch/zufall/",
+        "ausgaben": [
+          {
+            "form": "Taschenbuch",
+            "haendler": "Amazon",
+            "url": "https://www.amazon.de/dp/B0HH65RRKG",
+            "isbn": "979-8170553914",
+            "preis": 29.99,
+            "hinweis": null,
+            "art": "kauf"
+          },
+          {
+            "form": "E-Book",
+            "haendler": "Amazon",
+            "url": "https://www.amazon.de/dp/B0HH8KFYDY",
+            "isbn": null,
+            "preis": 9.99,
+            "hinweis": "in Kindle Unlimited enthalten",
+            "art": "kauf"
+          }
+        ],
+        "formen": [
+          "Taschenbuch",
+          "E-Book"
+        ],
+        "bewertung": null,
+        "zitate": 0,
+        "arbeitsstand": null,
+        "mangel": []
+      }
+    ],
+    "preisstand": "31. August 2026",
+    "inhaltsstand": "2026-08-31",
+    "stumm": 0,
+    "erschienen": 2,
+    "luecken": [
+      {
+        "was": "Die Unsichtbaren Fäden — Band 1",
+        "warum": "Gebunden: keine ISBN"
+      }
+    ]
   },
   "buch": {
     "titel": "Die Unsichtbaren Fäden — Band 1",
@@ -1560,6 +1721,10 @@
     "journalVorrat": 4
   },
   "luecken": [
+    {
+      "was": "Die Unsichtbaren Fäden — Band 1",
+      "warum": "Gebunden: keine ISBN"
+    },
     {
       "was": "Vorrat an Beiträgen",
       "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-06 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."

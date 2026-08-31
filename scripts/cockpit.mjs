@@ -20,6 +20,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buecherLesen } from './buecher-lesen.mjs';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(wurzel, 'public', 'cockpit-eb4e3e9d63d6', 'cockpit.json');
@@ -45,6 +46,10 @@ const lies = (pfad) => {
 const liesText = (pfad) => { try { return readFileSync(pfad, 'utf8'); } catch { return null; } };
 
 const heute = new Date().toISOString().slice(0, 10);
+// Manche Warnung entsteht weit oben, die Warnliste aber erst weit unten.
+// Sie hier zu sammeln ist ehrlicher, als die Prüfung nach hinten zu schieben,
+// wo sie zwischen Dingen stünde, mit denen sie nichts zu tun hat.
+const warnenSpaeter = [];
 const beitraegeText = liesText(join(wurzel, 'src', 'data', 'gemeinsam', 'beitraege.ts'));
 const luecken = [];
 const fehlt = (was, warum) => luecken.push({ was, warum });
@@ -155,6 +160,26 @@ if (jung?.rang) { buch.rangGesamt = jung.rang; buch.rangStand = jung.d; }
 if (davor?.rang) buch.rangVorher = davor.rang;
 if (jung?.rez !== null && jung?.rez !== undefined) {
   buch.rezensionen = { anzahl: jung.rez, schnitt: jung.schnitt ?? null };
+}
+
+// ── Das Regal: alle Bücher, aus den Daten der Website selbst ──────────────
+//
+// Bis zum 31.08.2026 kannte das Dashboard genau einen Titel — den, der von
+// Hand in cockpit-basis.json stand. Inzwischen sind es vier, und jeder Preis,
+// der hier von Hand gepflegt würde, wäre eine zweite Wahrheit neben der
+// Website. Also liest `buecher-lesen.mjs` dieselben Dateien, aus denen die
+// Buchseiten gebaut werden: Was hier steht, steht wörtlich auch dort.
+//
+// Der Block unten („Das Buch") bleibt daneben stehen. Er ist etwas anderes:
+// Rang, Kategorien und Verkäufe kommen aus dem KDP-Konto und lassen sich aus
+// dem Repository nicht lesen.
+const regal = buecherLesen(wurzel, heute);
+for (const l of regal.luecken) fehlt(l.was, l.warum);
+const ohneWeg = regal.buecher.filter((b) => b.status === 'erschienen' && !b.ausgaben.length);
+for (const b of ohneWeg) {
+  warnenSpaeter.push(['hoch',
+    `${b.name} steht auf „erschienen", hat aber keinen Kaufweg — auf der Buchseite `
+    + 'gibt es nichts zu klicken.']);
 }
 
 // ── Technik: was die stündliche Windows-Aufgabe gemessen hat ──────────────
@@ -596,6 +621,7 @@ for (const wn of basis.warnungen ?? []) {
   if (wn.bis && wn.bis < heute) continue;
   warnen(wn.stufe === 'hoch' ? 'hoch' : 'mittel', wn.text);
 }
+for (const [stufe, text] of warnenSpaeter) warnen(stufe, text);
 // „abgebrochen“ ist kein Alarm: Der Ablauf bricht den vorigen Lauf ab, wenn
 // ein neuer Push kommt. Das ist eingestellt und richtig so.
 if (technik.deploy === 'fehlgeschlagen') {
@@ -725,6 +751,7 @@ const raus = {
   stand,
   warnungen,
   aenderungen: aenderungenStand,
+  regal,
   buch,
   verkaeufe,
   monat,
@@ -755,4 +782,4 @@ if (nurPruefen) {
 }
 if (gleich) { console.log('Cockpit: unverändert, nichts geschrieben.'); process.exit(0); }
 writeFileSync(ZIEL, text, 'utf8');
-console.log(`Cockpit geschrieben: ${tage.length} Tage Verkäufe, ${bekannt.length}/${basis.kanaele.length} Kanäle mit Zahl, ${warnungen.length} Warnung(en), ${aenderungen.length} Änderung(en), ${luecken.length} Lücke(n), Verlauf ${bisher.length} Tag(e)${verlaufNeu ? ' (neu)' : ''}.`);
+console.log(`Cockpit geschrieben: ${regal.buecher.length} Bücher (${regal.erschienen} erschienen), ${tage.length} Tage Verkäufe, ${bekannt.length}/${basis.kanaele.length} Kanäle mit Zahl, ${warnungen.length} Warnung(en), ${aenderungen.length} Änderung(en), ${luecken.length} Lücke(n), Verlauf ${bisher.length} Tag(e)${verlaufNeu ? ' (neu)' : ''}.`);

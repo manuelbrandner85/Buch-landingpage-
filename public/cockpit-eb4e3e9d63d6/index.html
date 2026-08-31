@@ -69,6 +69,23 @@ ul{list-style:none}
   border-bottom:1px solid rgba(227,200,139,.1);font-size:.86rem}
 .ausgaben li:last-child{border-bottom:0}
 .ausgaben .zustand{color:var(--staub);font-size:.76rem;text-align:right}
+.regal li{padding:.8rem 0;border-bottom:1px solid rgba(227,200,139,.1)}
+.regal li:first-child{padding-top:0}
+.regal li:last-child{border-bottom:0;padding-bottom:0}
+.regal .kopf{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
+.regal .reihe{display:block;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-tief)}
+.regal .name{font-family:Georgia,serif;font-size:1.05rem;color:var(--papier)}
+.regal .lage{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid rgba(227,200,139,.3);border-radius:999px;padding:.15rem .5rem;color:var(--gold)}
+.regal .lage.wartet{color:var(--staub);border-color:rgba(156,148,130,.3)}
+.regal .formen{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem}
+.regal .form{font-size:.72rem;color:var(--staub);border:1px solid rgba(227,200,139,.14);
+  border-radius:.35rem;padding:.2rem .45rem}
+.regal .form b{font-family:Georgia,serif;font-weight:400;color:var(--gold)}
+.regal .sterne{display:block;font-size:.75rem;color:var(--gold);margin-top:.5rem}
+.regal .satz{display:block;font-size:.76rem;color:var(--staub);margin-top:.5rem}
+.regal .mangel{display:block;font-size:.72rem;color:#C0685F;margin-top:.5rem}
 
 .balken{display:block;width:100%;height:70px;margin-top:.9rem}
 .balken rect{fill:var(--gold-tief)}
@@ -473,6 +490,56 @@ svg.kurve circle{fill:var(--gold);vector-effect:non-scaling-stroke}
       + (vl.tage < 2
           ? '<p class="hinweis">Die Kurven beginnen morgen — heute steht der erste Tagesstand.</p>' : '')
       + '</div></section>');
+
+    // ---- Das Regal: alle Bücher, gelesen aus den Daten der Website ----
+    //
+    // Steht vor „Das Buch": Erst das ganze Regal, dann der eine Titel, zu dem
+    // es Rang und Verkäufe gibt. Wer das Dashboard öffnet, will zuerst wissen,
+    // wie das Haus steht — nicht, wie ein einzelner Band steht.
+    var rg = d.regal || {};
+    if (rg.buecher && rg.buecher.length) {
+      t.push('<section data-g="buch"><h2>Alle Bücher</h2><div class="karte"><ul class="regal">'
+        + rg.buecher.map(function (b) {
+            var lage = b.status === 'erschienen'
+              ? (da(b.tageDraussen)
+                  ? (b.tageDraussen === 0 ? 'seit heute im Handel'
+                      : 'seit ' + b.tageDraussen + (b.tageDraussen === 1 ? ' Tag' : ' Tagen') + ' im Handel')
+                  : 'im Handel')
+              : ((b.arbeitsstand && b.arbeitsstand.kurz) ? b.arbeitsstand.kurz : b.status);
+            var bw = b.bewertung;
+            return '<li><div class="kopf"><span>'
+              + '<span class="reihe">'
+              + (b.reihe === b.titel
+                  ? 'Einzeltitel'
+                  : h(b.reihe) + (da(b.nummer) ? ' · Band ' + b.nummer : ''))
+              + '</span>'
+              + '<span class="name">' + h(b.titel) + '</span></span>'
+              + '<span class="lage' + (b.status === 'erschienen' ? '' : ' wartet') + '">'
+              + h(lage) + '</span></div>'
+              + (b.ausgaben && b.ausgaben.length
+                  ? '<div class="formen">' + b.ausgaben.map(function (a) {
+                      return '<span class="form">' + h(a.form) + ' <b>'
+                        + (euro(a.preis) || '—') + '</b></span>';
+                    }).join('') + '</div>'
+                  : '')
+              + (bw
+                  ? '<span class="sterne">' + bw.schnitt.toFixed(1).replace('.', ',')
+                    + ' von 5 · ' + bw.anzahl + (bw.anzahl === 1 ? ' Bewertung' : ' Bewertungen')
+                    + (b.zitate ? ' · ' + b.zitate + (b.zitate === 1 ? ' Zitat' : ' Zitate') : '')
+                    + ' · ' + h((bw.quellen || []).join(', ')) + '</span>'
+                  : '')
+              + (b.arbeitsstand && b.arbeitsstand.satz
+                  ? '<span class="satz">' + h(b.arbeitsstand.satz) + '</span>' : '')
+              + (b.mangel && b.mangel.length
+                  ? '<span class="mangel">' + b.mangel.map(h).join(' · ') + '</span>' : '')
+              + '</li>';
+          }).join('')
+        + '</ul><p class="hinweis">Aus den Daten der Website gelesen — die Preise hier sind '
+        + 'wörtlich die, die auf den Buchseiten stehen. Preisstand: '
+        + h(rg.preisstand || '—') + '.'
+        + (rg.stumm ? ' ' + rg.stumm + ' Band' + (rg.stumm === 1 ? '' : 'e') + ' in Arbeit, hier nicht gezeigt.' : '')
+        + '</p></div></section>');
+    }
 
     // ---- Buch ----
     var b = d.buch || {}, rez = b.rezensionen || {};
