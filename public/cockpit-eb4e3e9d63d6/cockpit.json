@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-31T13:02:47Z",
+  "stand": "2026-08-31T14:21:34Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
@@ -398,20 +398,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "07_feuer",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "07_feuer",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "07_feuer",
@@ -795,6 +781,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-08-30",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "07_feuer",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -974,6 +969,15 @@
           "was": "05_reiterstafette",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "07_feuer",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Journal",
@@ -1543,11 +1547,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T13:02:00Z",
+    "stand": "2026-08-31T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": true,
-    "deployWann": null,
+    "deployLaeuft": false,
+    "deployWann": "2026-08-31T13:03:36Z",
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
