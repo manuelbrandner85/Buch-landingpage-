@@ -1,5 +1,5 @@
 {
-  "stand": "2026-08-31T14:21:34Z",
+  "stand": "2026-08-31T15:02:52Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-30",
@@ -1264,7 +1264,7 @@
       "reaktionenLabel": "Likes",
       "stand": "2026-08-31",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
-      "beitraege": 48,
+      "beitraege": 50,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-30"
     },
@@ -1312,7 +1312,7 @@
       "reaktionenLabel": "Klicks",
       "stand": "2026-08-31",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
-      "beitraege": 16,
+      "beitraege": 17,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-30"
     },
@@ -1325,7 +1325,7 @@
       "stand": "2026-08-31",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 3,
+      "beitraege": 4,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-30"
     },
@@ -1547,11 +1547,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T14:02:00Z",
+    "stand": "2026-08-31T15:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-31T13:03:36Z",
+    "deployWann": "2026-08-31T14:22:23Z",
     "zertifikatTage": 84,
     "linksGeprueft": 54,
     "linksKaputt": 0,
