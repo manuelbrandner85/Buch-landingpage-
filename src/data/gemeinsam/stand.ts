@@ -7,7 +7,7 @@
  * mehr. Deshalb steht hier ein Datum, das nur mitwandert, wenn sich am Inhalt
  * wirklich etwas ändert. Journalbeiträge bringen ihr eigenes Datum mit.
  */
-export const STAND = '2026-08-27';
+export const STAND = '2026-08-31';
 
 /**
  * Von wann die Preise auf der Buchseite sind.
@@ -16,4 +16,4 @@ export const STAND = '2026-08-27';
  * Abschrift ohne Datum ist eine Behauptung; mit Datum ist sie eine Auskunft.
  * Ändert sich ein Preis, wandert dieses Datum mit.
  */
-export const PREISSTAND = '27. August 2026';
+export const PREISSTAND = '31. August 2026';
