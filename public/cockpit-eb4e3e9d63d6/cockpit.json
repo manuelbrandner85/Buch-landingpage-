@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T16:04:17Z",
+  "stand": "2026-09-01T17:02:48Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -611,15 +611,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Facebook",
-          "zeit": "18:30",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Journal",
           "zeit": null,
           "was": "seit-wann-beherrscht-der-mensch-das-feuer",
@@ -1046,6 +1037,15 @@
           "was": "04_ordnung",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "09:30",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Instagram",
@@ -1781,11 +1781,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T16:02:00Z",
+    "stand": "2026-09-01T17:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T15:05:11Z",
+    "deployWann": "2026-09-01T16:05:39Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
