@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T15:04:04Z",
+  "stand": "2026-09-01T16:04:17Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1495,7 +1495,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-08-31",
+      "stand": "2026-09-01",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
@@ -1508,7 +1508,7 @@
       "vorher": 10,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-08-31",
+      "stand": "2026-09-01",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -1543,7 +1543,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-08-31",
+      "stand": "2026-09-01",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
@@ -1555,10 +1555,10 @@
       "follower": 0,
       "vorher": 0,
       "reaktionen": null,
-      "stand": "2026-08-31",
+      "stand": "2026-09-01",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 5,
+      "beitraege": 6,
       "quelle": "abgerufen",
       "vergleichVom": "2026-08-31"
     },
@@ -1781,11 +1781,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T15:02:00Z",
+    "stand": "2026-09-01T16:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T14:03:27Z",
+    "deployWann": "2026-09-01T15:05:11Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
