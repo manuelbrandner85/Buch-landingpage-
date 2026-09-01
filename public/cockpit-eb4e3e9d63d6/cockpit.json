@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T18:04:58Z",
+  "stand": "2026-09-01T19:02:33Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-31",
@@ -10,6 +10,20 @@
         "nach": "#645.558",
         "delta": "+#133.368",
         "richtung": "schlecht"
+      },
+      {
+        "was": "Follower gesamt",
+        "von": "22.657",
+        "nach": "22.658",
+        "delta": "+1",
+        "richtung": "gut"
+      },
+      {
+        "was": "YouTube",
+        "von": "10",
+        "nach": "11",
+        "delta": "+1",
+        "richtung": "gut"
       }
     ],
     "hinweis": null
@@ -324,7 +338,7 @@
     "quelle": "abgerufen"
   },
   "reichweite": {
-    "gesamt": 22657,
+    "gesamt": 22658,
     "kanaeleGezaehlt": 7,
     "kanaeleGesamt": 7,
     "abgerufen": 4,
@@ -408,7 +422,7 @@
       },
       {
         "d": "2026-09-01",
-        "v": 22657
+        "v": 22658
       }
     ],
     "bestellungen": [
@@ -489,7 +503,7 @@
         },
         {
           "d": "2026-09-01",
-          "v": 10
+          "v": 11
         }
       ],
       "Instagram": [
@@ -1533,7 +1547,7 @@
     {
       "name": "YouTube",
       "handle": "@Trendonixde",
-      "follower": 10,
+      "follower": 11,
       "vorher": 10,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
@@ -1810,12 +1824,12 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T18:02:00Z",
+    "stand": "2026-09-01T19:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T17:03:42Z",
-    "zertifikatTage": 83,
+    "deployWann": "2026-09-01T18:12:38Z",
+    "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
     "linksZiele": [],
