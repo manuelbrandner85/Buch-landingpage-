@@ -1,15 +1,18 @@
 {
-  "stand": "2026-09-01T17:02:48Z",
-  "warnungen": [
-    {
-      "stufe": "mittel",
-      "text": "Seit 2 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
-    }
-  ],
+  "stand": "2026-09-01T18:04:58Z",
+  "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-31",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Rang",
+        "von": "#512.190",
+        "nach": "#645.558",
+        "delta": "+#133.368",
+        "richtung": "schlecht"
+      }
+    ],
+    "hinweis": null
   },
   "regal": {
     "buecher": [
@@ -177,9 +180,9 @@
     "untertitel": "Ursprung und Ordnung",
     "erschienen": "2026-08-08",
     "seiten": 206,
-    "rangGesamt": 512190,
-    "rangVorher": 334543,
-    "rangStand": "2026-08-30",
+    "rangGesamt": 645558,
+    "rangVorher": null,
+    "rangStand": "2026-09-01",
     "kategorien": [
       {
         "name": "Kulturgeschichte",
@@ -226,7 +229,7 @@
     "gelesen": true,
     "hinweis": null,
     "summe30": {
-      "kindle": 0,
+      "kindle": 14,
       "taschenbuch": 0,
       "kenp": 0
     },
@@ -248,16 +251,34 @@
         "rang": 512190,
         "rez": 2,
         "schnitt": 5
+      },
+      {
+        "d": "2026-08-31",
+        "kindle": 9,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": null,
+        "rez": 2,
+        "schnitt": 5
+      },
+      {
+        "d": "2026-09-01",
+        "kindle": 5,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": 645558,
+        "rez": 2,
+        "schnitt": 5
       }
     ]
   },
   "monat": {
-    "zeitraum": "August 2026",
-    "stand": "2026-08-30",
-    "bestellungen": 13,
-    "ebook": 12,
-    "druck": 1,
-    "tantiemen": 10.81,
+    "zeitraum": "September 2026",
+    "stand": "2026-09-01",
+    "bestellungen": 5,
+    "ebook": 5,
+    "druck": 0,
+    "tantiemen": 0,
     "kenp": 0,
     "quellen": null,
     "hinweis": "Aus dem KDP-Bericht abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
@@ -335,7 +356,7 @@
       },
       {
         "d": "2026-09-01",
-        "v": 512190
+        "v": 645558
       }
     ],
     "rezensionen": [
@@ -398,6 +419,10 @@
       {
         "d": "2026-08-30",
         "v": 13
+      },
+      {
+        "d": "2026-09-01",
+        "v": 5
       }
     ],
     "tantiemen": [
@@ -408,6 +433,10 @@
       {
         "d": "2026-08-30",
         "v": 10.81
+      },
+      {
+        "d": "2026-09-01",
+        "v": 0
       }
     ],
     "kanaele": {
@@ -1410,9 +1439,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 7930,
+    "summe": 8071,
     "offenSumme": 6115,
     "buchungen": [
+      {
+        "datum": "2026-09-01",
+        "projekt": "Trendonix-Kurzvideo",
+        "zweck": "Abendplatz 18:21-18:35 Ortszeit: Kurzvideo 06_fuenf_fragen, vier eigene kie.ai-Einstellungen, davon 13 Credits fuer zwei Nachbesserungen an Bild 3 (244,5 auf 103,5). Von LOG.md vollstaendig zugeordnet, aus dem stuendlichen Cockpit-Lauf 17:07 UTC nachgetragen.",
+        "credits": 141
+      },
       {
         "datum": "2026-09-01",
         "projekt": "nicht zugeordnet",
@@ -1478,12 +1513,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (00:08 UTC)",
         "credits": 720
-      },
-      {
-        "datum": "2026-08-28",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (22:06 UTC)",
-        "credits": 270
       }
     ]
   },
@@ -1781,11 +1810,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T17:02:00Z",
+    "stand": "2026-09-01T18:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T16:05:39Z",
+    "deployWann": "2026-09-01T17:03:42Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
