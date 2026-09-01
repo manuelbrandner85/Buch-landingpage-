@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T19:02:33Z",
+  "stand": "2026-09-01T20:02:37Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-31",
@@ -299,13 +299,18 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 3 gemessene Tage.",
+    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 4 gemessene Tage.",
     "klicks7": 0,
-    "impressionen7": 29,
-    "position": 54.8,
+    "impressionen7": 48,
+    "position": 53.5,
     "seitenIndexiert": 66,
     "seitenGesamt": 197,
     "suchanfragen": [
+      {
+        "wort": "an welchem fluss liegt antwerpen",
+        "klicks": 0,
+        "impressionen": 1
+      },
       {
         "wort": "an welchem fluss liegt london",
         "klicks": 0,
@@ -314,7 +319,7 @@
       {
         "wort": "bab al-mandab",
         "klicks": 0,
-        "impressionen": 1
+        "impressionen": 2
       },
       {
         "wort": "bab el-mandeb",
@@ -322,19 +327,14 @@
         "impressionen": 1
       },
       {
-        "wort": "fluss durch liverpool",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "hauptstadt moskau",
+        "wort": "bab-al-mandab-straße",
         "klicks": 0,
         "impressionen": 1
       }
     ],
     "von": "2026-08-27",
-    "bis": "2026-08-29",
-    "tage": 3,
+    "bis": "2026-08-30",
+    "tage": 4,
     "quelle": "abgerufen"
   },
   "reichweite": {
@@ -1824,11 +1824,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T19:02:00Z",
+    "stand": "2026-09-01T20:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T18:12:38Z",
+    "deployWann": "2026-09-01T19:03:26Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
