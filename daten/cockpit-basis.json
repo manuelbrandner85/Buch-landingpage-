@@ -52,12 +52,12 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Erste Zahlen am 30.08. abgelesen (Datenstand bis 27.08., letzte Aktualisierung laut Konsole 7,5 Std. zuvor). Suchanfragen-Tabelle: keine Daten. Seitenindexierung meldet weiter „Die Daten werden verarbeitet“ — seitenIndexiert bleibt offen.",
+    "hinweis": "Abgelesen 01.09. 08:27 (Datenstand bis 29.08., letzte Aktualisierung laut Konsole 7,5 Std. zuvor). 7 Tage: 21 Suchanfragen, alle ohne Klick; die meisten Impressionen hat „malakka straße“ (2, Position 91,5), alle anderen je 1. Indexierung: 66 indexiert, 24 nicht (23 „Gefunden – zurzeit nicht indexiert“, 1 noindex). Sitemap zuletzt 30.08. gelesen, 197 erkannte Seiten.",
     "klicks7": 0,
-    "impressionen7": 1,
-    "position": 5,
-    "seitenIndexiert": null,
-    "seitenGesamt": 89,
+    "impressionen7": 29,
+    "position": 54.8,
+    "seitenIndexiert": 66,
+    "seitenGesamt": 197,
     "suchanfragen": []
   },
   "kanaele": [
@@ -259,6 +259,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-01T06:27:00Z",
+      "kanal": "Website",
+      "text": "Search Console (7 Tage bis 29.08.): 0 Klicks, 29 Impressionen, Position 54,8. Erstmals Indexierungszahlen: 66 Seiten indexiert, 23 gefunden und noch nicht indexiert, Sitemap mit 197 erkannten Seiten."
+    },
+    {
       "zeit": "2026-08-30T14:10:00Z",
       "kanal": "Kanäle",
       "text": "Alle sechs Kanaele auf www.trendonix-buecher.de geprueft. TikTok, YouTube und Bluesky waren richtig. Pinterest stand auf http statt https - umgestellt, und die Domain wird gerade verifiziert (Nachweis liegt als Meta-Zeile im Kopf jeder Seite). Facebook zeigte nur auf Amazon; die Website steht jetzt als zweiter Link daneben, der Kaufweg blieb. Instagram zeigt weiter auf Amazon - Meta laesst Links nur in der App aendern, das muss Manuel selbst tun. Der Groessenvergleich: TikTok hat 21.600 Follower, alle uebrigen Kanaele zusammen 1.047 (Instagram 1.041, Facebook 6, Pinterest 0, Bluesky 0 bei einem Beitrag). Neu angelegt: die geplante Aufgabe \"Trendonix Mittagsplatz\" - ein Kurzvideo um 12:20 auf YouTube und TikTok, zuerst mit kie.ai (Guthaben 490,5 Punkte), sonst mit vorhandenem Material, immer mit deutschen Untertiteln. Sie wartet auf Manuels Freigabe. Der Pinterest-Tag wurde ausdruecklich NICHT installiert - er ist ein Cookie-Verfolger und wuerde den Einwilligungsbanner zurueckbringen."
@@ -312,16 +317,6 @@
       "zeit": "2026-08-28T13:37:00Z",
       "kanal": "TikTok",
       "text": "Live-Nacharbeit vom 26.08. abgeschlossen: die zwei „Bin gerade live“-Hinweiskommentare unter den jüngsten Videos entfernt."
-    },
-    {
-      "zeit": "2026-08-28T13:42:00Z",
-      "kanal": "Verteiler",
-      "text": "Brevo: Formular „Verteiler Website“ jetzt 5 Einreichungen / 3 neue Kontakte (vorher 4/2); Liste führt daggi.richter@… als ersten Leser-Kontakt."
-    },
-    {
-      "zeit": "2026-08-28T06:20:00Z",
-      "kanal": "Technik",
-      "text": "Der Vorschlag „Analytics: einmal auf Weiter klicken“ ist aus dem Cockpit raus — er war seit heute Nacht gegenstandslos. Die Property liegt in einem Konto, dessen Nutzungsbedingungen seit Juni 2024 angenommen sind; der Klick, auf den gewartet wurde, war nie nötig."
     }
   ],
   "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",

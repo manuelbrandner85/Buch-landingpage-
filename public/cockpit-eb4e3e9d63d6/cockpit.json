@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T06:02:34Z",
+  "stand": "2026-09-01T06:27:23Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -268,8 +268,8 @@
     "klicks7": 0,
     "impressionen7": 29,
     "position": 54.8,
-    "seitenIndexiert": null,
-    "seitenGesamt": 89,
+    "seitenIndexiert": 66,
+    "seitenGesamt": 197,
     "suchanfragen": [
       {
         "wort": "an welchem fluss liegt london",
@@ -1609,6 +1609,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-01T06:27:00Z",
+      "kanal": "Website",
+      "text": "Search Console (7 Tage bis 29.08.): 0 Klicks, 29 Impressionen, Position 54,8. Erstmals Indexierungszahlen: 66 Seiten indexiert, 23 gefunden und noch nicht indexiert, Sitemap mit 197 erkannten Seiten."
+    },
+    {
       "id": "journal-seit-wann-beherrscht-der-mensch-das-feuer",
       "zeit": "2026-09-01T00:02:34Z",
       "kanal": "Website",
@@ -1677,11 +1682,6 @@
       "zeit": "2026-08-28T20:45:00Z",
       "kanal": "TikTok",
       "text": "LIVE seit 21:56 (ohne Titel): zwei Hinweis-Kommentare unter den jüngsten Videos gesetzt, Begrüßung im Live-Chat. Live-Clip live_b hing dreimal im Studio-Upload — Manuel gebeten, ihn aus der App zu posten."
-    },
-    {
-      "zeit": "2026-08-28T19:26:00Z",
-      "kanal": "TikTok",
-      "text": "Postfach: Dagmars Abendgruß von 20:59 kurz beantwortet (Dank + Wochenendwunsch). Kommentare, FB, IG, Pinterest, YouTube, Bluesky, Amazon geprüft — sonst nichts Neues."
     }
   ],
   "offen": [
@@ -1786,7 +1786,7 @@
     "linksGeprueft": 54,
     "linksKaputt": 0,
     "linksZiele": [],
-    "seitenGemeldet": 89,
+    "seitenGemeldet": 197,
     "journalVorrat": 3
   },
   "luecken": [
