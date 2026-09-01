@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T08:03:23Z",
+  "stand": "2026-09-01T09:03:29Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -625,30 +625,12 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "02_beleggrad",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-25",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Facebook",
           "zeit": "18:30",
           "was": "05_reiterstafette",
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-27",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -1130,6 +1112,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-24",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1214,6 +1205,15 @@
           "was": "08_aehre",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-25",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "TikTok LIVE",
@@ -1777,11 +1777,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T08:02:00Z",
+    "stand": "2026-09-01T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T07:04:39Z",
+    "deployWann": "2026-09-01T08:04:11Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
