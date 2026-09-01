@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T13:04:33Z",
+  "stand": "2026-09-01T14:02:32Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -604,20 +604,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "10_archiv",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "10_archiv",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "10_archiv",
@@ -1012,6 +998,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "10_archiv",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-01",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Journal",
           "zeit": null,
           "was": "wer-hat-die-pyramiden-gebaut",
@@ -1255,6 +1250,15 @@
           "was": "06_fuenf_fragen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "10_archiv",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-01",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1777,11 +1781,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T13:02:00Z",
+    "stand": "2026-09-01T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T12:03:25Z",
+    "deployWann": "2026-09-01T13:05:50Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
