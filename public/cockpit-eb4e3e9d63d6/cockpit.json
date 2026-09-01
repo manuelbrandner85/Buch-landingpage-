@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T11:02:39Z",
+  "stand": "2026-09-01T12:02:35Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1406,9 +1406,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 7744,
-    "offenSumme": 5929,
+    "summe": 7930,
+    "offenSumme": 6115,
     "buchungen": [
+      {
+        "datum": "2026-09-01",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (11:12 UTC) - 430,5 auf 244,5 Credits. LOG.md nennt fuer den Mittagsplatz-Lauf 12:30 Ortszeit 174 Credits (430,5 auf 256,5, davon 58 fuer zwei neu erzeugte Einstellungen); eine Buchung dafuer fehlt. Die restlichen 12 Credits sind unerklaert.",
+        "credits": 186
+      },
       {
         "datum": "2026-09-01",
         "projekt": "nicht zugeordnet",
@@ -1474,12 +1480,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (22:06 UTC)",
         "credits": 270
-      },
-      {
-        "datum": "2026-08-28",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (21:07 UTC, nachgetragen)",
-        "credits": 468
       }
     ]
   },
@@ -1777,11 +1777,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T11:02:00Z",
+    "stand": "2026-09-01T12:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T10:04:40Z",
+    "deployWann": "2026-09-01T11:03:38Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
