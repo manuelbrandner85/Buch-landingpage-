@@ -67,10 +67,10 @@ export const BEITRAEGE: Beitrag[] = [
   {
     slug: 'seit-wann-beherrscht-der-mensch-das-feuer',
     bandId: 'band-1',
-    titel: 'Seit wann beherrscht der Mensch das Feuer – und wie sicher ist das?',
+    titel: 'Seit wann beherrscht der Mensch das Feuer – wie sicher ist das?',
     datum: '2026-09-01',
     auszug:
-      'Regelmäßiger Feuergebrauch gilt seit rund 400.000 Jahren als gesichert. Es gibt deutlich ältere Belege – und über die wird bis heute gestritten. Beides gehört zur Antwort.',
+      'Regelmäßiger Feuergebrauch gilt seit rund 400.000 Jahren als gesichert. Es gibt ältere Belege – und über die wird gestritten. Beides gehört zur Antwort.',
     absaetze: [
       'Die kurze Antwort zuerst: Regelmäßiger Feuergebrauch gilt seit etwa 400.000 Jahren vor heute als gesicherter Befund. Das ist die Zahl, hinter der kaum jemand mehr streitet. Es gibt ältere Belege, deutlich ältere sogar — und über die wird bis heute gestritten. Wer nur eine Jahreszahl braucht, hat damit genug. Wer wissen will, warum in verschiedenen Büchern verschiedene Zahlen stehen, liest weiter.',
       '## Warum hier zwei Zahlen stehen und nicht eine',
