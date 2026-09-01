@@ -1,8 +1,13 @@
 {
-  "stand": "2026-08-31T23:05:54Z",
-  "warnungen": [],
+  "stand": "2026-09-01T03:02:35Z",
+  "warnungen": [
+    {
+      "stufe": "mittel",
+      "text": "Seit 2 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
+    }
+  ],
   "aenderungen": {
-    "seit": "2026-08-30",
+    "seit": "2026-08-31",
     "punkte": [],
     "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
@@ -17,7 +22,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 23,
+        "tageDraussen": 24,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -123,7 +128,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 1,
+        "tageDraussen": 2,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -305,7 +310,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 5,
+    "tage": 6,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -326,6 +331,10 @@
       },
       {
         "d": "2026-08-31",
+        "v": 512190
+      },
+      {
+        "d": "2026-09-01",
         "v": 512190
       }
     ],
@@ -349,6 +358,10 @@
       {
         "d": "2026-08-31",
         "v": 2
+      },
+      {
+        "d": "2026-09-01",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -370,6 +383,10 @@
       },
       {
         "d": "2026-08-31",
+        "v": 22657
+      },
+      {
+        "d": "2026-09-01",
         "v": 22657
       }
     ],
@@ -414,6 +431,10 @@
         {
           "d": "2026-08-31",
           "v": 21600
+        },
+        {
+          "d": "2026-09-01",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -435,6 +456,10 @@
         },
         {
           "d": "2026-08-31",
+          "v": 10
+        },
+        {
+          "d": "2026-09-01",
           "v": 10
         }
       ],
@@ -458,6 +483,10 @@
         {
           "d": "2026-08-31",
           "v": 1041
+        },
+        {
+          "d": "2026-09-01",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -479,6 +508,10 @@
         },
         {
           "d": "2026-08-31",
+          "v": 6
+        },
+        {
+          "d": "2026-09-01",
           "v": 6
         }
       ],
@@ -502,6 +535,10 @@
         {
           "d": "2026-08-31",
           "v": 0
+        },
+        {
+          "d": "2026-09-01",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -524,6 +561,10 @@
         {
           "d": "2026-08-31",
           "v": 0
+        },
+        {
+          "d": "2026-09-01",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -541,6 +582,10 @@
         },
         {
           "d": "2026-08-31",
+          "v": 2
+        },
+        {
+          "d": "2026-09-01",
           "v": 2
         }
       ]
@@ -1361,9 +1406,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 7347,
-    "offenSumme": 5532,
+    "summe": 7744,
+    "offenSumme": 5929,
     "buchungen": [
+      {
+        "datum": "2026-09-01",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (01:06 UTC) - 827,5 auf 430,5 Credits; kein Lauf in LOG.md seit 31.08. 22:46 UTC",
+        "credits": 397
+      },
       {
         "datum": "2026-08-31",
         "projekt": "Trendonix-Hausfilm",
@@ -1429,12 +1480,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (21:07 UTC, nachgetragen)",
         "credits": 468
-      },
-      {
-        "datum": "2026-08-28",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (20:08 UTC, nachgetragen)",
-        "credits": 342
       }
     ]
   },
@@ -1450,7 +1495,7 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     },
     {
       "name": "YouTube",
@@ -1463,7 +1508,7 @@
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     },
     {
       "name": "Instagram",
@@ -1474,7 +1519,7 @@
       "stand": "2026-08-28",
       "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     },
     {
       "name": "Facebook",
@@ -1485,7 +1530,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     },
     {
       "name": "Pinterest",
@@ -1498,7 +1543,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     },
     {
       "name": "Bluesky",
@@ -1511,7 +1556,7 @@
       "reaktionenLabel": null,
       "beitraege": 5,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     },
     {
       "name": "Verteiler",
@@ -1525,7 +1570,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-08-30"
+      "vergleichVom": "2026-08-31"
     }
   ],
   "vorschlaege": [
@@ -1563,6 +1608,12 @@
     }
   ],
   "aktivitaet": [
+    {
+      "id": "journal-seit-wann-beherrscht-der-mensch-das-feuer",
+      "zeit": "2026-09-01T00:02:34Z",
+      "kanal": "Website",
+      "text": "Der Journalbeitrag „seit-wann-beherrscht-der-mensch-das-feuer“ ist heute erschienen."
+    },
     {
       "id": "rez-2026-08-30-2",
       "zeit": "2026-08-30T16:33:13Z",
@@ -1631,11 +1682,6 @@
       "zeit": "2026-08-28T19:26:00Z",
       "kanal": "TikTok",
       "text": "Postfach: Dagmars Abendgruß von 20:59 kurz beantwortet (Dank + Wochenendwunsch). Kommentare, FB, IG, Pinterest, YouTube, Bluesky, Amazon geprüft — sonst nichts Neues."
-    },
-    {
-      "zeit": "2026-08-28T13:42:00Z",
-      "kanal": "Verteiler",
-      "text": "Brevo: Formular „Verteiler Website“ jetzt 5 Einreichungen / 3 neue Kontakte (vorher 4/2); Liste führt daggi.richter@… als ersten Leser-Kontakt."
     }
   ],
   "offen": [
@@ -1731,17 +1777,17 @@
     }
   ],
   "technik": {
-    "stand": "2026-08-31T23:02:00Z",
+    "stand": "2026-09-01T03:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-08-31T22:04:28Z",
+    "deployWann": "2026-09-01T02:36:46Z",
     "zertifikatTage": 83,
     "linksGeprueft": 54,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 89,
-    "journalVorrat": 4
+    "journalVorrat": 3
   },
   "luecken": [
     {
