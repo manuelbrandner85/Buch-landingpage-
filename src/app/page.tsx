@@ -5,7 +5,7 @@ import {
   OEFFENTLICHE_REIHEN, REIHEN_MIT_WELT, TRENDONIX, bandzeile, hatWelt, WELT,
   assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
-import { BASIS_PFAD, bildQuelle, bildSatzHtml, ordner } from '@/world/bilder';
+import { BASIS_PFAD, bewegt, bildQuelle, bildSatzHtml } from '@/world/bilder';
 import { WEG_COCKPIT, weg, wegAbsolut, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
@@ -205,8 +205,8 @@ export default function Haus() {
           <Hintergrundvideo
             bild={bildQuelle(motiv, 1920)}
             bildsatz={bildSatzHtml(motiv)}
-            video={ordner(`${motiv.datei}-motion.mp4`, motiv.bandId ?? 'band-1')}
-            videoKlein={ordner(`${motiv.datei}-motion-klein.mp4`, motiv.bandId ?? 'band-1')}
+            video={bewegt(`${motiv.datei}-motion.mp4`, motiv.bandId ?? 'band-1')}
+            videoKlein={bewegt(`${motiv.datei}-motion-klein.mp4`, motiv.bandId ?? 'band-1')}
             alt={motiv.alt}
           />
         )}

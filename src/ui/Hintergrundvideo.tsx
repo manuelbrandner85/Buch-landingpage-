@@ -100,8 +100,15 @@ export function Hintergrundvideo(
           weniger als die Hälfte der Bytes, und es steht früher. */}
       <img src={bild} srcSet={bildsatz} sizes={bildsatz ? '100vw' : undefined}
         alt={alt} decoding="async" fetchPriority="high" />
+      {/* Kein `poster`.
+          Das Standbild liegt bereits als <img> darunter und ist dasselbe Motiv.
+          Ein Poster am Video hieß: dasselbe Bild ein zweites Mal laden — und
+          zwar in der festen 1920er Stufe, während das <img> daneben über sein
+          `srcset` brav die 1000er nimmt. Am 01.09.2026 auf dem Telefon
+          gemessen: 56 KB für ein Bild, das kein Mensch je zu sehen bekommt,
+          weil es hinter einem identischen liegt. */}
       {quelle && (
-        <video ref={film} key={quelle} src={quelle} poster={bild}
+        <video ref={film} key={quelle} src={quelle}
           autoPlay muted loop playsInline preload="metadata"
           disablePictureInPicture />
       )}

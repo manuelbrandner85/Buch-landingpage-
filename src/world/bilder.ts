@@ -11,6 +11,22 @@ export const BASIS_PFAD = process.env.NEXT_PUBLIC_BASIS_PFAD ?? '';
 export const ordner = (datei: string, band: BandId = 'band-1'): string =>
   `${BASIS_PFAD}/assets/${band}/szenen/${datei}`;
 
+/**
+ * Die Fassung der Bewegtbilder.
+ *
+ * Der Server schickt zu jeder mp4 `Cache-Control: immutable` für ein Jahr –
+ * wer die Seite einmal gesehen hat, fragt danach nie wieder nach. Eine Datei
+ * unter demselben Namen auszutauschen ist damit für jeden Wiederkehrer
+ * wirkungslos, und man merkt es selbst nicht, weil der eigene Browser die
+ * neue Datei ja hat. Dieselbe Falle wie beim Hausfilm; dort heißt die
+ * Konstante `FASSUNG`.
+ *
+ * Wer eine Bewegtfassung neu rechnet, zählt diese Zahl hoch. Sonst nichts.
+ */
+const BEWEGTFASSUNG = '2';
+export const bewegt = (datei: string, band: BandId = 'band-1'): string =>
+  `${ordner(datei, band)}?f=${BEWEGTFASSUNG}`;
+
 const verfuegbar = (asset: Asset): number[] =>
   BREITEN.filter((b) => b <= asset.breite * 1.2);
 

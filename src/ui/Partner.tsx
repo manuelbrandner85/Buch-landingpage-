@@ -22,11 +22,17 @@ import { BASIS_PFAD } from '@/world/bilder';
  */
 function Marke({ partner }: { partner: PartnerDaten }) {
   const bild = partner.bild ? `${BASIS_PFAD}/marke/${partner.bild}.png` : undefined;
+  // Dieselbe Sache wie bei der Hausmarke: Die Maske braucht nur die Form.
+  // Über `--marke` auf das volle PNG zu zeigen hieß, das Partnerlogo (57 KB)
+  // schon auf dem ersten Bildschirm zu laden, obwohl es ganz unten steht und
+  // das <img> daneben brav `loading="lazy"` trägt — ein CSS-Bild wartet nicht.
+  const maske = partner.bild
+    ? `${BASIS_PFAD}/marke/${partner.bild}-maske.png` : undefined;
   return (
     <a className={`partner-marke${bild ? '' : ' partner-nurschrift'}`} href={partner.ziel}
       target="_blank" rel="noopener noreferrer">
       {bild ? (
-        <span className="partner-mal" style={{ ['--marke' as string]: `url(${bild})` }}>
+        <span className="partner-mal" style={{ ['--marke' as string]: `url(${maske})` }}>
           <picture>
             <source srcSet={`${BASIS_PFAD}/marke/${partner.bild}.avif`} type="image/avif" />
             <source srcSet={`${BASIS_PFAD}/marke/${partner.bild}.webp`} type="image/webp" />

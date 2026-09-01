@@ -62,36 +62,43 @@ export interface Hausfilmangabe {
  * **Wer den Film austauscht, zählt hier hoch.** Ohne das ist der Austausch
  * für jeden, der schon einmal da war, wirkungslos.
  */
-const FASSUNG = '2';
+const FASSUNG = '3';
 
 export const HAUSFILM: Hausfilmangabe = {
   datei: `/film/trendonix-film.mp4?f=${FASSUNG}`,
   dateiKlein: `/film/trendonix-film-klein.mp4?f=${FASSUNG}`,
   poster: `/film/trendonix-film.jpg?f=${FASSUNG}`,
   titel: 'Der Film über Trendonix',
-  laenge: '1:24 Minuten',
-  dauerISO: 'PT1M24S',
-  erschienen: '2026-08-31',
+  laenge: '1:10 Minuten',
+  dauerISO: 'PT1M10S',
+  erschienen: '2026-09-01',
   worum:
     'Ein Film über das Haus Trendonix: die Fragen, an denen es arbeitet, die '
-    + 'begehbaren Welten zu den Büchern und die eine Regel, nach der hier '
-    + 'nichts behauptet wird, was sich nicht prüfen lässt.',
+    + 'Themen, die noch dazukommen, und die eine Regel, nach der hier nichts '
+    + 'behauptet wird, was sich nicht prüfen lässt.',
+  // Der gesprochene Text — und zugleich das, was Vorleseprogramme unter dem
+  // Film bekommen. Eine Quelle, zwei Verwendungen, keine Abweichung möglich.
+  //
+  // Die Fassung vom 01.09.2026 nennt kein Buch mehr. Der Vorgänger endete bei
+  // den Welten der vorhandenen Bände — richtig für den Tag, an dem er entstand,
+  // und falsch für jeden Tag danach: Ein Haus, das über Mindset, Energie und
+  // Persönlichkeit weiterschreibt, kann sich nicht mit seinem Katalog von 2026
+  // vorstellen. Der Film trägt jetzt die Haltung, nicht den Bestand.
   text: [
     'Vor mehr als drei Millionen Jahren geht jemand durch feuchte Asche.',
     'Was blieb, sind Fußspuren. Mehr nicht.',
     'Und trotzdem wissen wir daraus, dass er aufrecht ging.',
     'Trendonix ist ein Haus für solche Fragen.',
     'Nicht für Antworten, die schon feststehen. Für den Weg dorthin.',
-    'Woher wir kommen und was uns geformt hat.',
+    'Kein Verlag für ein Thema. Ein Haus mit vielen Türen.',
+    'Woher wir kommen, und was uns geformt hat.',
     'Warum Zufall selten Zufall ist.',
     'Woher Energie kommt, wenn keine mehr da ist.',
     'Wie aus einem Gedanken eine Haltung wird.',
-    'Und was von einer Behauptung übrig bleibt, wenn man nachprüft.',
-    'Manches lässt sich nicht erzählen. Nur zeigen.',
-    'Deshalb bekommt jedes Buch eine Welt.',
-    'Orte, die man betreten kann.',
-    'Und die Belege stehen dort, wo sie hingehören: daneben.',
-    'Ein Haus mit einer einzigen Regel:',
+    'Und wer man ist, wenn keiner hinschaut.',
+    'Dahinter steht kein Verlag. Sondern jemand, der nachprüft.',
+    'Ein Haus mit einer einzigen Regel.',
     'Behauptet wird nichts, was sich nicht prüfen lässt.',
+    'Trendonix.',
   ],
 };

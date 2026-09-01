@@ -96,6 +96,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         */}
         <link rel="alternate" type="application/atom+xml"
           title={`${TRENDONIX.name} – Journal`} href={weg('/feed.xml')} />
+        {/*
+          Die nächste Seite ist schon da, bevor der Finger sie berührt.
+
+          Diese Seiten sind statisch erzeugt und komplett ohne Datenbank – die
+          einzige Zeit, die zwischen Klick und Bild vergeht, ist Netz. Genau die
+          nimmt der Browser hier vorweg: Sobald der Zeiger 200 Millisekunden auf
+          einem Link ruht oder die Maustaste heruntergeht, holt er die Seite.
+          Wer wirklich klickt, sieht sie ohne Ladeschritt; wer nur darüberfährt,
+          hat nichts verloren.
+
+          Bewusst `prefetch` und nicht `prerender`: Prefetch holt das Dokument,
+          Prerender baut es vollständig auf – mit Skripten, Bildern und Videos.
+          Auf einer Seite mit bewegten Gründen wäre das eine ganze zweite Seite
+          im Hintergrund, für einen Klick, der vielleicht nie kommt.
+
+          `eagerness: moderate` ist der Mittelweg: nicht bei jedem Blick, aber
+          früh genug. Browser, die den Standard nicht kennen, überlesen den
+          Block – er ist ein Zugewinn, keine Bedingung.
+        */}
+        <script type="speculationrules"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }],
+          }) }} />
       </head>
       <body>{children}<Zaehler /><Zustimmung /></body>
     </html>
