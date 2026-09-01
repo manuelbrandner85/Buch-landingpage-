@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T21:03:52Z",
+  "stand": "2026-09-01T22:02:34Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-31",
@@ -636,33 +636,6 @@
   },
   "termine": [
     {
-      "d": "2026-09-01",
-      "wochentag": "Di",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "10_archiv",
-          "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "10_archiv",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Journal",
-          "zeit": null,
-          "was": "seit-wann-beherrscht-der-mensch-das-feuer",
-          "zustand": "terminiert",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-09-02",
       "wochentag": "Mi",
       "punkte": [
@@ -1204,6 +1177,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "10_archiv",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-01",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Journal",
           "zeit": null,
           "was": "koenigsstrasse-neun-tage-statt-neunzig",
@@ -1402,6 +1384,40 @@
           "kanal": "Pinterest",
           "zeit": null,
           "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-16",
+      "wochentag": "Mi",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "10_archiv",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         }
@@ -1824,11 +1840,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T21:02:00Z",
+    "stand": "2026-09-01T22:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T20:03:25Z",
+    "deployWann": "2026-09-01T21:05:14Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
