@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-01T20:02:37Z",
+  "stand": "2026-09-01T21:03:52Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-08-31",
@@ -1453,9 +1453,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8071,
-    "offenSumme": 6115,
+    "summe": 8084,
+    "offenSumme": 6128,
     "buchungen": [
+      {
+        "datum": "2026-09-01",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (20:10 UTC) - 103,5 auf 90,5 Credits. Seit dem Abendplatz 18:21-18:35 Ortszeit steht kein neuer Lauf in LOG.md, KOMMENTAR_LOG.md meldet fuer 20:05, 20:20 und 21:04 Ortszeit keine Schreibaktion. Nachgetragen vom stuendlichen Cockpit-Lauf.",
+        "credits": 13
+      },
       {
         "datum": "2026-09-01",
         "projekt": "Trendonix-Kurzvideo",
@@ -1521,12 +1527,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (13:08 UTC)",
         "credits": 12
-      },
-      {
-        "datum": "2026-08-29",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (00:08 UTC)",
-        "credits": 720
       }
     ]
   },
@@ -1824,11 +1824,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-01T20:02:00Z",
+    "stand": "2026-09-01T21:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-01T19:03:26Z",
+    "deployWann": "2026-09-01T20:03:25Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
