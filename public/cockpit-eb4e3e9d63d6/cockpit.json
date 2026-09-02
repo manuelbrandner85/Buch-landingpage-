@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-02T21:18:55Z",
+  "stand": "2026-09-02T22:18:25Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -691,26 +691,6 @@
   },
   "termine": [
     {
-      "d": "2026-09-02",
-      "wochentag": "Mi",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "13_tempel",
-          "zustand": "terminiert",
-          "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "13_tempel",
-          "zustand": "offen",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-09-03",
       "wochentag": "Do",
       "punkte": [
@@ -1325,6 +1305,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-01",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "13_tempel",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-02",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1477,6 +1466,40 @@
           "kanal": "Pinterest",
           "zeit": null,
           "was": "10_archiv",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-17",
+      "wochentag": "Do",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "13_tempel",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "13_tempel",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "13_tempel",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "13_tempel",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         }
@@ -1900,11 +1923,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-02T21:02:00Z",
+    "stand": "2026-09-02T22:05:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-02T20:06:01Z",
+    "deployWann": "2026-09-02T21:20:25Z",
     "zertifikatTage": 81,
     "linksGeprueft": 54,
     "linksKaputt": 0,
