@@ -42,6 +42,12 @@
       "zeit": "2026-09-02T11:03:26Z",
       "kanal": "Amazon",
       "text": "6 Bestellungen mehr im Monat — jetzt 11."
+    },
+    {
+      "id": "deploy-2026-09-02-fehlgeschlagen",
+      "zeit": "2026-09-02T16:06:38Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
     }
   ]
 }
