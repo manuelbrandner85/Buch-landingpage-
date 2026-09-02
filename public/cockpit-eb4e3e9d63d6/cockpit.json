@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-02T08:04:12Z",
+  "stand": "2026-09-02T09:06:34Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -689,33 +689,6 @@
           "was": "13_tempel",
           "zustand": "offen",
           "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "06_fuenf_fragen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "11_statuen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-29",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1155,6 +1128,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-27",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "11_statuen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-29",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1259,6 +1241,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "TikTok LIVE",
           "zeit": "20:00",
           "was": null,
@@ -1341,6 +1332,15 @@
           "was": "11_statuen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1863,11 +1863,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-02T08:02:00Z",
+    "stand": "2026-09-02T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-02T07:05:28Z",
+    "deployWann": "2026-09-02T08:53:10Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
