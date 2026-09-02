@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-02T10:05:37Z",
+  "stand": "2026-09-02T11:03:26Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -8,8 +8,23 @@
   ],
   "aenderungen": {
     "seit": "2026-09-01",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Rang",
+        "von": "#645.558",
+        "nach": "#334.543",
+        "delta": "−#311.015",
+        "richtung": "gut"
+      },
+      {
+        "was": "Bestellungen im Monat",
+        "von": "5",
+        "nach": "11",
+        "delta": "+6",
+        "richtung": "gut"
+      }
+    ],
+    "hinweis": null
   },
   "regal": {
     "buecher": [
@@ -177,9 +192,9 @@
     "untertitel": "Ursprung und Ordnung",
     "erschienen": "2026-08-08",
     "seiten": 206,
-    "rangGesamt": 645558,
-    "rangVorher": null,
-    "rangStand": "2026-09-01",
+    "rangGesamt": 334543,
+    "rangVorher": 645558,
+    "rangStand": "2026-08-27",
     "kategorien": [
       {
         "name": "Kulturgeschichte",
@@ -226,7 +241,7 @@
     "gelesen": true,
     "hinweis": null,
     "summe30": {
-      "kindle": 14,
+      "kindle": 20,
       "taschenbuch": 0,
       "kenp": 0
     },
@@ -260,10 +275,19 @@
       },
       {
         "d": "2026-09-01",
-        "kindle": 5,
+        "kindle": 9,
         "taschenbuch": 0,
         "kenp": 0,
         "rang": 645558,
+        "rez": 2,
+        "schnitt": 5
+      },
+      {
+        "d": "2026-09-02",
+        "kindle": 2,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": null,
         "rez": 2,
         "schnitt": 5
       }
@@ -271,9 +295,9 @@
   },
   "monat": {
     "zeitraum": "September 2026",
-    "stand": "2026-09-01",
-    "bestellungen": 5,
-    "ebook": 5,
+    "stand": "2026-09-02",
+    "bestellungen": 11,
+    "ebook": 11,
     "druck": 0,
     "tantiemen": 0,
     "kenp": 0,
@@ -357,7 +381,7 @@
       },
       {
         "d": "2026-09-02",
-        "v": 645558
+        "v": 334543
       }
     ],
     "rezensionen": [
@@ -432,6 +456,10 @@
       {
         "d": "2026-09-01",
         "v": 5
+      },
+      {
+        "d": "2026-09-02",
+        "v": 11
       }
     ],
     "tantiemen": [
@@ -445,6 +473,10 @@
       },
       {
         "d": "2026-09-01",
+        "v": 0
+      },
+      {
+        "d": "2026-09-02",
         "v": 0
       }
     ],
@@ -1695,6 +1727,12 @@
   ],
   "aktivitaet": [
     {
+      "id": "best-2026-09-02-11",
+      "zeit": "2026-09-02T11:03:26Z",
+      "kanal": "Amazon",
+      "text": "6 Bestellungen mehr im Monat — jetzt 11."
+    },
+    {
       "zeit": "2026-09-02T05:35:00Z",
       "kanal": "Rundlauf",
       "text": "AUTOPILOT-Ordner wiedergefunden (Band 1\\05_Marketing\\05_Social_Kampagne). Lauf behelfsweise ueber Desktop Commander: YouTube-Kommentare, Zuschauerbeitraege und Bluesky geprueft — nichts Neues. Zur 11-Minuten-Live vom 01.09. (23:56) wurde wegen der Stoerung kein Clip gepostet; nichts zu privatisieren."
@@ -1762,12 +1800,6 @@
       "zeit": "2026-08-29T13:30:00Z",
       "kanal": "TikTok",
       "text": "Live-Nacharbeit erledigt: beide veralteten „Bin gerade live“-Hinweis-Kommentare im Studio entfernt (Live endete 04:14). Kein Live-Clip zu privatisieren — der Upload war am 28.08. gescheitert. TikTok, YouTube (inkl. Community), Bluesky geprüft: nichts Offenes."
-    },
-    {
-      "id": "journal-was-ein-unsichtbarer-faden-ist",
-      "zeit": "2026-08-29T00:02:33Z",
-      "kanal": "Website",
-      "text": "Der Journalbeitrag „was-ein-unsichtbarer-faden-ist“ ist heute erschienen."
     }
   ],
   "offen": [
@@ -1863,11 +1895,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-02T10:02:00Z",
+    "stand": "2026-09-02T11:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-02T09:07:48Z",
+    "deployWann": "2026-09-02T10:06:30Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
