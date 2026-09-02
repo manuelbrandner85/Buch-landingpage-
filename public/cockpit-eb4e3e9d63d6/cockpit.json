@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-02T13:02:59Z",
+  "stand": "2026-09-02T14:02:38Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -702,20 +702,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "13_tempel",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "13_tempel",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "13_tempel",
@@ -1223,6 +1209,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "13_tempel",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-02",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Journal",
           "zeit": null,
           "was": "koenigsstrasse-neun-tage-statt-neunzig",
@@ -1407,6 +1402,15 @@
           "was": "09_muenze",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "13_tempel",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-02",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1895,11 +1899,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-02T13:02:00Z",
+    "stand": "2026-09-02T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-02T12:03:26Z",
+    "deployWann": "2026-09-02T13:04:14Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
