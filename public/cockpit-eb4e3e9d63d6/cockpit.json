@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-02T14:02:38Z",
+  "stand": "2026-09-02T15:06:22Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -306,10 +306,10 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 4 gemessene Tage.",
+    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 5 gemessene Tage.",
     "klicks7": 0,
-    "impressionen7": 48,
-    "position": 53.5,
+    "impressionen7": 72,
+    "position": 53,
     "seitenIndexiert": 66,
     "seitenGesamt": 197,
     "suchanfragen": [
@@ -324,24 +324,24 @@
         "impressionen": 1
       },
       {
+        "wort": "bab al mandab strait",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
         "wort": "bab al-mandab",
         "klicks": 0,
         "impressionen": 2
       },
       {
-        "wort": "bab el-mandeb",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "bab-al-mandab-straße",
+        "wort": "bab al-mandab strait",
         "klicks": 0,
         "impressionen": 1
       }
     ],
     "von": "2026-08-27",
-    "bis": "2026-08-30",
-    "tage": 4,
+    "bis": "2026-08-31",
+    "tage": 5,
     "quelle": "abgerufen"
   },
   "reichweite": {
@@ -1899,11 +1899,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-02T14:02:00Z",
+    "stand": "2026-09-02T15:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-02T13:04:14Z",
+    "deployWann": "2026-09-02T14:03:42Z",
     "zertifikatTage": 82,
     "linksGeprueft": 54,
     "linksKaputt": 0,
