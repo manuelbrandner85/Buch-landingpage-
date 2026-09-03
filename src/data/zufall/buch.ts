@@ -18,6 +18,7 @@ export const BUCH_ZUFALL: Buch = {
   nummer: 1,
   titel: 'Alles nur Zufall?',
   unterzeile: '40 Theorien, die die Welt erklären. Angeblich.',
+  suchzeile: '40 Verschwörungstheorien',
   // Seit dem 31.08.2026 im Handel. Beide Ausgaben stehen im KDP-Bücherregal
   // auf „Live"; ASIN, Preise und ISBN sind dort abgelesen, nicht geschätzt.
   //

@@ -27,13 +27,96 @@ export const brotkrumen = (krumen: Krume[]) => ({
   })),
 });
 
+/**
+ * Die Beschreibung unter dem Suchtreffer.
+ *
+ * Google zeigt dort rund 155 Zeichen. Zu lang wird mitten im Wort abgeschnitten
+ * — zu kurz ist schlimmer: Eine Zeile mit 46 Zeichen lässt zwei Drittel der
+ * Fläche leer, die dem Treffer zusteht, und Google füllt sie dann selbst mit
+ * einem beliebigen Satz von der Seite. Deshalb wird hier aus mehreren Teilen
+ * zusammengesetzt und am Satzende getrennt, nicht am Zeichen.
+ */
+export const suchbeschreibung = (
+  teile: (string | undefined)[], hoechstens = 158,
+): string => {
+  // Punkt dazwischen, wo einer fehlt: Eine Unterzeile endet ohne Satzzeichen,
+  // und ohne diesen Schritt klebte der nächste Teil daran fest.
+  const text = teile
+    .filter(Boolean)
+    .map((t) => t!.replace(/\s+/g, ' ').trim())
+    .map((t) => (/[.!?…:]$/.test(t) ? t : `${t}.`))
+    .join(' ')
+    .trim();
+  if (text.length <= hoechstens) return text;
+  const kurz = text.slice(0, hoechstens + 1);
+  const satz = Math.max(
+    kurz.lastIndexOf('. '), kurz.lastIndexOf('! '), kurz.lastIndexOf('? '),
+  );
+  // Nur am Satzende trennen, wenn danach noch genug übrig bleibt: Sonst
+  // fällt bei einem langen zweiten Teil der ganze zweite Teil weg, und die
+  // Beschreibung ist wieder so kurz wie vorher.
+  if (satz > hoechstens * 0.72) return kurz.slice(0, satz + 1).trim();
+  return `${kurz.slice(0, kurz.lastIndexOf(' ')).trim()} …`;
+};
+
+/**
+ * Wo es im gedruckten Buch steht: „Band 1, Kapitel 1, Seite 12–39“.
+ *
+ * Nicht Zierde, sondern der Teil der Beschreibung, den nur diese eine Seite
+ * hat — und zugleich die Auskunft, die ein Suchender wirklich braucht: Steht
+ * das, was ich suche, im Buch, und wo.
+ */
+export const fundstelle = (
+  { bandNummer, kapitel, seiten }:
+  { bandNummer?: number; kapitel?: number; seiten?: number[] },
+): string => {
+  const teile: string[] = [];
+  if (bandNummer !== undefined) teile.push(`Band ${bandNummer}`);
+  if (kapitel !== undefined) teile.push(`Kapitel ${kapitel}`);
+  if (seiten?.length) {
+    teile.push(seiten.length > 1
+      ? `Seite ${seiten[0]}–${seiten[seiten.length - 1]}`
+      : `Seite ${seiten[0]}`);
+  }
+  return teile.join(', ');
+};
+
+/** Die feste Kennung des Hauses – damit alle Blätter dieselbe Stelle meinen. */
+export const hausKennung = () => `${wegVollstaendig(`${BASIS_PFAD}/`) ?? ''}#haus`;
+
 /** Das Haus – überall dasselbe, damit die Profile zusammenfinden. */
 export const haus = () => ({
   '@type': 'Organization',
+  // Ohne Kennung ist jede Erwähnung ein neues Haus: Der Verfasser eines
+  // Kapitels, der Herausgeber eines Buches und die Organisation auf der
+  // Startseite waren fuer Google bis dahin drei verschiedene Organisationen
+  // mit demselben Namen. Mit `@id` sind es drei Verweise auf eine.
+  '@id': hausKennung(),
   name: TRENDONIX.name,
   ...(wegVollstaendig(`${BASIS_PFAD}/`) ? { url: wegVollstaendig(`${BASIS_PFAD}/`) } : {}),
-  logo: `${BASIS_PFAD}/marke/trendonix.png`,
+  // Absolut, nicht `/marke/…`: Ein Logo mit relativer Adresse wird von Google
+  // verworfen, und dann steht im Wissenspanel kein Zeichen.
+  logo: wegVollstaendig('/marke/trendonix.png') ?? `${BASIS_PFAD}/marke/trendonix.png`,
   sameAs: kanalAdressen(),
+});
+
+/**
+ * Die Website als Ganzes.
+ *
+ * Google nimmt den Namen, den es über dem Treffer anzeigt, aus dieser Angabe –
+ * nicht aus dem Titel. Fehlt sie, rät Google ihn aus der Adresse, und dann
+ * steht dort „Trendonix-buecher.de“ statt „Trendonix“.
+ */
+export const netz = () => ({
+  // Ohne eigenen `@context`: Dieses Wesen steht im `@graph` der Startseite,
+  // und dort gilt der Kontext des Blattes.
+  '@type': 'WebSite',
+  '@id': `${wegVollstaendig(`${BASIS_PFAD}/`) ?? ''}#seite`,
+  name: TRENDONIX.name,
+  alternateName: `${TRENDONIX.name} Bücher`,
+  ...(wegVollstaendig(`${BASIS_PFAD}/`) ? { url: wegVollstaendig(`${BASIS_PFAD}/`) } : {}),
+  inLanguage: 'de',
+  publisher: { '@id': hausKennung() },
 });
 
 /** Ein Text mit Verfasser und Stand: Kapitelseiten und Journalbeiträge. */

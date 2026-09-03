@@ -25,7 +25,10 @@ const body = EB_Garamond({
  */
 export const metadata: Metadata = {
   title: {
-    default: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
+    // Der Treffer der Startseite trägt den Namen und das Fach, nicht das
+    // Motto: Nach „was zwischen den Dingen liegt“ sucht niemand, nach
+    // „Trendonix“ und nach „Sachbuch“ schon.
+    default: TRENDONIX.suchzeile,
     template: `%s · ${TRENDONIX.name}`,
   },
   description: TRENDONIX.kurzfassung,

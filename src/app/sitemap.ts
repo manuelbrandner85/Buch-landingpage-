@@ -26,9 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASIS}/blog/${b.slug}/`, changeFrequency: 'yearly' as const,
       priority: 0.6, lastModified: b.datum,
     })),
+    // Das Datum eines Buches ist sein Erscheinungsdatum, nicht der Tag des
+    // letzten Bauens. Ein `lastmod`, das auf allen zweihundert Adressen
+    // dasselbe sagt und sich bei jedem Hochladen ändert, ist keine Auskunft —
+    // Google hört auf, es zu lesen, und dann hilft es auch dort nicht mehr,
+    // wo es stimmt.
     ...OEFFENTLICHE_BUECHER.map((b) => ({
       url: `${BASIS}/buch/${b.id}/`, changeFrequency: 'monthly' as const,
-      priority: 0.9, lastModified: STAND,
+      priority: 0.9, lastModified: b.erschienen ?? STAND,
     })),
     // Die Nachschlage-Seiten zum Buch „Alles nur Zufall?“. Sie stehen erst
     // drin, wenn das Buch erschienen ist — vorher wäre die Sitemap die

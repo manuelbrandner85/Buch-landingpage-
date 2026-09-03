@@ -23,6 +23,17 @@ import { join } from 'node:path';
 const WURZEL = 'out';
 const MAX_TITEL = 65;
 const MAX_BESCHREIBUNG = 170;
+/**
+ * Untergrenzen — der Fehler, den diese Prüfung bis zum 03.09.2026 nicht sah.
+ *
+ * Sie kannte nur Obergrenzen, und deshalb galt eine Buchseite mit 29 Zeichen
+ * Titel und 46 Zeichen Beschreibung als in Ordnung. Ein Treffer bei Google ist
+ * aber eine Fläche, die einem zusteht: Wer sie nicht füllt, verschenkt sie
+ * nicht nur — Google füllt sie dann selbst, mit einem beliebigen Satz von der
+ * Seite. Zu kurz ist deshalb kein kleinerer Fehler als zu lang.
+ */
+const MIN_TITEL = 25;
+const MIN_BESCHREIBUNG = 90;
 
 function seiten(ordner) {
   const aus = [];
@@ -37,6 +48,8 @@ function seiten(ordner) {
 const eins = (html, muster) => (html.match(muster) ?? [])[1];
 
 const alle = seiten(WURZEL);
+let mitBild = 0;
+const ohneBild = [];
 const titel = new Map();
 const beschreibungen = new Map();
 const maengel = [];
@@ -53,19 +66,34 @@ for (const pfad of alle) {
 
   if (!t) maengel.push([weg, 'kein Titel']);
   else {
-    if (t.length > MAX_TITEL) maengel.push([weg, `Titel ${t.length} Zeichen`]);
+    if (t.length > MAX_TITEL) maengel.push([weg, `Titel ${t.length} Zeichen – zu lang`]);
+    if (t.length < MIN_TITEL) maengel.push([weg, `Titel ${t.length} Zeichen – zu kurz`]);
     titel.set(t, [...(titel.get(t) ?? []), weg]);
   }
   if (!b) maengel.push([weg, 'keine Beschreibung']);
   else {
     if (b.length > MAX_BESCHREIBUNG) {
-      maengel.push([weg, `Beschreibung ${b.length} Zeichen`]);
+      maengel.push([weg, `Beschreibung ${b.length} Zeichen – zu lang`]);
+    }
+    if (b.length < MIN_BESCHREIBUNG) {
+      maengel.push([weg, `Beschreibung ${b.length} Zeichen – zu kurz`]);
     }
     beschreibungen.set(b, [...(beschreibungen.get(b) ?? []), weg]);
   }
   if (!kanonisch) maengel.push([weg, 'kein canonical']);
+  // Ein Treffer ohne Vorschaubild wird auf jeder Plattform seltener geklickt.
+  //
+  // Nur geprüft, wenn überhaupt eine Seite eines hat: Ein Bau ohne
+  // NEXT_PUBLIC_BASIS_URL – also jeder Probelauf auf dem eigenen Rechner –
+  // lässt alle Vorschaubilder weg, weil ihnen die absolute Adresse fehlt.
+  // Zweihundert Beanstandungen, die nur bedeuten „das war kein
+  // Veröffentlichungsbau“, machen die Prüfung wertlos.
+  if (/<meta property="og:image"/.test(html)) mitBild += 1;
+  else ohneBild.push(weg);
   if (ueberschriften !== 1) maengel.push([weg, `${ueberschriften} Überschriften erster Ordnung`]);
 }
+
+if (mitBild > 0) for (const weg of ohneBild) maengel.push([weg, 'kein Vorschaubild']);
 
 for (const [t, wege] of titel) {
   if (wege.length > 1) maengel.push([wege.join(', '), `gleicher Titel: „${t.slice(0, 40)}…“`]);

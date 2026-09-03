@@ -16,7 +16,7 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title: 'Begriffe – Die Unsichtbaren Fäden',
-  description: 'Fachbegriffe des Bandes, erklärt: von in situ über Satrapie bis Höhle 17.',
+  description: 'Fachbegriffe des Bandes, kurz erklärt: von in situ über Satrapie bis Höhle 17 – jeder mit dem Kapitel, in dem er im Buch vorkommt.',
   alternates: {
     canonical: wegVollstaendig(wegBegriffe(LEITREIHE.id)) ?? wegBegriffe(LEITREIHE.id),
   },

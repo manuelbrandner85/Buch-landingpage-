@@ -7,7 +7,7 @@ import { ORTE } from '@/data/gemeinsam/orte';
 import {
   wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegUeber, wegVollstaendig, wegVorschau,
 } from '@/world/wege';
-import { aufsatz, brotkrumen } from '@/world/schema';
+import { aufsatz, brotkrumen, fundstelle, suchbeschreibung } from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
 import { Rueckweg } from '@/ui/Rueckweg';
@@ -40,7 +40,16 @@ export async function generateMetadata(
   return k && r
     ? {
       title: `Kapitel ${k.id}: ${k.titel}`,
-      description: k.unterzeile,
+      // Die Unterzeile allein war zwischen 28 und 66 Zeichen lang — auf den
+      // inhaltsreichsten Seiten der ganzen Website. Dahinter steht jetzt die
+      // Fundstelle: Sie ist je Kapitel verschieden und beantwortet die Frage,
+      // die jemand hat, der von Google kommt — steht das im Buch, und wo.
+      description: suchbeschreibung([
+        k.unterzeile,
+        `${fundstelle({
+          bandNummer: WELT[k.bandId]?.buch.nummer, kapitel: k.id, seiten: k.seiten,
+        })} von „${r.titel}“ – jede Aussage mit Quelle und Sicherheitsstufe`,
+      ]),
       alternates: {
         canonical: wegVollstaendig(wegKapitel(r.id, k.id)) ?? wegKapitel(r.id, k.id),
       },

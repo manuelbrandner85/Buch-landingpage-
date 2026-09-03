@@ -97,6 +97,21 @@ export interface Buch {
   titel: string;
   unterzeile?: string;
   /**
+   * Der Zusatz hinter dem Titel im Suchtreffer.
+   *
+   * Der Titel allein ist bei Google oft zu wenig: „Alles nur Zufall?“ sind
+   * siebzehn Zeichen, und der Rest der Zeile bleibt leer — verschenkte
+   * Fläche in einem Ergebnis, das ohnehin nur eine Zeile hat. Die Unterzeile
+   * taugt selten dafür, weil sie für den Umschlag geschrieben ist und nicht
+   * für die Suche.
+   *
+   * Hier steht deshalb das Wort, unter dem jemand sucht, der dieses Buch
+   * noch nicht kennt. Zusammen mit Titel und „ · Trendonix“ dürfen es
+   * höchstens 65 Zeichen sein; was länger ist, schneidet Google ab. Fehlt
+   * das Feld, trägt der Titel den Treffer allein.
+   */
+  suchzeile?: string;
+  /**
    * Drei Zustände, weil die Reihe drei hat:
    *  · `erschienen` – im Handel, die Welt ist offen, es gibt etwas zu kaufen
    *  · `erscheint`  – fertig gesetzt, die Welt ist offen, aber noch kein Kauf

@@ -23,7 +23,19 @@ export default function robots(): MetadataRoute.Robots {
     // eigenen Server auskommt – gefunden werden soll es aber nicht. Die Adresse
     // traegt deshalb eine unratbare Kennung, die Seite selbst ein `noindex`,
     // und hier steht die dritte Sperre.
-    rules: { userAgent: '*', allow: '/', disallow: '/cockpit-eb4e3e9d63d6/' },
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: [
+        '/cockpit-eb4e3e9d63d6/',
+        // Die beiden Zählpunkte sind keine Seiten, sondern Endpunkte: `z.php`
+        // schreibt bei jedem Abruf eine Zeile, `zahl.php` gibt sie zurück. Ein
+        // Sucher, der sie abruft, zählt sich selbst mit — die Besuchszahl unter
+        // dem Copyright wäre dann die Zahl der Suchmaschinenbesuche.
+        '/z.php',
+        '/zahl.php',
+      ],
+    },
     sitemap: `${BASIS}/sitemap.xml`,
   };
 }

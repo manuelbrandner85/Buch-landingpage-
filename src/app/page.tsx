@@ -5,13 +5,14 @@ import {
   OEFFENTLICHE_REIHEN, REIHEN_MIT_WELT, TRENDONIX, bandzeile, hatWelt, WELT,
   assetNach, istEinzeltitel, oeffentlicheBaendeVon, reiheZuBand,
 } from '@/world/registry';
-import { BASIS_PFAD, bewegt, bildQuelle, bildSatzHtml } from '@/world/bilder';
+import { bewegt, bildQuelle, bildSatzHtml } from '@/world/bilder';
 import { WEG_COCKPIT, weg, wegAbsolut, wegBuch, wegHaus, wegImpressum, wegReihe, wegUeber, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
 import { Buch3D } from '@/scenes/Buch3D';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Hintergrundvideo } from '@/ui/Hintergrundvideo';
 import { Hausfilm } from '@/ui/Hausfilm';
 import { og } from '@/world/og';
+import { haus, netz } from '@/world/schema';
 import { HAUSFILM } from '@/data/gemeinsam/hausfilm';
 import { Kanaele } from '@/ui/Kanaele';
 import { Partner } from '@/ui/Partner';
@@ -36,7 +37,14 @@ import { einstieg } from '@/data/gemeinsam/kaufweg';
  * der erste Eindruck nicht, und er steht dadurch sofort.
  */
 export const metadata: Metadata = {
-  title: `${TRENDONIX.name} – ${TRENDONIX.versprechen}`,
+  // Zwei verschiedene Zeilen, mit Absicht.
+  //
+  // Der Titel ist für die Trefferliste: Dort entscheidet, ob jemand das Wort
+  // wiederfindet, nach dem er gesucht hat — „Trendonix“ und „Sachbücher“.
+  // Die Zeile darunter, beim Teilen in einem Verlauf, hat einen anderen
+  // Leser: Der hat den Link schon bekommen und liest zuerst, worum es geht.
+  // Für ihn bleibt das Versprechen stehen.
+  title: TRENDONIX.suchzeile,
   description: TRENDONIX.kurzfassung,
   openGraph: og({
     type: 'website',
@@ -186,16 +194,22 @@ export default function Haus() {
     }
     : null;
 
+  // Ein Blatt, zwei Wesen: das Haus und die Seite. Sie verweisen mit `@id`
+  // aufeinander, damit Google nicht zwei Trendonix daraus macht — und die
+  // Adresse steht dabei, ohne die eine Organisation nirgendwo verankert ist.
   const strukturierteDaten = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: TRENDONIX.name,
-    description: TRENDONIX.arbeitsweise,
-    slogan: TRENDONIX.versprechen,
-    logo: `${BASIS_PFAD}/marke/trendonix.png`,
-    // Damit Suchmaschinen die sechs Profile diesem Haus zuordnen und nicht
-    // sechs Fremde daraus machen.
-    sameAs: kanalAdressen(),
+    '@graph': [
+      {
+        ...haus(),
+        description: TRENDONIX.arbeitsweise,
+        slogan: TRENDONIX.versprechen,
+        // Damit Suchmaschinen die sechs Profile diesem Haus zuordnen und nicht
+        // sechs Fremde daraus machen.
+        sameAs: kanalAdressen(),
+      },
+      netz(),
+    ],
   };
 
   return (

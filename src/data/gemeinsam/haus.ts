@@ -12,6 +12,16 @@ export interface Haus {
   name: string;
   /** Der eine Satz über der Startseite. */
   versprechen: string;
+  /**
+   * Die Titelzeile der Startseite im Suchergebnis.
+   *
+   * Nicht dasselbe wie `versprechen`: Das Versprechen ist für den, der schon
+   * da ist, und steht als Überschrift auf der Seite. Diese Zeile ist für den,
+   * der noch sucht — und niemand sucht nach „was zwischen den Dingen liegt“.
+   * Gesucht wird nach dem Namen des Hauses und nach dem, was es macht.
+   * Deshalb stehen hier beide, und der Rest bleibt der Seite selbst.
+   */
+  suchzeile: string;
   /** Das Verfahren, das alle Bücher teilen – unabhängig vom Thema. */
   arbeitsweise: string;
   /**
@@ -25,6 +35,7 @@ export interface Haus {
 export const TRENDONIX: Haus = {
   name: 'Trendonix',
   versprechen: 'Bücher über das, was zwischen den Dingen liegt.',
+  suchzeile: 'Trendonix – Sachbücher, die jede Aussage belegen',
   arbeitsweise:
     'Jeder Band beginnt bei etwas Sichtbarem – einem Feuer, einer Münze, einer Maschine – '
     + 'und fragt, welcher unsichtbare Faden daran hängt. Behauptet wird nichts, was sich '

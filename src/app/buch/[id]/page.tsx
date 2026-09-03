@@ -5,7 +5,9 @@ import {
   hatWelt, istEinzeltitel, reiheZuBand,
 } from '@/world/registry';
 import { wegBuch, wegHaus, wegKapitel, wegLeseprobe, wegReihe, wegVollstaendig, wegVorschau, wegWelt } from '@/world/wege';
-import { ausgaben, brotkrumen, stimmen as stimmenBlatt, urteil } from '@/world/schema';
+import {
+  ausgaben, brotkrumen, stimmen as stimmenBlatt, suchbeschreibung, urteil,
+} from '@/world/schema';
 import { PREISSTAND } from '@/data/gemeinsam/stand';
 import { angebotsreihenfolge } from '@/data/gemeinsam/kaufweg';
 import { gesamturteil, stimmenVon } from '@/data/gemeinsam/stimmen';
@@ -51,11 +53,24 @@ export async function generateMetadata(
     // Mit Reihentitel wird der Treffer bei zwei von drei Baenden zu lang und
     // reisst mitten im Wort ab. Dann traegt ihn die Bandzahl allein.
     title: (() => {
-      if (istEinzeltitel(reihe)) return buch.titel;
+      // Das Layout hängt „ · Trendonix“ an: zwölf Zeichen, die mitzählen.
+      // Bleiben 52, damit der Treffer unter den 65 steht, ab denen Google
+      // abschneidet.
+      if (istEinzeltitel(reihe)) {
+        // Ein Einzeltitel stand vorher allein in der Zeile: „Alles nur
+        // Zufall?“ sind siebzehn Zeichen, der Rest blieb leer. Die Suchzeile
+        // füllt sie mit dem Wort, unter dem gesucht wird.
+        const lang = buch.suchzeile ? `${buch.titel} – ${buch.suchzeile}` : buch.titel;
+        return lang.length <= 52 ? lang : buch.titel;
+      }
       const lang = `${buch.titel} – ${reihe?.titel} Band ${buch.nummer}`;
       return lang.length <= 52 ? lang : `${buch.titel} – Band ${buch.nummer}`;
     })(),
-    description: buch.unterzeile ?? buch.klappentext.slice(0, 160),
+    // Unterzeile und Klappentext zusammen, am Satzende getrennt. Vorher stand
+    // hier die Unterzeile allein — bei „Alles nur Zufall?“ waren das 46 von
+    // 155 möglichen Zeichen, und den Rest der Trefferzeile hat Google sich
+    // selbst irgendwo auf der Seite zusammengesucht.
+    description: suchbeschreibung([buch.unterzeile, buch.klappentext]),
     alternates: { canonical: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id) },
     openGraph: og({
       type: 'book', title: buch.titel, description: buch.klappentext,
@@ -96,7 +111,10 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
     // Das Cover: Google zeigt es im Buchtreffer an. Preis, ISBN und
     // Erscheinungsdatum fehlen hier bewusst – sie stehen nirgends auf der
     // Seite, und was die Seite nicht zeigt, behauptet das Datenblatt nicht.
-    ...(wegVorschau(buch.id) ? { image: wegVorschau(buch.id) } : {}),
+    // Nur die Adresse: Das Vorschauobjekt aus `wegVorschau` trägt Breite und
+    // Höhe für Open Graph, aber kein `@type` — als Bild in einem Datenblatt
+    // ist das ein Objekt ohne Art, und Google liest es nicht.
+    ...(wegVorschau(buch.id)?.[0] ? { image: wegVorschau(buch.id)![0]!.url } : {}),
     url: wegVollstaendig(wegBuch(buch.id)) ?? wegBuch(buch.id),
     ...(buch.erschienen ? { datePublished: buch.erschienen } : {}),
     ...(buch.kaufwege.length ? { workExample: ausgaben(buch.kaufwege) } : {}),

@@ -6,6 +6,7 @@ import { weg, wegHaus, wegVollstaendig } from '@/world/wege';
 import {
   QR_BUCH, QR_VEROEFFENTLICHT, QR_ZIELE, qrSchluessel, qrZielNach,
 } from '@/data/gemeinsam/qr';
+import { aufsatz, brotkrumen, suchbeschreibung } from '@/world/schema';
 
 export const dynamic = 'force-static';
 
@@ -26,11 +27,24 @@ export async function generateMetadata(
     // Kapitelname länger ist, trägt er den Titel allein. Google schneidet
     // sonst mitten im Wort ab, und abgeschnitten steht dort nicht die
     // Aufforderung, sondern ein Wortfragment.
+    // Die Behauptung in Anführungszeichen, nicht nackt: „Adolf Hitler lebt in
+    // Argentinien“ als Titel eines Suchtreffers liest sich sonst wie eine
+    // Aussage dieser Seite. Sie ist das Gegenteil — hier steht, wo man
+    // nachsieht. Die Zeichen kosten zwei Stellen und retten den Sinn.
     title: (() => {
-      const voll = `${ziel.kapitel} – selbst nachsehen`;
-      return voll.length <= 53 ? voll : ziel.kapitel;
+      const voll = `„${ziel.kapitel}“ – selbst nachsehen`;
+      return voll.length <= 53 ? voll : `„${ziel.kapitel}“`;
     })(),
-    description: ziel.hinweis,
+    // Der Hinweis allein ist ein halber Satz. Dahinter gehört, wo man
+    // nachsieht — das ist der Zweck dieser Seite und zugleich das, was sie
+    // von den anderen neununddreißig unterscheidet.
+    description: suchbeschreibung([
+      ziel.hinweis,
+      ziel.quellen.length
+        ? `Nachzusehen bei ${ziel.quellen.map((q) => q.anbieter).join(', ')}`
+        : undefined,
+      `Kapitel ${ziel.nr} aus „${QR_BUCH}“`,
+    ]),
     // Vor dem Erscheinen des Buches steht hier nichts im Index. Eine Seite,
     // die den Titel nennt, wäre sonst die Ankündigung.
     robots: QR_VEROEFFENTLICHT ? undefined : { index: false, follow: false },
@@ -52,8 +66,28 @@ export default async function QrSeite(
   const ziel = qrZielNach(nr);
   if (!ziel) notFound();
 
+  const pfad = weg(`/q/${qrSchluessel(ziel.nr)}/`);
+
   return (
     <main className="lesefassung">
+      {/*
+        Vierzig Nachschlage-Seiten ohne ein einziges Datenblatt: Google sah
+        hier bis zum 03.09.2026 vierzig kurze Texte ohne Verfasser, ohne Haus
+        und ohne Weg dorthin. Der Pfad ist das, was im Treffer über der Zeile
+        steht — ohne ihn steht dort die nackte Adresse mit /q/07/ darin.
+      */}
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(brotkrumen([
+          { name: TRENDONIX.name, weg: wegHaus() },
+          { name: QR_BUCH, weg: weg('/q/') },
+          { name: ziel.kapitel, weg: pfad },
+        ])) }} />
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aufsatz({
+          titel: `${ziel.kapitel} – selbst nachsehen`,
+          beschreibung: ziel.hinweis,
+          weg: pfad,
+        })) }} />
       <Rueckweg nach={wegHaus()} text={`Zurück zu ${TRENDONIX.name}`} />
       <p className="eyebrow">{QR_BUCH} · Kapitel {ziel.nr}</p>
       <h1>{ziel.kapitel}</h1>

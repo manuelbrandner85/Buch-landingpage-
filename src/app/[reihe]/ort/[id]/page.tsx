@@ -5,7 +5,9 @@ import { WELT, kapitelNach, reiheNach, REIHEN_MIT_KAPITELN } from '@/world/regis
 import {
   wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegVollstaendig, wegVorschau,
 } from '@/world/wege';
-import { brotkrumen, ort as ortDatenblatt } from '@/world/schema';
+import {
+  brotkrumen, fundstelle, ort as ortDatenblatt, suchbeschreibung,
+} from '@/world/schema';
 import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
 import { Rueckweg } from '@/ui/Rueckweg';
@@ -49,7 +51,20 @@ export async function generateMetadata(
   return {
     // Der Ortsname zuerst: Danach wird gesucht, nicht nach dem Reihentitel.
     title: `${o.name} – ${anriss(o.text)}`,
-    description: o.text,
+    // Der eine Satz zum Ort ist selten länger als achtzig Zeichen. Was dahinter
+    // gehört, steht ohnehin in den Daten: in welchem Band, welchem Kapitel und
+    // auf welcher Seite dieser Ort vorkommt.
+    description: suchbeschreibung([
+      o.text,
+      // Höchstens zwei Fundstellen: Bretton Woods kommt in drei Kapiteln vor,
+      // und die volle Liste sprengte die Beschreibung so weit, dass die
+      // Kürzung sie wieder ganz weggeschnitten hat.
+      o.vorkommen.length
+        ? `Im Buch: ${o.vorkommen.slice(0, 2).map((v) => fundstelle({
+          bandNummer: WELT[v.bandId]?.buch.nummer, kapitel: v.kapitel, seiten: v.seiten,
+        })).join('; ')}${o.vorkommen.length > 2 ? ' u. a.' : ''}`
+        : undefined,
+    ]),
     alternates: { canonical: wegVollstaendig(wegOrt(r.id, o.id)) ?? wegOrt(r.id, o.id) },
     // Ein Ort gehört keinem Band, sondern der Welt – geteilt wird deshalb das
     // Motiv der Welt und nicht das Cover eines beliebigen Bandes.
