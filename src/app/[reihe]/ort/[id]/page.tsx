@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ORTE, ortNach } from '@/data/gemeinsam/orte';
+import type { Ort } from '@/data/gemeinsam/typen';
 import { WELT, kapitelNach, reiheNach, REIHEN_MIT_KAPITELN } from '@/world/registry';
 import {
   wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegVollstaendig, wegVorschau,
@@ -51,20 +52,7 @@ export async function generateMetadata(
   return {
     // Der Ortsname zuerst: Danach wird gesucht, nicht nach dem Reihentitel.
     title: `${o.name} – ${anriss(o.text)}`,
-    // Der eine Satz zum Ort ist selten länger als achtzig Zeichen. Was dahinter
-    // gehört, steht ohnehin in den Daten: in welchem Band, welchem Kapitel und
-    // auf welcher Seite dieser Ort vorkommt.
-    description: suchbeschreibung([
-      o.text,
-      // Höchstens zwei Fundstellen: Bretton Woods kommt in drei Kapiteln vor,
-      // und die volle Liste sprengte die Beschreibung so weit, dass die
-      // Kürzung sie wieder ganz weggeschnitten hat.
-      o.vorkommen.length
-        ? `Im Buch: ${o.vorkommen.slice(0, 2).map((v) => fundstelle({
-          bandNummer: WELT[v.bandId]?.buch.nummer, kapitel: v.kapitel, seiten: v.seiten,
-        })).join('; ')}${o.vorkommen.length > 2 ? ' u. a.' : ''}`
-        : undefined,
-    ]),
+    description: ortsbeschreibung(o, r.titel),
     alternates: { canonical: wegVollstaendig(wegOrt(r.id, o.id)) ?? wegOrt(r.id, o.id) },
     // Ein Ort gehört keinem Band, sondern der Welt – geteilt wird deshalb das
     // Motiv der Welt und nicht das Cover eines beliebigen Bandes.
@@ -76,6 +64,35 @@ export async function generateMetadata(
     }, wegVollstaendig(wegOrt(r.id, o.id))),
   };
 }
+
+/**
+ * Die Beschreibung einer Ortsseite.
+ *
+ * Der eine Satz zum Ort ist selten länger als achtzig Zeichen. Dahinter gehört,
+ * was ohnehin in den Daten steht: in welchem Kapitel und auf welcher Seite
+ * dieser Ort vorkommt — je Ort verschieden und genau die Auskunft, die jemand
+ * braucht, der von einer Suchmaschine kommt.
+ *
+ * Ohne Bandzahl, wie der Kasten „Im Buch“ auf der Seite selbst: Band 3 ist in
+ * Arbeit und nicht zu haben. Eine Trefferzeile, die ihn nennt, kündigt ihn an.
+ *
+ * Höchstens zwei Fundstellen — Bretton Woods kommt in drei Kapiteln vor, und
+ * die volle Liste sprengte die Beschreibung so weit, dass die Kürzung sie
+ * wieder ganz weggeschnitten hat. Und wenn danach immer noch zu wenig dasteht
+ * (Hamburg: ein kurzer Satz, eine einzige Seite), sagt der Schluss, wo man
+ * hier eigentlich ist.
+ */
+const ortsbeschreibung = (o: Ort, reihentitel: string) => {
+  const kurz = suchbeschreibung([
+    o.text,
+    o.vorkommen.length
+      ? `Im Buch: ${o.vorkommen.slice(0, 2).map((v) => fundstelle({
+        kapitel: v.kapitel, seiten: v.seiten,
+      })).join('; ')}${o.vorkommen.length > 2 ? ' u. a.' : ''}`
+      : undefined,
+  ]);
+  return kurz.length >= 100 ? kurz : suchbeschreibung([kurz, `Ort in „${reihentitel}“`]);
+};
 
 /** Grad in Himmelsrichtungen, wie auf einer Karte. */
 const grad = (wert: number, achse: 'breite' | 'laenge') => {
