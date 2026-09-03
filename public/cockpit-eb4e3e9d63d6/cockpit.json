@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T11:02:52Z",
+  "stand": "2026-09-03T12:02:31Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -290,15 +290,44 @@
     "hinweis": "Aus dem KDP-Bericht abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
   },
   "besucher": {
-    "gelesen": false,
-    "hinweis": "fetch failed",
+    "gelesen": true,
+    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 6 gemessene Tage.",
     "klicks7": 0,
-    "impressionen7": 29,
-    "position": 54.8,
+    "impressionen7": 84,
+    "position": 50.1,
     "seitenIndexiert": 66,
     "seitenGesamt": 197,
-    "suchanfragen": [],
-    "quelle": "Dienstkonto meldet einen Fehler"
+    "suchanfragen": [
+      {
+        "wort": "an welchem fluss liegt antwerpen",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "an welchem fluss liegt london",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "bab al mandab strait",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "bab al-mandab",
+        "klicks": 0,
+        "impressionen": 2
+      },
+      {
+        "wort": "bab al-mandab strait",
+        "klicks": 0,
+        "impressionen": 1
+      }
+    ],
+    "von": "2026-08-27",
+    "bis": "2026-09-01",
+    "tage": 6,
+    "quelle": "abgerufen"
   },
   "reichweite": {
     "gesamt": 22658,
@@ -1632,7 +1661,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-09-01",
+      "stand": "2026-09-03",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
@@ -1645,7 +1674,7 @@
       "vorher": 11,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-09-01",
+      "stand": "2026-09-03",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -1680,7 +1709,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-09-01",
+      "stand": "2026-09-03",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
@@ -1692,7 +1721,7 @@
       "follower": 0,
       "vorher": 0,
       "reaktionen": null,
-      "stand": "2026-09-01",
+      "stand": "2026-09-03",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
       "beitraege": 6,
@@ -1919,13 +1948,13 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T11:02:00Z",
-    "deploy": null,
-    "deployQuelle": "Windows-Lauf",
-    "deployLaeuft": null,
-    "deployWann": null,
-    "zertifikatTage": null,
-    "linksGeprueft": 0,
+    "stand": "2026-09-03T12:02:00Z",
+    "deploy": "erfolgreich",
+    "deployQuelle": "GitHub",
+    "deployLaeuft": false,
+    "deployWann": "2026-09-03T09:02:27Z",
+    "zertifikatTage": 81,
+    "linksGeprueft": 54,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 197,
@@ -1935,26 +1964,6 @@
     {
       "was": "Die Unsichtbaren Fäden — Band 1",
       "warum": "Gebunden: keine ISBN"
-    },
-    {
-      "was": "Kanalabruf",
-      "warum": "TikTok: fetch failed"
-    },
-    {
-      "was": "Kanalabruf",
-      "warum": "Pinterest: fetch failed"
-    },
-    {
-      "was": "Kanalabruf",
-      "warum": "YouTube: fetch failed"
-    },
-    {
-      "was": "Kanalabruf",
-      "warum": "Bluesky: fetch failed"
-    },
-    {
-      "was": "Besucher",
-      "warum": "fetch failed"
     },
     {
       "was": "Vorrat an Beiträgen",
