@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T01:18:52Z",
+  "stand": "2026-09-03T02:03:00Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -290,44 +290,15 @@
     "hinweis": "Aus dem KDP-Bericht abgelesen. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
   },
   "besucher": {
-    "gelesen": true,
-    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 5 gemessene Tage.",
+    "gelesen": false,
+    "hinweis": "fetch failed",
     "klicks7": 0,
-    "impressionen7": 72,
-    "position": 53,
+    "impressionen7": 29,
+    "position": 54.8,
     "seitenIndexiert": 66,
     "seitenGesamt": 197,
-    "suchanfragen": [
-      {
-        "wort": "an welchem fluss liegt antwerpen",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "an welchem fluss liegt london",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "bab al mandab strait",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "bab al-mandab",
-        "klicks": 0,
-        "impressionen": 2
-      },
-      {
-        "wort": "bab al-mandab strait",
-        "klicks": 0,
-        "impressionen": 1
-      }
-    ],
-    "von": "2026-08-27",
-    "bis": "2026-08-31",
-    "tage": 5,
-    "quelle": "abgerufen"
+    "suchanfragen": [],
+    "quelle": "Dienstkonto meldet einen Fehler"
   },
   "reichweite": {
     "gesamt": 22658,
@@ -1948,13 +1919,13 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T01:02:00Z",
-    "deploy": "erfolgreich",
-    "deployQuelle": "GitHub",
-    "deployLaeuft": false,
-    "deployWann": "2026-09-03T00:08:08Z",
-    "zertifikatTage": 81,
-    "linksGeprueft": 54,
+    "stand": "2026-09-03T02:02:00Z",
+    "deploy": null,
+    "deployQuelle": "Windows-Lauf",
+    "deployLaeuft": null,
+    "deployWann": null,
+    "zertifikatTage": null,
+    "linksGeprueft": 0,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 197,
@@ -1964,6 +1935,26 @@
     {
       "was": "Die Unsichtbaren Fäden — Band 1",
       "warum": "Gebunden: keine ISBN"
+    },
+    {
+      "was": "Kanalabruf",
+      "warum": "TikTok: fetch failed"
+    },
+    {
+      "was": "Kanalabruf",
+      "warum": "Pinterest: fetch failed"
+    },
+    {
+      "was": "Kanalabruf",
+      "warum": "YouTube: fetch failed"
+    },
+    {
+      "was": "Kanalabruf",
+      "warum": "Bluesky: fetch failed"
+    },
+    {
+      "was": "Besucher",
+      "warum": "fetch failed"
     },
     {
       "was": "Vorrat an Beiträgen",
