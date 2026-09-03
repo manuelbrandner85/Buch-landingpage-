@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T08:03:00Z",
+  "stand": "2026-09-03T09:02:57Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -728,15 +728,6 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-27",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Facebook",
           "zeit": "18:30",
           "was": "08_aehre",
@@ -1430,6 +1421,15 @@
           "was": "07_feuer",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1919,7 +1919,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T08:02:00Z",
+    "stand": "2026-09-03T09:02:00Z",
     "deploy": null,
     "deployQuelle": "Windows-Lauf",
     "deployLaeuft": null,
