@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T14:03:05Z",
+  "stand": "2026-09-03T17:41:10Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -750,24 +750,6 @@
           "was": "12_schrift",
           "zustand": "offen",
           "hinweis": null
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "18:30",
-          "was": "01_neandertaler",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-22",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "18:30",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-27",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1336,6 +1318,15 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
+          "kanal": "Facebook",
+          "zeit": "09:30",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Instagram",
           "zeit": "11:00",
           "was": "10_archiv",
@@ -1386,6 +1377,15 @@
           "was": "11_statuen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "09:30",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-22",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Instagram",
@@ -1979,11 +1979,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T14:02:00Z",
+    "stand": "2026-09-03T17:37:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-03T13:03:21Z",
+    "deployWann": "2026-09-03T14:04:06Z",
     "zertifikatTage": 81,
     "linksGeprueft": 54,
     "linksKaputt": 0,
