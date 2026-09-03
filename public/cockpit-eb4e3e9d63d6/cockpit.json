@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T21:02:24Z",
+  "stand": "2026-09-03T22:03:16Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -741,19 +741,6 @@
   },
   "termine": [
     {
-      "d": "2026-09-03",
-      "wochentag": "Do",
-      "punkte": [
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "12_schrift",
-          "zustand": "offen",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-09-04",
       "wochentag": "Fr",
       "punkte": [
@@ -1438,6 +1425,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-02",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "12_schrift",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-03",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1558,6 +1554,47 @@
           "was": "13_tempel",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-18",
+      "wochentag": "Fr",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "12_schrift",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "TikTok LIVE",
+          "zeit": "20:00",
+          "was": null,
+          "zustand": "steht",
+          "hinweis": "fester Termin"
         }
       ]
     }
@@ -1979,11 +2016,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T21:02:00Z",
+    "stand": "2026-09-03T22:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-03T20:03:22Z",
+    "deployWann": "2026-09-03T21:03:25Z",
     "zertifikatTage": 80,
     "linksGeprueft": 54,
     "linksKaputt": 0,
