@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T09:02:57Z",
+  "stand": "2026-09-03T10:03:03Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1919,7 +1919,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T09:02:00Z",
+    "stand": "2026-09-03T10:02:00Z",
     "deploy": null,
     "deployQuelle": "Windows-Lauf",
     "deployLaeuft": null,
