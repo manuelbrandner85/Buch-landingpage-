@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-02T23:14:59Z",
+  "stand": "2026-09-03T00:06:55Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -7,24 +7,9 @@
     }
   ],
   "aenderungen": {
-    "seit": "2026-09-01",
-    "punkte": [
-      {
-        "was": "Rang",
-        "von": "#645.558",
-        "nach": "#334.543",
-        "delta": "−#311.015",
-        "richtung": "gut"
-      },
-      {
-        "was": "Bestellungen im Monat",
-        "von": "5",
-        "nach": "11",
-        "delta": "+6",
-        "richtung": "gut"
-      }
-    ],
-    "hinweis": null
+    "seit": "2026-09-02",
+    "punkte": [],
+    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
   "regal": {
     "buecher": [
@@ -37,7 +22,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 25,
+        "tageDraussen": 26,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -143,7 +128,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 3,
+        "tageDraussen": 4,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -352,7 +337,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 7,
+    "tage": 8,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -381,6 +366,10 @@
       },
       {
         "d": "2026-09-02",
+        "v": 334543
+      },
+      {
+        "d": "2026-09-03",
         "v": 334543
       }
     ],
@@ -412,6 +401,10 @@
       {
         "d": "2026-09-02",
         "v": 2
+      },
+      {
+        "d": "2026-09-03",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -441,6 +434,10 @@
       },
       {
         "d": "2026-09-02",
+        "v": 22658
+      },
+      {
+        "d": "2026-09-03",
         "v": 22658
       }
     ],
@@ -509,6 +506,10 @@
         {
           "d": "2026-09-02",
           "v": 21600
+        },
+        {
+          "d": "2026-09-03",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -538,6 +539,10 @@
         },
         {
           "d": "2026-09-02",
+          "v": 11
+        },
+        {
+          "d": "2026-09-03",
           "v": 11
         }
       ],
@@ -569,6 +574,10 @@
         {
           "d": "2026-09-02",
           "v": 1041
+        },
+        {
+          "d": "2026-09-03",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -598,6 +607,10 @@
         },
         {
           "d": "2026-09-02",
+          "v": 6
+        },
+        {
+          "d": "2026-09-03",
           "v": 6
         }
       ],
@@ -629,6 +642,10 @@
         {
           "d": "2026-09-02",
           "v": 0
+        },
+        {
+          "d": "2026-09-03",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -659,6 +676,10 @@
         {
           "d": "2026-09-02",
           "v": 0
+        },
+        {
+          "d": "2026-09-03",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -684,6 +705,10 @@
         },
         {
           "d": "2026-09-02",
+          "v": 2
+        },
+        {
+          "d": "2026-09-03",
           "v": 2
         }
       ]
@@ -1640,7 +1665,7 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     },
     {
       "name": "YouTube",
@@ -1653,7 +1678,7 @@
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     },
     {
       "name": "Instagram",
@@ -1664,7 +1689,7 @@
       "stand": "2026-08-28",
       "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     },
     {
       "name": "Facebook",
@@ -1675,7 +1700,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     },
     {
       "name": "Pinterest",
@@ -1688,7 +1713,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     },
     {
       "name": "Bluesky",
@@ -1701,7 +1726,7 @@
       "reaktionenLabel": null,
       "beitraege": 6,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     },
     {
       "name": "Verteiler",
@@ -1715,7 +1740,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-01"
+      "vergleichVom": "2026-09-02"
     }
   ],
   "vorschlaege": [
@@ -1923,11 +1948,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-02T23:02:00Z",
+    "stand": "2026-09-03T00:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-02T22:20:28Z",
+    "deployWann": "2026-09-02T23:15:46Z",
     "zertifikatTage": 81,
     "linksGeprueft": 54,
     "linksKaputt": 0,
