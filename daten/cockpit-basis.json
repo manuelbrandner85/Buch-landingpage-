@@ -52,12 +52,12 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Abgelesen 01.09. 08:27 (Datenstand bis 29.08., letzte Aktualisierung laut Konsole 7,5 Std. zuvor). 7 Tage: 21 Suchanfragen, alle ohne Klick; die meisten Impressionen hat „malakka straße“ (2, Position 91,5), alle anderen je 1. Indexierung: 66 indexiert, 24 nicht (23 „Gefunden – zurzeit nicht indexiert“, 1 noindex). Sitemap zuletzt 30.08. gelesen, 197 erkannte Seiten.",
+    "hinweis": "Abgelesen 04.09. 08:4x (letzte Aktualisierung laut Konsole 6,5 Std. zuvor, Daten bis 01.09.). 7 Tage: 0 Klicks, 84 Impressionen (Vorwoche 29), Position 50,1. 48 Suchanfragen, keine mit Klick; vorn: uruk (4), magellanstraße (4), bab el mandeb (3). Markenanfrage „trendonix“ erstmals mit Position 6,0 (1 Impression). Indexierung: 66 indexiert, 24 nicht (23 „Gefunden – zurzeit nicht indexiert“, 1 noindex). Sitemap zuletzt 02.09. gelesen, 198 erkannte Seiten.",
     "klicks7": 0,
-    "impressionen7": 29,
-    "position": 54.8,
+    "impressionen7": 84,
+    "position": 50.1,
     "seitenIndexiert": 66,
-    "seitenGesamt": 197,
+    "seitenGesamt": 198,
     "suchanfragen": []
   },
   "kanaele": [
@@ -259,6 +259,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-04T06:45:00Z",
+      "kanal": "Rundlauf",
+      "text": "08-Uhr-Lauf (behelfsweise, AUTOPILOT weiter nicht verbunden): YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach gesichtet — nur geteilte Videos/Lives und bekannte Werbung, keine Buchfrage. Search Console: 84 Impressionen in 7 Tagen (Vorwoche 29), weiter 0 Klicks."
+    },
+    {
       "zeit": "2026-09-02T05:35:00Z",
       "kanal": "Rundlauf",
       "text": "AUTOPILOT-Ordner wiedergefunden (Band 1\\05_Marketing\\05_Social_Kampagne). Lauf behelfsweise ueber Desktop Commander: YouTube-Kommentare, Zuschauerbeitraege und Bluesky geprueft — nichts Neues. Zur 11-Minuten-Live vom 01.09. (23:56) wurde wegen der Stoerung kein Clip gepostet; nichts zu privatisieren."
@@ -312,11 +317,6 @@
       "zeit": "2026-08-28T19:26:00Z",
       "kanal": "TikTok",
       "text": "Postfach: Dagmars Abendgruß von 20:59 kurz beantwortet (Dank + Wochenendwunsch). Kommentare, FB, IG, Pinterest, YouTube, Bluesky, Amazon geprüft — sonst nichts Neues."
-    },
-    {
-      "zeit": "2026-08-28T13:31:00Z",
-      "kanal": "TikTok",
-      "text": "Postfach: Dagmars „Bewertung ist drin jetzt!“ mit kurzem Dank beantwortet — sie ist zugleich die erste echte Verteiler-Anmeldung (in Brevo bestätigt)."
     }
   ],
   "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",

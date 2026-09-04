@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T06:02:22Z",
+  "stand": "2026-09-04T06:29:48Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -317,7 +317,7 @@
     "impressionen7": 84,
     "position": 50.1,
     "seitenIndexiert": 66,
-    "seitenGesamt": 197,
+    "seitenGesamt": 198,
     "suchanfragen": [
       {
         "wort": "an welchem fluss liegt antwerpen",
@@ -1891,6 +1891,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-04T06:45:00Z",
+      "kanal": "Rundlauf",
+      "text": "08-Uhr-Lauf (behelfsweise, AUTOPILOT weiter nicht verbunden): YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach gesichtet — nur geteilte Videos/Lives und bekannte Werbung, keine Buchfrage. Search Console: 84 Impressionen in 7 Tagen (Vorwoche 29), weiter 0 Klicks."
+    },
+    {
       "id": "deploy-2026-09-04-fehlgeschlagen",
       "zeit": "2026-09-04T01:02:20Z",
       "kanal": "Technik",
@@ -1961,11 +1966,6 @@
       "zeit": "2026-08-30T02:05:00Z",
       "kanal": "Website",
       "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
-    },
-    {
-      "zeit": "2026-08-30T01:10:00Z",
-      "kanal": "Website",
-      "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
     }
   ],
   "offen": [
@@ -2070,7 +2070,7 @@
     "linksGeprueft": 54,
     "linksKaputt": 0,
     "linksZiele": [],
-    "seitenGemeldet": 197,
+    "seitenGemeldet": 198,
     "journalVorrat": 2
   },
   "luecken": [
