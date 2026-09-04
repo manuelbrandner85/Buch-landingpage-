@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T20:02:25Z",
+  "stand": "2026-09-04T21:02:22Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -2080,11 +2080,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T20:02:00Z",
+    "stand": "2026-09-04T21:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-04T19:03:34Z",
+    "deployWann": "2026-09-04T20:03:14Z",
     "zertifikatTage": 79,
     "linksGeprueft": 54,
     "linksKaputt": 0,
