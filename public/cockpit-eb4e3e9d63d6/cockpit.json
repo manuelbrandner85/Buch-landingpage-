@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T13:02:23Z",
+  "stand": "2026-09-04T14:02:24Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -813,27 +813,6 @@
       "wochentag": "Fr",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "14_kernthese",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "14_kernthese",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "14_kernthese",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "14_kernthese",
@@ -983,6 +962,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "14_kernthese",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-04",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -1484,6 +1472,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "14_kernthese",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-04",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1656,6 +1653,15 @@
           "was": "12_schrift",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "14_kernthese",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-04",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "TikTok LIVE",
@@ -2085,7 +2091,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T13:02:00Z",
+    "stand": "2026-09-04T14:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
