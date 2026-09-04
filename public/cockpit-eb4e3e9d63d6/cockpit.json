@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T08:02:27Z",
+  "stand": "2026-09-04T09:02:25Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -841,42 +841,6 @@
           "hinweis": null
         },
         {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "06_fuenf_fragen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "11_statuen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-29",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "09_muenze",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-30",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "11:00",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-03",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "TikTok LIVE",
           "zeit": "20:00",
           "was": null,
@@ -949,6 +913,15 @@
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "18:30",
+          "was": "12_schrift",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -1450,6 +1423,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-26",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "09_muenze",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1545,6 +1527,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-27",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "11_statuen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-29",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1622,6 +1613,15 @@
           "was": "13_tempel",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2085,11 +2085,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T08:02:00Z",
+    "stand": "2026-09-04T09:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": null,
+    "deployWann": "2026-09-04T08:59:12Z",
     "zertifikatTage": 80,
     "linksGeprueft": 54,
     "linksKaputt": 0,
