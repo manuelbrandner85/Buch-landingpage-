@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T10:02:25Z",
+  "stand": "2026-09-04T11:02:26Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -328,10 +328,10 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Google liefert die letzten Tage mit Verzögerung — hier stehen 6 gemessene Tage.",
+    "hinweis": null,
     "klicks7": 0,
-    "impressionen7": 84,
-    "position": 50.1,
+    "impressionen7": 87,
+    "position": 50.2,
     "seitenIndexiert": 66,
     "seitenGesamt": 198,
     "suchanfragen": [
@@ -362,8 +362,8 @@
       }
     ],
     "von": "2026-08-27",
-    "bis": "2026-09-01",
-    "tage": 6,
+    "bis": "2026-09-02",
+    "tage": 7,
     "quelle": "abgerufen"
   },
   "reichweite": {
@@ -2085,7 +2085,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T10:02:00Z",
+    "stand": "2026-09-04T11:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,

@@ -1,14 +1,14 @@
 {
   "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
-  "stand": "2026-09-03T12:02:30Z",
+  "stand": "2026-09-04T11:02:25Z",
   "eingerichtet": true,
   "hinweis": null,
   "klicks": 0,
-  "impressionen": 84,
-  "position": 50.1,
+  "impressionen": 87,
+  "position": 50.2,
   "von": "2026-08-27",
-  "bis": "2026-09-01",
-  "tage": 6,
+  "bis": "2026-09-02",
+  "tage": 7,
   "suchanfragen": [
     {
       "wort": "an welchem fluss liegt antwerpen",
