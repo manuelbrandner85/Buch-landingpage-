@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T17:03:26Z",
+  "stand": "2026-09-04T18:02:22Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1707,9 +1707,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8289.5,
+    "summe": 8424,
     "offenSumme": 6333.5,
     "buchungen": [
+      {
+        "datum": "2026-09-04",
+        "projekt": "Trendonix-Kurzvideo",
+        "zweck": "Abendplatz 18:21-18:33 Ortszeit: Kurzvideo 10_archiv, vier eigene kie.ai-Einstellungen (1249,5 auf 1115,0). LOG.md schluesselt vollstaendig auf: 32,5 Bilder (davon 6,5 fuer die neu bestellte Einstellung 4), 90 Bewegungen, 12 Musik (Suno-Titel Verschlossene Kammer). Aus dem stuendlichen Cockpit-Lauf 17:06 UTC nachgetragen, weil der Videomotor seine Credits nicht selbst bucht.",
+        "credits": 134.5
+      },
       {
         "datum": "2026-09-04",
         "projekt": "nicht zugeordnet",
@@ -1775,12 +1781,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (15:08 UTC)",
         "credits": 99
-      },
-      {
-        "datum": "2026-08-30",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (12:06 UTC, nachgetragen)",
-        "credits": 24
       }
     ]
   },
@@ -2080,11 +2080,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T17:02:00Z",
+    "stand": "2026-09-04T18:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-04T16:49:30Z",
+    "deployWann": "2026-09-04T17:27:16Z",
     "zertifikatTage": 80,
     "linksGeprueft": 54,
     "linksKaputt": 0,
