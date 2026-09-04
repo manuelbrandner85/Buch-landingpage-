@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T16:02:23Z",
+  "stand": "2026-09-04T16:42:15Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1921,6 +1921,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-04T17:00:00Z",
+      "kanal": "Rundlauf",
+      "text": "18-Uhr-Lauf (TEIL 2, behelfsweise): Unter dem neuen YouTube-Short (Kochen, 112 Aufrufe in 90 Min) ersten Kommentar gesetzt und angepinnt, unter dem Bluesky-Tagespost eine Thread-Frage ergaenzt. LIVE-Bewertung 99/100, keine aktive Einschraenkung, drei Live-Clips liegen bereit; Titelvorschlag fuer 20 Uhr: 'Offene Runde mit einem Kapitel'. Brevo weiter im vecom-Konto (Verteilerzahlen blind). Kaufwege-Abgleich: gebundene Ausgabe (31.08.) in Kanaltexten noch nicht nachgezogen."
+    },
+    {
       "zeit": "2026-09-04T06:45:00Z",
       "kanal": "Rundlauf",
       "text": "08-Uhr-Lauf (behelfsweise, AUTOPILOT weiter nicht verbunden): YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach gesichtet — nur geteilte Videos/Lives und bekannte Werbung, keine Buchfrage. Search Console: 84 Impressionen in 7 Tagen (Vorwoche 29), weiter 0 Klicks."
@@ -1991,11 +1996,6 @@
       "zeit": "2026-08-30T03:10:00Z",
       "kanal": "Website",
       "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
-    },
-    {
-      "zeit": "2026-08-30T02:05:00Z",
-      "kanal": "Website",
-      "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
     }
   ],
   "offen": [
@@ -2094,7 +2094,7 @@
     "stand": "2026-09-04T16:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
-    "deployLaeuft": false,
+    "deployLaeuft": true,
     "deployWann": null,
     "zertifikatTage": 80,
     "linksGeprueft": 54,

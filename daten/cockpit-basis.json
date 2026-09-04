@@ -1,346 +1,346 @@
 {
-  "_hinweis": "Der redaktionelle Teil des Cockpits. Hier steht, was ein Mensch weiß und keine Maschine ausliest: Kanalzahlen, Vorschläge, offene Punkte, Ereignisse. scripts/cockpit.mjs verbindet diese Datei mit dem, was sich messen lässt (Technik, Deploys, Zertifikat, Links, ZAHLEN.md) und schreibt daraus public/cockpit-eb4e3e9d63d6/cockpit.json. Keine geschätzte Zahl: was unbekannt ist, bleibt null.",
-  "buch": {
-    "titel": "Die Unsichtbaren Fäden — Band 1",
-    "untertitel": "Ursprung und Ordnung",
-    "erschienen": "2026-08-08",
-    "seiten": 206,
-    "rangGesamt": 334543,
-    "rangVorher": null,
-    "rangStand": "2026-08-27",
-    "kategorien": [
-      {
-        "name": "Kulturgeschichte",
-        "platz": 247
-      },
-      {
-        "name": "Vor- & Frühgeschichte",
-        "platz": 744
-      },
-      {
-        "name": "Archäologie",
-        "platz": 948
-      }
-    ],
-    "rezensionen": {
-      "anzahl": 0,
-      "schnitt": null
-    },
-    "ausgaben": [
-      {
-        "form": "Taschenbuch",
-        "haendler": "Amazon",
-        "preis": 37.29,
-        "isbn": "979-8191493053",
-        "zustand": "im Handel · Aktualisierung wird geprüft"
-      },
-      {
-        "form": "E-Book",
-        "haendler": "Amazon",
-        "preis": 12.99,
-        "isbn": null,
-        "zustand": "im Handel · Kindle Unlimited"
-      },
-      {
-        "form": "Gebunden",
-        "haendler": "Amazon",
-        "preis": 46.64,
-        "isbn": null,
-        "zustand": "wird von KDP geprüft, fünfter Tag"
-      }
-    ]
+ "_hinweis": "Der redaktionelle Teil des Cockpits. Hier steht, was ein Mensch weiß und keine Maschine ausliest: Kanalzahlen, Vorschläge, offene Punkte, Ereignisse. scripts/cockpit.mjs verbindet diese Datei mit dem, was sich messen lässt (Technik, Deploys, Zertifikat, Links, ZAHLEN.md) und schreibt daraus public/cockpit-eb4e3e9d63d6/cockpit.json. Keine geschätzte Zahl: was unbekannt ist, bleibt null.",
+ "buch": {
+  "titel": "Die Unsichtbaren Fäden — Band 1",
+  "untertitel": "Ursprung und Ordnung",
+  "erschienen": "2026-08-08",
+  "seiten": 206,
+  "rangGesamt": 334543,
+  "rangVorher": null,
+  "rangStand": "2026-08-27",
+  "kategorien": [
+   {
+    "name": "Kulturgeschichte",
+    "platz": 247
+   },
+   {
+    "name": "Vor- & Frühgeschichte",
+    "platz": 744
+   },
+   {
+    "name": "Archäologie",
+    "platz": 948
+   }
+  ],
+  "rezensionen": {
+   "anzahl": 0,
+   "schnitt": null
   },
-  "besucher": {
-    "gelesen": true,
-    "hinweis": "Abgelesen 04.09. 08:4x (letzte Aktualisierung laut Konsole 6,5 Std. zuvor, Daten bis 01.09.). 7 Tage: 0 Klicks, 84 Impressionen (Vorwoche 29), Position 50,1. 48 Suchanfragen, keine mit Klick; vorn: uruk (4), magellanstraße (4), bab el mandeb (3). Markenanfrage „trendonix“ erstmals mit Position 6,0 (1 Impression). Indexierung: 66 indexiert, 24 nicht (23 „Gefunden – zurzeit nicht indexiert“, 1 noindex). Sitemap zuletzt 02.09. gelesen, 198 erkannte Seiten.",
-    "klicks7": 0,
-    "impressionen7": 84,
-    "position": 50.1,
-    "seitenIndexiert": 66,
-    "seitenGesamt": 198,
-    "suchanfragen": []
+  "ausgaben": [
+   {
+    "form": "Taschenbuch",
+    "haendler": "Amazon",
+    "preis": 37.29,
+    "isbn": "979-8191493053",
+    "zustand": "im Handel · Aktualisierung wird geprüft"
+   },
+   {
+    "form": "E-Book",
+    "haendler": "Amazon",
+    "preis": 12.99,
+    "isbn": null,
+    "zustand": "im Handel · Kindle Unlimited"
+   },
+   {
+    "form": "Gebunden",
+    "haendler": "Amazon",
+    "preis": 46.64,
+    "isbn": null,
+    "zustand": "wird von KDP geprüft, fünfter Tag"
+   }
+  ]
+ },
+ "besucher": {
+  "gelesen": true,
+  "hinweis": "Abgelesen 04.09. 08:4x (letzte Aktualisierung laut Konsole 6,5 Std. zuvor, Daten bis 01.09.). 7 Tage: 0 Klicks, 84 Impressionen (Vorwoche 29), Position 50,1. 48 Suchanfragen, keine mit Klick; vorn: uruk (4), magellanstraße (4), bab el mandeb (3). Markenanfrage „trendonix“ erstmals mit Position 6,0 (1 Impression). Indexierung: 66 indexiert, 24 nicht (23 „Gefunden – zurzeit nicht indexiert“, 1 noindex). Sitemap zuletzt 02.09. gelesen, 198 erkannte Seiten.",
+  "klicks7": 0,
+  "impressionen7": 84,
+  "position": 50.1,
+  "seitenIndexiert": 66,
+  "seitenGesamt": 198,
+  "suchanfragen": []
+ },
+ "kanaele": [
+  {
+   "name": "TikTok",
+   "handle": "@trendonix",
+   "follower": 21600,
+   "vorher": 21504,
+   "reaktionen": 164600,
+   "reaktionenLabel": "Likes",
+   "stand": "2026-08-26",
+   "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower."
   },
-  "kanaele": [
-    {
-      "name": "TikTok",
-      "handle": "@trendonix",
-      "follower": 21600,
-      "vorher": 21504,
-      "reaktionen": 164600,
-      "reaktionenLabel": "Likes",
-      "stand": "2026-08-26",
-      "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower."
-    },
-    {
-      "name": "YouTube",
-      "handle": "@Trendonixde",
-      "follower": 10,
-      "vorher": 8,
-      "reaktionen": 2,
-      "reaktionenLabel": "Kommentare",
-      "stand": "2026-08-28",
-      "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut."
-    },
-    {
-      "name": "Instagram",
-      "handle": "@trendonix_",
-      "follower": 1041,
-      "vorher": 1040,
-      "reaktionen": null,
-      "stand": "2026-08-28",
-      "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website."
-    },
-    {
-      "name": "Facebook",
-      "handle": "Seite Trendonix",
-      "follower": 6,
-      "vorher": null,
-      "reaktionen": null,
-      "stand": "2026-08-26",
-      "notiz": "Keine eigene URL, nicht mit Instagram verknüpft."
-    },
-    {
-      "name": "Pinterest",
-      "handle": "@trendonixbuecher",
-      "follower": null,
-      "vorher": null,
-      "reaktionen": 0,
-      "reaktionenLabel": "Klicks",
-      "stand": "2026-08-28",
-      "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen."
-    },
-    {
-      "name": "Bluesky",
-      "handle": "trendonix-buecher.bsky.social",
-      "follower": 0,
-      "vorher": null,
-      "reaktionen": null,
-      "stand": "2026-08-28",
-      "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link."
-    },
-    {
-      "name": "Verteiler",
-      "handle": "info@trendonix-buecher.de",
-      "eigen": true,
-      "follower": 2,
-      "folgerLabel": "bestätigte Kontakte",
-      "vorher": null,
-      "reaktionen": null,
-      "reaktionenLabel": "Einreichungen",
-      "stand": "2026-08-28",
-      "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen."
-    }
-  ],
-  "vorschlaege": [
-    {
-      "titel": "E-Book: Dateigröße ablesen, dann 9,99 € oder 12,99 €",
-      "wer": "Manuel",
-      "warum": "Auf amazon.de gilt die 70-%-Stufe nur von 2,99 € bis 9,99 €; bei 12,99 € läuft Band 1 in der 35-%-Stufe und bringt 4,25 € je Verkauf. Bei 9,99 € mit 70 % zieht Amazon 0,12 € je MB ab. Unter 27 MB konvertierter Dateigröße ist 9,99 € gleichzeitig der niedrigere Preis und die höhere Tantieme, darüber nicht. Die Zahl steht in KDP unter Rechte und Preisgestaltung."
-    },
-    {
-      "titel": "LIVE zum Hauptformat machen",
-      "wer": "Manuel",
-      "warum": "Eine einzige LIVE brachte 8.836 Aufrufe und 96 neue Follower. Achtundzwanzig Tage regulärer Beiträge brachten 920 Aufrufe und netto neun Follower weniger. Das ist der stärkste gemessene Befund im ganzen Konto — Faktor zehn, kostenlos, freigeschaltet, und liefert nebenbei den Stoff für zehn Videos."
-    },
-    {
-      "titel": "Unternehmensprofil: Video drehen oder liegen lassen",
-      "wer": "Manuel",
-      "warum": "Das Profil „Trendonix“ ist angelegt — Buchverlag, Beschreibung, Logo, Website, kein Kartenpunkt, Adresse verborgen. Google bietet zur Bestätigung nur noch eines an: ein Video von Standort, Ausstattung und Verwaltungsbefugnis, in einem Stück, nicht öffentlich. Keine Postkarte, kein Code. Ohne Bestätigung bleibt der Eintrag unsichtbar, geht aber auch nicht verloren. Meine Einschätzung: liegen lassen, bis jemand nach „Trendonix“ sucht — die Abwägung steht in REGISTRIERUNG/11_google-unternehmensprofil.md."
-    },
-    {
-      "titel": "Links in die Videobeschreibungen setzen",
-      "wer": "beide",
-      "warum": "YouTube hat heute Stufe 3 freigeschaltet. Ab sofort sind externe Links in Beschreibungen anklickbar — betroffen sind die 15 wartenden Shorts und die drei öffentlichen Videos. Bisher stand die Website dort als toter Text.",
-      "gewinn": "Jedes Video bekommt einen Weg zur eigenen Seite statt zu Amazon."
-    },
-    {
-      "titel": "Titel und Vorschaubild gegeneinander testen",
-      "wer": "beide",
-      "warum": "Mit Stufe 3 stehen A/B-Tests offen. Das neueste Video liegt bei 13,8 % Klickrate — deutlich über den 8 bis 10 %, die REICHWEITE.md als gut nennt. Genau da lohnt der Test: nicht um Schaden zu reparieren, sondern um zu erfahren, warum es funktioniert.",
-      "gewinn": "Die erste belastbare Antwort darauf, was auf diesem Kanal zieht."
-    },
-    {
-      "titel": "Die erste Verteiler-Mail abschicken",
-      "wer": "Manuel",
-      "warum": "Der Entwurf liegt fertig in AUTOPILOT/VERTEILER_MAIL_01.md — Betreff, Text, Pflichtangaben, Prüfliste. Auf der Liste steht genau ein Leser: Daggi, dieselbe, mit der auf TikTok noch eine Nachricht offen ist. Sie hat sich unter dem alten Versprechen eingetragen und weiß noch nichts vom neuen. Verschicken kannst nur du."
-    }
-  ],
-  "offen": [
-    {
-      "titel": "Doppelter Ordner \"Die unsichtbare Faeden\" mit kaputtem Namen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Neben dem richtigen Ordner liegt ein zweiter, dessen Name statt des Umlauts zwei falsche Zeichen enthaelt - entstanden, weil ein Werkzeug mit der falschen Zeichenkodierung geschrieben hat. Darin steht nur Landingpage\\_zufall-quelle\\zufall-innen.txt. Nicht gefaehrlich, aber verwirrend: Wer ihn oeffnet, sieht ein fast leeres Projekt und haelt es fuer das echte. Inhalt sichern, dann loeschen."
-    },
-    {
-      "titel": "AUTOPILOT-Ordner wiedergefunden — der Aufgabe „Trendonix Rundlauf“ neu verbinden",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Am 02.09.2026 gefunden: Der Ordner liegt unter C:\\Users\\manue\\Desktop\\Buch\\Die unsichtbare Fäden\\Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT (sieben Ebenen tief; die Suche vom 30.08. ging nur fuenf Ebenen tief und hat ihn deshalb verfehlt). Die stuendliche Kommentarrunde erreicht ihn weiterhin; nur der Aufgabe „Trendonix Rundlauf“ fehlt er seit 01.09. 19:22 als verbundener Ordner. Behebung: in der Claude-App bei der Aufgabe diesen Ordner wieder verbinden (Name AUTOPILOT, damit $HOME/mnt/AUTOPILOT stimmt). Bis dahin arbeitet der Rundlauf behelfsweise ueber Desktop Commander, ohne device_bash-Zugriff auf den Ordner."
-    },
-    {
-      "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
-    },
-    {
-      "titel": "Feed-Welt einmal selbst durchgehen",
-      "wer": "Manuel",
-      "stufe": "klein",
-      "warum": "Gemessen ist sie bei 375x812 und 1440x820: 46 Bildschirme, ganzes Geraet beim Heranfahren sichtbar, Symbolgitter weg bevor der Feed erscheint, Bildschirm deckt am Ende genau, keine Scrollleiste, Video startet von selbst und das vorige springt auf null. Was eine Messung nicht ersetzt: wie es sich unter dem Daumen anfuehlt, ob der Zwischenruf nach zehn Beitraegen an der richtigen Stelle sitzt und ob das Quellenblatt eher haelt oder eher unterbricht. Einmal durchscrollen auf dem eigenen Geraet, vom Eintauchen bis zum Schluss."
-    },
-    {
-      "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Nachgerechnet und revidiert: Bei Premiumfarbe bleiben. Amazon selbst nennt Standardfarbe „ideal für seitenstarke Bücher mit wenigen Bildern\" und Premiumfarbe „optimal für bildlastige Inhalte\" — Band 1 hat über 140 Abbildungen auf 206 Seiten. Schwerer wiegt die Reihe: Standardfarbe ist eine Papierklasse leichter (74–90 statt 88–105 g/m²), der Rücken würde bei gleicher Seitenzahl schmaler, das Weiß und der Griff anders. Band 1 ist verkauft und nicht mehr änderbar. Die Ersparnis von 5,88 € je Exemplar ist proportional zu Verkäufen, die es noch nicht gibt; die Ungleichheit im Regal ist sicher, ab dem ersten Leser, der beide besitzt. Der Preis ist der Hebel, nicht das Papier — der lässt sich jederzeit ändern, das Papier nie. Formatfrage geklärt: 6 × 9 Zoll, Standardfarbe wäre technisch möglich."
-    },
-    {
-      "titel": "Preis der Website und Preis bei KDP gehen auseinander",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Die Buchseite nennt 39,90 €, im Bücherregal steht 37,29 € mit dem Vermerk „Aktualisierung wird geprüft\". Der Preis steht auch im Datenblatt für Google. Amazon-Produktseiten rufe ich nicht ab — welche Zahl dort heute steht, musst du einmal ablesen; danach ziehe ich band.ts und PREISSTAND nach."
-    },
-    {
-      "titel": "12 eBook-Einheiten, aber 0 € Kindle-Tantiemen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Zwölf verkaufte E-Books müssten bei 12,99 € und 35 % rund 51 € bringen; im August stehen 10,81 €, vollständig aus dem einen Druckexemplar. Das passt nur bei Gratis-Downloads, Rückgaben oder einer nachlaufenden Abrechnung zusammen. KDP → Berichte → Verkaufs- und Umsatzbericht, Spalte „Kostenlose Einheiten“. Im Fall Gratis-Aktion sind zwölf Leser unterwegs, von denen keiner eine Seite gelesen hat (KENP 0)."
-    },
-    {
-      "titel": "Konto bei buechertreff.de anlegen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Blockiert die Leserunde — die einzige vorbereitete Maßnahme, die Rezensionen bringt."
-    },
-    {
-      "titel": "kie.ai-Schlüssel und FTP-Passwort wechseln",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Beide standen im Klartext im Chat."
-    },
-    {
-      "titel": "Chat-Sitzung „Autopilot“ starten",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "In geplanten Aufgaben ist der Datei-Upload gesperrt: TikTok 03.09. und 04.09., Facebook-Reel und Pinterest-Pin hängen fest."
-    },
-    {
-      "titel": "Instagram-Sicherheitshinweis prüfen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "„Someone’s trying to log into Instagram“, seit dem 26.08. unbeantwortet."
-    },
-    {
-      "titel": "Beim KDP-Support nach der gebundenen Ausgabe fragen",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Steht seit dem 24.08. auf „wird geprüft“, Preis 46,64 €. Üblich sind 72 Stunden."
-    },
-    {
-      "titel": "Rezensionsanfragen Stapel 1 freigeben",
-      "wer": "Manuel",
-      "stufe": "mittel",
-      "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md."
-    },
-    {
-      "titel": "Alte Live-Hinweiskommentare entfernen",
-      "wer": "Manuel",
-      "stufe": "klein",
-      "warum": "Zwei eigene Kommentare vom 26.08. laden weiter zu einer Live ein, die seit zwei Tagen vorbei ist. Löschen ist auf diesem Konto Manuels Sache."
-    },
-    {
-      "titel": "Bing, Amazon-Autorenseite, YouTube-OAuth",
-      "wer": "Manuel",
-      "stufe": "klein",
-      "warum": "Drei kleine Schritte, die alle eine Anmeldung brauchen. Der Brevo-DNS-Punkt ist am 28.08. erledigt."
-    }
-  ],
-  "aktivitaet": [
-    {
-      "zeit": "2026-09-04T06:45:00Z",
-      "kanal": "Rundlauf",
-      "text": "08-Uhr-Lauf (behelfsweise, AUTOPILOT weiter nicht verbunden): YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach gesichtet — nur geteilte Videos/Lives und bekannte Werbung, keine Buchfrage. Search Console: 84 Impressionen in 7 Tagen (Vorwoche 29), weiter 0 Klicks."
-    },
-    {
-      "zeit": "2026-09-02T05:35:00Z",
-      "kanal": "Rundlauf",
-      "text": "AUTOPILOT-Ordner wiedergefunden (Band 1\\05_Marketing\\05_Social_Kampagne). Lauf behelfsweise ueber Desktop Commander: YouTube-Kommentare, Zuschauerbeitraege und Bluesky geprueft — nichts Neues. Zur 11-Minuten-Live vom 01.09. (23:56) wurde wegen der Stoerung kein Clip gepostet; nichts zu privatisieren."
-    },
-    {
-      "zeit": "2026-09-01T06:27:00Z",
-      "kanal": "Website",
-      "text": "Search Console (7 Tage bis 29.08.): 0 Klicks, 29 Impressionen, Position 54,8. Erstmals Indexierungszahlen: 66 Seiten indexiert, 23 gefunden und noch nicht indexiert, Sitemap mit 197 erkannten Seiten."
-    },
-    {
-      "zeit": "2026-08-30T14:10:00Z",
-      "kanal": "Kanäle",
-      "text": "Alle sechs Kanaele auf www.trendonix-buecher.de geprueft. TikTok, YouTube und Bluesky waren richtig. Pinterest stand auf http statt https - umgestellt, und die Domain wird gerade verifiziert (Nachweis liegt als Meta-Zeile im Kopf jeder Seite). Facebook zeigte nur auf Amazon; die Website steht jetzt als zweiter Link daneben, der Kaufweg blieb. Instagram zeigt weiter auf Amazon - Meta laesst Links nur in der App aendern, das muss Manuel selbst tun. Der Groessenvergleich: TikTok hat 21.600 Follower, alle uebrigen Kanaele zusammen 1.047 (Instagram 1.041, Facebook 6, Pinterest 0, Bluesky 0 bei einem Beitrag). Neu angelegt: die geplante Aufgabe \"Trendonix Mittagsplatz\" - ein Kurzvideo um 12:20 auf YouTube und TikTok, zuerst mit kie.ai (Guthaben 490,5 Punkte), sonst mit vorhandenem Material, immer mit deutschen Untertiteln. Sie wartet auf Manuels Freigabe. Der Pinterest-Tag wurde ausdruecklich NICHT installiert - er ist ein Cookie-Verfolger und wuerde den Einwilligungsbanner zurueckbringen."
-    },
-    {
-      "zeit": "2026-08-30T06:30:00Z",
-      "kanal": "Suche",
-      "text": "Search Console liefert die ersten Zahlen: 1 Impression, 0 Klicks, Position 5 (7 Tage, Datenstand 27.08.). Seitenindexierung wird noch verarbeitet."
-    },
-    {
-      "zeit": "2026-08-30T03:10:00Z",
-      "kanal": "Website",
-      "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
-    },
-    {
-      "zeit": "2026-08-30T02:05:00Z",
-      "kanal": "Website",
-      "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
-    },
-    {
-      "zeit": "2026-08-30T01:10:00Z",
-      "kanal": "Website",
-      "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
-    },
-    {
-      "zeit": "2026-08-29T22:10:00Z",
-      "kanal": "Website",
-      "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
-    },
-    {
-      "zeit": "2026-08-29T13:30:00Z",
-      "kanal": "TikTok",
-      "text": "Live-Nacharbeit erledigt: beide veralteten „Bin gerade live“-Hinweis-Kommentare im Studio entfernt (Live endete 04:14). Kein Live-Clip zu privatisieren — der Upload war am 28.08. gescheitert. TikTok, YouTube (inkl. Community), Bluesky geprüft: nichts Offenes."
-    },
-    {
-      "zeit": "2026-08-28T20:45:00Z",
-      "kanal": "TikTok",
-      "text": "LIVE seit 21:56 (ohne Titel): zwei Hinweis-Kommentare unter den jüngsten Videos gesetzt, Begrüßung im Live-Chat. Live-Clip live_b hing dreimal im Studio-Upload — Manuel gebeten, ihn aus der App zu posten."
-    },
-    {
-      "zeit": "2026-08-28T19:26:00Z",
-      "kanal": "TikTok",
-      "text": "Postfach: Dagmars Abendgruß von 20:59 kurz beantwortet (Dank + Wochenendwunsch). Kommentare, FB, IG, Pinterest, YouTube, Bluesky, Amazon geprüft — sonst nichts Neues."
-    }
-  ],
-  "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",
-  "warnungen": [
-    {
-      "stufe": "hoch",
-      "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22). Ordner liegt unter Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT — der Aufgabe „Trendonix Rundlauf“ neu verbinden.",
-      "bis": "2026-09-05"
-    }
-  ],
-  "monat": {
-    "zeitraum": "August 2026",
-    "stand": "2026-08-27",
-    "bestellungen": 13,
-    "ebook": 12,
-    "druck": 1,
-    "tantiemen": 10.81,
-    "kenp": 0,
-    "quellen": [
-      {
-        "name": "Druck",
-        "anteil": 100
-      }
-    ],
-    "hinweis": "Aus dem KDP-Bericht „Bestellungen“ abgelesen: alle 13 Einheiten entfallen auf Band 1, die neun anderen Titel stehen bei null. Die Tantiemen stammen zu 100 % aus dem Druck — das eine Taschenbuch bringt mehr als zwölf eBooks über Kindle Unlimited. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
+  {
+   "name": "YouTube",
+   "handle": "@Trendonixde",
+   "follower": 10,
+   "vorher": 8,
+   "reaktionen": 2,
+   "reaktionenLabel": "Kommentare",
+   "stand": "2026-08-28",
+   "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut."
+  },
+  {
+   "name": "Instagram",
+   "handle": "@trendonix_",
+   "follower": 1041,
+   "vorher": 1040,
+   "reaktionen": null,
+   "stand": "2026-08-28",
+   "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website."
+  },
+  {
+   "name": "Facebook",
+   "handle": "Seite Trendonix",
+   "follower": 6,
+   "vorher": null,
+   "reaktionen": null,
+   "stand": "2026-08-26",
+   "notiz": "Keine eigene URL, nicht mit Instagram verknüpft."
+  },
+  {
+   "name": "Pinterest",
+   "handle": "@trendonixbuecher",
+   "follower": null,
+   "vorher": null,
+   "reaktionen": 0,
+   "reaktionenLabel": "Klicks",
+   "stand": "2026-08-28",
+   "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen."
+  },
+  {
+   "name": "Bluesky",
+   "handle": "trendonix-buecher.bsky.social",
+   "follower": 0,
+   "vorher": null,
+   "reaktionen": null,
+   "stand": "2026-08-28",
+   "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link."
+  },
+  {
+   "name": "Verteiler",
+   "handle": "info@trendonix-buecher.de",
+   "eigen": true,
+   "follower": 2,
+   "folgerLabel": "bestätigte Kontakte",
+   "vorher": null,
+   "reaktionen": null,
+   "reaktionenLabel": "Einreichungen",
+   "stand": "2026-08-28",
+   "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen."
   }
+ ],
+ "vorschlaege": [
+  {
+   "titel": "E-Book: Dateigröße ablesen, dann 9,99 € oder 12,99 €",
+   "wer": "Manuel",
+   "warum": "Auf amazon.de gilt die 70-%-Stufe nur von 2,99 € bis 9,99 €; bei 12,99 € läuft Band 1 in der 35-%-Stufe und bringt 4,25 € je Verkauf. Bei 9,99 € mit 70 % zieht Amazon 0,12 € je MB ab. Unter 27 MB konvertierter Dateigröße ist 9,99 € gleichzeitig der niedrigere Preis und die höhere Tantieme, darüber nicht. Die Zahl steht in KDP unter Rechte und Preisgestaltung."
+  },
+  {
+   "titel": "LIVE zum Hauptformat machen",
+   "wer": "Manuel",
+   "warum": "Eine einzige LIVE brachte 8.836 Aufrufe und 96 neue Follower. Achtundzwanzig Tage regulärer Beiträge brachten 920 Aufrufe und netto neun Follower weniger. Das ist der stärkste gemessene Befund im ganzen Konto — Faktor zehn, kostenlos, freigeschaltet, und liefert nebenbei den Stoff für zehn Videos."
+  },
+  {
+   "titel": "Unternehmensprofil: Video drehen oder liegen lassen",
+   "wer": "Manuel",
+   "warum": "Das Profil „Trendonix“ ist angelegt — Buchverlag, Beschreibung, Logo, Website, kein Kartenpunkt, Adresse verborgen. Google bietet zur Bestätigung nur noch eines an: ein Video von Standort, Ausstattung und Verwaltungsbefugnis, in einem Stück, nicht öffentlich. Keine Postkarte, kein Code. Ohne Bestätigung bleibt der Eintrag unsichtbar, geht aber auch nicht verloren. Meine Einschätzung: liegen lassen, bis jemand nach „Trendonix“ sucht — die Abwägung steht in REGISTRIERUNG/11_google-unternehmensprofil.md."
+  },
+  {
+   "titel": "Links in die Videobeschreibungen setzen",
+   "wer": "beide",
+   "warum": "YouTube hat heute Stufe 3 freigeschaltet. Ab sofort sind externe Links in Beschreibungen anklickbar — betroffen sind die 15 wartenden Shorts und die drei öffentlichen Videos. Bisher stand die Website dort als toter Text.",
+   "gewinn": "Jedes Video bekommt einen Weg zur eigenen Seite statt zu Amazon."
+  },
+  {
+   "titel": "Titel und Vorschaubild gegeneinander testen",
+   "wer": "beide",
+   "warum": "Mit Stufe 3 stehen A/B-Tests offen. Das neueste Video liegt bei 13,8 % Klickrate — deutlich über den 8 bis 10 %, die REICHWEITE.md als gut nennt. Genau da lohnt der Test: nicht um Schaden zu reparieren, sondern um zu erfahren, warum es funktioniert.",
+   "gewinn": "Die erste belastbare Antwort darauf, was auf diesem Kanal zieht."
+  },
+  {
+   "titel": "Die erste Verteiler-Mail abschicken",
+   "wer": "Manuel",
+   "warum": "Der Entwurf liegt fertig in AUTOPILOT/VERTEILER_MAIL_01.md — Betreff, Text, Pflichtangaben, Prüfliste. Auf der Liste steht genau ein Leser: Daggi, dieselbe, mit der auf TikTok noch eine Nachricht offen ist. Sie hat sich unter dem alten Versprechen eingetragen und weiß noch nichts vom neuen. Verschicken kannst nur du."
+  }
+ ],
+ "offen": [
+  {
+   "titel": "Doppelter Ordner \"Die unsichtbare Faeden\" mit kaputtem Namen",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "Neben dem richtigen Ordner liegt ein zweiter, dessen Name statt des Umlauts zwei falsche Zeichen enthaelt - entstanden, weil ein Werkzeug mit der falschen Zeichenkodierung geschrieben hat. Darin steht nur Landingpage\\_zufall-quelle\\zufall-innen.txt. Nicht gefaehrlich, aber verwirrend: Wer ihn oeffnet, sieht ein fast leeres Projekt und haelt es fuer das echte. Inhalt sichern, dann loeschen."
+  },
+  {
+   "titel": "AUTOPILOT-Ordner wiedergefunden — der Aufgabe „Trendonix Rundlauf“ neu verbinden",
+   "wer": "Manuel",
+   "stufe": "hoch",
+   "warum": "Am 02.09.2026 gefunden: Der Ordner liegt unter C:\\Users\\manue\\Desktop\\Buch\\Die unsichtbare Fäden\\Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT (sieben Ebenen tief; die Suche vom 30.08. ging nur fuenf Ebenen tief und hat ihn deshalb verfehlt). Die stuendliche Kommentarrunde erreicht ihn weiterhin; nur der Aufgabe „Trendonix Rundlauf“ fehlt er seit 01.09. 19:22 als verbundener Ordner. Behebung: in der Claude-App bei der Aufgabe diesen Ordner wieder verbinden (Name AUTOPILOT, damit $HOME/mnt/AUTOPILOT stimmt). Bis dahin arbeitet der Rundlauf behelfsweise ueber Desktop Commander, ohne device_bash-Zugriff auf den Ordner."
+  },
+  {
+   "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
+   "wer": "Manuel",
+   "stufe": "hoch",
+   "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
+  },
+  {
+   "titel": "Feed-Welt einmal selbst durchgehen",
+   "wer": "Manuel",
+   "stufe": "klein",
+   "warum": "Gemessen ist sie bei 375x812 und 1440x820: 46 Bildschirme, ganzes Geraet beim Heranfahren sichtbar, Symbolgitter weg bevor der Feed erscheint, Bildschirm deckt am Ende genau, keine Scrollleiste, Video startet von selbst und das vorige springt auf null. Was eine Messung nicht ersetzt: wie es sich unter dem Daumen anfuehlt, ob der Zwischenruf nach zehn Beitraegen an der richtigen Stelle sitzt und ob das Quellenblatt eher haelt oder eher unterbricht. Einmal durchscrollen auf dem eigenen Geraet, vom Eintauchen bis zum Schluss."
+  },
+  {
+   "titel": "Band 2/3: Farbart entscheiden — Empfehlung liegt vor",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "Nachgerechnet und revidiert: Bei Premiumfarbe bleiben. Amazon selbst nennt Standardfarbe „ideal für seitenstarke Bücher mit wenigen Bildern\" und Premiumfarbe „optimal für bildlastige Inhalte\" — Band 1 hat über 140 Abbildungen auf 206 Seiten. Schwerer wiegt die Reihe: Standardfarbe ist eine Papierklasse leichter (74–90 statt 88–105 g/m²), der Rücken würde bei gleicher Seitenzahl schmaler, das Weiß und der Griff anders. Band 1 ist verkauft und nicht mehr änderbar. Die Ersparnis von 5,88 € je Exemplar ist proportional zu Verkäufen, die es noch nicht gibt; die Ungleichheit im Regal ist sicher, ab dem ersten Leser, der beide besitzt. Der Preis ist der Hebel, nicht das Papier — der lässt sich jederzeit ändern, das Papier nie. Formatfrage geklärt: 6 × 9 Zoll, Standardfarbe wäre technisch möglich."
+  },
+  {
+   "titel": "Preis der Website und Preis bei KDP gehen auseinander",
+   "wer": "Manuel",
+   "stufe": "hoch",
+   "warum": "Die Buchseite nennt 39,90 €, im Bücherregal steht 37,29 € mit dem Vermerk „Aktualisierung wird geprüft\". Der Preis steht auch im Datenblatt für Google. Amazon-Produktseiten rufe ich nicht ab — welche Zahl dort heute steht, musst du einmal ablesen; danach ziehe ich band.ts und PREISSTAND nach."
+  },
+  {
+   "titel": "12 eBook-Einheiten, aber 0 € Kindle-Tantiemen",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "Zwölf verkaufte E-Books müssten bei 12,99 € und 35 % rund 51 € bringen; im August stehen 10,81 €, vollständig aus dem einen Druckexemplar. Das passt nur bei Gratis-Downloads, Rückgaben oder einer nachlaufenden Abrechnung zusammen. KDP → Berichte → Verkaufs- und Umsatzbericht, Spalte „Kostenlose Einheiten“. Im Fall Gratis-Aktion sind zwölf Leser unterwegs, von denen keiner eine Seite gelesen hat (KENP 0)."
+  },
+  {
+   "titel": "Konto bei buechertreff.de anlegen",
+   "wer": "Manuel",
+   "stufe": "hoch",
+   "warum": "Blockiert die Leserunde — die einzige vorbereitete Maßnahme, die Rezensionen bringt."
+  },
+  {
+   "titel": "kie.ai-Schlüssel und FTP-Passwort wechseln",
+   "wer": "Manuel",
+   "stufe": "hoch",
+   "warum": "Beide standen im Klartext im Chat."
+  },
+  {
+   "titel": "Chat-Sitzung „Autopilot“ starten",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "In geplanten Aufgaben ist der Datei-Upload gesperrt: TikTok 03.09. und 04.09., Facebook-Reel und Pinterest-Pin hängen fest."
+  },
+  {
+   "titel": "Instagram-Sicherheitshinweis prüfen",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "„Someone’s trying to log into Instagram“, seit dem 26.08. unbeantwortet."
+  },
+  {
+   "titel": "Beim KDP-Support nach der gebundenen Ausgabe fragen",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "Steht seit dem 24.08. auf „wird geprüft“, Preis 46,64 €. Üblich sind 72 Stunden."
+  },
+  {
+   "titel": "Rezensionsanfragen Stapel 1 freigeben",
+   "wer": "Manuel",
+   "stufe": "mittel",
+   "warum": "Drei geprüfte Kandidaten warten in REZENSIONEN_OFFEN.md."
+  },
+  {
+   "titel": "Alte Live-Hinweiskommentare entfernen",
+   "wer": "Manuel",
+   "stufe": "klein",
+   "warum": "Zwei eigene Kommentare vom 26.08. laden weiter zu einer Live ein, die seit zwei Tagen vorbei ist. Löschen ist auf diesem Konto Manuels Sache."
+  },
+  {
+   "titel": "Bing, Amazon-Autorenseite, YouTube-OAuth",
+   "wer": "Manuel",
+   "stufe": "klein",
+   "warum": "Drei kleine Schritte, die alle eine Anmeldung brauchen. Der Brevo-DNS-Punkt ist am 28.08. erledigt."
+  }
+ ],
+ "aktivitaet": [
+  {
+   "zeit": "2026-09-04T17:00:00Z",
+   "kanal": "Rundlauf",
+   "text": "18-Uhr-Lauf (TEIL 2, behelfsweise): Unter dem neuen YouTube-Short (Kochen, 112 Aufrufe in 90 Min) ersten Kommentar gesetzt und angepinnt, unter dem Bluesky-Tagespost eine Thread-Frage ergaenzt. LIVE-Bewertung 99/100, keine aktive Einschraenkung, drei Live-Clips liegen bereit; Titelvorschlag fuer 20 Uhr: 'Offene Runde mit einem Kapitel'. Brevo weiter im vecom-Konto (Verteilerzahlen blind). Kaufwege-Abgleich: gebundene Ausgabe (31.08.) in Kanaltexten noch nicht nachgezogen."
+  },
+  {
+   "zeit": "2026-09-04T06:45:00Z",
+   "kanal": "Rundlauf",
+   "text": "08-Uhr-Lauf (behelfsweise, AUTOPILOT weiter nicht verbunden): YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach gesichtet — nur geteilte Videos/Lives und bekannte Werbung, keine Buchfrage. Search Console: 84 Impressionen in 7 Tagen (Vorwoche 29), weiter 0 Klicks."
+  },
+  {
+   "zeit": "2026-09-02T05:35:00Z",
+   "kanal": "Rundlauf",
+   "text": "AUTOPILOT-Ordner wiedergefunden (Band 1\\05_Marketing\\05_Social_Kampagne). Lauf behelfsweise ueber Desktop Commander: YouTube-Kommentare, Zuschauerbeitraege und Bluesky geprueft — nichts Neues. Zur 11-Minuten-Live vom 01.09. (23:56) wurde wegen der Stoerung kein Clip gepostet; nichts zu privatisieren."
+  },
+  {
+   "zeit": "2026-09-01T06:27:00Z",
+   "kanal": "Website",
+   "text": "Search Console (7 Tage bis 29.08.): 0 Klicks, 29 Impressionen, Position 54,8. Erstmals Indexierungszahlen: 66 Seiten indexiert, 23 gefunden und noch nicht indexiert, Sitemap mit 197 erkannten Seiten."
+  },
+  {
+   "zeit": "2026-08-30T14:10:00Z",
+   "kanal": "Kanäle",
+   "text": "Alle sechs Kanaele auf www.trendonix-buecher.de geprueft. TikTok, YouTube und Bluesky waren richtig. Pinterest stand auf http statt https - umgestellt, und die Domain wird gerade verifiziert (Nachweis liegt als Meta-Zeile im Kopf jeder Seite). Facebook zeigte nur auf Amazon; die Website steht jetzt als zweiter Link daneben, der Kaufweg blieb. Instagram zeigt weiter auf Amazon - Meta laesst Links nur in der App aendern, das muss Manuel selbst tun. Der Groessenvergleich: TikTok hat 21.600 Follower, alle uebrigen Kanaele zusammen 1.047 (Instagram 1.041, Facebook 6, Pinterest 0, Bluesky 0 bei einem Beitrag). Neu angelegt: die geplante Aufgabe \"Trendonix Mittagsplatz\" - ein Kurzvideo um 12:20 auf YouTube und TikTok, zuerst mit kie.ai (Guthaben 490,5 Punkte), sonst mit vorhandenem Material, immer mit deutschen Untertiteln. Sie wartet auf Manuels Freigabe. Der Pinterest-Tag wurde ausdruecklich NICHT installiert - er ist ein Cookie-Verfolger und wuerde den Einwilligungsbanner zurueckbringen."
+  },
+  {
+   "zeit": "2026-08-30T06:30:00Z",
+   "kanal": "Suche",
+   "text": "Search Console liefert die ersten Zahlen: 1 Impression, 0 Klicks, Position 5 (7 Tage, Datenstand 27.08.). Seitenindexierung wird noch verarbeitet."
+  },
+  {
+   "zeit": "2026-08-30T03:10:00Z",
+   "kanal": "Website",
+   "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
+  },
+  {
+   "zeit": "2026-08-30T02:05:00Z",
+   "kanal": "Website",
+   "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
+  },
+  {
+   "zeit": "2026-08-30T01:10:00Z",
+   "kanal": "Website",
+   "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
+  },
+  {
+   "zeit": "2026-08-29T22:10:00Z",
+   "kanal": "Website",
+   "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
+  },
+  {
+   "zeit": "2026-08-29T13:30:00Z",
+   "kanal": "TikTok",
+   "text": "Live-Nacharbeit erledigt: beide veralteten „Bin gerade live“-Hinweis-Kommentare im Studio entfernt (Live endete 04:14). Kein Live-Clip zu privatisieren — der Upload war am 28.08. gescheitert. TikTok, YouTube (inkl. Community), Bluesky geprüft: nichts Offenes."
+  },
+  {
+   "zeit": "2026-08-28T20:45:00Z",
+   "kanal": "TikTok",
+   "text": "LIVE seit 21:56 (ohne Titel): zwei Hinweis-Kommentare unter den jüngsten Videos gesetzt, Begrüßung im Live-Chat. Live-Clip live_b hing dreimal im Studio-Upload — Manuel gebeten, ihn aus der App zu posten."
+  }
+ ],
+ "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",
+ "warnungen": [
+  {
+   "stufe": "hoch",
+   "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22). Ordner liegt unter Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT — der Aufgabe „Trendonix Rundlauf“ neu verbinden.",
+   "bis": "2026-09-05"
+  }
+ ],
+ "monat": {
+  "zeitraum": "August 2026",
+  "stand": "2026-08-27",
+  "bestellungen": 13,
+  "ebook": 12,
+  "druck": 1,
+  "tantiemen": 10.81,
+  "kenp": 0,
+  "quellen": [
+   {
+    "name": "Druck",
+    "anteil": 100
+   }
+  ],
+  "hinweis": "Aus dem KDP-Bericht „Bestellungen“ abgelesen: alle 13 Einheiten entfallen auf Band 1, die neun anderen Titel stehen bei null. Die Tantiemen stammen zu 100 % aus dem Druck — das eine Taschenbuch bringt mehr als zwölf eBooks über Kindle Unlimited. „Bearbeitete Bestellungen“ ist nicht dasselbe wie ausgezahlte Verkäufe; Stornos und Rückgaben können die Zahl noch senken."
+ }
 }
