@@ -1,13 +1,9 @@
 {
-  "stand": "2026-09-04T16:42:15Z",
+  "stand": "2026-09-04T17:03:26Z",
   "warnungen": [
     {
       "stufe": "hoch",
       "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22). Ordner liegt unter Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT — der Aufgabe „Trendonix Rundlauf“ neu verbinden."
-    },
-    {
-      "stufe": "hoch",
-      "text": "Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor."
     }
   ],
   "aenderungen": {
@@ -18,13 +14,6 @@
         "von": "#736.277",
         "nach": "#770.649",
         "delta": "+#34.372",
-        "richtung": "schlecht"
-      },
-      {
-        "was": "Veröffentlichung",
-        "von": "erfolgreich",
-        "nach": "fehlgeschlagen",
-        "delta": null,
         "richtung": "schlecht"
       }
     ],
@@ -1866,7 +1855,7 @@
       "stand": "2026-09-04",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 7,
+      "beitraege": 8,
       "quelle": "abgerufen",
       "vergleichVom": "2026-09-03"
     },
@@ -2091,11 +2080,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T16:02:00Z",
-    "deploy": "fehlgeschlagen",
+    "stand": "2026-09-04T17:02:00Z",
+    "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": true,
-    "deployWann": null,
+    "deployLaeuft": false,
+    "deployWann": "2026-09-04T16:49:30Z",
     "zertifikatTage": 80,
     "linksGeprueft": 54,
     "linksKaputt": 0,
