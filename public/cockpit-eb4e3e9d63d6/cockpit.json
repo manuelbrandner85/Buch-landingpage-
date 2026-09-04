@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T21:02:22Z",
+  "stand": "2026-09-04T22:02:22Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -798,33 +798,6 @@
   },
   "termine": [
     {
-      "d": "2026-09-04",
-      "wochentag": "Fr",
-      "punkte": [
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "14_kernthese",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "TikTok LIVE",
-          "zeit": "20:00",
-          "was": null,
-          "zustand": "steht",
-          "hinweis": "fester Termin"
-        },
-        {
-          "kanal": "Journal",
-          "zeit": null,
-          "was": "was-heisst-gesicherter-befund",
-          "zustand": "terminiert",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-09-05",
       "wochentag": "Sa",
       "punkte": [
@@ -1565,6 +1538,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "14_kernthese",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-04",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1660,6 +1642,40 @@
           "hinweis": "fester Termin"
         }
       ]
+    },
+    {
+      "d": "2026-09-19",
+      "wochentag": "Sa",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "14_kernthese",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        }
+      ]
     }
   ],
   "bericht": {
@@ -1707,9 +1723,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8424,
-    "offenSumme": 6333.5,
+    "summe": 8460,
+    "offenSumme": 6369.5,
     "buchungen": [
+      {
+        "datum": "2026-09-04",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (21:09 UTC) - 1115,0 auf 1079,0 Credits. LOG.md ist seit dem 18-Uhr-Rundlauf unberuehrt (Stand 16:43 UTC); die Kommentarrunde 22:03-22:09 und der Rundlauf 22:21 Ortszeit melden ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 36
+      },
       {
         "datum": "2026-09-04",
         "projekt": "Trendonix-Kurzvideo",
@@ -1775,12 +1797,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (16:07 UTC; LOG.md nennt fuer den Nachmittag den Videomotor als Ursache, eine Buchung dafuer fehlt)",
         "credits": 58
-      },
-      {
-        "datum": "2026-08-30",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (15:08 UTC)",
-        "credits": 99
       }
     ]
   },
@@ -2080,11 +2096,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T21:02:00Z",
+    "stand": "2026-09-04T22:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-04T20:03:14Z",
+    "deployWann": "2026-09-04T21:03:11Z",
     "zertifikatTage": 79,
     "linksGeprueft": 54,
     "linksKaputt": 0,
