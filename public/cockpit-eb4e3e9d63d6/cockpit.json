@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T06:29:48Z",
+  "stand": "2026-09-04T07:02:26Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -2061,7 +2061,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T06:02:00Z",
+    "stand": "2026-09-04T07:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
