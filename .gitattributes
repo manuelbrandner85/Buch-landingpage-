@@ -1,0 +1,33 @@
+# Zeilenenden – ein für alle Mal festgenagelt.
+#
+# Bis zum 04.09.2026 meldete `git status` regelmäßig achtzig bis hundert
+# geänderte Dateien, an denen niemand etwas geändert hatte: Werkzeuge auf dem
+# Windows-Rechner schrieben sie mit CRLF zurück, Werkzeuge in der Linux-VM mit
+# LF, und Git sah jedes Mal die ganze Datei als neu. Das ist nicht nur Lärm –
+# es ist gefährlich, weil eine echte Änderung darin untergeht und weil ein
+# unachtsames `git add -A` achtzig Dateien mit einbucht, die niemand
+# angesehen hat.
+#
+# `text=auto eol=lf` heißt: Im Repository steht LF, und ausgecheckt wird LF –
+# egal auf welchem Rechner. Node, Next und alle Skripte hier kommen damit
+# zurecht; nichts in diesem Repository verlangt CRLF.
+* text=auto eol=lf
+
+# Was nie als Text angefasst werden darf. Ohne diese Zeilen entscheidet Git
+# nach Heuristik, und eine falsch erkannte Bilddatei ist eine kaputte
+# Bilddatei.
+*.avif      binary
+*.webp      binary
+*.jpg       binary
+*.jpeg      binary
+*.png       binary
+*.gif       binary
+*.ico       binary
+*.mp4       binary
+*.mp3       binary
+*.wav       binary
+*.pdf       binary
+*.woff      binary
+*.woff2     binary
+*.ttf       binary
+*.otf       binary
