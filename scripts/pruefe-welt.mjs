@@ -123,6 +123,35 @@ for (const [, name, kapitel] of orteText.matchAll(/name: '([^']+)'[\s\S]{0,400}?
   if (!bekannt) fehler.push(`Ort "${name}": Kapitel ${kapitel} ist nicht definiert.`);
 }
 
+// --- Journal: Titel und Anriss, auch wenn der Beitrag erst spaeter erscheint ---
+//
+// Zweimal hintereinander ist der Bau an einem Beitrag gescheitert, der seit
+// Tagen fertig im Ordner lag: `sichtbareBeitraege()` zeigt einen Beitrag erst
+// an seinem Datum, und erst dann kam er in den Export — und erst dann fiel
+// auf, dass sein Titel zu lang ist. Der Fehler war jedes Mal schon beim
+// Schreiben da, nur unsichtbar bis zum Erscheinungstag. Diese Pruefung liest
+// die Daten und nicht den Export: Sie schlaegt am Tag des Schreibens an.
+//
+// Dieselben Grenzen wie in `pruefe-suche.mjs`. Der Titel eines Beitrags steht
+// bei Google allein, sobald er laenger als 52 Zeichen ist (blog/[slug]);
+// darum gilt hier die volle Zeile von 65.
+const journal = lies('src/data/gemeinsam/beitraege.ts');
+const slugs = new Set();
+for (const teil of journal.split("    slug: '").slice(1)) {
+  const slug = teil.slice(0, teil.indexOf("'"));
+  const feld = (name) => teil.match(new RegExp(`${name}:\\s*\\n?\\s*'((?:[^'\\\\]|\\\\.)*)'`))?.[1];
+  const titel = feld('titel') ?? '';
+  const auszug = feld('auszug') ?? '';
+  const datum = feld('datum') ?? '?';
+  const wo = `Beitrag "${slug}" (${datum})`;
+  if (slugs.has(slug)) fehler.push(`${wo}: Kennung kommt zweimal vor.`);
+  slugs.add(slug);
+  if (titel.length > 65) fehler.push(`${wo}: Titel ${titel.length} Zeichen – hoechstens 65.`);
+  if (titel.length < 25) fehler.push(`${wo}: Titel ${titel.length} Zeichen – mindestens 25.`);
+  if (auszug.length > 170) fehler.push(`${wo}: Anriss ${auszug.length} Zeichen – hoechstens 170.`);
+  if (auszug.length < 90) fehler.push(`${wo}: Anriss ${auszug.length} Zeichen – mindestens 90.`);
+}
+
 for (const w of warnung) console.warn(`  Hinweis: ${w}`);
 
 if (fehler.length) {

@@ -45,7 +45,24 @@ function seiten(ordner) {
   return aus;
 }
 
-const eins = (html, muster) => (html.match(muster) ?? [])[1];
+/**
+ * Was im Kopf steht, ist HTML: Ein gerades Anführungszeichen im Titel steht
+ * dort als `&quot;` — sechs Zeichen statt einem. Gemessen wurde bisher der
+ * Quelltext, und ein Titel mit zwei Anführungszeichen galt deshalb als zehn
+ * Zeichen länger, als Google ihn je anzeigt. Erst zurückverwandeln, dann
+ * zählen.
+ */
+const entschluesselt = (t) => t
+  .replace(/&quot;/g, '"').replace(/&#39;|&#x27;/gi, "'")
+  .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+  .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+  .replace(/&amp;/g, '&');
+
+const eins = (html, muster) => {
+  const t = (html.match(muster) ?? [])[1];
+  return t === undefined ? undefined : entschluesselt(t);
+};
 
 const alle = seiten(WURZEL);
 let mitBild = 0;

@@ -94,7 +94,7 @@ export const BEITRAEGE: Beitrag[] = [
   {
     slug: 'was-heisst-gesicherter-befund',
     bandId: 'band-1',
-    titel: 'Was heißt „gesicherter Befund"? Die Stufen, mit denen dieses Buch arbeitet',
+    titel: 'Was heißt „gesicherter Befund“? Die sieben Stufen',
     datum: '2026-09-04',
     auszug:
       'Sieben Stufen für Aussagen, fünf Angaben für Bilder. Was jede einzelne bedeutet – und warum ein Buch, das so arbeitet, weniger behauptet als andere.',
