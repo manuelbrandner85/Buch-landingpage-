@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T07:02:26Z",
+  "stand": "2026-09-04T08:02:27Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -13,6 +13,13 @@
   "aenderungen": {
     "seit": "2026-09-03",
     "punkte": [
+      {
+        "was": "Rang",
+        "von": "#736.277",
+        "nach": "#770.649",
+        "delta": "+#34.372",
+        "richtung": "schlecht"
+      },
       {
         "was": "Veröffentlichung",
         "von": "erfolgreich",
@@ -189,9 +196,9 @@
     "untertitel": "Ursprung und Ordnung",
     "erschienen": "2026-08-08",
     "seiten": 206,
-    "rangGesamt": 736277,
-    "rangVorher": null,
-    "rangStand": "2026-09-03",
+    "rangGesamt": 770649,
+    "rangVorher": 736277,
+    "rangStand": "2026-09-04",
     "kategorien": [
       {
         "name": "Kulturgeschichte",
@@ -296,12 +303,21 @@
         "rang": 736277,
         "rez": 2,
         "schnitt": 5
+      },
+      {
+        "d": "2026-09-04",
+        "kindle": 0,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": 770649,
+        "rez": 2,
+        "schnitt": 5
       }
     ]
   },
   "monat": {
     "zeitraum": "September 2026",
-    "stand": "2026-09-03",
+    "stand": "2026-09-04",
     "bestellungen": 11,
     "ebook": 11,
     "druck": 0,
@@ -395,7 +411,7 @@
       },
       {
         "d": "2026-09-04",
-        "v": 736277
+        "v": 770649
       }
     ],
     "rezensionen": [
@@ -494,6 +510,10 @@
       {
         "d": "2026-09-03",
         "v": 11
+      },
+      {
+        "d": "2026-09-04",
+        "v": 11
       }
     ],
     "tantiemen": [
@@ -515,6 +535,10 @@
       },
       {
         "d": "2026-09-03",
+        "v": 0
+      },
+      {
+        "d": "2026-09-04",
         "v": 0
       }
     ],
@@ -2061,7 +2085,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T07:02:00Z",
+    "stand": "2026-09-04T08:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
