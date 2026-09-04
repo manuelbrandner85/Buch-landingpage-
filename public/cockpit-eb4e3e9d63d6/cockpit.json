@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-04T15:03:22Z",
+  "stand": "2026-09-04T16:02:23Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1718,9 +1718,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8217.5,
-    "offenSumme": 6261.5,
+    "summe": 8289.5,
+    "offenSumme": 6333.5,
     "buchungen": [
+      {
+        "datum": "2026-09-04",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (15:08 UTC) - 1321,5 auf 1249,5 Credits. Seit dem Nachtrag 15:40 Ortszeit (13:34 UTC) steht kein neuer Lauf in LOG.md, und die Kommentarrunde 16:04-16:14 meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 72
+      },
       {
         "datum": "2026-09-04",
         "projekt": "nicht zugeordnet",
@@ -1786,12 +1792,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (12:06 UTC, nachgetragen)",
         "credits": 24
-      },
-      {
-        "datum": "2026-08-29",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (23:05 UTC)",
-        "credits": 1439
       }
     ]
   },
@@ -1803,7 +1803,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-09-03",
+      "stand": "2026-09-04",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
@@ -1816,7 +1816,7 @@
       "vorher": 11,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-09-03",
+      "stand": "2026-09-04",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -1851,7 +1851,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-09-03",
+      "stand": "2026-09-04",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
@@ -1863,10 +1863,10 @@
       "follower": 0,
       "vorher": 0,
       "reaktionen": null,
-      "stand": "2026-09-03",
+      "stand": "2026-09-04",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 6,
+      "beitraege": 7,
       "quelle": "abgerufen",
       "vergleichVom": "2026-09-03"
     },
@@ -2091,7 +2091,7 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T15:02:00Z",
+    "stand": "2026-09-04T16:02:00Z",
     "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
