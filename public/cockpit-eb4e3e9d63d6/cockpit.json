@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-03T23:02:28Z",
+  "stand": "2026-09-04T00:03:10Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -7,17 +7,9 @@
     }
   ],
   "aenderungen": {
-    "seit": "2026-09-02",
-    "punkte": [
-      {
-        "was": "Rang",
-        "von": "#334.543",
-        "nach": "#736.277",
-        "delta": "+#401.734",
-        "richtung": "schlecht"
-      }
-    ],
-    "hinweis": null
+    "seit": "2026-09-03",
+    "punkte": [],
+    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
   "regal": {
     "buecher": [
@@ -30,7 +22,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 26,
+        "tageDraussen": 27,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -136,7 +128,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 4,
+        "tageDraussen": 5,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -354,7 +346,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 8,
+    "tage": 9,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -387,6 +379,10 @@
       },
       {
         "d": "2026-09-03",
+        "v": 736277
+      },
+      {
+        "d": "2026-09-04",
         "v": 736277
       }
     ],
@@ -422,6 +418,10 @@
       {
         "d": "2026-09-03",
         "v": 2
+      },
+      {
+        "d": "2026-09-04",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -455,6 +455,10 @@
       },
       {
         "d": "2026-09-03",
+        "v": 22658
+      },
+      {
+        "d": "2026-09-04",
         "v": 22658
       }
     ],
@@ -535,6 +539,10 @@
         {
           "d": "2026-09-03",
           "v": 21600
+        },
+        {
+          "d": "2026-09-04",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -568,6 +576,10 @@
         },
         {
           "d": "2026-09-03",
+          "v": 11
+        },
+        {
+          "d": "2026-09-04",
           "v": 11
         }
       ],
@@ -603,6 +615,10 @@
         {
           "d": "2026-09-03",
           "v": 1041
+        },
+        {
+          "d": "2026-09-04",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -636,6 +652,10 @@
         },
         {
           "d": "2026-09-03",
+          "v": 6
+        },
+        {
+          "d": "2026-09-04",
           "v": 6
         }
       ],
@@ -671,6 +691,10 @@
         {
           "d": "2026-09-03",
           "v": 0
+        },
+        {
+          "d": "2026-09-04",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -705,6 +729,10 @@
         {
           "d": "2026-09-03",
           "v": 0
+        },
+        {
+          "d": "2026-09-04",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -734,6 +762,10 @@
         },
         {
           "d": "2026-09-03",
+          "v": 2
+        },
+        {
+          "d": "2026-09-04",
           "v": 2
         }
       ]
@@ -1644,9 +1676,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8095,
-    "offenSumme": 6139,
+    "summe": 8217.5,
+    "offenSumme": 6261.5,
     "buchungen": [
+      {
+        "datum": "2026-09-04",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (23:16 UTC) - 1444,0 auf 1321,5 Credits. LOG.md ordnet 96,5 davon dem Mittagsplatz vom 04.09., 01:05 Ortszeit zu (Video 09_muenze); die uebrigen 26,0 Credits stehen in keinem Lauf. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 122.5
+      },
       {
         "datum": "2026-09-03",
         "projekt": "nicht zugeordnet",
@@ -1712,12 +1750,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (23:05 UTC)",
         "credits": 1439
-      },
-      {
-        "datum": "2026-08-29",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (20:07 UTC, nach der Aufladung)",
-        "credits": 164
       }
     ]
   },
@@ -1733,7 +1765,7 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     },
     {
       "name": "YouTube",
@@ -1746,7 +1778,7 @@
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     },
     {
       "name": "Instagram",
@@ -1757,7 +1789,7 @@
       "stand": "2026-08-28",
       "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     },
     {
       "name": "Facebook",
@@ -1768,7 +1800,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     },
     {
       "name": "Pinterest",
@@ -1781,7 +1813,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     },
     {
       "name": "Bluesky",
@@ -1794,7 +1826,7 @@
       "reaktionenLabel": null,
       "beitraege": 6,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     },
     {
       "name": "Verteiler",
@@ -1808,7 +1840,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-02"
+      "vergleichVom": "2026-09-03"
     }
   ],
   "vorschlaege": [
@@ -1846,6 +1878,12 @@
     }
   ],
   "aktivitaet": [
+    {
+      "id": "journal-was-heisst-gesicherter-befund",
+      "zeit": "2026-09-04T00:03:10Z",
+      "kanal": "Website",
+      "text": "Der Journalbeitrag „was-heisst-gesicherter-befund“ ist heute erschienen."
+    },
     {
       "id": "deploy-2026-09-02-fehlgeschlagen",
       "zeit": "2026-09-02T16:06:38Z",
@@ -1915,12 +1953,6 @@
       "zeit": "2026-08-29T22:10:00Z",
       "kanal": "Website",
       "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
-    },
-    {
-      "id": "deploy-2026-08-29-fehlgeschlagen",
-      "zeit": "2026-08-29T22:04:17Z",
-      "kanal": "Technik",
-      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
     }
   ],
   "offen": [
@@ -2016,17 +2048,17 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-03T23:02:00Z",
+    "stand": "2026-09-04T00:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-03T22:04:15Z",
+    "deployWann": "2026-09-03T23:30:38Z",
     "zertifikatTage": 80,
     "linksGeprueft": 54,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 197,
-    "journalVorrat": 3
+    "journalVorrat": 2
   },
   "luecken": [
     {
