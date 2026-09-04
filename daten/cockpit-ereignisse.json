@@ -54,6 +54,12 @@
       "zeit": "2026-09-04T00:03:10Z",
       "kanal": "Website",
       "text": "Der Journalbeitrag „was-heisst-gesicherter-befund“ ist heute erschienen."
+    },
+    {
+      "id": "deploy-2026-09-04-fehlgeschlagen",
+      "zeit": "2026-09-04T01:02:20Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
     }
   ]
 }

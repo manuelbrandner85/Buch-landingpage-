@@ -1,15 +1,27 @@
 {
-  "stand": "2026-09-04T00:03:10Z",
+  "stand": "2026-09-04T01:02:20Z",
   "warnungen": [
     {
       "stufe": "hoch",
       "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22). Ordner liegt unter Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT — der Aufgabe „Trendonix Rundlauf“ neu verbinden."
+    },
+    {
+      "stufe": "hoch",
+      "text": "Die Veröffentlichung ist fehlgeschlagen — die Website zeigt noch den Stand davor."
     }
   ],
   "aenderungen": {
     "seit": "2026-09-03",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Veröffentlichung",
+        "von": "erfolgreich",
+        "nach": "fehlgeschlagen",
+        "delta": null,
+        "richtung": "schlecht"
+      }
+    ],
+    "hinweis": null
   },
   "regal": {
     "buecher": [
@@ -1879,6 +1891,12 @@
   ],
   "aktivitaet": [
     {
+      "id": "deploy-2026-09-04-fehlgeschlagen",
+      "zeit": "2026-09-04T01:02:20Z",
+      "kanal": "Technik",
+      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
+    },
+    {
       "id": "journal-was-heisst-gesicherter-befund",
       "zeit": "2026-09-04T00:03:10Z",
       "kanal": "Website",
@@ -1948,11 +1966,6 @@
       "zeit": "2026-08-30T01:10:00Z",
       "kanal": "Website",
       "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
-    },
-    {
-      "zeit": "2026-08-29T22:10:00Z",
-      "kanal": "Website",
-      "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
     }
   ],
   "offen": [
@@ -2048,11 +2061,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-04T00:02:00Z",
-    "deploy": "erfolgreich",
+    "stand": "2026-09-04T01:02:00Z",
+    "deploy": "fehlgeschlagen",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-03T23:30:38Z",
+    "deployWann": "2026-09-04T00:08:06Z",
     "zertifikatTage": 80,
     "linksGeprueft": 54,
     "linksKaputt": 0,

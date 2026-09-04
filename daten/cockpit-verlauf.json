@@ -160,7 +160,7 @@
       },
       "best": null,
       "tant": null,
-      "dep": "erfolgreich"
+      "dep": "fehlgeschlagen"
     }
   ]
 }
