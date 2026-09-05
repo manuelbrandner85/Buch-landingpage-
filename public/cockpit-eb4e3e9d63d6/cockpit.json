@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T13:03:06Z",
+  "stand": "2026-09-05T14:02:36Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -859,27 +859,6 @@
       "wochentag": "Sa",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "15_website",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "15_website",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "15_website",
-          "zustand": "offen",
-          "hinweis": null
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "15_website",
@@ -1051,6 +1030,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-01",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "15_website",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-05",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -1552,6 +1540,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-29",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "15_website",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-05",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1731,6 +1728,15 @@
           "was": "14_kernthese",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "15_website",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-05",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     }
@@ -2153,11 +2159,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T13:02:00Z",
+    "stand": "2026-09-05T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T12:19:31Z",
+    "deployWann": "2026-09-05T13:04:13Z",
     "zertifikatTage": 79,
     "linksGeprueft": 51,
     "linksKaputt": 0,
