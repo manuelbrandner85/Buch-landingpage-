@@ -2,7 +2,9 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ORTE, ortNach } from '@/data/gemeinsam/orte';
 import type { Ort } from '@/data/gemeinsam/typen';
-import { WELT, kapitelNach, reiheNach, REIHEN_MIT_KAPITELN } from '@/world/registry';
+import {
+  WELT, assetNach, kapitelNach, reiheNach, REIHEN_MIT_KAPITELN,
+} from '@/world/registry';
 import {
   wegBegriffe, wegHaus, wegKapitel, wegOrt, wegReihe, wegVollstaendig, wegVorschau,
 } from '@/world/wege';
@@ -13,6 +15,7 @@ import { Datenblatt } from '@/ui/Datenblatt';
 import { Quelle } from '@/ui/Quelle';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { og } from '@/world/og';
+import { bildQuelle } from '@/world/bilder';
 
 /**
  * Ein Ort gehört der Welt, nicht einem Band – deshalb listet er alle Vorkommen.
@@ -127,9 +130,33 @@ export default async function OrtSeite(
 
   const seiten = [...new Set(ort.vorkommen.flatMap((v) => v.seiten))].sort((a, b) => a - b);
 
+  /**
+   * Das Motiv des Kapitels, das diesen Ort belegt – kein erfundenes Bild.
+   *
+   * Diese Seiten waren reiner Text. Das ist nicht falsch, aber es ist auch
+   * nicht der Ort, an dem man ankommt, nachdem man ihn auf der Karte gesehen
+   * hat: Dort steht ein Bild, hier stand keins, und der Sprung fühlte sich an
+   * wie ein Themenwechsel. Genommen wird genau das Bild, das die Karte zeigt –
+   * derselbe Name, deshalb fliegt es beim Wechsel mit.
+   */
+  const motiv = (() => {
+    const v = ort.vorkommen[0];
+    if (!v) return undefined;
+    const szenen = WELT[v.bandId]?.szenen ?? [];
+    const treffer = szenen.find((z) => z.kapitelId === v.kapitel && z.typ === 'auftakt' && z.platte)
+      ?? szenen.find((z) => z.kapitelId === v.kapitel && z.platte);
+    return treffer?.platte ? assetNach(treffer.platte) : undefined;
+  })();
+
   return (
     <main className="lesefassung">
       <Rueckweg nach={wegReihe(r.id)} text={`Zurück in ${r.titel}`} />
+      {motiv && (
+        <figure className="ortbild">
+          <img src={bildQuelle(motiv, 1600)} alt="" decoding="async"
+            style={{ viewTransitionName: `ort-${ort.id}` }} />
+        </figure>
+      )}
       <p className="eyebrow">Ort in {r.titel}</p>
       <h1>{ort.name}</h1>
       <p className="unterzeile">{ort.text}</p>

@@ -288,6 +288,15 @@ main{position:relative;z-index:2}
   backface-visibility:hidden}
 .karte-ebene svg{width:100%;height:100%;display:block}
 
+/* Lufttiefe.
+   Was weit weg ist, wird nicht kleiner, sondern blasser: Zwischen Auge und
+   Ferne steht Luft, und die streut. Bisher standen die fünf Ebenen der Karte
+   verschieden weit hinten und waren alle gleich kontrastreich – deshalb sah
+   der Raum aus wie ein Stapel Folien und nicht wie Tiefe. Ein Schleier je
+   Ebene, nach hinten dichter, erledigt das mit einer Fläche ohne Filter,
+   ohne Mischmodus und ohne einen einzigen Rechenschritt je Bild. */
+.karte-luft{position:absolute;inset:0;pointer-events:none;background:#1b2740}
+
 /* Zwei flache Schleier über dem Raum – sie liegen nicht darin, sonst würden
    sie mitkippen und der Dunst stünde schräg in der Luft. */
 .karte-dunst{position:absolute;inset:0;pointer-events:none;
@@ -348,6 +357,15 @@ main{position:relative;z-index:2}
 .karte-tafel .sprung{display:inline-block;margin-top:.9rem;font-family:var(--display),serif;
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
   text-decoration:none;border-bottom:1px solid rgba(227,200,139,.4);padding-bottom:.2rem}
+/* Zwei Wege aus der Tafel heraus, nicht einer: in die Szene des Buches und
+   auf die Seite des Ortes. Nebeneinander gesetzt liefen sie ineinander -
+   „…BIBLIOTHEKALLES ZU NINIVE" -, weil beide inline stehen. Also je eine
+   Zeile, und der zweite ruhiger: Er ist das Weiterlesen, nicht der Sprung. */
+.karte-tafel .sprung{display:block;width:fit-content}
+.karte-tafel .sprung + .sprung{margin-top:.5rem;color:var(--staub);
+  border-bottom-color:rgba(196,186,166,.28)}
+.karte-tafel .sprung + .sprung:hover{color:var(--gold);
+  border-bottom-color:rgba(227,200,139,.5)}
 .karte-stand{margin-top:1.1rem;font-family:var(--display),serif;color:var(--gold);
   font-size:1.15rem;line-height:1}
 .karte-stand span{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
@@ -2541,4 +2559,35 @@ html:has(.feedwelt){scroll-snap-type:y proximity}
 .verteiler-wahl .verteiler-haken strong {
   font-weight: 600;
   letter-spacing: 0.01em;
+}
+
+
+/* Das Motiv über einer Ortsseite: breit und flach, damit es der Seite einen
+   Kopf gibt und nicht den Text verdrängt. Es ist dasselbe Bild wie auf der
+   Karte und trägt denselben Namen – deshalb fliegt es beim Wechsel mit,
+   statt zu verschwinden und woanders neu aufzutauchen. */
+.lesefassung .ortbild{margin:0 0 1.6rem;border-radius:6px;overflow:hidden;
+  aspect-ratio:21/9;background:#0d1420}
+.lesefassung .ortbild img{width:100%;height:100%;object-fit:cover;display:block}
+
+
+/* Der Höhepunkt des Evidenzreglers.
+   Auf der strengsten Stufe tritt nicht eine Angabe zurück, sondern der
+   Abschnitt: Er zerfällt in Körner, ist einen Moment fast weg, und was
+   zurückkommt, ist nur das, was hält. Die Zeit dafür ist knapp bemessen –
+   eineinviertel Sekunden. Länger nimmt es dem Leser die Kontrolle, und die
+   gehört ihm: Er hat den Regler in der Hand. */
+@media (prefers-reduced-motion: no-preference){
+  .hoehepunkt{animation:hoehepunkt 1.25s cubic-bezier(.16,1,.3,1) both}
+  @keyframes hoehepunkt{
+    0%{opacity:1}
+    20%{opacity:.06}
+    36%{opacity:.06}
+    100%{opacity:1}
+  }
+  /* Was standhält, setzt sich wieder – kurz nach dem Abschnitt, damit man
+     sieht, dass es zurückkommt und nicht nie weg war. */
+  .hoehepunkt [data-evidenz]:not(.verblasst){
+    animation:sammeln .72s cubic-bezier(.16,1,.3,1) .44s both}
+  @keyframes sammeln{from{opacity:0;transform:translateY(9px)}}
 }

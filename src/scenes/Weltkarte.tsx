@@ -7,8 +7,11 @@ import { ORTE } from '@/data/gemeinsam/orte';
 import {
   GRENZEN_PFAD, KARTE_BREITE, KARTE_HOEHE, LAND_PFAD, NETZ_PFAD, kx, ky,
 } from '@/data/gemeinsam/karte-pfade';
-import { WELT, assetNach, bandNummer, kapitelNach, szeneZuKapitel } from '@/world/registry';
+import {
+  WELT, assetNach, bandNummer, kapitelNach, reiheZuBand, szeneZuKapitel,
+} from '@/world/registry';
 import { bildQuelle } from '@/world/bilder';
+import { wegOrt } from '@/world/wege';
 import { useWeltFortschritt } from '@/world/FortschrittKontext';
 import { seil, type Seil } from '@/engine/seil';
 import { zupfen } from '@/audio/zupf';
@@ -346,6 +349,8 @@ export function Weltkarte({ szene }: { szene: Szene }) {
     return treffer?.platte ? assetNach(treffer.platte) : undefined;
   }, [gezeigt, band]);
 
+  const reihe = reiheZuBand(band);
+
   const besucht = (h: Halt) => {
     const s = szeneZuKapitel(h.kapitel, band);
     return Boolean(s && fortschritt?.kennt(s.id));
@@ -394,6 +399,7 @@ export function Weltkarte({ szene }: { szene: Szene }) {
                 <rect x={-KARTE_BREITE} y={-KARTE_HOEHE} width={KARTE_BREITE * 3}
                   height={KARTE_HOEHE * 3} className="karte-meer" />
               </svg>
+              <div className="karte-luft" style={{ opacity: 0.34 }} aria-hidden="true" />
             </div>
 
             {/* Gradnetz */}
@@ -401,6 +407,7 @@ export function Weltkarte({ szene }: { szene: Szene }) {
               <svg {...svgProps}>
                 <path d={NETZ_PFAD} className="karte-netz" strokeWidth={0.7 * e} />
               </svg>
+              <div className="karte-luft" style={{ opacity: 0.24 }} aria-hidden="true" />
             </div>
 
             {/* Land, Grenzen, Küste */}
@@ -417,6 +424,7 @@ export function Weltkarte({ szene }: { szene: Szene }) {
                 <path d={GRENZEN_PFAD} className="karte-grenzen" strokeWidth={0.7 * e} />
                 <path d={LAND_PFAD} className="karte-kueste" strokeWidth={1.1 * e} />
               </svg>
+              <div className="karte-luft" style={{ opacity: 0.1 }} aria-hidden="true" />
             </div>
 
             {/* Der Faden */}
@@ -522,6 +530,18 @@ export function Weltkarte({ szene }: { szene: Szene }) {
               {sprung && (
                 <a className="sprung" href={`#${sprung.id}`}>In die Szene · {sprung.titel}</a>
               )}
+              {/*
+                Bisher führte von der Karte kein Weg nach draußen: Man sah den
+                Ort, las drei Zeilen und blieb auf der Karte. Seine eigene Seite
+                gab es, sie war von hier aus nur nicht erreichbar. Jetzt schon —
+                und weil das Motiv dort dasselbe ist, fliegt es mit, statt
+                auszublenden.
+              */}
+              {reihe && (
+                <a className="sprung" href={wegOrt(reihe.id, gezeigt.ort.id)}>
+                  Alles zu {gezeigt.ort.name}
+                </a>
+              )}
             </>
           )}
           <p className="karte-stand" aria-hidden="true">
@@ -536,7 +556,10 @@ export function Weltkarte({ szene }: { szene: Szene }) {
 
         {auftakt && (
           <figure className="karte-motiv" key={auftakt.id}>
-            <img src={bildQuelle(auftakt, 1000)} alt="" loading="lazy" decoding="async" />
+            <img src={bildQuelle(auftakt, 1000)} alt="" loading="lazy" decoding="async"
+              style={gezeigt
+                ? ({ viewTransitionName: `ort-${gezeigt.ort.id}` } as React.CSSProperties)
+                : undefined} />
           </figure>
         )}
       </div>

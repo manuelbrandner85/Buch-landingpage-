@@ -35,6 +35,46 @@ export function EvidenzRegler() {
   const [gesamt, setGesamt] = useState(0);
   const [bleibt, setBleibt] = useState(0);
   const abschnitt = useRef<HTMLElement | null>(null);
+  const vorige = useRef(EVIDENZ.length - 1);
+  const zuletzt = useRef(0);
+
+  /**
+   * Der Höhepunkt: Auf der strengsten Stufe zerfällt nicht eine Angabe,
+   * sondern der Abschnitt.
+   *
+   * Das ist die These des Bandes, in einem Bild: Wer nur gesicherte Befunde
+   * gelten lässt, dem bleibt auf mancher Seite fast nichts stehen. Einzelne
+   * zerfallende Zeilen zeigen das nicht – man sieht drei Stellen blasser
+   * werden und liest weiter. Erst wenn die ganze Seite für einen Moment
+   * verschwindet und danach nur das zurückkommt, was hält, ist der Satz
+   * angekommen.
+   *
+   * Drei Riegel, damit daraus kein Jahrmarkt wird: Er läuft nur beim Eintritt
+   * in die Stufe, nur wenn dort wirklich etwas zurücktritt, und höchstens
+   * alle sechs Sekunden. Bei „Bewegung reduzieren“ gar nicht – dort bleibt es
+   * beim Verblassen, und die Aussage steht trotzdem in der Zeile darunter.
+   */
+  const hoehepunkt = useCallback((ziel: HTMLElement) => {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const jetzt = performance.now();
+    if (jetzt - zuletzt.current < 6000) return;
+    zuletzt.current = jetzt;
+
+    // Nur was im Bild steht: Körner am oberen Rand, die niemand kommen sah,
+    // sehen nach Fehler aus. Sechzehn Blöcke sind die Obergrenze des
+    // Kornfeldes – darüber wird aus Zerfall Nebel.
+    const bloecke = Array.from(
+      ziel.querySelectorAll<HTMLElement>('p, h2, h3, blockquote, figcaption, li'))
+      .filter((el) => {
+        const r = el.getBoundingClientRect();
+        return r.width > 40 && r.height > 8 && r.bottom > 0 && r.top < window.innerHeight;
+      })
+      .slice(0, 16);
+    bloecke.forEach((el) => laessZerfallen(el));
+    ziel.classList.add('hoehepunkt');
+    window.setTimeout(() => ziel.classList.remove('hoehepunkt'), 1400);
+  }, []);
 
   /** Anwenden – und zählen. Beides gehört zusammen: Der Regler soll zeigen, was er tut. */
   const anwenden = useCallback((s: number) => {
@@ -56,7 +96,14 @@ export function EvidenzRegler() {
     });
     setGesamt(n);
     setBleibt(steht);
-  }, []);
+
+    // Der Höhepunkt gehört an den Eintritt in die strengste Stufe, nicht an
+    // jedes Anwenden: Der Regler wird auch aufgerufen, wenn nur ein anderer
+    // Abschnitt ins Bild kommt.
+    const eintritt = s === 0 && vorige.current !== 0;
+    vorige.current = s;
+    if (eintritt && ziel && n - steht > 0) hoehepunkt(ziel);
+  }, [hoehepunkt]);
 
   useEffect(() => {
     const b = new IntersectionObserver(
