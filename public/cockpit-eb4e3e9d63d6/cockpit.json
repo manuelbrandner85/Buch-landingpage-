@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T16:02:29Z",
+  "stand": "2026-09-05T17:03:27Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -864,42 +864,6 @@
           "was": "15_website",
           "zustand": "offen",
           "hinweis": null
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "18:30",
-          "was": "01_neandertaler",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-22",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "18:30",
-          "was": "02_beleggrad",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-25",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "18:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "18:30",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-09-03",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1107,6 +1071,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "09:30",
+          "was": "12_schrift",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -1585,6 +1558,15 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
+          "kanal": "Facebook",
+          "zeit": "09:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Instagram",
           "zeit": "11:00",
           "was": "12_schrift",
@@ -1635,6 +1617,15 @@
           "was": "13_tempel",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "09:30",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-25",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Instagram",
@@ -1786,9 +1777,21 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8930,
-    "offenSumme": 6717,
+    "summe": 9115.5,
+    "offenSumme": 6768,
     "buchungen": [
+      {
+        "datum": "2026-09-05",
+        "projekt": "Trendonix-Kurzvideo",
+        "zweck": "Abendplatz 16:21-16:55 Ortszeit: Kurzvideo 12_schrift, vier eigene kie.ai-Einstellungen plus eigener Suno-Titel (558,0 auf 423,5); davon 6,5 fuer ein neu bestelltes Bild 2 und 12,0 fuer die Musik. Vom Videolauf selbst eingetragen, damit der stuendliche Cockpit-Lauf ihn nicht als Rueckgang ohne Zuordnung fuehrt.",
+        "credits": 134.5
+      },
+      {
+        "datum": "2026-09-05",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (16:07 UTC) - 609,0 auf 558,0 Credits. LOG.md ist seit dem Nachmittagslauf 15:33-15:45 Ortszeit unveraendert, KOMMENTAR_LOG.md meldet fuer den elften Lauf im Fenster (17:04-17:15 Ortszeit) ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 51
+      },
       {
         "datum": "2026-09-05",
         "projekt": "nicht zugeordnet",
@@ -1848,18 +1851,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (23:16 UTC) - 1444,0 auf 1321,5 Credits. LOG.md ordnet 96,5 davon dem Mittagsplatz vom 04.09., 01:05 Ortszeit zu (Video 09_muenze); die uebrigen 26,0 Credits stehen in keinem Lauf. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
         "credits": 122.5
-      },
-      {
-        "datum": "2026-09-03",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung",
-        "credits": 11
-      },
-      {
-        "datum": "2026-09-01",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (20:10 UTC) - 103,5 auf 90,5 Credits. Seit dem Abendplatz 18:21-18:35 Ortszeit steht kein neuer Lauf in LOG.md, KOMMENTAR_LOG.md meldet fuer 20:05, 20:20 und 21:04 Ortszeit keine Schreibaktion. Nachgetragen vom stuendlichen Cockpit-Lauf.",
-        "credits": 13
       }
     ]
   },
@@ -2159,11 +2150,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T16:02:00Z",
+    "stand": "2026-09-05T17:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T15:03:24Z",
+    "deployWann": "2026-09-05T16:03:17Z",
     "zertifikatTage": 79,
     "linksGeprueft": 51,
     "linksKaputt": 0,
