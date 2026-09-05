@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T00:02:21Z",
+  "stand": "2026-09-05T01:04:18Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1755,9 +1755,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8460,
-    "offenSumme": 6369.5,
+    "summe": 8536,
+    "offenSumme": 6445.5,
     "buchungen": [
+      {
+        "datum": "2026-09-05",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (00:07 UTC) - 1079,0 auf 1003,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 16:43 UTC); die Kommentarrunden 00:11 und 01:12 Ortszeit melden ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 76
+      },
       {
         "datum": "2026-09-04",
         "projekt": "nicht zugeordnet",
@@ -1823,12 +1829,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (22:07 UTC)",
         "credits": 48
-      },
-      {
-        "datum": "2026-08-30",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (16:07 UTC; LOG.md nennt fuer den Nachmittag den Videomotor als Ursache, eine Buchung dafuer fehlt)",
-        "credits": 58
       }
     ]
   },
@@ -2128,11 +2128,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T00:02:00Z",
+    "stand": "2026-09-05T01:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-04T23:03:10Z",
+    "deployWann": "2026-09-05T00:55:20Z",
     "zertifikatTage": 79,
     "linksGeprueft": 54,
     "linksKaputt": 0,
