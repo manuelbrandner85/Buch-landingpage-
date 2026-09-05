@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T20:02:28Z",
+  "stand": "2026-09-05T21:16:53Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1777,9 +1777,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9115.5,
-    "offenSumme": 6768,
+    "summe": 9162.5,
+    "offenSumme": 6815,
     "buchungen": [
+      {
+        "datum": "2026-09-05",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (20:08 UTC) - 423,5 auf 376,5 Credits. LOG.md ist seit dem Abendplatz 16:21-16:55 Ortszeit unveraendert (Stand 16:54 UTC), KOMMENTAR_LOG.md meldet fuer den fuenfzehnten Lauf im Fenster (21:04-21:11 Ortszeit) und den 21-Uhr-Rundlauf ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 47
+      },
       {
         "datum": "2026-09-05",
         "projekt": "Trendonix-Kurzvideo",
@@ -1845,12 +1851,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (15:08 UTC) - 1321,5 auf 1249,5 Credits. Seit dem Nachtrag 15:40 Ortszeit (13:34 UTC) steht kein neuer Lauf in LOG.md, und die Kommentarrunde 16:04-16:14 meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
         "credits": 72
-      },
-      {
-        "datum": "2026-09-04",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (23:16 UTC) - 1444,0 auf 1321,5 Credits. LOG.md ordnet 96,5 davon dem Mittagsplatz vom 04.09., 01:05 Ortszeit zu (Video 09_muenze); die uebrigen 26,0 Credits stehen in keinem Lauf. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
-        "credits": 122.5
       }
     ]
   },
@@ -2150,11 +2150,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T20:02:00Z",
+    "stand": "2026-09-05T21:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T19:03:19Z",
+    "deployWann": "2026-09-05T20:03:24Z",
     "zertifikatTage": 78,
     "linksGeprueft": 51,
     "linksKaputt": 0,
