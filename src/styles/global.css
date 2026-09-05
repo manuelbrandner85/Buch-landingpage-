@@ -2591,3 +2591,63 @@ html:has(.feedwelt){scroll-snap-type:y proximity}
     animation:sammeln .72s cubic-bezier(.16,1,.3,1) .44s both}
   @keyframes sammeln{from{opacity:0;transform:translateY(9px)}}
 }
+
+
+/* ---------- Das Geflecht im Feed ----------
+   Der Name ist nicht Geschmack: `fw-netz` war schon vergeben — es ist das
+   Symbol für den Empfang oben in der Statusleiste des Telefons, und dessen
+   Regel steht mit zwei Klassen da (`.feedwelt .fw-netz`) und schlug meine mit
+   einer. Gemessen war das Geflecht daraufhin zwölf mal neun Bildpunkte groß
+   und in die Form der Empfangsbalken geschnitten. Zwei Stunden hätte man an
+   der falschen Stelle suchen können; hier steht, warum es `fw-geflecht` heißt.
+
+   Es wächst in der Ecke mit, während man liest: ein Pin je Beitrag, ein Faden
+   je geteiltem Wort. Es soll nicht gelesen werden, sondern nebenbei auffallen —
+   deshalb klein, blass und ohne Beschriftung. Erst am Schluss wird es groß und
+   bekommt einen Satz. */
+.fw-geflecht{position:absolute;right:.9rem;bottom:.9rem;width:clamp(84px,17vw,132px);
+  aspect-ratio:1;pointer-events:none;opacity:.72;z-index:6}
+.fw-geflecht svg{width:100%;height:100%;display:block;overflow:visible}
+.fw-geflecht-blass{fill:none;stroke:rgba(214,84,74,.42);stroke-width:.35}
+.fw-geflecht-hell{fill:none;stroke:rgba(227,200,139,.85);stroke-width:1.1;
+  stroke-linecap:round}
+.fw-pin{fill:rgba(233,226,214,.5)}
+.fw-pin.haelt{fill:var(--gold)}
+
+/* Der Schluss: dasselbe Netz, groß, mit dem einen Satz darunter. */
+/* Breite als Prozent der Spalte, nicht als min() aus rem und vw: Der Schluss
+   steht in einem Element mit `container-type: size`, und dort kam aus der
+   Rechnung ein Zwölftel des Gewollten heraus - gemessen zwölf Bildpunkte statt
+   zweihundertsechsundsechzig. Prozent und eine Obergrenze tun dasselbe und
+   halten sich an die Spalte, in der sie stehen. */
+.fw-geflecht-gross{position:static;width:76%;max-width:19rem;margin:1.4rem auto .2rem;
+  opacity:1;pointer-events:auto}
+.fw-geflecht-gross .fw-geflecht-blass{stroke-width:.28}
+.fw-geflecht-wort{text-align:center;margin-top:.6rem}
+.fw-geflecht-wort p{font-size:.9rem;line-height:1.5;color:var(--staub);margin:0 auto;
+  max-width:26rem}
+.fw-geflecht-wort i{font-style:normal;color:rgba(214,84,74,.9)}
+.fw-geflecht-wort button{margin-top:.8rem;background:none;color:var(--gold);
+  font-family:var(--display),serif;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;border:1px solid rgba(227,200,139,.4);
+  padding:.5rem 1.1rem;cursor:pointer;transition:background .24s,color .24s}
+.fw-geflecht-wort button:hover{background:rgba(227,200,139,.12)}
+
+/* Der Zug. Was an einem Wort hängt, hält nicht: Die blassen Fäden lassen los,
+   und die Pins, die an keinem echten Faden hängen, fallen aus dem Bild. Was
+   zweimal dasselbe sagt, bleibt stehen. */
+@media (prefers-reduced-motion: no-preference){
+  .fw-geflecht.faellt .fw-geflecht-blass{animation:geflecht-los .5s ease-in both}
+  .fw-geflecht.faellt .fw-pin:not(.haelt){animation:pin-faellt 1.1s cubic-bezier(.4,0,1,1) both}
+  @keyframes geflecht-los{to{opacity:0}}
+  @keyframes pin-faellt{
+    0%{opacity:1;transform:translateY(0)}
+    12%{opacity:1;transform:translateY(-2px)}
+    100%{opacity:0;transform:translateY(150px)}
+  }
+}
+/* Ohne Bewegung fällt nichts, es ist einfach weg: Die Aussage steht im Satz. */
+@media (prefers-reduced-motion: reduce){
+  .fw-geflecht.faellt .fw-geflecht-blass,
+  .fw-geflecht.faellt .fw-pin:not(.haelt){opacity:0}
+}

@@ -10,6 +10,7 @@ import { BASIS_PFAD, bewegt } from '@/world/bilder';
 import { weg, wegBuch, wegImpressum, wegWelt } from '@/world/wege';
 import { Hausmarke } from '@/ui/Hausmarke';
 import { Startbildschirm } from './Startbildschirm';
+import { FeedNetz } from './FeedNetz';
 
 /**
  * Die Welt von „Alles nur Zufall?“.
@@ -466,6 +467,16 @@ export function FeedWelt() {
               + `kap${String(aktuell.nr).padStart(2, '0')}-640.webp)`,
           }} />
         )}
+
+        {/*
+          Kein Netz in der Ecke.
+          Der erste Entwurf ließ es beim Lesen mitwachsen. Angesehen war klar,
+          warum das nicht geht: Dieser Bildschirm ist mit Absicht voll —
+          Aufnahme, Konto, Bildunterschrift, Hashtags, die Spalte mit den
+          Zahlen. Es gibt keine freie Ecke, und ein Diagramm dazwischen ist ein
+          Kommentar in einem Feed, der ohne Kommentar wirken soll. Das Netz
+          steht deshalb nur am Ende — dort, wo es einen Satz dazu gibt.
+        */}
 
         {/* Das Gerät verschwindet nicht — es wird zu groß fürs Bild. */}
         <div className="fw-geraet" style={{
@@ -960,6 +971,13 @@ function Schluss({ gesehen, nachgesehen }: { gesehen: number; nachgesehen: numbe
             nachsehen, die dieselben Behauptungen für widerlegt halten.
           </p>
         )}
+
+        {/*
+          Der zweite Schluss, und er widerspricht dem ersten nicht, sondern
+          ergänzt ihn: Sie haben nicht nachgesehen — und es gab auch nichts,
+          was diese vierzig Behauptungen zusammengehalten hätte.
+        */}
+        <FeedNetz gesehen={40} gross />
 
         <p>
           Vierzig Theorien stehen in diesem Buch, und neben jeder steht, was
