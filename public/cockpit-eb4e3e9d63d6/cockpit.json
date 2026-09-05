@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T12:05:14Z",
+  "stand": "2026-09-05T13:03:06Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1780,9 +1780,21 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8716,
-    "offenSumme": 6625.5,
+    "summe": 8892.5,
+    "offenSumme": 6679.5,
     "buchungen": [
+      {
+        "datum": "2026-09-05",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (11:07 UTC) - nach dem Mittagsplatz 700,5 auf 646,5 Credits. Vom Gesamtrueckgang 823,0 auf 646,5 ordnet LOG.md 122,5 dem Mittagsplatz 11_statuen zu; diese 54,0 Credits stehen in keinem Lauf. Aus dem stuendlichen Cockpit-Lauf 12:10 UTC nachgetragen, weil der 11:07-Lauf kosten.json nicht lesen konnte.",
+        "credits": 54
+      },
+      {
+        "datum": "2026-09-05",
+        "projekt": "Trendonix-Kurzvideo",
+        "zweck": "Mittagsplatz 12:20-12:52 Ortszeit: Kurzvideo 11_statuen, vier eigene kie.ai-Einstellungen (823,0 auf 700,5), davon 6,5 fuer ein neu bestelltes Bild 3; Musik aus der Mediathek, 0 Credits. Aus dem stuendlichen Cockpit-Lauf 12:10 UTC nachgetragen, weil der Videomotor seine Credits nicht selbst bucht.",
+        "credits": 122.5
+      },
       {
         "datum": "2026-09-05",
         "projekt": "nicht zugeordnet",
@@ -1842,18 +1854,6 @@
         "projekt": "Trendonix-Kurzvideo",
         "zweck": "Abendplatz 18:21-18:35 Ortszeit: Kurzvideo 06_fuenf_fragen, vier eigene kie.ai-Einstellungen, davon 13 Credits fuer zwei Nachbesserungen an Bild 3 (244,5 auf 103,5). Von LOG.md vollstaendig zugeordnet, aus dem stuendlichen Cockpit-Lauf 17:07 UTC nachgetragen.",
         "credits": 141
-      },
-      {
-        "datum": "2026-09-01",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (11:12 UTC) - 430,5 auf 244,5 Credits. LOG.md nennt fuer den Mittagsplatz-Lauf 12:30 Ortszeit 174 Credits (430,5 auf 256,5, davon 58 fuer zwei neu erzeugte Einstellungen); eine Buchung dafuer fehlt. Die restlichen 12 Credits sind unerklaert.",
-        "credits": 186
-      },
-      {
-        "datum": "2026-09-01",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (01:06 UTC) - 827,5 auf 430,5 Credits; kein Lauf in LOG.md seit 31.08. 22:46 UTC",
-        "credits": 397
       }
     ]
   },
@@ -2153,11 +2153,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T12:02:00Z",
+    "stand": "2026-09-05T13:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T11:44:12Z",
+    "deployWann": "2026-09-05T12:19:31Z",
     "zertifikatTage": 79,
     "linksGeprueft": 51,
     "linksKaputt": 0,
