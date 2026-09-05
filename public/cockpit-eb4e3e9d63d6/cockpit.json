@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T15:02:29Z",
+  "stand": "2026-09-05T16:02:29Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1786,9 +1786,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8892.5,
-    "offenSumme": 6679.5,
+    "summe": 8930,
+    "offenSumme": 6717,
     "buchungen": [
+      {
+        "datum": "2026-09-05",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (15:07 UTC) - 646,5 auf 609,0 Credits. LOG.md ist seit dem Nachmittagslauf 15:33-15:45 Ortszeit unveraendert, KOMMENTAR_LOG.md meldet fuer den zehnten Lauf im Fenster ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 37.5
+      },
       {
         "datum": "2026-09-05",
         "projekt": "nicht zugeordnet",
@@ -1854,12 +1860,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (20:10 UTC) - 103,5 auf 90,5 Credits. Seit dem Abendplatz 18:21-18:35 Ortszeit steht kein neuer Lauf in LOG.md, KOMMENTAR_LOG.md meldet fuer 20:05, 20:20 und 21:04 Ortszeit keine Schreibaktion. Nachgetragen vom stuendlichen Cockpit-Lauf.",
         "credits": 13
-      },
-      {
-        "datum": "2026-09-01",
-        "projekt": "Trendonix-Kurzvideo",
-        "zweck": "Abendplatz 18:21-18:35 Ortszeit: Kurzvideo 06_fuenf_fragen, vier eigene kie.ai-Einstellungen, davon 13 Credits fuer zwei Nachbesserungen an Bild 3 (244,5 auf 103,5). Von LOG.md vollstaendig zugeordnet, aus dem stuendlichen Cockpit-Lauf 17:07 UTC nachgetragen.",
-        "credits": 141
       }
     ]
   },
@@ -2159,11 +2159,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T15:02:00Z",
+    "stand": "2026-09-05T16:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T14:03:43Z",
+    "deployWann": "2026-09-05T15:03:24Z",
     "zertifikatTage": 79,
     "linksGeprueft": 51,
     "linksKaputt": 0,
