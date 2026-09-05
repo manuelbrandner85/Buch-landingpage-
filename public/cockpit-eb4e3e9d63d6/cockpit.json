@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T21:16:53Z",
+  "stand": "2026-09-05T22:04:39Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -855,19 +855,6 @@
   },
   "termine": [
     {
-      "d": "2026-09-05",
-      "wochentag": "Sa",
-      "punkte": [
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "15_website",
-          "zustand": "offen",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-09-06",
       "wochentag": "So",
       "punkte": [
@@ -1680,6 +1667,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "15_website",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-05",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "TikTok LIVE",
           "zeit": "20:00",
           "was": null,
@@ -1727,6 +1723,49 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-05",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-20",
+      "wochentag": "So",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "15_website",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "09:30",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-22",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -2150,11 +2189,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T21:02:00Z",
+    "stand": "2026-09-05T22:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T20:03:24Z",
+    "deployWann": "2026-09-05T21:18:02Z",
     "zertifikatTage": 78,
     "linksGeprueft": 51,
     "linksKaputt": 0,
