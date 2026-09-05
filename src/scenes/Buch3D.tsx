@@ -35,9 +35,24 @@ export const rueckenstaerke = (band: BandId) => RUECKEN[band] ?? 0.078;
  * Gemessen auf dem Telefon: rund 46 KB je Band, siebenmal auf der Startseite.
  */
 export function Buch3D({
-  cover, band, tiefe = rueckenstaerke(band), breite = 368, rundum = true,
+  cover, band, tiefe = rueckenstaerke(band), breite = 368, rundum = true, marke,
 }: {
   cover: Asset; band: BandId; tiefe?: number;
+  /**
+   * Name für den Seitenwechsel — der Umschlag wandert dann mit.
+   *
+   * Wer im Regal auf einen Band tippt, sieht ihn nicht verschwinden und einen
+   * anderen erscheinen: Derselbe Umschlag wandert an seine neue Stelle und
+   * wird dabei größer. Der Browser macht das allein, sobald beide Seiten
+   * dasselbe Element bei demselben Namen nennen.
+   *
+   * Der Name muss auf einer Seite einmalig sein — steht er zweimal, lässt der
+   * Browser den ganzen Übergang aus und schreibt einen Fehler in die Konsole.
+   * Deshalb trägt ihn nur, wer auch wirklich zur Buchseite führt: die Karte im
+   * Regal und die Buchseite selbst. Die kleinen Bände in der Reihenleiste
+   * führen in die Welt und bleiben ohne.
+   */
+  marke?: string;
   /** Angezeigte Breite in CSS-Pixeln. Bestimmt, welche Bildstufe geladen wird. */
   breite?: number;
   /**
@@ -72,7 +87,8 @@ export function Buch3D({
       <div className="korpus">
         <div className="flaeche vorn">
           <img src={bildQuelle(cover, breite * 2)} alt={cover.alt}
-            width={cover.breite} height={cover.hoehe} loading="lazy" decoding="async" />
+            width={cover.breite} height={cover.hoehe} loading="lazy" decoding="async"
+            style={marke ? { viewTransitionName: marke } : undefined} />
           <span className="lack" aria-hidden="true" />
           <span className="licht" aria-hidden="true" />
         </div>

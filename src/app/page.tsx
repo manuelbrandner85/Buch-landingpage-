@@ -96,7 +96,8 @@ function Buchkarte({ buch }: { buch: Buch }) {
   return (
     <article className="buchkarte">
       {/* Im Regal steht der Band 208 Pixel breit — die 640er Stufe reicht. */}
-      {cover && <Buch3D cover={cover} band={buch.id} breite={208} />}
+      {cover && <Buch3D cover={cover} band={buch.id} breite={208}
+        marke={`umschlag-${buch.id}`} />}
       <div className="text">
         <p className="band-nr">
           {[zeile, buch.seiten ? `${buch.seiten} Seiten` : '']

@@ -143,7 +143,8 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
 
       <div className="buchkopf">
         {/* Der Buchkopf ist 208 Pixel breit (13rem), auf dem Telefon weniger. */}
-        {cover && <Buch3D cover={cover} band={buch.id} breite={208} />}
+        {cover && <Buch3D cover={cover} band={buch.id} breite={208}
+          marke={`umschlag-${buch.id}`} />}
         <div>
           <p className="klappe">{buch.klappentext}</p>
           {buch.seiten && (

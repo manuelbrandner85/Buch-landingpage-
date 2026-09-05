@@ -4,6 +4,7 @@ import { TRENDONIX } from '@/data/gemeinsam/haus';
 import { weg, wegVorschau } from '@/world/wege';
 import { Zaehler } from '@/ui/Zaehler';
 import { Zustimmung } from '@/ui/Zustimmung';
+import { Seitenwechsel } from '@/ui/Seitenwechsel';
 
 /**
  * Der Rahmen gehört dem Haus, nicht einem Titel: Jede Seite ergänzt ihren
@@ -150,7 +151,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }],
           }) }} />
       </head>
-      <body>{children}<Zaehler /><Zustimmung /></body>
+      <body><Seitenwechsel />
+        {children}<Zaehler /><Zustimmung /></body>
     </html>
   );
 }
