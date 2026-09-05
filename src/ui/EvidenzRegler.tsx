@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { EVIDENZ, type Evidenz } from '@/data/gemeinsam/typen';
+import { laessZerfallen } from '@/engine/zerfall';
 
 /**
  * Die These des Buches als Bedienelement.
@@ -45,6 +46,10 @@ export function EvidenzRegler() {
     knoten.forEach((k) => {
       const eigene = EVIDENZ.indexOf((k.dataset.evidenz ?? 'A') as Evidenz);
       const zurueck = eigene > s;
+      // Nur beim Übergang, nicht bei jedem Anwenden: Der Regler wird auch
+      // aufgerufen, wenn nur ein anderer Abschnitt ins Bild kommt. Wer dann
+      // alles noch einmal zerfallen ließe, bekäme ein Feuerwerk ohne Anlass.
+      if (zurueck && !k.classList.contains('verblasst')) laessZerfallen(k);
       k.classList.toggle('verblasst', zurueck);
       k.setAttribute('aria-hidden', zurueck ? 'true' : 'false');
       if (ziel && ziel.contains(k)) { n += 1; if (!zurueck) steht += 1; }

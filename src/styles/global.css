@@ -21,6 +21,11 @@
 @keyframes abgang{to{opacity:0;transform:translateY(10px) scale(.994)}}
 @keyframes auftritt{from{opacity:0;transform:translateY(14px)}}
 
+/* Die Fläche, auf der Angaben zerfallen. Sie liegt über allem und fängt
+   nichts ab; ohne lebende Körner ist sie leer und kostet nichts. */
+.zerfall{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
+  z-index:40;contain:strict}
+
 /* --------------------------------------------------- Schrift, die ankommt
  *
  * Zweihundert Leseseiten hatten bisher keine einzige Bewegung: Sie sind
