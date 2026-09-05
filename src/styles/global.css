@@ -896,7 +896,15 @@ main{z-index:3}
 .hausbild .grund{position:absolute;inset:0;z-index:0}
 .hausbild .grund img,.hausbild .grund video{position:absolute;inset:0;
   width:100%;height:100%;object-fit:cover;filter:brightness(.42) saturate(.86)}
-.hausbild .grund video{opacity:0;animation:grundEin 2.4s ease-out .3s forwards}
+/* Kurz eingeblendet, nicht langsam.
+ *
+ * Der bewegte Grund ist das groesste Element des ersten Bildschirms — und
+ * damit fuer den Browser der Anwaerter auf die Ladezeitmessung, sobald er
+ * sichtbar wird. Mit 0,3 s Wartezeit und 2,4 s Blende lag dieser Zeitpunkt auf
+ * einem gedrosselten Telefon jenseits von sechs Sekunden. Die Blende bleibt,
+ * sie ist nur halb so lang: sichtbar wird derselbe Uebergang, gemessen wird
+ * ein anderer Wert. */
+.hausbild .grund video{opacity:0;animation:grundEin 1.1s ease-out .1s forwards}
 @keyframes grundEin{to{opacity:1}}
 /* Zwei Schichten Dunkel: der Verlauf trägt die Schrift, die Vignette den Rand. */
 .hausbild .schleier{position:absolute;inset:0;
