@@ -38,26 +38,37 @@ export function Hintergrundvideo(
       ruhig.matches ? null : (schmal.matches && videoKlein ? videoKlein : video));
 
     /*
-     * Sofort, nicht später — die Annahme dahinter war falsch.
+     * Erst das Bild, dann der Film — nachgemessen, nicht angenommen.
      *
-     * Bis zum 05.09.2026 wartete der Film hier auf eine Ruhepause des
-     * Browsers (bis zu 2,5 s), mit der Begründung: Das Standbild sei das
-     * größte Element des ersten Bildschirms, und ein gleichzeitig ladendes
-     * Video verschlechtere die Messung.
+     * Am 05.09.2026 habe ich diese Wartezeit entfernt, mit der Vermutung, das
+     * Video sei ohnehin das Element, an dem die Ladezeit gemessen wird, und
+     * das Warten verschiebe sie nur nach hinten. Die Messung sagt etwas
+     * anderes: Gemessen wird der Fließtext im Empfang, nicht der Grund. Ohne
+     * Wartezeit zieht der Film 157 KB durch dieselbe schmale Leitung, durch
+     * die Stylesheet und Schriften kommen müssen, bevor überhaupt etwas
+     * erscheint — der Wert stieg von 3128 auf 3496 ms.
      *
-     * Gemessen stimmt das Gegenteil. Der Browser wählt als größtes Element
-     * das Video, sobald es sichtbar wird — nicht das Bild darunter. Die
-     * Wartezeit verschob damit genau den Zeitpunkt nach hinten, den sie
-     * schützen sollte: 3128 ms auf einer gedrosselten Verbindung, davon
-     * gut zwei Sekunden reines Warten.
-     *
-     * Das Bild ist 41 KB und wird mit hoher Priorität vorgeladen, der Film
-     * 157 KB. Sie behindern einander nicht ernsthaft — und wer wenig Daten
-     * hat, bekommt oben ohnehin kein Video.
+     * Also bleibt es dabei: Der Film wartet, bis der Browser Luft hat. Wer
+     * eine Annahme gegen eine Messung tauschen will, misst vorher.
      */
-    waehlen();
+    let abgesagt = false;
+    const start = () => { if (!abgesagt) waehlen(); };
+    const zeitplan = (window as unknown as {
+      requestIdleCallback?: (f: () => void, o?: { timeout: number }) => number;
+    }).requestIdleCallback;
+    const kennung = zeitplan
+      ? zeitplan(start, { timeout: 2500 })
+      : window.setTimeout(start, 1200);
+
     ruhig.addEventListener('change', waehlen);
-    return () => { ruhig.removeEventListener('change', waehlen); };
+    return () => {
+      abgesagt = true;
+      const abbrechen = (window as unknown as {
+        cancelIdleCallback?: (id: number) => void;
+      }).cancelIdleCallback;
+      if (zeitplan && abbrechen) abbrechen(kennung); else window.clearTimeout(kennung);
+      ruhig.removeEventListener('change', waehlen);
+    };
   }, [video, videoKlein]);
 
   /**
