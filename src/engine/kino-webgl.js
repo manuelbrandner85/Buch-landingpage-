@@ -734,6 +734,30 @@ const VORAUS = 3, ZURUECK = 1;
         schlafen(e.quelle);
         if (e.quelle) { e.quelle.el.removeAttribute('src'); e.quelle.el.load(); }
       });
+      /*
+       * Und alles andere hinterher.
+       *
+       * Bis zum 05.09.2026 gab diese Fläche nur die Videotexturen frei. Die
+       * Standbilder blieben liegen: je Szene ein Motiv und eine Tiefenkarte,
+       * als RGBA rund acht Megabyte für ein 1920er Bild. Beim Wechsel von
+       * einer Welt in die nächste legte der Browser die neue Fläche daneben,
+       * und die alte gab ihren Grafikspeicher erst frei, wenn er das Blatt
+       * irgendwann einsammelte — auf einem älteren Telefon nach zwei, drei
+       * Wechseln der Punkt, an dem die Fläche schwarz wird.
+       *
+       * Der Kontextverlust am Schluss ist die einzige Anweisung, die dem
+       * Treiber wirklich sagt: fertig, alles zurück.
+       */
+      geladen.forEach((e) => {
+        if (e.bild && e.bild !== platzhalter) gl.deleteTexture(e.bild);
+        if (e.tiefe && e.tiefe !== platzhalter) gl.deleteTexture(e.tiefe);
+        e.bild = null; e.tiefe = null;
+      });
+      if (platzhalter) gl.deleteTexture(platzhalter);
+      if (puffer) gl.deleteBuffer(puffer);
+      if (prog) gl.deleteProgram(prog);
+      const verlust = gl.getExtension('WEBGL_lose_context');
+      if (verlust) { try { verlust.loseContext(); } catch { /* egal */ } }
     },
   };
 }

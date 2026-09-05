@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Szene } from '@/data/gemeinsam/typen';
 import { assetNach, stimmungFuer } from '@/world/registry';
-import { bildQuelle, ordner } from '@/world/bilder';
+import { bewegt, bildQuelle, ordner } from '@/world/bilder';
 import { starteKino, type KinoSteuerung } from './kino-webgl';
 import { zeilenAufdecken } from './zeilen';
 
@@ -54,8 +54,12 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           tiefe: asset ? ordner(`${asset.datei}-tiefe.webp`, asset.bandId ?? 'band-1') : undefined,
           // Bewegtfassung, sobald sie vorliegt. Fehlt sie, bleibt das Standbild –
           // die Engine prüft das selbst und fällt still zurück.
-          video: s.motion && asset ? ordner(`${asset.datei}-motion.mp4`, asset.bandId ?? 'band-1') : undefined,
-          videoKlein: s.motion && asset ? ordner(`${asset.datei}-motion-klein.mp4`, asset.bandId ?? 'band-1') : undefined,
+          // Mit Fassung, nicht ohne: Die Szenenvideos liefen bis zum
+          // 05.09.2026 als nackte Adresse durch `ordner`. Der Webspace setzt
+          // auf mp4 ein Jahr `immutable` — neu gerechnete Dateien waeren bei
+          // jedem Wiederkehrer unsichtbar geblieben.
+          video: s.motion && asset ? bewegt(`${asset.datei}-motion.mp4`, asset.bandId ?? 'band-1') : undefined,
+          videoKlein: s.motion && asset ? bewegt(`${asset.datei}-motion-klein.mp4`, asset.bandId ?? 'band-1') : undefined,
           grading: hexZuRgb(s.grading ?? '#1a2540'),
           uebergang: s.uebergang ?? 'aufloesen',
           fahrt: s.fahrt ?? 'hinein',

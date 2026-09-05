@@ -6,7 +6,7 @@ import { FEED, LESEORDNUNG } from '@/data/zufall/feed';
 import { QR_VEROEFFENTLICHT, qrSchluessel, qrZielNach } from '@/data/gemeinsam/qr';
 import { VERTEILER } from '@/data/gemeinsam/verteiler';
 import { melden } from '@/data/gemeinsam/messung';
-import { BASIS_PFAD } from '@/world/bilder';
+import { BASIS_PFAD, bewegt } from '@/world/bilder';
 import { weg, wegBuch, wegImpressum, wegWelt } from '@/world/wege';
 import { Hausmarke } from '@/ui/Hausmarke';
 import { Startbildschirm } from './Startbildschirm';
@@ -743,7 +743,7 @@ function Beitrag({ kapitel, nah, spielt, schmal }: {
            und bringen nichts, weil sie niemand sieht. */
         <video ref={video} className="fw-clip" muted loop playsInline
           autoPlay={spielt} preload={spielt ? 'auto' : 'metadata'}
-          src={`${BASIS_PFAD}/assets/zufall/szenen/kap${nr}-motion${schmal ? '-klein' : ''}.mp4`}
+          src={bewegt(`kap${nr}-motion${schmal ? '-klein' : ''}.mp4`, 'zufall')}
           poster={`${BASIS_PFAD}/assets/zufall/szenen/kap${nr}-1000.webp`} />
       ) : (
         <img className="fw-clip" loading="lazy" alt=""

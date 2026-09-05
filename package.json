@@ -27,7 +27,8 @@
     "pruefe:wege": "node scripts/pruefe-wege.mjs",
     "pruefe:suche": "node scripts/pruefe-suche.mjs",
     "vorschaubilder": "node scripts/vorschaubilder.mjs",
-    "karte": "node scripts/karte.mjs"
+    "karte": "node scripts/karte.mjs",
+    "pruefe:tempo": "node scripts/pruefe-tempo.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.5",

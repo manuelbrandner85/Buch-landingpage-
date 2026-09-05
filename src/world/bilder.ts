@@ -23,7 +23,7 @@ export const ordner = (datei: string, band: BandId = 'band-1'): string =>
  *
  * Wer eine Bewegtfassung neu rechnet, zählt diese Zahl hoch. Sonst nichts.
  */
-const BEWEGTFASSUNG = '2';
+const BEWEGTFASSUNG = '3';
 export const bewegt = (datei: string, band: BandId = 'band-1'): string =>
   `${ordner(datei, band)}?f=${BEWEGTFASSUNG}`;
 
