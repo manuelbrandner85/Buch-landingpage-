@@ -10,6 +10,8 @@ import {
 import { WELT, assetNach, bandNummer, kapitelNach, szeneZuKapitel } from '@/world/registry';
 import { bildQuelle } from '@/world/bilder';
 import { useWeltFortschritt } from '@/world/FortschrittKontext';
+import { seil, type Seil } from '@/engine/seil';
+import { zupfen } from '@/audio/zupf';
 
 /**
  * Die Welt dieses Bandes – als Flug, nicht als Diagramm.
@@ -92,6 +94,12 @@ export function Weltkarte({ szene }: { szene: Szene }) {
   const fortschritt = useWeltFortschritt();
   const abschnitt = useRef<HTMLElement>(null);
   const fadenRef = useRef<SVGPathElement>(null);
+  const spurRef = useRef<SVGPathElement>(null);
+  const scheinRef = useRef<SVGPathElement>(null);
+  const griffRef = useRef<SVGPathElement>(null);
+  const seilRef = useRef<Seil | null>(null);
+  const letzteKamera = useRef<{ x: number; y: number } | null>(null);
+  const weckerRef = useRef<(() => void) | null>(null);
 
   const [p, setP] = useState(0);
   const [ruhig, setRuhig] = useState(false);
@@ -132,6 +140,73 @@ export function Weltkarte({ szene }: { szene: Szene }) {
   useEffect(() => {
     if (fadenRef.current) setLaenge(fadenRef.current.getTotalLength());
   }, [spur]);
+
+  /**
+   * Aus dem gezeichneten Bogen wird eine Kette.
+   *
+   * Die Ruhelage sind rund hundertvierzig Punkte, abgetastet auf genau dem
+   * Weg, den `faden()` legt - der Faden sieht im Stillstand also aus wie
+   * vorher. Erst die Bewegung ist neu. Die Orte werden zu Ankern: Der Faden
+   * haengt zwischen ihnen durch, aber er loest sich nie von ihnen, sonst
+   * laege er neben der Stelle, die er belegt.
+   */
+  useEffect(() => {
+    const bahn = fadenRef.current;
+    if (!bahn || ruhig || halte.length < 2) { seilRef.current = null; return; }
+    const gesamt = bahn.getTotalLength();
+    if (!gesamt) { seilRef.current = null; return; }
+    const n = Math.min(180, Math.max(60, Math.round(gesamt / 26)));
+    const punkte: { x: number; y: number }[] = [];
+    for (let i = 0; i < n; i += 1) {
+      const q = bahn.getPointAtLength((gesamt * i) / (n - 1));
+      punkte.push({ x: q.x, y: q.y });
+    }
+    // Zu jedem Ort der naechstgelegene Kettenpunkt - das ist sein Anker.
+    const anker = halte.map((h) => {
+      let beste = 0; let mass = Infinity;
+      for (let i = 0; i < n; i += 1) {
+        const d = (punkte[i]!.x - h.x) ** 2 + (punkte[i]!.y - h.y) ** 2;
+        if (d < mass) { mass = d; beste = i; }
+      }
+      return beste;
+    });
+    seilRef.current = seil(punkte, anker);
+    return () => { seilRef.current = null; };
+  }, [spur, ruhig, halte]);
+
+  /**
+   * Die Bildschleife laeuft nur, solange sich etwas ruehrt.
+   *
+   * Ein Faden, der ausgeschwungen ist, kostet nichts: `ruht` meldet das, und
+   * die Schleife haelt an, bis ihn wieder jemand anstoesst. Deshalb steht hier
+   * kein Dauerlauf, obwohl es einer sein koennte.
+   */
+  useEffect(() => {
+    if (ruhig) {
+      for (const r of [spurRef, scheinRef, fadenRef, griffRef]) {
+        if (r.current) r.current.setAttribute('d', spur);
+      }
+      return undefined;
+    }
+    let laeuft = true;
+    let bild = 0;
+    const zeichnen = () => {
+      if (!laeuft) return;
+      const sl = seilRef.current;
+      if (sl && sl.schritt()) {
+        const d = sl.pfad();
+        for (const r of [spurRef, scheinRef, fadenRef, griffRef]) {
+          if (r.current) r.current.setAttribute('d', d);
+        }
+      }
+      if (sl && sl.ruht) { bild = 0; return; }
+      bild = requestAnimationFrame(zeichnen);
+    };
+    const wecken = () => { if (!bild) bild = requestAnimationFrame(zeichnen); };
+    weckerRef.current = wecken;
+    wecken();
+    return () => { laeuft = false; if (bild) cancelAnimationFrame(bild); weckerRef.current = null; };
+  }, [ruhig, spur]);
 
   const messen = useCallback(() => {
     const el = abschnitt.current;
@@ -210,6 +285,37 @@ export function Weltkarte({ szene }: { szene: Szene }) {
       i: t < 0.5 ? i : i + 1,
     };
   }, [p, ruhig, halte, anzahl]);
+
+  /**
+   * Die Kamerafahrt zieht am Faden.
+   *
+   * Physikalisch haengt der Faden im Raum und die Kamera bewegt sich - fuer
+   * das Auge ist es umgekehrt: Der Ausschnitt springt, und ein Faden, der
+   * dabei bretthart stehen bleibt, verraet sich als Zeichnung. Der Stoss ist
+   * bewusst klein; er soll nachwippen, nicht flattern.
+   */
+  useEffect(() => {
+    const v = letzteKamera.current;
+    letzteKamera.current = { x: kamera.x, y: kamera.y };
+    const sl = seilRef.current;
+    if (!v || !sl) return;
+    const dx = kamera.x - v.x;
+    const dy = kamera.y - v.y;
+    if (Math.abs(dx) + Math.abs(dy) < 0.4) return;
+    sl.stossen(Math.max(-9, Math.min(9, dx * 0.05)), Math.max(-9, Math.min(9, dy * 0.05)));
+    weckerRef.current?.();
+  }, [kamera.x, kamera.y]);
+
+  /** Bildschirmpunkt in Karteneinheiten - ueber die Matrix des SVG selbst. */
+  const kartenPunkt = useCallback((ev: React.PointerEvent<SVGPathElement>) => {
+    const svg = ev.currentTarget.ownerSVGElement;
+    const m = svg?.getScreenCTM();
+    if (!svg || !m) return null;
+    const q = svg.createSVGPoint();
+    q.x = ev.clientX; q.y = ev.clientY;
+    const k = q.matrixTransform(m.inverse());
+    return { x: k.x, y: k.y };
+  }, []);
 
   const hoehe = (kamera.w * 9) / 16;
   const sichtfeld = `${(kamera.x - kamera.w).toFixed(1)} ${(kamera.y - hoehe).toFixed(1)} `
@@ -315,13 +421,56 @@ export function Weltkarte({ szene }: { szene: Szene }) {
 
             {/* Der Faden */}
             <div className="karte-ebene" style={ebene(70)}>
-              <svg {...svgProps}>
-                <path d={spur} className="karte-faden-spur" strokeWidth={1.4 * e} />
-                <path d={spur} className="karte-faden-schein" strokeWidth={9 * e}
+              <svg {...svgProps} aria-hidden={undefined}>
+                <path ref={spurRef} d={spur} className="karte-faden-spur" strokeWidth={1.4 * e} />
+                <path ref={scheinRef} d={spur} className="karte-faden-schein" strokeWidth={9 * e}
                   strokeDasharray={laenge} strokeDashoffset={gezeichnet} />
                 <path ref={fadenRef} d={spur} className="karte-faden"
                   strokeWidth={2.2 * e}
                   strokeDasharray={laenge} strokeDashoffset={gezeichnet} />
+                {/*
+                  Der Griff: dieselbe Linie, dick und unsichtbar. Ein Faden von
+                  zwei Punkten Staerke laesst sich mit der Maus nicht treffen und
+                  mit dem Finger schon gar nicht. Er faengt nur Zeiger ab, die
+                  ihn wirklich meinen - deshalb `pointerEvents: stroke` und kein
+                  Rechteck ueber der halben Karte.
+                */}
+                <path ref={griffRef} d={spur} className="karte-faden-griff"
+                  strokeWidth={22 * e} fill="none" stroke="transparent"
+                  style={{ pointerEvents: 'stroke', cursor: 'grab', touchAction: 'pan-y' }}
+                  onPointerDown={(ev) => {
+                    const sl = seilRef.current;
+                    const k = kartenPunkt(ev);
+                    if (!sl || !k) return;
+                    // Auf dem Finger wird nicht gezogen: Ziehen ist dort Scrollen.
+                    // Eine Beruehrung zupft einmal an, mehr nicht.
+                    if (ev.pointerType === 'touch') {
+                      const r = sl.anzupfen(k.x, k.y, 30 * e, 7 * e);
+                      if (r) { zupfen(r.anteil, r.weite / e); weckerRef.current?.(); }
+                      return;
+                    }
+                    if (!sl.greifen(k.x, k.y, 30 * e)) return;
+                    ev.currentTarget.setPointerCapture(ev.pointerId);
+                    ev.currentTarget.style.cursor = 'grabbing';
+                    weckerRef.current?.();
+                  }}
+                  onPointerMove={(ev) => {
+                    const k = kartenPunkt(ev);
+                    if (!k) return;
+                    const r = seilRef.current?.ziehen(k.x, k.y, 150 * e);
+                    if (r) {
+                      ev.currentTarget.style.cursor = 'grab';
+                      zupfen(r.anteil, r.weite / e);
+                      weckerRef.current?.();
+                    }
+                  }}
+                  onPointerUp={(ev) => {
+                    const r = seilRef.current?.loslassen();
+                    ev.currentTarget.style.cursor = 'grab';
+                    if (r) { zupfen(r.anteil, r.weite / e); weckerRef.current?.(); }
+                  }}
+                  onPointerCancel={() => { seilRef.current?.loslassen(); }}
+                />
               </svg>
             </div>
 
