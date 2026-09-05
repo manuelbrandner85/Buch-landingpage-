@@ -91,7 +91,21 @@ async function live(basis) {
       offline: false, latency: 150,
       downloadThroughput: (1.6 * 1024 * 1024) / 8, uploadThroughput: (750 * 1024) / 8,
     });
-    await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+    /*
+     * Die Drosselung ist einstellbar, weil sie zwei Zwecke hat.
+     *
+     * `TEMPO_CPU=4` bildet ein Mittelklassetelefon nach — die ehrliche Zahl,
+     * aber nur auf einem ruhigen Rechner brauchbar: Wer nebenher zwei Browser
+     * offen hat, misst dessen Auslastung mit und bekommt fuer dieselbe
+     * unveraenderte Seite einmal 500 und einmal 2200 ms.
+     *
+     * `TEMPO_CPU=1` drosselt nur das Netz. Diese Zahl ist optimistischer, aber
+     * zwischen zwei Laeufen vergleichbar — und genau darum geht es, wenn man
+     * wissen will, ob eine Aenderung etwas gebracht hat.
+     */
+    await cdp.send('Emulation.setCPUThrottlingRate', {
+      rate: Number(process.env.TEMPO_CPU ?? 4),
+    });
     // Der Beobachter muss stehen, bevor die Seite laedt: Nachtraeglich gibt
     // `getEntriesByType` fuer diese Messung nichts zurueck.
     await page.evaluateOnNewDocument(() => {
@@ -131,9 +145,13 @@ async function live(basis) {
      * Deshalb wird hier beides genommen: der Stand nach 1,8 s (so sieht es der
      * Besucher) und der Stand nach 6 s ohne Geste (so sieht es ein Messwerkzeug).
      */
-    await new Promise((r) => { setTimeout(r, 1800); });
+    // Wann der Besucher das erste Mal etwas tut. Auf einer gedrosselten
+    // Verbindung steht das erste Bild selten vor 1,5 s — wer frueher abliest,
+    // liest gar nichts ab.
+    const geste = Number(process.env.TEMPO_GESTE ?? 3000);
+    await new Promise((r) => { setTimeout(r, geste); });
     const lcpFeld = await page.evaluate(() => window.__lcp || 0);
-    await new Promise((r) => { setTimeout(r, 4200); });
+    await new Promise((r) => { setTimeout(r, Math.max(1500, 6000 - geste)); });
     const m = await page.evaluate(() => new Promise((res) => {
       let lcp = 0, cls = 0;
       lcp = window.__lcp || 0;

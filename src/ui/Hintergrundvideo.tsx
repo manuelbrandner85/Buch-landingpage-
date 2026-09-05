@@ -37,30 +37,27 @@ export function Hintergrundvideo(
     const waehlen = () => setQuelle(
       ruhig.matches ? null : (schmal.matches && videoKlein ? videoKlein : video));
 
-    // Erst das Bild, dann der Film.
-    //
-    // Das Standbild ist das größte Element des ersten Bildschirms – und damit
-    // das, woran Google die Ladezeit misst. Lädt daneben schon das Video, wird
-    // die Messung schlechter, obwohl der Betrachter nichts davon hat: Das
-    // Video wird erst gebraucht, wenn das Bild steht.
-    let abgesagt = false;
-    const start = () => { if (!abgesagt) waehlen(); };
-    const zeitplan = (window as unknown as {
-      requestIdleCallback?: (f: () => void, o?: { timeout: number }) => number;
-    }).requestIdleCallback;
-    const kennung = zeitplan
-      ? zeitplan(start, { timeout: 2500 })
-      : window.setTimeout(start, 1200);
-
+    /*
+     * Sofort, nicht später — die Annahme dahinter war falsch.
+     *
+     * Bis zum 05.09.2026 wartete der Film hier auf eine Ruhepause des
+     * Browsers (bis zu 2,5 s), mit der Begründung: Das Standbild sei das
+     * größte Element des ersten Bildschirms, und ein gleichzeitig ladendes
+     * Video verschlechtere die Messung.
+     *
+     * Gemessen stimmt das Gegenteil. Der Browser wählt als größtes Element
+     * das Video, sobald es sichtbar wird — nicht das Bild darunter. Die
+     * Wartezeit verschob damit genau den Zeitpunkt nach hinten, den sie
+     * schützen sollte: 3128 ms auf einer gedrosselten Verbindung, davon
+     * gut zwei Sekunden reines Warten.
+     *
+     * Das Bild ist 41 KB und wird mit hoher Priorität vorgeladen, der Film
+     * 157 KB. Sie behindern einander nicht ernsthaft — und wer wenig Daten
+     * hat, bekommt oben ohnehin kein Video.
+     */
+    waehlen();
     ruhig.addEventListener('change', waehlen);
-    return () => {
-      abgesagt = true;
-      const abbrechen = (window as unknown as {
-        cancelIdleCallback?: (id: number) => void;
-      }).cancelIdleCallback;
-      if (zeitplan && abbrechen) abbrechen(kennung); else window.clearTimeout(kennung);
-      ruhig.removeEventListener('change', waehlen);
-    };
+    return () => { ruhig.removeEventListener('change', waehlen); };
   }, [video, videoKlein]);
 
   /**
