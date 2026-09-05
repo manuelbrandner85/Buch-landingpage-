@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T02:02:22Z",
+  "stand": "2026-09-05T03:02:35Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1755,9 +1755,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 8644,
-    "offenSumme": 6553.5,
+    "summe": 8716,
+    "offenSumme": 6625.5,
     "buchungen": [
+      {
+        "datum": "2026-09-05",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (02:06 UTC) - 895,0 auf 823,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 04.09. 16:43 UTC); die Kommentarrunde 03:05 Ortszeit meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 72
+      },
       {
         "datum": "2026-09-05",
         "projekt": "nicht zugeordnet",
@@ -1823,12 +1829,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (01:06 UTC) - 827,5 auf 430,5 Credits; kein Lauf in LOG.md seit 31.08. 22:46 UTC",
         "credits": 397
-      },
-      {
-        "datum": "2026-08-31",
-        "projekt": "Trendonix-Hausfilm",
-        "zweck": "14 Einstellungen 1080p ueber bytedance/v1-pro-image-to-video plus Bilder ueber seedream/4.5-text-to-image, dazu fehlgeschlagene Sprachauftraege bei elevenlabs. Der 1080p-Motor kostet rund 88 Credits je Einstellung statt der 22,5 des lite-Motors bei 720p — das war die Fehleinschaetzung. Guthaben danach 4,5: Fuer die Sprecherstimme und den taeglichen Betrieb muss aufgeladen werden.",
-        "credits": 1671
       }
     ]
   },
@@ -2128,13 +2128,13 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T02:02:00Z",
+    "stand": "2026-09-05T03:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": true,
-    "deployWann": null,
+    "deployLaeuft": false,
+    "deployWann": "2026-09-05T02:55:04Z",
     "zertifikatTage": 79,
-    "linksGeprueft": 54,
+    "linksGeprueft": 51,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 198,
