@@ -1,3 +1,15 @@
+/* Die Schriftregeln stehen im Kopf des Dokuments, nicht hier — siehe
+ * src/app/layout.tsx. Grund: Die Adressen der vier Dateien brauchen den
+ * Basispfad, den der Spiegel unter github.io voranstellt, und ein Stylesheet
+ * kennt ihn nicht. Hier stehen nur die Namen, unter denen sie angesprochen
+ * werden. */
+:root{
+  --display:"Cormorant Garamond","Cormorant Garamond Fallback";
+  --display-kursiv:"Cormorant Garamond","Cormorant Garamond Fallback";
+  --body:"EB Garamond","EB Garamond Fallback";
+  --body-kursiv:"EB Garamond","EB Garamond Fallback";
+}
+
 /* =========================================================================
    Die visuelle Welt kommt aus dem Buch:
    außen die Nacht des Covers, innen das Papier der Seiten.
@@ -30,10 +42,14 @@ a{color:inherit}
 
 .eyebrow{font-family:var(--display),serif;font-size:.7rem;letter-spacing:.3em;
   text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
-.unterzeile{font-family:var(--display),serif;font-style:italic;color:var(--gold);
+/* Kursives im Fliesstext nennt seine Familie selbst — sonst stellt der
+   Browser die aufrechte schräg, und das sieht man einer Antiqua an. */
+i,em,cite{font-family:var(--body-kursiv),serif;font-style:italic}
+.unterzeile{font-family:var(--display-kursiv),serif;font-style:italic;color:var(--gold);
   font-size:clamp(1rem,1.7vw,1.3rem);margin-top:.6rem}
 .fliess{margin-top:1.5rem;max-width:38rem}
-.quelle{margin-top:1.4rem;font-size:.74rem;color:var(--staub);font-style:italic}
+.quelle{margin-top:1.4rem;font-size:.74rem;color:var(--staub);
+  font-family:var(--body-kursiv),serif;font-style:italic}
 .quelle b{font-style:normal;font-family:var(--display),serif;letter-spacing:.16em;
   text-transform:uppercase;font-size:.62rem;color:var(--gold);margin-right:.55rem}
 /* Kein Abdunkeln über Deckkraft: das unterschreitet den Mindestkontrast. */
@@ -162,11 +178,11 @@ main{position:relative;z-index:2}
 .papier .unterzeile{color:#c7ae74}
 .papier h2{color:var(--gold);max-width:20ch;margin-inline:auto;
   text-shadow:0 1px 0 rgba(0,0,0,.6)}
-.papier blockquote{font-family:var(--display),serif;font-style:italic;
+.papier blockquote{font-family:var(--display-kursiv),serif;font-style:italic;
   font-size:clamp(1.15rem,2.5vw,1.7rem);line-height:1.5;margin:1.6rem auto 0;
   max-width:34ch;color:#efe7d4}
 /* Die Spiegelung: dasselbe Zitat, gekippt und verlaufend ausgeblendet */
-.spiegel{margin:0 auto;max-width:34ch;font-family:var(--display),serif;
+.spiegel{margin:0 auto;max-width:34ch;font-family:var(--display-kursiv),serif;
   font-style:italic;font-size:clamp(1.15rem,2.5vw,1.7rem);line-height:1.5;
   color:#efe7d4;transform:scaleY(-1);opacity:.10;pointer-events:none;
   user-select:none;filter:blur(1.4px);
@@ -324,7 +340,7 @@ main{position:relative;z-index:2}
 .tor-eingang .kopf{margin-bottom:3.6rem}
 .tor-eingang .klappe{display:none}
 .tor-eingang .hinweis-zeile.weiter{border-top:0;margin-top:2.6rem;
-  font-family:var(--display),serif;font-style:italic;color:var(--staub)}
+  font-family:var(--display-kursiv),serif;font-style:italic;color:var(--staub)}
 
 .buecher{background:
     radial-gradient(90% 60% at 50% 0%,#101c33 0%,#070c18 55%,var(--nacht) 100%);
@@ -674,7 +690,8 @@ nav button[aria-pressed="true"]{color:var(--gold);opacity:1}
 .ring.offen{opacity:1;border-color:var(--weinrot);background:rgba(124,22,34,.05)}
 .ring-stufe{font-family:var(--display),serif;font-size:1.15rem;color:var(--weinrot)}
 .ring-kontrolle{font-size:.82rem;color:#6a6152}
-.ringe-stand{font-size:.85rem;color:#6a6152;font-style:italic}
+.ringe-stand{font-size:.85rem;color:#6a6152;
+  font-family:var(--body-kursiv),serif;font-style:italic}
 /* Die Ringe stehen im Papierregister – Verblassen dort dunkler als in der Nacht. */
 .papier [data-evidenz].verblasst{opacity:.25;filter:grayscale(1)}
 
@@ -755,9 +772,10 @@ nav button[aria-pressed="true"]{color:var(--gold);opacity:1}
 .bahn .marke.bote::before{background:var(--weinrot);order:2;margin-top:.4rem}
 .bahn .marke.laeufer{top:3rem;color:#6a6152}
 .bahn .marke.laeufer::before{background:#8d8677;margin-bottom:.4rem}
-.strecke-stand{margin-top:.8rem;font-size:.85rem;color:#6a6152;font-style:italic;
+.strecke-stand{margin-top:.8rem;font-size:.85rem;color:#6a6152;
+  font-family:var(--body-kursiv),serif;font-style:italic;
   min-height:3rem}
-.kernsatz{font-family:var(--display),serif;font-style:italic;color:var(--weinrot);
+.kernsatz{font-family:var(--display-kursiv),serif;font-style:italic;color:var(--weinrot);
   font-size:clamp(1.05rem,2vw,1.35rem);margin-top:1.4rem}
 
 /* ---------- Die Prüfung ---------- */
@@ -990,7 +1008,8 @@ main{z-index:3}
 .neutext{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;min-width:0}
 .neutext b{font-family:var(--display),serif;font-weight:400;
   font-size:clamp(.98rem,1.9vw,1.16rem);color:var(--papier)}
-.neutext i{font-style:italic;color:var(--staub);font-size:.82rem}
+.neutext i{font-family:var(--body-kursiv),serif;font-style:italic;
+  color:var(--staub);font-size:.82rem}
 .neupreis{flex:0 0 auto;margin-left:auto;font-size:.74rem;letter-spacing:.1em;
   color:var(--gold)}
 .neupfeil{flex:0 0 auto;color:var(--gold-tief);transition:transform .3s}
@@ -1361,7 +1380,7 @@ a,button,.tor,.weltentor,.kaufen,.eintauchen{
 @media (max-width:640px){.leseprobe .knopf{width:100%;text-align:center}}
 
 /* Was im Impressum noch fehlt, wird gezeigt – nicht erfunden. */
-.fehlt{color:#c9a961;font-style:italic}
+.fehlt{color:#c9a961;font-family:var(--body-kursiv),serif;font-style:italic}
 .quelle.warnung{border-left:2px solid var(--gold-tief);padding-left:.9rem}
 
 /* Der leiseste der drei Wege am Tor – aber der, der nichts kostet. */
@@ -1783,7 +1802,7 @@ header .marke .reihenname{color:#F0DDA9;
 .ortzahlen b{font-family:var(--display),serif;font-weight:400;font-size:1.15rem;
   color:var(--gold);margin-right:.5rem}
 .lesefassung blockquote{margin:1.2rem 0;padding-left:1.2rem;
-  border-left:1px solid rgba(227,200,139,.38);font-family:var(--display),serif;
+  border-left:1px solid rgba(227,200,139,.38);font-family:var(--display-kursiv),serif;
   font-style:italic;font-size:1.1rem;color:var(--papier)}
 
 /* ---------- Der Kaufweg, der mitkommt ----------
@@ -1868,7 +1887,7 @@ body.mit-kaufleiste{padding-bottom:4.6rem}
   padding:1.3rem 1.4rem;background:rgba(227,200,139,.035);
   display:flex;flex-direction:column;gap:.7rem}
 .stimme blockquote{margin:0;padding:0;border:0;
-  font-family:var(--display),serif;font-style:italic;
+  font-family:var(--display-kursiv),serif;font-style:italic;
   font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.5;color:var(--papier)}
 .stimme blockquote::before{content:'\201C';color:var(--gold);margin-right:.1em}
 .stimme blockquote::after{content:'\201D';color:var(--gold);margin-left:.05em}
@@ -2126,7 +2145,7 @@ html:has(.feedwelt) body::-webkit-scrollbar{width:0;height:0;display:none}
 .feedliste-text h2 a{color:var(--papier);text-decoration:none}
 .feedliste-text h2 a:hover{color:var(--gold)}
 .feedliste-unterzeile{margin:0 0 .5em;font-size:.86rem;line-height:1.45;
-  color:var(--staub);font-style:italic}
+  color:var(--staub);font-family:var(--body-kursiv),serif;font-style:italic}
 .feedliste-konto{margin:0 0 .3em;font-weight:700;font-size:.84rem;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color:rgba(241,236,224,.9)}
@@ -2268,7 +2287,8 @@ html:has(.feedwelt){scroll-snap-type:y proximity}
 .feedwelt .fw-schlussinhalt p{color:var(--staub);font-size:clamp(.9rem,2.6vw,.98rem);
   line-height:1.62;margin:0 0 .95rem;max-width:44ch;margin-inline:auto}
 .feedwelt .fw-fuehrt{color:var(--papier)}
-.feedwelt .fw-zwei{color:var(--staub);font-style:italic}
+.feedwelt .fw-zwei{color:var(--staub);font-family:var(--body-kursiv),serif;
+  font-style:italic}
 .feedwelt .fw-fein{font-family:var(--display),serif;font-size:.78rem;letter-spacing:.12em;
   color:var(--gold-tief);margin-top:1.3rem}
 .feedwelt .fw-wege{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;

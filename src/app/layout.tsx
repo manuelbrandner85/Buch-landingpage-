@@ -1,22 +1,9 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, EB_Garamond } from 'next/font/google';
 import '@/styles/global.css';
 import { TRENDONIX } from '@/data/gemeinsam/haus';
 import { weg, wegVorschau } from '@/world/wege';
 import { Zaehler } from '@/ui/Zaehler';
 import { Zustimmung } from '@/ui/Zustimmung';
-
-// Nur die Schnitte, die tatsächlich vorkommen. Jeder zusätzliche Schnitt ist
-// eine eigene Datei: Vorher wurden vier Schriftdateien geladen, obwohl die
-// Halbfetten nirgends gesetzt sind.
-const display = Cormorant_Garamond({
-  subsets: ['latin'], weight: ['300', '400'],
-  style: ['normal', 'italic'], variable: '--display', display: 'swap',
-});
-const body = EB_Garamond({
-  subsets: ['latin'], weight: ['400'],
-  style: ['normal', 'italic'], variable: '--body', display: 'swap',
-});
 
 /**
  * Der Rahmen gehört dem Haus, nicht einem Titel: Jede Seite ergänzt ihren
@@ -85,8 +72,48 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${display.variable} ${body.variable}`}>
+    <html lang="de">
       <head>
+        {/*
+          Die beiden aufrechten Schnitte, sonst nichts.
+
+          Sie tragen den ersten Bildschirm: Ueberschrift, Unterzeile,
+          Fliesstext. Die kursiven kommen dort nirgends vor und laden nach,
+          wenn sie gebraucht werden — das spart rund 62 KB auf dem Weg zum
+          ersten Zeichen. Warum das nicht ueber `next/font` geht, steht in
+          global.css.
+        */}
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous"
+          href={weg('/schriften/cormorant-garamond.woff2')} />
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous"
+          href={weg('/schriften/eb-garamond.woff2')} />
+        {/*
+          Die Schriftregeln selbst, nicht im Stylesheet.
+
+          Ein Stylesheet kennt den Basispfad nicht, den der Spiegel unter
+          github.io jeder Adresse voranstellt — und eine relative Adresse
+          versucht der Baukasten beim Übersetzen aufzulösen und findet nichts,
+          weil die Dateien in `public/` liegen. Im Kopf lässt sich der Pfad
+          einsetzen. Nebenbei spart es einen Umweg: Die Regeln stehen im
+          ersten Dokument statt in einer Datei, die erst geholt werden muss.
+
+          Die Ersatzmaße stammen aus der Berechnung von `next/font` und bleiben
+          so stehen — sie sind der Grund, warum beim Nachladen nichts springt.
+        */}
+        <style dangerouslySetInnerHTML={{ __html: [
+          ['Cormorant Garamond', 'normal', '300 400', 'cormorant-garamond'],
+          ['Cormorant Garamond', 'italic', '400', 'cormorant-garamond-kursiv'],
+          ['EB Garamond', 'normal', '400', 'eb-garamond'],
+          ['EB Garamond', 'italic', '400', 'eb-garamond-kursiv'],
+        ].map(([familie, lage, schnitt, datei]) => `@font-face{font-family:"${familie}";`
+          + `font-style:${lage};font-weight:${schnitt};font-display:swap;`
+          + `src:url(${weg(`/schriften/${datei}.woff2`)}) format("woff2")}`).join('')
+          + '@font-face{font-family:"Cormorant Garamond Fallback";src:local("Times New Roman");'
+          + 'ascent-override:95.27%;descent-override:29.59%;line-gap-override:0.00%;'
+          + 'size-adjust:96.98%}'
+          + '@font-face{font-family:"EB Garamond Fallback";src:local("Times New Roman");'
+          + 'ascent-override:106.26%;descent-override:31.44%;line-gap-override:0.00%;'
+          + 'size-adjust:94.77%}' }} />
         {/*
           Der Feed des Journals – die einzige Stelle, an der er auffindbar ist.
 
