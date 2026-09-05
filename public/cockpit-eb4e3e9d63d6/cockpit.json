@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-05T08:02:50Z",
+  "stand": "2026-09-05T09:02:49Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -328,8 +328,8 @@
     "gelesen": true,
     "hinweis": null,
     "klicks7": 0,
-    "impressionen7": 87,
-    "position": 50.2,
+    "impressionen7": 97,
+    "position": 47.6,
     "seitenIndexiert": 66,
     "seitenGesamt": 198,
     "suchanfragen": [
@@ -359,8 +359,8 @@
         "impressionen": 1
       }
     ],
-    "von": "2026-08-27",
-    "bis": "2026-09-02",
+    "von": "2026-08-28",
+    "bis": "2026-09-03",
     "tage": 7,
     "quelle": "abgerufen"
   },
@@ -2153,11 +2153,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-05T08:02:00Z",
+    "stand": "2026-09-05T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-05T07:03:56Z",
+    "deployWann": "2026-09-05T08:28:05Z",
     "zertifikatTage": 79,
     "linksGeprueft": 51,
     "linksKaputt": 0,
