@@ -1,6 +1,11 @@
 {
-  "stand": "2026-09-06T16:02:34Z",
-  "warnungen": [],
+  "stand": "2026-09-06T16:35:45Z",
+  "warnungen": [
+    {
+      "stufe": "hoch",
+      "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22). Ordner liegt unter Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT — der Aufgabe „Trendonix Rundlauf“ neu verbinden."
+    }
+  ],
   "aenderungen": {
     "seit": "2026-09-05",
     "punkte": [
@@ -1063,6 +1068,13 @@
           "verschoben": 3,
           "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "wie-datiert-man-einen-fund",
+          "zustand": "terminiert",
+          "hinweis": null
         }
       ]
     },
@@ -1278,6 +1290,13 @@
           "was": null,
           "zustand": "steht",
           "hinweis": "fester Termin"
+        },
+        {
+          "kanal": "Journal",
+          "zeit": null,
+          "was": "was-ist-das-domestikationssyndrom",
+          "zustand": "terminiert",
+          "hinweis": null
         }
       ]
     },
@@ -1812,53 +1831,61 @@
     }
   ],
   "bericht": {
-    "titel": "Woche 24.–30.08.2026 (geschrieben 30.08., 18-Uhr-Lauf)",
+    "titel": "Woche 31.08.–06.09.2026 (geschrieben 06.09., 18-Uhr-Lauf)",
     "zeilen": [
-      "**Verkäufe:** 0 in dieser Woche ab dem 28.08. — der Monat steht seit dem 27.08.",
-      "unverändert bei 13 Bestellungen / 10,81 € (Quelle: KDP-Dashboard, ZAHLEN.md).",
-      "Drei Tage null ist die auffälligste Zahl der Woche. Rang von 334.543 auf",
-      "512.190 gefallen (eigene Buchseite, 30.08.).",
-      "**Rezensionen:** Die zweite ist da — „Würmchen\", 5 Sterne, verifizierter Kauf,",
-      "27.08.: „SUPER BUCH, VIELEN HERZLICHEN DANK! ICH EMPFEHLE ES UNBEDINGT WEITER!\"",
-      "Beide Rezensionen 5,0.",
-      "**Kanäle diese Woche:** Heute (Sonntag) liefen erstmals alle sechs Kanäle an",
-      "einem Tag: Pinterest-Pin, YouTube-Short, Instagram-Reels (2, nach 9 Tagen",
-      "Stillstand), Bluesky (Text + Video über die Schnittstelle), TikTok stumm,",
-      "Facebook-Reel. TikTok, letzte 7 Tage: 1.900 Aufrufe (+600 %), 65 Likes,",
-      "30 Kommentare, 76 Profilaufrufe. Instagram-Stillstand seit 21.08. aufgeklärt:",
-      "das Profil ist nicht mit der Facebook-Seite verknüpft, deshalb kann nichts",
-      "geplant werden — Details im LOG vom 30.08.",
-      "**YouTube (Studio → Analytics, 28 Tage):** 510 Aufrufe, +3 Abos (jetzt 10).",
-      "Klickrate 8,6 % — im grünen Bereich (Maßstab 8–10 %), Titel und Vorschaubilder",
-      "dürfen bleiben. Mittlere Wiedergabedauer 0:52 je Aufruf; der Neandertaler-Short",
-      "hält 70,6 %, das 1:06-Video nur 40,3 % — unter der 50-%-Marke, die längeren",
-      "Stücke verlieren die Leute. Stufe 3 seit heute AKTIV (Links anklickbar,",
-      "A/B-Tests verfügbar).",
-      "**Lives:** 1 (28.08., 234 Minuten). Zuschauerzahl: keine Daten (LIVE Center",
-      "wird freitags geprüft). Keine neue Einschränkung bekannt.",
-      "**Teilungen der Woche:** TikTok **3** — nach sieben Tagen null in der Vorwoche",
-      "das erste Lebenszeichen. Übrige Kanäle: keine Daten.",
-      "**Verteiler (Brevo):** 6 Einreichungen, 3 bestätigte Kontakte — die Hälfte",
-      "bestätigt nicht; die Bestätigungsmail bleibt die Schwachstelle. Seit heute ist",
-      "die Domain authentifiziert, die Mails gehen echt von info@trendonix-buecher.de.",
-      "**Was messbar etwas gebracht hat:** das Suchfragen-Format (Neandertaler-Short:",
-      "474 Aufrufe bei 70,6 % Haltedauer) und die ersten drei TikTok-Teilungen.",
-      "**Was Zeit gekostet und nichts gebracht hat:** der Instagram-Plan hat 13 fertige",
-      "Reels neun Tage lang stumm weitergeschoben, ohne zu melden — Reichweite, die",
-      "einfach verfiel. Und: sechs bediente Kanäle haben diese Woche keinen einzigen",
-      "Verkauf ausgelöst — Reichweite und Kauf sind noch nicht verbunden.",
-      "**Die eine Empfehlung:** Manuel verknüpft @trendonix_ mit der Seite Trendonix",
-      "(Business Suite → Einstellungen → Instagram-Konto verknüpfen, ~5 Minuten).",
-      "Das schaltet die geplante Ausspielung der 13 fertigen Reels frei — ein Beitrag",
-      "pro Tag, ohne Claude, ohne laufenden PC.",
-      "---"
+      "**Verkäufe:** Monat September: 11 Bestellungen (alle eBook), Tantiemen 0,00 € —",
+      "seit dem 02.09. kein weiterer Verkauf, vier Tage in Folge null. Vorwoche: 0.",
+      "Rang fällt täglich (645.558 am 01.09. → 841.858 heute). Elf Einheiten bei null",
+      "Euro bleiben ungeklärt (Preisprüfung B0HFZFHWKK liegt bei Manuel). Quelle:",
+      "ZAHLEN.md / KDP-Dashboard.",
+      "**Kanäle (7 Tage):**",
+      "- TikTok: 1.300 Aufrufe (−30,8 %), 8 Kommentare, **0 Geteilt** (−3); Suchbegriffe",
+      "weiter aus der Shop-Zeit („trendy\", „erfolg\"). **Kein neuer Beitrag** — Upload",
+      "in geplanten Aufgaben abgeschaltet, fünf Sendeplätze in Folge verfallen, zehn",
+      "fertige Videos warten auf Freigabe. Quelle: TikTok Studio Analytics.",
+      "- YouTube: 955 Aufrufe (941 Shorts, 14 Videos), +1 Abo, 4 Shorts + 1 Video",
+      "veröffentlicht. **Klickrate 7,6 %**, mittlere Wiedergabedauer 0:31 (neuester",
+      "Short 67,1 % der Länge). Unter 8 % — Empfehlung siehe unten. Quelle: Studio",
+      "Analytics 30.08.–05.09.",
+      "- Instagram: +1 Follower, 2 Reel-Likes, keine neuen Kommentare; kein Beitrag",
+      "(ig/02_beleggrad.mp4 wartet seit 31.08., Video geht nur von Hand).",
+      "- Facebook: 6 Follower, 1 Beitrag diese Woche (Fußspuren-Film 01.09.),",
+      "0 Kommentare auf allen acht Beiträgen.",
+      "- Pinterest: 17 Pins, überall 0 Merken; /engagement/ und Business-Hub rendern",
+      "seit Tagen weiß — Kanal über den Browser derzeit nicht bedienbar, kein Pin",
+      "gesetzt (Entwürfe verfallen 22.09.).",
+      "- Bluesky: nichts Neues (nur das Like vom 26.08.).",
+      "- Website/Journal: zwei neue Beiträge angelegt (08.09. Datierung, 11.09.",
+      "Domestikationssyndrom), Vorrat damit 4.",
+      "**Lives:** eine — 01.09., 23:56–00:08 (11 Min), ohne Titel, Alltagslive, kein",
+      "Clip (Störung). Einschränkungen: Stand 04.09. Bewertung 99, keine aktive.",
+      "**Rezensionen:** keine neue — unverändert 2 (Ø 5,0), weiterhin nur",
+      "Sternebewertungen ohne Text.",
+      "**Teilungen der Woche:** TikTok 0 (belegt, Vorwoche 3); auf den übrigen Kanälen",
+      "keine beobachtet. Die Null bleibt die Auskunft.",
+      "**Verteiler:** keine Daten — der Browser ist im Brevo-Konto vecom-design.it",
+      "angemeldet; das Trendonix-Konto ist ohne Anmeldung nicht erreichbar (offen",
+      "seit 04.09., Anmeldung ist Manuels Schritt).",
+      "**Gebracht:** YouTube trug fast die ganze Reichweite der Woche (Shorts-Feed",
+      "94,6 % der Aufrufe); der Koch-Short hielt 67,1 % Wiedergabedauer.",
+      "**Zeit gekostet, nichts gebracht:** Pinterest (17 Pins, 0 Merken, elf Läufe",
+      "nicht auslesbar); die nächtliche Videoproduktion verbrannte am 05.09. rund",
+      "400 Credits ohne Zuordnung; fünf TikTok-Sendeplätze verfielen ungenutzt,",
+      "während zehn fertige Videos auf Freigabe warten.",
+      "**Empfehlung der Woche:** Titel und Vorschaubilder der YouTube-Shorts"
     ]
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9370,
+    "summe": 9504.5,
     "offenSumme": 6887,
     "buchungen": [
+      {
+        "datum": "2026-09-06",
+        "projekt": "Trendonix-Kurzvideo",
+        "zweck": "Abendplatz 18:21-18:3x Ortszeit: Kurzvideo 14_kernthese, vier eigene kie.ai-Einstellungen plus eigener Suno-Titel „Die Kette“ (165,0 auf 30,5); davon 32,5 Bilder (vier Bilder 26,0 plus eine Nachbestellung Bild 3 wegen eines Zeichenbandes am Krugrand), 90,0 Bewegungen und 12,0 Musik. Vom Videolauf selbst eingetragen, damit der stuendliche Cockpit-Lauf ihn nicht als Rueckgang ohne Zuordnung fuehrt.",
+        "credits": 134.5
+      },
       {
         "datum": "2026-09-06",
         "projekt": "nicht zugeordnet",
@@ -1924,12 +1951,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (00:07 UTC) - 1079,0 auf 1003,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 16:43 UTC); die Kommentarrunden 00:11 und 01:12 Ortszeit melden ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
         "credits": 76
-      },
-      {
-        "datum": "2026-09-04",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (21:09 UTC) - 1115,0 auf 1079,0 Credits. LOG.md ist seit dem 18-Uhr-Rundlauf unberuehrt (Stand 16:43 UTC); die Kommentarrunde 22:03-22:09 und der Rundlauf 22:21 Ortszeit melden ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
-        "credits": 36
       }
     ]
   },
@@ -2059,6 +2080,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-06T16:55:00Z",
+      "kanal": "Rundlauf",
+      "text": "18-Uhr-Lauf (TEIL 2 Sonntag, behelfsweise): Zwei neue Journalbeitraege angelegt und gepusht (08.09. 'Wie datiert man einen Fund aus der Steinzeit?', 11.09. 'Was ist das Domestikationssyndrom?', Vorrat 4). Wochenbericht 31.08.-06.09. geschrieben: YouTube-Klickrate 7,6 % (unter 8 %, Empfehlung: Titel/Vorschaubilder), TikTok 1.300 Aufrufe (-30,8 %), 0 Teilungen, Verteiler ohne Daten (Brevo weiter im vecom-Konto), Pinterest elfter Lauf ohne Inhalt (Business Hub rendert weiss). YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach unveraendert. D1 Pinterest-App weiter 'trial-Zugriff ausstehend'; D2 YouTube-Funktionsseite in diesem Lauf nicht ladbar ('Ein Fehler ist aufgetreten', zwei Versuche). Kein Bandwechsel."
+    },
+    {
       "zeit": "2026-09-04T17:00:00Z",
       "kanal": "Rundlauf",
       "text": "18-Uhr-Lauf (TEIL 2, behelfsweise): Unter dem neuen YouTube-Short (Kochen, 112 Aufrufe in 90 Min) ersten Kommentar gesetzt und angepinnt, unter dem Bluesky-Tagespost eine Thread-Frage ergaenzt. LIVE-Bewertung 99/100, keine aktive Einschraenkung, drei Live-Clips liegen bereit; Titelvorschlag fuer 20 Uhr: 'Offene Runde mit einem Kapitel'. Brevo weiter im vecom-Konto (Verteilerzahlen blind). Kaufwege-Abgleich: gebundene Ausgabe (31.08.) in Kanaltexten noch nicht nachgezogen."
@@ -2129,11 +2155,6 @@
       "zeit": "2026-08-30T06:30:00Z",
       "kanal": "Suche",
       "text": "Search Console liefert die ersten Zahlen: 1 Impression, 0 Klicks, Position 5 (7 Tage, Datenstand 27.08.). Seitenindexierung wird noch verarbeitet."
-    },
-    {
-      "zeit": "2026-08-30T03:10:00Z",
-      "kanal": "Website",
-      "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
     }
   ],
   "offen": [
@@ -2239,7 +2260,7 @@
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 198,
-    "journalVorrat": 2
+    "journalVorrat": 4
   },
   "luecken": [
     {
