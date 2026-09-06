@@ -179,6 +179,24 @@
       "best": 11,
       "tant": 0,
       "dep": "erfolgreich"
+    },
+    {
+      "d": "2026-09-06",
+      "rang": 806286,
+      "rez": 2,
+      "gesamt": 22658,
+      "kanaele": {
+        "TikTok": 21600,
+        "YouTube": 11,
+        "Instagram": 1041,
+        "Facebook": 6,
+        "Pinterest": 0,
+        "Bluesky": 0,
+        "Verteiler": 2
+      },
+      "best": null,
+      "tant": null,
+      "dep": "erfolgreich"
     }
   ]
 }
