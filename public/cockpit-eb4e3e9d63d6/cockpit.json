@@ -1,10 +1,18 @@
 {
-  "stand": "2026-09-06T07:04:36Z",
+  "stand": "2026-09-06T08:03:52Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-09-05",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Rang",
+        "von": "#806.286",
+        "nach": "#841.858",
+        "delta": "+#35.572",
+        "richtung": "schlecht"
+      }
+    ],
+    "hinweis": null
   },
   "regal": {
     "buecher": [
@@ -172,9 +180,9 @@
     "untertitel": "Ursprung und Ordnung",
     "erschienen": "2026-08-08",
     "seiten": 206,
-    "rangGesamt": 806286,
-    "rangVorher": 770649,
-    "rangStand": "2026-09-05",
+    "rangGesamt": 841858,
+    "rangVorher": 806286,
+    "rangStand": "2026-09-06",
     "kategorien": [
       {
         "name": "Kulturgeschichte",
@@ -297,12 +305,21 @@
         "rang": 806286,
         "rez": 2,
         "schnitt": 5
+      },
+      {
+        "d": "2026-09-06",
+        "kindle": 0,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": 841858,
+        "rez": 2,
+        "schnitt": 5
       }
     ]
   },
   "monat": {
     "zeitraum": "September 2026",
-    "stand": "2026-09-05",
+    "stand": "2026-09-06",
     "bestellungen": 11,
     "ebook": 11,
     "druck": 0,
@@ -404,7 +421,7 @@
       },
       {
         "d": "2026-09-06",
-        "v": 806286
+        "v": 841858
       }
     ],
     "rezensionen": [
@@ -527,6 +544,10 @@
       {
         "d": "2026-09-05",
         "v": 11
+      },
+      {
+        "d": "2026-09-06",
+        "v": 11
       }
     ],
     "tantiemen": [
@@ -556,6 +577,10 @@
       },
       {
         "d": "2026-09-05",
+        "v": 0
+      },
+      {
+        "d": "2026-09-06",
         "v": 0
       }
     ],
@@ -2216,11 +2241,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-06T07:02:00Z",
+    "stand": "2026-09-06T08:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-06T06:06:13Z",
+    "deployWann": "2026-09-06T07:06:45Z",
     "zertifikatTage": 78,
     "linksGeprueft": 51,
     "linksKaputt": 0,
