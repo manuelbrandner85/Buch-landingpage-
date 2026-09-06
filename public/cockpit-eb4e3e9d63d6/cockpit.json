@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-06T10:03:48Z",
+  "stand": "2026-09-06T11:06:55Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-09-05",
@@ -1859,9 +1859,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9162.5,
+    "summe": 9298,
     "offenSumme": 6815,
     "buchungen": [
+      {
+        "datum": "2026-09-06",
+        "projekt": "Trendonix-Kurzvideo",
+        "zweck": "Mittagsplatz 12:21-13:0x Ortszeit: Kurzvideo 13_tempel, vier eigene kie.ai-Einstellungen (372,5 auf 237,0); davon 45,5 Bilder (vier Bilder 26,0 plus drei Nachbestellungen: Bild 1 einmal wegen blassem Himmel, Bild 3 zweimal wegen schwebender Schale und wegen Hieroglyphen an der Wand) und 90,0 Bewegungen. Musik aus der Mediathek (fireflies), 0 Credits. Vom Videolauf selbst eingetragen, damit der stuendliche Cockpit-Lauf ihn nicht als Rueckgang ohne Zuordnung fuehrt.",
+        "credits": 135.5
+      },
       {
         "datum": "2026-09-05",
         "projekt": "nicht zugeordnet",
@@ -1927,12 +1933,6 @@
         "projekt": "Trendonix-Kurzvideo",
         "zweck": "Abendplatz 18:21-18:33 Ortszeit: Kurzvideo 10_archiv, vier eigene kie.ai-Einstellungen (1249,5 auf 1115,0). LOG.md schluesselt vollstaendig auf: 32,5 Bilder (davon 6,5 fuer die neu bestellte Einstellung 4), 90 Bewegungen, 12 Musik (Suno-Titel Verschlossene Kammer). Aus dem stuendlichen Cockpit-Lauf 17:06 UTC nachgetragen, weil der Videomotor seine Credits nicht selbst bucht.",
         "credits": 134.5
-      },
-      {
-        "datum": "2026-09-04",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (15:08 UTC) - 1321,5 auf 1249,5 Credits. Seit dem Nachtrag 15:40 Ortszeit (13:34 UTC) steht kein neuer Lauf in LOG.md, und die Kommentarrunde 16:04-16:14 meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
-        "credits": 72
       }
     ]
   },
@@ -2232,11 +2232,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-06T10:02:00Z",
+    "stand": "2026-09-06T11:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-06T09:04:32Z",
+    "deployWann": "2026-09-06T10:04:49Z",
     "zertifikatTage": 78,
     "linksGeprueft": 51,
     "linksKaputt": 0,
