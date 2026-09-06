@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-06T15:02:31Z",
+  "stand": "2026-09-06T16:02:34Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-09-05",
@@ -1856,9 +1856,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9298,
-    "offenSumme": 6815,
+    "summe": 9370,
+    "offenSumme": 6887,
     "buchungen": [
+      {
+        "datum": "2026-09-06",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (15:09 UTC) - 237,0 auf 165,0 Credits. LOG.md ist seit dem Nachmittagslauf 15:30-15:40 Ortszeit unveraendert (Stand 13:34 UTC), KOMMENTAR_LOG.md meldet fuer die 16:0x-Kommentarrunde und den 16:2x-Rundlauf ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 72
+      },
       {
         "datum": "2026-09-06",
         "projekt": "Trendonix-Kurzvideo",
@@ -1924,12 +1930,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (21:09 UTC) - 1115,0 auf 1079,0 Credits. LOG.md ist seit dem 18-Uhr-Rundlauf unberuehrt (Stand 16:43 UTC); die Kommentarrunde 22:03-22:09 und der Rundlauf 22:21 Ortszeit melden ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
         "credits": 36
-      },
-      {
-        "datum": "2026-09-04",
-        "projekt": "Trendonix-Kurzvideo",
-        "zweck": "Abendplatz 18:21-18:33 Ortszeit: Kurzvideo 10_archiv, vier eigene kie.ai-Einstellungen (1249,5 auf 1115,0). LOG.md schluesselt vollstaendig auf: 32,5 Bilder (davon 6,5 fuer die neu bestellte Einstellung 4), 90 Bewegungen, 12 Musik (Suno-Titel Verschlossene Kammer). Aus dem stuendlichen Cockpit-Lauf 17:06 UTC nachgetragen, weil der Videomotor seine Credits nicht selbst bucht.",
-        "credits": 134.5
       }
     ]
   },
@@ -2229,11 +2229,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-06T15:02:00Z",
+    "stand": "2026-09-06T16:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-06T14:03:31Z",
+    "deployWann": "2026-09-06T15:03:38Z",
     "zertifikatTage": 78,
     "linksGeprueft": 51,
     "linksKaputt": 0,
