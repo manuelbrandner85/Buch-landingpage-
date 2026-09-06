@@ -1,22 +1,17 @@
 {
   "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
-  "stand": "2026-09-05T09:02:48Z",
+  "stand": "2026-09-06T06:04:04Z",
   "eingerichtet": true,
   "hinweis": null,
   "klicks": 0,
-  "impressionen": 97,
-  "position": 47.6,
-  "von": "2026-08-28",
-  "bis": "2026-09-03",
+  "impressionen": 93,
+  "position": 46.4,
+  "von": "2026-08-29",
+  "bis": "2026-09-04",
   "tage": 7,
   "suchanfragen": [
     {
       "wort": "an welchem fluss liegt antwerpen",
-      "klicks": 0,
-      "impressionen": 1
-    },
-    {
-      "wort": "an welchem fluss liegt london",
       "klicks": 0,
       "impressionen": 1
     },
@@ -28,12 +23,17 @@
     {
       "wort": "bab al-mandab",
       "klicks": 0,
-      "impressionen": 2
+      "impressionen": 1
     },
     {
       "wort": "bab al-mandab strait",
       "klicks": 0,
       "impressionen": 1
+    },
+    {
+      "wort": "bab el mandeb",
+      "klicks": 0,
+      "impressionen": 3
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-06T05:03:46Z",
+  "stand": "2026-09-06T06:04:08Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-09-05",
@@ -315,18 +315,13 @@
     "gelesen": true,
     "hinweis": null,
     "klicks7": 0,
-    "impressionen7": 97,
-    "position": 47.6,
+    "impressionen7": 93,
+    "position": 46.4,
     "seitenIndexiert": 66,
     "seitenGesamt": 198,
     "suchanfragen": [
       {
         "wort": "an welchem fluss liegt antwerpen",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "an welchem fluss liegt london",
         "klicks": 0,
         "impressionen": 1
       },
@@ -338,16 +333,21 @@
       {
         "wort": "bab al-mandab",
         "klicks": 0,
-        "impressionen": 2
+        "impressionen": 1
       },
       {
         "wort": "bab al-mandab strait",
         "klicks": 0,
         "impressionen": 1
+      },
+      {
+        "wort": "bab el mandeb",
+        "klicks": 0,
+        "impressionen": 3
       }
     ],
-    "von": "2026-08-28",
-    "bis": "2026-09-03",
+    "von": "2026-08-29",
+    "bis": "2026-09-04",
     "tage": 7,
     "quelle": "abgerufen"
   },
@@ -2216,11 +2216,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-06T05:02:00Z",
+    "stand": "2026-09-06T06:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-06T04:04:58Z",
+    "deployWann": "2026-09-06T05:04:57Z",
     "zertifikatTage": 78,
     "linksGeprueft": 51,
     "linksKaputt": 0,
