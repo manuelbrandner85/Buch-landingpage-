@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-06T20:02:35Z",
+  "stand": "2026-09-06T21:02:35Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1877,9 +1877,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9504.5,
-    "offenSumme": 6887,
+    "summe": 9530,
+    "offenSumme": 6912.5,
     "buchungen": [
+      {
+        "datum": "2026-09-06",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (20:07 UTC) - 30,5 auf 5,0 Credits. LOG.md ist seit dem 18-Uhr-Rundlauf 18:21-18:58 unveraendert, KOMMENTAR_LOG.md meldet fuer die 21:0x-Kommentarrunde ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 25.5
+      },
       {
         "datum": "2026-09-06",
         "projekt": "Trendonix-Kurzvideo",
@@ -1945,12 +1951,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (01:07 UTC) - 1003,0 auf 895,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 04.09. 16:43 UTC); die Kommentarrunde 02:03 Ortszeit meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
         "credits": 108
-      },
-      {
-        "datum": "2026-09-05",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (00:07 UTC) - 1079,0 auf 1003,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 16:43 UTC); die Kommentarrunden 00:11 und 01:12 Ortszeit melden ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
-        "credits": 76
       }
     ]
   },
@@ -2250,11 +2250,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-06T20:02:00Z",
+    "stand": "2026-09-06T21:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-06T19:06:20Z",
+    "deployWann": "2026-09-06T20:03:25Z",
     "zertifikatTage": 77,
     "linksGeprueft": 51,
     "linksKaputt": 0,
