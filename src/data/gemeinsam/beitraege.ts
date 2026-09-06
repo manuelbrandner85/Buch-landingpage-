@@ -173,4 +173,42 @@ export const BEITRAEGE: Beitrag[] = [
       'Nachzulesen im [vierten Kapitel](/faeden/kapitel/4/), Seite 101.',
     ],
   },
+  {
+    slug: 'wie-datiert-man-einen-fund',
+    bandId: 'band-1',
+    titel: 'Wie datiert man einen Fund aus der Steinzeit?',
+    datum: '2026-09-08',
+    auszug:
+      'Meist wird nicht der Fund datiert, sondern die Schicht, in der er liegt. Drei Begriffe und drei Verfahren entscheiden, ob eine Jahreszahl trägt.',
+    absaetze: [
+      'Die kurze Antwort: Meist wird gar nicht der Fund datiert, sondern die Schicht, in der er liegt. Kein Knochen und kein verkohltes Holzstück trägt sein Alter in sich — das Alter kommt aus dem Zusammenhang. Deshalb entscheidet über eine Jahreszahl oft nicht das Labor, sondern die Frage, ob der Fund noch dort liegt, wo er hingehört. Wer das einmal verstanden hat, versteht auch, warum über manche berühmte Zahl seit Jahrzehnten gestritten wird.',
+      '## Drei Wörter, an denen alles hängt',
+      'Das erste ist [in situ](/faeden/begriffe/#in-situ), lateinisch für „an Ort und Stelle": Ein Fund, der unverlagert in seiner Schicht liegt, ist datierbar. Das zweite ist die [Stratigrafie](/faeden/begriffe/#stratigrafie), die Abfolge der Erdschichten — was unten liegt, ist in der Regel älter als das darüber. Beide stehen im Band auf Seite 15, gleich zu Beginn des [ersten Kapitels](/faeden/kapitel/1/), und zwar bevor die erste Jahreszahl fällt. Das ist kein Zufall, sondern die Reihenfolge, in der auch die Forschung arbeitet.',
+      'Das dritte Wort ist die [Fundlage](/faeden/begriffe/#fundlage): die Lage eines Fundes in seiner Schicht. Sie ist oft wichtiger als der Fund selbst, weil verlagerte Stücke sich nicht mehr zuordnen lassen. Daraus folgt ein Satz, der im Band die Stufe G trägt, also als widerlegte Behauptung geführt wird: dass sich ein einzelnes Streufundstück datieren ließe. Es liegt irgendwo, aber nicht mehr dort, wo es hingehört — und damit ist die einzige Uhr weg, die man hätte ablesen können.',
+      '## Die drei Uhren',
+      'Die bekannteste Uhr ist die Radiokarbonmethode, und sie hat eine Grenze, die viele überrascht: Sie reicht rund 50.000 Jahre zurück. Für die Menschwerdung ist das viel zu wenig. Fundplätze aus dieser Zeit arbeiten deshalb mit anderen Verfahren — Argon-Argon und Paläomagnetik neben dem Radiokarbon. Drei Uhren, drei Reichweiten, drei Fehlerquellen. Wer eine Jahreszahl liest, liest immer auch ein Verfahren mit, und dessen Grenzen.',
+      'Wie sich das im Streitfall auswirkt, zeigt die [Wonderwerk-Höhle](/faeden/ort/wonderwerk/) in Südafrika: Feuerbelege aus rund einer Million Jahren, im Band auf den Seiten 25 und 28 — mit der Stufe E, umstritten. Umstritten heißt nicht erfunden. Es heißt: Es gibt einen Befund, es gibt eine Deutung, und es gibt Fachleute, die diese Deutung nicht teilen — unter anderem, weil sich bei so alten Schichten genau die Fragen stellen, um die es hier ging. Der Streit ist kein Makel der Forschung, er ist ihr Arbeitsmodus.',
+      'Deshalb trägt in diesem Band jede Aussage eine Stufe zwischen A und G — was die Stufen bedeuten, ist [hier erklärt](/ueber/). Eine Jahreszahl ohne Angabe, woher sie kommt und wie sicher sie ist, ist keine Auskunft, sondern eine Behauptung. Die Datierungsfrage ist der Ort, an dem sich das am schnellsten zeigt.',
+    ],
+  },
+  {
+    slug: 'was-ist-das-domestikationssyndrom',
+    bandId: 'band-1',
+    titel: 'Was ist das Domestikationssyndrom?',
+    datum: '2026-09-11',
+    auszug:
+      'Das Bündel von Merkmalen, das Kulturpflanzen von ihren wilden Vorfahren trennt — beim Getreide vor allem die Ähre, die nicht mehr von selbst zerfällt.',
+    absaetze: [
+      'Die kurze Antwort: Das [Domestikationssyndrom](/faeden/begriffe/#domestikationssyndrom) ist das Bündel von Merkmalen, das Kulturpflanzen von ihren wilden Vorfahren trennt. Beim Getreide ist das sichtbarste Merkmal die Ähre, die nicht mehr von selbst zerfällt. Im Band steht der Begriff auf Seite 43, im [zweiten Kapitel](/faeden/kapitel/2/) — und er ist mehr als ein botanisches Detail: Er ist der Grund, warum sich der Beginn des Ackerbaus überhaupt nachweisen lässt.',
+      '## Warum eine Ähre etwas beweisen kann',
+      'Eine wilde Ähre zerfällt von selbst, denn so verbreitet die Pflanze ihre Samen. Eine Ähre, die bis zur Ernte zusammenhält, kann sich allein nicht mehr fortpflanzen — sie ist darauf angewiesen, dass jemand erntet und wieder aussät. Genau deshalb taugt sie als Beleg: Das Korn selbst trägt die Spur der menschlichen Arbeit. Man muss keinen Bauern ausgraben, um Ackerbau nachzuweisen; es genügt, das Getreide zu finden und zu sehen, welche Form es hat.',
+      'Das ist die Denkweise, die sich durch den ganzen Band zieht: Nicht die Erzählung entscheidet, sondern das, was am Fund ablesbar ist. Die Ähre ist dafür das vielleicht schönste Beispiel, weil die entscheidende Information nicht in einem Bauwerk oder einer Inschrift steckt, sondern in der Pflanze selbst.',
+      '## Kein Ereignis, sondern ein Vorgang',
+      'Der Übergang zum Ackerbau war kein Entschluss und kein Datum. An Orten wie [Abu Hureyra](/faeden/ort/abu-hureyra/) verdichtete er sich über Jahrtausende; [Jericho](/faeden/ort/jericho/) gehört zu den frühen Fundplätzen des Übergangs von Wildgetreide zur sicheren Kulturpflanze. Im Band steht dieser Abschnitt auf den Seiten 43 bis 46. Wer nach dem „ersten Bauern" sucht, stellt die falsche Frage — es gab ihn so wenig wie den ersten Sprecher einer Sprache.',
+      'Dazu gehört ein zweiter Begriff: die [Gründerkulturen](/faeden/begriffe/#gruenderkulturen), die acht Pflanzen, die sich als gemeinsames Paket ausbreiteten und die Grundlage des frühen Ackerbaus bildeten (Seite 49). Nicht eine Wunderpflanze machte den Unterschied, sondern ein Bündel, das zusammen reiste — auch das eher ein Vorgang als eine Erfindung.',
+      '## Was daran hängt',
+      'Das [zweite Kapitel](/faeden/kapitel/2/) heißt „Saat, Besitz und Hierarchie", und die Reihenfolge der drei Wörter ist die These: Mit dem Ackerbau kam der Vorrat, und mit dem Vorrat die Frage, wer darüber bestimmt. Wörtlich heißt es im Band: „Nicht der Überschuss schuf die Herrschaft, sondern die Frage, wer über ihn verfügt." Die zerfallende Ähre steht am Anfang dieser Kette — ein unscheinbares Merkmal, an dem ein sehr langer Faden hängt.',
+      'Wie gut die einzelnen Aussagen dieses Abschnitts belegt sind, lässt sich [in der begehbaren Welt zu Band 1](/faeden/band-1/) nachprüfen: Dort trägt jede Angabe dieselbe Belegstufe wie im gedruckten Buch.',
+    ],
+  },
 ];
