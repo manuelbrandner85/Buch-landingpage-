@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-07T10:02:45Z",
+  "stand": "2026-09-07T11:02:34Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1973,9 +1973,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9530,
+    "summe": 9652.5,
     "offenSumme": 6912.5,
     "buchungen": [
+      {
+        "datum": "2026-09-07",
+        "projekt": "Mittagsplatz 15_website",
+        "zweck": "Kurzvideo \"Wo faengt die Geschichte der Menschheit an?\": vier Bilder seedream/4.5 (26,0), ein Bild neu bestellt (6,5), vier Bewegungen bytedance/v1-lite 720p 5s (90,0), Musik aus der Mediathek (0)",
+        "credits": 122.5
+      },
       {
         "datum": "2026-09-06",
         "projekt": "nicht zugeordnet",
@@ -2041,12 +2047,6 @@
         "projekt": "nicht zugeordnet",
         "zweck": "Rueckgang ohne Zuordnung (02:06 UTC) - 895,0 auf 823,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 04.09. 16:43 UTC); die Kommentarrunde 03:05 Ortszeit meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
         "credits": 72
-      },
-      {
-        "datum": "2026-09-05",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (01:07 UTC) - 1003,0 auf 895,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 04.09. 16:43 UTC); die Kommentarrunde 02:03 Ortszeit meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
-        "credits": 108
       }
     ]
   },
@@ -2347,11 +2347,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-07T10:02:00Z",
+    "stand": "2026-09-07T11:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-07T09:28:39Z",
+    "deployWann": "2026-09-07T10:03:34Z",
     "zertifikatTage": 77,
     "linksGeprueft": 51,
     "linksKaputt": 0,
