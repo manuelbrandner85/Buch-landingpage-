@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-07T13:03:38Z",
+  "stand": "2026-09-07T14:02:33Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -973,27 +973,6 @@
       "wochentag": "Mo",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "03_kochen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "03_kochen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "03_kochen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "03_kochen",
@@ -1392,6 +1371,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-02",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "03_kochen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-07",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -1879,6 +1867,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-06",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "03_kochen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-07",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2347,11 +2344,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-07T13:02:00Z",
+    "stand": "2026-09-07T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-07T12:07:01Z",
+    "deployWann": "2026-09-07T13:04:31Z",
     "zertifikatTage": 77,
     "linksGeprueft": 51,
     "linksKaputt": 0,
