@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-07T16:46:13Z",
+  "stand": "2026-09-07T17:02:32Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -980,24 +980,6 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
-          "kanal": "Instagram",
-          "zeit": "18:30",
-          "was": "03_kochen",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-23",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "18:30",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Journal",
           "zeit": null,
           "was": "wer-hat-die-pyramiden-gebaut",
@@ -1912,6 +1894,15 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
+          "kanal": "Pinterest",
+          "zeit": "09:30",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Instagram",
           "zeit": "18:30",
           "was": "11_statuen",
@@ -2118,7 +2109,7 @@
       "stand": "2026-09-07",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 9,
+      "beitraege": 10,
       "quelle": "abgerufen",
       "vergleichVom": "2026-09-06"
     },
@@ -2337,11 +2328,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-07T16:02:00Z",
+    "stand": "2026-09-07T17:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-07T15:04:10Z",
+    "deployWann": "2026-09-07T16:47:19Z",
     "zertifikatTage": 77,
     "linksGeprueft": 51,
     "linksKaputt": 0,
