@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-07T08:03:18Z",
+  "stand": "2026-09-07T09:03:26Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1019,24 +1019,6 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "10_archiv",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-01",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "11:00",
-          "was": "15_website",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-05",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Journal",
           "zeit": null,
           "was": "wer-hat-die-pyramiden-gebaut",
@@ -1326,6 +1308,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-03",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "18:30",
+          "was": "15_website",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-05",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -1817,6 +1808,15 @@
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "10_archiv",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-01",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -2347,11 +2347,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-07T08:02:00Z",
+    "stand": "2026-09-07T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-07T07:03:24Z",
+    "deployWann": "2026-09-07T08:09:52Z",
     "zertifikatTage": 77,
     "linksGeprueft": 51,
     "linksKaputt": 0,
