@@ -12,7 +12,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
-      - run: npm ci
+      # Siehe deploy.yml: der Installationsschritt von onnxruntime-node laedt
+      # ~100 MB nach und ist hier nicht noetig.
+      - name: Abhängigkeiten
+        env:
+          ONNXRUNTIME_NODE_INSTALL: skip
+        run: |
+          npm ci || {
+            echo "Netz zickt - zweiter Versuch in 20 Sekunden"
+            sleep 20
+            npm ci
+          }
       - name: Weltdaten
         run: npm run pruefen
       - name: TypeScript

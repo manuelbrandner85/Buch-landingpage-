@@ -44,8 +44,22 @@ jobs:
           node-version: 22
           cache: npm
 
+      # onnxruntime-node laedt beim Installieren rund 100 MB native Dateien von
+      # einem fremden CDN nach. Gebraucht wird es einzig lokal von
+      # scripts/tiefenkarten.mjs, in diesem Bau nie. Am 07.09.2026 lief genau
+      # dieser Download in eine Zeitueberschreitung (ETIMEDOUT) und riss den
+      # Auftrag mit, obwohl an der Seite nichts fehlte. "skip" ueberspringt
+      # nur diesen einen Download; alles andere wird normal installiert.
+      # Der zweite Versuch faengt die uebrigen Netzaussetzer ab.
       - name: Abhängigkeiten
-        run: npm ci
+        env:
+          ONNXRUNTIME_NODE_INSTALL: skip
+        run: |
+          npm ci || {
+            echo "Netz zickt - zweiter Versuch in 20 Sekunden"
+            sleep 20
+            npm ci
+          }
 
       - name: Weltdaten prüfen
         run: npm run pruefen
@@ -177,9 +191,23 @@ jobs:
           node-version: 22
           cache: npm
 
+      # onnxruntime-node laedt beim Installieren rund 100 MB native Dateien von
+      # einem fremden CDN nach. Gebraucht wird es einzig lokal von
+      # scripts/tiefenkarten.mjs, in diesem Bau nie. Am 07.09.2026 lief genau
+      # dieser Download in eine Zeitueberschreitung (ETIMEDOUT) und riss den
+      # Auftrag mit, obwohl an der Seite nichts fehlte. "skip" ueberspringt
+      # nur diesen einen Download; alles andere wird normal installiert.
+      # Der zweite Versuch faengt die uebrigen Netzaussetzer ab.
       - name: Abhängigkeiten
         if: steps.zugang.outputs.da == 'ja'
-        run: npm ci
+        env:
+          ONNXRUNTIME_NODE_INSTALL: skip
+        run: |
+          npm ci || {
+            echo "Netz zickt - zweiter Versuch in 20 Sekunden"
+            sleep 20
+            npm ci
+          }
 
       - name: Weltdaten prüfen
         if: steps.zugang.outputs.da == 'ja'
