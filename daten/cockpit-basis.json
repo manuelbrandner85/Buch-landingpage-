@@ -85,10 +85,9 @@
       "name": "Instagram",
       "handle": "@trendonix_",
       "follower": 1041,
-      "vorher": 1040,
       "reaktionen": null,
-      "stand": "2026-08-28",
-      "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website."
+      "stand": "2026-09-07",
+      "notiz": "87 Beiträge. Bio-Link zeigt auf die Website — der Mangel aus dem August-Befund ist behoben. Reichweite bleibt ohne Business-Suite-Anmeldung nicht ablesbar."
     },
     {
       "name": "Facebook",
@@ -179,12 +178,6 @@
       "warum": "Am 02.09.2026 gefunden: Der Ordner liegt unter C:\\Users\\manue\\Desktop\\Buch\\Die unsichtbare Fäden\\Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT (sieben Ebenen tief; die Suche vom 30.08. ging nur fuenf Ebenen tief und hat ihn deshalb verfehlt). Die stuendliche Kommentarrunde erreicht ihn weiterhin; nur der Aufgabe „Trendonix Rundlauf“ fehlt er seit 01.09. 19:22 als verbundener Ordner. Behebung: in der Claude-App bei der Aufgabe diesen Ordner wieder verbinden (Name AUTOPILOT, damit $HOME/mnt/AUTOPILOT stimmt). Bis dahin arbeitet der Rundlauf behelfsweise ueber Desktop Commander, ohne device_bash-Zugriff auf den Ordner."
     },
     {
-      "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
-    },
-    {
       "titel": "Feed-Welt einmal selbst durchgehen",
       "wer": "Manuel",
       "stufe": "klein",
@@ -259,6 +252,16 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-07T16:55:00Z",
+      "kanal": "Befund",
+      "text": "Monatsbefund September erhoben (erster Montag): TikTok 3.800 Aufrufe/28T (+79 %), YouTube 1.461 (×7,7), Klickrate 7,6 %, LIVE −73 %, LIVE-Verlauf 5 → 9; Befundseite und Dashboard neu veröffentlicht, BEFUND/2026-09.md abgelegt."
+    },
+    {
+      "zeit": "2026-09-07T16:40:00Z",
+      "kanal": "Bluesky",
+      "text": "Thread-Frage als erste Antwort unter den Pyramiden-Journalpost gesetzt (einzige Schreibaktion des Laufs)."
+    },
+    {
       "zeit": "2026-09-06T16:55:00Z",
       "kanal": "Rundlauf",
       "text": "18-Uhr-Lauf (TEIL 2 Sonntag, behelfsweise): Zwei neue Journalbeitraege angelegt und gepusht (08.09. 'Wie datiert man einen Fund aus der Steinzeit?', 11.09. 'Was ist das Domestikationssyndrom?', Vorrat 4). Wochenbericht 31.08.-06.09. geschrieben: YouTube-Klickrate 7,6 % (unter 8 %, Empfehlung: Titel/Vorschaubilder), TikTok 1.300 Aufrufe (-30,8 %), 0 Teilungen, Verteiler ohne Daten (Brevo weiter im vecom-Konto), Pinterest elfter Lauf ohne Inhalt (Business Hub rendert weiss). YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky nur bekanntes Like, TikTok-Postfach unveraendert. D1 Pinterest-App weiter 'trial-Zugriff ausstehend'; D2 YouTube-Funktionsseite in diesem Lauf nicht ladbar ('Ein Fehler ist aufgetreten', zwei Versuche). Kein Bandwechsel."
@@ -307,16 +310,6 @@
       "zeit": "2026-08-30T01:10:00Z",
       "kanal": "Website",
       "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
-    },
-    {
-      "zeit": "2026-08-29T22:10:00Z",
-      "kanal": "Website",
-      "text": "„Alles nur Zufall?“ steht auf der Seite: eigene Buchseite unter /buch/zufall/, vierzig Nachschlage-Seiten unter /q/01 bis /q/40 und ein neuer Abschnitt auf der Startseite — „Weitere Bücher · Einzeln, außerhalb der Reihen“. Das Buch ist der erste Einzeltitel des Hauses: keine Reihe, keine begehbare Welt, kein Weltentor. Kein Kaufweg, solange keine Produktseite existiert; auf dem Knopf steht „Bei Amazon in Prüfung“. Drei Fehler kamen dabei ans Licht und sind behoben: zwei Verweise ins Leere, die die Veröffentlichung zweimal abgebrochen hatten, ein Vorschaubild, das es nicht gab, und dreizehn zu lange Suchtitel bei den Nachschlage-Seiten."
-    },
-    {
-      "zeit": "2026-08-29T13:30:00Z",
-      "kanal": "TikTok",
-      "text": "Live-Nacharbeit erledigt: beide veralteten „Bin gerade live“-Hinweis-Kommentare im Studio entfernt (Live endete 04:14). Kein Live-Clip zu privatisieren — der Upload war am 28.08. gescheitert. TikTok, YouTube (inkl. Community), Bluesky geprüft: nichts Offenes."
     }
   ],
   "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",

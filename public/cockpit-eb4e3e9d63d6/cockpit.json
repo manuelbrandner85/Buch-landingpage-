@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-07T16:02:29Z",
+  "stand": "2026-09-07T16:46:13Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -2078,11 +2078,11 @@
       "name": "Instagram",
       "handle": "@trendonix_",
       "follower": 1041,
-      "vorher": 1041,
       "reaktionen": null,
-      "stand": "2026-08-28",
-      "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website.",
+      "stand": "2026-09-07",
+      "notiz": "87 Beiträge. Bio-Link zeigt auf die Website — der Mangel aus dem August-Befund ist behoben. Reichweite bleibt ohne Business-Suite-Anmeldung nicht ablesbar.",
       "quelle": "Handpflege",
+      "vorher": 1041,
       "vergleichVom": "2026-09-06"
     },
     {
@@ -2173,6 +2173,16 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-07T16:55:00Z",
+      "kanal": "Befund",
+      "text": "Monatsbefund September erhoben (erster Montag): TikTok 3.800 Aufrufe/28T (+79 %), YouTube 1.461 (×7,7), Klickrate 7,6 %, LIVE −73 %, LIVE-Verlauf 5 → 9; Befundseite und Dashboard neu veröffentlicht, BEFUND/2026-09.md abgelegt."
+    },
+    {
+      "zeit": "2026-09-07T16:40:00Z",
+      "kanal": "Bluesky",
+      "text": "Thread-Frage als erste Antwort unter den Pyramiden-Journalpost gesetzt (einzige Schreibaktion des Laufs)."
+    },
+    {
       "id": "journal-wer-hat-die-pyramiden-gebaut",
       "zeit": "2026-09-07T00:02:45Z",
       "kanal": "Website",
@@ -2238,17 +2248,6 @@
       "zeit": "2026-08-30T16:33:13Z",
       "kanal": "Amazon",
       "text": "Eine neue Rezension — jetzt 2 insgesamt, Durchschnitt 5."
-    },
-    {
-      "zeit": "2026-08-30T14:10:00Z",
-      "kanal": "Kanäle",
-      "text": "Alle sechs Kanaele auf www.trendonix-buecher.de geprueft. TikTok, YouTube und Bluesky waren richtig. Pinterest stand auf http statt https - umgestellt, und die Domain wird gerade verifiziert (Nachweis liegt als Meta-Zeile im Kopf jeder Seite). Facebook zeigte nur auf Amazon; die Website steht jetzt als zweiter Link daneben, der Kaufweg blieb. Instagram zeigt weiter auf Amazon - Meta laesst Links nur in der App aendern, das muss Manuel selbst tun. Der Groessenvergleich: TikTok hat 21.600 Follower, alle uebrigen Kanaele zusammen 1.047 (Instagram 1.041, Facebook 6, Pinterest 0, Bluesky 0 bei einem Beitrag). Neu angelegt: die geplante Aufgabe \"Trendonix Mittagsplatz\" - ein Kurzvideo um 12:20 auf YouTube und TikTok, zuerst mit kie.ai (Guthaben 490,5 Punkte), sonst mit vorhandenem Material, immer mit deutschen Untertiteln. Sie wartet auf Manuels Freigabe. Der Pinterest-Tag wurde ausdruecklich NICHT installiert - er ist ein Cookie-Verfolger und wuerde den Einwilligungsbanner zurueckbringen."
-    },
-    {
-      "id": "deploy-2026-08-30-fehlgeschlagen",
-      "zeit": "2026-08-30T10:06:03Z",
-      "kanal": "Technik",
-      "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
     }
   ],
   "offen": [
@@ -2263,12 +2262,6 @@
       "wer": "Manuel",
       "stufe": "hoch",
       "warum": "Am 02.09.2026 gefunden: Der Ordner liegt unter C:\\Users\\manue\\Desktop\\Buch\\Die unsichtbare Fäden\\Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT (sieben Ebenen tief; die Suche vom 30.08. ging nur fuenf Ebenen tief und hat ihn deshalb verfehlt). Die stuendliche Kommentarrunde erreicht ihn weiterhin; nur der Aufgabe „Trendonix Rundlauf“ fehlt er seit 01.09. 19:22 als verbundener Ordner. Behebung: in der Claude-App bei der Aufgabe diesen Ordner wieder verbinden (Name AUTOPILOT, damit $HOME/mnt/AUTOPILOT stimmt). Bis dahin arbeitet der Rundlauf behelfsweise ueber Desktop Commander, ohne device_bash-Zugriff auf den Ordner."
-    },
-    {
-      "titel": "„Alles nur Zufall?“: Kaufwege eintragen, sobald die Produktseiten stehen",
-      "wer": "Manuel",
-      "stufe": "hoch",
-      "warum": "Taschenbuch und Kindle-Ausgabe liegen bei KDP in der Prüfung. Solange keine Produktseite existiert, steht auf der Buchseite kein Kaufweg, sondern „Bei Amazon in Prüfung“ — erfundene Adressen gibt es hier nicht. Sobald die Seiten stehen: URL, ISBN und Preis in src/data/zufall/buch.ts eintragen, PREISSTAND in src/data/gemeinsam/stand.ts mitziehen, status auf „erschienen“ setzen. Danach die Liste in VERTRIEBSWEGE.md abarbeiten — die gilt für dieses Buch genauso wie für die Bände. Bis dahin ist jede Reichweite auf das Buch Reichweite ohne Kasse."
     },
     {
       "titel": "Feed-Welt einmal selbst durchgehen",
