@@ -44,6 +44,23 @@ Vor jeder Veröffentlichung laufen dieselben Prüfungen wie lokal: Weltdaten,
 Bewegtbild und jeder interne Verweis. Ein statischer Export hat keinen Server,
 der einen falschen Pfad noch abfängt.
 
+### Wenn der Bau am Installieren scheitert
+
+Am 07.09.2026 brach der Auftrag `webspace` beim `npm ci` ab, während derselbe
+Schritt im Auftrag `bauen` durchlief – kein Fehler an der Seite, sondern ein
+Download, der ins Leere lief. `onnxruntime-node` holt beim Installieren rund
+100 MB native Dateien von einem fremden CDN; der Server antwortete nicht
+(`ETIMEDOUT`), und npm riss den ganzen Auftrag mit.
+
+Gebraucht wird das Paket einzig lokal von `scripts/tiefenkarten.mjs`, im Bau
+nie. Deshalb steht in allen drei Abläufen jetzt `ONNXRUNTIME_NODE_INSTALL:
+skip` am Installationsschritt – das überspringt genau diesen Download – und ein
+zweiter Versuch nach zwanzig Sekunden fängt die übrigen Netzaussetzer ab.
+
+Merksatz für den nächsten Fehlschlag: Steht *ein* Auftrag rot und der andere
+grün, obwohl beide dasselbe bauen, liegt es fast nie am Code. Zuerst den
+Protokolltext lesen, nicht neu bauen.
+
 ## Die Kinoebene
 
 Alle Motive laufen in **einem WebGL2-Durchgang** (`src/engine/kino-webgl.js`), nicht
