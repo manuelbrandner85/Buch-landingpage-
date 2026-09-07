@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-06T23:03:31Z",
+  "stand": "2026-09-07T00:02:45Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -7,17 +7,9 @@
     }
   ],
   "aenderungen": {
-    "seit": "2026-09-05",
-    "punkte": [
-      {
-        "was": "Rang",
-        "von": "#806.286",
-        "nach": "#841.858",
-        "delta": "+#35.572",
-        "richtung": "schlecht"
-      }
-    ],
-    "hinweis": null
+    "seit": "2026-09-06",
+    "punkte": [],
+    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
   "regal": {
     "buecher": [
@@ -30,7 +22,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 29,
+        "tageDraussen": 30,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -136,7 +128,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 7,
+        "tageDraussen": 8,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -381,7 +373,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 11,
+    "tage": 12,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -426,6 +418,10 @@
       },
       {
         "d": "2026-09-06",
+        "v": 841858
+      },
+      {
+        "d": "2026-09-07",
         "v": 841858
       }
     ],
@@ -473,6 +469,10 @@
       {
         "d": "2026-09-06",
         "v": 2
+      },
+      {
+        "d": "2026-09-07",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -518,6 +518,10 @@
       },
       {
         "d": "2026-09-06",
+        "v": 22658
+      },
+      {
+        "d": "2026-09-07",
         "v": 22658
       }
     ],
@@ -634,6 +638,10 @@
         {
           "d": "2026-09-06",
           "v": 21600
+        },
+        {
+          "d": "2026-09-07",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -679,6 +687,10 @@
         },
         {
           "d": "2026-09-06",
+          "v": 11
+        },
+        {
+          "d": "2026-09-07",
           "v": 11
         }
       ],
@@ -726,6 +738,10 @@
         {
           "d": "2026-09-06",
           "v": 1041
+        },
+        {
+          "d": "2026-09-07",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -771,6 +787,10 @@
         },
         {
           "d": "2026-09-06",
+          "v": 6
+        },
+        {
+          "d": "2026-09-07",
           "v": 6
         }
       ],
@@ -818,6 +838,10 @@
         {
           "d": "2026-09-06",
           "v": 0
+        },
+        {
+          "d": "2026-09-07",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -864,6 +888,10 @@
         {
           "d": "2026-09-06",
           "v": 0
+        },
+        {
+          "d": "2026-09-07",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -905,6 +933,10 @@
         },
         {
           "d": "2026-09-06",
+          "v": 2
+        },
+        {
+          "d": "2026-09-07",
           "v": 2
         }
       ]
@@ -2005,7 +2037,7 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     },
     {
       "name": "YouTube",
@@ -2018,7 +2050,7 @@
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     },
     {
       "name": "Instagram",
@@ -2029,7 +2061,7 @@
       "stand": "2026-08-28",
       "notiz": "84 Beiträge. Link im Profil zeigt weiter auf Amazon statt auf die Website.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     },
     {
       "name": "Facebook",
@@ -2040,7 +2072,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     },
     {
       "name": "Pinterest",
@@ -2053,7 +2085,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     },
     {
       "name": "Bluesky",
@@ -2066,7 +2098,7 @@
       "reaktionenLabel": null,
       "beitraege": 8,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     },
     {
       "name": "Verteiler",
@@ -2080,7 +2112,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-05"
+      "vergleichVom": "2026-09-06"
     }
   ],
   "vorschlaege": [
@@ -2118,6 +2150,12 @@
     }
   ],
   "aktivitaet": [
+    {
+      "id": "journal-wer-hat-die-pyramiden-gebaut",
+      "zeit": "2026-09-07T00:02:45Z",
+      "kanal": "Website",
+      "text": "Der Journalbeitrag „wer-hat-die-pyramiden-gebaut“ ist heute erschienen."
+    },
     {
       "zeit": "2026-09-06T16:55:00Z",
       "kanal": "Rundlauf",
@@ -2189,11 +2227,6 @@
       "zeit": "2026-08-30T10:06:03Z",
       "kanal": "Technik",
       "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
-    },
-    {
-      "zeit": "2026-08-30T06:30:00Z",
-      "kanal": "Suche",
-      "text": "Search Console liefert die ersten Zahlen: 1 Impression, 0 Klicks, Position 5 (7 Tage, Datenstand 27.08.). Seitenindexierung wird noch verarbeitet."
     }
   ],
   "offen": [
@@ -2289,17 +2322,17 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-06T23:02:00Z",
+    "stand": "2026-09-07T00:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-06T22:04:18Z",
+    "deployWann": "2026-09-06T23:04:29Z",
     "zertifikatTage": 77,
     "linksGeprueft": 51,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 198,
-    "journalVorrat": 4
+    "journalVorrat": 3
   },
   "luecken": [
     {
