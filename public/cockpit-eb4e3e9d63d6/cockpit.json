@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-08T15:08:22Z",
+  "stand": "2026-09-08T16:03:38Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -15,6 +15,20 @@
         "nach": "#915.118",
         "delta": "+#36.360",
         "richtung": "schlecht"
+      },
+      {
+        "was": "Follower gesamt",
+        "von": "22.658",
+        "nach": "22.659",
+        "delta": "+1",
+        "richtung": "gut"
+      },
+      {
+        "was": "YouTube",
+        "von": "11",
+        "nach": "12",
+        "delta": "+1",
+        "richtung": "gut"
       }
     ],
     "hinweis": null
@@ -392,7 +406,7 @@
     "quelle": "abgerufen"
   },
   "reichweite": {
-    "gesamt": 22658,
+    "gesamt": 22659,
     "kanaeleGezaehlt": 7,
     "kanaeleGesamt": 7,
     "abgerufen": 4,
@@ -560,7 +574,7 @@
       },
       {
         "d": "2026-09-08",
-        "v": 22658
+        "v": 22659
       }
     ],
     "bestellungen": [
@@ -753,7 +767,7 @@
         },
         {
           "d": "2026-09-08",
-          "v": 11
+          "v": 12
         }
       ],
       "Instagram": [
@@ -2029,9 +2043,15 @@
   },
   "kosten": {
     "waehrung": "Kie.ai-Credits",
-    "summe": 9652.5,
-    "offenSumme": 6912.5,
+    "summe": 9662.5,
+    "offenSumme": 6922.5,
     "buchungen": [
+      {
+        "datum": "2026-09-08",
+        "projekt": "nicht zugeordnet",
+        "zweck": "Rueckgang ohne Zuordnung (15:09 UTC) - 1882,5 auf 1872,5 Credits. Juengste Buchung bleibt der Mittagsplatz 15_website vom 07.09.; LOG.md ist seit dem Nachtrag 15:41-15:52 Ortszeit unveraendert. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
+        "credits": 10
+      },
       {
         "datum": "2026-09-07",
         "projekt": "Mittagsplatz 15_website",
@@ -2097,12 +2117,6 @@
         "projekt": "Trendonix-Kurzvideo",
         "zweck": "Mittagsplatz 12:20-12:52 Ortszeit: Kurzvideo 11_statuen, vier eigene kie.ai-Einstellungen (823,0 auf 700,5), davon 6,5 fuer ein neu bestelltes Bild 3; Musik aus der Mediathek, 0 Credits. Aus dem stuendlichen Cockpit-Lauf 12:10 UTC nachgetragen, weil der Videomotor seine Credits nicht selbst bucht.",
         "credits": 122.5
-      },
-      {
-        "datum": "2026-09-05",
-        "projekt": "nicht zugeordnet",
-        "zweck": "Rueckgang ohne Zuordnung (02:06 UTC) - 895,0 auf 823,0 Credits. LOG.md hat seit dem 18-Uhr-Rundlauf vom 04.09. keinen neuen Eintrag (Stand 04.09. 16:43 UTC); die Kommentarrunde 03:05 Ortszeit meldet ausdruecklich keine Schreibaktion. Aus dem stuendlichen Cockpit-Lauf nachgetragen.",
-        "credits": 72
       }
     ]
   },
@@ -2114,7 +2128,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-09-07",
+      "stand": "2026-09-08",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
@@ -2123,11 +2137,11 @@
     {
       "name": "YouTube",
       "handle": "@Trendonixde",
-      "follower": 11,
+      "follower": 12,
       "vorher": 11,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-09-07",
+      "stand": "2026-09-08",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -2162,7 +2176,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-09-07",
+      "stand": "2026-09-08",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
@@ -2174,10 +2188,10 @@
       "follower": 0,
       "vorher": 0,
       "reaktionen": null,
-      "stand": "2026-09-07",
+      "stand": "2026-09-08",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 10,
+      "beitraege": 11,
       "quelle": "abgerufen",
       "vergleichVom": "2026-09-07"
     },
@@ -2396,11 +2410,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-08T15:03:00Z",
+    "stand": "2026-09-08T16:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-08T14:03:52Z",
+    "deployWann": "2026-09-08T15:09:24Z",
     "zertifikatTage": 76,
     "linksGeprueft": 51,
     "linksKaputt": 0,
