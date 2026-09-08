@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-08T21:04:04Z",
+  "stand": "2026-09-08T22:07:12Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1040,26 +1040,6 @@
   },
   "termine": [
     {
-      "d": "2026-09-08",
-      "wochentag": "Di",
-      "punkte": [
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "04_ordnung",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Journal",
-          "zeit": null,
-          "was": "wie-datiert-man-einen-fund",
-          "zustand": "terminiert",
-          "hinweis": null
-        }
-      ]
-    },
-    {
       "d": "2026-09-09",
       "wochentag": "Mi",
       "punkte": [
@@ -1994,6 +1974,58 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
+    },
+    {
+      "d": "2026-09-23",
+      "wochentag": "Mi",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "04_ordnung",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "18:30",
+          "was": "07_feuer",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "03_kochen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-07",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        }
+      ]
     }
   ],
   "bericht": {
@@ -2410,11 +2442,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-08T21:02:00Z",
+    "stand": "2026-09-08T22:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-08T20:06:13Z",
+    "deployWann": "2026-09-08T21:05:07Z",
     "zertifikatTage": 75,
     "linksGeprueft": 51,
     "linksKaputt": 0,
@@ -2429,7 +2461,7 @@
     },
     {
       "was": "Vorrat an Beiträgen",
-      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-08 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
+      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-09 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
     }
   ]
 }
