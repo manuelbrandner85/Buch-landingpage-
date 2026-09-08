@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-08T08:02:35Z",
+  "stand": "2026-09-08T09:03:23Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1056,24 +1056,6 @@
           "was": "04_ordnung",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "09_muenze",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-30",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "07_feuer",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-31",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Journal",
@@ -2417,11 +2399,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-08T08:02:00Z",
+    "stand": "2026-09-08T09:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-08T07:04:36Z",
+    "deployWann": "2026-09-08T08:59:52Z",
     "zertifikatTage": 76,
     "linksGeprueft": 51,
     "linksKaputt": 0,
