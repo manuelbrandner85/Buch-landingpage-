@@ -218,7 +218,7 @@
     },
     {
       "d": "2026-09-08",
-      "rang": 878758,
+      "rang": 915118,
       "rez": 2,
       "gesamt": 22658,
       "kanaele": {
@@ -230,8 +230,8 @@
         "Bluesky": 0,
         "Verteiler": 2
       },
-      "best": null,
-      "tant": null,
+      "best": 11,
+      "tant": 0,
       "dep": "erfolgreich"
     }
   ]

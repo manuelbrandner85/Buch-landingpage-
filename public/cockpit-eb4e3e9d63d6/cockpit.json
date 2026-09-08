@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-08T07:03:28Z",
+  "stand": "2026-09-08T08:02:35Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -8,8 +8,16 @@
   ],
   "aenderungen": {
     "seit": "2026-09-07",
-    "punkte": [],
-    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
+    "punkte": [
+      {
+        "was": "Rang",
+        "von": "#878.758",
+        "nach": "#915.118",
+        "delta": "+#36.360",
+        "richtung": "schlecht"
+      }
+    ],
+    "hinweis": null
   },
   "regal": {
     "buecher": [
@@ -177,9 +185,9 @@
     "untertitel": "Ursprung und Ordnung",
     "erschienen": "2026-08-08",
     "seiten": 206,
-    "rangGesamt": 878758,
-    "rangVorher": 841858,
-    "rangStand": "2026-09-07",
+    "rangGesamt": 915118,
+    "rangVorher": 878758,
+    "rangStand": "2026-09-08",
     "kategorien": [
       {
         "name": "Kulturgeschichte",
@@ -320,12 +328,21 @@
         "rang": 878758,
         "rez": 2,
         "schnitt": 5
+      },
+      {
+        "d": "2026-09-08",
+        "kindle": 0,
+        "taschenbuch": 0,
+        "kenp": 0,
+        "rang": 915118,
+        "rez": 2,
+        "schnitt": 5
       }
     ]
   },
   "monat": {
     "zeitraum": "September 2026",
-    "stand": "2026-09-07",
+    "stand": "2026-09-08",
     "bestellungen": 11,
     "ebook": 11,
     "druck": 0,
@@ -435,7 +452,7 @@
       },
       {
         "d": "2026-09-08",
-        "v": 878758
+        "v": 915118
       }
     ],
     "rezensionen": [
@@ -582,6 +599,10 @@
       {
         "d": "2026-09-07",
         "v": 11
+      },
+      {
+        "d": "2026-09-08",
+        "v": 11
       }
     ],
     "tantiemen": [
@@ -619,6 +640,10 @@
       },
       {
         "d": "2026-09-07",
+        "v": 0
+      },
+      {
+        "d": "2026-09-08",
         "v": 0
       }
     ],
@@ -1033,15 +1058,6 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
-          "kanal": "Facebook",
-          "zeit": "09:30",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 3,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Instagram",
           "zeit": "11:00",
           "was": "09_muenze",
@@ -1057,15 +1073,6 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-08-31",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "09:30",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 3,
-          "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -1435,6 +1442,15 @@
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "20:15",
+          "was": "12_schrift",
+          "zustand": "nachholen",
+          "verschoben": 4,
+          "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -1904,6 +1920,15 @@
           "was": "01_neandertaler",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "20:15",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 4,
+          "urspruenglich": "2026-08-26",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Pinterest",
@@ -2392,11 +2417,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-08T07:02:00Z",
+    "stand": "2026-09-08T08:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-08T06:05:32Z",
+    "deployWann": "2026-09-08T07:04:36Z",
     "zertifikatTage": 76,
     "linksGeprueft": 51,
     "linksKaputt": 0,
