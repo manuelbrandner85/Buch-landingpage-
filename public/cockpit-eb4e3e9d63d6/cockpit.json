@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-09T16:04:04Z",
+  "stand": "2026-09-09T17:03:32Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-09-08",
@@ -1062,42 +1062,6 @@
           "was": "02_beleggrad",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "18:30",
-          "was": "04_ordnung",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-24",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "18:30",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-27",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "18:30",
-          "was": "11_statuen",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-29",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "18:30",
-          "was": "14_kernthese",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-09-04",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1590,6 +1554,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-03",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "09:30",
+          "was": "14_kernthese",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-09-04",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -2452,11 +2425,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-09T16:02:00Z",
+    "stand": "2026-09-09T17:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-09T15:04:50Z",
+    "deployWann": "2026-09-09T16:05:13Z",
     "zertifikatTage": 75,
     "linksGeprueft": 51,
     "linksKaputt": 0,
