@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-09T13:03:30Z",
+  "stand": "2026-09-09T14:03:40Z",
   "warnungen": [],
   "aenderungen": {
     "seit": "2026-09-08",
@@ -1057,27 +1057,6 @@
       "wochentag": "Mi",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "02_beleggrad",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "02_beleggrad",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "02_beleggrad",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "02_beleggrad",
@@ -1550,6 +1529,15 @@
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-05",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-09",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -2037,6 +2025,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-07",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-09",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     }
@@ -2455,11 +2452,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-09T13:02:00Z",
+    "stand": "2026-09-09T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-09T12:03:40Z",
+    "deployWann": "2026-09-09T13:04:31Z",
     "zertifikatTage": 75,
     "linksGeprueft": 51,
     "linksKaputt": 0,
