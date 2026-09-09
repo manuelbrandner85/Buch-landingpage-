@@ -1,37 +1,10 @@
 {
-  "stand": "2026-09-08T23:10:30Z",
-  "warnungen": [
-    {
-      "stufe": "hoch",
-      "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22). Ordner liegt unter Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT — der Aufgabe „Trendonix Rundlauf“ neu verbinden."
-    }
-  ],
+  "stand": "2026-09-09T00:06:05Z",
+  "warnungen": [],
   "aenderungen": {
-    "seit": "2026-09-07",
-    "punkte": [
-      {
-        "was": "Rang",
-        "von": "#878.758",
-        "nach": "#915.118",
-        "delta": "+#36.360",
-        "richtung": "schlecht"
-      },
-      {
-        "was": "Follower gesamt",
-        "von": "22.658",
-        "nach": "22.659",
-        "delta": "+1",
-        "richtung": "gut"
-      },
-      {
-        "was": "YouTube",
-        "von": "11",
-        "nach": "12",
-        "delta": "+1",
-        "richtung": "gut"
-      }
-    ],
-    "hinweis": null
+    "seit": "2026-09-08",
+    "punkte": [],
+    "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
   "regal": {
     "buecher": [
@@ -44,7 +17,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 31,
+        "tageDraussen": 32,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -150,7 +123,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 9,
+        "tageDraussen": 10,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -413,7 +386,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 13,
+    "tage": 14,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -466,6 +439,10 @@
       },
       {
         "d": "2026-09-08",
+        "v": 915118
+      },
+      {
+        "d": "2026-09-09",
         "v": 915118
       }
     ],
@@ -521,6 +498,10 @@
       {
         "d": "2026-09-08",
         "v": 2
+      },
+      {
+        "d": "2026-09-09",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -574,6 +555,10 @@
       },
       {
         "d": "2026-09-08",
+        "v": 22659
+      },
+      {
+        "d": "2026-09-09",
         "v": 22659
       }
     ],
@@ -714,6 +699,10 @@
         {
           "d": "2026-09-08",
           "v": 21600
+        },
+        {
+          "d": "2026-09-09",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -767,6 +756,10 @@
         },
         {
           "d": "2026-09-08",
+          "v": 12
+        },
+        {
+          "d": "2026-09-09",
           "v": 12
         }
       ],
@@ -822,6 +815,10 @@
         {
           "d": "2026-09-08",
           "v": 1041
+        },
+        {
+          "d": "2026-09-09",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -875,6 +872,10 @@
         },
         {
           "d": "2026-09-08",
+          "v": 6
+        },
+        {
+          "d": "2026-09-09",
           "v": 6
         }
       ],
@@ -930,6 +931,10 @@
         {
           "d": "2026-09-08",
           "v": 0
+        },
+        {
+          "d": "2026-09-09",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -984,6 +989,10 @@
         {
           "d": "2026-09-08",
           "v": 0
+        },
+        {
+          "d": "2026-09-09",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -1033,6 +1042,10 @@
         },
         {
           "d": "2026-09-08",
+          "v": 2
+        },
+        {
+          "d": "2026-09-09",
           "v": 2
         }
       ]
@@ -2164,20 +2177,20 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     },
     {
       "name": "YouTube",
       "handle": "@Trendonixde",
       "follower": 12,
-      "vorher": 11,
+      "vorher": 12,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
       "stand": "2026-09-08",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     },
     {
       "name": "Instagram",
@@ -2188,7 +2201,7 @@
       "notiz": "87 Beiträge. Bio-Link zeigt auf die Website — der Mangel aus dem August-Befund ist behoben. Reichweite bleibt ohne Business-Suite-Anmeldung nicht ablesbar.",
       "quelle": "Handpflege",
       "vorher": 1041,
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     },
     {
       "name": "Facebook",
@@ -2199,7 +2212,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     },
     {
       "name": "Pinterest",
@@ -2212,7 +2225,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     },
     {
       "name": "Bluesky",
@@ -2225,7 +2238,7 @@
       "reaktionenLabel": null,
       "beitraege": 11,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     },
     {
       "name": "Verteiler",
@@ -2239,7 +2252,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-07"
+      "vergleichVom": "2026-09-08"
     }
   ],
   "vorschlaege": [
@@ -2442,11 +2455,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-08T23:02:00Z",
+    "stand": "2026-09-09T00:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-08T22:08:07Z",
+    "deployWann": "2026-09-08T23:11:21Z",
     "zertifikatTage": 75,
     "linksGeprueft": 51,
     "linksKaputt": 0,
@@ -2458,6 +2471,10 @@
     {
       "was": "Die Unsichtbaren Fäden — Band 1",
       "warum": "Gebunden: keine ISBN"
+    },
+    {
+      "was": "Facebook",
+      "warum": "Die Followerzahl steht seit dem 2026-08-26 unverändert. Facebook gibt sie ohne Anmeldung nicht heraus; sie altert hier, ohne falsch auszusehen."
     },
     {
       "was": "Vorrat an Beiträgen",
