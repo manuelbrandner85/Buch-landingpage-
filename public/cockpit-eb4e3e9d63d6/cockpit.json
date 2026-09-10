@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-10T02:03:18Z",
+  "stand": "2026-09-10T11:52:09Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1130,42 +1130,6 @@
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
         },
         {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "07_feuer",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-08-31",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "10_archiv",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-01",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "13_tempel",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-02",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "11:00",
-          "was": "01_neandertaler",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-06",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
           "kanal": "Journal",
           "zeit": null,
           "was": "koenigsstrasse-neun-tage-statt-neunzig",
@@ -1665,6 +1629,15 @@
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "18:30",
+          "was": "01_neandertaler",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-06",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -2518,11 +2491,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-10T02:02:00Z",
+    "stand": "2026-09-10T10:45:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-10T01:05:08Z",
+    "deployWann": "2026-09-10T09:03:18Z",
     "zertifikatTage": 74,
     "linksGeprueft": 51,
     "linksKaputt": 0,
