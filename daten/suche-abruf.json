@@ -1,13 +1,13 @@
 {
   "_hinweis": "Von scripts/suche-abruf.mjs aus der Search Console geholt. Nicht von Hand pflegen.",
-  "stand": "2026-09-06T06:04:04Z",
+  "stand": "2026-09-10T00:03:26Z",
   "eingerichtet": true,
   "hinweis": null,
   "klicks": 0,
-  "impressionen": 93,
-  "position": 46.4,
-  "von": "2026-08-29",
-  "bis": "2026-09-04",
+  "impressionen": 73,
+  "position": 42.9,
+  "von": "2026-08-30",
+  "bis": "2026-09-07",
   "tage": 7,
   "suchanfragen": [
     {
