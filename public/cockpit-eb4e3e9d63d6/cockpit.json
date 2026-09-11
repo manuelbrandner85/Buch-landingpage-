@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-11T11:06:33Z",
+  "stand": "2026-09-11T20:16:45Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1142,59 +1142,11 @@
       "wochentag": "Fr",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "08_aehre",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "08_aehre",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "08_aehre",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "08_aehre",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "18:30",
-          "was": "02_beleggrad",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-25",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "18:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "18:30",
-          "was": "15_website",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-09-05",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "TikTok LIVE",
@@ -1767,6 +1719,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-05",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-11",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1809,6 +1770,15 @@
           "zustand": "nachholen",
           "verschoben": 3,
           "urspruenglich": "2026-08-22",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "09:30",
+          "was": "15_website",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-09-05",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -2559,12 +2529,12 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-11T11:05:00Z",
+    "stand": "2026-09-11T20:11:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
-    "deployLaeuft": true,
-    "deployWann": "2026-09-11T11:03:56Z",
-    "zertifikatTage": 73,
+    "deployLaeuft": false,
+    "deployWann": "2026-09-11T20:09:57Z",
+    "zertifikatTage": 72,
     "linksGeprueft": 51,
     "linksKaputt": 0,
     "linksZiele": [],
