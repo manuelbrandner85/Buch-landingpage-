@@ -1,13 +1,13 @@
 {
-  "stand": "2026-09-10T11:54:42Z",
+  "stand": "2026-09-11T11:03:04Z",
   "warnungen": [
     {
       "stufe": "mittel",
-      "text": "Seit 2 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
+      "text": "Seit 3 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
     }
   ],
   "aenderungen": {
-    "seit": "2026-09-09",
+    "seit": "2026-09-10",
     "punkte": [],
     "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
@@ -22,7 +22,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 33,
+        "tageDraussen": 34,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -128,7 +128,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 11,
+        "tageDraussen": 12,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -391,7 +391,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 15,
+    "tage": 16,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -452,6 +452,10 @@
       },
       {
         "d": "2026-09-10",
+        "v": 915118
+      },
+      {
+        "d": "2026-09-11",
         "v": 915118
       }
     ],
@@ -515,6 +519,10 @@
       {
         "d": "2026-09-10",
         "v": 2
+      },
+      {
+        "d": "2026-09-11",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -576,6 +584,10 @@
       },
       {
         "d": "2026-09-10",
+        "v": 22659
+      },
+      {
+        "d": "2026-09-11",
         "v": 22659
       }
     ],
@@ -724,6 +736,10 @@
         {
           "d": "2026-09-10",
           "v": 21600
+        },
+        {
+          "d": "2026-09-11",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -785,6 +801,10 @@
         },
         {
           "d": "2026-09-10",
+          "v": 12
+        },
+        {
+          "d": "2026-09-11",
           "v": 12
         }
       ],
@@ -848,6 +868,10 @@
         {
           "d": "2026-09-10",
           "v": 1041
+        },
+        {
+          "d": "2026-09-11",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -909,6 +933,10 @@
         },
         {
           "d": "2026-09-10",
+          "v": 6
+        },
+        {
+          "d": "2026-09-11",
           "v": 6
         }
       ],
@@ -972,6 +1000,10 @@
         {
           "d": "2026-09-10",
           "v": 0
+        },
+        {
+          "d": "2026-09-11",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -1034,6 +1066,10 @@
         {
           "d": "2026-09-10",
           "v": 0
+        },
+        {
+          "d": "2026-09-11",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -1092,52 +1128,15 @@
         {
           "d": "2026-09-10",
           "v": 2
+        },
+        {
+          "d": "2026-09-11",
+          "v": 2
         }
       ]
     }
   },
   "termine": [
-    {
-      "d": "2026-09-10",
-      "wochentag": "Do",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "05_reiterstafette",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "05_reiterstafette",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "05_reiterstafette",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "05_reiterstafette",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Journal",
-          "zeit": null,
-          "was": "koenigsstrasse-neun-tage-statt-neunzig",
-          "zustand": "terminiert",
-          "hinweis": null
-        }
-      ]
-    },
     {
       "d": "2026-09-11",
       "wochentag": "Fr",
@@ -1186,15 +1185,6 @@
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-03",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -1702,6 +1692,15 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-10",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "TikTok LIVE",
           "zeit": "20:00",
           "was": null,
@@ -2075,6 +2074,74 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
+    },
+    {
+      "d": "2026-09-25",
+      "wochentag": "Fr",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "05_reiterstafette",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "09:30",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "09_muenze",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-30",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "18:30",
+          "was": "13_tempel",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-02",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok LIVE",
+          "zeit": "20:00",
+          "was": null,
+          "zustand": "steht",
+          "hinweis": "fester Termin"
+        }
+      ]
     }
   ],
   "bericht": {
@@ -2213,7 +2280,7 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     },
     {
       "name": "YouTube",
@@ -2226,7 +2293,7 @@
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     },
     {
       "name": "Instagram",
@@ -2237,7 +2304,7 @@
       "notiz": "87 Beiträge. Bio-Link zeigt auf die Website — der Mangel aus dem August-Befund ist behoben. Reichweite bleibt ohne Business-Suite-Anmeldung nicht ablesbar.",
       "quelle": "Handpflege",
       "vorher": 1041,
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     },
     {
       "name": "Facebook",
@@ -2248,7 +2315,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     },
     {
       "name": "Pinterest",
@@ -2261,7 +2328,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     },
     {
       "name": "Bluesky",
@@ -2274,7 +2341,7 @@
       "reaktionenLabel": null,
       "beitraege": 11,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     },
     {
       "name": "Verteiler",
@@ -2288,7 +2355,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-09"
+      "vergleichVom": "2026-09-10"
     }
   ],
   "vorschlaege": [
@@ -2326,6 +2393,12 @@
     }
   ],
   "aktivitaet": [
+    {
+      "id": "journal-was-ist-das-domestikationssyndrom",
+      "zeit": "2026-09-11T11:03:04Z",
+      "kanal": "Website",
+      "text": "Der Journalbeitrag „was-ist-das-domestikationssyndrom“ ist heute erschienen."
+    },
     {
       "id": "journal-koenigsstrasse-neun-tage-statt-neunzig",
       "zeit": "2026-09-10T00:03:27Z",
@@ -2397,11 +2470,6 @@
       "zeit": "2026-09-02T05:35:00Z",
       "kanal": "Rundlauf",
       "text": "AUTOPILOT-Ordner wiedergefunden (Band 1\\05_Marketing\\05_Social_Kampagne). Lauf behelfsweise ueber Desktop Commander: YouTube-Kommentare, Zuschauerbeitraege und Bluesky geprueft — nichts Neues. Zur 11-Minuten-Live vom 01.09. (23:56) wurde wegen der Stoerung kein Clip gepostet; nichts zu privatisieren."
-    },
-    {
-      "zeit": "2026-09-01T06:27:00Z",
-      "kanal": "Website",
-      "text": "Search Console (7 Tage bis 29.08.): 0 Klicks, 29 Impressionen, Position 54,8. Erstmals Indexierungszahlen: 66 Seiten indexiert, 23 gefunden und noch nicht indexiert, Sitemap mit 197 erkannten Seiten."
     }
   ],
   "offen": [
@@ -2491,17 +2559,17 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-10T11:53:00Z",
+    "stand": "2026-09-11T10:59:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": null,
-    "zertifikatTage": 74,
+    "deployWann": "2026-09-11T09:02:10Z",
+    "zertifikatTage": 73,
     "linksGeprueft": 51,
     "linksKaputt": 0,
     "linksZiele": [],
     "seitenGemeldet": 198,
-    "journalVorrat": 1
+    "journalVorrat": 0
   },
   "luecken": [
     {
@@ -2513,8 +2581,12 @@
       "warum": "Die Followerzahl steht seit dem 2026-08-26 unverändert. Facebook gibt sie ohne Anmeldung nicht heraus; sie altert hier, ohne falsch auszusehen."
     },
     {
+      "was": "Verteiler",
+      "warum": "Die Followerzahl steht seit dem 2026-08-28 unverändert. Verteiler gibt sie ohne Anmeldung nicht heraus; sie altert hier, ohne falsch auszusehen."
+    },
+    {
       "was": "Vorrat an Beiträgen",
-      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-10 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
+      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-11 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
     }
   ]
 }
