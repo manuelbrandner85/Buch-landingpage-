@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-12T13:06:30Z",
+  "stand": "2026-09-12T14:03:29Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -1182,27 +1182,6 @@
       "wochentag": "Sa",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "06_fuenf_fragen",
@@ -1906,6 +1885,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-08",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-12",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2576,11 +2564,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-12T13:02:00Z",
+    "stand": "2026-09-12T14:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-12T12:04:37Z",
+    "deployWann": "2026-09-12T13:07:28Z",
     "zertifikatTage": 72,
     "linksGeprueft": 51,
     "linksKaputt": 0,
