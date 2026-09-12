@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-12T15:03:33Z",
+  "stand": "2026-09-12T16:03:38Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -2344,7 +2344,7 @@
       "stand": "2026-09-12",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
-      "beitraege": 12,
+      "beitraege": 13,
       "quelle": "abgerufen",
       "vergleichVom": "2026-09-11"
     },
@@ -2564,11 +2564,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-12T15:02:00Z",
+    "stand": "2026-09-12T16:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-12T14:04:26Z",
+    "deployWann": "2026-09-12T15:04:20Z",
     "zertifikatTage": 72,
     "linksGeprueft": 51,
     "linksKaputt": 0,
