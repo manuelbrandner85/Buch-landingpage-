@@ -1,6 +1,10 @@
 {
-  "stand": "2026-09-12T03:03:28Z",
+  "stand": "2026-09-12T11:02:18Z",
   "warnungen": [
+    {
+      "stufe": "mittel",
+      "text": "Der stündliche Rechnerlauf hat sich seit mehr als sechs Stunden nicht gemeldet."
+    },
     {
       "stufe": "mittel",
       "text": "Seit 4 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -1208,42 +1212,6 @@
           "was": "06_fuenf_fragen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "09:30",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 3,
-          "urspruenglich": "2026-08-27",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "10_archiv",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-01",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "13_tempel",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-02",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "11:00",
-          "was": "03_kochen",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-07",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1872,6 +1840,15 @@
           "verschoben": 2,
           "urspruenglich": "2026-08-29",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "18:30",
+          "was": "03_kochen",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-07",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2320,7 +2297,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-09-11",
+      "stand": "2026-09-12",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
@@ -2603,11 +2580,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-12T03:02:00Z",
+    "stand": "2026-09-12T04:47:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-12T02:04:24Z",
+    "deployWann": "2026-09-12T03:04:29Z",
     "zertifikatTage": 72,
     "linksGeprueft": 51,
     "linksKaputt": 0,
@@ -2619,10 +2596,6 @@
     {
       "was": "Die Unsichtbaren Fäden — Band 1",
       "warum": "Gebunden: keine ISBN"
-    },
-    {
-      "was": "Kanalabruf",
-      "warum": "TikTok: fremdes Profil: unbekannt"
     },
     {
       "was": "Facebook",
