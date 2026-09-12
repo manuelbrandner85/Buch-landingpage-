@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-12T01:02:35Z",
+  "stand": "2026-09-12T02:03:35Z",
   "warnungen": [
     {
       "stufe": "mittel",
@@ -2333,7 +2333,7 @@
       "vorher": 12,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-09-11",
+      "stand": "2026-09-12",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -2368,7 +2368,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-09-11",
+      "stand": "2026-09-12",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
@@ -2380,7 +2380,7 @@
       "follower": 0,
       "vorher": 0,
       "reaktionen": null,
-      "stand": "2026-09-11",
+      "stand": "2026-09-12",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
       "beitraege": 12,
@@ -2603,11 +2603,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-12T01:02:00Z",
+    "stand": "2026-09-12T02:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-12T00:09:40Z",
+    "deployWann": "2026-09-12T01:03:40Z",
     "zertifikatTage": 72,
     "linksGeprueft": 51,
     "linksKaputt": 0,
@@ -2619,6 +2619,10 @@
     {
       "was": "Die Unsichtbaren Fäden — Band 1",
       "warum": "Gebunden: keine ISBN"
+    },
+    {
+      "was": "Kanalabruf",
+      "warum": "TikTok: fremdes Profil: unbekannt"
     },
     {
       "was": "Facebook",
