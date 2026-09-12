@@ -1,10 +1,6 @@
 {
-  "stand": "2026-09-12T11:02:18Z",
+  "stand": "2026-09-12T11:59:22Z",
   "warnungen": [
-    {
-      "stufe": "mittel",
-      "text": "Der stündliche Rechnerlauf hat sich seit mehr als sechs Stunden nicht gemeldet."
-    },
     {
       "stufe": "mittel",
       "text": "Seit 4 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
@@ -2580,11 +2576,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-12T04:47:00Z",
+    "stand": "2026-09-12T11:57:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-12T03:04:29Z",
+    "deployWann": "2026-09-12T11:10:06Z",
     "zertifikatTage": 72,
     "linksGeprueft": 51,
     "linksKaputt": 0,
