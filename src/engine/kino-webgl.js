@@ -352,6 +352,7 @@ export function starteKino(canvas, szenen, optionen = {}) {
   const platzhalter = einfarbig(gl, [10, 16, 30]);
   const flach = einfarbig(gl, [128, 128, 128]);
   const geladen = szenen.map(() => ({ bild: platzhalter, tiefe: flach, seite: 1.5, bereit: false }));
+  let ersteGemeldet = false;
 
   /**
    * Geladen wird nur, was in Reichweite ist.
@@ -378,6 +379,12 @@ const VORAUS = 3, ZURUECK = 1;
         e.bild = textur(gl, img);
         e.seite = img.width / img.height;
         e.bereit = true;
+        // Erst wenn wirklich etwas zu sehen ist, darf die Fläche aufgedeckt
+        // werden. Vorher wurde sie sichtbar geschaltet, sobald der Kontext
+        // stand – und stand dann schwarz da, bis das erste Motiv über das
+        // Netz kam: auf einer normalen Verbindung rund drei Sekunden. Der
+        // Rückruf feuert genau einmal, bei der ersten fertigen Textur.
+        if (!ersteGemeldet) { ersteGemeldet = true; optionen.beiErstemBild?.(); }
       }).catch(() => { e.angefordert = false; });
       if (s.tiefe) {
         lade(s.tiefe).then((img) => { e.tiefe = textur(gl, img); }).catch(() => undefined);

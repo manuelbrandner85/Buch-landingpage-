@@ -22,5 +22,11 @@ export interface KinoSteuerung {
 export function starteKino(
   canvas: HTMLCanvasElement,
   szenen: KinoSzene[],
-  optionen?: { qualitaet?: number; zoom?: number; daempfung?: number },
+  optionen?: {
+    qualitaet?: number;
+    zoom?: number;
+    daempfung?: number;
+    /** Einmalig, sobald die erste Textur steht – vorher ist die Fläche leer. */
+    beiErstemBild?: () => void;
+  },
 ): KinoSteuerung | null;

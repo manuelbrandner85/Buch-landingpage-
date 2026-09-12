@@ -950,6 +950,23 @@ main{z-index:3}
 .ruhig .kino-flaeche{display:none}
 @media (prefers-reduced-motion:reduce){ .kino-flaeche{display:none} }
 
+/* Das Vorbild für die erste Sekunde – 640 px, weichgezeichnet, rund 1,7 KB.
+   Es steht im ausgelieferten HTML und trägt das Bild, bis die Kinoebene ihre
+   erste Textur hat. Vorher begann jeder Eintritt in eine Welt mit rund drei
+   Sekunden Schwarz.
+
+   Es blendet NICHT gleichzeitig mit der Fläche aus, sondern erst danach: Zwei
+   Vollbilder, die sich über `opacity` gegenseitig ablösen, summieren sich in
+   der Mitte nie auf eins – dazwischen schiene das Schwarz durch. Genau dieser
+   Fehler hat die alten DOM-Bühnen flackern lassen. Die Fläche ist opak, sobald
+   sie steht; das Vorbild darf danach in Ruhe verschwinden. */
+.kino-vorbild{position:fixed;inset:0;pointer-events:none;
+  background-size:cover;background-position:center;
+  transform:scale(1.04);            /* die weiche Kante des Posters bleibt außen */
+  transition:opacity .5s ease 1s}
+.ruhig .kino-vorbild{display:none}
+@media (prefers-reduced-motion:reduce){ .kino-vorbild{display:none} }
+
 /* Zeilenmasken: eine Überschrift steigt zeilenweise auf, statt als Block einzublenden.
    Die Klassennamen kommen aus src/engine/zeilen.js. */
 .zeile{display:inline-block;overflow:hidden;vertical-align:top}
@@ -1315,21 +1332,54 @@ footer > a:not(:has(.fussmarke)){display:inline}
 header{flex-wrap:nowrap}
 header nav{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
   scrollbar-width:none;-ms-overflow-style:none;
-  scroll-snap-type:x proximity;padding-block:.2rem;
-  mask-image:linear-gradient(to right,transparent 0,#000 1.2rem,#000 calc(100% - 1.2rem),transparent 100%)}
+  scroll-snap-type:x proximity;padding-block:.2rem}
 header nav::-webkit-scrollbar{display:none}
 header nav > *{flex:0 0 auto;scroll-snap-align:end}
 /* Der Kaufweg steht neben der Leiste, nicht darin – sonst schöbe sich der
    scrollende Rest darunter hindurch. */
 .kopf-kaufen{flex:0 0 auto;margin-left:.2rem}
+.kopf-kaufen .kurz{display:none}
+
+/* ---------- Ton und Ruhe: die beiden Schalter, die nie verschwinden ----------
+   Sie standen bis zum 08.09.2026 in der schiebbaren Leiste und lagen auf einem
+   Telefon außerhalb des sichtbaren Teils – ausgerechnet die Schalter für Ton
+   und Bewegung. Jetzt stehen sie fest zwischen Leiste und Kaufweg: als Wort,
+   solange Platz ist, sonst als Zeichen. Sie erben die Typografie der Leiste,
+   damit sich nichts am Bild der Kopfzeile ändert. */
+.kopf-schalter{display:inline-flex;align-items:center;gap:clamp(.7rem,2vw,1.6rem);
+  flex:0 0 auto}
+.kopf-schalter button{font-family:var(--display),serif;font-size:.7rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--papier);opacity:.7;
+  background:none;border:0;cursor:pointer;padding:.4rem 0;
+  display:inline-flex;align-items:center;gap:.4rem;
+  transition:opacity .3s,color .3s}
+.kopf-schalter button:hover{opacity:1;color:var(--gold)}
+.kopf-schalter button[aria-pressed="true"]{color:var(--gold);opacity:1}
+.kopf-schalter .zeichen{display:none;flex:0 0 auto}
 
 @media (max-width:760px){
   header{padding:.7rem calc(var(--rand) * .55);gap:.6rem}
   header .marke img{width:2.1rem}
   header .marke .reihenname{display:none}
-  header nav{gap:.9rem}
+  header nav{gap:.9rem;
+    /* Die Ausblendung am Rand gehört dorthin, wo tatsächlich geschoben wird.
+       Auf breiten Schirmen passt die Leiste vollständig – dort ließ die Maske
+       den letzten Eintrag ohne Grund abblassen. */
+    mask-image:linear-gradient(to right,transparent 0,#000 1.2rem,#000 calc(100% - 1.2rem),transparent 100%)}
   header nav a,header nav button{font-size:.62rem;letter-spacing:.13em}
   .kopf-kaufen{font-size:.6rem;padding:.55rem .8rem}
+  .kopf-kaufen .lang{display:none}
+  .kopf-kaufen .kurz{display:inline}
+
+  /* Zeichen statt Wort – und ein Ziel, das ein Daumen trifft. Die Fläche
+     wächst nach außen über den sichtbaren Strich hinaus, damit die Leiste
+     optisch schmal bleibt. */
+  .kopf-schalter{gap:.2rem;margin-right:.1rem}
+  .kopf-schalter .wort{position:absolute;width:1px;height:1px;overflow:hidden;
+    clip-path:inset(50%);white-space:nowrap}
+  .kopf-schalter .zeichen{display:block}
+  .kopf-schalter button{min-width:2.75rem;min-height:2.75rem;
+    justify-content:center;padding:0}
 }
 
 /* ---------- Ruhigere, teurere Bewegung ----------

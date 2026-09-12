@@ -21,6 +21,25 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
   const leinwand = useRef<HTMLCanvasElement>(null);
   const [laeuft, setLaeuft] = useState(false);
 
+  /**
+   * Das Vorbild für die erste Sekunde.
+   *
+   * Die Fläche wurde bisher sichtbar geschaltet, sobald der WebGL-Kontext
+   * stand – und stand dann schwarz da, bis das erste Motiv über das Netz kam.
+   * Gemessen waren das rund drei Sekunden: der Eintritt in eine Welt begann
+   * mit einem leeren Bild.
+   *
+   * Das Poster liegt längst neben jedem Motiv: 640 Pixel breit, weichgezeichnet,
+   * rund 1,7 KB. Es steht im ausgelieferten HTML und ist damit vor dem ersten
+   * Bild da. Die Kinoebene blendet sich darüber, sobald ihre erste Textur
+   * steht – aus unscharf wird scharf, nicht aus schwarz wird Bild.
+   */
+  const ersteSzene = szenen.find((s) => s.platte);
+  const ersterAssetName = ersteSzene ? assetNach(ersteSzene.platte) : undefined;
+  const vorbild = ersterAssetName
+    ? ordner(`${ersterAssetName.datei}-poster.avif`, ersterAssetName.bandId ?? 'band-1')
+    : undefined;
+
   useEffect(() => {
     if (!leinwand.current) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { beiRueckfall(); return; }
@@ -66,12 +85,15 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
           stimmung: stimmungFuer(s.kapitelId, s.bandId),
           tor: Boolean(s.tor),
         };
-      }));
+      }), {
+        // Aufdecken erst, wenn wirklich etwas zu sehen ist. Bis dahin trägt
+        // das Poster darunter das Bild.
+        beiErstemBild: () => setLaeuft(true),
+      });
     } catch {
       steuerung = null;
     }
     if (!steuerung) { beiRueckfall(); return; }
-    setLaeuft(true);
     // Für Messungen von außen erreichbar – die Fläche selbst braucht das nicht.
     (window as unknown as { kino?: KinoSteuerung }).kino = steuerung;
 
@@ -147,6 +169,12 @@ export function KinoWebGL({ szenen, beiRueckfall }: {
 
   return (
     <div className="kino" aria-hidden="true">
+      {vorbild && (
+        <div
+          className="kino-vorbild"
+          style={{ backgroundImage: `url(${vorbild})`, opacity: laeuft ? 0 : 1 }}
+        />
+      )}
       <canvas ref={leinwand} className="kino-flaeche" style={{ opacity: laeuft ? 1 : 0 }} />
     </div>
   );
