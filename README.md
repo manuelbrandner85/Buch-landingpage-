@@ -80,6 +80,58 @@ Fahren wirklich vor den Hintergrund.
 Das Modell liegt unter `modelle/depth.onnx` (99 MB, nicht im Repository) und
 wird beim ersten Lauf geladen.
 
+**Nachgebessert am 08.09.2026** — die Karten waren Messdaten, wurden aber wie
+Bilder behandelt. Drei Fehler in vier Zeilen, alle mit derselben Wirkung: Der
+Raum blieb weich, wo er hätte stehen müssen.
+
+- **Das Seitenverhältnis war fest auf 16:9 verdrahtet** (`512 * 9/16`).
+  Dreizehn Motive haben ein anderes — Band 3 liegt bei 1,49 und 1,34,
+  `b3-kap16-motiv` bei 2,71, die Coverbilder bei 0,67. Bei ihnen lag die
+  Tiefeninformation systematisch an der falschen Bildstelle: Die Engine
+  sampelt Motiv und Karte mit denselben Koordinaten und las „nah", wo „fern"
+  war. Das war der Grund, warum Band 3 sich flacher anfühlte als Band 1.
+  Jetzt folgt die Karte dem Motiv, Bild für Bild.
+- **512 Pixel waren zu wenig.** Gezeigt wird ein Motiv mit bis zu 2560 px, die
+  Karte hatte ein Fünftel davon. Silhouetten fielen unter die Rasterung — und
+  an den Silhouetten entsteht der Eindruck von Raum. Jetzt 1024 auf der langen
+  Kante. Im Vergleichsbild (`qa/tiefe-vergleich.jpg`) sieht man es an `grabung`:
+  Kellen und Vermessungsschnüre sind eigene Körper statt Schlieren.
+- **`webp({quality:82})` auf einem Graustufengradienten** macht aus einer
+  Fläche, die schräg in den Raum läuft, eine Treppe. Gemessen an `grabung`
+  gegen die unkomprimierte Karte:
+
+  | | Größe | größter Fehler | mittlerer Fehler |
+  |---|---|---|---|
+  | PNG grau | 100 KB | 0 | 0 |
+  | WebP verlustfrei | 56 KB | 0 | 0 |
+  | **WebP q95** | **16 KB** | **9/255** | **0,36** |
+  | WebP q82 (alt, bei 512 px) | 8 KB | 18/255 | 0,59 |
+
+  Gewählt ist q95. Verlustfrei wäre bei vier Szenen im Ladefenster rund 190 KB
+  mehr für einen Unterschied von neun Stufen auf 255.
+
+Dazu ersetzt ein Medianfilter den Gaußfilter mit Radius 1,2: Er hält Rauschen
+draußen und Kanten stehen. Alle vierzig Karten zusammen wachsen von 84 auf
+459 KB, im Ladefenster von vier Szenen sind das **37 KB mehr** — bei
+vierfacher Auflösung und richtigem Seitenverhältnis.
+
+### Der Eintritt beginnt nicht mehr mit Schwarz
+
+Die Kinofläche wurde sichtbar geschaltet, sobald der WebGL-Kontext stand — und
+stand dann schwarz da, bis das erste Motiv über das Netz kam. Auf der
+ausgelieferten Seite waren das rund **drei Sekunden**. Der Eintritt in eine
+Welt begann mit einem leeren Bild.
+
+Das Poster liegt längst neben jedem Motiv: 640 px, weichgezeichnet, rund
+1,7 KB, erzeugt von `scripts/assets.mjs`. Es steht jetzt als `.kino-vorbild`
+im ausgelieferten HTML und ist damit vor dem ersten Bild da. `starteKino`
+meldet über `beiErstemBild`, wenn die erste Textur steht; erst dann blendet
+die Fläche auf — aus unscharf wird scharf, nicht aus schwarz wird Bild.
+
+Das Vorbild blendet **nicht** gleichzeitig aus, sondern eine Sekunde später:
+Zwei Vollbilder, die sich über `opacity` ablösen, summieren sich in der Mitte
+nie auf eins. Genau dieser Fehler hat die alten DOM-Bühnen flackern lassen.
+
 **Kamera und Licht**
 - Die Fahrt folgt einer Zeitkurve mit Masse: träges Anfahren, langes Ausrollen,
   eine kleine gedämpfte Schwingung am Ende. Ein reines Smoothstep sah sauber aus
@@ -812,6 +864,25 @@ Bildschirmhöhe mehr passieren muss. Die Coverebenen entfallen im Hochformat –
 sie greifen dort kaum und kosten auf schwächeren Geräten Rechenzeit. Partikel
 laufen in halber Dichte, der Weichzeichner hinter dem Evidenzregler entfällt.
 
+**Ton und Ruhe verschwanden auf dem Telefon** (behoben am 08.09.2026). Beide
+standen als vierter und fünfter Eintrag in der Kopfleiste. Die ist auf einem
+schmalen Gerät schmaler als ihr Inhalt — gemessen 192 Pixel für 399 — und
+lässt sich schieben; sichtbar blieben „Welt" und ein Teil von „Zeitleiste".
+Ausgerechnet die beiden Schalter, die über Ton und Bewegung entscheiden, waren
+die am schwersten erreichbaren der Seite: Wer den Ton abstellen wollte, musste
+erst erraten, dass sich die Leiste wischen lässt.
+
+Sie stehen jetzt als `.kopf-schalter` fest zwischen Leiste und Kaufweg — auf
+breiten Schirmen unverändert als Wort, auf schmalen als Strichzeichnung in
+derselben Haarlinie wie die Hausmarke, mit `aria-label` und einem Ziel von
+2,75 rem. Der Kaufweg heißt dort „Kaufen" statt „Band 1 kaufen": Die 120 Pixel
+Unterschied waren genau die, die der Leiste danach fehlten.
+
+Dabei ist noch ein zweiter, älterer Fehler aufgefallen: Die Ausblendmaske am
+Rand der Leiste lief unbedingt und ließ auch auf breiten Schirmen den letzten
+Eintrag abblassen, obwohl dort nichts zu schieben ist. Sie gilt jetzt nur noch
+unter 760 Pixeln.
+
 ## Erkundung
 
 Die Welt merkt sich lokal im Browser, welche Szenen schon gesehen wurden
@@ -836,3 +907,31 @@ und nichts freizuschalten.
   Datenblatt meldet sie an Google.
 - Coverdatei **ohne Typografie** – sonst parallaxt der Titel mit dem Himmel mit
 - Freistellung der Tiefenebenen (`layer-01…05.png`); VideoSlash hat dafür keine Funktion
+- **Sieben Motive von Band 1 liegen unter der Auflösung der übrigen.** Gemessen
+  am 08.09.2026 in `assets-quelle/`:
+
+  | | Auflösung | Größe |
+  |---|---|---|
+  | feuer, graben, grabung, feld, dunhuang, persien, versunken | 1920×1080 | **80–101 KB** |
+  | baustelle, bibliothek, catal, kap2–kap6, strasse | 4096×2304 | ~2000 KB |
+
+  Ein Achtel der Fläche, ein Zwanzigstel der Datenmenge – und `graben` und
+  `feuer` sind die ersten beiden Bilder, die ein Besucher von Band 1 sieht.
+  Auf einem 2560er Schirm wird so ein Bild um 1,33 hochgezogen, dazu die
+  Kamerafahrt mit bis zu 1,24: effektiv das 1,65-fache aus einem stark
+  komprimierten JPEG.
+
+  In Arbeit über `Landingpage/_arbeit/motive-schaerfen.py`
+  (`topaz/image-upscale`, Faktor 2, **10 Credits je Motiv**, gemessen).
+  **Hochskalieren, nicht neu erzeugen:** Zu jedem dieser Motive gehört ein
+  fünf Sekunden langes Bewegtbild, das aus genau diesem Standbild entstanden
+  ist; die Kinoebene blendet zwischen beiden. Ein neu erzeugtes Motiv hätte
+  eine andere Komposition, und der Übergang zum Video wäre ein Sprung. Topaz
+  lässt die Komposition unangetastet — Bewegtfassung, Tiefenkarte und
+  Bildunterschrift passen weiter.
+
+  Die Herkunftsangabe bleibt dabei, was sie ist: sechsmal „Freie
+  Rekonstruktion", bei `grabung` „Gesicherter Befund". Hochskalieren erfindet
+  keine Szene, es schärft vorhandenes Material — aus einer Rekonstruktion wird
+  dadurch keine Fotografie, und der Bildnachweis auf Seite 201 gilt
+  unverändert.
