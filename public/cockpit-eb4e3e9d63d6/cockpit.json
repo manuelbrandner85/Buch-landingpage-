@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-13T11:02:33Z",
+  "stand": "2026-09-13T12:03:32Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -2370,7 +2370,7 @@
       "vorher": 21600,
       "reaktionen": 164700,
       "reaktionenLabel": "Likes",
-      "stand": "2026-09-12",
+      "stand": "2026-09-13",
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
@@ -2652,11 +2652,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-13T11:02:00Z",
+    "stand": "2026-09-13T12:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-13T10:03:26Z",
+    "deployWann": "2026-09-13T11:08:36Z",
     "zertifikatTage": 71,
     "linksGeprueft": 51,
     "linksKaputt": 0,
@@ -2672,10 +2672,6 @@
     {
       "was": "Alles nur Zufall?",
       "warum": "seit 14 Tagen im Handel und noch ohne Bewertung"
-    },
-    {
-      "was": "Kanalabruf",
-      "warum": "TikTok: fremdes Profil: unbekannt"
     },
     {
       "was": "Facebook",
