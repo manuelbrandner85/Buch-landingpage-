@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-13T06:02:32Z",
+  "stand": "2026-09-13T06:29:05Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -359,8 +359,8 @@
     "klicks7": 0,
     "impressionen7": 73,
     "position": 42.9,
-    "seitenIndexiert": 66,
-    "seitenGesamt": 198,
+    "seitenIndexiert": 73,
+    "seitenGesamt": 203,
     "suchanfragen": [
       {
         "wort": "an welchem fluss liegt antwerpen",
@@ -2497,6 +2497,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-13T06:35:00Z",
+      "kanal": "Rundlauf",
+      "text": "08-Uhr-Lauf (behelfsweise ueber Desktop Commander): Search Console abgelesen — 7 Tage 04.–10.09.: 0 Klicks, nur noch 4 Impressionen (Vorwoche 84), Position 23,8; 73 Seiten indexiert, Sitemap 203 erkannt (12.09. gelesen). Kontoreihenfolge im Browser verschoben, Property jetzt unter /u/2. YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky leer, TikTok-Postfach nur Teilen-Benachrichtigungen; Kommentarrunde 08:0x hatte die fuenf Kanaele schon geprueft."
+    },
+    {
       "zeit": "2026-09-13T05:30:00Z",
       "kanal": "Rundlauf",
       "text": "Erster Rundlauf seit dem 08.09. (rund 5 Tage Ausfall nach dem Windows-Update). In der Luecke lief am 12.09. eine Live von 2h 41min OHNE TITEL; kein Clip gepostet, nichts zu privatisieren, Nacharbeit bereinigt. YouTube-Browser stand auf Manuels Privatkonto - auf Trendonix zurueckgewechselt; Kommentare und Zuschauerbeitraege leer, Bluesky leer, TikTok-Postfach nur Teilen-Benachrichtigungen."
@@ -2567,12 +2572,6 @@
       "zeit": "2026-09-02T16:06:38Z",
       "kanal": "Technik",
       "text": "Die Veröffentlichung ist auf „fehlgeschlagen“ gewechselt."
-    },
-    {
-      "id": "best-2026-09-02-11",
-      "zeit": "2026-09-02T11:03:26Z",
-      "kanal": "Amazon",
-      "text": "6 Bestellungen mehr im Monat — jetzt 11."
     }
   ],
   "offen": [
@@ -2671,7 +2670,7 @@
     "linksGeprueft": 51,
     "linksKaputt": 0,
     "linksZiele": [],
-    "seitenGemeldet": 198,
+    "seitenGemeldet": 203,
     "journalVorrat": 0
   },
   "luecken": [

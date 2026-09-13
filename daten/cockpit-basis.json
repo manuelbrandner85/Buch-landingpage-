@@ -52,13 +52,15 @@
   },
   "besucher": {
     "gelesen": true,
-    "hinweis": "Abgelesen 04.09. 08:4x (letzte Aktualisierung laut Konsole 6,5 Std. zuvor, Daten bis 01.09.). 7 Tage: 0 Klicks, 84 Impressionen (Vorwoche 29), Position 50,1. 48 Suchanfragen, keine mit Klick; vorn: uruk (4), magellanstraße (4), bab el mandeb (3). Markenanfrage „trendonix“ erstmals mit Position 6,0 (1 Impression). Indexierung: 66 indexiert, 24 nicht (23 „Gefunden – zurzeit nicht indexiert“, 1 noindex). Sitemap zuletzt 02.09. gelesen, 198 erkannte Seiten.",
+    "hinweis": "Abgelesen 13.09. 08:3x (Konsole zuletzt vor 5 Std. aktualisiert, Datenfenster 04.–10.09.). 7 Tage: 0 Klicks, 4 Impressionen (Vorwoche 84), Position 23,8. Einzige gelistete Suchanfrage: hauptstadt an der donau (1 Impression, 0 Klicks). Indexierung: 73 indexiert, 131 nicht (Stand 04.09.). Sitemap zuletzt 12.09. gelesen, 203 erkannte Seiten. Kontoreihenfolge im Browser verschoben: die Property liegt jetzt unter /u/2 (brandy13062), /u/3 ist ein anderes Konto ohne Zugriff.",
     "klicks7": 0,
-    "impressionen7": 84,
-    "position": 50.1,
-    "seitenIndexiert": 66,
-    "seitenGesamt": 198,
-    "suchanfragen": []
+    "impressionen7": 4,
+    "position": 23.8,
+    "seitenIndexiert": 73,
+    "seitenGesamt": 203,
+    "suchanfragen": [
+      { "wort": "hauptstadt an der donau", "klicks": 0 }
+    ]
   },
   "kanaele": [
     {
@@ -252,6 +254,11 @@
   ],
   "aktivitaet": [
     {
+      "zeit": "2026-09-13T06:35:00Z",
+      "kanal": "Rundlauf",
+      "text": "08-Uhr-Lauf (behelfsweise ueber Desktop Commander): Search Console abgelesen — 7 Tage 04.–10.09.: 0 Klicks, nur noch 4 Impressionen (Vorwoche 84), Position 23,8; 73 Seiten indexiert, Sitemap 203 erkannt (12.09. gelesen). Kontoreihenfolge im Browser verschoben, Property jetzt unter /u/2. YouTube-Kommentare und Zuschauerbeitraege leer, Bluesky leer, TikTok-Postfach nur Teilen-Benachrichtigungen; Kommentarrunde 08:0x hatte die fuenf Kanaele schon geprueft."
+    },
+    {
       "zeit": "2026-09-13T05:30:00Z",
       "kanal": "Rundlauf",
       "text": "Erster Rundlauf seit dem 08.09. (rund 5 Tage Ausfall nach dem Windows-Update). In der Luecke lief am 12.09. eine Live von 2h 41min OHNE TITEL; kein Clip gepostet, nichts zu privatisieren, Nacharbeit bereinigt. YouTube-Browser stand auf Manuels Privatkonto - auf Trendonix zurueckgewechselt; Kommentare und Zuschauerbeitraege leer, Bluesky leer, TikTok-Postfach nur Teilen-Benachrichtigungen."
@@ -305,16 +312,6 @@
       "zeit": "2026-08-30T03:10:00Z",
       "kanal": "Website",
       "text": "Die Feed-Welt kann neun Dinge mehr. Die Quelle bleibt im Geraet: \"Sieh selbst nach\" fuehrte auf /q/NN und beendete damit den Aufenthalt; jetzt faehrt ein Blatt darueber und wieder weg, man steht danach bei demselben Beitrag. Wischen rastet ein, am Laptop springen Pfeil und Leertaste um einen Bildschirm. Auf breiten Fenstern liegt das Standbild unscharf hinter der Scheibe statt schwarzem Nichts. Nach zehn Beitraegen steht ein Zwischenruf mit der Zahl - am Ende kam sie so spaet, dass sie eine Behauptung ueber den Leser war statt einer Beobachtung an ihm. Im Schluss steht jetzt das Eintragefeld selbst statt eines Verweises darauf, und daneben Seite 9 aus dem Buch: \"Die zweite Leseordnung - Lies das Buch wie einen Feed\", die genau die Reihenfolge nennt, in der die vierzig Beitraege gelaufen sind. Jeder Beitrag laesst sich teilen; der Link oeffnet die Welt bei diesem Kapitel. Neu unter /zufall/zufall/liste/: die stille Fassung, alle vierzig Beitraege lesbar ohne Scrollen, in der Sitemap - Suchmaschinen wischen nicht. Und gemessen wird jetzt die Strecke: erster Beitrag, zehnter, zwanzigster, dreissigster, Schluss, dazu Nachsehen und Teilen; nur mit Zustimmung, wie alles andere auch. Kosten: keine - kein einziger kie.ai-Punkt, Guthaben unveraendert rund 514."
-    },
-    {
-      "zeit": "2026-08-30T02:05:00Z",
-      "kanal": "Website",
-      "text": "Die Feed-Welt benimmt sich jetzt wie ein Telefon. Sechs Dinge behoben: Die Wischrichtung war auf dem Telefon verkehrt herum — beim Wischen blendet sich die Adressleiste aus, das Fenster wird hoeher, und damit wurde die Scrollstrecke genau dann laenger, wenn man vorwaerts wischte; die Kamera fuhr zurueck. Die Fenstermasse zaehlen jetzt nur noch bei einer echten Aenderung. Das Symbolgitter schien durch das laufende Video — die App-Flaeche deckt jetzt erst alles zu und verblasst danach. Das App-Zeichen blitzt kurz auf, dann faengt der Feed an, wie beim Oeffnen einer echten App. Videos: autoPlay nur beim laufenden Beitrag, zweiter Anlauf beim ersten canplay. Rechts keine Scrollleiste mehr. Dabei gefunden und behoben: Die Glaettungskurve faellt jenseits von 1 wieder ab — am Ende der Fahrt blieb der Bildschirm drei Pixel unter der Fensterhoehe, oben und unten stand ein schwarzer Streifen. Gemessen bei 375x812 und 1280x800: Seitenhoehe 45 Bildschirme, ganzes Geraet sichtbar, Fenster deckt am Ende genau."
-    },
-    {
-      "zeit": "2026-08-30T01:10:00Z",
-      "kanal": "Website",
-      "text": "„Alles nur Zufall?“ hat eine begehbare Welt: /zufall/zufall/. Sie spielt in einem Telefon — man scrollt in ein ausgeschaltetes Gerät hinein, der Bildschirm geht an, die Trendonix-App öffnet sich, und dann laufen vierzig Beiträge, einer je Bildschirm, in der zweiten Leseordnung des Buches. Je Beitrag das Motiv aus dem Satz als Bewegtfassung, Konto, Bildunterschrift, Hashtags, Originalton, die Zahlen des Buches und ein Kommentarstrom aus sechs Zeilen. Kein Kapiteltext, keine Kommentarspalte, kein Nachtrag — das bleibt im Buch. Am Ende steht keine Kauftaste, sondern eine Zahl: wie oft der Besucher auf „Sieh selbst nach“ gedrückt hat. Kosten bei kie.ai: 906,5 Punkte (40 Bewegtfassungen à 22,5 plus 6,5 für die Bühne), Guthaben danach rund 514."
     }
   ],
   "_warnungen": "Was ein Mensch bemerkt hat und keine Maschine messen kann — ein falsches Konto im Browser, eine gesperrte Seite, ein hängender Upload. Steht hier etwas, erscheint es rot ganz oben im Dashboard, über allen Reitern. Wieder leeren, sobald es erledigt ist. Aufbau: { \"stufe\": \"hoch\" oder \"mittel\", \"text\": \"…\" }",
