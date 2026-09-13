@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-13T07:02:34Z",
+  "stand": "2026-09-13T08:02:39Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -1258,15 +1258,6 @@
           "was": "11_statuen",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "09:30",
-          "was": "01_neandertaler",
-          "zustand": "nachholen",
-          "verschoben": 3,
-          "urspruenglich": "2026-08-22",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
           "kanal": "Instagram",
@@ -2661,11 +2652,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-13T07:02:00Z",
+    "stand": "2026-09-13T08:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-13T06:30:15Z",
+    "deployWann": "2026-09-13T07:03:29Z",
     "zertifikatTage": 71,
     "linksGeprueft": 51,
     "linksKaputt": 0,
