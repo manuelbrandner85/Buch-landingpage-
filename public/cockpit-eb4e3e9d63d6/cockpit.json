@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-13T10:02:32Z",
+  "stand": "2026-09-13T11:02:33Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -2383,7 +2383,7 @@
       "vorher": 12,
       "reaktionen": 2,
       "reaktionenLabel": "Kommentare",
-      "stand": "2026-09-12",
+      "stand": "2026-09-13",
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
@@ -2418,7 +2418,7 @@
       "vorher": 0,
       "reaktionen": 0,
       "reaktionenLabel": "Klicks",
-      "stand": "2026-09-12",
+      "stand": "2026-09-13",
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
@@ -2430,7 +2430,7 @@
       "follower": 0,
       "vorher": 0,
       "reaktionen": null,
-      "stand": "2026-09-12",
+      "stand": "2026-09-13",
       "notiz": "0 Follower, 27 gefolgt, 1 Beitrag. Der gemeldete 404 war ein Fehlalarm der Linkprüfung, nicht ein toter Link.",
       "reaktionenLabel": null,
       "beitraege": 13,
@@ -2652,11 +2652,11 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-13T10:02:00Z",
+    "stand": "2026-09-13T11:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-13T09:39:39Z",
+    "deployWann": "2026-09-13T10:03:26Z",
     "zertifikatTage": 71,
     "linksGeprueft": 51,
     "linksKaputt": 0,
@@ -2672,6 +2672,10 @@
     {
       "was": "Alles nur Zufall?",
       "warum": "seit 14 Tagen im Handel und noch ohne Bewertung"
+    },
+    {
+      "was": "Kanalabruf",
+      "warum": "TikTok: fremdes Profil: unbekannt"
     },
     {
       "was": "Facebook",
