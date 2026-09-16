@@ -1,5 +1,5 @@
 {
-  "stand": "2026-09-13T12:03:32Z",
+  "stand": "2026-09-16T14:24:32Z",
   "warnungen": [
     {
       "stufe": "hoch",
@@ -7,11 +7,15 @@
     },
     {
       "stufe": "mittel",
-      "text": "Seit 5 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
+      "text": "1 toter Link auf der Seite — 0 auf https://www.youtube.com/@Trendonixde."
+    },
+    {
+      "stufe": "mittel",
+      "text": "Seit 8 Tagen wurde kein KDP-Stand abgelesen — Verkäufe und Rang stehen still."
     }
   ],
   "aenderungen": {
-    "seit": "2026-09-12",
+    "seit": "2026-09-13",
     "punkte": [],
     "hinweis": "Seit dem letzten Stand hat sich keine der gemessenen Zahlen bewegt."
   },
@@ -26,7 +30,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-08",
-        "tageDraussen": 36,
+        "tageDraussen": 39,
         "seiten": 206,
         "weg": "/buch/band-1/",
         "ausgaben": [
@@ -132,7 +136,7 @@
         "nummer": 1,
         "status": "erschienen",
         "erschienen": "2026-08-30",
-        "tageDraussen": 14,
+        "tageDraussen": 17,
         "seiten": 456,
         "weg": "/buch/zufall/",
         "ausgaben": [
@@ -163,7 +167,7 @@
         "zitate": 0,
         "arbeitsstand": null,
         "mangel": [
-          "seit 14 Tagen im Handel und noch ohne Bewertung"
+          "seit 17 Tagen im Handel und noch ohne Bewertung"
         ]
       }
     ],
@@ -178,7 +182,7 @@
       },
       {
         "was": "Alles nur Zufall?",
-        "warum": "seit 14 Tagen im Handel und noch ohne Bewertung"
+        "warum": "seit 17 Tagen im Handel und noch ohne Bewertung"
       }
     ]
   },
@@ -357,23 +361,13 @@
     "gelesen": true,
     "hinweis": null,
     "klicks7": 0,
-    "impressionen7": 73,
-    "position": 42.9,
+    "impressionen7": 55,
+    "position": 39.2,
     "seitenIndexiert": 73,
     "seitenGesamt": 203,
     "suchanfragen": [
       {
-        "wort": "an welchem fluss liegt antwerpen",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
         "wort": "bab al mandab strait",
-        "klicks": 0,
-        "impressionen": 1
-      },
-      {
-        "wort": "bab al-mandab",
         "klicks": 0,
         "impressionen": 1
       },
@@ -386,10 +380,20 @@
         "wort": "bab el mandeb",
         "klicks": 0,
         "impressionen": 3
+      },
+      {
+        "wort": "bab el mandeb strait",
+        "klicks": 0,
+        "impressionen": 1
+      },
+      {
+        "wort": "bab el-mandeb strait",
+        "klicks": 0,
+        "impressionen": 2
       }
     ],
-    "von": "2026-08-30",
-    "bis": "2026-09-07",
+    "von": "2026-08-31",
+    "bis": "2026-09-13",
     "tage": 7,
     "quelle": "abgerufen"
   },
@@ -401,7 +405,7 @@
     "hinweis": "Verteiler zählt hier nicht mit. Diese Adressen gehören dem Haus, nicht einer Plattform — sie sind mehr wert als die Summe daneben und lassen sich nicht mit ihr verrechnen."
   },
   "verlauf": {
-    "tage": 18,
+    "tage": 19,
     "seit": "2026-08-27",
     "rang": [
       {
@@ -474,6 +478,10 @@
       },
       {
         "d": "2026-09-13",
+        "v": 915118
+      },
+      {
+        "d": "2026-09-16",
         "v": 915118
       }
     ],
@@ -549,6 +557,10 @@
       {
         "d": "2026-09-13",
         "v": 2
+      },
+      {
+        "d": "2026-09-16",
+        "v": 2
       }
     ],
     "reichweite": [
@@ -622,6 +634,10 @@
       },
       {
         "d": "2026-09-13",
+        "v": 22659
+      },
+      {
+        "d": "2026-09-16",
         "v": 22659
       }
     ],
@@ -782,6 +798,10 @@
         {
           "d": "2026-09-13",
           "v": 21600
+        },
+        {
+          "d": "2026-09-16",
+          "v": 21600
         }
       ],
       "YouTube": [
@@ -855,6 +875,10 @@
         },
         {
           "d": "2026-09-13",
+          "v": 12
+        },
+        {
+          "d": "2026-09-16",
           "v": 12
         }
       ],
@@ -930,6 +954,10 @@
         {
           "d": "2026-09-13",
           "v": 1041
+        },
+        {
+          "d": "2026-09-16",
+          "v": 1041
         }
       ],
       "Facebook": [
@@ -1003,6 +1031,10 @@
         },
         {
           "d": "2026-09-13",
+          "v": 6
+        },
+        {
+          "d": "2026-09-16",
           "v": 6
         }
       ],
@@ -1078,6 +1110,10 @@
         {
           "d": "2026-09-13",
           "v": 0
+        },
+        {
+          "d": "2026-09-16",
+          "v": 0
         }
       ],
       "Bluesky": [
@@ -1152,6 +1188,10 @@
         {
           "d": "2026-09-13",
           "v": 0
+        },
+        {
+          "d": "2026-09-16",
+          "v": 0
         }
       ],
       "Verteiler": [
@@ -1222,279 +1262,25 @@
         {
           "d": "2026-09-13",
           "v": 2
+        },
+        {
+          "d": "2026-09-16",
+          "v": 2
         }
       ]
     }
   },
   "termine": [
     {
-      "d": "2026-09-13",
-      "wochentag": "So",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "11_statuen",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "18:30",
-          "was": "05_reiterstafette",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-26",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "18:30",
-          "was": "09_muenze",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-30",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "20:15",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 4,
-          "urspruenglich": "2026-09-03",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        }
-      ]
-    },
-    {
-      "d": "2026-09-14",
-      "wochentag": "Mo",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "09_muenze",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "09_muenze",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "09_muenze",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "09_muenze",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "13_tempel",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-02",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-03",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "14_kernthese",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-04",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "11:00",
-          "was": "04_ordnung",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-08",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        }
-      ]
-    },
-    {
-      "d": "2026-09-15",
-      "wochentag": "Di",
-      "punkte": [
-        {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "07_feuer",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "07_feuer",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "07_feuer",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": null,
-          "was": "07_feuer",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "18:30",
-          "was": "08_aehre",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-27",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "18:30",
-          "was": "11_statuen",
-          "zustand": "nachholen",
-          "verschoben": 2,
-          "urspruenglich": "2026-08-29",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "11:00",
-          "was": "15_website",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-05",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "11:00",
-          "was": "02_beleggrad",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-09",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        }
-      ]
-    },
-    {
       "d": "2026-09-16",
       "wochentag": "Mi",
       "punkte": [
         {
-          "kanal": "TikTok",
-          "zeit": "15:30",
-          "was": "10_archiv",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "15:30",
-          "was": "10_archiv",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "15:30",
-          "was": "10_archiv",
-          "zustand": "offen",
-          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
           "kanal": "Pinterest",
           "zeit": null,
           "was": "10_archiv",
           "zustand": "offen",
           "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
-        },
-        {
-          "kanal": "Facebook",
-          "zeit": "09:30",
-          "was": "06_fuenf_fragen",
-          "zustand": "nachholen",
-          "verschoben": 3,
-          "urspruenglich": "2026-08-28",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Instagram",
-          "zeit": "11:00",
-          "was": "12_schrift",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-03",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "TikTok",
-          "zeit": "09:30",
-          "was": "14_kernthese",
-          "zustand": "nachholen",
-          "verschoben": 3,
-          "urspruenglich": "2026-09-04",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
-        },
-        {
-          "kanal": "Pinterest",
-          "zeit": "11:00",
-          "was": "14_kernthese",
-          "zustand": "nachholen",
-          "verschoben": 1,
-          "urspruenglich": "2026-09-04",
-          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -1983,6 +1769,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-09",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "11_statuen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-13",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2044,6 +1839,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-08",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "09_muenze",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-14",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2104,6 +1908,15 @@
           "zustand": "nachholen",
           "verschoben": 2,
           "urspruenglich": "2026-09-02",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "07_feuer",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-15",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
@@ -2173,6 +1986,15 @@
           "verschoben": 1,
           "urspruenglich": "2026-09-10",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "11:00",
+          "was": "10_archiv",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-16",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
     },
@@ -2227,12 +2049,222 @@
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         },
         {
+          "kanal": "TikTok",
+          "zeit": "20:15",
+          "was": "14_kernthese",
+          "zustand": "nachholen",
+          "verschoben": 4,
+          "urspruenglich": "2026-09-04",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
           "kanal": "Instagram",
           "zeit": "11:00",
           "was": "02_beleggrad",
           "zustand": "nachholen",
           "verschoben": 1,
           "urspruenglich": "2026-09-09",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-28",
+      "wochentag": "Mo",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "11_statuen",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "09:30",
+          "was": "04_ordnung",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-24",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "18:30",
+          "was": "04_ordnung",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-08",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-10",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-11",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-29",
+      "wochentag": "Di",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "09_muenze",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "20:15",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 4,
+          "urspruenglich": "2026-08-27",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "09:30",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 3,
+          "urspruenglich": "2026-08-28",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "18:30",
+          "was": "07_feuer",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-08-31",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "TikTok",
+          "zeit": "18:30",
+          "was": "02_beleggrad",
+          "zustand": "nachholen",
+          "verschoben": 2,
+          "urspruenglich": "2026-09-09",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        }
+      ]
+    },
+    {
+      "d": "2026-09-30",
+      "wochentag": "Mi",
+      "punkte": [
+        {
+          "kanal": "TikTok",
+          "zeit": "15:30",
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "15:30",
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "15:30",
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": null,
+          "was": "07_feuer",
+          "zustand": "offen",
+          "hinweis": "Wiederholung — neuen Text schreiben, nicht denselben."
+        },
+        {
+          "kanal": "Instagram",
+          "zeit": "11:00",
+          "was": "05_reiterstafette",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-10",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Pinterest",
+          "zeit": "11:00",
+          "was": "08_aehre",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-11",
+          "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
+        },
+        {
+          "kanal": "Facebook",
+          "zeit": "11:00",
+          "was": "06_fuenf_fragen",
+          "zustand": "nachholen",
+          "verschoben": 1,
+          "urspruenglich": "2026-09-12",
           "hinweis": "Vor dem Posten im Kanal nachsehen, ob der Clip doch schon draußen ist."
         }
       ]
@@ -2374,7 +2406,7 @@
       "notiz": "920 Aufrufe in 28 Tagen, netto −9 Follower, 0 Mal geteilt. Die LIVE trägt: 8.836 Aufrufe, 96 neue Follower.",
       "beitraege": 51,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     },
     {
       "name": "YouTube",
@@ -2387,7 +2419,7 @@
       "notiz": "Stufe 3 seit dem 28.08. aktiviert — Links in Beschreibungen und A/B-Tests sind frei. Neuestes Video 20 Aufrufe bei 13,8 % Klickrate; der Maßstab in REICHWEITE.md nennt 8–10 % als gut.",
       "beitraege": null,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     },
     {
       "name": "Instagram",
@@ -2398,7 +2430,7 @@
       "notiz": "87 Beiträge. Bio-Link zeigt auf die Website — der Mangel aus dem August-Befund ist behoben. Reichweite bleibt ohne Business-Suite-Anmeldung nicht ablesbar.",
       "quelle": "Handpflege",
       "vorher": 1041,
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     },
     {
       "name": "Facebook",
@@ -2409,7 +2441,7 @@
       "stand": "2026-08-26",
       "notiz": "Keine eigene URL, nicht mit Instagram verknüpft.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     },
     {
       "name": "Pinterest",
@@ -2422,7 +2454,7 @@
       "notiz": "10 Pins, 0 Speicherungen, 0 Klicks. Sechs neue Standbilder liegen bereit. trendonix-buecher.de ist bei Pinterest noch nicht verifiziert — ohne das keine Zuordnung und keine Zahlen zu den Pins, die auf die Website führen.",
       "beitraege": 17,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     },
     {
       "name": "Bluesky",
@@ -2435,7 +2467,7 @@
       "reaktionenLabel": null,
       "beitraege": 13,
       "quelle": "abgerufen",
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     },
     {
       "name": "Verteiler",
@@ -2449,7 +2481,7 @@
       "stand": "2026-08-28",
       "notiz": "Am 28.08.2026 selbst im Brevo-Konto nachgesehen: zwei bestätigte Kontakte insgesamt, beide per E-Mail angemeldet, keiner blockiert. Einer davon ist die eigene Testadresse — es steht also ein Leser auf dieser Liste. Der einzige Kanal, der niemandem gehört außer dem Haus; deshalb zählt er nicht in „Follower gesamt“. Brevo gibt die Zahl ohne Anmeldung nicht heraus, sie wird hier von Hand nachgetragen. Seit dem 28.08. hängt an dieser Liste ein Versprechen: Der nächste Band geht zuerst hierhin, als Leseexemplar vor dem Erscheinen.",
       "quelle": "Handpflege",
-      "vergleichVom": "2026-09-12"
+      "vergleichVom": "2026-09-13"
     }
   ],
   "vorschlaege": [
@@ -2652,15 +2684,20 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-13T12:02:00Z",
+    "stand": "2026-09-16T14:20:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-13T11:08:36Z",
-    "zertifikatTage": 71,
+    "deployWann": "2026-09-16T09:24:32Z",
+    "zertifikatTage": 68,
     "linksGeprueft": 51,
-    "linksKaputt": 0,
-    "linksZiele": [],
+    "linksKaputt": 1,
+    "linksZiele": [
+      {
+        "ziel": "https://www.youtube.com/@Trendonixde",
+        "code": 0
+      }
+    ],
     "seitenGemeldet": 203,
     "journalVorrat": 0
   },
@@ -2671,7 +2708,7 @@
     },
     {
       "was": "Alles nur Zufall?",
-      "warum": "seit 14 Tagen im Handel und noch ohne Bewertung"
+      "warum": "seit 17 Tagen im Handel und noch ohne Bewertung"
     },
     {
       "was": "Facebook",
@@ -2683,7 +2720,11 @@
     },
     {
       "was": "Vorrat an Beiträgen",
-      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-13 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
+      "warum": "15 Clips bei einem Beitrag am Tag: Nach 15 Tagen fängt die Rotation von vorn an, ab dem 2026-09-16 laufen Wiederholungen. Für den vorgesehenen Abstand von 30 Tagen bräuchte es 30 Clips. Erfunden wird keiner."
+    },
+    {
+      "was": "Hängende Beiträge",
+      "warum": "1 Beitrag ist viermal nicht hinausgegangen: tiktok 12_schrift. Ein weiterer Termin hilft dort nicht."
     }
   ]
 }
