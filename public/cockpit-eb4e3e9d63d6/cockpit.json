@@ -1,13 +1,9 @@
 {
-  "stand": "2026-09-16T14:24:32Z",
+  "stand": "2026-09-16T15:02:31Z",
   "warnungen": [
     {
       "stufe": "hoch",
       "text": "Rundlauf ohne verbundenen AUTOPILOT-Ordner (seit 01.09. 19:22); vom 08. bis 13.09. fiel der Rundlauf ganz aus (Windows-Update), die Live vom 12.09. lief ohne Titel und ohne Ankündigung. Behebung: der Aufgabe „Trendonix Rundlauf“ den Ordner Band 1\\05_Marketing\\05_Social_Kampagne\\AUTOPILOT neu verbinden."
-    },
-    {
-      "stufe": "mittel",
-      "text": "1 toter Link auf der Seite — 0 auf https://www.youtube.com/@Trendonixde."
     },
     {
       "stufe": "mittel",
@@ -2684,20 +2680,15 @@
     }
   ],
   "technik": {
-    "stand": "2026-09-16T14:20:00Z",
+    "stand": "2026-09-16T15:02:00Z",
     "deploy": "erfolgreich",
     "deployQuelle": "GitHub",
     "deployLaeuft": false,
-    "deployWann": "2026-09-16T09:24:32Z",
+    "deployWann": "2026-09-16T14:25:30Z",
     "zertifikatTage": 68,
     "linksGeprueft": 51,
-    "linksKaputt": 1,
-    "linksZiele": [
-      {
-        "ziel": "https://www.youtube.com/@Trendonixde",
-        "code": 0
-      }
-    ],
+    "linksKaputt": 0,
+    "linksZiele": [],
     "seitenGemeldet": 203,
     "journalVorrat": 0
   },
