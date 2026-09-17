@@ -11,7 +11,30 @@ assets-quelle/*-motion-roh.mp4
 
 # Die Vorschau ist eine erzeugte Datei (npm run vorschau)
 vorschau
-modelle/
+
+# public/modelle/ gehoert INS Repository.
+#
+# Hier stand `modelle/` als Sammelausschluss. Ohne fuehrenden Schraegstrich
+# greift so ein Muster auf jeder Ebene — also auch auf public/modelle/, und
+# damit auf die drei GLB-Fassungen des Buches und die Standbilder des Hero.
+# Auf dem Server waere davon nichts angekommen: Der Hero haette ein Modell
+# und ein Standbild angefordert, die es dort nicht gibt, und waere auf die
+# Rueckfallebene gefallen — und niemand haette den Grund gesehen, weil
+# lokal alles da ist.
+#
+# Draussen bleiben nur die PNG-Vorlagen. Blender schreibt sie mit
+# Alphakanal, ausgeliefert werden daraus AVIF und WebP
+# (node scripts/buch-poster-web.mjs). Das PNG waere ein Drittel des
+# Repositorys fuer eine Datei, die kein Browser je anfordert.
+public/modelle/*.png
+
+# Blender-Arbeitsstaende. Alles davon entsteht in Sekunden neu aus
+# blender/buch.py — die .blend ist ein Ergebnis, keine Quelle.
+blender/probe/
+blender/arbeit/
+blender/__pycache__/
+blender/buch.blend
+blender/buch.blend1
 
 # Quellstandbilder von Band 1 liegen nicht im Repository: Die Bewegtfassungen
 # wurden aus den bereits versionierten Ableitungen unter public/assets erzeugt,

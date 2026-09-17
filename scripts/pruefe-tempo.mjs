@@ -37,6 +37,11 @@ const SEITEN = [
   ['Startseite', '/'],
   ['Welt Band 1', '/faeden/band-1/'],
   ['Buchseite', '/buch/zufall/'],
+  // Die Buchseite von Band 1 traegt seit dem 17.09.2026 den filmischen Kopf
+  // mit dem 3D-Modell. Sie steht hier als eigene Zeile, weil genau sie die
+  // Frage beantwortet, um die es bei dieser Art Seite geht: Kostet die
+  // Inszenierung Tempo? Ohne Messpunkt waere die Antwort eine Meinung.
+  ['Buchseite Band 1 · Hero', '/buch/band-1/'],
   ['Kapitelseite', '/faeden/kapitel/1/'],
 ];
 

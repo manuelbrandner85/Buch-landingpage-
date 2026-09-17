@@ -1,0 +1,60 @@
+{
+  "_": [
+    "Die Kameraführung des Cinematic Hero — an EINER Stelle.",
+    "",
+    "Sie wird von zwei Programmen gelesen, die nichts voneinander wissen:",
+    "src/hero/buehne.ts baut daraus die laufende Bühne im Browser,",
+    "blender/poster-rendern.py rechnet daraus die Standbilder.",
+    "Das Standbild liegt unter der Bühne und wird ausgeblendet, sobald diese",
+    "zeichnet. Weichen die Werte auch nur leicht ab, springt das Buch genau",
+    "in dem Moment, in dem der Besucher hinsieht. Zwei Dateien mit denselben",
+    "Zahlen wären genau dieser Fehler, nur später.",
+    "",
+    "Gerechnet wird in Kugelkoordinaten um das Buch, nicht in drei Zahlen,",
+    "die zufällig zusammen einen Abstand ergeben. Der erste Anlauf stand auf",
+    "(0.30, 0.10, 0.95) — das ist ein Abstand von 0,995 bei 30 Grad, also ein",
+    "Bildausschnitt von einer halben Buchhöhe. Das Buch lag doppelt so hoch",
+    "wie das Bild. Mit Abstand, Schwenk und Neigung lässt sich so etwas",
+    "nachrechnen, statt es im Browser zu entdecken.",
+    "",
+    "Das Modell ist auf Höhe 1 normiert. Sichtbare Höhe = 2 * Abstand *",
+    "tan(Öffnungswinkel/2); der Anteil, den das Buch davon füllt, steht als",
+    "'fuellung' daneben und ist nachgerechnet, nicht geschätzt.",
+    "",
+    "16 Grad senkrechter Öffnungswinkel sind auf Kleinbild 85 mm — also ein",
+    "Produktobjektiv. Vorher standen hier 30 Grad, das sind 45 mm: eine",
+    "Reportagebrennweite, bei der ein 24 cm hohes Buch aus 70 cm Abstand",
+    "sichtbar stürzt. Die Kanten liefen zusammen, und genau daran erkennt",
+    "man ein Rendering. Die längere Brennweite kostet nur Abstand.",
+    "",
+    "'versatzX' und 'versatzY' verschieben das BUCH im Bild, nicht die",
+    "Kamera. Sie sind der Grund, warum im Querformat links Platz für die",
+    "Überschrift bleibt und im Hochformat unten. Wer stattdessen die Kamera",
+    "schwenkt, dreht das Buch mit — der Blickwinkel auf den Umschlag wäre",
+    "dann von der Textmenge daneben abhängig."
+  ],
+
+  "drehung": -0.34,
+
+  "quer": {
+    "oeffnungswinkel": 16,
+    "abstandFern": 5.7,
+    "abstandNah": 4.06,
+    "schwenk": 0.22,
+    "neigung": 0.1,
+    "versatzX": 0.38,
+    "versatzY": 0.1,
+    "fuellung": "62 % fern, 87 % nah — Buchmitte bei rund 63 % der Breite"
+  },
+
+  "hoch": {
+    "oeffnungswinkel": 16,
+    "abstandFern": 6.2,
+    "abstandNah": 4.75,
+    "schwenk": 0.16,
+    "neigung": 0.09,
+    "versatzX": 0,
+    "versatzY": 0.32,
+    "fuellung": "57 % fern, 75 % nah — unten bleibt ein Drittel für den Text; 0,22 waren zu wenig, die Überschrift lag im Browser auf dem Buchdeckel"
+  }
+}

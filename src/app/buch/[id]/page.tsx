@@ -16,6 +16,7 @@ import { BASIS_PFAD } from '@/world/bilder';
 import { BLICK } from '@/data/gemeinsam/blick';
 import { leseprobeVon } from '@/data/gemeinsam/leseprobe';
 import { Buch3D } from '@/scenes/Buch3D';
+import { Hero, type Weg as HeroWeg } from '@/hero/Hero';
 import { Kaufwege } from '@/scenes/Buecher';
 import { Rueckweg } from '@/ui/Rueckweg';
 import { Kanaele } from '@/ui/Kanaele';
@@ -39,6 +40,20 @@ import { og } from '@/world/og';
  * Umfang, Klappentext, Inhalt, Kaufweg – in dieser Reihenfolge, ohne Umweg.
  */
 export const dynamicParams = false;
+
+/**
+ * Fuer welche Baende es ein gebackenes 3D-Modell gibt.
+ *
+ * Das Modell unter `public/modelle` traegt den Umschlag von Band 1 — der
+ * ganze Bogen, die Goldpraegung als gebackene Metallik, der Schnitt als
+ * echte Blaetter. Auf der Seite eines anderen Bandes stuende damit das
+ * falsche Buch, und zwar bildschirmfuellend.
+ *
+ * Deshalb eine Liste statt einer Vermutung: Kommt ein Modell dazu, kommt
+ * hier eine Zeile dazu. Alle anderen Baende behalten den Seitenkopf, den sie
+ * bisher hatten — Bandzeile, Ueberschrift, Unterzeile, Buchkoerper daneben.
+ */
+const BAENDE_MIT_MODELL: ReadonlySet<string> = new Set(['band-1']);
 
 export function generateStaticParams() {
   return OEFFENTLICHE_BUECHER.map((b) => ({ id: b.id }));
@@ -97,6 +112,37 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
   const bewertet = gesamturteil(buch.id);
   const zitate = stimmenVon(buch.id);
 
+  // Der filmische Seitenkopf — nur dort, wo es das Buch als Modell gibt.
+  //
+  // Die Wege darin sind nicht erfunden: Der Hauptweg ist derselbe guenstigste
+  // Kaufweg, den `angebotsreihenfolge` weiter unten an die Spitze der
+  // Ausgabenliste setzt. Zwei Stellen, die unabhaengig voneinander
+  // entscheiden, welcher Kaufweg der wichtigste ist, waeren zwei
+  // Entscheidungen — und irgendwann zwei verschiedene.
+  const mitHero = BAENDE_MIT_MODELL.has(buch.id);
+  const heroWege: HeroWeg[] = [];
+  if (mitHero) {
+    const einstieg = angebotsreihenfolge(buch.kaufwege)[0];
+    if (einstieg) {
+      heroWege.push({
+        text: `${einstieg.form} ${einstieg.art === 'ausleihe' ? 'ausleihen bei' : 'bei'} ${einstieg.haendler}`,
+        nach: einstieg.url,
+        haupt: true,
+        ...(einstieg.preis !== undefined && einstieg.art !== 'ausleihe'
+          ? { zusatz: `${einstieg.preis.toFixed(2).replace('.', ',')} €` }
+          : {}),
+      });
+    }
+    if (welt && reihe) {
+      heroWege.push({
+        text: istEinzeltitel(reihe)
+          ? 'In die Welt dieses Buches'
+          : `In die Welt von Band ${buch.nummer}`,
+        nach: wegWelt(reihe.id, buch.id),
+      });
+    }
+  }
+
   const strukturierteDaten = {
     '@context': 'https://schema.org',
     '@type': 'Book',
@@ -137,13 +183,31 @@ export default async function BuchSeite({ params }: { params: Promise<{ id: stri
         text={!welt || !reihe ? 'Zurück ins Regal'
           : istEinzeltitel(reihe) ? 'In die Welt dieses Buches'
           : `Zurück in ${reihe.titel}`} />
-      {bandzeile(buch) && <p className="eyebrow">{bandzeile(buch)}</p>}
-      <h1>{buch.titel}</h1>
-      {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
+      {mitHero ? (
+        /* Der filmische Kopf traegt die Ueberschrift selbst — sonst stuenden
+           zwei h1 auf einer Seite, und Suchmaschinen wie Vorleseprogramme
+           muessten raten, welche die Seite meint. */
+        <Hero
+          oben={bandzeile(buch)}
+          titel={buch.titel}
+          unterzeile={buch.unterzeile}
+          wege={heroWege}
+          titelId="buchtitel"
+        />
+      ) : (
+        <>
+          {bandzeile(buch) && <p className="eyebrow">{bandzeile(buch)}</p>}
+          <h1>{buch.titel}</h1>
+          {buch.unterzeile && <p className="unterzeile">{buch.unterzeile}</p>}
+        </>
+      )}
 
       <div className="buchkopf">
-        {/* Der Buchkopf ist 208 Pixel breit (13rem), auf dem Telefon weniger. */}
-        {cover && <Buch3D cover={cover} band={buch.id} breite={208}
+        {/* Der Buchkopf ist 208 Pixel breit (13rem), auf dem Telefon weniger.
+            Wo der filmische Kopf steht, entfaellt er: Dasselbe Buch zweimal
+            untereinander, einmal begehbar und einmal als Kachel, liest sich
+            wie ein Fehler. */}
+        {cover && !mitHero && <Buch3D cover={cover} band={buch.id} breite={208}
           marke={`umschlag-${buch.id}`} />}
         <div>
           <p className="klappe">{buch.klappentext}</p>

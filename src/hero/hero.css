@@ -1,0 +1,345 @@
+/*
+ * Der Cinematic Hero.
+ *
+ * Die Farben stammen nicht aus einer Palette, sondern vom Cover: das tiefe
+ * Nachtblau des Himmels, das warme Gold der Praegung, das gebrochene Weiss
+ * der Kapitaelchen. Damit stimmt die Seite mit dem Buch ueberein, das sie
+ * verkauft — und nicht mit einer Designmode.
+ *
+ * Die Schriftart steht hier NICHT. Sie kommt aus global.css, wo sie fuer die
+ * ganze Seite festgelegt ist; ein zweiter Ort waere ein zweiter Stand.
+ */
+
+.hero {
+  /* Die Farben kommen aus dem Bestand, wo es sie schon gibt. Die Werte
+     dahinter sind der Rueckfall, falls der Hero einmal ausserhalb dieser
+     Seite steht — nicht eine zweite Palette. */
+  --hero-grund: #070a12;
+  --hero-gold: var(--gold, #c9a24e);
+  --hero-weiss: #ece6da;
+
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  /* Im Querformat steht das Buch rechts (siehe src/hero/kamera.json), der
+     Text steht links auf halber Hoehe. Im Hochformat wechselt beides — das
+     steht weiter unten. */
+  align-content: center;
+  justify-items: start;
+  overflow: clip;
+  background: var(--hero-grund);
+}
+
+/*
+ * Ausbruch aus der Lesespalte.
+ *
+ * Die Buchseite ist eine Lesefassung: eine schmale, zentrierte Spalte. Ein
+ * Hero, der darin steckenbleibt, ist eine grosse Karte, kein erster
+ * Bildschirm. `margin-inline: calc(50% - 50vw)` zieht ihn auf Fensterbreite,
+ * ganz gleich, wie breit die Spalte gerade ist.
+ *
+ * Die Rechnung hat einen bekannten Haken: `50vw` zaehlt die Bildlaufleiste
+ * mit, der Block wird also ein paar Pixel zu breit. Hier ist das ungefaehrlich,
+ * weil `body` in global.css bereits `overflow-x: hidden` traegt — das steht
+ * dort seit langem und aus anderem Grund. Wer diese Regel in eine Umgebung
+ * ohne diese Zeile traegt, bekommt einen waagerechten Balken.
+ */
+.lesefassung > .hero {
+  margin-inline: calc(50% - 50vw);
+  margin-block: 0 clamp(2.5rem, 6vh, 4.5rem);
+  width: auto;
+}
+
+/*
+ * Der Hero faengt oben an, nicht nach 16 Prozent der Fensterhoehe.
+ *
+ * `.lesefassung` bringt `padding: 16vh ... 14vh` mit, und darueber stand der
+ * Rueckweg. Gemessen im Browser: Auf 1512x945 begann der Hero erst bei 23
+ * Prozent der Fensterhoehe, und der Buchdeckel lief unten aus dem Bild —
+ * eine Inszenierung, die zu einem Viertel unter dem Falz liegt.
+ *
+ * Der Rueckweg bleibt im Dokument an erster Stelle: Fuer Tastatur und
+ * Vorleseprogramm ist er der erste Weg der Seite, und daran aendert die
+ * Gestaltung nichts. Er wird nur aus dem Fluss genommen und ueber den Hero
+ * gelegt.
+ */
+.lesefassung:has(> .hero) {
+  padding-block-start: 0;
+}
+
+.lesefassung:has(> .hero) > .rueckweg {
+  position: absolute;
+  z-index: 3;
+  inset-block-start: clamp(1.2rem, 4vh, 2.8rem);
+  inset-inline-start: 0;
+  margin-bottom: 0;
+}
+
+.hero-grund {
+  position: absolute;
+  inset: 0;
+  /* Der Platz steht von Anfang an. Ohne feste Flaeche springt das Layout,
+     sobald die Buehne erscheint — und die Layoutstabilitaet ist dahin,
+     bevor sie gemessen werden konnte. */
+  contain: strict;
+}
+
+.hero-standbild,
+.hero-buehne {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-standbild {
+  object-fit: cover;
+  /* Weich austauschen statt umschalten: Das Standbild bleibt liegen, bis die
+     Buehne wirklich zeichnet. Ein harter Wechsel blitzt. */
+  transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-standbild--weg {
+  opacity: 0;
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Zwei Verlaeufe: einer zieht den Text aus dem Bild heraus, der andere
+     dunkelt die Raender ab. Text auf unruhigem Bild wird abgedunkelt, nicht
+     mit einem Schlagschatten versehen — ein Schatten unter Fliesstext frisst
+     Kontrast und macht die Kanten unruhig.
+
+     Im Querformat kommt die Abdunklung von LINKS, weil dort der Text steht
+     und rechts das Buch. */
+  background:
+    linear-gradient(to right,
+      rgb(7 10 18 / 0.94) 0%,
+      rgb(7 10 18 / 0.78) 26%,
+      rgb(7 10 18 / 0.20) 52%,
+      transparent 68%),
+    radial-gradient(ellipse 80% 70% at 64% 46%, transparent 32%, rgb(7 10 18 / 0.62) 100%);
+}
+
+/* ------------------------------------------------------------------ Text */
+
+/*
+ * Alles hier steht mit `.hero` davor — also mit zwei Klassen, nicht mit
+ * einer.
+ *
+ * Grund: global.css enthaelt `.lesefassung a{color:var(--gold);border-bottom:
+ * 1px solid …}` und `.lesefassung h1{margin-bottom:.4rem;color:var(--papier)}`.
+ * Das sind ebenfalls zwei Klassen beziehungsweise Klasse plus Element; bei
+ * gleichem Gewicht entscheidet die Reihenfolge der Dateien, und die ist
+ * nichts, worauf man bauen sollte. Im ersten Lauf gewann global.css: Die
+ * Schrift auf dem goldenen Knopf stand in Gold auf Gold und war praktisch
+ * unlesbar.
+ */
+.hero .hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: min(44ch, 52%);
+  padding-inline: clamp(20px, 5vw, 96px);
+  padding-block: clamp(24px, 6vh, 72px);
+}
+
+.hero .hero-oben {
+  margin: 0 0 clamp(10px, 1.6vh, 18px);
+  font-family: var(--display), Georgia, serif;
+  font-size: clamp(0.64rem, 1vw, 0.76rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--hero-gold);
+}
+
+.hero .hero-titel {
+  margin: 0;
+  /* Eine sehr grosse Sache, viel Ruhe drumherum. Die Zeile ist der Grund,
+     warum jemand bleibt — und sie ist gleichzeitig das LCP-Element. */
+  font-size: clamp(2.1rem, 5vw, 4.3rem);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  color: var(--hero-weiss);
+}
+
+.hero .hero-unterzeile {
+  margin: clamp(14px, 2.2vh, 26px) 0 0;
+  max-width: 40ch;
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  line-height: 1.55;
+  /* 0,76 auf dem abgedunkelten Grund ergibt rund 8:1 — deutlich ueber der
+     Anforderung, und noetig: Der Grund ist ein Bild, nicht eine Flaeche. */
+  color: rgb(236 230 218 / 0.76);
+}
+
+/* ------------------------------------------------------------------ Wege */
+
+.hero .hero-wege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(22px, 3.4vh, 40px);
+}
+
+.hero .hero-weg {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  /* 44 Pixel Mindesthoehe. Auf einem Telefon ist das kein Gestaltungswert,
+     sondern die Groesse einer Fingerkuppe. */
+  min-height: 46px;
+  padding: 10px 22px;
+  border-radius: 3px;
+  /* Ein Rand, der ein Bedienelement vom Grund trennt, muss 3:1 erreichen
+     (WCAG 1.4.11). 0,45 auf diesem Grund sind rund 3,8:1 — eine Haarlinie
+     mit 7 Prozent, wie sie unter einem Bild richtig waere, waere hier zu
+     wenig. */
+  border: 1px solid rgb(236 230 218 / 0.45);
+  color: var(--hero-weiss);
+  text-decoration: none;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  background: rgb(236 230 218 / 0.04);
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero .hero-weg small {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: rgb(236 230 218 / 0.62);
+}
+
+.hero .hero-weg--haupt,
+.hero .hero-weg--haupt:link,
+.hero .hero-weg--haupt:visited {
+  color: #10131c;
+  border-color: transparent;
+  background: linear-gradient(180deg, #d8b25c 0%, var(--hero-gold) 100%);
+  font-weight: 600;
+  /* Auf dunklem Grund traegt ein Schatten kaum. Hoehe entsteht dort ueber
+     eine aufgehellte Flaeche und eine Lichtkante oben — dazu ein knapper
+     Kontaktschatten, damit die Flaeche aufliegt statt zu schweben. */
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 1px 2px rgb(4 6 12 / 0.55),
+    0 8px 20px -8px rgb(4 6 12 / 0.7);
+}
+
+.hero .hero-weg--haupt small {
+  color: rgb(16 19 28 / 0.66);
+}
+
+@media (hover: hover) {
+  .hero .hero-weg:hover {
+    /* Eine Ebene hoeher UND zwei Pixel nach oben. Nur der Schatten ohne
+       Bewegung wirkt wie ein Zeichenfehler, nur Bewegung ohne Schatten
+       schwerelos. */
+    transform: translateY(-2px);
+    background: rgb(236 230 218 / 0.1);
+    border-color: rgb(236 230 218 / 0.66);
+  }
+
+  .hero .hero-weg--haupt:hover {
+    color: #10131c;
+    background: linear-gradient(180deg, #e2bd68 0%, #cfa855 100%);
+    border-color: transparent;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.34),
+      0 2px 4px rgb(4 6 12 / 0.5),
+      0 14px 28px -10px rgb(4 6 12 / 0.66);
+  }
+}
+
+.hero .hero-weg:active {
+  /* Eine Ebene UNTER den Ruhezustand. Das ist das ganze Geheimnis eines
+     Knopfes, der sich echt anfuehlt. */
+  transform: translateY(0) scale(0.985);
+  box-shadow: inset 0 1px 3px rgb(4 6 12 / 0.5);
+}
+
+.hero .hero-weg:focus-visible {
+  outline: 2px solid var(--hero-gold);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------- Hochformat */
+
+@media (max-aspect-ratio: 3 / 4) {
+  .hero {
+    /* Hochformat ist keine schmalere Querformatansicht. Das Buch steht oben
+       (versatzY in kamera.json), der Text darunter — nebeneinander waere
+       beides zu klein. */
+    align-content: end;
+    justify-items: stretch;
+  }
+
+  .hero .hero-text {
+    max-width: none;
+    padding-block-end: clamp(36px, 8vh, 96px);
+  }
+
+  .hero .hero-unterzeile {
+    max-width: 34ch;
+  }
+
+  .hero-vignette {
+    /* Jetzt von UNTEN, weil der Text dort steht.
+       Der Verlauf reicht hoeher hinauf als im Querformat: Auf einem Telefon
+       stossen Text und Buchdeckel unweigerlich aneinander, und dort muss der
+       Deckel zurueckweichen, nicht die Ueberschrift. */
+    background:
+      linear-gradient(to top,
+        rgb(7 10 18 / 0.98) 0%,
+        rgb(7 10 18 / 0.94) 30%,
+        rgb(7 10 18 / 0.55) 46%,
+        rgb(7 10 18 / 0.1) 62%,
+        transparent 74%),
+      radial-gradient(ellipse 96% 56% at 52% 30%, transparent 34%, rgb(7 10 18 / 0.58) 100%);
+  }
+
+  .hero .hero-weg {
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* ------------------------------------------------ Reduzierte Bewegung */
+
+@media (prefers-reduced-motion: reduce) {
+  /*
+   * Reduzierte Bewegung heisst nicht "nichts anzeigen".
+   *
+   * Die Buehne startet bei dieser Einstellung gar nicht erst — das
+   * entscheidet Hero.tsx, nicht diese Datei. Uebrig bleibt das Standbild,
+   * und das ist das erste Bild der Buehne aus derselben Kamera. Es fehlt
+   * nichts ausser der Bewegung.
+   *
+   * Hier bleiben nur die Uebergaenge stillzulegen, die das CSS selbst
+   * macht: der weiche Wechsel zum Standbild und das Anheben der Knoepfe.
+   * Der Hoehenwechsel am Knopf bleibt — er ist Rueckmeldung, keine
+   * Dekoration, und ohne ihn fuehlt sich nichts mehr an.
+   */
+  .hero-standbild {
+    transition: none;
+  }
+
+  .hero .hero-weg {
+    transition: none;
+  }
+
+  .hero .hero-weg:hover,
+  .hero .hero-weg:active {
+    transform: none;
+  }
+}
