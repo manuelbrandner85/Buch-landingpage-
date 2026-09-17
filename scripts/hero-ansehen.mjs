@@ -89,6 +89,18 @@ async function main() {
     seite.on('requestfailed', (r) => {
       verloren.push(`${name}: ${r.url()} — ${r.failure()?.errorText}`);
     });
+    /**
+     * Auch Antworten ab 400 mitschreiben, mit Adresse.
+     *
+     * `requestfailed` meldet nur, was gar nicht ankam. Eine 404 ist für den
+     * Browser eine erfolgreiche Anfrage — sie taucht hier bisher nur als
+     * Konsolenzeile „Failed to load resource: 404" auf, ohne zu sagen,
+     * WELCHE Datei fehlt. Damit ist der Befund wertlos: Man weiß, dass etwas
+     * fehlt, und sucht dann von Hand.
+     */
+    seite.on('response', (a) => {
+      if (a.status() >= 400) verloren.push(`${name}: ${a.url()} — HTTP ${a.status()}`);
+    });
     await seite.setViewport({
       width: breite, height: hoehe, deviceScaleFactor: dichte,
       isMobile: breite < 700, hasTouch: breite < 700,

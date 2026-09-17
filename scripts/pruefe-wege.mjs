@@ -40,7 +40,19 @@ const vorhanden = (pfad) => {
   let entschluesselt = pfad;
   try { entschluesselt = decodeURIComponent(pfad); } catch { /* bleibt roh */ }
   const p = join(WURZEL, entschluesselt);
-  if (existsSync(p) && statSync(p).isFile()) return true;
+  if (existsSync(p) && statSync(p).isFile()) {
+    /**
+     * Vorhanden heisst nicht brauchbar.
+     *
+     * `public/assets/band-1/szenen/versunken-1600.avif` lag als Datei mit
+     * NULL Byte im Repository — vermutlich ein abgebrochener Lauf von
+     * `scripts/assets.mjs`, der genau dort stehenblieb. Fuer diese Pruefung
+     * war der Verweis in Ordnung, fuer den Browser war das Bild kaputt, und
+     * weil die Datei existierte, hat sie auch der naechste Lauf nie wieder
+     * angefasst. Ein Fehler, der sich selbst versteckt.
+     */
+    return statSync(p).size > 0 ? true : 'leer';
+  }
   if (existsSync(join(p, 'index.html'))) return true;
   if (existsSync(`${p}.html`)) return true;
   return false;
@@ -88,7 +100,9 @@ for (const seite of seiten) {
       continue;
     }
     const imBaum = BASIS ? absolut.slice(BASIS.length) : absolut;
-    if (!vorhanden(imBaum)) fehler.push(`${woher}: "${roh}" führt ins Leere`);
+    const stand = vorhanden(imBaum);
+    if (stand === 'leer') fehler.push(`${woher}: "${roh}" ist eine Datei mit null Byte`);
+    else if (!stand) fehler.push(`${woher}: "${roh}" führt ins Leere`);
   }
 }
 
