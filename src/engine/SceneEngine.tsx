@@ -32,6 +32,36 @@ import { FortschrittGeber } from '@/world/FortschrittKontext';
  */
 export function SceneEngine(
   { szenen, reihe, band }: { szenen: Szene[]; reihe: ReiheId; band?: BandId }) {
+  /**
+   * Eine Welt, die in einem Telefon spielt, bekommt keine Kinoebene.
+   *
+   * Die Kinoebene legt Bildplatten hinter die Abschnitte und fährt eine Kamera
+   * darüber — richtig für eine Landschaft, falsch für einen Feed. „Alles nur
+   * Zufall?" hat deshalb eine eigene Bauform, und das ist die einzige Stelle,
+   * an der das Haus davon weiß. Erkannt wird sie an den Daten, nicht am Namen
+   * der Reihe: Wo eine Szene `feed` heißt, gilt die andere Bauform.
+   *
+   * Diese Weiche steht in einer eigenen Komponente, die selbst KEINEN Hook
+   * aufruft — und das ist der ganze Zweck der Aufteilung.
+   *
+   * Vorher stand sie mitten in der Fädenwelt, zwischen `useExperience` und
+   * `useScrollKamera`. Damit rief dieselbe Komponente je nach Daten
+   * unterschiedlich viele Hooks auf, was React verbietet: Es merkt sich die
+   * Hooks einer Komponente als LISTE und ordnet sie beim nächsten Durchlauf
+   * über ihre Position zu. Aufgefallen wäre es erst, wenn ein Szenensatz
+   * innerhalb desselben Mounts von „feed" auf etwas anderes wechselt — dann
+   * bekäme der Zustand des einen Hooks den Wert eines anderen. Ein Fehler,
+   * der nicht abstürzt, sondern falsch rechnet.
+   *
+   * Nebenbei spart die Aufteilung echte Arbeit: Die Feed-Welt startet so gar
+   * nicht erst die Experience Engine samt Gerätemessung, die sie nie braucht.
+   */
+  if (szenen.some((s) => s.typ === 'feed')) return <FeedWelt />;
+  return <Faedenwelt szenen={szenen} reihe={reihe} band={band} />;
+}
+
+function Faedenwelt(
+  { szenen, reihe, band }: { szenen: Szene[]; reihe: ReiheId; band?: BandId }) {
   const [ruhig, setRuhig] = useState(false);
   const [rueckfall, setRueckfall] = useState(false);
 
@@ -49,17 +79,6 @@ export function SceneEngine(
    */
   const bedarf = useMemo(() => BEDARFSMUSTER.inszenierung(band ?? reihe), [reihe, band]);
   const experience = useExperience(bedarf);
-
-  /**
-   * Eine Welt, die in einem Telefon spielt, bekommt keine Kinoebene.
-   *
-   * Die Kinoebene legt Bildplatten hinter die Abschnitte und fährt eine Kamera
-   * darüber — richtig für eine Landschaft, falsch für einen Feed. „Alles nur
-   * Zufall?“ hat deshalb eine eigene Bauform, und das ist die einzige Stelle,
-   * an der das Haus davon weiß. Erkannt wird sie an den Daten, nicht am Namen
-   * der Reihe: Wo eine Szene `feed` heißt, gilt die andere Bauform.
-   */
-  if (szenen.some((s) => s.typ === 'feed')) return <FeedWelt />;
 
   /**
    * GSAP nur noch dort, wo es gebraucht wird: in der DOM-Fassung.
