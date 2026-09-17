@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { BandId, ReiheId, Szene } from '@/data/gemeinsam/typen';
+import { BEDARFSMUSTER } from '@/experience/bedarf';
+import { useExperience } from '@/experience/useExperience';
 import { useScrollKamera } from '@/camera/useScrollKamera';
 import { KinoEbene } from './KinoEbene';
 import { KinoWebGL } from './KinoWebGL';
@@ -32,6 +34,21 @@ export function SceneEngine(
   { szenen, reihe, band }: { szenen: Szene[]; reihe: ReiheId; band?: BandId }) {
   const [ruhig, setRuhig] = useState(false);
   const [rueckfall, setRueckfall] = useState(false);
+
+  /**
+   * Die Adaptive Experience Engine entscheidet, welche Fassung der Leser
+   * bekommt.
+   *
+   * Vorher stand hier eine Vermutung: WebGL zuerst, und wenn es nicht trägt,
+   * meldet sich die Kinoebene. Das erkennt nur den Totalausfall — nicht das
+   * Telefon, das die Szene zwar startet und dann mit zwölf Bildern je Sekunde
+   * durch die Welt ruckelt. Genau dieser Fall ist der häufige.
+   *
+   * Der Bedarf muss über Renderdurchläufe hinweg derselbe bleiben, sonst
+   * startet die Engine bei jedem Neuaufbau von vorn.
+   */
+  const bedarf = useMemo(() => BEDARFSMUSTER.inszenierung(band ?? reihe), [reihe, band]);
+  const experience = useExperience(bedarf);
 
   /**
    * Eine Welt, die in einem Telefon spielt, bekommt keine Kinoebene.
@@ -65,6 +82,10 @@ export function SceneEngine(
   // es nur in Band 1 und lief in den Bandwelten ins Leere.
   const karte = szenen.find((s) => s.typ === 'karte');
 
+  // Solange die Engine noch misst, gilt die ruhige Fassung. Sie steht sofort
+  // und ist nie leer — ein leeres Feld liest sich als Defekt.
+  const flach = ruhig || rueckfall || experience.laedt || experience.stufe === 'RUECKFALL';
+
   return (
     <FortschrittGeber>
     <div className={ruhig ? 'welt ruhig' : 'welt'}>
@@ -72,10 +93,22 @@ export function SceneEngine(
       <Kopfzeile reihe={reihe} band={band} ruhig={ruhig} beiRuhe={() => setRuhig((r) => !r)} />
       {/* WebGL zuerst. Trägt es nicht – alter Browser, abgeschaltete
           Beschleunigung, „Bewegung reduzieren“ –, übernimmt die DOM-Fassung. */}
-      {ruhig || rueckfall
+      {/* Die drei Wege, die zur DOM-Fassung führen, sind bewusst getrennt:
+          „Ruhe" ist der Wunsch des Lesers, `rueckfall` der harte Ausfall der
+          Kinoebene, und RUECKFALL das Urteil der Engine über Gerät und
+          gemessene Bildrate. Jeder davon gilt für sich. */}
+      {flach
         ? <KinoEbene szenen={szenen} />
-        : <KinoWebGL szenen={szenen} beiRueckfall={() => setRueckfall(true)} />}
-      <Filmkorn an={ruhig || rueckfall} />
+        : <KinoWebGL
+            szenen={szenen}
+            beiRueckfall={() => {
+              setRueckfall(true);
+              // Auch der Engine sagen, dass diese Stufe ausgefallen ist —
+              // sonst bietet der Regler sie gleich wieder an.
+              experience.ausfallMelden('Kinoebene traegt nicht');
+            }}
+          />}
+      <Filmkorn an={flach} />
       <Faden />
       <Kapitelmarke />
       <EvidenzRegler />
