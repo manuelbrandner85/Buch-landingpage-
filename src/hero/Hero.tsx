@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { BEDARFSMUSTER } from '@/experience/bedarf';
 import { useExperience } from '@/experience/useExperience';
+import { weg } from '@/world/wege';
 import './hero.css';
 
 /**
@@ -140,27 +141,35 @@ export function Hero({
           hat dort denselben Wert wie in der Buehne. Zwei Quellen fuer
           dieselbe Farbe waeren zwei Farben, sobald eine sich aendert.
         */}
+        {/* `weg()` und nicht der nackte Pfad.
+
+            Unter der eigenen Domain liegt die Seite in der Wurzel und beides
+            waere gleich. Auf dem Spiegel unter github.io liegt sie in einem
+            Unterordner, und ein Pfad mit fuehrendem Schraegstrich zeigt dann
+            an der Seite vorbei auf die Wurzel der Domain. `basePath` von
+            Next.js hilft hier nicht: Es erreicht `next/link` und
+            `next/image`, nicht das, was im Markup steht. */}
         <picture>
           <source
             media="(orientation: portrait)"
             type="image/avif"
-            srcSet="/modelle/buch-poster-hoch-720.avif 720w, /modelle/buch-poster-hoch.avif 1080w"
+            srcSet={`${weg('/modelle/buch-poster-hoch-720.avif')} 720w, ${weg('/modelle/buch-poster-hoch.avif')} 1080w`}
             sizes="100vw"
           />
           <source
             media="(orientation: portrait)"
             type="image/webp"
-            srcSet="/modelle/buch-poster-hoch-720.webp 720w, /modelle/buch-poster-hoch.webp 1080w"
+            srcSet={`${weg('/modelle/buch-poster-hoch-720.webp')} 720w, ${weg('/modelle/buch-poster-hoch.webp')} 1080w`}
             sizes="100vw"
           />
           <source
             type="image/avif"
-            srcSet="/modelle/buch-poster-quer-1000.avif 1000w, /modelle/buch-poster-quer.avif 1600w"
+            srcSet={`${weg('/modelle/buch-poster-quer-1000.avif')} 1000w, ${weg('/modelle/buch-poster-quer.avif')} 1600w`}
             sizes="100vw"
           />
           <source
             type="image/webp"
-            srcSet="/modelle/buch-poster-quer-1000.webp 1000w, /modelle/buch-poster-quer.webp 1600w"
+            srcSet={`${weg('/modelle/buch-poster-quer-1000.webp')} 1000w, ${weg('/modelle/buch-poster-quer.webp')} 1600w`}
             sizes="100vw"
           />
           {/* Die letzte Stufe ist WebP, nicht PNG. Jeder Browser, der heute
@@ -168,7 +177,7 @@ export function Hero({
               einen Fall, den es nicht gibt. Es bleibt trotzdem liegen — als
               Vorlage fuer die Umwandlung, nicht als Auslieferung. */}
           <img
-            src="/modelle/buch-poster-quer.webp"
+            src={weg('/modelle/buch-poster-quer.webp')}
             alt=""
             width={1600}
             height={1000}

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import type { Budget } from '@/experience/typen';
+import { weg } from '@/world/wege';
 import kamerawerte from './kamera.json';
 
 /**
@@ -70,11 +71,20 @@ function kameraOrt(f: Fuehrung, anteil: number, hinein: THREE.Vector3): void {
   );
 }
 
+/**
+ * Die drei Fassungen des Modells.
+ *
+ * `weg()` und nicht der nackte Pfad: Unter der eigenen Domain liegt die Seite
+ * in der Wurzel, auf dem Spiegel unter github.io in einem Unterordner. Ein
+ * Pfad mit fuehrendem Schraegstrich zeigt dort an der Seite vorbei. `basePath`
+ * von Next.js faengt das nicht ab — es erreicht `next/link` und `next/image`,
+ * nicht einen Pfad, den ein Lader zur Laufzeit selbst zusammensetzt.
+ */
 const MODELL: Record<Budget['modellfassung'], string> = {
-  high: '/modelle/buch-high.glb',
-  medium: '/modelle/buch-medium.glb',
-  low: '/modelle/buch-low.glb',
-  keine: '/modelle/buch-low.glb',
+  high: weg('/modelle/buch-high.glb'),
+  medium: weg('/modelle/buch-medium.glb'),
+  low: weg('/modelle/buch-low.glb'),
+  keine: weg('/modelle/buch-low.glb'),
 };
 
 /**
@@ -320,7 +330,7 @@ export async function buehneStarten(
   // ------------------------------------------------------------ Buch
   const lader = new GLTFLoader();
   const draco = new DRACOLoader();
-  draco.setDecoderPath('/draco/');
+  draco.setDecoderPath(weg('/draco/'));
   lader.setDRACOLoader(draco);
 
   const buch = new THREE.Group();

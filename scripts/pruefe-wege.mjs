@@ -53,7 +53,28 @@ for (const seite of seiten) {
   // auf, jeder relative Verweis wird gegen die Wurzel geprueft und meldet
   // faelschlich „fuehrt ins Leere“ — auf dem Server war alles in Ordnung.
   const woher = seite.slice(WURZEL.length + 1).split('\\').join('/');
-  for (const [, roh] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+
+  /**
+   * `srcset` gehoert mit geprueft.
+   *
+   * Hier stand nur `href` und `src`. Ein `<picture>` mit vier `<source>`
+   * traegt seine Adressen aber in `srcset`, und zwar mehrere je Attribut,
+   * getrennt durch Komma und mit einer Breitenangabe dahinter. Genau dort
+   * ist es am 17.09.2026 passiert: Der Hero verwies mit fuehrendem
+   * Schraegstrich auf seine Standbilder, unter der eigenen Domain richtig,
+   * auf dem Spiegel ins Leere — und diese Pruefung hat es nicht gesehen,
+   * weil sie die Attribute gar nicht las.
+   */
+  const wege = [];
+  for (const [, roh] of html.matchAll(/(?:href|src)="([^"]+)"/g)) wege.push(roh);
+  for (const [, satz] of html.matchAll(/srcset="([^"]+)"/gi)) {
+    for (const eintrag of satz.split(',')) {
+      const adresse = eintrag.trim().split(/\s+/)[0];
+      if (adresse) wege.push(adresse);
+    }
+  }
+
+  for (const roh of wege) {
     if (/^(https?:|mailto:|tel:|data:|#|\/\/)/.test(roh)) continue;
     const ohneAnker = roh.split('#')[0].split('?')[0];
     if (!ohneAnker) continue;
