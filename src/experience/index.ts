@@ -34,7 +34,12 @@ export {
 } from './stufen';
 
 export { geraetLesen, punkteFuer, startstufe } from './geraet';
-export { netzLesen, netzMessen, netzTraegtStreaming } from './netz';
+export {
+  netzLesen,
+  netzMessen,
+  netzTraegtStreaming,
+  modellfassungFuerLeitung,
+} from './netz';
 
 export type { Lage } from './entscheidung';
 export { entscheiden, naechsteStufe } from './entscheidung';

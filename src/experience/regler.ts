@@ -1,4 +1,5 @@
-import type { Budget, Messwerte, Stufe } from './typen';
+import type { Budget, Messwerte, Netz, Stufe } from './typen';
+import { modellfassungFuerLeitung } from './netz';
 import { budgetFuer, hoeher, tiefer } from './stufen';
 
 /**
@@ -252,7 +253,7 @@ function runter(
  * Damit bleibt der Zustand an einer Stelle. Die Szene fragt nicht „welche
  * Stufe und welche Drosselungen", sondern bekommt fertige Zahlen.
  */
-export function wirksamesBudget(stand: Reglerstand): Budget {
+export function wirksamesBudget(stand: Reglerstand, netz?: Netz): Budget {
   const b: Budget = { ...budgetFuer(stand.stufe) };
 
   for (const schraube of stand.gedrosselt) {
@@ -287,6 +288,16 @@ export function wirksamesBudget(stand: Reglerstand): Budget {
         break;
     }
   }
+
+  /**
+   * Zuletzt die Leitung.
+   *
+   * Sie kommt nach den Stellschrauben und nicht davor: Was der Regler an der
+   * Modellfassung schon gesenkt hat, soll nicht wieder angehoben werden. Und
+   * sie greift NUR an der Modellfassung — alles andere in diesem Budget ist
+   * Rechenaufwand, und der wird von einer schlechten Leitung nicht kleiner.
+   */
+  if (netz) b.modellfassung = modellfassungFuerLeitung(b.modellfassung, netz);
 
   return b;
 }

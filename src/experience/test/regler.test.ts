@@ -192,3 +192,70 @@ describe('Wirksames Budget', () => {
     assert.ok(b.lodStart <= 3);
   });
 });
+
+describe('Die Leitung entscheidet ueber die Modellfassung, nicht ueber die Stufe', () => {
+  const stand = standErstellen('HIGH_END');
+
+  it('laesst ein starkes Geraet an guter Leitung in Ruhe', () => {
+    const b = wirksamesBudget(stand, { art: '4g', bandbreite: 12, datensparen: false });
+    assert.equal(b.modellfassung, 'high');
+  });
+
+  it('gibt einem starken Geraet an schwacher Leitung die kleinere Datei', () => {
+    // Der haeufige Fall: gutes Telefon, schlechter Empfang. Bisher bekam es
+    // 640 KB Modell, weil es sie RECHNEN kann.
+    const b = wirksamesBudget(stand, { art: '3g', datensparen: false });
+    assert.equal(b.modellfassung, 'medium');
+  });
+
+  it('nimmt einer schwachen Leitung NICHT die Rechenleistung weg', () => {
+    // Das ist der Kern der Trennung: Schatten, Partikel und Nachbearbeitung
+    // sind Rechenaufwand. Eine schlechte Leitung macht davon nichts billiger
+    // — sie wegzunehmen wuerde das Bild verschlechtern, ohne dass es
+    //  frueher da waere.
+    const gut = wirksamesBudget(stand, { art: '4g', bandbreite: 40, datensparen: false });
+    const schlecht = wirksamesBudget(stand, { art: '2g', datensparen: false });
+    assert.equal(schlecht.schatten, gut.schatten);
+    assert.equal(schlecht.partikel, gut.partikel);
+    assert.equal(schlecht.nachbearbeitung, gut.nachbearbeitung);
+    assert.equal(schlecht.aufloesungsskala, gut.aufloesungsskala);
+    assert.equal(schlecht.modellfassung, 'low');
+  });
+
+  it('hebt nichts an, was der Regler schon gesenkt hat', () => {
+    const b = wirksamesBudget(
+      { ...stand, gedrosselt: ['lodDistanz'] },
+      { art: '4g', bandbreite: 40, datensparen: false },
+    );
+    assert.equal(b.modellfassung, 'medium');
+  });
+
+  it('macht aus GESTREAMT und RUECKFALL kein Modell', () => {
+    // Dort wird gar nichts geladen. Eine schlechte Leitung darf daraus nicht
+    // ploetzlich eine Datei machen.
+    for (const s of ['GESTREAMT', 'RUECKFALL'] as const) {
+      const b = wirksamesBudget(standErstellen(s), { art: '2g', datensparen: false });
+      assert.equal(b.modellfassung, 'keine');
+    }
+  });
+
+  it('raet nicht, wenn der Browser nichts ueber die Leitung sagt', () => {
+    const b = wirksamesBudget(stand, { datensparen: false });
+    assert.equal(b.modellfassung, 'high');
+  });
+
+  it('nimmt Datensparen ernst', () => {
+    const b = wirksamesBudget(stand, { art: '4g', bandbreite: 40, datensparen: true });
+    assert.equal(b.modellfassung, 'low');
+  });
+
+  it('glaubt der eigenen Messung mehr als der Selbstauskunft', () => {
+    const b = wirksamesBudget(stand, {
+      art: '4g',
+      bandbreite: 20,
+      gemesseneLadezeit: 2400,
+      datensparen: false,
+    });
+    assert.equal(b.modellfassung, 'low');
+  });
+});

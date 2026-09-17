@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Budget, Entscheidung, Stufe, Szenenbedarf } from './typen';
+import type { Budget, Entscheidung, Netz, Stufe, Szenenbedarf } from './typen';
 import { geraetLesen } from './geraet';
 import { netzLesen, netzMessen } from './netz';
 import { entscheiden, naechsteStufe } from './entscheidung';
@@ -51,21 +51,34 @@ export function useExperience(bedarf: Szenenbedarf, messdatei?: string): Experie
   const vorheriges = useRef<number | undefined>(undefined);
   const wunsch = useRef({ stufe: 'AUTO' as Stufe | 'AUTO', gross: false });
 
+  /**
+   * Die zuletzt gelesene Leitung.
+   *
+   * Sie steht in einem Ref und nicht im Zustand, weil sie kein Neuzeichnen
+   * ausloesen soll — sie entscheidet ueber eine Datei, die einmal geladen
+   * wird. Und sie bleibt beim ersten Rendern absichtlich leer: `netzLesen()`
+   * liefert auf dem Server andere Werte als im Browser, und ein Budget, das
+   * sich zwischen Server und Browser unterscheidet, ist ein
+   * Hydrierungsfehler.
+   */
+  const leitung = useRef<Netz | undefined>(undefined);
+
   const uebernehmen = useCallback((e: Entscheidung) => {
     stand.current = standErstellen(e.stufe);
     zeiten.current.leeren();
     vorheriges.current = undefined;
     setEntscheidung(e);
     setStufe(e.stufe);
-    setBudget(wirksamesBudget(stand.current));
+    setBudget(wirksamesBudget(stand.current, leitung.current));
   }, []);
 
   const neuEntscheiden = useCallback(() => {
     if (!geraet.current) return;
+    leitung.current = netzLesen();
     uebernehmen(
       entscheiden({
         geraet: geraet.current,
-        netz: netzLesen(),
+        netz: leitung.current,
         bedarf,
         wunsch: {
           stufe: wunsch.current.stufe,
@@ -97,6 +110,7 @@ export function useExperience(bedarf: Szenenbedarf, messdatei?: string): Experie
       // kostet.
       if (messdatei && bedarf.unrealMoeglich) netz = await netzMessen(messdatei, netz);
       if (abgebrochen) return;
+      leitung.current = netz;
 
       uebernehmen(
         entscheiden({
@@ -155,7 +169,7 @@ export function useExperience(bedarf: Szenenbedarf, messdatei?: string): Experie
     // Durchgang gegen Werte, die vor der Aenderung entstanden sind.
     zeiten.current.leeren();
     setStufe(e.stand.stufe);
-    setBudget(wirksamesBudget(e.stand));
+    setBudget(wirksamesBudget(e.stand, leitung.current));
   }, []);
 
   const ausfallMelden = useCallback(

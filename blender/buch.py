@@ -633,14 +633,27 @@ def umschlag_atlas(profil, hoehe=1797, name='cover-umschlag'):
     #
     # Die ORM-Karte bleibt bewusst PNG: Sie ist ein Messwert, kein Bild, und
     # JPEG-Ringe um die Goldbuchstaben wuerden die Folie ausfransen lassen.
+    #
+    # Qualitaet 96 und nicht 88, seit `scripts/glb-texturen.mjs` dahinter
+    # steht. Diese Datei ist nicht mehr die Auslieferung, sondern nur noch
+    # der Weg, auf dem der Exporter ein Format uebernimmt — ausgeliefert
+    # wird WebP, das aus ihr entsteht. Bei 88 waere das eine verlustbehaftete
+    # Kodierung einer verlustbehafteten Kodierung; die Fehler der ersten
+    # stehen dann fuer immer im Bild. Die 300 KB, die 96 hier mehr kostet,
+    # sind eine Zwischendatei auf der Platte und erreichen niemanden.
     os.makedirs(ARBEIT, exist_ok=True)
     datei = os.path.join(ARBEIT, 'umschlag-bogen-%d.jpg' % hoehe)
-    alt_q = bpy.context.scene.render.image_settings.quality
-    bpy.context.scene.render.image_settings.quality = 88
+    # Die Qualitaet geht als Argument mit, nicht ueber die Szene.
+    #
+    # `scene.render.image_settings.quality` zu setzen sieht aus, als wirke
+    # es, und tut es hier nicht: `Image.save()` nimmt den Szenenwert nur,
+    # wenn ihm selbst keiner uebergeben wird — gemessen daran, dass die
+    # Datei bei 88 und bei 96 auf 0,1 KB genau gleich gross blieb. Solche
+    # Einstellungen, die still ignoriert werden, sind die teuerste Sorte:
+    # Man haelt eine Entscheidung fuer getroffen.
     roh.filepath_raw = datei
     roh.file_format = 'JPEG'
-    roh.save()
-    bpy.context.scene.render.image_settings.quality = alt_q
+    roh.save(filepath=datei, quality=96)
     bpy.data.images.remove(roh)
 
     atlas = bpy.data.images.load(datei)

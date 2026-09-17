@@ -315,6 +315,57 @@ def alles_exportieren():
     return ergebnisse
 
 
+def texturen_umkodieren():
+    """
+    Die Texturen nachbehandeln — gemessen, nicht vermutet.
+
+    Blender schreibt die ORM-Karte als PNG mit seiner Standardpackstufe und
+    den Umschlag als JPEG. Gemessen an der hohen Fassung:
+
+        Umschlag  JPEG 88            665,1 KB
+        ORM       PNG                499,4 KB
+        Geometrie                     12,8 KB
+
+    Das Modell ist zu 98,6 Prozent Textur. Beide Bilder gehen als WebP
+    deutlich kleiner durch, ohne dass irgendetwas verlorengeht: die ORM-Karte
+    VERLUSTFREI auf 207 KB, der Umschlag bei q90 auf 416 KB. Zusammen wiegt
+    die hohe Fassung danach 640 statt 1181 KB.
+
+    Warum nicht gleich aus Blender heraus: Der glTF-Exporter reicht ein Bild
+    in dem Format weiter, in dem es vorliegt, und ueber die Packstufe
+    entscheidet er selbst. Die Kodierung gehoert deshalb dorthin, wo sie
+    einstellbar und messbar ist — in ein eigenes Skript.
+
+    Schlaegt der Aufruf fehl, ist das kein Abbruch: Die GLB-Dateien sind
+    fertig und funktionieren, sie sind nur groesser als noetig. Gesagt wird
+    es trotzdem, denn still zu viel auszuliefern ist genau das, was hier
+    nicht passieren soll.
+    """
+    import subprocess
+    skript = os.path.join(PROJEKT, 'scripts', 'glb-texturen.mjs')
+    if not os.path.exists(skript):
+        print('HINWEIS: scripts/glb-texturen.mjs fehlt — Texturen bleiben roh.')
+        return False
+    try:
+        lauf = subprocess.run(
+            ['node', skript],
+            cwd=PROJEKT, capture_output=True, text=True, timeout=600,
+        )
+    except (OSError, subprocess.SubprocessError) as fehler:
+        print('HINWEIS: node nicht aufrufbar (%s) — Texturen bleiben roh.' % fehler)
+        return False
+    print(lauf.stdout.strip())
+    if lauf.returncode != 0:
+        print('HINWEIS: Texturschritt fehlgeschlagen:\n%s' % lauf.stderr.strip())
+        return False
+    return True
+
+
 if __name__ == '__main__':
     for z in alles_exportieren():
         print(z)
+    texturen_umkodieren()
+    for name, *_ in FASSUNGEN:
+        pfad = os.path.join(ZIEL, 'buch-%s.glb' % name)
+        if os.path.exists(pfad):
+            print('ENDSTAND buch-%s.glb  %.1f KB' % (name, os.path.getsize(pfad) / 1024))
